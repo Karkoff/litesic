@@ -3,14 +3,14 @@
  *
  * Este arquivo só inclui os headers das bibliotecas de terceiros.
  * Se compila, a integração não quebra por conflito de macros.
+ * miniaudio.h integra stb_vorbis automaticamente quando detecta o header.
  * Não contém lógica alguma.
  */
 
-#include "../third_party/stb_vorbis.h"
-#include "../third_party/miniaudio.h"
+#include "miniaudio.h"
 
 int main(void)
 {
-    /* Apenas verifica se os símbolos básicos existem e compilam. */
+    /* Apenas verifica se os simbolos basicos existem e compilam. */
     return 0;
 }

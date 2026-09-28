@@ -1,0 +1,29 @@
+/*
+ * app.rc — Recursos do LiteSic (stub para M0-T3)
+ *
+ * Manifest, ícone e VERSIONINFO completos serão adicionados em M0-T5.
+ */
+
+VS_VERSION_INFO VERSIONINFO
+FILEVERSION     0,1,0,0
+PRODUCTVERSION  0,1,0,0
+BEGIN
+    BLOCK "StringFileInfo"
+    BEGIN
+        BLOCK "040904B0"
+        BEGIN
+            VALUE "CompanyName",      "LiteSic"
+            VALUE "FileDescription",  "LiteSic - Winamp-like audio player"
+            VALUE "FileVersion",      "0.1.0.0"
+            VALUE "InternalName",     "LiteSic"
+            VALUE "LegalCopyright",   "LiteSic project"
+            VALUE "OriginalFilename", "LiteSic.exe"
+            VALUE "ProductName",      "LiteSic"
+            VALUE "ProductVersion",   "0.1.0.0"
+        END
+    END
+    BLOCK "VarFileInfo"
+    BEGIN
+        VALUE "Translation", 0x0409, 1200
+    END
+END
