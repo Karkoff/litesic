@@ -44,7 +44,7 @@ ifeq ($(DEBUG),1)
   CFLAGS   += -g -O0 -DDEBUG
 endif
 
-LDFLAGS       := -mwindows -static-libgcc -static-libstdc++ \
+LDFLAGS       := -mwindows -municode -static-libgcc -static-libstdc++ \
                  -luser32 -lkernel32 -lgdi32
 
 # Source files
