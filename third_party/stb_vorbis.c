@@ -5124,9 +5124,15 @@ stb_vorbis * stb_vorbis_open_memory(const unsigned char *data, int len, int *err
 }
 
 #ifndef STB_VORBIS_NO_INTEGER_CONVERSION
+#ifndef PLAYBACK_MONO
 #define PLAYBACK_MONO     1
+#endif
+#ifndef PLAYBACK_LEFT
 #define PLAYBACK_LEFT     2
+#endif
+#ifndef PLAYBACK_RIGHT
 #define PLAYBACK_RIGHT    4
+#endif
 
 #define L  (PLAYBACK_LEFT  | PLAYBACK_MONO)
 #define C  (PLAYBACK_LEFT  | PLAYBACK_RIGHT | PLAYBACK_MONO)

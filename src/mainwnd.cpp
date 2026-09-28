@@ -467,13 +467,25 @@ BOOL MainWnd_RegisterClass(HINSTANCE hInstance)
 
 HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow)
 {
+    /* Centralizar a janela na tela. */
+    RECT desktop{};
+    GetWindowRect(GetDesktopWindow(), &desktop);
+    int const screenW = desktop.right - desktop.left;
+    int const screenH = desktop.bottom - desktop.top;
+
+    int x = (screenW - MAINWND_WIDTH) / 2;
+    int y = (screenH - MAINWND_HEIGHT) / 2;
+    /* Garantir que a janela não fique fora da tela. */
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+
     HWND hwnd = CreateWindowExW(
         0,                              /* dwExStyle */
         CLASS_NAME,                     /* lpClassName */
         L"LiteSic",                     /* lpWindowName — título da janela */
         WS_POPUP | WS_OVERLAPPED |     /* sem bordas padrão (sem WS_CAPTION/WS_THICKFRAME) */
         WS_MINIMIZEBOX,                 /* permite minimizar via ShowWindow(SW_MINIMIZE) */
-        CW_USEDEFAULT, CW_USEDEFAULT,  /* x, y — deixar o Windows posicionar */
+        x, y,                           /* posição centralizada */
         MAINWND_WIDTH,                  /* nWidth */
         MAINWND_HEIGHT,                 /* nHeight */
         NULL,                           /* hWndParent */
