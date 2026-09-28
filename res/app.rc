@@ -1,9 +1,16 @@
 /*
- * app.rc — Recursos do LiteSic (stub para M0-T3)
+ * app.rc — Recursos do LiteSic
  *
- * Manifest, ícone e VERSIONINFO completos serão adicionados em M0-T5.
+ * Manifest (DPI awareness + compatibilidade Win7-11), ícone e VERSIONINFO.
  */
 
+/* Manifest de processo (CREATEPROCESS_MANIFEST_RESOURCE_ID = 1, RT_MANIFEST = 24) */
+1 24 "app.manifest"
+
+/* Ícone da aplicação */
+IDI_APP_ICON ICON "icon.ico"
+
+/* Informações de versão */
 VS_VERSION_INFO VERSIONINFO
 FILEVERSION     0,1,0,0
 PRODUCTVERSION  0,1,0,0
