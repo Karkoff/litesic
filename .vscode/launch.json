@@ -1,0 +1,24 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Depurar LiteSic (gdb)",
+            "type": "cpp-gdb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/LiteSic.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "miDebuggerPath": "C:/msys64/mingw64/bin/gdb.exe",
+            "preLaunchTask": "Compilar (Debug)",
+            "filterStderr": true,
+            "filterStdout": false,
+            "externalConsole": false,
+            "logging": {
+                "moduleLoad": false,
+                "trace": false
+            }
+        }
+    ]
+}

@@ -1,0 +1,56 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Compilar (Debug)",
+            "type": "shell",
+            "command": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": [
+                "-lc",
+                "make DEBUG=1"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": ["$gcc"],
+            "detail": "Compila Debug com depuração (g++ -g -O0)"
+        },
+        {
+            "label": "Compilar (Release 64 bits)",
+            "type": "shell",
+            "command": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": [
+                "-lc",
+                "make"
+            ],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Compila Release 64 bits otimizado"
+        },
+        {
+            "label": "Compilar (Release 32 bits)",
+            "type": "shell",
+            "command": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": [
+                "-lc",
+                "make ARCH=32"
+            ],
+            "group": "build",
+            "problemMatcher": ["$gcc"],
+            "detail": "Compila Release 32 bits (i686)"
+        },
+        {
+            "label": "Limpar build/",
+            "type": "shell",
+            "command": "C:\\msys64\\usr\\bin\\bash.exe",
+            "args": [
+                "-lc",
+                "make clean"
+            ],
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Remove build/ e todos os objetos compilados"
+        }
+    ]
+}
