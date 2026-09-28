@@ -2,6 +2,7 @@
  * mainwnd.cpp — Janela principal sem borda (estilo Winamp)
  *
  * M1-T1: WndProc tratando WM_CREATE, WM_DESTROY e WM_PAINT com cor sólida.
+ * M1-T2: barra de título arrastável via ReleaseCapture + HTCAPTION.
  */
 
 #include "mainwnd.h"
@@ -30,6 +31,30 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
     case WM_CREATE:
         break;
+
+    /* ------------------------------------------------------------------
+     * Arraste da janela — clicar na barra de título e arrastar.
+     * M1-T2: ReleaseCapture + WM_NCLBUTTONDOWN HTCAPTION permite que o
+     * Windows mova a janela nativamente (suporta Aero snap do Win7+).
+     * ------------------------------------------------------------------ */
+    case WM_LBUTTONDOWN:
+    {
+        /* Coordenadas do mouse relativas à janela. */
+        int const my = (int)(short)HIWORD(lParam);
+
+        if (my < (int)TITLEBAR_HEIGHT)
+        {
+            /* Clique na barra de título — iniciar arraste nativo. */
+            ReleaseCapture();
+            SendMessageW(hwnd, WM_NCLBUTTONDOWN, HTCAPTION, lParam);
+        }
+        else
+        {
+            /* Clique fora da barra de título: apenas captura o foco. */
+            SetForegroundWindow(hwnd);
+        }
+        break;
+    }
 
     case WM_PAINT:
     {
