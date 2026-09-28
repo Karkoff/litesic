@@ -44,20 +44,18 @@ ifeq ($(DEBUG),1)
   CFLAGS   += -g -O0 -DDEBUG
 endif
 
-LDFLAGS       := -mwindows -municode -static-libgcc -static-libstdc++ \
-                 -luser32 -lkernel32 -lgdi32
+LDFLAGS       := -mwindows -municode \
+                  -luser32 -lkernel32 -lgdi32 -lm
 
-# Source files
+# Source files (miniaudio_impl agora .cpp para linkar com libstdc++)
 CPP_SRCS      := $(wildcard $(SRC_DIR)/*.cpp)
-C_SRCS        := $(SRC_DIR)/miniaudio_impl.c
 RC_SRCS       := $(RES_DIR)/app.rc
 
 # Object files
 CPP_OBJS      := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(CPP_SRCS))
-C_OBJS        := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(C_SRCS))
 RC_OBJS       := $(patsubst $(RES_DIR)/%.rc,$(BUILD_DIR)/%.res.o,$(RC_SRCS))
 
-OBJS          := $(CPP_OBJS) $(C_OBJS) $(RC_OBJS)
+OBJS          := $(CPP_OBJS) $(RC_OBJS)
 
 # Test files
 TEST_SRCS     := $(wildcard $(TEST_DIR)/*.c)

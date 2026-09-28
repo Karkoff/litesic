@@ -35,6 +35,34 @@ typedef enum
 /* ID do ícone definido em res/app.rc (M0-T5). */
 #define IDI_APP_ICON 101
 
+/* ------------------------------------------------------------------ */
+/* Botões de controle (M2-T4)                                           */
+/* Posicionados abaixo da barra de título.                              */
+/* ------------------------------------------------------------------ */
+
+/* Área dos botões de controle — logo abaixo da titlebar. */
+#define CONTROLS_Y      TITLEBAR_HEIGHT
+#define CONTROLS_BTN_W  30
+#define CONTROLS_BTN_H  16
+#define CONTROLS_GAP    4
+
+/* Botão "Abrir" ocupa o espaço restante à esquerda. */
+#define BTN_OPEN_X      4
+#define BTN_OPEN_Y      CONTROLS_Y
+#define BTN_OPEN_W      (MAINWND_WIDTH - 4*2 - 3*CONTROLS_BTN_W - 3*CONTROLS_GAP)
+
+/* Botões de controle empilhados verticalmente no canto direito. */
+#define BTN_PLAY_X      (MAINWND_WIDTH - CONTROLS_BTN_W - 4)
+#define BTN_PAUSE_X     (BTN_PLAY_X)
+#define BTN_STOP_X      (BTN_PLAY_X)
+
+#define BTN_PLAY_Y      (CONTROLS_Y + 2)
+#define BTN_PAUSE_Y     (BTN_PLAY_Y + CONTROLS_BTN_H + CONTROLS_GAP)
+#define BTN_STOP_Y      (BTN_PAUSE_Y + CONTROLS_BTN_H + CONTROLS_GAP)
+
+/* ID do timer para atualização de posição (M2-T4). */
+#define POSITION_TIMER_ID 1
+
 /* Registra a classe da janela principal (chamar uma vez antes de criar).
  * Retorna TRUE em caso de sucesso, FALSE caso contrário. */
 BOOL MainWnd_RegisterClass(HINSTANCE hInstance);
