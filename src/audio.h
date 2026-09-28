@@ -4,6 +4,10 @@
  * M2-T1: inicialização e desligamento.
  * M2-T2: abrir/arquivo, duração.
  * M2-T3: play/pause/stop, posição.
+ * M3-T3: sample rate, canais, bitrate.
+ * M3-T4: seek.
+ * M3-T5: volume, pan (balanço).
+ * M3-T6: navegação (prev/next) — interface mínima provisória.
  * Tipos do miniaudio são opacos — o resto do app nunca os vê diretamente.
  */
 
@@ -59,5 +63,52 @@ AudioState Audio_GetState(void);
 
 /* Retorna a posição atual em segundos. */
 double Audio_GetPositionSeconds(void);
+
+/* ------------------------------------------------------------------ */
+/* Informações do arquivo — M3-T3                                       */
+/* ------------------------------------------------------------------ */
+
+/* Retorna a taxa de amostragem em Hz (ex.: 44100, 48000).
+ * Retorna 0 se nenhum arquivo estiver carregado. */
+int Audio_GetSampleRate(void);
+
+/* Retorna o número de canais (1 = mono, 2 = estéreo).
+ * Retorna 0 se nenhum arquivo estiver carregado. */
+int Audio_GetChannels(void);
+
+/* Retorna o bitrate aproximado em kbps.
+ * Para VBR, retorna o bitrate médio calculado a partir do tamanho
+ * do arquivo e da duração. Retorna 0 se não disponível. */
+int Audio_GetBitrateKbps(void);
+
+/* ------------------------------------------------------------------ */
+/* Seek — M3-T4                                                         */
+/* ------------------------------------------------------------------ */
+
+/* Pula para a posição especificada em segundos. */
+void Audio_SeekSeconds(double seconds);
+
+/* ------------------------------------------------------------------ */
+/* Volume e balanço — M3-T5                                             */
+/* ------------------------------------------------------------------ */
+
+/* Define o volume master (0.0 = mudo, 1.0 = máximo). */
+void Audio_SetVolume(float volume);
+
+/* Define o balanço/pan (-1.0 = totalmente esquerda, 0 = centro,
+ * 1.0 = totalmente direita). */
+void Audio_SetPan(float pan);
+
+/* ------------------------------------------------------------------ */
+/* Navegação — M3-T6 (interface mínima provisória)                      */
+/* ------------------------------------------------------------------ */
+
+/* Avança para a próxima faixa.
+ * shuffle: se TRUE, pula para uma faixa aleatória.
+ * repeat:  se TRUE, volta à primeira faixa ao chegar no fim. */
+void Audio_Next(BOOL shuffle, BOOL repeat);
+
+/* Volta para a faixa anterior (ou reinicia a atual se posição > 3s). */
+void Audio_Previous(void);
 
 #endif /* AUDIO_H */

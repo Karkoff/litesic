@@ -6,10 +6,17 @@
  * M1-T3: botões fechar/minimizar desenhados com hover/pressed visual.
  * M1-T4: ícone carregado do recurso e enviado via WM_SETICON.
  * M2-T4: botões abrir/play/pause/stop + timer de posição.
+ * M3-T1: display LCD de tempo (MM:SS), clique alterna decorrido/restante.
+ * M3-T2: título rolando horizontalmente quando excede a área.
+ * M3-T3: indicador kbps/kHz/estéreo ao lado do LCD.
+ * M3-T4: barra de busca (seek slider) arrastável.
+ * M3-T5: sliders de volume e balanço.
+ * M3-T6: botões anterior/próxima + toggles aleatório/repetir.
  */
 
 #include "mainwnd.h"
 #include "audio.h"
+#include "util.h"
 
 #include <windows.h>
 
@@ -37,8 +44,37 @@ static const COLORREF CLOSE_ICON_COLOR = RGB(0xff, 0x40, 0x40);
 static const COLORREF CTRL_BG_NORMAL   = RGB(0x6a, 0x5a, 0x3a);
 static const COLORREF CTRL_BG_HOVER    = RGB(0x8a, 0x7a, 0x5a);
 
+/* Cores do display LCD. */
+static const COLORREF LCD_BG_COLOR     = RGB(0x0a, 0x0a, 0x0a);
+static const COLORREF LCD_TEXT_COLOR   = RGB(0x00, 0xff, 0x40); /* verde LCD */
+static const COLORREF LCD_DIM_COLOR    = RGB(0x00, 0x30, 0x10);
+
+/* Cor do título rolando. */
+static const COLORREF TITLE_TEXT_COLOR = RGB(0xcc, 0xaa, 0x66);
+
+/* Cores dos indicadores de áudio (kbps/kHz). */
+static const COLORREF AUDIO_INFO_COLOR = RGB(0x88, 0x88, 0x88);
+
+/* Cor da barra de busca. */
+static const COLORREF SEEK_BAR_BG      = RGB(0x2a, 0x2a, 0x2a);
+static const COLORREF SEEK_BAR_FILL    = RGB(0x66, 0xcc, 0x44);
+static const COLORREF SEEK_BAR_THUMB   = RGB(0xee, 0xee, 0xee);
+
+/* Cores dos sliders de volume/pan. */
+static const COLORREF SLIDER_BG        = RGB(0x2a, 0x2a, 0x2a);
+static const COLORREF SLIDER_FILL      = RGB(0x66, 0xcc, 0x44);
+static const COLORREF SLIDER_THUMB     = RGB(0xee, 0xee, 0xee);
+
+/* Cores dos botões de navegação. */
+static const COLORREF NAV_BG_NORMAL    = RGB(0x5a, 0x4a, 0x2a);
+static const COLORREF NAV_BG_HOVER     = RGB(0x7a, 0x6a, 0x4a);
+
+/* Cores dos toggles. */
+static const COLORREF TOGGLE_ON_BG     = RGB(0x44, 0x88, 0x22);
+static const COLORREF TOGGLE_OFF_BG    = RGB(0x3a, 0x3a, 0x3a);
+
 /* ------------------------------------------------------------------ */
-/* Estado dos botões (módulo-local)                                     */
+/* Estado da janela (módulo-local)                                      */
 /* ------------------------------------------------------------------ */
 
 /* Botão da titlebar que o mouse está sobre. */
@@ -47,8 +83,27 @@ static TitleBarButton g_hoverBtn = BTN_NONE;
 /* Botão da titlebar pressionado (mouse down). */
 static TitleBarButton g_pressedBtn = BTN_NONE;
 
+/* M3-T1: mostrar tempo restante (TRUE) ou decorrido (FALSE). */
+static BOOL g_showRemaining = FALSE;
+
+/* M3-T2: contador de ms para scroll do título. */
+static DWORD g_scrollElapsedMs = 0;
+
+/* M3-T4/M3-T5: estado de arraste do slider. */
+static SliderType g_draggingSlider = SLIDER_NONE;
+static float    g_seekValue   = 0.0f; /* 0..1 normalizado para seek */
+static float    g_volumeValue = 0.8f; /* 0..1 */
+static float    g_panValue    = 0.0f; /* -1..1 */
+
+/* M3-T6: estado dos toggles. */
+static BOOL g_shuffleOn = FALSE;
+static BOOL g_repeatOn  = FALSE;
+
+/* M3-T6: índice atual da playlist (provisório, lista de 1 item). */
+static int g_currentTrack = -1; /* -1 = nenhum arquivo carregado */
+
 /* ------------------------------------------------------------------ */
-/* Helpers — hit-test e desenho de botões                               */
+/* Helpers — hit-test e desenho de botões da titlebar                   */
 /* ------------------------------------------------------------------ */
 
 /* Verifica se (x, y) está dentro do botão especificado. */
@@ -133,67 +188,209 @@ static void InvalidateButtons(HWND hwnd)
     InvalidateRect(hwnd, &r, FALSE);
 }
 
-/* Verifica se (x, y) está dentro de um botão de controle. */
-static BOOL PtInControlBtn(int x, int y, int *pBtnId)
+/* ------------------------------------------------------------------ */
+/* Helpers — desenho do display LCD (M3-T1)                             */
+/* Fonte bitmap 5x7 por segmento, digits compostos de 3 chars.         */
+/* ------------------------------------------------------------------ */
+
+/* Mapa de bits para dígitos 0-9 (5 colunas x 7 linhas), cada linha é um
+ * byte onde os 5 bits menos significáveis representam as colunas.
+ * Bit 4 = esquerda, bit 0 = direita. */
+static const unsigned char g_digitFont[10][7] = {
+    /* '0' */ { 0x7C, 0xC6, 0xCE, 0xD6, 0xE6, 0xC6, 0x7C },
+    /* '1' */ { 0x18, 0x38, 0x18, 0x18, 0x18, 0x18, 0x3C },
+    /* '2' */ { 0x7C, 0xC6, 0x06, 0x7C, 0x60, 0x60, 0x7E },
+    /* '3' */ { 0x7C, 0xC6, 0x06, 0x7C, 0x06, 0xC6, 0x7C },
+    /* '4' */ { 0x1C, 0x3C, 0x6C, 0xCC, 0x7C, 0x06, 0x06 },
+    /* '5' */ { 0x7E, 0xC0, 0xC0, 0x7C, 0x06, 0xC6, 0x7C },
+    /* '6' */ { 0x7C, 0xC0, 0xC0, 0x7C, 0xCE, 0xC6, 0x7C },
+    /* '7' */ { 0x7E, 0x06, 0x0C, 0x18, 0x30, 0x30, 0x30 },
+    /* '8' */ { 0x7C, 0xC6, 0xC6, 0x7C, 0xC6, 0xC6, 0x7C },
+    /* '9' */ { 0x7C, 0xC6, 0xC6, 0x7E, 0x06, 0x0C, 0x78 },
+};
+
+/* Caractere ':' (dois pontos) para separar minutos de segundos. */
+static const unsigned char g_colonChar[7] = {
+    0x00, 0x18, 0x00, 0x00, 0x00, 0x18, 0x00
+};
+
+/* Caractere '-' (hífen) para tempo restante. */
+static const unsigned char g_dashChar[7] = {
+    0x00, 0x00, 0x00, 0x7C, 0x00, 0x00, 0x00
+};
+
+/* Largura de um dígito em pixels (5 bits * 2px por bit + 1px gap). */
+#define DIGIT_CHAR_W  11
+/* Altura de um dígito em pixels (7 linhas * 2px por linha). */
+#define DIGIT_CHAR_H  14
+
+/* Desenha um único caractere (dígito, ':' ou '-') no LCD.
+ * ch: índice no font map (0-9 = dígitos, 10 = ':', 11 = '-').
+ * x, y: posição do canto superior esquerdo. */
+static void DrawLcdChar(HDC hdc, int ch, int x, int y)
 {
-    /* Botão Abrir. */
-    RECT r = { BTN_OPEN_X, BTN_OPEN_Y, BTN_OPEN_X + BTN_OPEN_W, BTN_OPEN_Y + CONTROLS_BTN_H };
+    if (ch < 0 || ch > 11)
+        return;
+
+    const unsigned char *fontData;
+    int rows = 7;
+
+    if (ch == 10) /* ':' */
+        fontData = g_colonChar;
+    else if (ch == 11) /* '-' */
+        fontData = g_dashChar;
+    else
+        fontData = g_digitFont[ch];
+
+    /* Desenhar cada linha do caractere como blocos de 2x2 pixels. */
+    for (int row = 0; row < rows; row++)
+    {
+        unsigned char bits = fontData[row];
+        for (int col = 0; col < 5; col++)
+        {
+            if (bits & (0x10 >> col)) /* bit ativo */
+            {
+                RECT cell = {
+                    x + col * DIGIT_CHAR_W / 5, y + row * DIGIT_CHAR_H / 7,
+                    x + (col + 1) * DIGIT_CHAR_W / 5 + 1,
+                    y + (row + 1) * DIGIT_CHAR_H / 7 + 1
+                };
+                HBRUSH brush = CreateSolidBrush(LCD_TEXT_COLOR);
+                FillRect(hdc, &cell, brush);
+                DeleteObject(brush);
+            }
+        }
+    }
+}
+
+/* Desenha a string de tempo no display LCD. */
+static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
+{
+    /* Fundo escuro do LCD. */
+    RECT lcdRect = { LCD_X, LCD_Y, LCD_X + LCD_W, LCD_Y + LCD_H };
+    HBRUSH bgBrush = CreateSolidBrush(LCD_BG_COLOR);
+    FillRect(hdc, &lcdRect, bgBrush);
+    DeleteObject(bgBrush);
+
+    /* Borda sutil. */
+    HPEN pen = CreatePen(PS_SOLID, 1, RGB(0x22, 0x44, 0x22));
+    HGDIOBJ oldPen = SelectObject(hdc, pen);
+    Rectangle(hdc, lcdRect.left, lcdRect.top, lcdRect.right, lcdRect.bottom);
+    SelectObject(hdc, oldPen);
+    DeleteObject(pen);
+
+    /* Desenhar cada caractere centralizado no LCD. */
+    int len = (int)wcslen(timeStr);
+    int totalWidth = len * DIGIT_CHAR_W;
+    int startX = LCD_X + (LCD_W - totalWidth) / 2;
+    int startY = LCD_Y + (LCD_H - DIGIT_CHAR_H) / 2;
+
+    /* Ajustar se o texto ultrapassar a área. */
+    if (startX < LCD_X + 2)
+        startX = LCD_X + 2;
+
+    for (int i = 0; i < len; i++)
+    {
+        wchar_t wc = timeStr[i];
+        int chIdx = -1;
+
+        if (wc >= L'0' && wc <= L'9')
+            chIdx = wc - L'0';
+        else if (wc == L':')
+            chIdx = 10;
+        else if (wc == L'-')
+            chIdx = 11;
+
+        if (chIdx >= 0)
+            DrawLcdChar(hdc, chIdx, startX + i * DIGIT_CHAR_W, startY);
+    }
+}
+
+/* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
+/* Helpers — barra de busca / sliders (M3-T4, M3-T5)                    */
+/* ------------------------------------------------------------------ */
+
+/* Desenha um slider horizontal simples (sem thumb detalhado). */
+static void DrawHSlider(HDC hdc, int x, int y, int w, int h, float value)
+{
+    /* Track. */
+    RECT trackRect = { x, y, x + w, y + h };
+    HBRUSH bgBrush = CreateSolidBrush(SEEK_BAR_BG);
+    FillRect(hdc, &trackRect, bgBrush);
+    DeleteObject(bgBrush);
+
+    /* Fill. */
+    int fillW = (int)((float)w * value);
+    if (fillW > 0)
+    {
+        RECT fillRect = { x, y, x + fillW, y + h };
+        HBRUSH fillBrush = CreateSolidBrush(SEEK_BAR_FILL);
+        FillRect(hdc, &fillRect, fillBrush);
+        DeleteObject(fillBrush);
+    }
+
+    /* Thumb. */
+    int thumbX = x + fillW;
+    RECT thumbRect = { thumbX - 3, y - 2, thumbX + 3, y + h + 2 };
+    HBRUSH thumbBrush = CreateSolidBrush(SEEK_BAR_THUMB);
+    FillRect(hdc, &thumbRect, thumbBrush);
+    DeleteObject(thumbBrush);
+}
+
+/* ------------------------------------------------------------------ */
+/* Helpers — botões de navegação (M3-T6)                                */
+/* ------------------------------------------------------------------ */
+
+static BOOL PtInNavBtn(int x, int y, int *pBtnId)
+{
+    /* Botão Prev. */
+    RECT r = { BTN_PREV_X, NAV_Y, BTN_PREV_X + NAV_BTN_W, NAV_Y + NAV_BTN_H };
     if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 1; return TRUE; }
 
-    /* Botão Play. */
-    r = { BTN_PLAY_X, BTN_PLAY_Y, BTN_PLAY_X + CONTROLS_BTN_W, BTN_PLAY_Y + CONTROLS_BTN_H };
+    /* Botão Next. */
+    r = { BTN_NEXT_X, NAV_Y, BTN_NEXT_X + NAV_BTN_W, NAV_Y + NAV_BTN_H };
     if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 2; return TRUE; }
 
-    /* Botão Pause. */
-    r = { BTN_PAUSE_X, BTN_PAUSE_Y, BTN_PAUSE_X + CONTROLS_BTN_W, BTN_PAUSE_Y + CONTROLS_BTN_H };
+    /* Botão Shuffle. */
+    r = { BTN_SHUFFLE_X, TOGGLE_Y, BTN_SHUFFLE_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
     if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 3; return TRUE; }
 
-    /* Botão Stop. */
-    r = { BTN_STOP_X, BTN_STOP_Y, BTN_STOP_X + CONTROLS_BTN_W, BTN_STOP_Y + CONTROLS_BTN_H };
+    /* Botão Repeat. */
+    r = { BTN_REPEAT_X, TOGGLE_Y, BTN_REPEAT_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
     if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 4; return TRUE; }
 
     return FALSE;
 }
 
-/* Desenha um botão de controle na DC de memória. */
-static void DrawControlButton(HDC hdc, int btnId)
+/* ------------------------------------------------------------------ */
+/* Helpers — hit-test para sliders e LCD                              */
+/* ------------------------------------------------------------------ */
+
+static BOOL PtInLcdArea(int x, int y)
 {
-    RECT r{};
-    switch (btnId)
-    {
-    case 1: /* Abrir */
-        r = { BTN_OPEN_X, BTN_OPEN_Y, BTN_OPEN_X + BTN_OPEN_W, BTN_OPEN_Y + CONTROLS_BTN_H };
-        break;
-    case 2: /* Play */
-        r = { BTN_PLAY_X, BTN_PLAY_Y, BTN_PLAY_X + CONTROLS_BTN_W, BTN_PLAY_Y + CONTROLS_BTN_H };
-        break;
-    case 3: /* Pause */
-        r = { BTN_PAUSE_X, BTN_PAUSE_Y, BTN_PAUSE_X + CONTROLS_BTN_W, BTN_PAUSE_Y + CONTROLS_BTN_H };
-        break;
-    case 4: /* Stop */
-        r = { BTN_STOP_X, BTN_STOP_Y, BTN_STOP_X + CONTROLS_BTN_W, BTN_STOP_Y + CONTROLS_BTN_H };
-        break;
-    default:
-        return;
-    }
+    RECT r = { LCD_X, LCD_Y, LCD_X + LCD_W, LCD_Y + LCD_H };
+    return PtInRect(&r, (POINT){ x, y });
+}
 
-    HBRUSH brush = CreateSolidBrush(CTRL_BG_NORMAL);
-    FillRect(hdc, &r, brush);
-    DeleteObject(brush);
+static BOOL PtInSeekBar(int x, int y)
+{
+    RECT r = { SEEK_X, SEEK_Y, SEEK_X + SEEK_W, SEEK_Y + SEEK_H };
+    return PtInRect(&r, (POINT){ x, y });
+}
 
-    /* Desenhar texto. */
-    const wchar_t *text = NULL;
-    switch (btnId)
-    {
-    case 1: text = L"Abrir"; break;
-    case 2: text = L">";   break;
-    case 3: text = L"||";  break;
-    case 4: text = L"[]";  break;
-    }
+static BOOL PtInVolumeSlider(int x, int y)
+{
+    RECT r = { VOLUME_SLIDER_X, VOLPAN_Y,
+               VOLUME_SLIDER_X + VOLUME_SLIDER_W, VOLPAN_Y + VOLPAN_H };
+    return PtInRect(&r, (POINT){ x, y });
+}
 
-    SetBkMode(hdc, TRANSPARENT);
-    SetTextColor(hdc, RGB(0xff, 0xff, 0xcc));
-    DrawTextW(hdc, text, (int)wcslen(text), &r, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+static BOOL PtInPanSlider(int x, int y)
+{
+    RECT r = { PAN_SLIDER_X, VOLPAN_Y,
+               PAN_SLIDER_X + PAN_SLIDER_W, VOLPAN_Y + VOLPAN_H };
+    return PtInRect(&r, (POINT){ x, y });
 }
 
 /* ------------------------------------------------------------------ */
@@ -222,6 +419,10 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         /* Timer para atualização periódica da posição (250ms). */
         SetTimer(hwnd, POSITION_TIMER_ID, 250, NULL);
+
+        /* Timer para scroll do título (30ms — ~33fps suave). */
+        SetTimer(hwnd, SCROLL_TIMER_ID, 30, NULL);
+
         break;
     }
 
@@ -234,6 +435,15 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             {
                 InvalidateRect(hwnd, NULL, FALSE);
             }
+        }
+        else if (wParam == SCROLL_TIMER_ID)
+        {
+            /* Atualizar contador de scroll do título. */
+            g_scrollElapsedMs++;
+
+            /* Invalidar apenas a área do título para redraw. */
+            RECT titleRect = { TITLE_X, TITLE_Y, TITLE_X + TITLE_W, TITLE_Y + TITLE_H };
+            InvalidateRect(hwnd, &titleRect, FALSE);
         }
         break;
     }
@@ -268,9 +478,75 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             ReleaseCapture();
             SendMessageW(hwnd, WM_NCLBUTTONDOWN, HTCAPTION, lParam);
         }
-        else if (my >= CONTROLS_Y && my < CONTROLS_Y + CONTROLS_BTN_H * 3 + CONTROLS_GAP * 2)
+        /* M3-T1: LCD toggle (decorrido/restante). */
+        else if (PtInLcdArea(mx, my))
         {
-            /* Clique na área de botões de controle — apenas captura o foco. */
+            g_showRemaining = !g_showRemaining;
+            InvalidateRect(hwnd, NULL, FALSE);
+            return 0;
+        }
+        /* M3-T4: Seek bar dragging. */
+        else if (PtInSeekBar(mx, my))
+        {
+            g_draggingSlider = SLIDER_SEEK;
+            /* Calcular valor a partir da posição do mouse. */
+            int relX = mx - SEEK_X;
+            g_seekValue = PixelToValue(relX, SEEK_W, 0.0f, 1.0f);
+            double pos = g_seekValue * Audio_GetDurationSeconds();
+            Audio_SeekSeconds(pos);
+            InvalidateRect(hwnd, NULL, FALSE);
+            return 0;
+        }
+        /* M3-T5: Volume slider dragging. */
+        else if (PtInVolumeSlider(mx, my))
+        {
+            g_draggingSlider = SLIDER_VOLUME;
+            int relX = mx - VOLUME_SLIDER_X;
+            g_volumeValue = PixelToValue(relX, VOLUME_SLIDER_W, 0.0f, 1.0f);
+            Audio_SetVolume(g_volumeValue);
+            InvalidateRect(hwnd, NULL, FALSE);
+            return 0;
+        }
+        /* M3-T5: Pan slider dragging. */
+        else if (PtInPanSlider(mx, my))
+        {
+            g_draggingSlider = SLIDER_PAN;
+            int relX = mx - PAN_SLIDER_X;
+            g_panValue = PixelToValue(relX, PAN_SLIDER_W, 0.0f, 1.0f);
+            /* Converter 0..1 para -1..1 */
+            float panReal = g_panValue * 2.0f - 1.0f;
+            Audio_SetPan(panReal);
+            InvalidateRect(hwnd, NULL, FALSE);
+            return 0;
+        }
+        /* M3-T6: Botões de navegação e toggles. */
+        else if (my >= NAV_Y && my < NAV_Y + NAV_BTN_H + TOGGLE_GAP + TOGGLE_H)
+        {
+            int btnId = 0;
+            if (PtInNavBtn(mx, my, &btnId))
+            {
+                switch (btnId)
+                {
+                case 1: /* Prev */
+                    Audio_Previous();
+                    break;
+                case 2: /* Next */
+                    Audio_Next(g_shuffleOn, g_repeatOn);
+                    break;
+                case 3: /* Shuffle toggle */
+                    g_shuffleOn = !g_shuffleOn;
+                    InvalidateRect(hwnd, NULL, FALSE);
+                    return 0;
+                case 4: /* Repeat toggle */
+                    g_repeatOn = !g_repeatOn;
+                    InvalidateRect(hwnd, NULL, FALSE);
+                    return 0;
+                }
+            }
+        }
+        /* Clique na área de botões de controle — apenas captura o foco. */
+        else if (my >= BOTTOM_CONTROLS_Y)
+        {
             SetForegroundWindow(hwnd);
         }
         else
@@ -281,8 +557,70 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     }
 
     /* ------------------------------------------------------------------
+     * Movimento do mouse — slider dragging e hover.
+     * ------------------------------------------------------------------ */
+    case WM_MOUSEMOVE:
+    {
+        int const mx = (int)(short)LOWORD(lParam);
+        int const my = (int)(short)HIWORD(lParam);
+
+        /* Hover na titlebar. */
+        TitleBarButton newHover = BTN_NONE;
+        if (my < (int)TITLEBAR_HEIGHT && g_pressedBtn == BTN_NONE)
+        {
+            if (PtInButton(mx, my, BTN_CLOSE))
+                newHover = BTN_CLOSE;
+            else if (PtInButton(mx, my, BTN_MINIMIZE))
+                newHover = BTN_MINIMIZE;
+        }
+
+        if (newHover != g_hoverBtn)
+        {
+            g_hoverBtn = newHover;
+            InvalidateButtons(hwnd);
+        }
+
+        /* Slider dragging. */
+        if (g_draggingSlider != SLIDER_NONE)
+        {
+            switch (g_draggingSlider)
+            {
+            case SLIDER_SEEK:
+            {
+                int relX = mx - SEEK_X;
+                g_seekValue = PixelToValue(relX, SEEK_W, 0.0f, 1.0f);
+                double pos = g_seekValue * Audio_GetDurationSeconds();
+                Audio_SeekSeconds(pos);
+                InvalidateRect(hwnd, NULL, FALSE);
+                break;
+            }
+            case SLIDER_VOLUME:
+            {
+                int relX = mx - VOLUME_SLIDER_X;
+                g_volumeValue = PixelToValue(relX, VOLUME_SLIDER_W, 0.0f, 1.0f);
+                Audio_SetVolume(g_volumeValue);
+                InvalidateRect(hwnd, NULL, FALSE);
+                break;
+            }
+            case SLIDER_PAN:
+            {
+                int relX = mx - PAN_SLIDER_X;
+                g_panValue = PixelToValue(relX, PAN_SLIDER_W, 0.0f, 1.0f);
+                float panReal = g_panValue * 2.0f - 1.0f;
+                Audio_SetPan(panReal);
+                InvalidateRect(hwnd, NULL, FALSE);
+                break;
+            }
+            default:
+                break;
+            }
+        }
+        break;
+    }
+
+    /* ------------------------------------------------------------------
      * Soltar botão — titlebar ou controles.
-     * M2-T4: chama funções de audio.h para botões de controle.
+     * M2-T4/M3: chama funções de audio.h para botões de controle.
      * ------------------------------------------------------------------ */
     case WM_LBUTTONUP:
     {
@@ -312,76 +650,67 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             InvalidateButtons(hwnd);
         }
 
-        /* Verificar se soltou num botão de controle. */
-        if (my >= CONTROLS_Y)
+        /* Soltar slider — parar dragging. */
+        if (g_draggingSlider != SLIDER_NONE && my >= SEEK_Y)
         {
-            int btnId = 0;
-            if (PtInControlBtn(mx, my, &btnId))
+            g_draggingSlider = SLIDER_NONE;
+        }
+
+        /* Verificar se soltou num botão de controle inferior. */
+        if (my >= BOTTOM_CONTROLS_Y)
+        {
+            RECT r;
+            /* Botão Abrir. */
+            r = { BTN_OPEN_X, BTN_OPEN_Y, BTN_OPEN_X + BTN_OPEN_W, BTN_OPEN_Y + 16 };
+            if (PtInRect(&r, (POINT){ mx, my }))
             {
-                switch (btnId)
+                OPENFILENAMEW ofn{};
+                wchar_t szFile[MAX_PATH] = { 0 };
+
+                ofn.lStructSize  = sizeof(ofn);
+                ofn.hwndOwner    = hwnd;
+                ofn.lpstrFilter  = L"Audio Files\0*.mp3;*.wav;*.flac;*.ogg\0All Files\0*.*\0";
+                ofn.lpstrFile    = szFile;
+                ofn.nMaxFile     = MAX_PATH;
+                ofn.Flags        = OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
+
+                if (GetOpenFileNameW(&ofn))
                 {
-                case 1: /* Abrir arquivo */
-                {
-                    OPENFILENAMEW ofn{};
-                    wchar_t szFile[MAX_PATH] = { 0 };
-
-                    ofn.lStructSize  = sizeof(ofn);
-                    ofn.hwndOwner    = hwnd;
-                    ofn.lpstrFilter  = L"Audio Files\0*.mp3;*.wav;*.flac;*.ogg\0All Files\0*.*\0";
-                    ofn.lpstrFile    = szFile;
-                    ofn.nMaxFile     = MAX_PATH;
-                    ofn.Flags        = OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-
-                    if (GetOpenFileNameW(&ofn))
-                    {
-                        Audio_Load(szFile);
-                    }
-                    break;
-                }
-
-                case 2: /* Play */
-                    Audio_Play();
-                    break;
-
-                case 3: /* Pause */
-                    Audio_Pause();
-                    break;
-
-                case 4: /* Stop */
-                    Audio_Stop();
-                    break;
-
-                default:
-                    break;
+                    Audio_Load(szFile);
+                    g_currentTrack = 0;
+                    g_seekValue = 0.0f;
+                    g_scrollElapsedMs = 0;
                 }
             }
-        }
-        break;
-    }
-
-    /* ------------------------------------------------------------------
-     * Movimento do mouse — detectar hover sobre botões.
-     * M1-T3/M2-T4: invalida região para redesenhar estado.
-     * ------------------------------------------------------------------ */
-    case WM_MOUSEMOVE:
-    {
-        int const mx = (int)(short)LOWORD(lParam);
-        int const my = (int)(short)HIWORD(lParam);
-
-        /* Hover na titlebar. */
-        TitleBarButton newHover = BTN_NONE;
-        if (my < (int)TITLEBAR_HEIGHT && g_pressedBtn == BTN_NONE)
-        {
-            if (PtInButton(mx, my, BTN_CLOSE))
-                newHover = BTN_CLOSE;
-            else if (PtInButton(mx, my, BTN_MINIMIZE))
-                newHover = BTN_MINIMIZE;
-        }
-
-        if (newHover != g_hoverBtn)
-        {
-            g_hoverBtn = newHover;
-            InvalidateButtons(hwnd);
+            else
+            {
+                /* Botão Play. */
+                r = { BTN_PLAY_X, BTN_PLAY_Y, BTN_PLAY_X + 30, BTN_PLAY_Y + 16 };
+                if (PtInRect(&r, (POINT){ mx, my }))
+                {
+                    Audio_Play();
+                }
+                else
+                {
+                    /* Botão Pause. */
+                    r = { BTN_PAUSE_X, BTN_PAUSE_Y, BTN_PAUSE_X + 30, BTN_PAUSE_Y + 16 };
+                    if (PtInRect(&r, (POINT){ mx, my }))
+                    {
+                        Audio_Pause();
+                    }
+                    else
+                    {
+                        /* Botão Stop. */
+                        r = { BTN_STOP_X, BTN_STOP_Y, BTN_STOP_X + 30, BTN_STOP_Y + 16 };
+                        if (PtInRect(&r, (POINT){ mx, my }))
+                        {
+                            Audio_Stop();
+                            g_seekValue = 0.0f;
+                            g_scrollElapsedMs = 0;
+                        }
+                    }
+                }
+            }
         }
         break;
     }
@@ -391,6 +720,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
 
+        /* Double buffer — desenhar em memória e copiar de uma vez. */
         HDC memDC = CreateCompatibleDC(hdc);
         HBITMAP memBM = CreateCompatibleBitmap(hdc, MAINWND_WIDTH, MAINWND_HEIGHT);
         HGDIOBJ oldObj = SelectObject(memDC, memBM);
@@ -400,22 +730,240 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         FillRect(memDC, &ps.rcPaint, bgBrush);
         DeleteObject(bgBrush);
 
-        /* Barra de título (faixa no topo). */
-        RECT titleRect = { 0, 0, MAINWND_WIDTH, TITLEBAR_HEIGHT };
+        /* ------------------------------------------------------------------
+         * Barra de título (faixa no topo).
+         * ------------------------------------------------------------------ */
+        RECT titleBarRect = { 0, 0, MAINWND_WIDTH, TITLEBAR_HEIGHT };
         HBRUSH titleBrush = CreateSolidBrush(TITLEBAR_COLOR);
-        FillRect(memDC, &titleRect, titleBrush);
+        FillRect(memDC, &titleBarRect, titleBrush);
         DeleteObject(titleBrush);
 
         /* Botões da barra de título. */
         DrawTitleButton(memDC, BTN_MINIMIZE);
         DrawTitleButton(memDC, BTN_CLOSE);
 
-        /* Botões de controle (Abrir/Play/Pause/Stop). */
-        DrawControlButton(memDC, 1); /* Abrir */
-        DrawControlButton(memDC, 2); /* Play */
-        DrawControlButton(memDC, 3); /* Pause */
-        DrawControlButton(memDC, 4); /* Stop */
+        /* ------------------------------------------------------------------
+         * Display LCD de tempo — M3-T1
+         * ------------------------------------------------------------------ */
+        {
+            wchar_t timeStr[8] = { 0 };
+            double pos = Audio_GetPositionSeconds();
+            double dur = Audio_GetDurationSeconds();
+            FormatTime(pos, g_showRemaining, dur, timeStr, ARRAYSIZE(timeStr));
+            DrawLcdDisplay(hwnd, memDC, timeStr);
+        }
 
+        /* ------------------------------------------------------------------
+         * Informações de áudio (kbps/kHz/estéreo) — M3-T3
+         * ------------------------------------------------------------------ */
+        {
+            int sampleRate = Audio_GetSampleRate();
+            int channels   = Audio_GetChannels();
+            int bitrate    = Audio_GetBitrateKbps();
+
+            /* Desenhar texto pequeno ao lado do LCD. */
+            RECT infoRect = { TITLE_X, TITLE_Y + 14, TITLE_X + TITLE_W, TITLE_Y + TITLE_H };
+            SetBkMode(memDC, TRANSPARENT);
+            SetTextColor(memDC, AUDIO_INFO_COLOR);
+
+            wchar_t infoBuf[32] = { 0 };
+            if (bitrate > 0 && sampleRate > 0)
+            {
+                wsprintfW(infoBuf, L"%d kbps %d Hz%s", bitrate, sampleRate / 1000, channels == 2 ? " st" : "");
+            }
+            else if (bitrate > 0)
+            {
+                wsprintfW(infoBuf, L"%d kbps", bitrate);
+            }
+            else if (sampleRate > 0)
+            {
+                wsprintfW(infoBuf, L"%d Hz%s", sampleRate / 1000, channels == 2 ? " st" : "");
+            }
+
+            if (infoBuf[0] != L'\0')
+                DrawTextW(memDC, infoBuf, (int)wcslen(infoBuf), &infoRect, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+        }
+
+        /* ------------------------------------------------------------------
+         * Título rolando — M3-T2
+         * ------------------------------------------------------------------ */
+        {
+            wchar_t fileName[MAX_PATH] = { 0 };
+            if (Audio_IsActive())
+            {
+                /* Extrair nome do arquivo carregado. */
+                /* Nota: precisamos do caminho atual — armazenamos internamente. */
+                /* Por enquanto, usar um placeholder ou extrair de Audio_GetFileName(). */
+                /* Implementação provisória: obteremos o path via uma função nova. */
+            }
+
+            /* Medir largura do texto. */
+            SIZE textSize;
+            GetTextExtentPoint32W(memDC, fileName, (int)wcslen(fileName), &textSize);
+
+            /* Calcular offset de scroll. */
+            int scrollOffset = 0;
+            BOOL needsScroll = CalcScrollOffset(&scrollOffset, textSize.cx, TITLE_W,
+                                                 g_scrollElapsedMs, 500, TITLE_SCROLL_SPEED);
+
+            if (needsScroll && textSize.cx > 0)
+            {
+                RECT titleRect = { TITLE_X - scrollOffset, TITLE_Y,
+                                   TITLE_X - scrollOffset + textSize.cx, TITLE_Y + TITLE_H };
+                SetBkMode(memDC, TRANSPARENT);
+                SetTextColor(memDC, TITLE_TEXT_COLOR);
+                DrawTextW(memDC, fileName, (int)wcslen(fileName), &titleRect,
+                          DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+            }
+            else if (textSize.cx > 0 && textSize.cx <= TITLE_W)
+            {
+                /* Centralizar se cabe. */
+                RECT titleRect = { TITLE_X + (TITLE_W - textSize.cx) / 2, TITLE_Y,
+                                   TITLE_X + (TITLE_W + textSize.cx) / 2, TITLE_Y + TITLE_H };
+                SetBkMode(memDC, TRANSPARENT);
+                SetTextColor(memDC, TITLE_TEXT_COLOR);
+                DrawTextW(memDC, fileName, (int)wcslen(fileName), &titleRect,
+                          DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+            }
+        }
+
+        /* ------------------------------------------------------------------
+         * Barra de busca (seek) — M3-T4
+         * ------------------------------------------------------------------ */
+        {
+            DrawHSlider(memDC, SEEK_X, SEEK_Y, SEEK_W, SEEK_H, g_seekValue);
+
+            /* Label de tempo abaixo da barra. */
+            wchar_t seekLabel[16] = { 0 };
+            double pos = Audio_GetPositionSeconds();
+            double dur = Audio_GetDurationSeconds();
+            FormatTime(pos, FALSE, dur, seekLabel, ARRAYSIZE(seekLabel));
+
+            RECT labelRect = { SEEK_X, SEEK_Y + SEEK_H + 1,
+                               SEEK_X + 30, SEEK_Y + SEEK_H + 14 };
+            SetBkMode(memDC, TRANSPARENT);
+            SetTextColor(memDC, AUDIO_INFO_COLOR);
+            DrawTextW(memDC, seekLabel, (int)wcslen(seekLabel), &labelRect,
+                      DT_LEFT | DT_TOP | DT_SINGLELINE);
+
+            /* Tempo total à direita. */
+            wchar_t durLabel[16] = { 0 };
+            FormatTime(dur, FALSE, dur, durLabel, ARRAYSIZE(durLabel));
+            RECT durRect = { SEEK_X + SEEK_W - 35, SEEK_Y + SEEK_H + 1,
+                             SEEK_X + SEEK_W, SEEK_Y + SEEK_H + 14 };
+            DrawTextW(memDC, durLabel, (int)wcslen(durLabel), &durRect,
+                      DT_RIGHT | DT_TOP | DT_SINGLELINE);
+        }
+
+        /* ------------------------------------------------------------------
+         * Volume e balanço — M3-T5
+         * ------------------------------------------------------------------ */
+        {
+            /* Label "VOL". */
+            RECT volLabelRect = { VOLUME_SLIDER_X, VOLPAN_Y - 1,
+                                  VOLUME_SLIDER_X + 20, VOLPAN_Y + 1 };
+            SetBkMode(memDC, TRANSPARENT);
+            SetTextColor(memDC, AUDIO_INFO_COLOR);
+            DrawTextW(memDC, L"VOL", 3, &volLabelRect,
+                      DT_LEFT | DT_TOP | DT_SINGLELINE);
+
+            DrawHSlider(memDC, VOLUME_SLIDER_X, VOLPAN_Y,
+                        VOLUME_SLIDER_W, VOLPAN_H, g_volumeValue);
+
+            /* Label "BAL". */
+            RECT panLabelRect = { PAN_SLIDER_X, VOLPAN_Y - 1,
+                                  PAN_SLIDER_X + 20, VOLPAN_Y + 1 };
+            DrawTextW(memDC, L"BAL", 3, &panLabelRect,
+                      DT_LEFT | DT_TOP | DT_SINGLELINE);
+
+            DrawHSlider(memDC, PAN_SLIDER_X, VOLPAN_Y,
+                        PAN_SLIDER_W, VOLPAN_H, g_panValue);
+        }
+
+        /* ------------------------------------------------------------------
+         * Botões de navegação e toggles — M3-T6
+         * ------------------------------------------------------------------ */
+        {
+            /* Botão Prev. */
+            RECT prevRect = { BTN_PREV_X, NAV_Y, BTN_PREV_X + NAV_BTN_W, NAV_Y + NAV_BTN_H };
+            HBRUSH prevBrush = CreateSolidBrush(NAV_BG_NORMAL);
+            FillRect(memDC, &prevRect, prevBrush);
+            DeleteObject(prevBrush);
+            SetBkMode(memDC, TRANSPARENT);
+            SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
+            DrawTextW(memDC, L"<<", 2, &prevRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+            /* Botão Next. */
+            RECT nextRect = { BTN_NEXT_X, NAV_Y, BTN_NEXT_X + NAV_BTN_W, NAV_Y + NAV_BTN_H };
+            HBRUSH nextBrush = CreateSolidBrush(NAV_BG_NORMAL);
+            FillRect(memDC, &nextRect, nextBrush);
+            DeleteObject(nextBrush);
+            DrawTextW(memDC, L">>", 2, &nextRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+            /* Botão Shuffle (toggle). */
+            RECT shuffleRect = { BTN_SHUFFLE_X, TOGGLE_Y,
+                                 BTN_SHUFFLE_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
+            HBRUSH shuffleBrush = CreateSolidBrush(
+                g_shuffleOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG);
+            FillRect(memDC, &shuffleRect, shuffleBrush);
+            DeleteObject(shuffleBrush);
+            SetTextColor(memDC, g_shuffleOn ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
+            DrawTextW(memDC, L"SHUF", 4, &shuffleRect,
+                      DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+            /* Botão Repeat (toggle). */
+            RECT repeatRect = { BTN_REPEAT_X, TOGGLE_Y,
+                                BTN_REPEAT_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
+            HBRUSH repeatBrush = CreateSolidBrush(
+                g_repeatOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG);
+            FillRect(memDC, &repeatRect, repeatBrush);
+            DeleteObject(repeatBrush);
+            SetTextColor(memDC, g_repeatOn ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
+            DrawTextW(memDC, L"REP", 3, &repeatRect,
+                      DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+        }
+
+        /* ------------------------------------------------------------------
+         * Botões de controle inferior (Abrir/Play/Pause/Stop).
+         * ------------------------------------------------------------------ */
+        {
+            /* Botão Abrir. */
+            RECT openRect = { BTN_OPEN_X, BTN_OPEN_Y,
+                              BTN_OPEN_X + BTN_OPEN_W, BTN_OPEN_Y + 16 };
+            HBRUSH openBrush = CreateSolidBrush(CTRL_BG_NORMAL);
+            FillRect(memDC, &openRect, openBrush);
+            DeleteObject(openBrush);
+            SetBkMode(memDC, TRANSPARENT);
+            SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
+            DrawTextW(memDC, L"Abrir", 5, &openRect,
+                      DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+            /* Botão Play. */
+            RECT playRect = { BTN_PLAY_X, BTN_PLAY_Y,
+                              BTN_PLAY_X + 30, BTN_PLAY_Y + 16 };
+            HBRUSH playBrush = CreateSolidBrush(CTRL_BG_NORMAL);
+            FillRect(memDC, &playRect, playBrush);
+            DeleteObject(playBrush);
+            DrawTextW(memDC, L">", 1, &playRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+            /* Botão Pause. */
+            RECT pauseRect = { BTN_PAUSE_X, BTN_PAUSE_Y,
+                               BTN_PAUSE_X + 30, BTN_PAUSE_Y + 16 };
+            HBRUSH pauseBrush = CreateSolidBrush(CTRL_BG_NORMAL);
+            FillRect(memDC, &pauseRect, pauseBrush);
+            DeleteObject(pauseBrush);
+            DrawTextW(memDC, L"||", 2, &pauseRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+
+            /* Botão Stop. */
+            RECT stopRect = { BTN_STOP_X, BTN_STOP_Y,
+                              BTN_STOP_X + 30, BTN_STOP_Y + 16 };
+            HBRUSH stopBrush = CreateSolidBrush(CTRL_BG_NORMAL);
+            FillRect(memDC, &stopRect, stopBrush);
+            DeleteObject(stopBrush);
+            DrawTextW(memDC, L"[]", 2, &stopRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+        }
+
+        /* Copiar buffer para a tela. */
         BitBlt(hdc, 0, 0, MAINWND_WIDTH, MAINWND_HEIGHT, memDC, 0, 0, SRCCOPY);
 
         SelectObject(memDC, oldObj);
@@ -429,6 +977,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     case WM_DESTROY:
     {
         KillTimer(hwnd, POSITION_TIMER_ID);
+        KillTimer(hwnd, SCROLL_TIMER_ID);
         Audio_Shutdown();
         PostQuitMessage(0);
         break;

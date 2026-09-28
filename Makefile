@@ -103,8 +103,8 @@ test: $(TEST_BINS)
 	done
 	@echo "All tests passed."
 
-$(BUILD_DIR)/test-%: $(TEST_DIR)/%.c
+$(BUILD_DIR)/test-%: $(TEST_DIR)/%.c $(BUILD_DIR)/util.o
 	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ $<
+	$(CC) $(CFLAGS) -o $@ $< $(BUILD_DIR)/util.o
 
 .PHONY: all clean test

@@ -5,13 +5,20 @@
  * preferido (fallback automático para DirectSound/WinMM se indisponível).
  * M2-T2: carregar arquivo + duração.
  * M2-T3: play/pause/stop + posição.
+ * M3-T3: sample rate, canais, bitrate.
+ * M3-T4: seek.
+ * M3-T5: volume, pan (balanço).
+ * M3-T6: navegação prev/next — interface mínima provisória (lista de 1 item).
  */
 
 #include "ma_config.h"
 #include "audio.h"
+#include "util.h"
 
 /* Incluir miniaudio SOMENTE aqui (implementação em miniaudio_impl.c). */
 #include "../third_party/miniaudio.h"
+
+#include <cstdint>
 
 /* ------------------------------------------------------------------ */
 /* Estado interno (opaco)                                               */
@@ -23,6 +30,8 @@ static struct AudioEngine
     ma_sound   sound;      /* Sound carregado                      */
     BOOL       active;     /* TRUE se engine inicializada          */
     AudioState state;      /* Estado atual da reprodução           */
+    wchar_t    currentPath[MAX_PATH]; /* Caminho do arquivo atual    */
+    __int64    fileSizeBytes;   /* Tamanho em bytes (para bitrate) */
 } g_audio{};
 
 /* ------------------------------------------------------------------ */
@@ -46,8 +55,10 @@ BOOL Audio_Init(void)
         return FALSE;
     }
 
-    g_audio.active  = TRUE;
-    g_audio.state   = AUDIO_STATE_STOPPED;
+    g_audio.active   = TRUE;
+    g_audio.state    = AUDIO_STATE_STOPPED;
+    g_audio.fileSizeBytes = 0;
+    g_audio.currentPath[0] = L'\0';
     /* sound será inicializado em Audio_Load(). */
 
     return TRUE;
@@ -62,8 +73,8 @@ void Audio_Shutdown(void)
     ma_sound_uninit(&g_audio.sound);
 
     ma_engine_uninit(&g_audio.engine);
-    g_audio.active  = FALSE;
-    g_audio.state   = AUDIO_STATE_STOPPED;
+    g_audio.active   = FALSE;
+    g_audio.state    = AUDIO_STATE_STOPPED;
 }
 
 BOOL Audio_IsActive(void)
@@ -94,6 +105,23 @@ BOOL Audio_Load(const wchar_t* path)
     {
         g_audio.state = AUDIO_STATE_STOPPED;
         return FALSE;
+    }
+
+    /* Salvar caminho e tamanho do arquivo. */
+    wcsncpy_s(g_audio.currentPath, ARRAYSIZE(g_audio.currentPath),
+              path, _TRUNCATE);
+
+    /* Obter tamanho do arquivo para cálculo de bitrate. */
+    g_audio.fileSizeBytes = 0;
+    {
+        WIN32_FILE_ATTRIBUTE_DATA info{};
+        if (GetFileAttributesExW(path, GetFileExInfoStandard, &info))
+        {
+            ULARGE_INTEGER size;
+            size.LowPart  = info.nFileSizeLow;
+            size.HighPart = info.nFileSizeHigh;
+            g_audio.fileSizeBytes = (int64_t)size.QuadPart;
+        }
     }
 
     /* Resetar estado. */
@@ -166,4 +194,132 @@ double Audio_GetPositionSeconds(void)
     ma_sound_get_cursor_in_pcm_frames(&g_audio.sound, &frameCount);
     double position = (double)frameCount / (double)ma_engine_get_sample_rate(&g_audio.engine);
     return position;
+}
+
+/* ------------------------------------------------------------------ */
+/* Informações do arquivo — M3-T3                                       */
+/* ------------------------------------------------------------------ */
+
+int Audio_GetSampleRate(void)
+{
+    if (!g_audio.active)
+        return 0;
+
+    return ma_engine_get_sample_rate(&g_audio.engine);
+}
+
+int Audio_GetChannels(void)
+{
+    if (!g_audio.active)
+        return 0;
+
+    /* Obter o número de canais do sound via data source format. */
+    ma_format format = ma_format_unknown;
+    ma_uint32 channels = 0;
+    ma_uint32 sampleRate = 0;
+    ma_result result = ma_sound_get_data_format(&g_audio.sound, &format, &channels, &sampleRate, NULL, 0);
+    if (result != MA_SUCCESS)
+        return 0;
+
+    return (int)channels;
+}
+
+int Audio_GetBitrateKbps(void)
+{
+    if (g_audio.fileSizeBytes <= 0)
+        return 0;
+
+    double duration = Audio_GetDurationSeconds();
+    if (duration <= 0.0)
+        return 0;
+
+    return CalcApproxBitrateKbps(g_audio.fileSizeBytes, duration);
+}
+
+/* ------------------------------------------------------------------ */
+/* Seek — M3-T4                                                         */
+/* ------------------------------------------------------------------ */
+
+void Audio_SeekSeconds(double seconds)
+{
+    if (!g_audio.active)
+        return;
+
+    /* Limitar aos limites do arquivo. */
+    double dur = Audio_GetDurationSeconds();
+    if (dur <= 0.0)
+        return;
+
+    if (seconds < 0.0) seconds = 0.0;
+    if (seconds > dur) seconds = dur;
+
+    /* Converter segundos para frames PCM. */
+    int sampleRate = Audio_GetSampleRate();
+    if (sampleRate <= 0)
+        return;
+
+    ma_uint64 targetFrame = (ma_uint64)(seconds * sampleRate);
+    ma_sound_seek_to_pcm_frame(&g_audio.sound, targetFrame);
+}
+
+/* ------------------------------------------------------------------ */
+/* Volume e balanço — M3-T5                                             */
+/* ------------------------------------------------------------------ */
+
+void Audio_SetVolume(float volume)
+{
+    if (!g_audio.active)
+        return;
+
+    /* Clamp entre 0.0 e 1.0. */
+    if (volume < 0.0f) volume = 0.0f;
+    if (volume > 1.0f) volume = 1.0f;
+
+    ma_engine_set_volume(&g_audio.engine, volume);
+}
+
+void Audio_SetPan(float pan)
+{
+    if (!g_audio.active)
+        return;
+
+    /* Clamp entre -1.0 e 1.0. */
+    if (pan < -1.0f) pan = -1.0f;
+    if (pan > 1.0f)  pan =  1.0f;
+
+    ma_sound_set_pan(&g_audio.sound, pan);
+}
+
+/* ------------------------------------------------------------------ */
+/* Navegação — M3-T6 (interface mínima provisória)                      */
+/* Lista de 1 item: Next/Previous não saem dos limites.                 */
+/* Será substituída pela implementação real no M5.                      */
+/* ------------------------------------------------------------------ */
+
+void Audio_Next(BOOL shuffle, BOOL repeat)
+{
+    (void)shuffle; /* Usado quando playlist real for implementada no M5. */
+    (void)repeat;  /* Usado quando playlist real for implementada no M5. */
+
+    /* Provisório: se há um arquivo carregado, reiniciar do início.
+     * No M5, isso usará a playlist real. */
+    if (g_audio.active && g_audio.currentPath[0] != L'\0')
+    {
+        Audio_Stop();
+        Audio_Play();
+    }
+}
+
+void Audio_Previous(void)
+{
+    /* Provisório: se posição > 3s, reiniciar; senão, não fazer nada.
+     * No M5, isso voltará para a faixa anterior da playlist. */
+    if (g_audio.active && g_audio.state == AUDIO_STATE_PLAYING)
+    {
+        double pos = Audio_GetPositionSeconds();
+        if (pos > 3.0)
+        {
+            Audio_SeekSeconds(0.0);
+        }
+    }
 }
