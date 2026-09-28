@@ -17,6 +17,21 @@
 /* Altura da barra de título (área sensível para arrastar e botões). */
 #define TITLEBAR_HEIGHT 24
 
+/* Tamanho dos botões na barra de título. */
+#define BTN_SIZE        16
+
+/* Posição X dos botões (alinhados à direita, com margem). */
+#define BTN_CLOSE_X     (MAINWND_WIDTH - BTN_SIZE - 2)
+#define BTN_MINIMIZE_X  (BTN_CLOSE_X - BTN_SIZE - 2)
+
+/* Estado dos botões da barra de título. */
+typedef enum
+{
+    BTN_NONE = 0,
+    BTN_MINIMIZE,
+    BTN_CLOSE
+} TitleBarButton;
+
 /* Registra a classe da janela principal (chamar uma vez antes de criar).
  * Retorna TRUE em caso de sucesso, FALSE caso contrário. */
 BOOL MainWnd_RegisterClass(HINSTANCE hInstance);
