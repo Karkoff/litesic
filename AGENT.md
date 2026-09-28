@@ -89,7 +89,7 @@ Não adivinhar assinaturas de API ou comportamento de biblioteca — checar.
 ## Fluxo de execução de tarefas
 
 O fluxo de "implementar → testar → commitar → perguntar próxima tarefa" está
-definido como uma skill em `.claude/skills/litesic-task/SKILL.md`. Use-a
+definido como uma skill em `.agent/skills/litesic-task/SKILL.md`. Use-a
 sempre que for executar uma tarefa do roadmap — não improvise um fluxo
 diferente.
 
