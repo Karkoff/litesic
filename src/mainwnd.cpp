@@ -4,6 +4,7 @@
  * M1-T1: WndProc tratando WM_CREATE, WM_DESTROY e WM_PAINT com cor sólida.
  * M1-T2: barra de título arrastável via ReleaseCapture + HTCAPTION.
  * M1-T3: botões fechar/minimizar desenhados com hover/pressed visual.
+ * M1-T4: ícone carregado do recurso e enviado via WM_SETICON.
  */
 
 #include "mainwnd.h"
@@ -138,7 +139,19 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     switch (msg)
     {
     case WM_CREATE:
+    {
+        /* Garantir que o ícone aparece na taskbar e no Alt+Tab. */
+        HICON hIcon = LoadIconW(
+            GetModuleHandleW(NULL),
+            MAKEINTRESOURCEW(IDI_APP_ICON)
+        );
+        if (hIcon != NULL)
+        {
+            SendMessageW(hwnd, WM_SETICON, ICON_BIG,  (LPARAM)hIcon);
+            SendMessageW(hwnd, WM_SETICON, ICON_SMALL, (LPARAM)hIcon);
+        }
         break;
+    }
 
     /* ------------------------------------------------------------------
      * Arraste da janela — clicar na barra de título e arrastar.
@@ -292,6 +305,8 @@ BOOL MainWnd_RegisterClass(HINSTANCE hInstance)
     wc.style         = CS_HREDRAW | CS_VREDRAW;
     wc.lpfnWndProc   = WndProc;
     wc.hInstance     = hInstance;
+    wc.hIcon         = LoadIconW(hInstance, MAKEINTRESOURCEW(IDI_APP_ICON));
+    wc.hIconSm       = LoadIconW(hInstance, MAKEINTRESOURCEW(IDI_APP_ICON));
     wc.hCursor       = LoadCursorW(NULL, IDC_ARROW);
     wc.hbrBackground = (HBRUSH)(COLOR_WINDOW + 1);
     wc.lpszClassName = CLASS_NAME;

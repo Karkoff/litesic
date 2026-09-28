@@ -32,6 +32,9 @@ typedef enum
     BTN_CLOSE
 } TitleBarButton;
 
+/* ID do ícone definido em res/app.rc (M0-T5). */
+#define IDI_APP_ICON 101
+
 /* Registra a classe da janela principal (chamar uma vez antes de criar).
  * Retorna TRUE em caso de sucesso, FALSE caso contrário. */
 BOOL MainWnd_RegisterClass(HINSTANCE hInstance);
