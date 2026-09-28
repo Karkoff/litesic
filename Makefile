@@ -44,18 +44,20 @@ ifeq ($(DEBUG),1)
   CFLAGS   += -g -O0 -DDEBUG
 endif
 
-LDFLAGS       := -mwindows -municode \
+LDFLAGS       := -mwindows -municode -static-libgcc -static-libstdc++ \
                   -luser32 -lkernel32 -lgdi32 -lm
 
-# Source files (miniaudio_impl agora .cpp para linkar com libstdc++)
+# Source files (miniaudio_impl compilado como C puro — sem libstdc++)
 CPP_SRCS      := $(wildcard $(SRC_DIR)/*.cpp)
+MA_SRC        := $(SRC_DIR)/miniaudio_impl.c
 RC_SRCS       := $(RES_DIR)/app.rc
 
 # Object files
 CPP_OBJS      := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(CPP_SRCS))
+MA_OBJ        := $(BUILD_DIR)/miniaudio_impl.o
 RC_OBJS       := $(patsubst $(RES_DIR)/%.rc,$(BUILD_DIR)/%.res.o,$(RC_SRCS))
 
-OBJS          := $(CPP_OBJS) $(RC_OBJS)
+OBJS          := $(CPP_OBJS) $(MA_OBJ) $(RC_OBJS)
 
 # Test files
 TEST_SRCS     := $(wildcard $(TEST_DIR)/*.c)
@@ -74,6 +76,11 @@ $(TARGET): $(OBJS)
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
 	@mkdir -p $(dir $@)
 	$(CXX) $(CXXFLAGS) -c -o $@ $<
+
+# miniaudio_impl compilado como C puro (sem libstdc++/UCRT)
+$(MA_OBJ): $(MA_SRC)
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c -o $@ $<
 
 $(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(dir $@)
