@@ -1,6 +1,6 @@
 ---
 name: litesic-task
-description: Executa uma tarefa do roadmap do LiteSic (docs/ROADMAP.md) do início ao fim — implementação, testes, commit e proposta da próxima tarefa. Use quando o usuário pedir para "executar", "fazer", "implementar" ou "rodar" uma tarefa/milestone do LiteSic (ex.: "executa M2-T3", "faz a próxima tarefa", "implementa o M5-T2").
+description: Executa uma tarefa do roadmap do LiteSic (docs/ROADMAP.md + docs/milestones/M<n>.md) do início ao fim — implementação, testes, commit, marcação do checkbox e proposta da próxima tarefa. Use quando o usuário pedir para "executar", "fazer", "implementar" ou "rodar" uma tarefa/milestone do LiteSic (ex.: "executa M2-T3", "faz a próxima tarefa", "implementa o M5-T2").
 ---
 
 # Executar tarefa do LiteSic
@@ -13,12 +13,15 @@ improvise um fluxo alternativo — siga os passos abaixo em ordem.
 Antes de qualquer coisa, leia (se ainda não estiverem no contexto):
 
 1. `AGENT.md` — regras de código, decisões técnicas, convenções.
-2. `docs/ROADMAP.md` — para localizar a tarefa pedida (ID `M<n>-T<n>`) e
-   entender seu critério de "pronto".
+2. `docs/ROADMAP.md` — índice das milestones.
+3. `docs/milestones/M<n>.md` correspondente à tarefa pedida (ID
+   `M<n>-T<n>`) — contém o detalhamento, arquivos envolvidos, testes
+   esperados e critério de "pronto" daquela tarefa específica.
 
 Se o usuário pedir "a próxima tarefa" sem ID, descubra a última tarefa
-commitada (`git log --oneline`, mensagens no padrão `M<n>-T<n>: ...`) e
-pegue a seguinte na ordem do roadmap.
+commitada (`git log --oneline`, mensagens no padrão `M<n>-T<n>: ...`) e/ou
+o primeiro checkbox `- [ ]` não marcado, em ordem, percorrendo
+`docs/milestones/M0.md`, `M1.md`, etc.
 
 ## Passo 1 — Implementar
 
@@ -50,12 +53,19 @@ ajuda ao usuário:
 1. MCP **context7** — documentação da biblioteca/API em questão.
 2. MCP **github** — exemplos de código e issues de projetos parecidos.
 
-## Passo 3 — Commit
+## Passo 3 — Marcar o checkbox e commitar
 
 Só chegue aqui se compilação e testes estiverem 100% verdes.
 
+1. Em `docs/milestones/M<n>.md`, marque a tarefa concluída trocando
+   `- [ ] **M<n>-T<n> — ...`  por `- [x] **M<n>-T<n> — ...`. Se a tarefa
+   era a última da milestone, marque também os itens do checklist em
+   "Checkpoint da milestone" que já se confirmam (deixe os que exigem
+   validação manual do usuário sem marcar até essa confirmação chegar).
+2. Commit incluindo o código da tarefa e essa atualização do checkbox:
+
 ```
-git add <arquivos da tarefa>
+git add <arquivos da tarefa> docs/milestones/M<n>.md
 git commit -m "M<n>-T<n>: <resumo curto do que foi feito>"
 ```
 
@@ -65,8 +75,8 @@ checar `git status` antes). Nunca use `--no-verify`.
 ## Passo 4 — Checkpoint visual (entre milestones)
 
 Se a tarefa que acabou de ser commitada é a **última tarefa de uma
-milestone** (conferir em `docs/ROADMAP.md` — todas as tarefas `M<n>-T*`
-daquela milestone já commitadas):
+milestone** (conferir em `docs/milestones/M<n>.md` — todos os checkboxes
+`M<n>-T*` daquela milestone já marcados):
 
 1. Compile a versão mais recente (`make`).
 2. Avise o usuário explicitamente: "Milestone M<n> concluída — abra
@@ -77,6 +87,9 @@ daquela milestone já commitadas):
    usuário de que a validação manual passou. Testes verdes não substituem
    isso: é comum a aplicação não funcionar direito na prática mesmo com
    testes passando.
+4. Quando o usuário confirmar, marque os checkboxes restantes do
+   "Checkpoint da milestone" em `docs/milestones/M<n>.md` e faça um
+   commit `M<n>: checkpoint validado`.
 
 Se a tarefa NÃO é a última da milestone, pule este passo.
 

@@ -95,4 +95,8 @@ diferente.
 
 ## Roadmap
 
-Milestones, tarefas e critérios de "pronto" estão em `docs/ROADMAP.md`.
+`docs/ROADMAP.md` é só o índice das milestones. Cada milestone (M0–M10)
+tem seu próprio arquivo em `docs/milestones/M<n>.md`, com a lista
+detalhada de tarefas — cada tarefa é um checkbox (`- [ ]`, marcado
+`- [x]` quando concluída), com arquivos envolvidos, o que fazer, testes
+esperados e critério de "pronto".
