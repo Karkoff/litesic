@@ -713,7 +713,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         else if (wParam == SCROLL_TIMER_ID)
         {
             /* Atualizar contador de scroll do título. */
-            g_scrollElapsedMs++;
+            g_scrollElapsedMs += 30;
 
             /* Invalidar apenas a área do título para redraw. */
             RECT titleRect = { TITLE_X, TITLE_Y, TITLE_X + TITLE_W, TITLE_Y + TITLE_H };
@@ -1093,30 +1093,34 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             SIZE textSize;
             GetTextExtentPoint32W(memDC, fileName, (int)wcslen(fileName), &textSize);
 
-            int scrollOffset = 0;
-            BOOL needsScroll = CalcScrollOffset(&scrollOffset, textSize.cx, TITLE_W,
-                                                 g_scrollElapsedMs, 500, TITLE_SCROLL_SPEED);
+            /* Tudo em pixels reais; o texto é recortado à área do título
+             * para nunca invadir o LCD nem a borda da janela. */
+            RECT area = {
+                MainWnd_DPIScale(TITLE_X), MainWnd_DPIScale(TITLE_Y),
+                MainWnd_DPIScale(TITLE_X + TITLE_W), MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14)
+            };
+            int areaW = area.right - area.left;
 
-            RECT titleRect;
-            if (needsScroll && textSize.cx > 0)
-                titleRect = { MainWnd_DPIScale(TITLE_X) - scrollOffset,
-                              MainWnd_DPIScale(TITLE_Y),
-                              MainWnd_DPIScale(TITLE_X) - scrollOffset + textSize.cx,
-                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14) };
-            else if (textSize.cx > 0 && textSize.cx <= TITLE_W)
-                titleRect = { MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale((TITLE_W - textSize.cx) / 2),
-                              MainWnd_DPIScale(TITLE_Y),
-                              MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale((TITLE_W + textSize.cx) / 2),
-                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14) };
-            else
-                titleRect = { 0, 0, 0, 0 };
-
-            if (textSize.cx > 0 && (titleRect.right > titleRect.left))
+            if (textSize.cx > 0)
             {
+                int scrollOffset = 0;
+                CalcScrollOffset(&scrollOffset, textSize.cx, areaW, g_scrollElapsedMs,
+                                 1500, TITLE_SCROLL_SPEED * (float)MainWnd_DPIScale(1));
+
+                RECT textRect = area;
+                if (textSize.cx <= areaW)
+                    textRect.left = area.left + (areaW - textSize.cx) / 2;
+                else
+                    textRect.left = area.left - scrollOffset;
+                textRect.right = textRect.left + textSize.cx;
+
+                int savedDC = SaveDC(memDC);
+                IntersectClipRect(memDC, area.left, area.top, area.right, area.bottom);
                 SetBkMode(memDC, TRANSPARENT);
                 SetTextColor(memDC, TITLE_TEXT_COLOR);
-                DrawTextW(memDC, fileName, (int)wcslen(fileName), &titleRect,
-                          DT_LEFT | DT_VCENTER | DT_SINGLELINE);
+                DrawTextW(memDC, fileName, (int)wcslen(fileName), &textRect,
+                          DT_LEFT | DT_VCENTER | DT_SINGLELINE | DT_NOPREFIX);
+                RestoreDC(memDC, savedDC);
             }
         }
 

@@ -59,36 +59,31 @@ void FormatTime(double seconds, BOOL showRemaining, double duration,
 /* ------------------------------------------------------------------ */
 
 BOOL CalcScrollOffset(int *pOffset, int textWidth, int areaWidth,
-                      DWORD elapsedMs, DWORD /*pauseMs*/, float speedPxPerSec)
+                      DWORD elapsedMs, DWORD pauseMs, float speedPxPerSec)
 {
     /* Se o texto cabe na área, não precisa rolar. */
-    if (textWidth <= areaWidth)
+    if (textWidth <= areaWidth || speedPxPerSec <= 0.0f)
     {
         *pOffset = 0;
         return FALSE;
     }
 
     int scrollRange = textWidth - areaWidth;
-
-    /* Ciclo completo: scroll + pausa final + scroll reverso + pausa inicial
-     * Comportamento clássico Winamp: rola da esquerda para direita,
-     * pausa, volta ao início (sem reverso — simples reset). */
-    DWORD cycleMs = (DWORD)((double)scrollRange / (double)speedPxPerSec * 1000.0);
-    if (cycleMs == 0)
+    DWORD scrollMs = (DWORD)((double)scrollRange / (double)speedPxPerSec * 1000.0);
+    if (scrollMs == 0)
     {
         *pOffset = 0;
         return FALSE;
     }
 
-    /* Tempo dentro do ciclo (wrap). */
-    DWORD t = elapsedMs % cycleMs;
-
-    /* Posição linear: começa em 0, vai até scrollRange. */
-    float progress = (float)t / (float)cycleMs;
-    if (progress > 1.0f)
-        progress = 1.0f;
-
-    *pOffset = (int)(progress * (float)scrollRange);
+    /* Ciclo: pausa no início, rolagem, pausa no fim, volta ao início. */
+    DWORD t = elapsedMs % (pauseMs + scrollMs + pauseMs);
+    if (t < pauseMs)
+        *pOffset = 0;
+    else if (t < pauseMs + scrollMs)
+        *pOffset = (int)((double)(t - pauseMs) / (double)scrollMs * (double)scrollRange);
+    else
+        *pOffset = scrollRange;
 
     return TRUE;
 }
