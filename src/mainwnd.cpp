@@ -716,7 +716,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             g_scrollElapsedMs += 30;
 
             /* Invalidar apenas a área do título para redraw. */
-            RECT titleRect = { TITLE_X, TITLE_Y, TITLE_X + TITLE_W, TITLE_Y + TITLE_H };
+            RECT titleRect = { MainWnd_DPIScale(TITLE_X), MainWnd_DPIScale(TITLE_Y),
+                               MainWnd_DPIScale(TITLE_X + TITLE_W), MainWnd_DPIScale(TITLE_Y + TITLE_H) };
             InvalidateRect(hwnd, &titleRect, FALSE);
         }
         break;
