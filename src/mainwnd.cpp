@@ -93,7 +93,7 @@ static DWORD g_scrollElapsedMs = 0;
 static SliderType g_draggingSlider = SLIDER_NONE;
 static float    g_seekValue   = 0.0f; /* 0..1 normalizado para seek */
 static float    g_volumeValue = 0.8f; /* 0..1 */
-static float    g_panValue    = 0.0f; /* -1..1 */
+static float    g_panValue    = 0.5f; /* -1..1 (0.5 = centro, panReal = 0.0) */
 
 /* M3-T6: estado dos toggles. */
 static BOOL g_shuffleOn = FALSE;
@@ -705,8 +705,12 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                         if (PtInRect(&r, (POINT){ mx, my }))
                         {
                             Audio_Stop();
-                            g_seekValue = 0.0f;
+                            g_seekValue   = 0.0f;
                             g_scrollElapsedMs = 0;
+                            /* Forçar redraw imediato — o timer para quando não está tocando,
+                             * então InvalidateRect sozinho pode não gerar WM_PAINT rápido o suficiente. */
+                            InvalidateRect(hwnd, NULL, FALSE);
+                            UpdateWindow(hwnd);
                         }
                     }
                 }
