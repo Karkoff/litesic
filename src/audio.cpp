@@ -208,27 +208,36 @@ void Audio_UpdateVisualization(void)
     if (format != ma_format_f32)
         return;
 
-    /* Ler blocos de 64 frames e converter para mono. */
-    float tmp[64 * 2]; /* Máx 2 canais. */
+    /* Ler blocos de 256 frames e converter para mono.
+     * Maior bloco = menos lag, mas ainda dentro do limite do timer (250ms). */
+    float tmp[256 * 2]; /* Máx 2 canais. */
     ma_uint32 channelsU32 = (ma_uint32)channels;
 
-    /* Ler apenas UM bloco por timer tick para não ler à frente demais. */
-    ma_uint64 framesRead64 = 0;
-    ma_result result = ma_decoder_read_pcm_frames(&g_vizDecoder, tmp, 64, &framesRead64);
-    if (result != MA_SUCCESS || framesRead64 == 0)
-        return;
-
-    ma_uint32 framesRead = (ma_uint32)framesRead64;
-
-    /* Converter para mono e escrever no buffer. */
-    for (ma_uint32 i = 0; i < framesRead; i++)
+    /* Ler blocos até preencher ~256 amostras no buffer. */
+    int totalRead = 0;
+    while (totalRead < 256)
     {
-        float sample = 0.0f;
-        for (ma_uint32 ch = 0; ch < channelsU32; ch++)
-            sample += tmp[i * channelsU32 + ch];
-        sample /= (float)channelsU32;
+        int toRead = 256 - totalRead;
+        if (toRead > 128) toRead = 128; /* Máx 128 por chamada. */
 
-        Audio_VizWrite(&sample, 1);
+        ma_uint64 framesRead64 = 0;
+        ma_result result = ma_decoder_read_pcm_frames(&g_vizDecoder, tmp, (ma_uint32)toRead, &framesRead64);
+        if (result != MA_SUCCESS || framesRead64 == 0)
+            break;
+
+        ma_uint32 framesRead = (ma_uint32)framesRead64;
+        totalRead += framesRead;
+
+        /* Converter para mono e escrever no buffer. */
+        for (ma_uint32 i = 0; i < framesRead; i++)
+        {
+            float sample = 0.0f;
+            for (ma_uint32 ch = 0; ch < channelsU32; ch++)
+                sample += tmp[i * channelsU32 + ch];
+            sample /= (float)channelsU32;
+
+            Audio_VizWrite(&sample, 1);
+        }
     }
 }
 

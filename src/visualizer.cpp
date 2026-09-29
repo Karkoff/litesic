@@ -232,47 +232,61 @@ void DrawSpectrum(HDC hdc, int x, int y, int w, int h)
     float samples[FFT_SIZE];
     int count = Audio_GetVisualizationSamples(samples, FFT_SIZE);
 
-    if (count >= FFT_SIZE)
+    /* Precisa de pelo menos 128 amostras para FFT útil (mínimo prático). */
+    if (count >= 128)
     {
+        /* Usar apenas as amostras disponíveis. */
+        int fftSizeUsed = count;
+        /* Arredondar para potência de 2 mais próxima. */
+        int pow2 = 128;
+        while (pow2 < fftSizeUsed && pow2 * 2 <= FFT_SIZE)
+            pow2 *= 2;
+        fftSizeUsed = pow2;
+
         /* Copiar amostras para um buffer temporário (FFT pode modificar). */
         float tempBuffer[FFT_SIZE];
-        memcpy(tempBuffer, samples, sizeof(tempBuffer));
+        memset(tempBuffer, 0, sizeof(tempBuffer));
+        memcpy(tempBuffer, samples, fftSizeUsed * sizeof(float));
 
         /* Aplicar janela de Hann. */
-        ApplyHannWindow(tempBuffer, FFT_SIZE);
+        ApplyHannWindow(tempBuffer, fftSizeUsed);
 
         /* Converter para complexo. */
         Complex complexInput[FFT_SIZE];
         for (int i = 0; i < FFT_SIZE; i++)
         {
-            complexInput[i].real = tempBuffer[i];
+            complexInput[i].real = (i < fftSizeUsed) ? tempBuffer[i] : 0.0f;
             complexInput[i].imag = 0.0f;
         }
 
         /* Calcular FFT. */
-        FFT(complexInput, FFT_SIZE);
+        FFT(complexInput, fftSizeUsed);
 
         /* Calcular magnitudes. */
         float magnitudes[FFT_SIZE / 2];
-        FFTMagnitude(complexInput, magnitudes, FFT_SIZE);
+        FFTMagnitude(complexInput, magnitudes, fftSizeUsed);
+
+        /* Preencher o resto com zero. */
+        for (int i = fftSizeUsed / 2; i < FFT_SIZE / 2; i++)
+            magnitudes[i] = 0.0f;
 
         /* Normalizar (encontrar magnitude máxima). */
         float maxMag = 0.0f;
-        for (int i = 0; i < FFT_SIZE / 2; i++)
+        for (int i = 0; i < fftSizeUsed / 2; i++)
         {
             if (magnitudes[i] > maxMag)
                 maxMag = magnitudes[i];
         }
         if (maxMag > 0.0f)
         {
-            for (int i = 0; i < FFT_SIZE / 2; i++)
+            for (int i = 0; i < fftSizeUsed / 2; i++)
                 magnitudes[i] /= maxMag;
         }
 
         /* Calcular faixas log-scale. */
         int startBins[SPECTRUM_BARS];
         int endBins[SPECTRUM_BARS];
-        CalculateLogBins(startBins, endBins, SPECTRUM_BARS, FFT_SIZE);
+        CalculateLogBins(startBins, endBins, SPECTRUM_BARS, fftSizeUsed);
 
         /* Desenhar barras. */
         int barWidth = w / SPECTRUM_BARS;
