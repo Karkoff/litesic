@@ -32,6 +32,7 @@ static struct AudioEngine
     AudioState state;      /* Estado atual da reprodução           */
     wchar_t    currentPath[MAX_PATH]; /* Caminho do arquivo atual    */
     __int64    fileSizeBytes;   /* Tamanho em bytes (para bitrate) */
+    int        fileSampleRate;  /* Taxa nativa do arquivo carregado */
 
     /* M4-T1: Ring buffer de visualização. */
     float        vizBuffer[VISUALIZATION_BUFFER_SIZE]; /* Buffer circular */
@@ -265,7 +266,23 @@ BOOL Audio_Load(const wchar_t* path)
     if (result != MA_SUCCESS)
     {
         g_audio.state = AUDIO_STATE_STOPPED;
+        g_audio.currentPath[0] = L'\0';
+        g_audio.fileSampleRate = 0;
+        g_audio.fileSizeBytes = 0;
         return FALSE;
+    }
+
+    /* Taxa nativa do arquivo (o sound é reamostrado para a taxa da engine). */
+    g_audio.fileSampleRate = 0;
+    {
+        ma_decoder probe;
+        if (ma_decoder_init_file_w(path, NULL, &probe) == MA_SUCCESS)
+        {
+            ma_uint32 nativeRate = 0;
+            if (ma_decoder_get_data_format(&probe, NULL, NULL, &nativeRate, NULL, 0) == MA_SUCCESS)
+                g_audio.fileSampleRate = (int)nativeRate;
+            ma_decoder_uninit(&probe);
+        }
     }
 
     /* Rotear a saída do sound pelo nó de visualização. */
@@ -371,6 +388,36 @@ int Audio_GetSampleRate(void)
         return 0;
 
     return ma_engine_get_sample_rate(&g_audio.engine);
+}
+
+BOOL Audio_HasTrack(void)
+{
+    return g_audio.active && g_audio.currentPath[0] != L'\0';
+}
+
+int Audio_GetFileSampleRate(void)
+{
+    return Audio_HasTrack() ? g_audio.fileSampleRate : 0;
+}
+
+void Audio_GetTrackName(wchar_t* out, int outLen)
+{
+    if (out == NULL || outLen <= 0)
+        return;
+    out[0] = L'\0';
+    if (!Audio_HasTrack())
+        return;
+
+    const wchar_t* name = g_audio.currentPath;
+    for (const wchar_t* p = name; *p; p++)
+        if (*p == L'\\' || *p == L'/')
+            name = p + 1;
+
+    wcsncpy_s(out, (size_t)outLen, name, _TRUNCATE);
+
+    wchar_t* dot = wcsrchr(out, L'.');
+    if (dot != NULL && dot != out)
+        *dot = L'\0';
 }
 
 int Audio_GetChannels(void)

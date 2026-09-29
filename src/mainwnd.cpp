@@ -147,10 +147,10 @@ static const COLORREF LCD_TEXT_COLOR   = RGB(0x00, 0xff, 0x40); /* verde LCD */
 static const COLORREF LCD_DIM_COLOR    = RGB(0x00, 0x30, 0x10);
 
 /* Cor do título rolando. */
-static const COLORREF TITLE_TEXT_COLOR = RGB(0xcc, 0xaa, 0x66);
+static const COLORREF TITLE_TEXT_COLOR = RGB(0xf0, 0xd8, 0x90);
 
 /* Cores dos indicadores de áudio (kbps/kHz). */
-static const COLORREF AUDIO_INFO_COLOR = RGB(0x88, 0x88, 0x88);
+static const COLORREF AUDIO_INFO_COLOR = RGB(0xb8, 0xa0, 0x78);
 
 /* Cor da barra de busca. */
 static const COLORREF SEEK_BAR_BG      = RGB(0x2a, 0x2a, 0x2a);
@@ -375,7 +375,9 @@ static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
     /* Borda sutil. */
     HPEN pen = CreatePen(PS_SOLID, 1, RGB(0x22, 0x44, 0x22));
     HGDIOBJ oldPen = SelectObject(hdc, pen);
+    HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(NULL_BRUSH));
     Rectangle(hdc, lcdRect.left, lcdRect.top, lcdRect.right, lcdRect.bottom);
+    SelectObject(hdc, oldBrush);
     SelectObject(hdc, oldPen);
     DeleteObject(pen);
 
@@ -477,7 +479,9 @@ static void DrawLcdDisplayScaled(HDC hdc)
     /* Borda sutil. */
     HPEN pen = CreatePen(PS_SOLID, MainWnd_DPIScale(1), RGB(0x22, 0x44, 0x22));
     HGDIOBJ oldPen = SelectObject(hdc, pen);
+    HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(NULL_BRUSH));
     Rectangle(hdc, lcdRect.left, lcdRect.top, lcdRect.right, lcdRect.bottom);
+    SelectObject(hdc, oldBrush);
     SelectObject(hdc, oldPen);
     DeleteObject(pen);
 
@@ -1044,9 +1048,10 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * Informações de áudio (kbps/kHz/estéreo) — M3-T3
          * ------------------------------------------------------------------ */
         {
-            int sampleRate = Audio_GetSampleRate();
-            int channels   = Audio_GetChannels();
-            int bitrate    = Audio_GetBitrateKbps();
+            BOOL loaded    = Audio_HasTrack();
+            int sampleRate = loaded ? Audio_GetFileSampleRate() : 0;
+            int channels   = loaded ? Audio_GetChannels() : 0;
+            int bitrate    = loaded ? Audio_GetBitrateKbps() : 0;
 
             RECT infoRect = {
                 MainWnd_DPIScale(TITLE_X),
@@ -1057,13 +1062,23 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             SetBkMode(memDC, TRANSPARENT);
             SetTextColor(memDC, AUDIO_INFO_COLOR);
 
-            wchar_t infoBuf[32] = { 0 };
+            wchar_t infoBuf[48] = { 0 };
+            wchar_t khzBuf[16] = { 0 };
+            if (sampleRate > 0)
+            {
+                int tenths = (sampleRate + 50) / 100;
+                if (tenths % 10 == 0)
+                    wsprintfW(khzBuf, L"%d kHz", tenths / 10);
+                else
+                    wsprintfW(khzBuf, L"%d.%d kHz", tenths / 10, tenths % 10);
+            }
+            const wchar_t* stereo = channels == 2 ? L" st" : (channels == 1 ? L" mono" : L"");
             if (bitrate > 0 && sampleRate > 0)
-                wsprintfW(infoBuf, L"%d kbps %d Hz%s", bitrate, sampleRate / 1000, channels == 2 ? L" st" : L"");
+                wsprintfW(infoBuf, L"%d kbps  %s%s", bitrate, khzBuf, stereo);
             else if (bitrate > 0)
                 wsprintfW(infoBuf, L"%d kbps", bitrate);
             else if (sampleRate > 0)
-                wsprintfW(infoBuf, L"%d Hz%s", sampleRate / 1000, channels == 2 ? L" st" : L"");
+                wsprintfW(infoBuf, L"%s%s", khzBuf, stereo);
 
             if (infoBuf[0] != L'\0')
                 DrawTextW(memDC, infoBuf, (int)wcslen(infoBuf), &infoRect, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
@@ -1074,6 +1089,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * ------------------------------------------------------------------ */
         {
             wchar_t fileName[MAX_PATH] = { 0 };
+            Audio_GetTrackName(fileName, ARRAYSIZE(fileName));
             SIZE textSize;
             GetTextExtentPoint32W(memDC, fileName, (int)wcslen(fileName), &textSize);
 
@@ -1086,12 +1102,12 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 titleRect = { MainWnd_DPIScale(TITLE_X) - scrollOffset,
                               MainWnd_DPIScale(TITLE_Y),
                               MainWnd_DPIScale(TITLE_X) - scrollOffset + textSize.cx,
-                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(TITLE_H) };
+                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14) };
             else if (textSize.cx > 0 && textSize.cx <= TITLE_W)
                 titleRect = { MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale((TITLE_W - textSize.cx) / 2),
                               MainWnd_DPIScale(TITLE_Y),
                               MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale((TITLE_W + textSize.cx) / 2),
-                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(TITLE_H) };
+                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14) };
             else
                 titleRect = { 0, 0, 0, 0 };
 

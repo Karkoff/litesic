@@ -72,6 +72,16 @@ double Audio_GetPositionSeconds(void);
  * Retorna 0 se nenhum arquivo estiver carregado. */
 int Audio_GetSampleRate(void);
 
+/* TRUE se há uma faixa carregada com sucesso. */
+BOOL Audio_HasTrack(void);
+
+/* Taxa de amostragem nativa do arquivo carregado (0 se nenhum). */
+int Audio_GetFileSampleRate(void);
+
+/* Copia o nome da faixa (nome do arquivo sem extensão) para out.
+ * out fica vazio se nenhuma faixa estiver carregada. */
+void Audio_GetTrackName(wchar_t* out, int outLen);
+
 /* Retorna o número de canais (1 = mono, 2 = estéreo).
  * Retorna 0 se nenhum arquivo estiver carregado. */
 int Audio_GetChannels(void);
