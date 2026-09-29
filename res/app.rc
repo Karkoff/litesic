@@ -7,8 +7,8 @@
 /* Manifest de processo (CREATEPROCESS_MANIFEST_RESOURCE_ID = 1, RT_MANIFEST = 24) */
 1 24 "app.manifest"
 
-/* Ícone da aplicação */
-IDI_APP_ICON ICON "icon.ico"
+/* Ícone da aplicação (ID 101 — deve bater com IDI_APP_ICON em mainwnd.h) */
+101 ICON "icon.ico"
 
 /* Informações de versão */
 VS_VERSION_INFO VERSIONINFO
