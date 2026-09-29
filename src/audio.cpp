@@ -148,7 +148,7 @@ static void Audio_VizWrite(const float* samples, int frameCount)
 
 /* Atualiza o buffer de visualização lendo do decoder auxiliar.
  * Chamado a partir da UI thread (timer), nunca do callback de áudio.
- * O decoder auxiliar lê à frente do playback sem interferir. */
+ * O decoder auxiliar é sincronizado com a posição atual do playback. */
 void Audio_UpdateVisualization(void)
 {
     if (!g_audio.active || !g_audio.vizActive)
@@ -157,6 +157,25 @@ void Audio_UpdateVisualization(void)
     /* Só ler amostras se há um sound carregado e está tocando. */
     if (g_audio.state != AUDIO_STATE_PLAYING)
         return;
+
+    /* Sincronizar posição do decoder auxiliar com o playback atual.
+     * Isso é necessário porque o decoder lê à frente e precisa acompanhar. */
+    if (g_vizDecoderActive)
+    {
+        double posSec = Audio_GetPositionSeconds();
+        int sampleRate = Audio_GetSampleRate();
+        if (sampleRate > 0)
+        {
+            ma_uint64 targetFrame = (ma_uint64)(posSec * (double)sampleRate);
+            /* Apenas seek se a diferença for maior que 512 frames (~11ms). */
+            ma_uint64 currentFrame = 0;
+            ma_decoder_get_cursor_in_pcm_frames(&g_vizDecoder, &currentFrame);
+            if (llabs((long long)targetFrame - (long long)currentFrame) > 512)
+            {
+                ma_decoder_seek_to_pcm_frame(&g_vizDecoder, targetFrame);
+            }
+        }
+    }
 
     /* Se o decoder auxiliar não está ativo, tentar inicializar. */
     if (!g_vizDecoderActive && g_audio.currentPath[0] != L'\0')
@@ -167,8 +186,12 @@ void Audio_UpdateVisualization(void)
             g_vizDecoderActive = TRUE;
             /* Sincronizar posição com o sound principal. */
             double posSec = Audio_GetPositionSeconds();
-            ma_uint64 targetFrame = (ma_uint64)(posSec * (double)Audio_GetSampleRate());
-            ma_decoder_seek_to_pcm_frame(&g_vizDecoder, targetFrame);
+            int sampleRate = Audio_GetSampleRate();
+            if (sampleRate > 0)
+            {
+                ma_uint64 targetFrame = (ma_uint64)(posSec * (double)sampleRate);
+                ma_decoder_seek_to_pcm_frame(&g_vizDecoder, targetFrame);
+            }
         }
     }
 
