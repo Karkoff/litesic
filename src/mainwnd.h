@@ -129,6 +129,18 @@ typedef enum
 #define TITLE_SCROLL_SPEED  40.0f
 
 /* ------------------------------------------------------------------ */
+/* DPI scaling — M8-T3                                                 */
+/* Retorna o fator de escala atual baseado no DPI da monitor da janela. */
+/* 1.0 = 96 DPI (100%), 1.25 = 120 DPI, 1.5 = 144 DPI, 2.0 = 192 DPI.*/
+/* ------------------------------------------------------------------ */
+
+/* Escala um valor inteiro pelo DPI atual. */
+int MainWnd_DPIScale(int px);
+
+/* Escala um valor float pelo DPI atual. */
+float MainWnd_DPIScaleFloat(float f);
+
+/* ------------------------------------------------------------------ */
 /* Slider dragging state                                               */
 /* ------------------------------------------------------------------ */
 typedef enum

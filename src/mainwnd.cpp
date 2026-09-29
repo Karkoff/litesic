@@ -19,6 +19,54 @@
 #include "util.h"
 
 #include <windows.h>
+#include <cmath>
+
+/* DPI scale factor — inicializa em WM_CREATE. */
+static float g_dpiScale = 1.0f;
+
+/* ------------------------------------------------------------------ */
+/* DPI scaling — M8-T3                                                 */
+/* ------------------------------------------------------------------ */
+
+static float GetDpiScaleFactor(HWND hwnd)
+{
+    /* GetDpiForWindow requer Windows 10 1607+. Fallback para 96 DPI. */
+    typedef UINT (WINAPI *PFN_GetDpiForWindow)(HWND);
+    static PFN_GetDpiForWindow pGetDpi = NULL;
+
+    if (pGetDpi == NULL)
+    {
+        HMODULE hUser32 = LoadLibraryW(L"user32.dll");
+        if (hUser32 != NULL)
+        {
+            pGetDpi = (PFN_GetDpiForWindow)GetProcAddress(
+                hUser32, "GetDpiForWindow");
+            FreeLibrary(hUser32);
+        }
+    }
+
+    if (pGetDpi != NULL)
+    {
+        UINT dpi = pGetDpi(hwnd);
+        return (float)dpi / 96.0f;
+    }
+
+    /* Fallback: usar GetDeviceCaps do DC da janela. */
+    HDC hdc = GetDC(hwnd);
+    int dpiX = GetDeviceCaps(hdc, LOGPIXELSX);
+    ReleaseDC(hwnd, hdc);
+    return (float)dpiX / 96.0f;
+}
+
+int MainWnd_DPIScale(int px)
+{
+    return (int)round((float)px * g_dpiScale);
+}
+
+float MainWnd_DPIScaleFloat(float f)
+{
+    return f * g_dpiScale;
+}
 
 /* ------------------------------------------------------------------ */
 /* Classe da janela — nome único                                        */
@@ -339,6 +387,160 @@ static void DrawHSlider(HDC hdc, int x, int y, int w, int h, float value)
 }
 
 /* ------------------------------------------------------------------ */
+/* Helpers — desenho escalado por DPI                                   */
+/* ------------------------------------------------------------------ */
+
+/* Desenha botão da titlebar com coordenadas escaladas. */
+static void DrawTitleButtonScaled(HDC hdc, TitleBarButton btn)
+{
+    RECT r{};
+    switch (btn)
+    {
+    case BTN_MINIMIZE:
+        r = { MainWnd_DPIScale(BTN_MINIMIZE_X), MainWnd_DPIScale(2),
+              MainWnd_DPIScale(BTN_MINIMIZE_X + BTN_SIZE), MainWnd_DPIScale(2 + BTN_SIZE) };
+        break;
+    case BTN_CLOSE:
+        r = { MainWnd_DPIScale(BTN_CLOSE_X), MainWnd_DPIScale(2),
+              MainWnd_DPIScale(BTN_CLOSE_X + BTN_SIZE), MainWnd_DPIScale(2 + BTN_SIZE) };
+        break;
+    default:
+        return;
+    }
+
+    HBRUSH brush = CreateSolidBrush(ButtonColor(btn));
+    FillRect(hdc, &r, brush);
+    DeleteObject(brush);
+
+    int iconColor = (btn == BTN_CLOSE) ? RGB(0xff, 0x40, 0x40) : RGB(0x00, 0x00, 0x00);
+    HPEN pen = CreatePen(PS_SOLID, MainWnd_DPIScale(1), iconColor);
+    HGDIOBJ oldPen = SelectObject(hdc, pen);
+
+    if (btn == BTN_MINIMIZE)
+    {
+        int yLine = r.top + r.bottom / 2;
+        MoveToEx(hdc, r.left + MainWnd_DPIScale(4), yLine, NULL);
+        LineTo(hdc, r.right - MainWnd_DPIScale(4), yLine);
+    }
+    else if (btn == BTN_CLOSE)
+    {
+        int pad = MainWnd_DPIScale(4);
+        MoveToEx(hdc, r.left + pad, r.top + pad, NULL);
+        LineTo(hdc, r.right - pad, r.top + r.bottom - pad);
+        MoveToEx(hdc, r.right - pad, r.top + pad, NULL);
+        LineTo(hdc, r.left + pad, r.top + r.bottom - pad);
+    }
+
+    SelectObject(hdc, oldPen);
+    DeleteObject(pen);
+}
+
+/* Desenha o display LCD com coordenadas escaladas. */
+static void DrawLcdDisplayScaled(HDC hdc)
+{
+    int x = MainWnd_DPIScale(LCD_X);
+    int y = MainWnd_DPIScale(LCD_Y);
+    int w = MainWnd_DPIScale(LCD_W);
+    int h = MainWnd_DPIScale(LCD_H);
+
+    /* Fundo escuro do LCD. */
+    RECT lcdRect = { x, y, x + w, y + h };
+    HBRUSH bgBrush = CreateSolidBrush(LCD_BG_COLOR);
+    FillRect(hdc, &lcdRect, bgBrush);
+    DeleteObject(bgBrush);
+
+    /* Borda sutil. */
+    HPEN pen = CreatePen(PS_SOLID, MainWnd_DPIScale(1), RGB(0x22, 0x44, 0x22));
+    HGDIOBJ oldPen = SelectObject(hdc, pen);
+    Rectangle(hdc, lcdRect.left, lcdRect.top, lcdRect.right, lcdRect.bottom);
+    SelectObject(hdc, oldPen);
+    DeleteObject(pen);
+
+    /* Desenhar cada caractere centralizado no LCD. */
+    wchar_t timeStr[8] = { 0 };
+    double pos = Audio_GetPositionSeconds();
+    double dur = Audio_GetDurationSeconds();
+    FormatTime(pos, g_showRemaining, dur, timeStr, ARRAYSIZE(timeStr));
+
+    int len = (int)wcslen(timeStr);
+    int charW = MainWnd_DPIScale(DIGIT_CHAR_W);
+    int charH = MainWnd_DPIScale(DIGIT_CHAR_H);
+    int totalWidth = len * charW;
+    int startX = x + (w - totalWidth) / 2;
+    int startY = y + (h - charH) / 2;
+
+    if (startX < x + MainWnd_DPIScale(2))
+        startX = x + MainWnd_DPIScale(2);
+
+    for (int i = 0; i < len; i++)
+    {
+        wchar_t wc = timeStr[i];
+        int chIdx = -1;
+        if (wc >= L'0' && wc <= L'9') chIdx = wc - L'0';
+        else if (wc == L':') chIdx = 10;
+        else if (wc == L'-') chIdx = 11;
+
+        if (chIdx >= 0)
+        {
+            const unsigned char *fontData;
+            if (chIdx == 10) fontData = g_colonChar;
+            else if (chIdx == 11) fontData = g_dashChar;
+            else fontData = g_digitFont[chIdx];
+
+            int cellW = MainWnd_DPIScale(DIGIT_CHAR_W / 5);
+            int cellH = MainWnd_DPIScale(DIGIT_CHAR_H / 7);
+            if (cellW < 1) cellW = 1;
+            if (cellH < 1) cellH = 1;
+
+            for (int row = 0; row < 7; row++)
+            {
+                unsigned char bits = fontData[row];
+                for (int col = 0; col < 5; col++)
+                {
+                    if (bits & (0x10 >> col))
+                    {
+                        RECT cell = {
+                            startX + col * cellW, startY + row * cellH,
+                            startX + (col + 1) * cellW + 1,
+                            startY + (row + 1) * cellH + 1
+                        };
+                        HBRUSH b = CreateSolidBrush(LCD_TEXT_COLOR);
+                        FillRect(hdc, &cell, b);
+                        DeleteObject(b);
+                    }
+                }
+            }
+        }
+    }
+}
+
+/* Desenha slider horizontal com coordenadas de RECT escaladas. */
+static void DrawHSliderScaled(HDC hdc, RECT *pr, float value)
+{
+    /* Track. */
+    HBRUSH bgBrush = CreateSolidBrush(SEEK_BAR_BG);
+    FillRect(hdc, pr, bgBrush);
+    DeleteObject(bgBrush);
+
+    /* Fill. */
+    int fillW = (int)((float)(pr->right - pr->left) * value);
+    if (fillW > 0)
+    {
+        RECT fillRect = { pr->left, pr->top, pr->left + fillW, pr->bottom };
+        HBRUSH fillBrush = CreateSolidBrush(SEEK_BAR_FILL);
+        FillRect(hdc, &fillRect, fillBrush);
+        DeleteObject(fillBrush);
+    }
+
+    /* Thumb. */
+    int thumbX = pr->left + fillW;
+    RECT thumbRect = { thumbX - 3, pr->top - 2, thumbX + 3, pr->bottom + 2 };
+    HBRUSH thumbBrush = CreateSolidBrush(SEEK_BAR_THUMB);
+    FillRect(hdc, &thumbRect, thumbBrush);
+    DeleteObject(thumbBrush);
+}
+
+/* ------------------------------------------------------------------ */
 /* Helpers — botões de navegação (M3-T6)                                */
 /* ------------------------------------------------------------------ */
 
@@ -403,6 +605,9 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
     case WM_CREATE:
     {
+        /* Calcular fator de escala DPI para esta janela. */
+        g_dpiScale = GetDpiScaleFactor(hwnd);
+
         /* Garantir que o ícone aparece na taskbar e no Alt+Tab. */
         HICON hIcon = LoadIconW(
             GetModuleHandleW(NULL),
@@ -430,9 +635,15 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         if (wParam == POSITION_TIMER_ID)
         {
-            /* Se estiver tocando, invalidar a janela para redraw. */
+            /* Se estiver tocando, sincronizar seek bar com posição real e
+             * invalidar para redraw. */
             if (Audio_GetState() == AUDIO_STATE_PLAYING)
             {
+                double dur = Audio_GetDurationSeconds();
+                if (dur > 0.0)
+                {
+                    g_seekValue = (float)(Audio_GetPositionSeconds() / dur);
+                }
                 InvalidateRect(hwnd, NULL, FALSE);
             }
         }
@@ -724,9 +935,12 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
 
-        /* Double buffer — desenhar em memória e copiar de uma vez. */
+        /* Double buffer — desenhar em memória e copiar de uma vez.
+         * Dimensões escaladas pelo DPI para telas high-DPI (4K etc.). */
         HDC memDC = CreateCompatibleDC(hdc);
-        HBITMAP memBM = CreateCompatibleBitmap(hdc, MAINWND_WIDTH, MAINWND_HEIGHT);
+        int scaledW = MainWnd_DPIScale(MAINWND_WIDTH);
+        int scaledH = MainWnd_DPIScale(MAINWND_HEIGHT);
+        HBITMAP memBM = CreateCompatibleBitmap(hdc, scaledW, scaledH);
         HGDIOBJ oldObj = SelectObject(memDC, memBM);
 
         /* Fundo da janela. */
@@ -737,14 +951,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         /* ------------------------------------------------------------------
          * Barra de título (faixa no topo).
          * ------------------------------------------------------------------ */
-        RECT titleBarRect = { 0, 0, MAINWND_WIDTH, TITLEBAR_HEIGHT };
-        HBRUSH titleBrush = CreateSolidBrush(TITLEBAR_COLOR);
-        FillRect(memDC, &titleBarRect, titleBrush);
-        DeleteObject(titleBrush);
+        {
+            RECT r = { 0, 0, scaledW, MainWnd_DPIScale(TITLEBAR_HEIGHT) };
+            HBRUSH b = CreateSolidBrush(TITLEBAR_COLOR);
+            FillRect(memDC, &r, b); DeleteObject(b);
 
-        /* Botões da barra de título. */
-        DrawTitleButton(memDC, BTN_MINIMIZE);
-        DrawTitleButton(memDC, BTN_CLOSE);
+            DrawTitleButtonScaled(memDC, BTN_MINIMIZE);
+            DrawTitleButtonScaled(memDC, BTN_CLOSE);
+        }
 
         /* ------------------------------------------------------------------
          * Display LCD de tempo — M3-T1
@@ -754,7 +968,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             double pos = Audio_GetPositionSeconds();
             double dur = Audio_GetDurationSeconds();
             FormatTime(pos, g_showRemaining, dur, timeStr, ARRAYSIZE(timeStr));
-            DrawLcdDisplay(hwnd, memDC, timeStr);
+            DrawLcdDisplayScaled(memDC);
         }
 
         /* ------------------------------------------------------------------
@@ -765,24 +979,22 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             int channels   = Audio_GetChannels();
             int bitrate    = Audio_GetBitrateKbps();
 
-            /* Desenhar texto pequeno ao lado do LCD. */
-            RECT infoRect = { TITLE_X, TITLE_Y + 14, TITLE_X + TITLE_W, TITLE_Y + TITLE_H };
+            RECT infoRect = {
+                MainWnd_DPIScale(TITLE_X),
+                MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14),
+                MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale(TITLE_W),
+                MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(TITLE_H)
+            };
             SetBkMode(memDC, TRANSPARENT);
             SetTextColor(memDC, AUDIO_INFO_COLOR);
 
             wchar_t infoBuf[32] = { 0 };
             if (bitrate > 0 && sampleRate > 0)
-            {
                 wsprintfW(infoBuf, L"%d kbps %d Hz%s", bitrate, sampleRate / 1000, channels == 2 ? " st" : "");
-            }
             else if (bitrate > 0)
-            {
                 wsprintfW(infoBuf, L"%d kbps", bitrate);
-            }
             else if (sampleRate > 0)
-            {
                 wsprintfW(infoBuf, L"%d Hz%s", sampleRate / 1000, channels == 2 ? " st" : "");
-            }
 
             if (infoBuf[0] != L'\0')
                 DrawTextW(memDC, infoBuf, (int)wcslen(infoBuf), &infoRect, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
@@ -793,37 +1005,29 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * ------------------------------------------------------------------ */
         {
             wchar_t fileName[MAX_PATH] = { 0 };
-            if (Audio_IsActive())
-            {
-                /* Extrair nome do arquivo carregado. */
-                /* Nota: precisamos do caminho atual — armazenamos internamente. */
-                /* Por enquanto, usar um placeholder ou extrair de Audio_GetFileName(). */
-                /* Implementação provisória: obteremos o path via uma função nova. */
-            }
-
-            /* Medir largura do texto. */
             SIZE textSize;
             GetTextExtentPoint32W(memDC, fileName, (int)wcslen(fileName), &textSize);
 
-            /* Calcular offset de scroll. */
             int scrollOffset = 0;
             BOOL needsScroll = CalcScrollOffset(&scrollOffset, textSize.cx, TITLE_W,
                                                  g_scrollElapsedMs, 500, TITLE_SCROLL_SPEED);
 
+            RECT titleRect;
             if (needsScroll && textSize.cx > 0)
-            {
-                RECT titleRect = { TITLE_X - scrollOffset, TITLE_Y,
-                                   TITLE_X - scrollOffset + textSize.cx, TITLE_Y + TITLE_H };
-                SetBkMode(memDC, TRANSPARENT);
-                SetTextColor(memDC, TITLE_TEXT_COLOR);
-                DrawTextW(memDC, fileName, (int)wcslen(fileName), &titleRect,
-                          DT_LEFT | DT_VCENTER | DT_SINGLELINE);
-            }
+                titleRect = { MainWnd_DPIScale(TITLE_X) - scrollOffset,
+                              MainWnd_DPIScale(TITLE_Y),
+                              MainWnd_DPIScale(TITLE_X) - scrollOffset + textSize.cx,
+                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(TITLE_H) };
             else if (textSize.cx > 0 && textSize.cx <= TITLE_W)
+                titleRect = { MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale((TITLE_W - textSize.cx) / 2),
+                              MainWnd_DPIScale(TITLE_Y),
+                              MainWnd_DPIScale(TITLE_X) + MainWnd_DPIScale((TITLE_W + textSize.cx) / 2),
+                              MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(TITLE_H) };
+            else
+                titleRect = { 0, 0, 0, 0 };
+
+            if (textSize.cx > 0 && (titleRect.right > titleRect.left))
             {
-                /* Centralizar se cabe. */
-                RECT titleRect = { TITLE_X + (TITLE_W - textSize.cx) / 2, TITLE_Y,
-                                   TITLE_X + (TITLE_W + textSize.cx) / 2, TITLE_Y + TITLE_H };
                 SetBkMode(memDC, TRANSPARENT);
                 SetTextColor(memDC, TITLE_TEXT_COLOR);
                 DrawTextW(memDC, fileName, (int)wcslen(fileName), &titleRect,
@@ -835,140 +1039,102 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * Barra de busca (seek) — M3-T4
          * ------------------------------------------------------------------ */
         {
-            DrawHSlider(memDC, SEEK_X, SEEK_Y, SEEK_W, SEEK_H, g_seekValue);
+            RECT seekR = { MainWnd_DPIScale(SEEK_X), MainWnd_DPIScale(SEEK_Y),
+                           MainWnd_DPIScale(SEEK_X + SEEK_W), MainWnd_DPIScale(SEEK_Y + SEEK_H) };
+            DrawHSliderScaled(memDC, &seekR, g_seekValue);
 
-            /* Label de tempo abaixo da barra. */
             wchar_t seekLabel[16] = { 0 };
-            double pos = Audio_GetPositionSeconds();
-            double dur = Audio_GetDurationSeconds();
-            FormatTime(pos, FALSE, dur, seekLabel, ARRAYSIZE(seekLabel));
-
-            RECT labelRect = { SEEK_X, SEEK_Y + SEEK_H + 1,
-                               SEEK_X + 30, SEEK_Y + SEEK_H + 14 };
+            FormatTime(Audio_GetPositionSeconds(), FALSE, Audio_GetDurationSeconds(), seekLabel, ARRAYSIZE(seekLabel));
+            RECT labelR = { seekR.left, seekR.bottom + MainWnd_DPIScale(1),
+                            seekR.left + MainWnd_DPIScale(30), seekR.bottom + MainWnd_DPIScale(14) };
             SetBkMode(memDC, TRANSPARENT);
             SetTextColor(memDC, AUDIO_INFO_COLOR);
-            DrawTextW(memDC, seekLabel, (int)wcslen(seekLabel), &labelRect,
-                      DT_LEFT | DT_TOP | DT_SINGLELINE);
+            DrawTextW(memDC, seekLabel, (int)wcslen(seekLabel), &labelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
 
-            /* Tempo total à direita. */
             wchar_t durLabel[16] = { 0 };
-            FormatTime(dur, FALSE, dur, durLabel, ARRAYSIZE(durLabel));
-            RECT durRect = { SEEK_X + SEEK_W - 35, SEEK_Y + SEEK_H + 1,
-                             SEEK_X + SEEK_W, SEEK_Y + SEEK_H + 14 };
-            DrawTextW(memDC, durLabel, (int)wcslen(durLabel), &durRect,
-                      DT_RIGHT | DT_TOP | DT_SINGLELINE);
+            FormatTime(Audio_GetDurationSeconds(), FALSE, Audio_GetDurationSeconds(), durLabel, ARRAYSIZE(durLabel));
+            RECT durR = { seekR.right - MainWnd_DPIScale(35), seekR.bottom + MainWnd_DPIScale(1),
+                          seekR.right, seekR.bottom + MainWnd_DPIScale(14) };
+            DrawTextW(memDC, durLabel, (int)wcslen(durLabel), &durR, DT_RIGHT | DT_TOP | DT_SINGLELINE);
         }
 
         /* ------------------------------------------------------------------
          * Volume e balanço — M3-T5
          * ------------------------------------------------------------------ */
         {
-            /* Label "VOL". */
-            RECT volLabelRect = { VOLUME_SLIDER_X, VOLPAN_Y - 1,
-                                  VOLUME_SLIDER_X + 20, VOLPAN_Y + 1 };
+            RECT volR = { MainWnd_DPIScale(VOLUME_SLIDER_X), MainWnd_DPIScale(VOLPAN_Y),
+                          MainWnd_DPIScale(VOLUME_SLIDER_X + VOLUME_SLIDER_W), MainWnd_DPIScale(VOLPAN_Y + VOLPAN_H) };
+            DrawHSliderScaled(memDC, &volR, g_volumeValue);
+
+            RECT volLabelR = { volR.left, volR.top - 1, volR.left + MainWnd_DPIScale(20), volR.top + 1 };
             SetBkMode(memDC, TRANSPARENT);
             SetTextColor(memDC, AUDIO_INFO_COLOR);
-            DrawTextW(memDC, L"VOL", 3, &volLabelRect,
-                      DT_LEFT | DT_TOP | DT_SINGLELINE);
+            DrawTextW(memDC, L"VOL", 3, &volLabelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
 
-            DrawHSlider(memDC, VOLUME_SLIDER_X, VOLPAN_Y,
-                        VOLUME_SLIDER_W, VOLPAN_H, g_volumeValue);
+            RECT panR = { MainWnd_DPIScale(PAN_SLIDER_X), MainWnd_DPIScale(VOLPAN_Y),
+                          MainWnd_DPIScale(PAN_SLIDER_X + PAN_SLIDER_W), MainWnd_DPIScale(VOLPAN_Y + VOLPAN_H) };
+            DrawHSliderScaled(memDC, &panR, g_panValue);
 
-            /* Label "BAL". */
-            RECT panLabelRect = { PAN_SLIDER_X, VOLPAN_Y - 1,
-                                  PAN_SLIDER_X + 20, VOLPAN_Y + 1 };
-            DrawTextW(memDC, L"BAL", 3, &panLabelRect,
-                      DT_LEFT | DT_TOP | DT_SINGLELINE);
-
-            DrawHSlider(memDC, PAN_SLIDER_X, VOLPAN_Y,
-                        PAN_SLIDER_W, VOLPAN_H, g_panValue);
+            RECT panLabelR = { panR.left, panR.top - 1, panR.left + MainWnd_DPIScale(20), panR.top + 1 };
+            DrawTextW(memDC, L"BAL", 3, &panLabelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
         }
 
         /* ------------------------------------------------------------------
          * Botões de navegação e toggles — M3-T6
          * ------------------------------------------------------------------ */
         {
-            /* Botão Prev. */
-            RECT prevRect = { BTN_PREV_X, NAV_Y, BTN_PREV_X + NAV_BTN_W, NAV_Y + NAV_BTN_H };
-            HBRUSH prevBrush = CreateSolidBrush(NAV_BG_NORMAL);
-            FillRect(memDC, &prevRect, prevBrush);
-            DeleteObject(prevBrush);
-            SetBkMode(memDC, TRANSPARENT);
-            SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
-            DrawTextW(memDC, L"<<", 2, &prevRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            RECT prevR = { MainWnd_DPIScale(BTN_PREV_X), MainWnd_DPIScale(NAV_Y),
+                           MainWnd_DPIScale(BTN_PREV_X + NAV_BTN_W), MainWnd_DPIScale(NAV_Y + NAV_BTN_H) };
+            HBRUSH b = CreateSolidBrush(NAV_BG_NORMAL); FillRect(memDC, &prevR, b); DeleteObject(b);
+            SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
+            DrawTextW(memDC, L"<<", 2, &prevR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-            /* Botão Next. */
-            RECT nextRect = { BTN_NEXT_X, NAV_Y, BTN_NEXT_X + NAV_BTN_W, NAV_Y + NAV_BTN_H };
-            HBRUSH nextBrush = CreateSolidBrush(NAV_BG_NORMAL);
-            FillRect(memDC, &nextRect, nextBrush);
-            DeleteObject(nextBrush);
-            DrawTextW(memDC, L">>", 2, &nextRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            RECT nextR = { MainWnd_DPIScale(BTN_NEXT_X), MainWnd_DPIScale(NAV_Y),
+                           MainWnd_DPIScale(BTN_NEXT_X + NAV_BTN_W), MainWnd_DPIScale(NAV_Y + NAV_BTN_H) };
+            b = CreateSolidBrush(NAV_BG_NORMAL); FillRect(memDC, &nextR, b); DeleteObject(b);
+            DrawTextW(memDC, L">>", 2, &nextR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-            /* Botão Shuffle (toggle). */
-            RECT shuffleRect = { BTN_SHUFFLE_X, TOGGLE_Y,
-                                 BTN_SHUFFLE_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
-            HBRUSH shuffleBrush = CreateSolidBrush(
-                g_shuffleOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG);
-            FillRect(memDC, &shuffleRect, shuffleBrush);
-            DeleteObject(shuffleBrush);
+            RECT shufR = { MainWnd_DPIScale(BTN_SHUFFLE_X), MainWnd_DPIScale(TOGGLE_Y),
+                           MainWnd_DPIScale(BTN_SHUFFLE_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
+            b = CreateSolidBrush(g_shuffleOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &shufR, b); DeleteObject(b);
             SetTextColor(memDC, g_shuffleOn ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
-            DrawTextW(memDC, L"SHUF", 4, &shuffleRect,
-                      DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            DrawTextW(memDC, L"SHUF", 4, &shufR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-            /* Botão Repeat (toggle). */
-            RECT repeatRect = { BTN_REPEAT_X, TOGGLE_Y,
-                                BTN_REPEAT_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
-            HBRUSH repeatBrush = CreateSolidBrush(
-                g_repeatOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG);
-            FillRect(memDC, &repeatRect, repeatBrush);
-            DeleteObject(repeatBrush);
+            RECT repR = { MainWnd_DPIScale(BTN_REPEAT_X), MainWnd_DPIScale(TOGGLE_Y),
+                          MainWnd_DPIScale(BTN_REPEAT_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
+            b = CreateSolidBrush(g_repeatOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
             SetTextColor(memDC, g_repeatOn ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
-            DrawTextW(memDC, L"REP", 3, &repeatRect,
-                      DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            DrawTextW(memDC, L"REP", 3, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
         /* ------------------------------------------------------------------
          * Botões de controle inferior (Abrir/Play/Pause/Stop).
          * ------------------------------------------------------------------ */
         {
-            /* Botão Abrir. */
-            RECT openRect = { BTN_OPEN_X, BTN_OPEN_Y,
-                              BTN_OPEN_X + BTN_OPEN_W, BTN_OPEN_Y + 16 };
-            HBRUSH openBrush = CreateSolidBrush(CTRL_BG_NORMAL);
-            FillRect(memDC, &openRect, openBrush);
-            DeleteObject(openBrush);
-            SetBkMode(memDC, TRANSPARENT);
-            SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
-            DrawTextW(memDC, L"Abrir", 5, &openRect,
-                      DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            RECT openR = { MainWnd_DPIScale(BTN_OPEN_X), MainWnd_DPIScale(BTN_OPEN_Y),
+                           MainWnd_DPIScale(BTN_OPEN_X + BTN_OPEN_W), MainWnd_DPIScale(BTN_OPEN_Y + 16) };
+            HBRUSH b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &openR, b); DeleteObject(b);
+            SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
+            DrawTextW(memDC, L"Abrir", 5, &openR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-            /* Botão Play. */
-            RECT playRect = { BTN_PLAY_X, BTN_PLAY_Y,
-                              BTN_PLAY_X + 30, BTN_PLAY_Y + 16 };
-            HBRUSH playBrush = CreateSolidBrush(CTRL_BG_NORMAL);
-            FillRect(memDC, &playRect, playBrush);
-            DeleteObject(playBrush);
-            DrawTextW(memDC, L">", 1, &playRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            RECT playR = { MainWnd_DPIScale(BTN_PLAY_X), MainWnd_DPIScale(BTN_PLAY_Y),
+                           MainWnd_DPIScale(BTN_PLAY_X + 30), MainWnd_DPIScale(BTN_PLAY_Y + 16) };
+            b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &playR, b); DeleteObject(b);
+            DrawTextW(memDC, L">", 1, &playR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-            /* Botão Pause. */
-            RECT pauseRect = { BTN_PAUSE_X, BTN_PAUSE_Y,
-                               BTN_PAUSE_X + 30, BTN_PAUSE_Y + 16 };
-            HBRUSH pauseBrush = CreateSolidBrush(CTRL_BG_NORMAL);
-            FillRect(memDC, &pauseRect, pauseBrush);
-            DeleteObject(pauseBrush);
-            DrawTextW(memDC, L"||", 2, &pauseRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            RECT pauseR = { MainWnd_DPIScale(BTN_PAUSE_X), MainWnd_DPIScale(BTN_PAUSE_Y),
+                            MainWnd_DPIScale(BTN_PAUSE_X + 30), MainWnd_DPIScale(BTN_PAUSE_Y + 16) };
+            b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &pauseR, b); DeleteObject(b);
+            DrawTextW(memDC, L"||", 2, &pauseR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
-            /* Botão Stop. */
-            RECT stopRect = { BTN_STOP_X, BTN_STOP_Y,
-                              BTN_STOP_X + 30, BTN_STOP_Y + 16 };
-            HBRUSH stopBrush = CreateSolidBrush(CTRL_BG_NORMAL);
-            FillRect(memDC, &stopRect, stopBrush);
-            DeleteObject(stopBrush);
-            DrawTextW(memDC, L"[]", 2, &stopRect, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            RECT stopR = { MainWnd_DPIScale(BTN_STOP_X), MainWnd_DPIScale(BTN_STOP_Y),
+                           MainWnd_DPIScale(BTN_STOP_X + 30), MainWnd_DPIScale(BTN_STOP_Y + 16) };
+            b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &stopR, b); DeleteObject(b);
+            DrawTextW(memDC, L"[]", 2, &stopR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
         /* Copiar buffer para a tela. */
-        BitBlt(hdc, 0, 0, MAINWND_WIDTH, MAINWND_HEIGHT, memDC, 0, 0, SRCCOPY);
+        BitBlt(hdc, 0, 0, scaledW, scaledH, memDC, 0, 0, SRCCOPY);
 
         SelectObject(memDC, oldObj);
         DeleteObject(memBM);
