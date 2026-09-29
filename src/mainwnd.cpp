@@ -17,6 +17,7 @@
 #include "mainwnd.h"
 #include "audio.h"
 #include "util.h"
+#include "visualizer.h"
 
 #include <windows.h>
 #include <cmath>
@@ -198,12 +199,7 @@ static BOOL g_repeatOn  = FALSE;
 /* M3-T6: índice atual da playlist (provisório, lista de 1 item). */
 static int g_currentTrack = -1; /* -1 = nenhum arquivo carregado */
 
-/* M4: Estado do visualizador. */
-typedef enum
-{
-    VIZ_MODE_OSCILLOSCOPE = 0,
-    VIZ_MODE_SPECTRUM
-} VizMode;
+/* M4: Estado do visualizador (declarado em visualizer.h). */
 static VizMode g_vizMode = VIZ_MODE_OSCILLOSCOPE;
 
 /* ------------------------------------------------------------------ */
@@ -636,85 +632,6 @@ static BOOL PtInVizArea(int x, int y)
 {
     RECT r = { VIZ_X, VIZ_Y, VIZ_X + VIZ_W, VIZ_Y + VIZ_H };
     return PtInRect(&r, (POINT){ x, y });
-}
-
-/* ------------------------------------------------------------------ */
-/* Visualizador — M4-T2 / M4-T3                                       */
-/* Funções de desenho do osciloscópio e espectro.                       */
-/* ------------------------------------------------------------------ */
-
-/* Converte amplitude de amostra (-1.0..1.0) para posição Y em pixels.
- * height: altura da área de desenho.
- * sample: amplitude normalizada (-1.0 a 1.0).
- * Retorna Y em pixels (0 = topo, height/2 = centro). */
-static int MapSampleToY(float sample, int height)
-{
-    /* Clamp entre -1.0 e 1.0. */
-    if (sample < -1.0f) sample = -1.0f;
-    if (sample > 1.0f)  sample =  1.0f;
-
-    /* Mapear: -1.0 → 0, 0.0 → height/2, +1.0 → height. */
-    int y = (int)((1.0f + sample) * (float)height / 2.0f);
-    if (y < 0) y = 0;
-    if (y > height) y = height;
-    return y;
-}
-
-/* Desenha o osciloscópio (waveform) na DC fornecida. */
-static void DrawOscilloscope(HDC hdc, int x, int y, int w, int h)
-{
-    /* Fundo escuro da área de visualização. */
-    RECT vizRect = { x, y, x + w, y + h };
-    HBRUSH bgBrush = CreateSolidBrush(RGB(0x0a, 0x0a, 0x1a));
-    FillRect(hdc, &vizRect, bgBrush);
-    DeleteObject(bgBrush);
-
-    /* Borda sutil. */
-    HPEN borderPen = CreatePen(PS_SOLID, 1, RGB(0x22, 0x44, 0x66));
-    HGDIOBJ oldPen = SelectObject(hdc, borderPen);
-    Rectangle(hdc, vizRect.left, vizRect.top, vizRect.right, vizRect.bottom);
-
-    /* Puxar amostras do buffer de visualização. */
-    float samples[VISUALIZATION_BUFFER_SIZE];
-    int count = Audio_GetVisualizationSamples(samples, VISUALIZATION_BUFFER_SIZE);
-
-    if (count < 2)
-    {
-        /* Sem amostras — desenhar linha plana no centro. */
-        int centerY = y + h / 2;
-        HPEN linePen = CreatePen(PS_SOLID, 1, RGB(0x00, 0xcc, 0xff));
-        SelectObject(hdc, linePen);
-        MoveToEx(hdc, x + 1, centerY, NULL);
-        LineTo(hdc, x + w - 1, centerY);
-        DeleteObject(linePen);
-    }
-    else
-    {
-        /* Desenhar waveform conectando as amostras. */
-        HPEN linePen = CreatePen(PS_SOLID, 1, RGB(0x00, 0xcc, 0xff));
-        HGDIOBJ oldPen2 = SelectObject(hdc, linePen);
-
-        int step = count > w ? count / w : 1; /* Reduzir amostras se necessário. */
-
-        for (int i = 0; i < w && (i * step) < count; i++)
-        {
-            float sample = samples[i * step];
-            int currY = y + MapSampleToY(sample, h);
-
-            if (i == 0)
-                MoveToEx(hdc, x + i, currY, NULL);
-            else
-                LineTo(hdc, x + i, currY);
-
-            prevY = currY;
-        }
-
-        SelectObject(hdc, oldPen2);
-        DeleteObject(linePen);
-    }
-
-    SelectObject(hdc, oldPen);
-    DeleteObject(borderPen);
 }
 
 /* ------------------------------------------------------------------ */
