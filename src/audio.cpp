@@ -32,6 +32,13 @@ static struct AudioEngine
     AudioState state;      /* Estado atual da reprodução           */
     wchar_t    currentPath[MAX_PATH]; /* Caminho do arquivo atual    */
     __int64    fileSizeBytes;   /* Tamanho em bytes (para bitrate) */
+
+    /* M4-T1: Ring buffer de visualização. */
+    float        vizBuffer[VISUALIZATION_BUFFER_SIZE]; /* Buffer circular */
+    int          vizWritePos;      /* Próxima posição de escrita     */
+    int          vizCount;         /* Amostras disponíveis para leitura */
+    CRITICAL_SECTION vizLock;      /* Protege acesso concorrente     */
+    BOOL         vizActive;        /* TRUE se viz buffer inicializado */
 } g_audio{};
 
 /* ------------------------------------------------------------------ */
@@ -64,6 +71,109 @@ BOOL Audio_Init(void)
     return TRUE;
 }
 
+/* ------------------------------------------------------------------ */
+/* Visualização — M4-T1                                                 */
+/* Ring buffer protegido por CRITICAL_SECTION.                          */
+/* ------------------------------------------------------------------ */
+
+BOOL Audio_VizInit(void)
+{
+    if (!g_audio.active || g_audio.vizActive)
+        return TRUE; /* Já inicializado ou engine não ativa. */
+
+    /* Zerar buffer e estado. */
+    memset(g_audio.vizBuffer, 0, sizeof(g_audio.vizBuffer));
+    g_audio.vizWritePos = 0;
+    g_audio.vizCount    = 0;
+    g_audio.vizActive   = TRUE;
+
+    /* Inicializar critical section para proteção concorrente. */
+    InitializeCriticalSection(&g_audio.vizLock);
+
+    return TRUE;
+}
+
+void Audio_VizShutdown(void)
+{
+    if (g_audio.vizActive)
+    {
+        DeleteCriticalSection(&g_audio.vizLock);
+        g_audio.vizActive = FALSE;
+        g_audio.vizCount  = 0;
+    }
+}
+
+/* Escreve amostras no ring buffer de visualização.
+ * Chamado a partir do callback de áudio (thread segura, seção crítica curta).
+ * Se o buffer estiver cheio, sobrescreve as amostras mais antigas. */
+static void Audio_VizWrite(const float* samples, int frameCount)
+{
+    if (!g_audio.vizActive || samples == NULL || frameCount <= 0)
+        return;
+
+    EnterCriticalSection(&g_audio.vizLock);
+
+    for (int i = 0; i < frameCount; i++)
+    {
+        g_audio.vizBuffer[g_audio.vizWritePos] = samples[i];
+        g_audio.vizWritePos = (g_audio.vizWritePos + 1) % VISUALIZATION_BUFFER_SIZE;
+
+        /* Se o buffer ainda não está cheio, incrementar count.
+         * Se já está cheio, count permanece no máximo. */
+        if (g_audio.vizCount < VISUALIZATION_BUFFER_SIZE)
+            g_audio.vizCount++;
+    }
+
+    LeaveCriticalSection(&g_audio.vizLock);
+}
+
+/* Atualiza o buffer de visualização lendo amostras do sound atual.
+ * Chamado a partir da UI thread (timer), nunca do callback de áudio.
+ *
+ * Nota: ma_engine não expõe diretamente o data callback.
+ * Esta função será implementada plenamente quando migrarmos para
+ * a API low-level ma_device com callback personalizado (M4-T2).
+ * Por enquanto, é um placeholder que prepara a infraestrutura. */
+void Audio_UpdateVisualization(void)
+{
+    /* Placeholder — o ring buffer está pronto, mas ainda não estamos
+     * populando amostras. Isso será feito quando implementarmos o
+     * data callback no M4-T2. */
+    (void)0;
+}
+
+int Audio_GetVisualizationSamples(float* out, int count)
+{
+    if (!g_audio.vizActive || out == NULL || count <= 0)
+        return 0;
+
+    /* Limitar ao tamanho do buffer. */
+    if (count > VISUALIZATION_BUFFER_SIZE)
+        count = VISUALIZATION_BUFFER_SIZE;
+
+    EnterCriticalSection(&g_audio.vizLock);
+
+    int available = g_audio.vizCount;
+    if (available == 0)
+    {
+        LeaveCriticalSection(&g_audio.vizLock);
+        return 0;
+    }
+
+    /* Copiar amostras mais recentes.
+     * As amostras mais recentes estão em:
+     *   writePos - 1, writePos - 2, ... (com wraparound) */
+    int toCopy = count < available ? count : available;
+    for (int i = 0; i < toCopy; i++)
+    {
+        int idx = (g_audio.vizWritePos - 1 - i + VISUALIZATION_BUFFER_SIZE) % VISUALIZATION_BUFFER_SIZE;
+        out[i] = g_audio.vizBuffer[idx];
+    }
+
+    LeaveCriticalSection(&g_audio.vizLock);
+    return toCopy;
+}
+
 void Audio_Shutdown(void)
 {
     if (!g_audio.active)
@@ -71,6 +181,9 @@ void Audio_Shutdown(void)
 
     /* Parar e liberar o sound antes de desligar a engine. */
     ma_sound_uninit(&g_audio.sound);
+
+    /* Encerrar visualização. */
+    Audio_VizShutdown();
 
     ma_engine_uninit(&g_audio.engine);
     g_audio.active   = FALSE;

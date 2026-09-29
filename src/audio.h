@@ -111,4 +111,30 @@ void Audio_Next(BOOL shuffle, BOOL repeat);
 /* Volta para a faixa anterior (ou reinicia a atual se posição > 3s). */
 void Audio_Previous(void);
 
+/* ------------------------------------------------------------------ */
+/* Visualização — M4-T1                                                 */
+/* Ring buffer de amostras para FFT/osciloscópio.                       */
+/* ------------------------------------------------------------------ */
+
+/* Número de amostras no buffer de visualização (potência de 2).
+ * 512 samples → ~11ms a 44100Hz, suficiente para osciloscópio e FFT. */
+#define VISUALIZATION_BUFFER_SIZE  512
+
+/* Inicializa o ring buffer de visualização (chamar após Audio_Init).
+ * Retorna TRUE em sucesso. */
+BOOL Audio_VizInit(void);
+
+/* Encerra o ring buffer de visualização. */
+void Audio_VizShutdown(void);
+
+/* Pega uma cópia das N amostras mais recentes do buffer.
+ * out: buffer de destino (float[N]).
+ * count: número de amostras desejadas (deve ser <= VISUALIZATION_BUFFER_SIZE).
+ * Retorna o número real de amostras copiadas. */
+int Audio_GetVisualizationSamples(float* out, int count);
+
+/* Atualiza o buffer de visualização lendo do sound atual.
+ * Chamado a partir da UI thread (timer), nunca do callback de áudio. */
+void Audio_UpdateVisualization(void);
+
 #endif /* AUDIO_H */

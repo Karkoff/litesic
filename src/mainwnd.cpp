@@ -653,6 +653,9 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         /* Inicializar motor de áudio. */
         Audio_Init();
 
+        /* M4-T1: Inicializar ring buffer de visualização. */
+        Audio_VizInit();
+
         /* Timer para atualização periódica da posição (250ms). */
         SetTimer(hwnd, POSITION_TIMER_ID, 250, NULL);
 
@@ -666,6 +669,9 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         if (wParam == POSITION_TIMER_ID)
         {
+            /* M4-T1: Atualizar buffer de visualização a partir do sound. */
+            Audio_UpdateVisualization();
+
             /* Se estiver tocando, sincronizar seek bar com posição real e
              * invalidar para redraw. */
             if (Audio_GetState() == AUDIO_STATE_PLAYING)
