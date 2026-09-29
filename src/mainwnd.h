@@ -12,9 +12,11 @@
 #include <windows.h>
 
 /* Tamanho fixo da janela na escala 1x (Winamp clássico).
- * Expandido de 116 para acomodar todos os controles do player (M3). */
+ * Expandido de 116 para acomodar todos os controles do player (M3).
+ * Altura reduzida de 200 para 140 depois de unificar Abrir/Play/Pause/Stop
+ * em uma única linha (antes ocupavam 3 linhas empilhadas). */
 #define MAINWND_WIDTH   275
-#define MAINWND_HEIGHT  200
+#define MAINWND_HEIGHT  140
 
 /* Altura da barra de título (área sensível para arrastar e botões). */
 #define TITLEBAR_HEIGHT 24
@@ -36,6 +38,18 @@ typedef enum
 
 /* ID do ícone definido em res/app.rc (M0-T5). */
 #define IDI_APP_ICON 101
+
+/* ------------------------------------------------------------------ */
+/* Menu de contexto — Aparência > Escala da interface                   */
+/* Clique direito em qualquer ponto da janela abre o menu.              */
+/* ------------------------------------------------------------------ */
+#define IDM_SCALE_AUTO   4000
+#define IDM_SCALE_80     4001
+#define IDM_SCALE_90     4002
+#define IDM_SCALE_100    4003
+#define IDM_SCALE_110    4004
+#define IDM_SCALE_125    4005
+#define IDM_SCALE_150    4006
 
 /* ------------------------------------------------------------------ */
 /* Display LCD de tempo — M3-T1                                         */
@@ -103,21 +117,25 @@ typedef enum
 
 /* ------------------------------------------------------------------ */
 /* Botões de controle "Abrir/Play/Pause/Stop" — M2-T4                   */
-/* Reposicionados para a parte inferior da janela, abaixo dos controles */
-/* do player principal.                                                 */
+/* Uma única linha na parte inferior: Abrir à esquerda (compacto),      */
+/* Play/Pause/Stop lado a lado à direita.                               */
 #define BOTTOM_CONTROLS_Y   (NAV_Y + NAV_BTN_H + 6)
+
+#define CTRL_BTN_W      30
+#define CTRL_BTN_H      16
+#define CTRL_GAP        4
+
+#define BTN_STOP_X      (MAINWND_WIDTH - CTRL_BTN_W - 4)
+#define BTN_PAUSE_X     (BTN_STOP_X - CTRL_BTN_W - CTRL_GAP)
+#define BTN_PLAY_X      (BTN_PAUSE_X - CTRL_BTN_W - CTRL_GAP)
 
 #define BTN_OPEN_X      4
 #define BTN_OPEN_Y      BOTTOM_CONTROLS_Y
-#define BTN_OPEN_W      (MAINWND_WIDTH - 4*2 - 3*30 - 3*4)
-
-#define BTN_PLAY_X      (MAINWND_WIDTH - 30 - 4)
-#define BTN_PAUSE_X     (BTN_PLAY_X)
-#define BTN_STOP_X      (BTN_PLAY_X)
+#define BTN_OPEN_W      (BTN_PLAY_X - CTRL_GAP - BTN_OPEN_X)
 
 #define BTN_PLAY_Y      BOTTOM_CONTROLS_Y
-#define BTN_PAUSE_Y     (BOTTOM_CONTROLS_Y + 16 + 4)
-#define BTN_STOP_Y      (BTN_PAUSE_Y + 16 + 4)
+#define BTN_PAUSE_Y     BOTTOM_CONTROLS_Y
+#define BTN_STOP_Y      BOTTOM_CONTROLS_Y
 
 /* ------------------------------------------------------------------ */
 /* Timer IDs                                                           */

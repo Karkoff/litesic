@@ -24,6 +24,12 @@
 /* DPI scale factor — inicializa em WM_CREATE. */
 static float g_dpiScale = 1.0f;
 
+/* Escala de interface definida pelo usuário (Configurações > Aparência).
+ * 0 = Automática (segue só o DPI do monitor); caso contrário, percentual
+ * (80/90/100/110/125/150) multiplicado pelo fator de DPI do monitor.
+ * Só em memória por enquanto — persistência real entra no M8 (M8-T4). */
+static int g_userScalePercent = 0;
+
 /* ------------------------------------------------------------------ */
 /* DPI scaling — M8-T3                                                 */
 /* ------------------------------------------------------------------ */
@@ -66,6 +72,48 @@ int MainWnd_DPIScale(int px)
 float MainWnd_DPIScaleFloat(float f)
 {
     return f * g_dpiScale;
+}
+
+/* Converte uma coordenada física (recebida em WM_LBUTTONDOWN/MOUSEMOVE/UP,
+ * em pixels reais da janela) de volta para a escala lógica 1x usada por
+ * todas as constantes de hit-test em mainwnd.h (BTN_*, SEEK_*, LCD_* etc.).
+ * Sem isso, os cliques passam a cair fora dos controles sempre que a janela
+ * é redimensionada por DPI ou pela escala do usuário (M8-T3). */
+static int MainWnd_DPIUnscale(int physicalPx)
+{
+    if (g_dpiScale <= 0.0f) return physicalPx;
+    return (int)round((float)physicalPx / g_dpiScale);
+}
+
+/* Multiplicador de escala definido pelo usuário em cima do DPI do monitor
+ * (Configurações > Aparência > Escala da interface). 1.0 quando "Automática". */
+static float UserScaleMultiplier()
+{
+    return (g_userScalePercent == 0) ? 1.0f : (float)g_userScalePercent / 100.0f;
+}
+
+/* Recalcula g_dpiScale (DPI do monitor x escala do usuário) e redimensiona/
+ * reposiciona a janela para o novo tamanho físico, mantendo-a centrada em
+ * torno do centro atual. Usado tanto na criação quanto ao trocar a escala
+ * pelo menu de contexto. */
+static void ApplyInterfaceScale(HWND hwnd)
+{
+    g_dpiScale = GetDpiScaleFactor(hwnd) * UserScaleMultiplier();
+
+    int scaledW = MainWnd_DPIScale(MAINWND_WIDTH);
+    int scaledH = MainWnd_DPIScale(MAINWND_HEIGHT);
+
+    RECT cur{};
+    GetWindowRect(hwnd, &cur);
+    int cx = cur.left + (cur.right - cur.left) / 2;
+    int cy = cur.top + (cur.bottom - cur.top) / 2;
+    int x = cx - scaledW / 2;
+    int y = cy - scaledH / 2;
+    if (x < 0) x = 0;
+    if (y < 0) y = 0;
+
+    SetWindowPos(hwnd, NULL, x, y, scaledW, scaledH, SWP_NOZORDER | SWP_NOACTIVATE);
+    InvalidateRect(hwnd, NULL, TRUE);
 }
 
 /* ------------------------------------------------------------------ */
@@ -296,7 +344,7 @@ static void DrawLcdChar(HDC hdc, int ch, int x, int y)
         unsigned char bits = fontData[row];
         for (int col = 0; col < 5; col++)
         {
-            if (bits & (0x10 >> col)) /* bit ativo */
+            if (bits & (0x40 >> col)) /* bit ativo — dados ocupam bits 6..2 */
             {
                 RECT cell = {
                     x + col * DIGIT_CHAR_W / 5, y + row * DIGIT_CHAR_H / 7,
@@ -358,33 +406,6 @@ static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
 /* ------------------------------------------------------------------ */
 /* Helpers — barra de busca / sliders (M3-T4, M3-T5)                    */
 /* ------------------------------------------------------------------ */
-
-/* Desenha um slider horizontal simples (sem thumb detalhado). */
-static void DrawHSlider(HDC hdc, int x, int y, int w, int h, float value)
-{
-    /* Track. */
-    RECT trackRect = { x, y, x + w, y + h };
-    HBRUSH bgBrush = CreateSolidBrush(SEEK_BAR_BG);
-    FillRect(hdc, &trackRect, bgBrush);
-    DeleteObject(bgBrush);
-
-    /* Fill. */
-    int fillW = (int)((float)w * value);
-    if (fillW > 0)
-    {
-        RECT fillRect = { x, y, x + fillW, y + h };
-        HBRUSH fillBrush = CreateSolidBrush(SEEK_BAR_FILL);
-        FillRect(hdc, &fillRect, fillBrush);
-        DeleteObject(fillBrush);
-    }
-
-    /* Thumb. */
-    int thumbX = x + fillW;
-    RECT thumbRect = { thumbX - 3, y - 2, thumbX + 3, y + h + 2 };
-    HBRUSH thumbBrush = CreateSolidBrush(SEEK_BAR_THUMB);
-    FillRect(hdc, &thumbRect, thumbBrush);
-    DeleteObject(thumbBrush);
-}
 
 /* ------------------------------------------------------------------ */
 /* Helpers — desenho escalado por DPI                                   */
@@ -487,6 +508,7 @@ static void DrawLcdDisplayScaled(HDC hdc)
             else if (chIdx == 11) fontData = g_dashChar;
             else fontData = g_digitFont[chIdx];
 
+            int chX = startX + i * charW;
             int cellW = MainWnd_DPIScale(DIGIT_CHAR_W / 5);
             int cellH = MainWnd_DPIScale(DIGIT_CHAR_H / 7);
             if (cellW < 1) cellW = 1;
@@ -497,11 +519,11 @@ static void DrawLcdDisplayScaled(HDC hdc)
                 unsigned char bits = fontData[row];
                 for (int col = 0; col < 5; col++)
                 {
-                    if (bits & (0x10 >> col))
+                    if (bits & (0x40 >> col)) /* bit ativo — dados ocupam bits 6..2 */
                     {
                         RECT cell = {
-                            startX + col * cellW, startY + row * cellH,
-                            startX + (col + 1) * cellW + 1,
+                            chX + col * cellW, startY + row * cellH,
+                            chX + (col + 1) * cellW + 1,
                             startY + (row + 1) * cellH + 1
                         };
                         HBRUSH b = CreateSolidBrush(LCD_TEXT_COLOR);
@@ -532,9 +554,15 @@ static void DrawHSliderScaled(HDC hdc, RECT *pr, float value)
         DeleteObject(fillBrush);
     }
 
-    /* Thumb. */
+    /* Thumb — largura escalada por DPI para manter proporção com a track;
+     * clampada para não desenhar fora da track quando value == 0 ou 1. */
+    int thumbHalf = MainWnd_DPIScale(3);
+    if (thumbHalf < 1) thumbHalf = 1;
     int thumbX = pr->left + fillW;
-    RECT thumbRect = { thumbX - 3, pr->top - 2, thumbX + 3, pr->bottom + 2 };
+    RECT thumbRect = { thumbX - thumbHalf, pr->top - MainWnd_DPIScale(2),
+                        thumbX + thumbHalf, pr->bottom + MainWnd_DPIScale(2) };
+    if (thumbRect.left < pr->left)   thumbRect.left  = pr->left;
+    if (thumbRect.right > pr->right) thumbRect.right = pr->right;
     HBRUSH thumbBrush = CreateSolidBrush(SEEK_BAR_THUMB);
     FillRect(hdc, &thumbRect, thumbBrush);
     DeleteObject(thumbBrush);
@@ -605,8 +633,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
     case WM_CREATE:
     {
-        /* Calcular fator de escala DPI para esta janela. */
-        g_dpiScale = GetDpiScaleFactor(hwnd);
+        /* Calcular fator de escala DPI para esta janela e redimensionar a
+         * janela (criada em tamanho lógico 1x) para o tamanho físico real
+         * antes do primeiro ShowWindow — senão o conteúdo desenhado em
+         * coordenadas escaladas fica cortado dentro de uma janela pequena. */
+        ApplyInterfaceScale(hwnd);
 
         /* Garantir que o ícone aparece na taskbar e no Alt+Tab. */
         HICON hIcon = LoadIconW(
@@ -666,8 +697,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
      * ------------------------------------------------------------------ */
     case WM_LBUTTONDOWN:
     {
-        int const mx = (int)(short)LOWORD(lParam);
-        int const my = (int)(short)HIWORD(lParam);
+        int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
+        int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
         /* Verificar se clicou num botão da titlebar primeiro. */
         if (my < (int)TITLEBAR_HEIGHT)
@@ -772,8 +803,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
      * ------------------------------------------------------------------ */
     case WM_MOUSEMOVE:
     {
-        int const mx = (int)(short)LOWORD(lParam);
-        int const my = (int)(short)HIWORD(lParam);
+        int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
+        int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
         /* Hover na titlebar. */
         TitleBarButton newHover = BTN_NONE;
@@ -835,8 +866,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
      * ------------------------------------------------------------------ */
     case WM_LBUTTONUP:
     {
-        int const mx = (int)(short)LOWORD(lParam);
-        int const my = (int)(short)HIWORD(lParam);
+        int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
+        int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
         /* Verificar se soltou na titlebar. */
         if (g_pressedBtn != BTN_NONE && my < (int)TITLEBAR_HEIGHT)
@@ -990,11 +1021,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
             wchar_t infoBuf[32] = { 0 };
             if (bitrate > 0 && sampleRate > 0)
-                wsprintfW(infoBuf, L"%d kbps %d Hz%s", bitrate, sampleRate / 1000, channels == 2 ? " st" : "");
+                wsprintfW(infoBuf, L"%d kbps %d Hz%s", bitrate, sampleRate / 1000, channels == 2 ? L" st" : L"");
             else if (bitrate > 0)
                 wsprintfW(infoBuf, L"%d kbps", bitrate);
             else if (sampleRate > 0)
-                wsprintfW(infoBuf, L"%d Hz%s", sampleRate / 1000, channels == 2 ? " st" : "");
+                wsprintfW(infoBuf, L"%d Hz%s", sampleRate / 1000, channels == 2 ? L" st" : L"");
 
             if (infoBuf[0] != L'\0')
                 DrawTextW(memDC, infoBuf, (int)wcslen(infoBuf), &infoRect, DT_LEFT | DT_VCENTER | DT_SINGLELINE);
@@ -1141,6 +1172,69 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         DeleteDC(memDC);
 
         EndPaint(hwnd, &ps);
+        break;
+    }
+
+    /* ------------------------------------------------------------------
+     * Menu de contexto — Configurações > Aparência > Escala da interface.
+     * Clique direito em qualquer ponto da janela.
+     * ------------------------------------------------------------------ */
+    case WM_CONTEXTMENU:
+    {
+        struct ScaleMenuItem { int id; int percent; const wchar_t *label; };
+        static const ScaleMenuItem items[] = {
+            { IDM_SCALE_AUTO, 0,   L"Automática (recomendado)" },
+            { IDM_SCALE_80,   80,  L"80%" },
+            { IDM_SCALE_90,   90,  L"90%" },
+            { IDM_SCALE_100,  100, L"100%" },
+            { IDM_SCALE_110,  110, L"110%" },
+            { IDM_SCALE_125,  125, L"125%" },
+            { IDM_SCALE_150,  150, L"150%" },
+        };
+
+        HMENU hScale = CreatePopupMenu();
+        for (size_t i = 0; i < ARRAYSIZE(items); i++)
+        {
+            UINT flags = MF_STRING |
+                (items[i].percent == g_userScalePercent ? MF_CHECKED : MF_UNCHECKED);
+            AppendMenuW(hScale, flags, items[i].id, items[i].label);
+        }
+
+        HMENU hMenu = CreatePopupMenu();
+        AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hScale, L"Aparência > Escala da interface");
+
+        int x = (int)(short)LOWORD(lParam);
+        int y = (int)(short)HIWORD(lParam);
+        if (x == -1 && y == -1)
+        {
+            RECT r{};
+            GetWindowRect(hwnd, &r);
+            x = r.left;
+            y = r.top;
+        }
+
+        TrackPopupMenu(hMenu, TPM_RIGHTBUTTON, x, y, 0, hwnd, NULL);
+        DestroyMenu(hMenu);
+        break;
+    }
+
+    case WM_COMMAND:
+    {
+        int cmdId = LOWORD(wParam);
+        static const struct { int id; int percent; } scaleCmds[] = {
+            { IDM_SCALE_AUTO, 0 },   { IDM_SCALE_80, 80 },   { IDM_SCALE_90, 90 },
+            { IDM_SCALE_100, 100 }, { IDM_SCALE_110, 110 }, { IDM_SCALE_125, 125 },
+            { IDM_SCALE_150, 150 },
+        };
+        for (size_t i = 0; i < ARRAYSIZE(scaleCmds); i++)
+        {
+            if (scaleCmds[i].id == cmdId)
+            {
+                g_userScalePercent = scaleCmds[i].percent;
+                ApplyInterfaceScale(hwnd);
+                break;
+            }
+        }
         break;
     }
 
