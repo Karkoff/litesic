@@ -151,6 +151,7 @@ typedef enum
 /* Timer IDs                                                           */
 /* ------------------------------------------------------------------ */
 #define POSITION_TIMER_ID   1  /* Atualiza LCD, seek bar, título rolando. */
+#define VIZ_TIMER_ID        3  /* Redesenha o visualizador (~60fps).       */
 #define SCROLL_TIMER_ID     2  /* Contador de ms para scroll do título.    */
 
 /* Velocidade do scroll do título (pixels/segundo). */

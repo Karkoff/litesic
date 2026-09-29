@@ -73,37 +73,110 @@ BOOL Audio_Init(void)
 
 /* ------------------------------------------------------------------ */
 /* Visualização — M4-T1                                                 */
-/* Ring buffer protegido por CRITICAL_SECTION.                          */
-/* Decoder auxiliar para leitura de amostras sem interferir no playback.*/
+/* Um nó "tap" é inserido no grafo do ma_engine entre o sound e o       */
+/* endpoint. Ele repassa o áudio sem alteração e copia uma mistura mono */
+/* para o ring buffer, então a UI vê exatamente o que vai para o        */
+/* dispositivo, sem decoder auxiliar nem seek.                          */
 /* ------------------------------------------------------------------ */
 
-/* Decoder separado usado apenas para visualização.
- * Lê à frente do playback para alimentar o ring buffer sem travar. */
-static ma_decoder g_vizDecoder{};
-static BOOL       g_vizDecoderActive = FALSE;
+typedef struct
+{
+    ma_node_base base;
+    ma_uint32    channels;
+} VizTapNode;
+
+static VizTapNode g_vizTap{};
+static BOOL       g_vizTapActive = FALSE;
+
+/* Escreve amostras mono no ring buffer (seção crítica curta: só cópia). */
+static void Audio_VizWriteBlock(const float* samples, int frameCount)
+{
+    EnterCriticalSection(&g_audio.vizLock);
+
+    for (int i = 0; i < frameCount; i++)
+    {
+        g_audio.vizBuffer[g_audio.vizWritePos] = samples[i];
+        g_audio.vizWritePos = (g_audio.vizWritePos + 1) % VISUALIZATION_BUFFER_SIZE;
+    }
+    g_audio.vizCount += frameCount;
+    if (g_audio.vizCount > VISUALIZATION_BUFFER_SIZE)
+        g_audio.vizCount = VISUALIZATION_BUFFER_SIZE;
+
+    LeaveCriticalSection(&g_audio.vizLock);
+}
+
+/* Roda na thread de áudio: sem alocação, sem janelas. */
+static void VizTap_Process(ma_node* pNode, const float** ppFramesIn,
+                           ma_uint32* pFrameCountIn, float** ppFramesOut,
+                           ma_uint32* pFrameCountOut)
+{
+    VizTapNode* tap = (VizTapNode*)pNode;
+    ma_uint32 frames = *pFrameCountOut;
+    if (*pFrameCountIn < frames)
+        frames = *pFrameCountIn;
+
+    const float* in  = ppFramesIn[0];
+    float*       out = ppFramesOut[0];
+    ma_uint32    ch  = tap->channels;
+
+    memcpy(out, in, (size_t)frames * ch * sizeof(float));
+
+    float mono[256];
+    ma_uint32 done = 0;
+    while (done < frames)
+    {
+        ma_uint32 n = frames - done;
+        if (n > 256) n = 256;
+
+        for (ma_uint32 i = 0; i < n; i++)
+        {
+            const float* f = in + (size_t)(done + i) * ch;
+            float sum = 0.0f;
+            for (ma_uint32 c = 0; c < ch; c++)
+                sum += f[c];
+            mono[i] = sum / (float)ch;
+        }
+        Audio_VizWriteBlock(mono, (int)n);
+        done += n;
+    }
+
+    *pFrameCountIn  = frames;
+    *pFrameCountOut = frames;
+}
+
+static ma_node_vtable g_vizTapVtable =
+{
+    VizTap_Process,
+    NULL,
+    1, /* 1 barra de entrada */
+    1, /* 1 barra de saída   */
+    0
+};
 
 BOOL Audio_VizInit(void)
 {
     if (!g_audio.active || g_audio.vizActive)
         return TRUE; /* Já inicializado ou engine não ativa. */
 
-    /* Zerar buffer e estado. */
     memset(g_audio.vizBuffer, 0, sizeof(g_audio.vizBuffer));
     g_audio.vizWritePos = 0;
     g_audio.vizCount    = 0;
+    InitializeCriticalSection(&g_audio.vizLock);
     g_audio.vizActive   = TRUE;
 
-    /* Inicializar critical section para proteção concorrente. */
-    InitializeCriticalSection(&g_audio.vizLock);
+    ma_uint32 channels = ma_engine_get_channels(&g_audio.engine);
+    ma_node_config cfg = ma_node_config_init();
+    cfg.vtable          = &g_vizTapVtable;
+    cfg.pInputChannels  = &channels;
+    cfg.pOutputChannels = &channels;
+    g_vizTap.channels   = channels;
 
-    /* Inicializar decoder auxiliar para visualização (se houver arquivo carregado). */
-    if (g_audio.currentPath[0] != L'\0')
+    if (ma_node_init(ma_engine_get_node_graph(&g_audio.engine), &cfg, NULL,
+                     &g_vizTap.base) == MA_SUCCESS)
     {
-        ma_result result = ma_decoder_init_file_w(g_audio.currentPath, NULL, &g_vizDecoder);
-        if (result == MA_SUCCESS)
-        {
-            g_vizDecoderActive = TRUE;
-        }
+        ma_node_attach_output_bus(&g_vizTap.base, 0,
+                                  ma_engine_get_endpoint(&g_audio.engine), 0);
+        g_vizTapActive = TRUE;
     }
 
     return TRUE;
@@ -111,133 +184,17 @@ BOOL Audio_VizInit(void)
 
 void Audio_VizShutdown(void)
 {
-    /* Parar decoder auxiliar. */
-    if (g_vizDecoderActive)
+    if (g_vizTapActive)
     {
-        ma_decoder_uninit(&g_vizDecoder);
-        g_vizDecoderActive = FALSE;
+        ma_node_uninit(&g_vizTap.base, NULL);
+        g_vizTapActive = FALSE;
     }
 
     if (g_audio.vizActive)
     {
-        DeleteCriticalSection(&g_audio.vizLock);
         g_audio.vizActive = FALSE;
+        DeleteCriticalSection(&g_audio.vizLock);
         g_audio.vizCount  = 0;
-    }
-}
-
-/* Escreve amostras no ring buffer de visualização. */
-static void Audio_VizWrite(const float* samples, int frameCount)
-{
-    if (!g_audio.vizActive || samples == NULL || frameCount <= 0)
-        return;
-
-    EnterCriticalSection(&g_audio.vizLock);
-
-    for (int i = 0; i < frameCount; i++)
-    {
-        g_audio.vizBuffer[g_audio.vizWritePos] = samples[i];
-        g_audio.vizWritePos = (g_audio.vizWritePos + 1) % VISUALIZATION_BUFFER_SIZE;
-
-        if (g_audio.vizCount < VISUALIZATION_BUFFER_SIZE)
-            g_audio.vizCount++;
-    }
-
-    LeaveCriticalSection(&g_audio.vizLock);
-}
-
-/* Atualiza o buffer de visualização lendo do decoder auxiliar.
- * Chamado a partir da UI thread (timer), nunca do callback de áudio.
- * O decoder auxiliar é sincronizado com a posição atual do playback. */
-void Audio_UpdateVisualization(void)
-{
-    if (!g_audio.active || !g_audio.vizActive)
-        return;
-
-    /* Só ler amostras se há um sound carregado e está tocando. */
-    if (g_audio.state != AUDIO_STATE_PLAYING)
-        return;
-
-    /* Sincronizar posição do decoder auxiliar com o playback atual.
-     * Isso é necessário porque o decoder lê à frente e precisa acompanhar. */
-    if (g_vizDecoderActive)
-    {
-        double posSec = Audio_GetPositionSeconds();
-        int sampleRate = Audio_GetSampleRate();
-        if (sampleRate > 0)
-        {
-            ma_uint64 targetFrame = (ma_uint64)(posSec * (double)sampleRate);
-            /* Apenas seek se a diferença for maior que 512 frames (~11ms). */
-            ma_uint64 currentFrame = 0;
-            ma_decoder_get_cursor_in_pcm_frames(&g_vizDecoder, &currentFrame);
-            if (llabs((long long)targetFrame - (long long)currentFrame) > 512)
-            {
-                ma_decoder_seek_to_pcm_frame(&g_vizDecoder, targetFrame);
-            }
-        }
-    }
-
-    /* Se o decoder auxiliar não está ativo, tentar inicializar. */
-    if (!g_vizDecoderActive && g_audio.currentPath[0] != L'\0')
-    {
-        ma_result result = ma_decoder_init_file_w(g_audio.currentPath, NULL, &g_vizDecoder);
-        if (result == MA_SUCCESS)
-        {
-            g_vizDecoderActive = TRUE;
-            /* Sincronizar posição com o sound principal. */
-            double posSec = Audio_GetPositionSeconds();
-            int sampleRate = Audio_GetSampleRate();
-            if (sampleRate > 0)
-            {
-                ma_uint64 targetFrame = (ma_uint64)(posSec * (double)sampleRate);
-                ma_decoder_seek_to_pcm_frame(&g_vizDecoder, targetFrame);
-            }
-        }
-    }
-
-    if (!g_vizDecoderActive)
-        return;
-
-    /* Verificar formato do decoder auxiliar. */
-    ma_format format = ma_format_unknown;
-    ma_uint32 channels = 0;
-    ma_uint32 sampleRate = 0;
-    if (ma_decoder_get_data_format(&g_vizDecoder, &format, &channels, &sampleRate, NULL, 0) != MA_SUCCESS)
-        return;
-
-    if (format != ma_format_f32)
-        return;
-
-    /* Ler blocos de 256 frames e converter para mono.
-     * Maior bloco = menos lag, mas ainda dentro do limite do timer (250ms). */
-    float tmp[256 * 2]; /* Máx 2 canais. */
-    ma_uint32 channelsU32 = (ma_uint32)channels;
-
-    /* Ler blocos até preencher ~256 amostras no buffer. */
-    int totalRead = 0;
-    while (totalRead < 256)
-    {
-        int toRead = 256 - totalRead;
-        if (toRead > 128) toRead = 128; /* Máx 128 por chamada. */
-
-        ma_uint64 framesRead64 = 0;
-        ma_result result = ma_decoder_read_pcm_frames(&g_vizDecoder, tmp, (ma_uint32)toRead, &framesRead64);
-        if (result != MA_SUCCESS || framesRead64 == 0)
-            break;
-
-        ma_uint32 framesRead = (ma_uint32)framesRead64;
-        totalRead += framesRead;
-
-        /* Converter para mono e escrever no buffer. */
-        for (ma_uint32 i = 0; i < framesRead; i++)
-        {
-            float sample = 0.0f;
-            for (ma_uint32 ch = 0; ch < channelsU32; ch++)
-                sample += tmp[i * channelsU32 + ch];
-            sample /= (float)channelsU32;
-
-            Audio_VizWrite(&sample, 1);
-        }
     }
 }
 
@@ -246,26 +203,18 @@ int Audio_GetVisualizationSamples(float* out, int count)
     if (!g_audio.vizActive || out == NULL || count <= 0)
         return 0;
 
-    /* Limitar ao tamanho do buffer. */
     if (count > VISUALIZATION_BUFFER_SIZE)
         count = VISUALIZATION_BUFFER_SIZE;
 
     EnterCriticalSection(&g_audio.vizLock);
 
-    int available = g_audio.vizCount;
-    if (available == 0)
-    {
-        LeaveCriticalSection(&g_audio.vizLock);
-        return 0;
-    }
+    int toCopy = count < g_audio.vizCount ? count : g_audio.vizCount;
 
-    /* Copiar amostras mais recentes.
-     * As amostras mais recentes estão em:
-     *   writePos - 1, writePos - 2, ... (com wraparound) */
-    int toCopy = count < available ? count : available;
+    /* Ordem cronológica: out[0] é a mais antiga, out[toCopy-1] a mais recente. */
     for (int i = 0; i < toCopy; i++)
     {
-        int idx = (g_audio.vizWritePos - 1 - i + VISUALIZATION_BUFFER_SIZE) % VISUALIZATION_BUFFER_SIZE;
+        int idx = (g_audio.vizWritePos - toCopy + i + VISUALIZATION_BUFFER_SIZE)
+                  % VISUALIZATION_BUFFER_SIZE;
         out[i] = g_audio.vizBuffer[idx];
     }
 
@@ -318,6 +267,10 @@ BOOL Audio_Load(const wchar_t* path)
         g_audio.state = AUDIO_STATE_STOPPED;
         return FALSE;
     }
+
+    /* Rotear a saída do sound pelo nó de visualização. */
+    if (g_vizTapActive)
+        ma_node_attach_output_bus(&g_audio.sound, 0, &g_vizTap.base, 0);
 
     /* Salvar caminho e tamanho do arquivo. */
     wcsncpy_s(g_audio.currentPath, ARRAYSIZE(g_audio.currentPath),

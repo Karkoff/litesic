@@ -111,31 +111,38 @@ static void FFTMagnitude(const Complex* input, float* output, int size)
 }
 
 /* ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ */
 /* Espectro log-scale — M4-T3                                         */
 /* Agrupa bins de frequência em faixas logarítmicas.                  */
 /* ------------------------------------------------------------------ */
 
-/* Calcula os índices de início/fim para cada faixa log-scale. */
-static void CalculateLogBins(int* startBins, int* endBins, int numBars, int fftSize)
+/* Calcula os bins de início/fim (inclusivos) de cada barra.
+ * As faixas vão de 40 Hz a min(16 kHz, Nyquist), espaçadas em log,
+ * convertendo Hz -> índice de bin (bin = freq * fftSize / sampleRate). */
+static void CalculateLogBins(int* startBins, int* endBins, int numBars,
+                             int fftSize, int sampleRate)
 {
-    /* Faixa de frequência visível: 20Hz a Nyquist (sampleRate/2).
-     * Usamos escala logarítmica para melhor representação visual. */
-    float minLog = logf(20.0f);   /* 20 Hz — limite inferior audível. */
-    float maxLog = logf((float)fftSize / 2.0f); /* Nyquist em bins. */
-    float range = maxLog - minLog;
+    const float nyquist = (float)sampleRate / 2.0f;
+    float fMin = 40.0f;
+    float fMax = nyquist < 16000.0f ? nyquist : 16000.0f;
+    const float logMin = logf(fMin);
+    const float logRange = logf(fMax) - logMin;
+    const int maxBin = fftSize / 2 - 1;
 
+    int prevEnd = 0; /* bin 0 (DC) nunca é usado. */
     for (int i = 0; i < numBars; i++)
     {
-        float startLog = minLog + (float)i * range / (float)numBars;
-        float endLog = minLog + (float)(i + 1) * range / (float)numBars;
+        float fHi = expf(logMin + (float)(i + 1) * logRange / (float)numBars);
+        int endBin = (int)(fHi * (float)fftSize / (float)sampleRate + 0.5f);
+        if (endBin > maxBin) endBin = maxBin;
 
-        startBins[i] = (int)expf(startLog);
-        endBins[i] = (int)expf(endLog);
+        int startBin = prevEnd + 1;
+        if (startBin > maxBin) startBin = maxBin;
+        if (endBin < startBin) endBin = startBin;
 
-        /* Clamp aos limites válidos. */
-        if (startBins[i] < 0) startBins[i] = 0;
-        if (endBins[i] >= fftSize / 2) endBins[i] = fftSize / 2 - 1;
-        if (startBins[i] > endBins[i]) startBins[i] = endBins[i];
+        startBins[i] = startBin;
+        endBins[i] = endBin;
+        prevEnd = endBin;
     }
 }
 
@@ -167,7 +174,9 @@ void DrawOscilloscope(HDC hdc, int x, int y, int w, int h)
     /* Borda sutil. */
     HPEN borderPen = CreatePen(PS_SOLID, 1, SPECTRUM_BORDER_COLOR);
     HGDIOBJ oldPen = SelectObject(hdc, borderPen);
+    HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(NULL_BRUSH));
     Rectangle(hdc, vizRect.left, vizRect.top, vizRect.right, vizRect.bottom);
+    SelectObject(hdc, oldBrush);
 
     /* Puxar amostras do buffer de visualização. */
     float samples[FFT_SIZE];
@@ -217,6 +226,9 @@ void DrawOscilloscope(HDC hdc, int x, int y, int w, int h)
 
 void DrawSpectrum(HDC hdc, int x, int y, int w, int h)
 {
+    /* Altura das barras suavizada entre quadros (queda gradual). */
+    static float smoothed[SPECTRUM_BARS];
+
     /* Fundo escuro. */
     RECT vizRect = { x, y, x + w, y + h };
     HBRUSH bgBrush = CreateSolidBrush(SPECTRUM_BG_COLOR);
@@ -226,113 +238,80 @@ void DrawSpectrum(HDC hdc, int x, int y, int w, int h)
     /* Borda sutil. */
     HPEN borderPen = CreatePen(PS_SOLID, 1, SPECTRUM_BORDER_COLOR);
     HGDIOBJ oldPen = SelectObject(hdc, borderPen);
+    HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(NULL_BRUSH));
     Rectangle(hdc, vizRect.left, vizRect.top, vizRect.right, vizRect.bottom);
+    SelectObject(hdc, oldBrush);
 
-    /* Puxar amostras do buffer de visualização. */
+    /* Pega as FFT_SIZE amostras mais recentes (ordem cronológica). */
     float samples[FFT_SIZE];
     int count = Audio_GetVisualizationSamples(samples, FFT_SIZE);
 
-    /* Precisa de pelo menos 128 amostras para FFT útil (mínimo prático). */
-    if (count >= 128)
+    int sampleRate = Audio_GetSampleRate();
+    if (sampleRate <= 0) sampleRate = 44100;
+
+    float levels[SPECTRUM_BARS];
+    if (count >= FFT_SIZE)
     {
-        /* Usar apenas as amostras disponíveis. */
-        int fftSizeUsed = count;
-        /* Arredondar para potência de 2 mais próxima. */
-        int pow2 = 128;
-        while (pow2 < fftSizeUsed && pow2 * 2 <= FFT_SIZE)
-            pow2 *= 2;
-        fftSizeUsed = pow2;
+        ApplyHannWindow(samples, FFT_SIZE);
 
-        /* Copiar amostras para um buffer temporário (FFT pode modificar). */
-        float tempBuffer[FFT_SIZE];
-        memset(tempBuffer, 0, sizeof(tempBuffer));
-        memcpy(tempBuffer, samples, fftSizeUsed * sizeof(float));
-
-        /* Aplicar janela de Hann. */
-        ApplyHannWindow(tempBuffer, fftSizeUsed);
-
-        /* Converter para complexo. */
-        Complex complexInput[FFT_SIZE];
+        Complex data[FFT_SIZE];
         for (int i = 0; i < FFT_SIZE; i++)
         {
-            complexInput[i].real = (i < fftSizeUsed) ? tempBuffer[i] : 0.0f;
-            complexInput[i].imag = 0.0f;
+            data[i].real = samples[i];
+            data[i].imag = 0.0f;
         }
+        FFT(data, FFT_SIZE);
 
-        /* Calcular FFT. */
-        FFT(complexInput, fftSizeUsed);
-
-        /* Calcular magnitudes. */
         float magnitudes[FFT_SIZE / 2];
-        FFTMagnitude(complexInput, magnitudes, fftSizeUsed);
+        FFTMagnitude(data, magnitudes, FFT_SIZE);
 
-        /* Preencher o resto com zero. */
-        for (int i = fftSizeUsed / 2; i < FFT_SIZE / 2; i++)
-            magnitudes[i] = 0.0f;
-
-        /* Normalizar (encontrar magnitude máxima). */
-        float maxMag = 0.0f;
-        for (int i = 0; i < fftSizeUsed / 2; i++)
-        {
-            if (magnitudes[i] > maxMag)
-                maxMag = magnitudes[i];
-        }
-        if (maxMag > 0.0f)
-        {
-            for (int i = 0; i < fftSizeUsed / 2; i++)
-                magnitudes[i] /= maxMag;
-        }
-
-        /* Calcular faixas log-scale. */
         int startBins[SPECTRUM_BARS];
         int endBins[SPECTRUM_BARS];
-        CalculateLogBins(startBins, endBins, SPECTRUM_BARS, fftSizeUsed);
+        CalculateLogBins(startBins, endBins, SPECTRUM_BARS, FFT_SIZE, sampleRate);
 
-        /* Desenhar barras. */
-        int barWidth = w / SPECTRUM_BARS;
-        if (barWidth < 1) barWidth = 1;
-
-        HPEN barPen = CreatePen(PS_SOLID, 0, SPECTRUM_BAR_COLOR);
-        HGDIOBJ oldPen2 = SelectObject(hdc, barPen);
-
+        /* Referência fixa: uma senoide de escala cheia com janela Hann
+         * gera magnitude FFT_SIZE/4. Mapeia -60 dB..0 dB para 0..1. */
+        const float ref = (float)FFT_SIZE / 4.0f;
         for (int i = 0; i < SPECTRUM_BARS; i++)
         {
-            /* Calcular magnitude média da faixa. */
-            float sum = 0.0f;
-            int count = 0;
+            float peak = 0.0f;
             for (int j = startBins[i]; j <= endBins[i]; j++)
-            {
-                sum += magnitudes[j];
-                count++;
-            }
-            float avgMag = count > 0 ? sum / (float)count : 0.0f;
+                if (magnitudes[j] > peak)
+                    peak = magnitudes[j];
 
-            /* Altura da barra. */
-            int barH = (int)(avgMag * (h - 2));
-            if (barH < 1) barH = 1;
-            if (barH > h - 2) barH = h - 2;
-
-            RECT barRect = {
-                x + i * barWidth, y + h - barH,
-                x + (i + 1) * barWidth, y + h
-            };
-            FillRect(hdc, &barRect, CreateSolidBrush(SPECTRUM_BAR_COLOR));
+            float db = 20.0f * log10f(peak / ref + 1e-9f);
+            float level = (db + 60.0f) / 60.0f;
+            if (level < 0.0f) level = 0.0f;
+            if (level > 1.0f) level = 1.0f;
+            levels[i] = level;
         }
-
-        SelectObject(hdc, oldPen2);
-        DeleteObject(barPen);
     }
     else
     {
-        /* Sem amostras suficientes — desenhar linha plana. */
-        HPEN linePen = CreatePen(PS_SOLID, 1, SPECTRUM_BAR_COLOR);
-        HGDIOBJ oldPen2 = SelectObject(hdc, linePen);
-        MoveToEx(hdc, x + 1, y + h - 1, NULL);
-        LineTo(hdc, x + w - 1, y + h - 1);
-        SelectObject(hdc, oldPen2);
-        DeleteObject(linePen);
+        for (int i = 0; i < SPECTRUM_BARS; i++)
+            levels[i] = 0.0f;
     }
 
+    HBRUSH barBrush = CreateSolidBrush(SPECTRUM_BAR_COLOR);
+    int barWidth = w / SPECTRUM_BARS;
+    if (barWidth < 1) barWidth = 1;
+
+    for (int i = 0; i < SPECTRUM_BARS; i++)
+    {
+        float fall = smoothed[i] * 0.85f;
+        smoothed[i] = levels[i] > fall ? levels[i] : fall;
+
+        int barH = (int)(smoothed[i] * (float)(h - 2));
+        if (barH < 1) barH = 1;
+
+        RECT barRect = {
+            x + i * barWidth, y + h - 1 - barH,
+            x + (i + 1) * barWidth - 1, y + h - 1
+        };
+        FillRect(hdc, &barRect, barBrush);
+    }
+
+    DeleteObject(barBrush);
     SelectObject(hdc, oldPen);
     DeleteObject(borderPen);
 }

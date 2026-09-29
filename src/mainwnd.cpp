@@ -673,6 +673,9 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         /* Timer para scroll do título (30ms — ~33fps suave). */
         SetTimer(hwnd, SCROLL_TIMER_ID, 30, NULL);
 
+        /* Timer do visualizador (~60fps). */
+        SetTimer(hwnd, VIZ_TIMER_ID, 16, NULL);
+
         break;
     }
 
@@ -680,9 +683,6 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         if (wParam == POSITION_TIMER_ID)
         {
-            /* M4-T1: Atualizar buffer de visualização a partir do sound. */
-            Audio_UpdateVisualization();
-
             /* Se estiver tocando, sincronizar seek bar com posição real e
              * invalidar para redraw. */
             if (Audio_GetState() == AUDIO_STATE_PLAYING)
@@ -693,6 +693,17 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                     g_seekValue = (float)(Audio_GetPositionSeconds() / dur);
                 }
                 InvalidateRect(hwnd, NULL, FALSE);
+            }
+        }
+        else if (wParam == VIZ_TIMER_ID)
+        {
+            if (Audio_GetState() == AUDIO_STATE_PLAYING)
+            {
+                RECT vizRect = {
+                    MainWnd_DPIScale(VIZ_X), MainWnd_DPIScale(VIZ_Y),
+                    MainWnd_DPIScale(VIZ_X + VIZ_W), MainWnd_DPIScale(VIZ_Y + VIZ_H)
+                };
+                InvalidateRect(hwnd, &vizRect, FALSE);
             }
         }
         else if (wParam == SCROLL_TIMER_ID)
@@ -1002,7 +1013,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         /* Fundo da janela. */
         HBRUSH bgBrush = CreateSolidBrush(BG_COLOR);
-        FillRect(memDC, &ps.rcPaint, bgBrush);
+        RECT fullRect = { 0, 0, scaledW, scaledH };
+        FillRect(memDC, &fullRect, bgBrush);
         DeleteObject(bgBrush);
 
         /* ------------------------------------------------------------------
@@ -1203,7 +1215,10 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             {
                 DrawOscilloscope(memDC, vizX, vizY, vizW, vizH);
             }
-            /* M4-T3: Espectro será desenhado aqui quando implementado. */
+            else
+            {
+                DrawSpectrum(memDC, vizX, vizY, vizW, vizH);
+            }
         }
 
         /* Copiar buffer para a tela. */
@@ -1284,6 +1299,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         KillTimer(hwnd, POSITION_TIMER_ID);
         KillTimer(hwnd, SCROLL_TIMER_ID);
+        KillTimer(hwnd, VIZ_TIMER_ID);
         Audio_Shutdown();
         PostQuitMessage(0);
         break;

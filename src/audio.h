@@ -117,8 +117,8 @@ void Audio_Previous(void);
 /* ------------------------------------------------------------------ */
 
 /* Número de amostras no buffer de visualização (potência de 2).
- * 512 samples → ~11ms a 44100Hz, suficiente para osciloscópio e FFT. */
-#define VISUALIZATION_BUFFER_SIZE  512
+ * 2048 samples → ~46ms a 44100Hz; a UI lê as mais recentes. */
+#define VISUALIZATION_BUFFER_SIZE  2048
 
 /* Inicializa o ring buffer de visualização (chamar após Audio_Init).
  * Retorna TRUE em sucesso. */
@@ -127,14 +127,11 @@ BOOL Audio_VizInit(void);
 /* Encerra o ring buffer de visualização. */
 void Audio_VizShutdown(void);
 
-/* Pega uma cópia das N amostras mais recentes do buffer.
+/* Pega uma cópia das N amostras mais recentes do buffer (mono), em ordem
+ * cronológica: out[0] é a mais antiga e out[n-1] a mais recente.
  * out: buffer de destino (float[N]).
  * count: número de amostras desejadas (deve ser <= VISUALIZATION_BUFFER_SIZE).
  * Retorna o número real de amostras copiadas. */
 int Audio_GetVisualizationSamples(float* out, int count);
-
-/* Atualiza o buffer de visualização lendo do sound atual.
- * Chamado a partir da UI thread (timer), nunca do callback de áudio. */
-void Audio_UpdateVisualization(void);
 
 #endif /* AUDIO_H */
