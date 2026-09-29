@@ -25,7 +25,7 @@ A aplicação oferece três janelas independentes:
 
 | Recurso | Detalhes |
 |---|---|
-| **Formatos** | OGG Vorbis (via `stb_vorbis`), WAV nativo |
+| **Formatos** | MP3, WAV, FLAC, OGG Vorbis |
 | **Motor de áudio** | [miniaudio](https://miniaud.io) — single-header, multi-backend |
 | **Interface** | Janela sem borda arrastável, 3 janelas com snap/dock |
 | **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica |
