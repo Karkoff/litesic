@@ -14,9 +14,10 @@
 /* Tamanho fixo da janela na escala 1x (Winamp clássico).
  * Expandido de 116 para acomodar todos os controles do player (M3).
  * Altura reduzida de 200 para 140 depois de unificar Abrir/Play/Pause/Stop
- * em uma única linha (antes ocupavam 3 linhas empilhadas). */
+ * em uma única linha (antes ocupavam 3 linhas empilhadas).
+ * Expandido para 180 para acomodar o visualizador M4 (32px + margem). */
 #define MAINWND_WIDTH   275
-#define MAINWND_HEIGHT  140
+#define MAINWND_HEIGHT  180
 
 /* Altura da barra de título (área sensível para arrastar e botões). */
 #define TITLEBAR_HEIGHT 24
