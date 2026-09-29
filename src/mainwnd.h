@@ -138,6 +138,15 @@ typedef enum
 #define BTN_STOP_Y      BOTTOM_CONTROLS_Y
 
 /* ------------------------------------------------------------------ */
+/* Visualizador — M4                                                   */
+/* Área abaixo dos controles inferiores para osciloscópio/espectro.    */
+/* ------------------------------------------------------------------ */
+#define VIZ_X           4
+#define VIZ_Y           (BOTTOM_CONTROLS_Y + 20)
+#define VIZ_W           (MAINWND_WIDTH - 8)
+#define VIZ_H           32
+
+/* ------------------------------------------------------------------ */
 /* Timer IDs                                                           */
 /* ------------------------------------------------------------------ */
 #define POSITION_TIMER_ID   1  /* Atualiza LCD, seek bar, título rolando. */
