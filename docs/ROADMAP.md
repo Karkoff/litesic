@@ -18,7 +18,7 @@ próxima.
 | M1 | [docs/milestones/M1.md](milestones/M1.md) | Esqueleto: janela sem borda, arrastável, ícone, fechar/minimizar | sim |
 | M2 | [docs/milestones/M2.md](milestones/M2.md) | Motor de áudio: abrir/tocar/pausar/parar, posição/duração | sim |
 | M3 | [docs/milestones/M3.md](milestones/M3.md) | Player principal: LCD, título rolando, kbps/kHz/estéreo, seek, volume, balanço, prev/next, shuffle/repeat | sim |
-| M4 | [docs/milestones/M4.md](milestones/M4.md) | Visualizador: espectro FFT + osciloscópio | sim |
+| M4 | [docs/milestones/M4.md](milestones/M4.md) | Visualizador: espectro FFT + osciloscópio | sim (validada) |
 | M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background | sim |
 | M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador: 10 bandas, pré-amp, presets, tempo real | sim |
 | M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: snap/dock entre janelas, mostrar/ocultar EQ/PL | sim |

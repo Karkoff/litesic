@@ -9,6 +9,7 @@
  * M3-T4: seek.
  * M3-T5: volume, pan (balanço).
  * M3-T6: navegação prev/next — interface mínima provisória (lista de 1 item).
+ * M4-T1: visualização — nó tap no grafo do engine + ring buffer.
  */
 
 #include "ma_config.h"
