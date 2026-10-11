@@ -1,0 +1,1356 @@
+{
+  "created_utc": "2026-10-11T04:59:51.267768+00:00",
+  "final_x64_debug_sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d",
+  "builds": [
+    {
+      "architecture": "32",
+      "configuration": "debug",
+      "cases": 73,
+      "exe_sha256": "59e24b4ca0b336cf75ab502d2ecd390d600f79d5de6a8dedb89edf30523fa243",
+      "logs": [
+        {
+          "file": "refine-build-32-debug.log",
+          "sha256": "3cabf1f6edcf0e8615b6dbc0eabd044df3c112e7aa9d2f8b465932bb1e17143c"
+        },
+        {
+          "file": "refine-tests-32-debug.log",
+          "sha256": "44fcff04b48bfb0986fab3f0dc4d5632495b370ef813082a75d25fd665189cfe"
+        }
+      ]
+    },
+    {
+      "architecture": "32",
+      "configuration": "release",
+      "cases": 73,
+      "exe_sha256": "33dbdc92df885a1c33a6851818d94673e8e192b5657d2349a0b910da3b59c225",
+      "logs": [
+        {
+          "file": "refine-build-32-release.log",
+          "sha256": "a9626224e028cede900566891ca913d9f253971d92a367f755dd185bf6684c0e"
+        },
+        {
+          "file": "refine-tests-32-release.log",
+          "sha256": "a5d248581a87edec7a75f5c5438549a8d61c3be154157a9c7ccbf1c4af9880a7"
+        }
+      ]
+    },
+    {
+      "architecture": "64",
+      "configuration": "debug",
+      "cases": 73,
+      "exe_sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d",
+      "logs": [
+        {
+          "file": "refine-build-64-debug.log",
+          "sha256": "8d94c9ea2b37ef02680ef2e953daade46bc7b76f6745360ad125ccc596026bbe"
+        },
+        {
+          "file": "refine-tests-64-debug.log",
+          "sha256": "871cfb1c06bce79591a273cc396009d53c987cfbaa8005b4ac0d99018336fea8"
+        }
+      ]
+    },
+    {
+      "architecture": "64",
+      "configuration": "release",
+      "cases": 73,
+      "exe_sha256": "2e8c928e318515728737342e95bd9b613af0c2eb82c145c6688e9ceadb050402",
+      "logs": [
+        {
+          "file": "refine-build-64-release.log",
+          "sha256": "1a60346aed4014e2bbf387263d62441b16261e9b0849e8b972387f3039b5d772"
+        },
+        {
+          "file": "refine-tests-64-release.log",
+          "sha256": "2d10a36d1b5d3ec079157561d30be641f942827cb96633f3d6951ad9cff5496a"
+        }
+      ]
+    }
+  ],
+  "evidence_checks": {
+    "attached_same_delta": true,
+    "detached_stays": true,
+    "reattached_same_delta": true,
+    "pause_stable": true,
+    "resume_clock_changes": true,
+    "eof_seek_rewinds": true,
+    "repeat_labels_differ": true
+  },
+  "captures": [
+    {
+      "utc": "2026-10-11T04:56:54.355358+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-alpha-near-end",
+        "x": 400,
+        "y": 90,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-alpha-near-end.png",
+        "sha256": "08fb5bb5866b5c8daa547d8de3d3bb01fa7f970c3cee49d38e3cb21c07eb6e40",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-alpha-near-end.png"
+    },
+    {
+      "utc": "2026-10-11T04:56:59.505427+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-alpha-repeated",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-alpha-repeated.png",
+        "sha256": "f4f30dc5c67632b1c56c7bf2ae040a199a99ade06161bb698b44b4772a5feef8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-alpha-repeated.png"
+    },
+    {
+      "utc": "2026-10-11T04:51:10.501428+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-delivery-list-before",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1713,
+          1215,
+          2193,
+          1665
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-delivery-list-before.png",
+        "sha256": "ed737d09dce62a83fffcec8d91d5d77bd59260752a53bddb0f9d59249385acc4",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-delivery-list-before.png"
+    },
+    {
+      "utc": "2026-10-11T04:51:24.374344+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-delivery-list-moved",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1813,
+          1245,
+          2293,
+          1695
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-delivery-list-moved.png",
+        "sha256": "ed737d09dce62a83fffcec8d91d5d77bd59260752a53bddb0f9d59249385acc4",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-delivery-list-moved.png"
+    },
+    {
+      "utc": "2026-10-11T04:51:21.526299+00:00",
+      "action": "drag",
+      "args": {
+        "action": "drag",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": 200,
+        "end_y": 48,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-delivery-main-moved",
+        "x": 100,
+        "y": 18,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1813,
+          975,
+          2226,
+          1245
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-delivery-main-moved.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-delivery-main-moved.png"
+    },
+    {
+      "utc": "2026-10-11T04:51:09.680109+00:00",
+      "action": "launch",
+      "args": {
+        "action": "launch",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-delivery-main",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1713,
+          945,
+          2126,
+          1215
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-delivery-main.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-delivery-main.png"
+    },
+    {
+      "utc": "2026-10-11T04:53:53.914036+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-detached-stable",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1913,
+          1365,
+          2393,
+          1815
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-detached-stable.png",
+        "sha256": "c366cc482575acbfa340a2ff65c1ca5933a41d34085e41dd0f763b97a15575a8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-detached-stable.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:17.003868+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-independent-list-after",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1913,
+          1365,
+          2393,
+          1815
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-independent-list-after.png",
+        "sha256": "c366cc482575acbfa340a2ff65c1ca5933a41d34085e41dd0f763b97a15575a8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-independent-list-after.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:12.237105+00:00",
+      "action": "drag",
+      "args": {
+        "action": "drag",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": 300,
+        "end_y": 48,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-independent-main-after",
+        "x": 200,
+        "y": 18,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2013,
+          1035,
+          2426,
+          1305
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-independent-main-after.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-independent-main-after.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:11.615749+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-independent-main-before",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1913,
+          1005,
+          2326,
+          1275
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-independent-main-before.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-independent-main-before.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:11.119900+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-next-in-one",
+        "x": 218,
+        "y": 150,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-next-in-one.png",
+        "sha256": "2cbe5301285ded199c46c9974e726dfec95847fb99ee7f2f0c1a29835a324dd8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-next-in-one.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:23.258711+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-paused-a",
+        "x": 121,
+        "y": 150,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-paused-a.png",
+        "sha256": "bb9cc9c8d6bce969b510242b7c9724b5032bcd449d74f07508ff58570b070f0c",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-paused-a.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:27.423908+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-paused-b",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-paused-b.png",
+        "sha256": "bb9cc9c8d6bce969b510242b7c9724b5032bcd449d74f07508ff58570b070f0c",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-paused-b.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:58.157096+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-previous",
+        "x": 26,
+        "y": 150,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-previous.png",
+        "sha256": "4b68df0a6eb7cdbc46fb10eef7593879ca446141d22aa5d002ea804e27c8ab57",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-previous.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:29.716854+00:00",
+      "action": "drag",
+      "args": {
+        "action": "drag",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": 200,
+        "end_y": 68,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-rejoin-main-near",
+        "x": 200,
+        "y": 18,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2013,
+          1085,
+          2426,
+          1355
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-rejoin-main-near.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-rejoin-main-near.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:59.577674+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-rejoined-list-after",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          2009,
+          1375,
+          2489,
+          1825
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-rejoined-list-after.png",
+        "sha256": "c366cc482575acbfa340a2ff65c1ca5933a41d34085e41dd0f763b97a15575a8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-rejoined-list-after.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:54.851103+00:00",
+      "action": "drag",
+      "args": {
+        "action": "drag",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": 260,
+        "end_y": 38,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-rejoined-main-after",
+        "x": 200,
+        "y": 18,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-rejoined-main-after.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-rejoined-main-after.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:45.867057+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-rejoined-main-before",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2013,
+          1085,
+          2426,
+          1355
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-rejoined-main-before.png",
+        "sha256": "8725895c33d9e052711c93bdfcf2bce6d28f699081e645d760a0b4811bcb1d2d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-rejoined-main-before.png"
+    },
+    {
+      "utc": "2026-10-11T04:54:45.235998+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-rejoined-stable",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1949,
+          1355,
+          2429,
+          1805
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-rejoined-stable.png",
+        "sha256": "c366cc482575acbfa340a2ff65c1ca5933a41d34085e41dd0f763b97a15575a8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-rejoined-stable.png"
+    },
+    {
+      "utc": "2026-10-11T04:55:41.033736+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-repeat-all",
+        "x": 102,
+        "y": 188,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-repeat-all.png",
+        "sha256": "4e30608f28d84e76e8fb0a7d6fa8514c1ec4a835cb3a6f3894001c820ae9987c",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-repeat-all.png"
+    },
+    {
+      "utc": "2026-10-11T04:58:07.547525+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-repeat-off",
+        "x": 102,
+        "y": 188,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-repeat-off.png",
+        "sha256": "178d525376a5abf6dae07ce4abebce70f65f1098c947a30dbcfd30d332286edd",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-repeat-off.png"
+    },
+    {
+      "utc": "2026-10-11T04:56:01.057363+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-repeat-one",
+        "x": 102,
+        "y": 188,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-repeat-one.png",
+        "sha256": "905a6118f8ff70f766cce02bdb69f2d62ed9d46a3a5a87513665c143709c84d1",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-repeat-one.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:39.848669+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-resumed-later",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-resumed-later.png",
+        "sha256": "396672b5c339224d69f6851515982247e69ac446962621e39e2e9acc6a1ebdad",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-resumed-later.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:48.757045+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-stopped",
+        "x": 170,
+        "y": 150,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 8787412,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          2073,
+          1105,
+          2486,
+          1375
+        ],
+        "client": [
+          413,
+          270
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-stopped.png",
+        "sha256": "2cbe5301285ded199c46c9974e726dfec95847fb99ee7f2f0c1a29835a324dd8",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-stopped.png"
+    },
+    {
+      "utc": "2026-10-11T04:57:12.211775+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "target": "playlist",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "adjust-three-tracks-final",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1837566,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          2009,
+          1375,
+          2489,
+          1825
+        ],
+        "client": [
+          480,
+          450
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\adjust-three-tracks-final.png",
+        "sha256": "5a6cc36803ed54e4b5231a9a8033556121ea9eda9101dd35a6253b06ab279e5e",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 67460,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T04:51:09.869000+00:00",
+          "sha256": "3700e356b323b30c46849998325d77a9de426a4e7bae757a330a7c74a14a360d"
+        }
+      },
+      "archive": "adjust-three-tracks-final.png"
+    }
+  ]
+}

@@ -44,6 +44,8 @@ void DrawOscilloscope(HDC hdc, int x, int y, int w, int h);
  * hdc: DC de destino (já escalada por DPI).
  * x, y, w, h: posição e dimensões da área. */
 void DrawSpectrum(HDC hdc, int x, int y, int w, int h);
+namespace Ui { class Canvas; struct Rect; }
+void DrawVisualizerD2D(Ui::Canvas& canvas, Ui::Rect area, VizMode mode);
 
 /* Converte amplitude de amostra (-1.0..1.0) para posição Y em pixels.
  * height: altura da área de desenho.

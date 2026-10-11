@@ -19,12 +19,21 @@ próxima.
 | M2 | [docs/milestones/M2.md](milestones/M2.md) | Motor de áudio: abrir/tocar/pausar/parar, posição/duração | sim |
 | M3 | [docs/milestones/M3.md](milestones/M3.md) | Player principal: LCD, título rolando, kbps/kHz/estéreo, seek, volume, balanço, prev/next, shuffle/repeat | sim |
 | M4 | [docs/milestones/M4.md](milestones/M4.md) | Visualizador: espectro FFT + osciloscópio | sim (validada) |
-| M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background | sim |
+| M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background — IN_PROGRESS, checkpoint manual pendente | sim |
 | M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador: 10 bandas, pré-amp, presets, tempo real | sim |
 | M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: snap/dock entre janelas, mostrar/ocultar EQ/PL | sim |
 | M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos estilo Winamp, teclas de mídia, always-on-top, instância única, persistência | sim |
 | M9 | [docs/milestones/M9.md](milestones/M9.md) | Testes de compatibilidade (VM Win7 32/64, checagem de DLLs importadas) | manual/VM |
 | M10 | [docs/milestones/M10.md](milestones/M10.md) | Distribuição: builds 32/64, zip portátil, instalador Inno Setup | build final |
+
+## Modernização transversal UI/UX — IN_PROGRESS
+
+As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
+Direct2D/DirectWrite; pesquisa preserva índices canônicos e docking da M5.
+UI-00..02 concluídas; UI-03..08 ainda IN_PROGRESS. M6/DSP não implementado:
+EQ permanece indisponível. M5 mantém seu checkpoint humano; M9 permanece
+pendente de VM Windows 7. Ver [plano](design/LITESIC-UI-IMPLEMENTATION-PLAN.md)
+e [relatório com testes/capturas/limitações](design/UI-VALIDATION-2026-10-11.md).
 
 ## Futuro (fora do roadmap atual)
 

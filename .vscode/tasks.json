@@ -1,56 +1,201 @@
 {
-    "version": "2.0.0",
-    "tasks": [
-        {
-            "label": "Compilar (Debug)",
-            "type": "shell",
-            "command": "C:\\msys64\\usr\\bin\\bash.exe",
-            "args": [
-                "-lc",
-                "make DEBUG=1"
-            ],
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "problemMatcher": ["$gcc"],
-            "detail": "Compila Debug com depuração (g++ -g -O0)"
-        },
-        {
-            "label": "Compilar (Release 64 bits)",
-            "type": "shell",
-            "command": "C:\\msys64\\usr\\bin\\bash.exe",
-            "args": [
-                "-lc",
-                "make"
-            ],
-            "group": "build",
-            "problemMatcher": ["$gcc"],
-            "detail": "Compila Release 64 bits otimizado"
-        },
-        {
-            "label": "Compilar (Release 32 bits)",
-            "type": "shell",
-            "command": "C:\\msys64\\usr\\bin\\bash.exe",
-            "args": [
-                "-lc",
-                "make ARCH=32"
-            ],
-            "group": "build",
-            "problemMatcher": ["$gcc"],
-            "detail": "Compila Release 32 bits (i686)"
-        },
-        {
-            "label": "Limpar build/",
-            "type": "shell",
-            "command": "C:\\msys64\\usr\\bin\\bash.exe",
-            "args": [
-                "-lc",
-                "make clean"
-            ],
-            "group": "build",
-            "problemMatcher": [],
-            "detail": "Remove build/ e todos os objetos compilados"
-        }
-    ]
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Compilar (Debug 64 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "64",
+        "-DebugBuild"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Testar (Debug 64 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "64",
+        "-DebugBuild"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Compilar (Release 64 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "64"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Testar (Release 64 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "64"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Compilar (Debug 32 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "32",
+        "-DebugBuild"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Testar (Debug 32 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "32",
+        "-DebugBuild"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    },
+    {
+      "label": "Compilar (Release 32 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "32"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": false
+      }
+    },
+    {
+      "label": "Testar (Release 32 bits)",
+      "type": "process",
+      "command": "powershell.exe",
+      "args": [
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "${workspaceFolder}/scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "32"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "problemMatcher": [
+        "$gcc"
+      ]
+    }
+  ]
 }

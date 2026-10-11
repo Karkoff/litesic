@@ -32,6 +32,7 @@ BOOL Audio_IsActive(void);
  * Retorna TRUE em sucesso, FALSE se falhar (arquivo não encontrado,
  * formato não suportado, etc.). Libera arquivo anterior se houver. */
 BOOL Audio_Load(const wchar_t* path);
+void Audio_Unload(void);
 
 /* Retorna a duração do arquivo carregado em segundos.
  * Retorna 0.0 se nenhum arquivo estiver carregado. */
@@ -60,6 +61,14 @@ void Audio_Stop(void);
 
 /* Retorna o estado atual da reprodução. */
 AudioState Audio_GetState(void);
+BOOL Audio_IsAtEnd(void);
+
+#ifdef LITESIC_TEST
+BOOL Audio_TestInit(unsigned rate);
+BOOL Audio_TestRead(float* frames, unsigned count);
+unsigned long long Audio_TestCursor(void);
+void Audio_TestVizLock(BOOL lock);
+#endif
 
 /* Retorna a posição atual em segundos. */
 double Audio_GetPositionSeconds(void);
@@ -110,16 +119,8 @@ void Audio_SetVolume(float volume);
 void Audio_SetPan(float pan);
 
 /* ------------------------------------------------------------------ */
-/* Navegação — M3-T6 (interface mínima provisória)                      */
+/* Navigation is owned by PlaybackController (M5).                     */
 /* ------------------------------------------------------------------ */
-
-/* Avança para a próxima faixa.
- * shuffle: se TRUE, pula para uma faixa aleatória.
- * repeat:  se TRUE, volta à primeira faixa ao chegar no fim. */
-void Audio_Next(BOOL shuffle, BOOL repeat);
-
-/* Volta para a faixa anterior (ou reinicia a atual se posição > 3s). */
-void Audio_Previous(void);
 
 /* ------------------------------------------------------------------ */
 /* Visualização — M4-T1                                                 */

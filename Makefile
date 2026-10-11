@@ -1,110 +1,101 @@
-# =============================================================================
-# LiteSic - Makefile
-# Player de audio estilo Winamp em C++ nativo + Win32/GDI
-# =============================================================================
+# LiteSic: GNU Make dentro do MSYS2 MINGW64/MINGW32 (MSVCRT).
+.DEFAULT_GOAL := all
+SHELL := /usr/bin/bash
+.DELETE_ON_ERROR:
 
-# Toolchain (MINGW64 por padrao, MINGW32 para ARCH=32)
+ARCH ?= 64
 ifeq ($(ARCH),32)
-  CXX     := i686-w64-mingw32-g++
-  CC      := i686-w64-mingw32-gcc
-  WINDRES := windres.exe
+  TOOLCHAIN := /mingw32/bin
+else ifeq ($(ARCH),64)
+  TOOLCHAIN := /mingw64/bin
 else
-  CXX     := g++.exe
-  CC      := gcc.exe
-  WINDRES := windres.exe
+  $(error ARCH deve ser 32 ou 64)
 endif
+CC := $(TOOLCHAIN)/gcc.exe
+CXX := $(TOOLCHAIN)/g++.exe
+WINDRES := $(TOOLCHAIN)/windres.exe
+export PATH := $(TOOLCHAIN):/usr/bin:$(PATH)
 
-# Add MinGW bin to PATH so tools are found
-export PATH := /mingw64/bin:$(PATH)
-ifeq ($(ARCH),32)
-export PATH := /mingw32/bin:$(PATH)
-endif
-
-# Directories
-SRC_DIR       := src
-THIRD_PARTY   := third_party
-RES_DIR       := res
-BUILD_DIR     := build
-TEST_DIR      := tests
-
-# Output
-TARGET        := $(BUILD_DIR)/LiteSic.exe
-
-# Flags comuns (C++)
-CXXFLAGS      := -std=c++17 -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE \
-                 -Wall -Wextra -I$(SRC_DIR) -I$(THIRD_PARTY)
-
-# Flags comuns (C — miniaudio + stb_vorbis)
-CFLAGS        := -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE \
-                 -Wall -Wextra -I$(SRC_DIR) -I$(THIRD_PARTY)
-
-# Flags de debug (comuns)
 ifeq ($(DEBUG),1)
-  CXXFLAGS += -g -O0 -DDEBUG
-  CFLAGS   += -g -O0 -DDEBUG
+  CONFIG := debug
+  OPTFLAGS := -g -O0 -DDEBUG
+else
+  CONFIG := release
+  OPTFLAGS := -O2
 endif
 
-LDFLAGS       := -mwindows -municode -static-libgcc -static-libstdc++ \
-                  -luser32 -lkernel32 -lgdi32 -lm
+# Caminhos fixos por variante impedem mistura de objetos e limpeza arbitraria.
+BUILD_DIR := build/$(ARCH)/$(CONFIG)
+TARGET := $(BUILD_DIR)/LiteSic.exe
+CPPFLAGS := -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party
+CFLAGS := -std=c17 -Wall -Wextra $(OPTFLAGS)
+CXXFLAGS := -std=c++17 -Wall -Wextra $(OPTFLAGS)
+DEPFLAGS := -MMD -MP
+LDFLAGS := -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp
+LDLIBS := -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm
 
-# Source files (miniaudio_impl compilado como C puro — sem libstdc++)
-CPP_SRCS      := $(wildcard $(SRC_DIR)/*.cpp)
-MA_SRC        := $(SRC_DIR)/miniaudio_impl.c
-RC_SRCS       := $(RES_DIR)/app.rc
-
-# Object files
-CPP_OBJS      := $(patsubst $(SRC_DIR)/%.cpp,$(BUILD_DIR)/%.o,$(CPP_SRCS))
-MA_OBJ        := $(BUILD_DIR)/miniaudio_impl.o
-RC_OBJS       := $(patsubst $(RES_DIR)/%.rc,$(BUILD_DIR)/%.res.o,$(RC_SRCS))
-
-OBJS          := $(CPP_OBJS) $(MA_OBJ) $(RC_OBJS)
-
-# Test files
-TEST_SRCS     := $(wildcard $(TEST_DIR)/*.c)
-TEST_BINS     := $(patsubst $(TEST_DIR)/%.c,$(BUILD_DIR)/test-%,$(TEST_SRCS))
-
-# =============================================================================
-# Targets
-# =============================================================================
+CPP_SRCS := $(wildcard src/*.cpp)
+CPP_OBJS := $(patsubst src/%.cpp,$(BUILD_DIR)/%.o,$(CPP_SRCS))
+MA_OBJ := $(BUILD_DIR)/miniaudio_impl.o
+RC_OBJ := $(BUILD_DIR)/app.res.o
+OBJS := $(CPP_OBJS) $(MA_OBJ) $(RC_OBJ)
+TEST_SRCS := $(wildcard tests/*.c)
+TEST_BINS := $(patsubst tests/%.c,$(BUILD_DIR)/test-%.exe,$(TEST_SRCS))
+CPP_TEST_SRCS := $(wildcard tests/*.cpp)
+TEST_BINS += $(patsubst tests/%.cpp,$(BUILD_DIR)/test-%.exe,$(CPP_TEST_SRCS))
+TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o)
+TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o)
+$(BUILD_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_player_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_player_window.exe: $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_ui_draw.exe: TEST_EXTRA_OBJS := $(BUILD_DIR)/ui_draw.o
+$(BUILD_DIR)/test-test_ui_draw.exe: $(BUILD_DIR)/ui_draw.o
 
 all: $(TARGET)
 
-$(TARGET): $(OBJS)
-	@mkdir -p $(BUILD_DIR)
-	$(CXX) $(LDFLAGS) -o $@ $(OBJS)
+$(TARGET): $(OBJS) Makefile
+	$(CXX) $(LDFLAGS) -mwindows -municode -o $@ $(OBJS) $(LDLIBS)
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.cpp
-	@mkdir -p $(dir $@)
-	$(CXX) $(CXXFLAGS) -c -o $@ $<
+$(BUILD_DIR)/%.o: src/%.cpp Makefile
+	@mkdir -p $(@D)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(DEPFLAGS) -c -o $@ $<
 
-# miniaudio_impl compilado como C puro (sem libstdc++/UCRT)
-$(MA_OBJ): $(MA_SRC)
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(BUILD_DIR)/%.o: src/%.c Makefile
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
 
-$(BUILD_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c -o $@ $<
+$(RC_OBJ): res/app.rc res/app.manifest res/icon.ico Makefile
+	@mkdir -p $(@D)
+	$(WINDRES) -Ires -i $< -o $@
 
-$(BUILD_DIR)/%.res.o: $(RES_DIR)/%.rc
-	@mkdir -p $(dir $@)
-	$(WINDRES) -i $< -o $@
+$(BUILD_DIR)/test-%.exe: tests/%.c $(BUILD_DIR)/util.o Makefile
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(BUILD_DIR)/util.o $(LDLIBS)
 
-# Clean
-clean:
-	rm -rf $(BUILD_DIR)
+# O smoke test usa a implementacao real e a mesma configuracao do aplicativo.
+$(BUILD_DIR)/test-build_third_party_smoke.exe: tests/build_third_party_smoke.c $(MA_OBJ) Makefile
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(MA_OBJ) $(LDLIBS)
 
-# Tests
+# Audio offline usa a mesma unidade de producao, com acesso de teste ao engine.
+$(BUILD_DIR)/audio-test.o: src/audio.cpp Makefile
+	@mkdir -p $(@D)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -c -o $@ $<
+
+$(BUILD_DIR)/test-%.exe: tests/%.cpp $(TEST_LOGIC_OBJS) Makefile
+	@mkdir -p $(@D)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_EXTRA_OBJS) $(LDLIBS)
+
 test: $(TEST_BINS)
-	@echo "Running tests..."
-	@for t in $(TEST_BINS); do \
-		echo "==> $$t"; \
-		$$t && echo "    OK" || (echo "    FAILED" && exit 1); \
-	done
+	@set -e; for t in $(TEST_BINS); do echo "==> $$t"; "$$t"; done
 	@echo "All tests passed."
 
-$(BUILD_DIR)/test-%: $(TEST_DIR)/%.c $(BUILD_DIR)/util.o
-	@mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -o $@ $< $(BUILD_DIR)/util.o
+run: $(TARGET)
+	./$(TARGET)
 
-.PHONY: all clean test
+clean:
+	rm -rf -- ./build/$(ARCH)/$(CONFIG)
+
+-include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(BUILD_DIR)/audio-test.d $(TEST_BINS:.exe=.d)
+.PHONY: all test run clean

@@ -8,7 +8,7 @@
  * M3-T3: sample rate, canais, bitrate.
  * M3-T4: seek.
  * M3-T5: volume, pan (balanço).
- * M3-T6: navegação prev/next — interface mínima provisória (lista de 1 item).
+ * M5: navigation is implemented by PlaybackController.
  * M4-T1: visualização — nó tap no grafo do engine + ring buffer.
  */
 
@@ -30,10 +30,13 @@ static struct AudioEngine
     ma_engine  engine;     /* Engine (device + resampler + mixing) */
     ma_sound   sound;      /* Sound carregado                      */
     BOOL       active;     /* TRUE se engine inicializada          */
+    BOOL       soundLoaded;
+    float      pan;
     AudioState state;      /* Estado atual da reprodução           */
     wchar_t    currentPath[MAX_PATH]; /* Caminho do arquivo atual    */
     __int64    fileSizeBytes;   /* Tamanho em bytes (para bitrate) */
     int        fileSampleRate;  /* Taxa nativa do arquivo carregado */
+    int        sourceSampleRate; /* Resource manager may resample to engine rate. */
 
     /* M4-T1: Ring buffer de visualização. */
     float        vizBuffer[VISUALIZATION_BUFFER_SIZE]; /* Buffer circular */
@@ -47,7 +50,7 @@ static struct AudioEngine
 /* Interface pública                                                    */
 /* ------------------------------------------------------------------ */
 
-BOOL Audio_Init(void)
+static BOOL InitEngine(const ma_engine_config* config)
 {
     ma_result result;
 
@@ -57,7 +60,7 @@ BOOL Audio_Init(void)
     /* Inicializar engine com configurações padrão — usa o dispositivo de
      * saída padrão do SO (WASAPI no Windows 7+, fallback automático para
      * DirectSound/WinMM se WASAPI não estiver disponível). */
-    result = ma_engine_init(NULL, &g_audio.engine);
+    result = ma_engine_init(config, &g_audio.engine);
     if (result != MA_SUCCESS)
     {
         /* Log de erro — não crashar, apenas retornar FALSE. */
@@ -72,6 +75,28 @@ BOOL Audio_Init(void)
 
     return TRUE;
 }
+
+BOOL Audio_Init(void) { return InitEngine(nullptr); }
+#ifdef LITESIC_TEST
+BOOL Audio_TestInit(unsigned rate) {
+    ma_engine_config config = ma_engine_config_init();
+    config.noDevice = MA_TRUE;
+    config.channels = 2;
+    config.sampleRate = rate;
+    return InitEngine(&config);
+}
+BOOL Audio_TestRead(float* frames, unsigned count) {
+    return ma_engine_read_pcm_frames(&g_audio.engine, frames, count, nullptr) == MA_SUCCESS;
+}
+unsigned long long Audio_TestCursor(void) {
+    ma_uint64 cursor = 0;
+    if (g_audio.soundLoaded) ma_sound_get_cursor_in_pcm_frames(&g_audio.sound, &cursor);
+    return cursor;
+}
+void Audio_TestVizLock(BOOL lock) {
+    if (lock) EnterCriticalSection(&g_audio.vizLock); else LeaveCriticalSection(&g_audio.vizLock);
+}
+#endif
 
 /* ------------------------------------------------------------------ */
 /* Visualização — M4-T1                                                 */
@@ -93,7 +118,8 @@ static BOOL       g_vizTapActive = FALSE;
 /* Escreve amostras mono no ring buffer (seção crítica curta: só cópia). */
 static void Audio_VizWriteBlock(const float* samples, int frameCount)
 {
-    EnterCriticalSection(&g_audio.vizLock);
+    /* Visualization is expendable; never wait for a UI reader in the callback. */
+    if (!TryEnterCriticalSection(&g_audio.vizLock)) return;
 
     for (int i = 0; i < frameCount; i++)
     {
@@ -230,7 +256,9 @@ void Audio_Shutdown(void)
         return;
 
     /* Parar e liberar o sound antes de desligar a engine. */
-    ma_sound_uninit(&g_audio.sound);
+    if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
+    g_audio.soundLoaded = FALSE;
+    g_audio.currentPath[0] = 0;
 
     /* Encerrar visualização. */
     Audio_VizShutdown();
@@ -245,6 +273,15 @@ BOOL Audio_IsActive(void)
     return g_audio.active;
 }
 
+void Audio_Unload(void) {
+    if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
+    g_audio.soundLoaded = FALSE;
+    g_audio.currentPath[0] = 0;
+    g_audio.fileSampleRate = 0;
+    g_audio.fileSizeBytes = 0;
+    g_audio.state = AUDIO_STATE_STOPPED;
+}
+
 /* ------------------------------------------------------------------ */
 /* Carregar arquivo (M2-T2)                                             */
 /* ------------------------------------------------------------------ */
@@ -257,7 +294,8 @@ BOOL Audio_Load(const wchar_t* path)
         return FALSE;
 
     /* Parar e liberar o sound anterior se houver. */
-    ma_sound_uninit(&g_audio.sound);
+    if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
+    g_audio.soundLoaded = FALSE;
 
     /* Inicializar sound a partir do arquivo — miniaudio decodifica MP3/WAV/
      * FLAC nativamente. OGG/Vorbis é habilitado pelo stb_vorbis incluído
@@ -273,17 +311,18 @@ BOOL Audio_Load(const wchar_t* path)
         return FALSE;
     }
 
-    /* Taxa nativa do arquivo (o sound é reamostrado para a taxa da engine). */
+    g_audio.soundLoaded = TRUE;
+    ma_sound_set_pan(&g_audio.sound, g_audio.pan);
+    /* Sound frames use the resource manager output rate, not necessarily the file rate. */
     g_audio.fileSampleRate = 0;
-    {
-        ma_decoder probe;
-        if (ma_decoder_init_file_w(path, NULL, &probe) == MA_SUCCESS)
-        {
-            ma_uint32 nativeRate = 0;
-            if (ma_decoder_get_data_format(&probe, NULL, NULL, &nativeRate, NULL, 0) == MA_SUCCESS)
-                g_audio.fileSampleRate = (int)nativeRate;
-            ma_decoder_uninit(&probe);
-        }
+    ma_uint32 nativeRate = 0;
+    if (ma_sound_get_data_format(&g_audio.sound, nullptr, nullptr, &nativeRate, nullptr, 0) == MA_SUCCESS)
+        g_audio.sourceSampleRate = static_cast<int>(nativeRate);
+    ma_decoder probe;
+    if (ma_decoder_init_file_w(path, nullptr, &probe) == MA_SUCCESS) {
+        if (ma_decoder_get_data_format(&probe, nullptr, nullptr, &nativeRate, nullptr, 0) == MA_SUCCESS)
+            g_audio.fileSampleRate = static_cast<int>(nativeRate);
+        ma_decoder_uninit(&probe);
     }
 
     /* Rotear a saída do sound pelo nó de visualização. */
@@ -316,7 +355,7 @@ BOOL Audio_Load(const wchar_t* path)
 
 double Audio_GetDurationSeconds(void)
 {
-    if (!g_audio.active)
+    if (!g_audio.soundLoaded || g_audio.sourceSampleRate <= 0)
         return 0.0;
 
     /* Obter duração em frames e converter para segundos. */
@@ -325,7 +364,7 @@ double Audio_GetDurationSeconds(void)
     if (frameCount == 0)
         return 0.0;
 
-    double duration = (double)frameCount / (double)ma_engine_get_sample_rate(&g_audio.engine);
+    double duration = (double)frameCount / g_audio.sourceSampleRate;
     return duration;
 }
 
@@ -335,16 +374,15 @@ double Audio_GetDurationSeconds(void)
 
 void Audio_Play(void)
 {
-    if (!g_audio.active || g_audio.state == AUDIO_STATE_PLAYING)
+    if (!g_audio.soundLoaded || g_audio.state == AUDIO_STATE_PLAYING)
         return;
 
-    ma_sound_start(&g_audio.sound);
-    g_audio.state = AUDIO_STATE_PLAYING;
+    if (ma_sound_start(&g_audio.sound) == MA_SUCCESS) g_audio.state = AUDIO_STATE_PLAYING;
 }
 
 void Audio_Pause(void)
 {
-    if (!g_audio.active || g_audio.state != AUDIO_STATE_PLAYING)
+    if (!g_audio.soundLoaded || g_audio.state != AUDIO_STATE_PLAYING)
         return;
 
     ma_sound_stop(&g_audio.sound);
@@ -355,7 +393,8 @@ void Audio_Pause(void)
 
 void Audio_Stop(void)
 {
-    if (!g_audio.active)
+    g_audio.state = AUDIO_STATE_STOPPED;
+    if (!g_audio.soundLoaded)
         return;
 
     ma_sound_stop(&g_audio.sound);
@@ -368,14 +407,18 @@ AudioState Audio_GetState(void)
     return g_audio.state;
 }
 
+BOOL Audio_IsAtEnd(void) {
+    return g_audio.soundLoaded && ma_sound_at_end(&g_audio.sound);
+}
+
 double Audio_GetPositionSeconds(void)
 {
-    if (!g_audio.active)
+    if (!g_audio.soundLoaded || g_audio.sourceSampleRate <= 0)
         return 0.0;
 
     ma_uint64 frameCount = 0;
     ma_sound_get_cursor_in_pcm_frames(&g_audio.sound, &frameCount);
-    double position = (double)frameCount / (double)ma_engine_get_sample_rate(&g_audio.engine);
+    double position = (double)frameCount / g_audio.sourceSampleRate;
     return position;
 }
 
@@ -393,7 +436,7 @@ int Audio_GetSampleRate(void)
 
 BOOL Audio_HasTrack(void)
 {
-    return g_audio.active && g_audio.currentPath[0] != L'\0';
+    return g_audio.soundLoaded;
 }
 
 int Audio_GetFileSampleRate(void)
@@ -423,7 +466,7 @@ void Audio_GetTrackName(wchar_t* out, int outLen)
 
 int Audio_GetChannels(void)
 {
-    if (!g_audio.active)
+    if (!g_audio.soundLoaded)
         return 0;
 
     /* Obter o número de canais do sound via data source format. */
@@ -455,7 +498,7 @@ int Audio_GetBitrateKbps(void)
 
 void Audio_SeekSeconds(double seconds)
 {
-    if (!g_audio.active)
+    if (!g_audio.soundLoaded)
         return;
 
     /* Limitar aos limites do arquivo. */
@@ -467,7 +510,7 @@ void Audio_SeekSeconds(double seconds)
     if (seconds > dur) seconds = dur;
 
     /* Converter segundos para frames PCM. */
-    int sampleRate = Audio_GetSampleRate();
+    int sampleRate = g_audio.sourceSampleRate;
     if (sampleRate <= 0)
         return;
 
@@ -500,39 +543,6 @@ void Audio_SetPan(float pan)
     if (pan < -1.0f) pan = -1.0f;
     if (pan > 1.0f)  pan =  1.0f;
 
-    ma_sound_set_pan(&g_audio.sound, pan);
-}
-
-/* ------------------------------------------------------------------ */
-/* Navegação — M3-T6 (interface mínima provisória)                      */
-/* Lista de 1 item: Next/Previous não saem dos limites.                 */
-/* Será substituída pela implementação real no M5.                      */
-/* ------------------------------------------------------------------ */
-
-void Audio_Next(BOOL shuffle, BOOL repeat)
-{
-    (void)shuffle; /* Usado quando playlist real for implementada no M5. */
-    (void)repeat;  /* Usado quando playlist real for implementada no M5. */
-
-    /* Provisório: se há um arquivo carregado, reiniciar do início.
-     * No M5, isso usará a playlist real. */
-    if (g_audio.active && g_audio.currentPath[0] != L'\0')
-    {
-        Audio_Stop();
-        Audio_Play();
-    }
-}
-
-void Audio_Previous(void)
-{
-    /* Provisório: se posição > 3s, reiniciar; senão, não fazer nada.
-     * No M5, isso voltará para a faixa anterior da playlist. */
-    if (g_audio.active && g_audio.state == AUDIO_STATE_PLAYING)
-    {
-        double pos = Audio_GetPositionSeconds();
-        if (pos > 3.0)
-        {
-            Audio_SeekSeconds(0.0);
-        }
-    }
+    g_audio.pan = pan;
+    if (g_audio.soundLoaded) ma_sound_set_pan(&g_audio.sound, pan);
 }

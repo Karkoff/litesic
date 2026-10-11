@@ -1,0 +1,54 @@
+{
+  "player.png": {
+    "source_label": "m5-delivery-main-playing",
+    "utc": "2026-10-11T04:07:54.224717+00:00",
+    "image": "build/gui/m5-delivery-main-playing.png",
+    "sha256": "952f239356b459ef23dc3f161a413b517a4ec6e783d9602b44b0a54735b18bdd",
+    "rect": [
+      1713,
+      945,
+      2126,
+      1215
+    ],
+    "process": {
+      "pid": 54652,
+      "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+      "created": "2026-10-11T04:03:59.782000+00:00",
+      "sha256": "e37af1ca997bfc956c7f71f57bfd4ef7bc89831e0d91a3e77aa569ca0e61a419"
+    },
+    "note": ""
+  },
+  "playlist.png": {
+    "source_label": "m5-delivery-playing",
+    "utc": "2026-10-11T04:07:53.335804+00:00",
+    "image": "build/gui/m5-delivery-playing.png",
+    "sha256": "642cbc1f541f20f56f5a12f3dfef919dce7a71f1e26d980da51d8577528f6913",
+    "rect": [
+      1713,
+      1221,
+      2193,
+      1671
+    ],
+    "process": {
+      "pid": 54652,
+      "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+      "created": "2026-10-11T04:03:59.782000+00:00",
+      "sha256": "e37af1ca997bfc956c7f71f57bfd4ef7bc89831e0d91a3e77aa569ca0e61a419"
+    },
+    "note": ""
+  },
+  "large-folder.png": {
+    "source_label": "m5-large-progress",
+    "utc": "2026-10-11T03:41:23.965625+00:00",
+    "image": "build/gui/m5-large-progress.png",
+    "sha256": "d36ed1b894f50d5625c126e7fac33c745281d6f8b0b21f70295957859c79ca3a",
+    "rect": [
+      1713,
+      1221,
+      2193,
+      1671
+    ],
+    "process": null,
+    "note": "Historical iteration without per-capture binary identity."
+  }
+}

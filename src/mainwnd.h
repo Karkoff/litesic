@@ -11,23 +11,20 @@
 
 #include <windows.h>
 
-/* Tamanho fixo da janela na escala 1x (Winamp clássico).
- * Expandido de 116 para acomodar todos os controles do player (M3).
- * Altura reduzida de 200 para 140 depois de unificar Abrir/Play/Pause/Stop
- * em uma única linha (antes ocupavam 3 linhas empilhadas).
- * Expandido para 180 para acomodar o visualizador M4 (32px + margem). */
-#define MAINWND_WIDTH   275
-#define MAINWND_HEIGHT  180
+/* Tamanho fixo em DIP: transporte e modos em uma linha,
+ * visualizador ampliado e atalhos de lista/EQ no rodapé técnico. */
+#define MAINWND_WIDTH 460
+#define MAINWND_HEIGHT 290
 
 /* Altura da barra de título (área sensível para arrastar e botões). */
-#define TITLEBAR_HEIGHT 24
+#define TITLEBAR_HEIGHT 32
 
 /* Tamanho dos botões na barra de título. */
-#define BTN_SIZE        16
+#define BTN_SIZE 28
 
 /* Posição X dos botões (alinhados à direita, com margem). */
-#define BTN_CLOSE_X     (MAINWND_WIDTH - BTN_SIZE - 2)
-#define BTN_MINIMIZE_X  (BTN_CLOSE_X - BTN_SIZE - 2)
+#define BTN_CLOSE_X (MAINWND_WIDTH - 32)
+#define BTN_MINIMIZE_X (MAINWND_WIDTH - 64)
 
 /* Estado dos botões da barra de título. */
 typedef enum
@@ -56,96 +53,90 @@ typedef enum
 /* Display LCD de tempo — M3-T1                                         */
 /* Dimensões fixas: 80x26 px, canto superior esquerdo abaixo da titlebar. */
 /* ------------------------------------------------------------------ */
-#define LCD_X           4
-#define LCD_Y           (TITLEBAR_HEIGHT + 2)
-#define LCD_W           80
-#define LCD_H           26
+#define LCD_X 12
+#define LCD_Y 42
+#define LCD_W 108
+#define LCD_H 42
 
 /* ------------------------------------------------------------------ */
 /* Título rolando — M3-T2                                               */
 /* Fica à direita do LCD, mesma altura.                                 */
 /* ------------------------------------------------------------------ */
-#define TITLE_X         (LCD_X + LCD_W + 4)
+#define TITLE_X 130
 #define TITLE_Y         LCD_Y
-#define TITLE_W         (MAINWND_WIDTH - TITLE_X - 4)
+#define TITLE_W 318
 #define TITLE_H          LCD_H
 
 /* ------------------------------------------------------------------ */
 /* Barra de busca (seek) — M3-T4                                        */
 /* Abaixo do LCD/título.                                                */
 /* ------------------------------------------------------------------ */
-#define SEEK_Y          (LCD_Y + LCD_H + 2)
-#define SEEK_H          16
-#define SEEK_X          4
-#define SEEK_W          (MAINWND_WIDTH - 8)
+#define SEEK_Y 92
+#define SEEK_H 20
+#define SEEK_X 48
+#define SEEK_W 360
 
 /* ------------------------------------------------------------------ */
 /* Volume e balanço — M3-T5                                             */
 /* Dois sliders horizontais lado a lado, abaixo do seek.                */
 /* ------------------------------------------------------------------ */
-#define VOLPAN_Y        (SEEK_Y + SEEK_H + 2)
-#define VOLPAN_H        16
+#define VOLPAN_Y 164
+#define VOLPAN_H 24
 
-#define VOLUME_SLIDER_X 4
-#define VOLUME_SLIDER_W 80
+#define VOLUME_SLIDER_X 64
+#define VOLUME_SLIDER_W 132
 
-#define PAN_SLIDER_X    (VOLUME_SLIDER_X + VOLUME_SLIDER_W + 10)
-#define PAN_SLIDER_W    80
+#define PAN_SLIDER_X 318
+#define PAN_SLIDER_W 120
 
 /* ------------------------------------------------------------------ */
 /* Botões de navegação — M3-T6                                          */
-/* Prev/Next na linha inferior.                                         */
+/* Anterior, Play, Pause, Stop, Próximo em uma única linha.              */
 /* ------------------------------------------------------------------ */
-#define NAV_Y           (VOLPAN_Y + VOLPAN_H + 4)
-#define NAV_BTN_W       28
-#define NAV_BTN_H       18
-#define NAV_GAP         4
+#define NAV_Y 120
+#define NAV_BTN_W 48
+#define NAV_BTN_H 36
+#define NAV_GAP 12
 
-#define BTN_PREV_X      4
-#define BTN_NEXT_X      (BTN_PREV_X + NAV_BTN_W + NAV_GAP)
+#define BTN_PREV_X 86
+#define BTN_PLAY_X      (BTN_PREV_X + NAV_BTN_W + NAV_GAP)
+#define BTN_PAUSE_X     (BTN_PLAY_X + NAV_BTN_W + NAV_GAP)
+#define BTN_STOP_X      (BTN_PAUSE_X + NAV_BTN_W + NAV_GAP)
+#define BTN_NEXT_X      (BTN_STOP_X + NAV_BTN_W + NAV_GAP)
 
 /* ------------------------------------------------------------------ */
 /* Botões toggle aleatório/repetir — M3-T6                              */
-/* Ao lado dos botões de navegação.                                     */
+/* Nas extremidades da linha de transporte.                            */
 /* ------------------------------------------------------------------ */
-#define TOGGLE_Y        NAV_Y
-#define TOGGLE_W        40
-#define TOGGLE_H        NAV_BTN_H
-#define TOGGLE_GAP      4
+#define TOGGLE_Y NAV_Y
+#define TOGGLE_W 48
+#define TOGGLE_H NAV_BTN_H
+#define TOGGLE_GAP 8
 
-#define BTN_SHUFFLE_X   (BTN_NEXT_X + NAV_BTN_W + NAV_GAP)
-#define BTN_REPEAT_X    (BTN_SHUFFLE_X + TOGGLE_W + TOGGLE_GAP)
+#define BTN_LIST_X 336
+#define BTN_EQ_X 396
+#define FOOTER_BUTTON_Y 268
+#define FOOTER_BUTTON_W 52
+#define FOOTER_BUTTON_H 18
+#define BTN_SHUFFLE_X 12
+#define BTN_REPEAT_X 400
 
 /* ------------------------------------------------------------------ */
-/* Botões de controle "Abrir/Play/Pause/Stop" — M2-T4                   */
-/* Uma única linha na parte inferior: Abrir à esquerda (compacto),      */
-/* Play/Pause/Stop lado a lado à direita.                               */
-#define BOTTOM_CONTROLS_Y   (NAV_Y + NAV_BTN_H + 6)
-
-#define CTRL_BTN_W      30
-#define CTRL_BTN_H      16
-#define CTRL_GAP        4
-
-#define BTN_STOP_X      (MAINWND_WIDTH - CTRL_BTN_W - 4)
-#define BTN_PAUSE_X     (BTN_STOP_X - CTRL_BTN_W - CTRL_GAP)
-#define BTN_PLAY_X      (BTN_PAUSE_X - CTRL_BTN_W - CTRL_GAP)
-
-#define BTN_OPEN_X      4
-#define BTN_OPEN_Y      BOTTOM_CONTROLS_Y
-#define BTN_OPEN_W      (BTN_PLAY_X - CTRL_GAP - BTN_OPEN_X)
-
-#define BTN_PLAY_Y      BOTTOM_CONTROLS_Y
-#define BTN_PAUSE_Y     BOTTOM_CONTROLS_Y
-#define BTN_STOP_Y      BOTTOM_CONTROLS_Y
+/* Controles de transporte compartilham tamanho e alinhamento.          */
+#define CTRL_BTN_W      NAV_BTN_W
+#define CTRL_BTN_H      NAV_BTN_H
+#define BTN_PLAY_Y      NAV_Y
+#define BTN_PAUSE_Y     NAV_Y
+#define BTN_STOP_Y      NAV_Y
 
 /* ------------------------------------------------------------------ */
 /* Visualizador — M4                                                   */
 /* Área abaixo dos controles inferiores para osciloscópio/espectro.    */
 /* ------------------------------------------------------------------ */
-#define VIZ_X           4
-#define VIZ_Y           (BOTTOM_CONTROLS_Y + 20)
-#define VIZ_W           (MAINWND_WIDTH - 8)
-#define VIZ_H           32
+#define VIZ_X 12
+#define VIZ_Y 196
+#define VIZ_W 436
+#define VIZ_H 68
 
 /* ------------------------------------------------------------------ */
 /* Timer IDs                                                           */
@@ -168,6 +159,7 @@ int MainWnd_DPIScale(int px);
 
 /* Escala um valor float pelo DPI atual. */
 float MainWnd_DPIScaleFloat(float f);
+float MainWnd_UserScaleMultiplier();
 
 /* ------------------------------------------------------------------ */
 /* Slider dragging state                                               */

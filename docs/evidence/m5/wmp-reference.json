@@ -1,0 +1,34 @@
+{
+  "player": "Windows Media Player COM",
+  "count": 7,
+  "items": [
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\Alpha.wav",
+      "exists": true
+    },
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\Beta.wav",
+      "exists": true
+    },
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\Gamma.wav",
+      "exists": true
+    },
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\invalid.wav",
+      "exists": true
+    },
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\tagged.flac",
+      "exists": true
+    },
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\tagged.mp3",
+      "exists": true
+    },
+    {
+      "url": "D:\\Projetos\\IA\\litesic\\build\\gui\\m5-fixtures\\tagged.ogg",
+      "exists": true
+    }
+  ]
+}

@@ -1,22 +1,37 @@
 {
-    "configurations": [
-        {
-            "name": "MinGW-W64",
-            "includePath": [
-                "${workspaceFolder}/**",
-                "${workspaceFolder}/src/**",
-                "${workspaceFolder}/third_party/**"
-            ],
-            "defines": [
-                "_WIN32_WINNT=0x0601",
-                "UNICODE",
-                "_UNICODE"
-            ],
-            "compilerPath": "C:/msys64/mingw64/bin/g++.exe",
-            "cStandard": "c17",
-            "cppStandard": "c++17",
-            "intelliSenseMode": "windows-gcc-x64"
-        }
-    ],
-    "version": 4
+  "configurations": [
+    {
+      "name": "MinGW 64 bits",
+      "includePath": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/third_party"
+      ],
+      "defines": [
+        "_WIN32_WINNT=0x0601",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compilerPath": "${workspaceFolder}/.tools/msys64/mingw64/bin/g++.exe",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "windows-gcc-x64"
+    },
+    {
+      "name": "MinGW 32 bits",
+      "includePath": [
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/third_party"
+      ],
+      "defines": [
+        "_WIN32_WINNT=0x0601",
+        "UNICODE",
+        "_UNICODE"
+      ],
+      "compilerPath": "${workspaceFolder}/.tools/msys64/mingw32/bin/g++.exe",
+      "cStandard": "c17",
+      "cppStandard": "c++17",
+      "intelliSenseMode": "windows-gcc-x86"
+    }
+  ],
+  "version": 4
 }

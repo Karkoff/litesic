@@ -9,6 +9,7 @@
 #include <windows.h>
 
 #include "mainwnd.h"
+#include "plwnd.h"
 
 /* DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 requer Windows 10 1703+.
  * Verificar existência da função antes de chamar (fallback para o manifest). */
@@ -40,10 +41,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
 {
     /* Configurar Per-Monitor DPI Awareness V2 antes de criar janelas. */
     InitDpiAwareness();
+    HRESULT com = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
 
     /* Registrar a classe da janela (uma vez). */
     if (!MainWnd_RegisterClass(hInstance))
     {
+        if (SUCCEEDED(com)) CoUninitialize();
         return 1;
     }
 
@@ -51,6 +54,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
     HWND hwnd = MainWnd_Create(hInstance, nCmdShow);
     if (hwnd == NULL)
     {
+        if (SUCCEEDED(com)) CoUninitialize();
+        return 1;
+    }
+    if (!PlWnd_Create(hInstance, hwnd)) {
+        DestroyWindow(hwnd);
+        if (SUCCEEDED(com)) CoUninitialize();
         return 1;
     }
 
@@ -62,5 +71,6 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
         DispatchMessageW(&msg);
     }
 
+    if (SUCCEEDED(com)) CoUninitialize();
     return (int)msg.wParam;
 }

@@ -13,9 +13,11 @@
 /* DirectSound/WinMM se indisponível). Windows 7 tem WASAPI nativo.     */
 /* ------------------------------------------------------------------ */
 
-/* Habilitar apenas WASAPI — remove Alsa/PulseAudio/JACK/Core Audio/etc. */
+/* Backends Windows: WASAPI preferido, com fallback DirectSound/WinMM. */
 #define MA_ENABLE_ONLY_SPECIFIC_BACKENDS
 #define MA_ENABLE_WASAPI
+#define MA_ENABLE_DSOUND
+#define MA_ENABLE_WINMM
 
 /* ------------------------------------------------------------------ */
 /* Decoders — habilitar apenas os formatos que o LiteSic suporta.       */
@@ -24,9 +26,8 @@
 /* MINIAUDIO_IMPLEMENTATION em miniaudio_impl.c.                        */
 /* ------------------------------------------------------------------ */
 
-#define MA_NO_WAV       /* NÃO desligar — necessário para WAV */
-#define MA_NO_MP3       /* NÃO desligar — necessário para MP3 */
-#define MA_NO_FLAC      /* NÃO desligar — necessário para FLAC */
+/* MA_NO_WAV/MA_NO_MP3/MA_NO_FLAC devem permanecer indefinidas:
+ * essas macros desabilitam os decoders, inclusive com valor 0. */
 
 /* Desligar o que NÃO vamos usar. */
 #define MA_NO_ENCODING              /* Não gravamos áudio */
@@ -38,6 +39,6 @@
 /* Outros                                                             */
 /* ------------------------------------------------------------------ */
 
-#define MA_DEBUG_OUTPUT   0   /* Desligar logs verbosos em release */
+/* MA_DEBUG_OUTPUT é testada com #ifdef; deixá-la indefinida evita logs. */
 
 #endif /* MA_CONFIG_H */

@@ -7,6 +7,7 @@
 
 #include "visualizer.h"
 #include "audio.h"
+#include "ui_draw.h"
 #include <math.h>
 #include <string.h>
 
@@ -314,4 +315,45 @@ void DrawSpectrum(HDC hdc, int x, int y, int w, int h)
     DeleteObject(barBrush);
     SelectObject(hdc, oldPen);
     DeleteObject(borderPen);
+}
+
+// Direct2D presentation shares the production FFT/window/bin algorithms.
+// Sample acquisition and FFT run on the UI thread, never in the audio callback.
+void DrawVisualizerD2D(Ui::Canvas& c, Ui::Rect r, VizMode mode) {
+    c.Fill(r,Ui::Display,2); c.Stroke(r,Ui::Active,2);
+    c.Clip(r);
+    for(float x=r.x+8;x<r.x+r.w;x+=8) c.Line(x,r.y,x,r.y+r.h,Ui::Active);
+    float samples[FFT_SIZE]{};
+    int count=Audio_GetVisualizationSamples(samples,FFT_SIZE);
+    if(mode==VIZ_MODE_OSCILLOSCOPE) {
+        if(count<2) c.Line(r.x,r.y+r.h/2,r.x+r.w,r.y+r.h/2,Ui::Green);
+        else for(int i=1;i<count;++i)
+            c.Line(r.x+(i-1)*r.w/(count-1),r.y+MapSampleToY(samples[i-1],static_cast<int>(r.h-2))+1,
+                r.x+i*r.w/(count-1),r.y+MapSampleToY(samples[i],static_cast<int>(r.h-2))+1,Ui::Green);
+    } else {
+        static float smooth[SPECTRUM_BARS]{};
+        float levels[SPECTRUM_BARS]{};
+        if(count>=FFT_SIZE) {
+            ApplyHannWindow(samples,FFT_SIZE);
+            Complex data[FFT_SIZE]{};
+            for(int i=0;i<FFT_SIZE;++i) data[i].real=samples[i];
+            FFT(data,FFT_SIZE);
+            float magnitudes[FFT_SIZE/2]; FFTMagnitude(data,magnitudes,FFT_SIZE);
+            int start[SPECTRUM_BARS],end[SPECTRUM_BARS];
+            int rate=Audio_GetSampleRate(); if(rate<=0) rate=44100;
+            CalculateLogBins(start,end,SPECTRUM_BARS,FFT_SIZE,rate);
+            for(int i=0;i<SPECTRUM_BARS;++i) {
+                float peak=0;
+                for(int j=start[i];j<=end[i];++j) if(magnitudes[j]>peak) peak=magnitudes[j];
+                float value=(20*log10f(peak/(FFT_SIZE/4.f)+1e-9f)+60)/60;
+                levels[i]=value<0?0:value>1?1:value;
+            }
+        }
+        for(int i=0;i<SPECTRUM_BARS;++i) {
+            smooth[i]=fmaxf(levels[i],smooth[i]*.85f);
+            float height=fmaxf(1,smooth[i]*(r.h-2));
+            c.Fill({r.x+i*r.w/SPECTRUM_BARS+1,r.y+r.h-height-1,r.w/SPECTRUM_BARS-2,height},Ui::Green);
+        }
+    }
+    c.Unclip();
 }

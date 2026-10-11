@@ -9,6 +9,8 @@
  *   3. miniaudio.h         → backend Vorbis ativado pelas declarações acima
  */
 
+#include "ma_config.h"
+
 /* 1. Declarações do stb_vorbis — DEVE vir antes de miniaudio.h para ativar
  *    o decoder customizado de OGG Vorbis no miniaudio.               */
 #include "../third_party/stb_vorbis.h"

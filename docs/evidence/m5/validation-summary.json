@@ -1,0 +1,46 @@
+[
+  {
+    "arch": "64",
+    "configuration": "debug",
+    "cases": 68,
+    "existing_cases": 27,
+    "new_cases": 41,
+    "failed": 0,
+    "audio_scenarios": 4,
+    "bytes": 7151909,
+    "sha256": "e37af1ca997bfc956c7f71f57bfd4ef7bc89831e0d91a3e77aa569ca0e61a419"
+  },
+  {
+    "arch": "64",
+    "configuration": "release",
+    "cases": 68,
+    "existing_cases": 27,
+    "new_cases": 41,
+    "failed": 0,
+    "audio_scenarios": 4,
+    "bytes": 3697097,
+    "sha256": "ffb5df770d097a527f048e8f02ea1037e2b2206f41854fdc9824fe34fffafefd"
+  },
+  {
+    "arch": "32",
+    "configuration": "debug",
+    "cases": 68,
+    "existing_cases": 27,
+    "new_cases": 41,
+    "failed": 0,
+    "audio_scenarios": 4,
+    "bytes": 6428293,
+    "sha256": "381ce188ea026c647fc3e126d9f1dc0797233b06034b2301177861e3ab8f1f0e"
+  },
+  {
+    "arch": "32",
+    "configuration": "release",
+    "cases": 68,
+    "existing_cases": 27,
+    "new_cases": 41,
+    "failed": 0,
+    "audio_scenarios": 4,
+    "bytes": 3551254,
+    "sha256": "b9b69ddd1773800af4b5cb057d835fa437f7b91b7c2e708d37696392db94bff0"
+  }
+]

@@ -18,9 +18,17 @@
 #include "audio.h"
 #include "util.h"
 #include "visualizer.h"
+#include "playback.h"
+#include "plwnd.h"
+#include "ui_player.h"
+#include "eqwnd.h"
 
 #include <windows.h>
 #include <cmath>
+#include <algorithm>
+#include <commctrl.h>
+
+static void UpdateTooltipRects(HWND hwnd);
 
 /* DPI scale factor — inicializa em WM_CREATE. */
 static float g_dpiScale = 1.0f;
@@ -92,6 +100,7 @@ static float UserScaleMultiplier()
 {
     return (g_userScalePercent == 0) ? 1.0f : (float)g_userScalePercent / 100.0f;
 }
+float MainWnd_UserScaleMultiplier() { return UserScaleMultiplier(); }
 
 /* Recalcula g_dpiScale (DPI do monitor x escala do usuário) e redimensiona/
  * reposiciona a janela para o novo tamanho físico, mantendo-a centrada em
@@ -115,6 +124,7 @@ static void ApplyInterfaceScale(HWND hwnd)
 
     SetWindowPos(hwnd, NULL, x, y, scaledW, scaledH, SWP_NOZORDER | SWP_NOACTIVATE);
     InvalidateRect(hwnd, NULL, TRUE);
+    UpdateTooltipRects(hwnd);
 }
 
 /* ------------------------------------------------------------------ */
@@ -194,10 +204,39 @@ static float    g_panValue    = 0.5f; /* -1..1 (0.5 = centro, panReal = 0.0) */
 
 /* M3-T6: estado dos toggles. */
 static BOOL g_shuffleOn = FALSE;
-static BOOL g_repeatOn  = FALSE;
+static RepeatMode g_repeatMode = RepeatMode::Off;
 
-/* M3-T6: índice atual da playlist (provisório, lista de 1 item). */
-static int g_currentTrack = -1; /* -1 = nenhum arquivo carregado */
+static uint64_t g_displayTrack = 0;
+static Ui::Canvas g_canvas;
+static int g_controlHover=0, g_controlPressed=0, g_controlFocus=0;
+static HWND g_tooltip=nullptr;
+static std::wstring g_tooltipTitle;
+static bool g_playbackError=false;
+
+static void UpdateTooltipRects(HWND hwnd) {
+    if(!g_tooltip) return;
+    for(int id=1;id<=15;++id) {
+        auto r=id==15?Ui::Rect{TITLE_X,TITLE_Y,TITLE_W,TITLE_H}:PlayerControlRect(id);
+        TOOLINFOW tool{}; tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;
+        tool.rect={MainWnd_DPIScale(static_cast<int>(r.x)),MainWnd_DPIScale(static_cast<int>(r.y)),
+            MainWnd_DPIScale(static_cast<int>(r.x+r.w)),MainWnd_DPIScale(static_cast<int>(r.y+r.h))};
+        SendMessageW(g_tooltip,TTM_NEWTOOLRECTW,0,reinterpret_cast<LPARAM>(&tool));
+    }
+}
+static void CreatePlayerTooltips(HWND hwnd) {
+    INITCOMMONCONTROLSEX controls{sizeof(controls),ICC_WIN95_CLASSES}; InitCommonControlsEx(&controls);
+    g_tooltip=CreateWindowExW(WS_EX_TOPMOST,TOOLTIPS_CLASSW,nullptr,WS_POPUP|TTS_ALWAYSTIP|TTS_NOPREFIX,
+        CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,hwnd,nullptr,GetModuleHandleW(nullptr),nullptr);
+    const wchar_t* labels[]={L"",L"Anterior",L"Próximo",L"Aleatório",L"Repetir: desligado → lista → faixa",
+        L"Reproduzir",L"Pausar",L"Parar",L"Posição da faixa",L"Volume",L"Balanço: esquerda / direita",
+        L"Mostrar / ocultar playlist",L"Equalizador indisponível: DSP pendente na M6",L"Espectro FFT",L"Osciloscópio"};
+    for(int id=1;id<=15;++id) {
+        TOOLINFOW tool{};tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;tool.uFlags=TTF_SUBCLASS;
+        tool.lpszText=id==15?LPSTR_TEXTCALLBACKW:const_cast<wchar_t*>(labels[id]);
+        SendMessageW(g_tooltip,TTM_ADDTOOLW,0,reinterpret_cast<LPARAM>(&tool));
+    }
+    UpdateTooltipRects(hwnd);
+}
 
 /* M4: Estado do visualizador (declarado em visualizer.h). */
 static VizMode g_vizMode = VIZ_MODE_OSCILLOSCOPE;
@@ -598,7 +637,60 @@ static BOOL PtInNavBtn(int x, int y, int *pBtnId)
     r = { BTN_REPEAT_X, TOGGLE_Y, BTN_REPEAT_X + TOGGLE_W, TOGGLE_Y + TOGGLE_H };
     if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 4; return TRUE; }
 
+    r = { BTN_PLAY_X, NAV_Y, BTN_PLAY_X + CTRL_BTN_W, NAV_Y + CTRL_BTN_H };
+    if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 5; return TRUE; }
+    r = { BTN_PAUSE_X, NAV_Y, BTN_PAUSE_X + CTRL_BTN_W, NAV_Y + CTRL_BTN_H };
+    if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 6; return TRUE; }
+    r = { BTN_STOP_X, NAV_Y, BTN_STOP_X + CTRL_BTN_W, NAV_Y + CTRL_BTN_H };
+    if (PtInRect(&r, (POINT){ x, y })) { *pBtnId = 7; return TRUE; }
+
     return FALSE;
+}
+
+static void ExecutePlayerControl(HWND hwnd,int id) {
+    switch(id) {
+    case 1: PlayerPlayback().Previous(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(); break;
+    case 2: PlayerPlayback().Next(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(); break;
+    case 3: g_shuffleOn=!g_shuffleOn; break;
+    case 4: g_repeatMode=NextRepeatMode(g_repeatMode); break;
+    case 5: g_playbackError=!PlayerPlayback().Play(); PlWnd_Refresh(); break;
+    case 6: Audio_Pause(); break;
+    case 7: Audio_Stop(); g_seekValue=0; g_scrollElapsedMs=0; g_playbackError=false; break;
+    case 11: PlWnd_Toggle(); break;
+    case 12: EqWnd_Toggle(hwnd); break;
+    case 13: g_vizMode=VIZ_MODE_SPECTRUM; break;
+    case 14: g_vizMode=VIZ_MODE_OSCILLOSCOPE; break;
+    }
+}
+
+static PlayerViewState PlayerSnapshot() {
+    PlayerViewState s;
+    s.loaded=Audio_HasTrack(); s.playback=Audio_GetState();
+    s.shuffle=g_shuffleOn; s.repeat=g_repeatMode; s.visualization=g_vizMode;
+    s.seek=g_seekValue; s.volume=g_volumeValue; s.pan=g_panValue;
+    s.hover=g_controlHover; s.pressed=g_controlPressed; s.focus=g_controlFocus;
+    s.titleHover=g_hoverBtn; s.titlePressed=g_pressedBtn;
+    s.playlistVisible=PlWnd_IsVisible(); s.hasPlaylist=PlayerPlaylist().Count()>0;
+    wchar_t time[16]{},duration[16]{},name[MAX_PATH]{};
+    FormatTime(Audio_GetPositionSeconds(),g_showRemaining,Audio_GetDurationSeconds(),time,ARRAYSIZE(time));
+    FormatTime(Audio_GetDurationSeconds(),FALSE,Audio_GetDurationSeconds(),duration,ARRAYSIZE(duration));
+    s.time=time; s.duration=s.loaded?duration:L"--:--";
+    Audio_GetTrackName(name,ARRAYSIZE(name)); s.title=name;
+    if(const Track* track=PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex())) s.title=track->displayTitle;
+    if(!s.loaded) s.title=L"Sua música, por perto";
+    g_tooltipTitle=s.title;
+    s.subtitle=!s.loaded?L"Adicione arquivos pela playlist":s.playback==AUDIO_STATE_PLAYING?L"Reproduzindo":
+        s.playback==AUDIO_STATE_PAUSED?L"Pausado":L"Pronto para reproduzir";
+    if(g_playbackError) s.subtitle=L"Não foi possível reproduzir a faixa";
+    if(s.loaded) {
+        wchar_t info[96]{};
+        int rate=Audio_GetFileSampleRate(),bitrate=Audio_GetBitrateKbps(),channels=Audio_GetChannels();
+        swprintf(info,ARRAYSIZE(info),L"%.1f kHz   ·   %ls",rate/1000.0,
+            channels==2?L"Estéreo":channels==1?L"Mono":L"Multicanal");
+        s.technical=info;
+        if(bitrate>0) s.technical+=L"   ·   "+std::to_wstring(bitrate)+L" kbps";
+    } else s.technical=L"LiteSic   ·   Player de áudio nativo";
+    return s;
 }
 
 /* ------------------------------------------------------------------ */
@@ -653,6 +745,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * antes do primeiro ShowWindow — senão o conteúdo desenhado em
          * coordenadas escaladas fica cortado dentro de uma janela pequena. */
         ApplyInterfaceScale(hwnd);
+        CreatePlayerTooltips(hwnd);
 
         /* Garantir que o ícone aparece na taskbar e no Alt+Tab. */
         HICON hIcon = LoadIconW(
@@ -667,6 +760,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         /* Inicializar motor de áudio. */
         Audio_Init();
+        Audio_SetVolume(g_volumeValue);
 
         /* M4-T1: Inicializar ring buffer de visualização. */
         Audio_VizInit();
@@ -675,33 +769,83 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         SetTimer(hwnd, POSITION_TIMER_ID, 250, NULL);
 
         /* Timer para scroll do título (30ms — ~33fps suave). */
-        SetTimer(hwnd, SCROLL_TIMER_ID, 30, NULL);
+        // DirectWrite ellipsis + tooltip replace continuous idle marquee repaint.
 
         /* Timer do visualizador (~60fps). */
-        SetTimer(hwnd, VIZ_TIMER_ID, 16, NULL);
+        SetTimer(hwnd, VIZ_TIMER_ID, 33, NULL);
 
         break;
     }
+
+    case WM_WINDOWPOSCHANGED:
+        PlWnd_MainMoved();
+        return DefWindowProcW(hwnd, msg, wParam, lParam); // Also delivers WM_SIZE/WM_MOVE.
+
+    case WM_ERASEBKGND: return 1;
+    case WM_DPICHANGED: {
+        g_dpiScale=LOWORD(wParam)/96.f*UserScaleMultiplier();
+        auto r=reinterpret_cast<RECT*>(lParam);
+        SetWindowPos(hwnd,nullptr,r->left,r->top,MainWnd_DPIScale(MAINWND_WIDTH),MainWnd_DPIScale(MAINWND_HEIGHT),SWP_NOZORDER|SWP_NOACTIVATE);
+        PlWnd_ScaleChanged(); EqWnd_ScaleChanged(); UpdateTooltipRects(hwnd); InvalidateRect(hwnd,nullptr,FALSE); return 0;
+    }
+    case WM_NOTIFY: {
+        auto header=reinterpret_cast<NMHDR*>(lParam);
+        if(header->hwndFrom==g_tooltip && header->code==TTN_GETDISPINFOW) {
+            auto info=reinterpret_cast<NMTTDISPINFOW*>(lParam);
+            info->lpszText=const_cast<wchar_t*>(g_tooltipTitle.c_str()); return 0;
+        }
+        break;
+    }
+    case WM_KEYDOWN: {
+        const int order[]={1,5,6,7,2,8,9,10,3,4,11,12,13,14};
+        if(wParam==VK_TAB) {
+            int next=0;
+            for(int i=0;i<14;++i) if(order[i]==g_controlFocus) next=(i+((GetKeyState(VK_SHIFT)&0x8000)?13:1))%14;
+            g_controlFocus=order[next]; InvalidateRect(hwnd,nullptr,FALSE); return 0;
+        }
+        if(wParam==VK_SPACE || wParam==VK_RETURN) {
+            ExecutePlayerControl(hwnd,g_controlFocus?g_controlFocus:Audio_GetState()==AUDIO_STATE_PLAYING?6:5);
+            InvalidateRect(hwnd,nullptr,FALSE); return 0;
+        }
+        if(g_controlFocus>=8 && g_controlFocus<=10 && (wParam==VK_LEFT || wParam==VK_RIGHT || wParam==VK_HOME || wParam==VK_END)) {
+            if(g_controlFocus==8 && !Audio_HasTrack()) return 0;
+            float& value=g_controlFocus==8?g_seekValue:g_controlFocus==9?g_volumeValue:g_panValue;
+            value=wParam==VK_HOME?0:wParam==VK_END?1:std::clamp(value+(wParam==VK_LEFT?-.02f:.02f),0.f,1.f);
+            if(g_controlFocus==8 && Audio_HasTrack()) Audio_SeekSeconds(value*Audio_GetDurationSeconds());
+            if(g_controlFocus==9) Audio_SetVolume(value);
+            if(g_controlFocus==10) Audio_SetPan(value*2-1);
+            InvalidateRect(hwnd,nullptr,FALSE); return 0;
+        }
+        break;
+    }
+    case WM_KILLFOCUS: g_controlFocus=0; InvalidateRect(hwnd,nullptr,FALSE); break;
+    case WM_CAPTURECHANGED: g_controlPressed=0; g_pressedBtn=BTN_NONE; g_draggingSlider=SLIDER_NONE; InvalidateRect(hwnd,nullptr,FALSE); break;
+    case WM_MOUSELEAVE: g_controlHover=0; g_hoverBtn=BTN_NONE; InvalidateRect(hwnd,nullptr,FALSE); break;
 
     case WM_TIMER:
     {
         if (wParam == POSITION_TIMER_ID)
         {
-            /* Se estiver tocando, sincronizar seek bar com posição real e
-             * invalidar para redraw. */
-            if (Audio_GetState() == AUDIO_STATE_PLAYING)
-            {
-                double dur = Audio_GetDurationSeconds();
-                if (dur > 0.0)
-                {
-                    g_seekValue = (float)(Audio_GetPositionSeconds() / dur);
-                }
-                InvalidateRect(hwnd, NULL, FALSE);
+            if (PlayerPlayback().Update(g_shuffleOn, g_repeatMode)) PlWnd_Refresh();
+            const Track* current = PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex());
+            uint64_t id = current ? current->id : 0;
+            if (id != g_displayTrack) {
+                g_displayTrack = id; g_seekValue = 0; g_scrollElapsedMs = 0;
+                PlWnd_Refresh(); InvalidateRect(hwnd, nullptr, FALSE);
             }
+            // EOF can stop without changing track identity. Synchronize the
+            // slider even then, so it cannot retain the previous end position.
+            float before = g_seekValue;
+            if (g_draggingSlider != SLIDER_SEEK) {
+                double dur = Audio_GetDurationSeconds();
+                g_seekValue = dur > 0 ? static_cast<float>(Audio_GetPositionSeconds() / dur) : 0;
+            }
+            if (Audio_GetState() == AUDIO_STATE_PLAYING || before != g_seekValue)
+                InvalidateRect(hwnd, NULL, FALSE);
         }
         else if (wParam == VIZ_TIMER_ID)
         {
-            if (Audio_GetState() == AUDIO_STATE_PLAYING)
+            if (Audio_GetState() == AUDIO_STATE_PLAYING && IsWindowVisible(hwnd) && !IsIconic(hwnd))
             {
                 RECT vizRect = {
                     MainWnd_DPIScale(VIZ_X), MainWnd_DPIScale(VIZ_Y),
@@ -733,110 +877,74 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
         int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
+        SetFocus(hwnd);
+        int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my));
+        g_controlFocus=control;
+        if(control && (control<8 || control>10)) {
+            g_controlPressed=control; SetCapture(hwnd);
+            InvalidateRect(hwnd,nullptr,FALSE); return 0;
+        }
+        if(control>=8 && control<=10) {
+            if(control==8 && !Audio_HasTrack()) return 0;
+            SetCapture(hwnd);
+        }
+
         /* Verificar se clicou num botão da titlebar primeiro. */
         if (my < (int)TITLEBAR_HEIGHT)
         {
             if (PtInButton(mx, my, BTN_CLOSE))
             {
                 g_pressedBtn = BTN_CLOSE;
+                SetCapture(hwnd);
                 InvalidateButtons(hwnd);
                 return 0;
             }
             if (PtInButton(mx, my, BTN_MINIMIZE))
             {
                 g_pressedBtn = BTN_MINIMIZE;
+                SetCapture(hwnd);
                 InvalidateButtons(hwnd);
                 return 0;
             }
 
-            /* Clique na barra de título — iniciar arraste nativo. */
             ReleaseCapture();
             SendMessageW(hwnd, WM_NCLBUTTONDOWN, HTCAPTION, lParam);
+            return 0;
         }
-        /* M3-T1: LCD toggle (decorrido/restante). */
-        else if (PtInLcdArea(mx, my))
-        {
+        if (PtInLcdArea(mx, my)) {
             g_showRemaining = !g_showRemaining;
-            InvalidateRect(hwnd, NULL, FALSE);
-            return 0;
-        }
-        /* M3-T4: Seek bar dragging. */
-        else if (PtInSeekBar(mx, my))
-        {
+        } else if (PtInSeekBar(mx, my)) {
             g_draggingSlider = SLIDER_SEEK;
-            /* Calcular valor a partir da posição do mouse. */
-            int relX = mx - SEEK_X;
-            g_seekValue = PixelToValue(relX, SEEK_W, 0.0f, 1.0f);
-            double pos = g_seekValue * Audio_GetDurationSeconds();
-            Audio_SeekSeconds(pos);
-            InvalidateRect(hwnd, NULL, FALSE);
-            return 0;
-        }
-        /* M3-T5: Volume slider dragging. */
-        else if (PtInVolumeSlider(mx, my))
-        {
+            g_seekValue = PixelToValue(mx - SEEK_X - 6, SEEK_W - 12, 0.0f, 1.0f);
+            Audio_SeekSeconds(g_seekValue * Audio_GetDurationSeconds());
+        } else if (PtInVolumeSlider(mx, my)) {
             g_draggingSlider = SLIDER_VOLUME;
-            int relX = mx - VOLUME_SLIDER_X;
-            g_volumeValue = PixelToValue(relX, VOLUME_SLIDER_W, 0.0f, 1.0f);
+            g_volumeValue = PixelToValue(mx - VOLUME_SLIDER_X - 6, VOLUME_SLIDER_W - 12, 0.0f, 1.0f);
             Audio_SetVolume(g_volumeValue);
-            InvalidateRect(hwnd, NULL, FALSE);
-            return 0;
-        }
-        /* M3-T5: Pan slider dragging. */
-        else if (PtInPanSlider(mx, my))
-        {
+        } else if (PtInPanSlider(mx, my)) {
             g_draggingSlider = SLIDER_PAN;
-            int relX = mx - PAN_SLIDER_X;
-            g_panValue = PixelToValue(relX, PAN_SLIDER_W, 0.0f, 1.0f);
-            /* Converter 0..1 para -1..1 */
-            float panReal = g_panValue * 2.0f - 1.0f;
-            Audio_SetPan(panReal);
-            InvalidateRect(hwnd, NULL, FALSE);
-            return 0;
-        }
-        /* M4-T4: Visualizador toggle (osciloscópio/espectro). */
-        else if (PtInVizArea(mx, my))
-        {
-            g_vizMode = (g_vizMode == VIZ_MODE_OSCILLOSCOPE)
-                        ? VIZ_MODE_SPECTRUM
-                        : VIZ_MODE_OSCILLOSCOPE;
-            InvalidateRect(hwnd, NULL, FALSE);
-            return 0;
-        }
-        /* M3-T6: Botões de navegação e toggles. */
-        else if (my >= NAV_Y && my < NAV_Y + NAV_BTN_H + TOGGLE_GAP + TOGGLE_H)
-        {
+            g_panValue = PixelToValue(mx - PAN_SLIDER_X - 6, PAN_SLIDER_W - 12, 0.0f, 1.0f);
+            Audio_SetPan(g_panValue * 2.0f - 1.0f);
+        } else if (PtInVizArea(mx, my)) {
+            g_vizMode = g_vizMode == VIZ_MODE_OSCILLOSCOPE ? VIZ_MODE_SPECTRUM : VIZ_MODE_OSCILLOSCOPE;
+        } else if (my >= NAV_Y && my < TOGGLE_Y + TOGGLE_H) {
             int btnId = 0;
-            if (PtInNavBtn(mx, my, &btnId))
-            {
-                switch (btnId)
-                {
-                case 1: /* Prev */
-                    Audio_Previous();
-                    break;
-                case 2: /* Next */
-                    Audio_Next(g_shuffleOn, g_repeatOn);
-                    break;
-                case 3: /* Shuffle toggle */
-                    g_shuffleOn = !g_shuffleOn;
-                    InvalidateRect(hwnd, NULL, FALSE);
-                    return 0;
-                case 4: /* Repeat toggle */
-                    g_repeatOn = !g_repeatOn;
-                    InvalidateRect(hwnd, NULL, FALSE);
-                    return 0;
+            if (PtInNavBtn(mx, my, &btnId)) {
+                switch (btnId) {
+                case 1: PlayerPlayback().Previous(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(); break;
+                case 2: PlayerPlayback().Next(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(); break;
+                case 3: g_shuffleOn = !g_shuffleOn; break;
+                case 4: g_repeatMode = NextRepeatMode(g_repeatMode); break;
+                case 5: PlayerPlayback().Play(); PlWnd_Refresh(); break;
+                case 6: Audio_Pause(); break;
+                case 7: Audio_Stop(); g_seekValue = 0; g_scrollElapsedMs = 0; break;
                 }
             }
-        }
-        /* Clique na área de botões de controle — apenas captura o foco. */
-        else if (my >= BOTTOM_CONTROLS_Y)
+        } else
         {
             SetForegroundWindow(hwnd);
         }
-        else
-        {
-            SetForegroundWindow(hwnd);
-        }
+        InvalidateRect(hwnd, NULL, FALSE);
         break;
     }
 
@@ -847,6 +955,10 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
         int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
+
+        int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my));
+        if(control!=g_controlHover) { g_controlHover=control; InvalidateRect(hwnd,nullptr,FALSE); }
+        TRACKMOUSEEVENT tracking{sizeof(tracking),TME_LEAVE,hwnd,0}; TrackMouseEvent(&tracking);
 
         /* Hover na titlebar. */
         TitleBarButton newHover = BTN_NONE;
@@ -872,7 +984,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             case SLIDER_SEEK:
             {
                 int relX = mx - SEEK_X;
-                g_seekValue = PixelToValue(relX, SEEK_W, 0.0f, 1.0f);
+                g_seekValue = PixelToValue(relX - 6, SEEK_W - 12, 0.0f, 1.0f);
                 double pos = g_seekValue * Audio_GetDurationSeconds();
                 Audio_SeekSeconds(pos);
                 InvalidateRect(hwnd, NULL, FALSE);
@@ -881,7 +993,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             case SLIDER_VOLUME:
             {
                 int relX = mx - VOLUME_SLIDER_X;
-                g_volumeValue = PixelToValue(relX, VOLUME_SLIDER_W, 0.0f, 1.0f);
+                g_volumeValue = PixelToValue(relX - 6, VOLUME_SLIDER_W - 12, 0.0f, 1.0f);
                 Audio_SetVolume(g_volumeValue);
                 InvalidateRect(hwnd, NULL, FALSE);
                 break;
@@ -889,7 +1001,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             case SLIDER_PAN:
             {
                 int relX = mx - PAN_SLIDER_X;
-                g_panValue = PixelToValue(relX, PAN_SLIDER_W, 0.0f, 1.0f);
+                g_panValue = PixelToValue(relX - 6, PAN_SLIDER_W - 12, 0.0f, 1.0f);
                 float panReal = g_panValue * 2.0f - 1.0f;
                 Audio_SetPan(panReal);
                 InvalidateRect(hwnd, NULL, FALSE);
@@ -911,12 +1023,19 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
         int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
+        int control=g_controlPressed; g_controlPressed=0;
+        TitleBarButton titlePressed=g_pressedBtn;
+        if(GetCapture()==hwnd) ReleaseCapture();
+        if(control && control==PlayerControlAt(static_cast<float>(mx),static_cast<float>(my))) {
+            ExecutePlayerControl(hwnd,control); InvalidateRect(hwnd,nullptr,FALSE); return 0;
+        }
+
         /* Verificar se soltou na titlebar. */
-        if (g_pressedBtn != BTN_NONE && my < (int)TITLEBAR_HEIGHT)
+        if (titlePressed != BTN_NONE && my < (int)TITLEBAR_HEIGHT)
         {
-            if (PtInButton(mx, my, g_pressedBtn))
+            if (PtInButton(mx, my, titlePressed))
             {
-                switch (g_pressedBtn)
+                switch (titlePressed)
                 {
                 case BTN_CLOSE:
                     DestroyWindow(hwnd);
@@ -940,66 +1059,6 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             g_draggingSlider = SLIDER_NONE;
         }
 
-        /* Verificar se soltou num botão de controle inferior. */
-        if (my >= BOTTOM_CONTROLS_Y)
-        {
-            RECT r;
-            /* Botão Abrir. */
-            r = { BTN_OPEN_X, BTN_OPEN_Y, BTN_OPEN_X + BTN_OPEN_W, BTN_OPEN_Y + 16 };
-            if (PtInRect(&r, (POINT){ mx, my }))
-            {
-                OPENFILENAMEW ofn{};
-                wchar_t szFile[MAX_PATH] = { 0 };
-
-                ofn.lStructSize  = sizeof(ofn);
-                ofn.hwndOwner    = hwnd;
-                ofn.lpstrFilter  = L"Audio Files\0*.mp3;*.wav;*.flac;*.ogg\0All Files\0*.*\0";
-                ofn.lpstrFile    = szFile;
-                ofn.nMaxFile     = MAX_PATH;
-                ofn.Flags        = OFN_FILEMUSTEXIST | OFN_HIDEREADONLY;
-
-                if (GetOpenFileNameW(&ofn))
-                {
-                    Audio_Load(szFile);
-                    g_currentTrack = 0;
-                    g_seekValue = 0.0f;
-                    g_scrollElapsedMs = 0;
-                }
-            }
-            else
-            {
-                /* Botão Play. */
-                r = { BTN_PLAY_X, BTN_PLAY_Y, BTN_PLAY_X + 30, BTN_PLAY_Y + 16 };
-                if (PtInRect(&r, (POINT){ mx, my }))
-                {
-                    Audio_Play();
-                }
-                else
-                {
-                    /* Botão Pause. */
-                    r = { BTN_PAUSE_X, BTN_PAUSE_Y, BTN_PAUSE_X + 30, BTN_PAUSE_Y + 16 };
-                    if (PtInRect(&r, (POINT){ mx, my }))
-                    {
-                        Audio_Pause();
-                    }
-                    else
-                    {
-                        /* Botão Stop. */
-                        r = { BTN_STOP_X, BTN_STOP_Y, BTN_STOP_X + 30, BTN_STOP_Y + 16 };
-                        if (PtInRect(&r, (POINT){ mx, my }))
-                        {
-                            Audio_Stop();
-                            g_seekValue   = 0.0f;
-                            g_scrollElapsedMs = 0;
-                            /* Forçar redraw imediato — o timer para quando não está tocando,
-                             * então InvalidateRect sozinho pode não gerar WM_PAINT rápido o suficiente. */
-                            InvalidateRect(hwnd, NULL, FALSE);
-                            UpdateWindow(hwnd);
-                        }
-                    }
-                }
-            }
-        }
         break;
     }
 
@@ -1007,6 +1066,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hwnd, &ps);
+
+        RECT client{}; GetClientRect(hwnd,&client);
+        if(PaintPlayer(g_canvas,hdc,client,g_dpiScale,PlayerSnapshot())) {
+            EndPaint(hwnd,&ps); break;
+        }
 
         /* Double buffer — desenhar em memória e copiar de uma vez.
          * Dimensões escaladas pelo DPI para telas high-DPI (4K etc.). */
@@ -1091,6 +1155,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         {
             wchar_t fileName[MAX_PATH] = { 0 };
             Audio_GetTrackName(fileName, ARRAYSIZE(fileName));
+            if (const Track* track = PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex()))
+                wcsncpy_s(fileName, ARRAYSIZE(fileName), track->displayTitle.c_str(), _TRUNCATE);
             SIZE textSize;
             GetTextExtentPoint32W(memDC, fileName, (int)wcslen(fileName), &textSize);
 
@@ -1192,33 +1258,29 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
             RECT repR = { MainWnd_DPIScale(BTN_REPEAT_X), MainWnd_DPIScale(TOGGLE_Y),
                           MainWnd_DPIScale(BTN_REPEAT_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
-            b = CreateSolidBrush(g_repeatOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
-            SetTextColor(memDC, g_repeatOn ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
-            DrawTextW(memDC, L"REP", 3, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            b = CreateSolidBrush(g_repeatMode != RepeatMode::Off ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
+            SetTextColor(memDC, g_repeatMode != RepeatMode::Off ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
+            DrawTextW(memDC, g_repeatMode == RepeatMode::One ? L"REP 1" : L"REP", -1, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
         /* ------------------------------------------------------------------
-         * Botões de controle inferior (Abrir/Play/Pause/Stop).
+         * Play/Pause/Stop ao lado de Anterior/Próximo.
          * ------------------------------------------------------------------ */
         {
-            RECT openR = { MainWnd_DPIScale(BTN_OPEN_X), MainWnd_DPIScale(BTN_OPEN_Y),
-                           MainWnd_DPIScale(BTN_OPEN_X + BTN_OPEN_W), MainWnd_DPIScale(BTN_OPEN_Y + 16) };
-            HBRUSH b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &openR, b); DeleteObject(b);
+            HBRUSH b;
             SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
-            DrawTextW(memDC, L"Abrir", 5, &openR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
-
             RECT playR = { MainWnd_DPIScale(BTN_PLAY_X), MainWnd_DPIScale(BTN_PLAY_Y),
-                           MainWnd_DPIScale(BTN_PLAY_X + 30), MainWnd_DPIScale(BTN_PLAY_Y + 16) };
+                           MainWnd_DPIScale(BTN_PLAY_X + CTRL_BTN_W), MainWnd_DPIScale(BTN_PLAY_Y + CTRL_BTN_H) };
             b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &playR, b); DeleteObject(b);
             DrawTextW(memDC, L">", 1, &playR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             RECT pauseR = { MainWnd_DPIScale(BTN_PAUSE_X), MainWnd_DPIScale(BTN_PAUSE_Y),
-                            MainWnd_DPIScale(BTN_PAUSE_X + 30), MainWnd_DPIScale(BTN_PAUSE_Y + 16) };
+                            MainWnd_DPIScale(BTN_PAUSE_X + CTRL_BTN_W), MainWnd_DPIScale(BTN_PAUSE_Y + CTRL_BTN_H) };
             b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &pauseR, b); DeleteObject(b);
             DrawTextW(memDC, L"||", 2, &pauseR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             RECT stopR = { MainWnd_DPIScale(BTN_STOP_X), MainWnd_DPIScale(BTN_STOP_Y),
-                           MainWnd_DPIScale(BTN_STOP_X + 30), MainWnd_DPIScale(BTN_STOP_Y + 16) };
+                           MainWnd_DPIScale(BTN_STOP_X + CTRL_BTN_W), MainWnd_DPIScale(BTN_STOP_Y + CTRL_BTN_H) };
             b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &stopR, b); DeleteObject(b);
             DrawTextW(memDC, L"[]", 2, &stopR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
@@ -1279,6 +1341,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         }
 
         HMENU hMenu = CreatePopupMenu();
+        AppendMenuW(hMenu, MF_STRING, 900, L"Lista de reprodução");
         AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hScale, L"Aparência > Escala da interface");
 
         int x = (int)(short)LOWORD(lParam);
@@ -1299,6 +1362,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     case WM_COMMAND:
     {
         int cmdId = LOWORD(wParam);
+        if (cmdId == 900) { PlWnd_Show(); break; }
         static const struct { int id; int percent; } scaleCmds[] = {
             { IDM_SCALE_AUTO, 0 },   { IDM_SCALE_80, 80 },   { IDM_SCALE_90, 90 },
             { IDM_SCALE_100, 100 }, { IDM_SCALE_110, 110 }, { IDM_SCALE_125, 125 },
@@ -1310,18 +1374,28 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             {
                 g_userScalePercent = scaleCmds[i].percent;
                 ApplyInterfaceScale(hwnd);
+                PlWnd_ScaleChanged();
+                EqWnd_ScaleChanged();
                 break;
             }
         }
         break;
     }
 
+    case WM_PLAYER_CHANGED:
+        InvalidateRect(hwnd, nullptr, FALSE);
+        break;
+
     case WM_DESTROY:
     {
         KillTimer(hwnd, POSITION_TIMER_ID);
         KillTimer(hwnd, SCROLL_TIMER_ID);
         KillTimer(hwnd, VIZ_TIMER_ID);
+        PlWnd_Shutdown();
+        EqWnd_Shutdown();
         Audio_Shutdown();
+        if(g_tooltip) DestroyWindow(g_tooltip);
+        g_tooltip=nullptr; g_canvas.DiscardTarget();
         PostQuitMessage(0);
         break;
     }

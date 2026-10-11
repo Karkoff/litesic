@@ -6,7 +6,7 @@ consulte `docs/ROADMAP.md` para saber qual tarefa executar.
 
 ## O que é o projeto
 
-Player de áudio estilo Winamp, em C++ nativo com Win32/GDI, rodando sem
+Player de áudio estilo Winamp, em C++ nativo com Win32 + Direct2D/DirectWrite, rodando sem
 runtime extra do Windows 7 ao Windows 11. Três telas: player principal,
 equalizador de 10 bandas e lista de reprodução. Sem streaming por enquanto.
 
@@ -16,7 +16,7 @@ obrigatório respeitar durante a implementação.
 
 ## Decisões técnicas obrigatórias
 
-- **Linguagem/UI**: C++17 + Win32 API + GDI puro. Nada de Qt, WinUI, .NET,
+- **Linguagem/UI**: C++17 + Win32 API + Direct2D 1.0/DirectWrite; GDI como fallback durante a migração. Nada de Qt, WinUI, .NET,
   MFC ou qualquer coisa que exija runtime extra.
 - **Áudio**: [miniaudio](https://miniaud.io) (single header) + `stb_vorbis`
   para OGG, ambos em `third_party/`.
@@ -56,6 +56,13 @@ res/        ícone, manifest (DPI + compatibilidade Win7-11), app.rc
 ```
 
 ## Testes
+
+Para validação gráfica, leia `docs/GUI-AUTOMATION.md`. Prefira Computer Use
+nativo quando funcionar. O auxiliar local `scripts/gui.ps1` permite captura
+real e entrada restrita ao LiteSic; exige o desktop interativo e respeita a
+revisão de aprovação da plataforma para execuções fora do sandbox. Sempre
+inspecione a captura antes de escolher coordenadas e confirme o resultado
+visualmente. Não confunda uma execução sem erro com validação da interface.
 
 Nem tudo em Win32/GDI é testável automaticamente. A regra prática:
 
