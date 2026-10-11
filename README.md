@@ -68,9 +68,14 @@ O produto prevê três janelas independentes:
 | **Playlist** | Arquivos/pastas, seleção múltipla, arraste para reordenar, ordenação, M3U, tags em background e recuperação automática ao reabrir |
 | **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica; botão **VIZ** ao lado de LISTA/EQ para ocultar ou mostrar, reduzindo/restaurando a altura do player |
 | **Equalizador** | Planejado para M6: 10 bandas, pré-amp e presets |
-| **Compatibilidade** | Alvo Windows 7–11, x86/x64; validação Win7 pendente na M9 |
+| **Compatibilidade** | Alvo Windows 7–11, x86/x64; M9 COMPLETE por decisão do usuário. Windows 11 confirmado; testes práticos Windows 7/8/8.1/10 e validação específica x86/x64 pendentes |
 | **DPI** | Suporte a alta densidade de pixels |
 | **Runtime** | Runtime GCC/C++ estático; depende das DLLs de sistema Windows |
+
+Encerramento M9 em 11/10/2026: os testes restantes serão realizados
+futuramente pelo usuário, sem bloquear o avanço nem reabrir automaticamente
+a milestone. Ver [PROJECT_STATE](PROJECT_STATE.md) e
+[decisão M9-DEC-2026-10-11](docs/M9-CLOSEOUT-2026-10-11.md).
 
 ## 🏗️ Arquitetura
 
@@ -161,7 +166,7 @@ O projeto é dividido em milestones incrementais, cada uma com tarefas verificá
 | **M6** | Equalizador — 10 bandas, presets, tempo real | 📝 Planejada |
 | **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | 📝 Planejada |
 | **M8** | Acabamento — atalhos, teclas de mídia, instância única | 📝 Planejada |
-| **M9** | Testes de compatibilidade (VM Win7) | 📝 Planejada |
+| **M9** | Compatibilidade — encerrada por decisão explícita do usuário | COMPLETE — testes futuros não bloqueantes |
 | **M10** | Distribuição — builds 32/64, zip portátil, instalador | 📝 Planejada |
 
 > 🖥️ Milestones com indicador visual terminam em algo executável para validação manual.

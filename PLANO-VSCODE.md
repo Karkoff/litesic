@@ -1,6 +1,6 @@
 #LiteSic — plano para desenvolver localmente no VS Code
 
-Player estilo Winamp, em C++ com Win32 nativo, rodando no Windows 7, 8, 10 e 11.
+Player estilo Winamp, em C++ com Win32 nativo, com alvo de compatibilidade Windows 7–11 (incluindo 8 e 8.1), x86/x64.
 Três telas: player principal, equalizador de 10 bandas e lista de reprodução.
 Streaming e extras ficam para depois.
 
@@ -109,3 +109,12 @@ suporte a mais formatos (AAC/M4A via Media Foundation, Opus).
   Windows sem depender da `winpthread`.
 - O callback de áudio roda em outra thread: ele nunca deve travar, alocar memória ou mexer em janelas
   (só `PostMessage`).
+
+## Estado atual da compatibilidade
+
+M9: **COMPLETE por decisão explícita do usuário (11/10/2026)**.
+Windows 11: funcionamento confirmado pelo usuário. Windows 7, 8, 8.1 e 10:
+testes práticos pendentes; validação específica x86/x64 pendente. O usuário
+realizará os testes restantes futuramente, sem bloquear o avanço nem reabrir
+automaticamente M9. Não há comprovação para ambientes ainda não testados.
+Ver [PROJECT_STATE](PROJECT_STATE.md) e [decisão M9](docs/M9-CLOSEOUT-2026-10-11.md).

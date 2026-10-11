@@ -7,12 +7,20 @@ consulte `docs/ROADMAP.md` para saber qual tarefa executar.
 ## O que é o projeto
 
 Player de áudio estilo Winamp, em C++ nativo com Win32 + Direct2D/DirectWrite, rodando sem
-runtime extra do Windows 7 ao Windows 11. Três telas: player principal,
+runtime extra como objetivo, com alvo Windows 7–11, x86/x64. Três telas: player principal,
 equalizador de 10 bandas e lista de reprodução. Sem streaming por enquanto.
 
 O plano de produto/arquitetura completo está em `PLANO-VSCODE.md` — este
 documento (`AGENT.md`) não repete decisões de lá, apenas resume o que é
 obrigatório respeitar durante a implementação.
+
+Estado canônico: [PROJECT_STATE.md](PROJECT_STATE.md). M9 está COMPLETE
+por decisão explícita do usuário em 11/10/2026. Windows 11 tem funcionamento
+confirmado; testes práticos Windows 7/8/8.1/10 e validação específica x86/x64
+permanecem pendentes e serão realizados futuramente pelo usuário. Não
+bloquear o avanço nem reabrir automaticamente M9 por essas pendências.
+Não declarar como comprovada compatibilidade ainda não testada.
+Ver [decisão M9](docs/M9-CLOSEOUT-2026-10-11.md).
 
 ## Decisões técnicas obrigatórias
 

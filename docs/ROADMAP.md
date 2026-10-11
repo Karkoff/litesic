@@ -23,16 +23,36 @@ próxima.
 | M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador: 10 bandas, pré-amp, presets, tempo real | sim |
 | M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: snap/dock entre janelas, mostrar/ocultar EQ/PL | sim |
 | M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos estilo Winamp, teclas de mídia, always-on-top, instância única, persistência | sim |
-| M9 | [docs/milestones/M9.md](milestones/M9.md) | Testes de compatibilidade (VM Win7 32/64, checagem de DLLs importadas) | manual/VM |
+| M9 | [docs/milestones/M9.md](milestones/M9.md) | Compatibilidade — COMPLETE por decisão explícita; Windows 11 confirmado; testes Windows 7/8/8.1/10 e x86/x64 pendentes, não bloqueantes | encerrada por decisão |
 | M10 | [docs/milestones/M10.md](milestones/M10.md) | Distribuição: builds 32/64, zip portátil, instalador Inno Setup | build final |
+
+## M9 — encerramento por decisão do usuário
+
+**Status: COMPLETE, por decisão explícita em 11/10/2026.**
+Alvo de compatibilidade: **Windows 7–11, x86/x64**.
+Windows 11: funcionamento confirmado pelo usuário, sem atribuir essa
+confirmação a uma arquitetura específica. Windows 7, 8, 8.1 e 10:
+testes práticos pendentes. Validação específica x86/x64: pendente.
+
+O usuário realizará os testes restantes futuramente. Essas pendências não
+bloqueiam o avanço do projeto nem reabrem automaticamente a M9. COMPLETE
+registra o encerramento da milestone, não comprovação de compatibilidade
+em ambientes ainda não testados. Nenhum código foi alterado e nenhum teste
+foi executado nesta tarefa de documentação.
+
+Decisão rastreável: **M9-DEC-2026-10-11**, solicitação do usuário
+“LiteSic — Persistência do encerramento da M9 (Compatibilidade)”.
+Ver [estado canônico](../PROJECT_STATE.md) e
+[registro de encerramento](M9-CLOSEOUT-2026-10-11.md).
 
 ## Modernização transversal UI/UX — IN_PROGRESS
 
 As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
 Direct2D/DirectWrite; pesquisa preserva índices canônicos e docking da M5.
 UI-00..02 concluídas; UI-03..08 ainda IN_PROGRESS. M6/DSP não implementado:
-EQ permanece indisponível. M5 tem checkpoint humano PASS; M9 permanece
-pendente de VM Windows 7. Ver [plano](design/LITESIC-UI-IMPLEMENTATION-PLAN.md)
+EQ permanece indisponível. M5 tem checkpoint humano PASS; M9 está COMPLETE por decisão explícita do usuário; os testes práticos
+de Windows 7/8/8.1/10 e a validação específica x86/x64 permanecem pendentes,
+sem bloquear o avanço ou reabrir automaticamente a milestone. Ver [plano](design/LITESIC-UI-IMPLEMENTATION-PLAN.md)
 e [relatório com testes/capturas/limitações](design/UI-VALIDATION-2026-10-11.md).
 Encerramento atualizado da M5, investigação de memória e preparação da M6:
 [relatório técnico](M5-CLOSEOUT-2026-10-11.md). M6 não iniciada.

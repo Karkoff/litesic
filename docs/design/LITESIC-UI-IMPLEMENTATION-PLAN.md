@@ -52,7 +52,12 @@ UI-05 corresponde à M6: só disponibilizar EQ com DSP real comprovado,
 ou apresentar painel explicitamente indisponível como permitido na especificação.
 UI-06 contribui para M7 sem declarar toda a integração concluída.
 UI-07 cruza M8 (persistência/instância única continuam fora deste corte).
-M9 continua PENDENTE DE VALIDAÇÃO EM WINDOWS 7; M10 depende dos marcos anteriores.
+M9 está COMPLETE por decisão explícita do usuário em 11/10/2026.
+Windows 11: funcionamento confirmado. Windows 7/8/8.1/10: testes práticos
+pendentes; validação específica x86/x64 pendente. O alvo permanece
+Windows 7–11, x86/x64. O usuário fará os testes restantes futuramente,
+sem bloquear o avanço nem reabrir automaticamente M9. M10 mantém as
+demais dependências; ver [decisão M9](../M9-CLOSEOUT-2026-10-11.md).
 Não alterar checkboxes históricos por aprovação visual do agente.
 
 Renderização D2D 1.0 em ID2D1DCRenderTarget mantém PrintWindow e fallback

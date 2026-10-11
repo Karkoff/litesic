@@ -27,7 +27,11 @@ e [playlist/menus atuais](PLAYLIST-UI-2026-10-11.md). Histórico do ambiente:
 O MSYS2 atual exige Windows recente para executar suas ferramentas, mas ainda
 permite mirar Windows 7 com MINGW64/MINGW32. Esses ambientes são legados;
 registrar as versões usadas antes de atualizar. Isso não certifica os binários
-no Windows 7: a validação em VM e de APIs continua na M9.
+no Windows 7. M9 está COMPLETE por decisão explícita do usuário;
+Windows 11 tem funcionamento confirmado. Testes práticos Windows 7/8/8.1/10
+e validação específica x86/x64 ficam para execução futura pelo usuário,
+sem bloquear o avanço nem reabrir automaticamente a milestone.
+Ver [registro M9](M9-CLOSEOUT-2026-10-11.md).
 Fontes: [suporte Windows](https://www.msys2.org/docs/windows_support/) e
 [ambientes](https://www.msys2.org/docs/environments/).
 
