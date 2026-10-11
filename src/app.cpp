@@ -12,6 +12,7 @@
 
 #include "mainwnd.h"
 #include "plwnd.h"
+#include "eqwnd.h"
 #include "ui_theme.h"
 
 /* DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 requer Windows 10 1703+.
@@ -76,6 +77,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
         if (SUCCEEDED(com)) CoUninitialize();
         return 1;
     }
+
+    EqWnd_Restore(hwnd);
 
     /* Loop de mensagens padrão. */
     MSG msg;

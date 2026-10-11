@@ -8,8 +8,9 @@ Ocultar reduz a altura da janela de 290 para 214 DIP, sem área vazia;
 mostrar restaura os 290 DIP. O rodapé, seus botões e tooltips acompanham
 o tamanho atual, inclusive ao mudar DPI ou escala da interface.
 O desenho periódico fica suspenso enquanto oculto; a reprodução e os
-controles de áudio continuam disponíveis. A visibilidade começa ativada
-ao abrir o aplicativo; esta opção não é persistida entre sessões.
+controles de áudio continuam disponíveis. A visibilidade agora é persistida
+entre sessões, juntamente com playlist, painel EQ, modo FFT/OSC e escala.
+Veja [persistência da aparência](APPEARANCE-PERSISTENCE-2026-10-11.md).
 O caminho GDI também oferece o botão e respeita a visibilidade.
 
 ## Ajuste posterior: player compacto

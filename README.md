@@ -27,11 +27,15 @@ em Adicionar. A pesquisa tem um ícone de borracha para limpar.
 Veja as [duas correções visuais recentes](docs/PLAYLIST-FOOTER-2026-10-11.md).
 Equalizador e a integração completa das três janelas permanecem planejados.
 Player e playlist já possuem encaixe magnético e movimento conjunto.
+**Aparência entre sessões:** visibilidade do visualizador (incluindo player
+compacto), playlist e painel EQ, modo FFT/OSC, escala da interface e tema
+são preservados. Veja [validação da persistência](docs/APPEARANCE-PERSISTENCE-2026-10-11.md).
 Veja o [encerramento técnico da M5](docs/M5-CLOSEOUT-2026-10-11.md).
 Modernização UI/UX **IN_PROGRESS**: player e playlist já usam Direct2D/DirectWrite,
 com pesquisa que preserva a fila e os cinco transportes separados. O painel EQ
 é explicitamente indisponível até a implementação do DSP. Baseline repetida:
-292 aprovações; suíte atual: **356 (89 por variante)**. A investigação de memória
+292 aprovações; rodada anterior: **356 (89 por variante)**. Após persistir a
+aparência, a suíte x64 Debug tem **93 testes aprovados**. A investigação de memória
 reproduziu o custo de inicialização gráfica, sem crescimento contínuo na carga
 curta do backend atual. UI-00..08 ainda não estão concluídas; M6 não iniciada.
 Veja [implementação, capturas e pendências](docs/design/UI-VALIDATION-2026-10-11.md)

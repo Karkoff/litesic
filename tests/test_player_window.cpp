@@ -2,6 +2,8 @@
 #include "ui_player.h"
 #include "audio.h"
 #include "m3u.h"
+#include "plwnd.h"
+#include "eqwnd.h"
 #include "check.h"
 #include <cmath>
 static HWND window;
@@ -68,11 +70,44 @@ static void geometry_dpi_and_keyboard_seek() {
     SendMessageW(window,WM_KEYDOWN,VK_RIGHT,0);CHECK(Audio_GetPositionSeconds()>0);
     SendMessageW(window,WM_KEYDOWN,VK_END,0);CHECK(std::abs(Audio_GetPositionSeconds()-2)<.02);
 }
+static HWND listWindow,eqWindow;
+static BOOL CALLBACK FindPanels(HWND hwnd,LPARAM) {
+    wchar_t name[80]{};GetClassNameW(hwnd,name,80);
+    if(!wcscmp(name,L"LiteSic.PlaylistWnd")) listWindow=hwnd;
+    if(!wcscmp(name,L"LiteSic.EqualizerWnd")) eqWindow=hwnd;
+    return TRUE;
+}
+static void appearance_persists_across_window_recreation() {
+    auto ini=FullPath(L"build\\window-appearance-"+std::to_wstring(sizeof(void*)*8)+
+#ifdef DEBUG
+        L"-debug.ini"
+#else
+        L"-release.ini"
+#endif
+    );
+    DestroyWindow(window);DeleteFileW(ini.c_str());Ui::ThemeConfigure(ini.c_str());
+    auto instance=GetModuleHandleW(nullptr);window=MainWnd_Create(instance,SW_SHOWNOACTIVATE);CHECK(window);
+    CHECK(PlWnd_Create(instance,window));CHECK(PlWnd_IsVisible());
+    Click(13);Click(16);PlWnd_Toggle();CHECK(!PlWnd_IsVisible());
+    EqWnd_Toggle(window);EnumThreadWindows(GetCurrentThreadId(),FindPanels,0);CHECK(eqWindow && IsWindowVisible(eqWindow));
+    SendMessageW(eqWindow,WM_CLOSE,0,0);CHECK(!Ui::LoadAppearance().equalizerVisible);EqWnd_Toggle(window);
+    SendMessageW(window,WM_COMMAND,IDM_SCALE_90,0);
+    DestroyWindow(window);Ui::ThemeConfigure(nullptr);Ui::ThemeConfigure(ini.c_str());
+    window=MainWnd_Create(instance,SW_SHOWNOACTIVATE);CHECK(window);
+    CHECK(PlWnd_Create(instance,window));CHECK(!PlWnd_IsVisible());
+    EqWnd_Restore(window);eqWindow=nullptr;EnumThreadWindows(GetCurrentThreadId(),FindPanels,0);
+    CHECK(eqWindow && IsWindowVisible(eqWindow));CHECK(MainWnd_UserScaleMultiplier()==.9f);
+    RECT r{};GetClientRect(window,&r);CHECK(r.bottom==MainWnd_DPIScale(PlayerLayoutHeight(false)));
+    auto state=Ui::LoadAppearance();CHECK(state.spectrum && !state.visualizerVisible);
+    Click(16,false);Click(11);CHECK(PlWnd_IsVisible());
+    SendMessageW(listWindow,WM_CLOSE,0,0);CHECK(!Ui::LoadAppearance().playlistVisible);
+    Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());
+}
 int main() {
     HINSTANCE instance=GetModuleHandleW(nullptr);CHECK(MainWnd_RegisterClass(instance));
     window=MainWnd_Create(instance,SW_HIDE);CHECK(window);
     // Use the same offline production audio adapter as integration tests.
     Audio_Shutdown(); int cases=0;
-    CASE(transport_and_seek_use_real_audio);CASE(capture_cancel_and_release_outside);CASE(geometry_dpi_and_keyboard_seek);
+    CASE(transport_and_seek_use_real_audio);CASE(capture_cancel_and_release_outside);CASE(geometry_dpi_and_keyboard_seek);CASE(appearance_persists_across_window_recreation);
     DestroyWindow(window);std::printf("%d player window cases\n",cases);
 }

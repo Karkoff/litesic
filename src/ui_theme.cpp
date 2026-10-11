@@ -4,6 +4,7 @@
 #include <cmath>
 #include <string>
 #include <vector>
+#include <initializer_list>
 
 namespace Ui {
 namespace {
@@ -101,6 +102,25 @@ bool SelectTheme(const wchar_t* id,bool save) {
     return !save || path.empty() || WritePrivateProfileStringW(L"Appearance",L"Theme",ActiveTheme().id,path.c_str());
 }
 bool RestoreTheme() { return SelectTheme(L"original"); }
+AppearanceState LoadAppearance() {
+    AppearanceState state;
+    auto choice=[](const wchar_t* key,int fallback,std::initializer_list<int> allowed) {
+        if(path.empty()) return fallback;
+        wchar_t value[32]{};
+        GetPrivateProfileStringW(L"Appearance",key,L"",value,32,path.c_str());
+        for(int candidate:allowed) if(std::to_wstring(candidate)==value) return candidate;
+        return fallback;
+    };
+    state.visualizerVisible=choice(L"VisualizerVisible",1,{0,1})!=0;
+    state.playlistVisible=choice(L"PlaylistVisible",1,{0,1})!=0;
+    state.equalizerVisible=choice(L"EqualizerVisible",0,{0,1})!=0;
+    state.spectrum=choice(L"Spectrum",0,{0,1})!=0;
+    state.scalePercent=choice(L"ScalePercent",0,{0,80,90,100,110,125,150});
+    return state;
+}
+bool SaveAppearanceValue(const wchar_t* key,int value) {
+    return path.empty() || WritePrivateProfileStringW(L"Appearance",key,std::to_wstring(value).c_str(),path.c_str());
+}
 void ThemeConfigure(const wchar_t* iniPath) {
     path=iniPath?iniPath:L"";
     wchar_t id[128]=L"original";

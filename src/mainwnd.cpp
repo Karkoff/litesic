@@ -37,7 +37,7 @@ static bool g_visualizerVisible=true;
 /* Escala de interface definida pelo usuário (Configurações > Aparência).
  * 0 = Automática (segue só o DPI do monitor); caso contrário, percentual
  * (80/90/100/110/125/150) multiplicado pelo fator de DPI do monitor.
- * Só em memória por enquanto — persistência real entra no M8 (M8-T4). */
+ * Persistida com as demais preferências de aparência. */
 static int g_userScalePercent = 0;
 
 /* ------------------------------------------------------------------ */
@@ -659,10 +659,11 @@ static void ExecutePlayerControl(HWND hwnd,int id) {
     case 7: Audio_Stop(); g_seekValue=0; g_scrollElapsedMs=0; g_playbackError=false; break;
     case 11: PlWnd_Toggle(); break;
     case 12: EqWnd_Toggle(hwnd); break;
-    case 13: g_vizMode=VIZ_MODE_SPECTRUM; break;
-    case 14: g_vizMode=VIZ_MODE_OSCILLOSCOPE; break;
+    case 13: g_vizMode=VIZ_MODE_SPECTRUM; Ui::SaveAppearanceValue(L"Spectrum",1); break;
+    case 14: g_vizMode=VIZ_MODE_OSCILLOSCOPE; Ui::SaveAppearanceValue(L"Spectrum",0); break;
     case 16:
         g_visualizerVisible=!g_visualizerVisible;
+        Ui::SaveAppearanceValue(L"VisualizerVisible",g_visualizerVisible);
         SetWindowPos(hwnd,nullptr,0,0,MainWnd_DPIScale(MAINWND_WIDTH),
             MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible)),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
         UpdateTooltipRects(hwnd);
@@ -937,6 +938,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             Audio_SetPan(g_panValue * 2.0f - 1.0f);
         } else if (PtInVizArea(mx, my)) {
             g_vizMode = g_vizMode == VIZ_MODE_OSCILLOSCOPE ? VIZ_MODE_SPECTRUM : VIZ_MODE_OSCILLOSCOPE;
+            Ui::SaveAppearanceValue(L"Spectrum",g_vizMode==VIZ_MODE_SPECTRUM);
         } else if (my >= NAV_Y && my < TOGGLE_Y + TOGGLE_H) {
             int btnId = 0;
             if (PtInNavBtn(mx, my, &btnId)) {
@@ -1403,6 +1405,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             if (scaleCmds[i].id == cmdId)
             {
                 g_userScalePercent = scaleCmds[i].percent;
+                Ui::SaveAppearanceValue(L"ScalePercent",g_userScalePercent);
                 ApplyInterfaceScale(hwnd);
                 PlWnd_ScaleChanged();
                 EqWnd_ScaleChanged();
@@ -1464,6 +1467,10 @@ BOOL MainWnd_RegisterClass(HINSTANCE hInstance)
 
 HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow)
 {
+    auto appearance=Ui::LoadAppearance();
+    g_visualizerVisible=appearance.visualizerVisible;
+    g_userScalePercent=appearance.scalePercent;
+    g_vizMode=appearance.spectrum?VIZ_MODE_SPECTRUM:VIZ_MODE_OSCILLOSCOPE;
     /* Centralizar a janela na tela. */
     RECT desktop{};
     GetWindowRect(GetDesktopWindow(), &desktop);

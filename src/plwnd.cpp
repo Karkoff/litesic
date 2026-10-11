@@ -459,7 +459,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         dragging=false; scrollDrag=false; pressed=0;
         if (GetCapture()==hwnd) ReleaseCapture();
         if (button && HitButton(point)==button) {
-            if (button==-1) ShowWindow(hwnd,SW_HIDE);
+            if (button==-1) { ShowWindow(hwnd,SW_HIDE); Ui::SaveAppearanceValue(L"PlaylistVisible",0); }
             else if (button==Remove) RemoveSelected();
             else if (button==AddFiles) PlWnd_AddFiles(hwnd);
             else if (button==AddFolder) FolderDialog();
@@ -547,7 +547,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
             }
         }
         ClampTop(); PlWnd_Refresh(); return 0;
-    case WM_CLOSE: ShowWindow(hwnd,SW_HIDE); return 0;
+    case WM_CLOSE: ShowWindow(hwnd,SW_HIDE); Ui::SaveAppearanceValue(L"PlaylistVisible",0); return 0;
     case WM_DESTROY:
         worker.Stop();
         if (!sessionPath.empty()) {
@@ -629,7 +629,7 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
         }
         PlWnd_Refresh();
         RECT list{}; GetWindowRect(window,&list); RememberDock(initial,list);
-        PlWnd_MainMoved(); ShowWindow(window,SW_SHOWNOACTIVATE); UpdateWindow(window);
+        PlWnd_MainMoved(); ShowWindow(window,Ui::LoadAppearance().playlistVisible?SW_SHOWNOACTIVATE:SW_HIDE); UpdateWindow(window);
     }
     return window!=nullptr;
 }
@@ -648,8 +648,8 @@ void PlWnd_MainMoved() {
     if (x!=list.left || y!=list.top)
         SetWindowPos(window,nullptr,x,y,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
-void PlWnd_Show() { if(window) { ShowWindow(window,SW_SHOW); SetForegroundWindow(window); } }
-void PlWnd_Toggle() { if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); PlWnd_Refresh(); } }
+void PlWnd_Show() { if(window) { ShowWindow(window,SW_SHOW); Ui::SaveAppearanceValue(L"PlaylistVisible",1); SetForegroundWindow(window); } }
+void PlWnd_Toggle() { if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); Ui::SaveAppearanceValue(L"PlaylistVisible",IsWindowVisible(window)!=FALSE); PlWnd_Refresh(); } }
 bool PlWnd_IsVisible() { return window && IsWindowVisible(window); }
 void PlWnd_Refresh(bool revealCurrent) {
     int current=PlayerPlaylist().GetCurrentIndex();

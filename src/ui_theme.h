@@ -42,6 +42,14 @@ void ThemeConfigure(const wchar_t* iniPath);
 bool SelectTheme(const wchar_t* id, bool save = true);
 bool RestoreTheme();
 bool ThemeInitializeUser();
+struct AppearanceState {
+    bool visualizerVisible = true, playlistVisible = true, equalizerVisible = false;
+    bool spectrum = false;
+    int scalePercent = 0;
+};
+// Uses the same settings.ini configured for themes; no path means isolated defaults.
+AppearanceState LoadAppearance();
+bool SaveAppearanceValue(const wchar_t* key, int value);
 double Contrast(uint32_t a, uint32_t b);
 inline COLORREF NativeColor(uint32_t rgb) { return RGB((rgb>>16)&255,(rgb>>8)&255,rgb&255); }
 void ShowThemes(HWND owner);

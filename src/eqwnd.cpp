@@ -9,6 +9,7 @@ namespace {
 HWND window=nullptr;
 float scale=1;
 Ui::Canvas canvas;
+void Hide(HWND hwnd) { ShowWindow(hwnd,SW_HIDE); Ui::SaveAppearanceValue(L"EqualizerVisible",0); }
 int S(float value) { return static_cast<int>(std::lround(value*scale)); }
 LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp) {
     switch(message) {
@@ -20,10 +21,10 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp) {
         return HTCLIENT;
     }
     case WM_LBUTTONUP:
-        if(GET_X_LPARAM(lp)>=S(428) && GET_Y_LPARAM(lp)<S(32)) ShowWindow(hwnd,SW_HIDE);
+        if(GET_X_LPARAM(lp)>=S(428) && GET_Y_LPARAM(lp)<S(32)) Hide(hwnd);
         return 0;
-    case WM_KEYDOWN:if(wp==VK_ESCAPE) ShowWindow(hwnd,SW_HIDE);return 0;
-    case WM_CLOSE:ShowWindow(hwnd,SW_HIDE);return 0;
+    case WM_KEYDOWN:if(wp==VK_ESCAPE) Hide(hwnd);return 0;
+    case WM_CLOSE:Hide(hwnd);return 0;
     case WM_DPICHANGED: {
         scale=LOWORD(wp)/96.f*MainWnd_UserScaleMultiplier();
         auto r=reinterpret_cast<RECT*>(lp);
@@ -74,10 +75,11 @@ void EqWnd_Toggle(HWND main) {
         int y=std::max<int>(monitor.rcWork.top,std::min<int>(parent.top,monitor.rcWork.bottom-S(210)));
         window=CreateWindowExW(0,cls.lpszClassName,L"LiteSic — Equalizador (DSP pendente)",WS_POPUP,x,y,S(460),S(210),main,nullptr,cls.hInstance,nullptr);
     }
-    if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); InvalidateRect(window,nullptr,FALSE); }
+    if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE); InvalidateRect(window,nullptr,FALSE); }
 }
 void EqWnd_ScaleChanged() {
     scale=MainWnd_DPIScaleFloat(1);
     if(window) SetWindowPos(window,nullptr,0,0,S(460),S(210),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
 void EqWnd_Shutdown() { if(window) DestroyWindow(window); }
+void EqWnd_Restore(HWND main) { if(Ui::LoadAppearance().equalizerVisible) EqWnd_Toggle(main); }
