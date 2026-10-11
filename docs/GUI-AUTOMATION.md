@@ -1,5 +1,31 @@
 # Automação gráfica de desenvolvimento
 
+## Temas — validação atual em 11/10/2026
+
+Após os ajustes de playlist/menus, o seletor tem moldura, botões e rolagem
+próprios. O launcher de categorias usa um menu com tema; o ComboBox interno
+mantém o modelo de categorias. A ação `theme` usa mensagens escalares desse
+controle para voltar a Todos e seleciona o tema no ListBox visível, mantendo
+as guardas de processo/proprietário/observação. Menus do seletor também são
+reconhecidos como pertencentes ao alvo. Nova rodada: 356 verificações, 27
+guardas e 14 capturas. [Relatório](PLAYLIST-UI-2026-10-11.md).
+O pacote atual é auditado por `scripts/diagnostics/package_adjustments.py`;
+o pacote `themes` abaixo preserva a etapa anterior ao novo rodapé/seletor.
+
+`-Target themes` captura apenas `LiteSic.ThemesWnd` pertencente ao player
+lançado pelo auxiliar. `-Action theme -Target themes -Query Claro` seleciona
+um nome da whitelist de 36 temas usando os controles nativos, após captura
+recente inspecionada. Não aceita nomes arbitrários nem atua no player errado.
+O auxiliar agora tem **27 guardas PASS**, incluindo proprietário do seletor,
+rejeição de tema/alvo inválidos e conversão de coordenadas da área cliente
+com `ClientToScreen` nativo. Isso corrige o deslocamento da barra de título
+em janelas com moldura; as janelas sem moldura mantêm a mesma origem.
+
+`scripts/diagnostics/package_themes.py` audita e empacota 25 capturas,
+catálogo/paletas, quatro logs de build/teste e quatro cargas de memória.
+[Galeria](evidence/themes/index.html), [manifesto](evidence/themes/manifest.json)
+e [limites/resultados](THEMES.md). As seções abaixo preservam as rodadas anteriores.
+
 ## Modernização Direct2D — 11/10/2026
 
 O backend novo usa `ID2D1DCRenderTarget`, compatível com o caminho de captura

@@ -82,16 +82,16 @@ void AvoidOverlap() {
     if(y+height>work.bottom) y=std::max<int>(work.top,parent.top-height-S(4));
     SetWindowPos(window,nullptr,x,y,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
-RECT List() { RECT r = Client(); r.left = S(8); r.top = S(124); r.right -= S(20); r.bottom -= S(28); return r; }
+RECT List() { RECT r = Client(); r.left = S(8); r.top = S(84); r.right -= S(20); r.bottom -= S(64); return r; }
 int Visible() { RECT r = List(); return std::max<int>(1, (r.bottom - r.top) / S(24)); }
 void ClampTop() { top = std::max(0, std::min(top, view.Count() - Visible())); }
 void LayoutSearch() {
     if(!search) return;
     RECT r=Client();
-    MoveWindow(search,S(16),S(80),std::max<int>(S(80),r.right-S(56)),S(24),TRUE);
+    MoveWindow(search,S(16),S(40),std::max<int>(S(80),r.right-S(56)),S(24),TRUE);
     if(searchFont) DeleteObject(searchFont);
     searchFont=CreateFontW(-S(12),0,0,0,FW_NORMAL,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
-        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,L"Segoe UI");
+        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,Ui::ActiveTheme().typography.body);
     SendMessageW(search,WM_SETFONT,reinterpret_cast<WPARAM>(searchFont),TRUE);
 }
 void Fill(HDC dc, RECT r, COLORREF color) { HBRUSH brush = CreateSolidBrush(color); FillRect(dc, &r, brush); DeleteObject(brush); }
@@ -103,14 +103,14 @@ void Text(HDC dc, RECT r, const std::wstring& text, COLORREF color, UINT flags =
 RECT Button(int id) {
     RECT r = Client();
     if (id == -1) return {r.right - S(32), S(4), r.right - S(4), S(28)};
-    if (id == ClearSearch) return {r.right-S(36),S(78),r.right-S(8),S(106)};
-    int width = (r.right - S(40)) / 4;
-    int column=id==AddFiles?0:id==AddFolder?1:id==Remove?2:3;
+    if (id == ClearSearch) return {r.right-S(36),S(38),r.right-S(8),S(66)};
+    int width = (r.right - S(32)) / 3;
+    int column=id==AddMenu?0:id==Remove?1:2;
     int x = S(8) + column * (width + S(8));
-    return {x, S(40), x + width, S(68)};
+    return {x, r.bottom-S(60), x + width, r.bottom-S(32)};
 }
 int HitButton(POINT p) {
-    for (int id : {-1, static_cast<int>(AddFiles),static_cast<int>(AddFolder), static_cast<int>(Remove), static_cast<int>(ListMenu),ClearSearch}) {
+    for (int id : {-1, static_cast<int>(AddMenu), static_cast<int>(Remove), static_cast<int>(ListMenu),ClearSearch}) {
         RECT r = Button(id); if (PtInRect(&r, p)) return id;
     }
     return 0;
@@ -185,7 +185,7 @@ void RemoveSelected() {
     for (auto it = selected.rbegin(); it != selected.rend(); ++it) PlayerPlayback().RemoveAt(*it);
     selected.clear(); anchor = -1; status.clear(); ClampTop(); PlWnd_Refresh();
 }
-void Menu(bool add, POINT point) {
+void Menu(bool add, POINT point, bool upwards=false) {
     HMENU menu = CreatePopupMenu();
     if (add) {
         AppendMenuW(menu, MF_STRING, AddFiles, L"Arquivos...");
@@ -203,7 +203,7 @@ void Menu(bool add, POINT point) {
         AppendMenuW(menu, MF_STRING, Clear, L"Limpar lista");
     }
     ClientToScreen(window, &point);
-    TrackPopupMenu(menu, TPM_LEFTALIGN | TPM_RIGHTBUTTON, point.x, point.y, 0, window, nullptr);
+    Ui::TrackThemedMenu(menu, TPM_LEFTALIGN | TPM_RIGHTBUTTON | (upwards?TPM_BOTTOMALIGN:0), point.x, point.y, window, scale);
     DestroyMenu(menu);
 }
 void Paint(HWND hwnd) {
@@ -213,19 +213,19 @@ void Paint(HWND hwnd) {
         const float width=r.right/scale,height=r.bottom/scale;
         canvas.Fill({0,0,width,height},Background);
         canvas.TitleBar(width,L"LITESIC · PLAYLIST",false,hover==-1?2:0,pressed==-1?2:0);
-        for(int id : {static_cast<int>(AddFiles),static_cast<int>(AddFolder),static_cast<int>(Remove),static_cast<int>(ListMenu)}) {
+        for(int id : {static_cast<int>(AddMenu),static_cast<int>(Remove),static_cast<int>(ListMenu)}) {
             RECT b=Button(id);
             canvas.Button({b.left/scale,b.top/scale,(b.right-b.left)/scale,(b.bottom-b.top)/scale},
-                id==AddFiles?L"+ Arquivos":id==AddFolder?L"+ Pasta":id==Remove?L"Remover":L"Lista ▾",
+                id==AddMenu?L"Adicionar ▾":id==Remove?L"Remover":L"Lista ▾",
                 false,hover==id,pressed==id,id!=Remove || !selected.empty());
         }
-        canvas.Fill({8,76,width-16,32},Surface,3); canvas.Stroke({8,76,width-16,32},Border,3);
-        if(query.empty() && GetFocus()!=search) canvas.TextAt({16,78,width-60,28},L"Pesquisar músicas...",Muted);
-        canvas.Button({width-36,78,28,28},L"×",false,hover==ClearSearch,pressed==ClearSearch);
-        canvas.Fill({8,112,width-28,12},Surface);
-        canvas.TextAt({12,110,24,14},L"#",Bronze,Font::Small);
-        canvas.TextAt({42,110,width-130,14},L"Título",Muted,Font::Small);
-        canvas.TextAt({width-80,110,56,14},L"Duração",Muted,Font::Small,true);
+        canvas.Fill({8,36,width-16,32},Surface,3); canvas.Stroke({8,36,width-16,32},Border,3);
+        if(query.empty() && GetFocus()!=search) canvas.TextAt({16,38,width-60,28},L"Pesquisar músicas...",Muted);
+        canvas.Button({width-36,38,28,28},L"×",false,hover==ClearSearch,pressed==ClearSearch);
+        canvas.Fill({8,72,width-28,12},Surface);
+        canvas.TextAt({12,70,24,14},L"#",Muted,Font::Small);
+        canvas.TextAt({42,70,width-130,14},L"Título",Muted,Font::Small);
+        canvas.TextAt({width-80,70,56,14},L"Duração",Muted,Font::Small,true);
         RECT list=List();
         Rect area{list.left/scale,list.top/scale,(list.right-list.left)/scale,(list.bottom-list.top)/scale};
         canvas.Fill(area,Surface); canvas.Clip(area);
@@ -234,14 +234,14 @@ void Paint(HWND hwnd) {
             float y=area.y+(row-top)*24;
             bool current=index==PlayerPlaylist().GetCurrentIndex();
             bool chosen=std::binary_search(selected.begin(),selected.end(),index);
-            if(chosen || current) canvas.Fill({area.x,y,area.w,24},chosen?Border:Active);
+            if(chosen || current) canvas.Fill({area.x,y,area.w,24},chosen?palette.selection:Active);
             canvas.Line(area.x,y+24,area.x+area.w,y+24,Background);
-            canvas.TextAt({12,y,28,24},current?L"▶":std::to_wstring(index+1),current?Green:Muted,Font::Small);
-            canvas.TextAt({42,y,width-126,24},track.displayTitle,track.failed?Danger:track.metadataPending?Muted:Ui::Text);
+            canvas.TextAt({12,y,28,24},current?L"▶":std::to_wstring(index+1),current?Green:chosen?Ui::Text:Muted,Font::Small);
+            canvas.TextAt({42,y,width-126,24},track.displayTitle,(chosen || current)?Ui::Text:track.failed?Danger:track.metadataPending?Muted:Ui::Text);
             wchar_t duration[32]=L"--:--";
             if(track.duration>=0) { unsigned seconds=static_cast<unsigned>(std::min(track.duration,359999.));
                 swprintf(duration,ARRAYSIZE(duration),L"%u:%02u",seconds/60,seconds%60); }
-            canvas.TextAt({width-80,y,56,24},duration,Muted,Font::Small,true);
+            canvas.TextAt({width-80,y,56,24},duration,chosen?Ui::Text:Muted,Font::Small,true);
         }
         if(!view.Count()) canvas.TextAt(area,query.empty()?L"Adicione arquivos ou uma pasta":L"Nenhuma música encontrada",Muted,Font::Body,true);
         if(dragging && insertion>=0) canvas.Line(area.x,area.y+(insertion-top)*24,area.x+area.w,area.y+(insertion-top)*24,Green,2);
@@ -269,62 +269,64 @@ void Paint(HWND hwnd) {
     HDC dc = CreateCompatibleDC(target); HBITMAP bitmap = CreateCompatibleBitmap(target, r.right, r.bottom);
     HGDIOBJ oldBitmap = SelectObject(dc, bitmap);
     HFONT font = CreateFontW(-S(11), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
-        DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, L"Tahoma");
+        DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, Ui::ActiveTheme().typography.body);
     HGDIOBJ oldFont = SelectObject(dc, font); SetBkMode(dc, TRANSPARENT);
-    Fill(dc, r, RGB(60,40,30)); Fill(dc, {0,0,r.right,S(24)}, RGB(90,66,50));
-    Text(dc, {S(6),0,r.right-S(25),S(24)}, L"LITESIC · LISTA", RGB(240,216,144));
+    Fill(dc, r, Ui::NativeColor(Ui::Background)); Fill(dc, {0,0,r.right,S(24)}, Ui::NativeColor(Ui::Border));
+    Text(dc, {S(6),0,r.right-S(25),S(24)}, L"LITESIC · LISTA", Ui::NativeColor(Ui::Text));
     for (int id : {-1, static_cast<int>(AddMenu), static_cast<int>(Remove), static_cast<int>(ListMenu)}) {
         RECT b = Button(id);
-        Fill(dc, b, pressed == id ? RGB(160,128,64) : hover == id ? RGB(138,122,90) : RGB(106,90,58));
+        Fill(dc, b, pressed == id ? Ui::NativeColor(Ui::palette.pressed) : hover == id ? Ui::NativeColor(Ui::Hover) : Ui::NativeColor(Ui::Surface));
         Text(dc, b, id == -1 ? L"×" : id == AddMenu ? L"Adicionar" : id == Remove ? L"Remover" : L"Lista",
-            id == -1 ? RGB(255,64,64) : RGB(240,216,144), DT_CENTER);
+            id == -1 ? Ui::NativeColor(Ui::Danger) : Ui::NativeColor(Ui::Text), DT_CENTER);
     }
-    RECT list = List(); Fill(dc, list, RGB(18,18,18));
+    RECT list = List(); Fill(dc, list, Ui::NativeColor(Ui::Surface));
     int saved = SaveDC(dc); IntersectClipRect(dc, list.left, list.top, list.right, list.bottom);
     for (int index = top; index < PlayerPlaylist().Count(); ++index) {
         RECT row = {list.left, list.top + (index-top)*S(18), list.right, list.top + (index-top+1)*S(18)};
         if (row.top >= list.bottom) break;
         const Track& track = *PlayerPlaylist().At(index);
         bool isSelected = std::binary_search(selected.begin(), selected.end(), index);
-        if (isSelected) Fill(dc, row, RGB(90,74,42));
+        if (isSelected) Fill(dc, row, Ui::NativeColor(Ui::palette.selection));
         std::wstring title = (index == PlayerPlaylist().GetCurrentIndex() ? L"> " : L"  ") + track.displayTitle;
         RECT name = row; name.left += S(3); name.right -= S(49);
-        Text(dc, name, title, track.failed ? RGB(255,128,112) : track.metadataPending ? RGB(184,160,120) : RGB(240,216,144));
+        Text(dc, name, title, track.failed ? Ui::NativeColor(Ui::Danger) : track.metadataPending ? Ui::NativeColor(Ui::Muted) : Ui::NativeColor(Ui::Text));
         RECT duration = row; duration.left = duration.right - S(47); duration.right -= S(3);
         wchar_t time[32] = L"--:--";
         if (track.duration >= 0) {
             unsigned seconds = static_cast<unsigned>(std::min(track.duration, 359999.0));
             swprintf(time, ARRAYSIZE(time), L"%u:%02u", seconds/60, seconds%60);
         }
-        Text(dc, duration, time, RGB(184,160,120), DT_RIGHT);
+        Text(dc, duration, time, Ui::NativeColor(Ui::Muted), DT_RIGHT);
     }
-    if (!PlayerPlaylist().Count()) Text(dc, list, L"Adicione arquivos ou arraste uma pasta", RGB(184,160,120), DT_CENTER);
+    if (!PlayerPlaylist().Count()) Text(dc, list, L"Adicione arquivos ou arraste uma pasta", Ui::NativeColor(Ui::Muted), DT_CENTER);
     if (dragging && insertion >= 0) {
         int y = list.top + (insertion-top)*S(18);
-        Fill(dc, {list.left,y-S(1),list.right,y+S(1)}, RGB(102,204,68));
+        Fill(dc, {list.left,y-S(1),list.right,y+S(1)}, Ui::NativeColor(Ui::Green));
     }
     RestoreDC(dc, saved);
-    RECT rail = {list.right+S(3),list.top,r.right-S(4),list.bottom}; Fill(dc,rail,RGB(42,42,42));
+    RECT rail = {list.right+S(3),list.top,r.right-S(4),list.bottom}; Fill(dc,rail,Ui::NativeColor(Ui::palette.sliderTrack));
     int count = PlayerPlaylist().Count();
     if (count > Visible()) {
         int height = rail.bottom - rail.top, thumb = std::max(S(12), height*Visible()/count);
         int y = rail.top + (height-thumb)*top/(count-Visible());
-        Fill(dc, {rail.left,y,rail.right,y+thumb}, RGB(192,160,96));
+        Fill(dc, {rail.left,y,rail.right,y+thumb}, Ui::NativeColor(Ui::Bronze));
     }
     std::wstring footer = status;
     if (footer.empty()) footer = std::to_wstring(count) + L" faixas · " + std::to_wstring(selected.size()) +
         L" selecionadas" + (worker.Busy() ? L" · lendo..." : L"");
-    Text(dc, {S(5),r.bottom-S(23),r.right-S(5),r.bottom-S(3)}, footer, RGB(184,160,120));
+    Text(dc, {S(5),r.bottom-S(23),r.right-S(5),r.bottom-S(3)}, footer, Ui::NativeColor(Ui::Muted));
     BitBlt(target,0,0,r.right,r.bottom,dc,0,0,SRCCOPY);
     SelectObject(dc,oldFont); DeleteObject(font); SelectObject(dc,oldBitmap); DeleteObject(bitmap); DeleteDC(dc);
     EndPaint(hwnd,&ps);
 }
 LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     POINT point{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
+    LRESULT menuResult{};
+    if(Ui::ThemeMenuMessage(message,wp,lp,menuResult)) return menuResult;
     switch (message) {
     case WM_CREATE: window = hwnd; scale = MainWnd_DPIScaleFloat(1); DragAcceptFiles(hwnd,TRUE);
         query.clear(); view.Update(PlayerPlaylist(),query);
-        searchBackground=CreateSolidBrush(RGB(0x2B,0x20,0x18));
+        searchBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
         search=CreateWindowExW(0,L"EDIT",L"",WS_CHILD|WS_TABSTOP|ES_AUTOHSCROLL,
             0,0,1,1,hwnd,reinterpret_cast<HMENU>(SearchId),GetModuleHandleW(nullptr),nullptr);
         SendMessageW(search,EM_SETLIMITTEXT,512,0); LayoutSearch();
@@ -334,8 +336,11 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     case WM_ERASEBKGND: return 1;
     case WM_PAINT: Paint(hwnd); return 0;
     case WM_SIZE: LayoutSearch(); ClampTop(); InvalidateRect(hwnd,nullptr,FALSE); return 0;
-    case WM_CTLCOLOREDIT: SetTextColor(reinterpret_cast<HDC>(wp),RGB(0xE6,0xE1,0xD7));
-        SetBkColor(reinterpret_cast<HDC>(wp),RGB(0x2B,0x20,0x18)); return reinterpret_cast<LRESULT>(searchBackground);
+    case Ui::WM_THEME_CHANGED:
+        DeleteObject(searchBackground);searchBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
+        LayoutSearch();InvalidateRect(hwnd,nullptr,FALSE);InvalidateRect(search,nullptr,TRUE);return 0;
+    case WM_CTLCOLOREDIT: SetTextColor(reinterpret_cast<HDC>(wp),Ui::NativeColor(Ui::Text));
+        SetBkColor(reinterpret_cast<HDC>(wp),Ui::NativeColor(Ui::Surface)); return reinterpret_cast<LRESULT>(searchBackground);
     case WM_ENTERSIZEMOVE:
         sizeMoveLoop=true; GetCursorPos(&moveCursor); GetWindowRect(hwnd,&moveOrigin); return 0;
     case WM_MOVING: {
@@ -392,7 +397,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     case WM_LBUTTONDOWN: {
         SetFocus(hwnd); pressed = HitButton(point);
         if (pressed) { SetCapture(hwnd); InvalidateRect(hwnd,nullptr,FALSE); return 0; }
-        if(point.y>=S(76) && point.y<S(108)) { ShowWindow(search,SW_SHOW); SetFocus(search); return 0; }
+        if(point.y>=S(36) && point.y<S(68)) { ShowWindow(search,SW_SHOW); SetFocus(search); return 0; }
         RECT list=List();
         if (point.x>list.right && point.y>=list.top && point.y<list.bottom && view.Count()>Visible()) {
             scrollDrag=true; SetCapture(hwnd);
@@ -442,7 +447,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
             else if (button==AddFiles) PlWnd_AddFiles(hwnd);
             else if (button==AddFolder) FolderDialog();
             else if (button==ClearSearch) { SetWindowTextW(search,L""); SetFocus(search); }
-            else Menu(button==AddMenu,{Button(button).left,Button(button).bottom});
+            else Menu(button==AddMenu,{Button(button).left,Button(button).top},true);
         } else if (moved && insertion>=0) {
             auto ids=SelectedIds(); PlayerPlaylist().MoveSelection(selected,insertion); RestoreSelection(ids);
         } else if (!scrolled && deferSelection) { int row=HitRow(point); if (row>=0) selected={row}; }
@@ -532,6 +537,21 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
             std::wstring error;
             if (!SaveM3U(sessionPath,PlayerPlaylist().Tracks(),error))
                 MessageBoxW(mainWindow,(L"Não foi possível preservar a playlist.\n"+error).c_str(),L"LiteSic",MB_OK|MB_ICONERROR);
+            else {
+                const int index=selected.empty()?-1:selected.front();
+                const Track* track=PlayerPlaylist().At(index);
+                std::wstring state=L"Index="+std::to_wstring(index)+L'\0'+L"Path="+(track?track->path:L"")+L'\0';
+                state+=L'\0';
+                // Profile APIs otherwise create ANSI files, losing non-ANSI paths.
+                // This dedicated, optional sidecar contains only our selection section.
+                const std::wstring ini=sessionPath+L".ini";
+                HANDLE file=CreateFileW(ini.c_str(),GENERIC_WRITE,0,nullptr,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,nullptr);
+                const WORD bom=0xfeff;DWORD written=0;
+                bool saved=file!=INVALID_HANDLE_VALUE && WriteFile(file,&bom,sizeof(bom),&written,nullptr) && written==sizeof(bom);
+                if(file!=INVALID_HANDLE_VALUE) CloseHandle(file);
+                if(!saved || !WritePrivateProfileSectionW(L"Selection",state.c_str(),ini.c_str()))
+                    MessageBoxW(mainWindow,L"Não foi possível preservar a seleção da playlist.",L"LiteSic",MB_OK|MB_ICONWARNING);
+            }
         }
         sessionPath.clear(); search=nullptr; DeleteObject(searchFont); searchFont=nullptr;
         DeleteObject(searchBackground); searchBackground=nullptr; canvas.DiscardTarget(); window=nullptr; return 0;
@@ -575,6 +595,14 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
                 std::vector<Track> tracks; std::wstring error;
                 if (LoadM3U(sessionPath,tracks,error)) {
                     for (const auto& track:tracks) AddTrack(track);
+                    std::wstring ini=sessionPath+L".ini";
+                    int index=static_cast<int>(GetPrivateProfileIntW(L"Selection",L"Index",-1,ini.c_str()));
+                    wchar_t path[32768]{};
+                    GetPrivateProfileStringW(L"Selection",L"Path",L"",path,ARRAYSIZE(path),ini.c_str());
+                    if(auto track=PlayerPlaylist().At(index); track && track->path==path) {
+                        selected={index};anchor=index;view.Update(PlayerPlaylist(),query);
+                        top=view.Row(index)-Visible()/2;
+                    }
                 } else {
                     status=error;
                     // Do not replace an unreadable session with an empty list.

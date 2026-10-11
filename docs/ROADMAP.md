@@ -37,6 +37,17 @@ e [relatório com testes/capturas/limitações](design/UI-VALIDATION-2026-10-11.
 Encerramento atualizado da M5, investigação de memória e preparação da M6:
 [relatório técnico](M5-CLOSEOUT-2026-10-11.md). M6 não iniciada.
 
+## Ampliação visual — temas
+
+36 temas implementados, com aplicação imediata, persistência e seletor de
+categorias/prévias. Quatro builds e 356 verificações passaram; 27 guardas de
+automação e carga sustentada de 1.980 trocas por variante passaram. Aceite
+visual humano dos novos temas pendente; M5 funcional mantém seu aceite
+anterior. M6/DSP não iniciada. [Arquitetura, catálogo e evidências](THEMES.md).
+Complemento entregue: seleção primária restaurada ao reabrir, comandos da
+playlist no rodapé, dropdown Adicionar e seletor/menus com tema compartilhado.
+[Relatório e nova validação nas quatro variantes](PLAYLIST-UI-2026-10-11.md).
+
 ## Futuro (fora do roadmap atual)
 
 Streaming (rádios HTTP/Icecast), skins, mini-player, bandeja do sistema,

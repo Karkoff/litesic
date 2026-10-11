@@ -1,0 +1,766 @@
+{
+  "result": "PASS",
+  "tests_per_variant": 89,
+  "total_tests": 356,
+  "driver_guards": 27,
+  "sustained_switches_per_variant": 1980,
+  "captures": [
+    {
+      "label": "themes-final2-original-main",
+      "file": "themes-final2-original-main.png",
+      "sha256": "5abdf99970680b55a37bd04c347ddd3aae86be68caa6cf2b97fc62bcc1191832",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:28:50.256866+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-original-playlist",
+      "file": "themes-final2-original-playlist.png",
+      "sha256": "1a3ec90e9b1e26d8ee4dbf51f7169acc0e3fae1ac83a50dae3ba1a85debd1d97",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:28:53.999741+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-dark-main",
+      "file": "themes-final2-dark-main.png",
+      "sha256": "811b51a94ac376968987aea0add458b803449498b392b5fe69f54d9d06a85914",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:30:03.046371+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-dark-playlist",
+      "file": "themes-final2-dark-playlist.png",
+      "sha256": "dc93e862c040bc57488c43a22726c8ebcd890c57fbc93a745ab4d9f8116f146c",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:30:07.600717+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-light-main",
+      "file": "themes-final2-light-main.png",
+      "sha256": "bea9e328f580796e056c7bbd8b036c8e0b044b8954a7d958dc491a1acfe3130e",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:30:25.138745+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-light-playlist",
+      "file": "themes-final2-light-playlist.png",
+      "sha256": "97b282fc57c59070ced354be2422257e6fc1c1346ba7ac44c78e6281ea419382",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:30:27.746431+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-inverse-main",
+      "file": "themes-final2-inverse-main.png",
+      "sha256": "13a8f9f50aca626f489456bc8167214486989169c5ac19ddc3cea8dbee60053b",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:30:47.509626+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-inverse-playlist",
+      "file": "themes-final2-inverse-playlist.png",
+      "sha256": "2ac4daa9894390894bf848d4f32a850b25707766bd46d88a89cff54b58d2be45",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:30:50.479625+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-summer-main",
+      "file": "themes-final2-summer-main.png",
+      "sha256": "098bda6f74410fe76a85b6013b05f4a3eff86ec3448fa012d3df216f492d37e7",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:31:10.166676+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-summer-playlist",
+      "file": "themes-final2-summer-playlist.png",
+      "sha256": "a8ad5ebcc74fb4a340272b050bb867a092e776a02ff3f77b792be43924f4c287",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:31:14.887450+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-christmas-main",
+      "file": "themes-final2-christmas-main.png",
+      "sha256": "5c0b13b8c77ec10a220dc48d9699bd874569b6a90ee9f1c32a357c63f0e93778",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:31:35.857021+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-christmas-playlist",
+      "file": "themes-final2-christmas-playlist.png",
+      "sha256": "c017f30a166d3c9ebbdf3837823572f67f7ef778cab4316c18cc543c85293da3",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:31:38.623571+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-halloween-main",
+      "file": "themes-final2-halloween-main.png",
+      "sha256": "eb656ea75b6724b39ed212a72bf468a1b790e5f45753d6ab2bee41ec810cfb19",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:31:59.792623+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-halloween-playlist",
+      "file": "themes-final2-halloween-playlist.png",
+      "sha256": "b01b44cf1467a2c947c9f8f43d7369a4d9acc3adc10a31f4e52c66e8c601a856",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:32:03.715430+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-cyberpunk-main",
+      "file": "themes-final2-cyberpunk-main.png",
+      "sha256": "ab7584c339ee17c39a51d0dc20b2dcd8b45a15a350a8c0ea05b2c28e8b59d275",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:32:23.571785+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-cyberpunk-playlist",
+      "file": "themes-final2-cyberpunk-playlist.png",
+      "sha256": "16d350a6f2d51de96563a5bb9623b3a1e8003d7f4dcc54a9c90b2eb1aa37a2c9",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:32:26.888649+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-selector-original",
+      "file": "themes-final2-selector-original.png",
+      "sha256": "dd7e53144f179a0a98abcd398b8ce0c9b33dc8fb7293fc5dba8a6829c4e93b2e",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2361,
+        1500
+      ],
+      "client": [
+        780,
+        597
+      ],
+      "utc": "2026-10-11T13:29:27.639280+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-cyberpunk-themes",
+      "file": "themes-final2-cyberpunk-themes.png",
+      "sha256": "5b9f4b6fcc19d577d494a2a1bb66db417b4e68422c2bc13cdfe5b34591845530",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2361,
+        1500
+      ],
+      "client": [
+        780,
+        597
+      ],
+      "utc": "2026-10-11T13:32:29.891046+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-final2-restore-original",
+      "file": "themes-final2-restore-original.png",
+      "sha256": "150b39fd30fd7e6949086debd486036cc76c9f739d3c65e126d62574ddafa935",
+      "process": {
+        "pid": 17324,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:28:50.452000+00:00",
+        "sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697"
+      },
+      "rect": [
+        1575,
+        863,
+        2361,
+        1500
+      ],
+      "client": [
+        780,
+        597
+      ],
+      "utc": "2026-10-11T13:32:50.708849+00:00",
+      "stage": "final"
+    },
+    {
+      "label": "themes-playing-cyberpunk",
+      "file": "themes-playing-cyberpunk.png",
+      "sha256": "089f93e4a6f9c39a961bc54939029738c4c9efc725bf3f944b34b6a8ea29e156",
+      "process": {
+        "pid": 57700,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:13:33.912000+00:00",
+        "sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:19:00.717519+00:00",
+      "stage": "before final contrast adjustments"
+    },
+    {
+      "label": "themes-playing-light-main",
+      "file": "themes-playing-light-main.png",
+      "sha256": "7f85df5efb6e3d6b615a0ec334103f4dfdd7bc278645137856393b568732119d",
+      "process": {
+        "pid": 57700,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:13:33.912000+00:00",
+        "sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:19:43.311484+00:00",
+      "stage": "before final contrast adjustments"
+    },
+    {
+      "label": "themes-playing-light-playlist",
+      "file": "themes-playing-light-playlist.png",
+      "sha256": "c7d14d8401e54fb1c3651c95d9164bec339cd1e84f3519e1039bd69161e99220",
+      "process": {
+        "pid": 57700,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:13:33.912000+00:00",
+        "sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:19:45.942391+00:00",
+      "stage": "before final contrast adjustments"
+    },
+    {
+      "label": "themes-restored-light-main",
+      "file": "themes-restored-light-main.png",
+      "sha256": "bea9e328f580796e056c7bbd8b036c8e0b044b8954a7d958dc491a1acfe3130e",
+      "process": {
+        "pid": 52540,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:21:23.186000+00:00",
+        "sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "utc": "2026-10-11T13:21:22.985122+00:00",
+      "stage": "before final contrast adjustments"
+    },
+    {
+      "label": "themes-restored-light-playlist",
+      "file": "themes-restored-light-playlist.png",
+      "sha256": "97b282fc57c59070ced354be2422257e6fc1c1346ba7ac44c78e6281ea419382",
+      "process": {
+        "pid": 52540,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:21:23.186000+00:00",
+        "sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "utc": "2026-10-11T13:21:39.421783+00:00",
+      "stage": "before final contrast adjustments"
+    },
+    {
+      "label": "themes-final-restore-pass",
+      "file": "themes-final-restore-pass.png",
+      "sha256": "150b39fd30fd7e6949086debd486036cc76c9f739d3c65e126d62574ddafa935",
+      "process": {
+        "pid": 56388,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T13:23:37.890000+00:00",
+        "sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381"
+      },
+      "rect": [
+        1575,
+        863,
+        2361,
+        1500
+      ],
+      "client": [
+        780,
+        597
+      ],
+      "utc": "2026-10-11T13:24:38.440612+00:00",
+      "stage": "before final contrast adjustments"
+    }
+  ],
+  "original_empty_player_matches_baseline": true,
+  "human_visual_acceptance": "pending",
+  "binary_sha256": "7a9d6c55dfc0a490b20433bb50961d58a9e089949b5a5af594bba77ce0b71697",
+  "supplemental_binary_sha256": "a62fa7c9cb5cc19bbaa4acdaa24ead416544a2225207424a7b8f7fcc33100381",
+  "artifacts": [
+    {
+      "file": "build-32-debug.txt",
+      "sha256": "4f33b69c6fb99ff54ae81890775b625fe271a5f1ad22ba8bfdbc52f11ad55503"
+    },
+    {
+      "file": "build-32-release.txt",
+      "sha256": "0709ecac3d6839dd66063aeda38832671269b3646e084151338eccf1f88b91c7"
+    },
+    {
+      "file": "build-64-debug.txt",
+      "sha256": "40cf5e2b23945ad61facb6d1c30eb85f7f26e6091e3925e54e3d91906f393064"
+    },
+    {
+      "file": "build-64-release.txt",
+      "sha256": "402338ac3749157fd7f45b7ea9a4b0adb0dfe99fbc6213f02df14be2670262dc"
+    },
+    {
+      "file": "catalog.md",
+      "sha256": "f0e591d30f56d701434d286afe2156d7016cce008c41098d502b4723d413c623"
+    },
+    {
+      "file": "driver-tests.txt",
+      "sha256": "aca991ae6c9e9165b923ee80261a5aafe81008732002c721fcf7c7a3e9751cd3"
+    },
+    {
+      "file": "index.html",
+      "sha256": "85917081f5304e4e78905b8443fb108dea8b16195e7cee0b2495158e25afc18b"
+    },
+    {
+      "file": "memory-32-debug.jsonl",
+      "sha256": "a121379aeb5885e2e64c37af17340877078ccc4c1b7c6d1bf10b4f2275e74aaa"
+    },
+    {
+      "file": "memory-32-release.jsonl",
+      "sha256": "78e3f7b87975438d8439c9bef2c92de975f629a085f589c81334554d1d2ded76"
+    },
+    {
+      "file": "memory-64-debug.jsonl",
+      "sha256": "e7a6f99bf18b73fc40ee0d680dd77a20e6b1c12e8de73c1f4e38af8c86b4bba2"
+    },
+    {
+      "file": "memory-64-release.jsonl",
+      "sha256": "943303fbbb282795584abf5c762bb1154c65986dd002e572416207a9cd3aec78"
+    },
+    {
+      "file": "memory-summary.json",
+      "sha256": "30df85f260f91d0e9911af390d3f0085c95b553c7f4c0458cc01e74a53e23998"
+    },
+    {
+      "file": "palettes.json",
+      "sha256": "4f3974b7208d71db9f4445da157e830362a2d0255c76c5e0f48f62bf61d67c1b"
+    },
+    {
+      "file": "restoration.json",
+      "sha256": "fc3245cd3658dbd5da1d9fbbdbf7a978132802791c08292a2b8540c12c8a68a7"
+    },
+    {
+      "file": "source-hashes.json",
+      "sha256": "2efe5e9fccb254caeda8ef9b05afb4f04d3f693c2f326ef1171792f97c7cb019"
+    },
+    {
+      "file": "test-32-debug.txt",
+      "sha256": "fc14242d02f04eaf4db4086100d0023dc2096ffcbb5fe0bccb7d8b577d911326"
+    },
+    {
+      "file": "test-32-release.txt",
+      "sha256": "dc95827be9a33ebf6c0b5475f071e4021e5d5dd2af8258e6791e9792e5b1ca8f"
+    },
+    {
+      "file": "test-64-debug.txt",
+      "sha256": "512b16d690e3b403310a0371cb048659dd4c5a2d7c5a6e47cbe0ab71ae25e9e1"
+    },
+    {
+      "file": "test-64-release.txt",
+      "sha256": "470785f18b7a873bc7737a5672a7c14b76ba152048dc0e68514f5c0e6110a46f"
+    },
+    {
+      "file": "themes-final-restore-pass.png",
+      "sha256": "150b39fd30fd7e6949086debd486036cc76c9f739d3c65e126d62574ddafa935"
+    },
+    {
+      "file": "themes-final2-christmas-main.png",
+      "sha256": "5c0b13b8c77ec10a220dc48d9699bd874569b6a90ee9f1c32a357c63f0e93778"
+    },
+    {
+      "file": "themes-final2-christmas-playlist.png",
+      "sha256": "c017f30a166d3c9ebbdf3837823572f67f7ef778cab4316c18cc543c85293da3"
+    },
+    {
+      "file": "themes-final2-cyberpunk-main.png",
+      "sha256": "ab7584c339ee17c39a51d0dc20b2dcd8b45a15a350a8c0ea05b2c28e8b59d275"
+    },
+    {
+      "file": "themes-final2-cyberpunk-playlist.png",
+      "sha256": "16d350a6f2d51de96563a5bb9623b3a1e8003d7f4dcc54a9c90b2eb1aa37a2c9"
+    },
+    {
+      "file": "themes-final2-cyberpunk-themes.png",
+      "sha256": "5b9f4b6fcc19d577d494a2a1bb66db417b4e68422c2bc13cdfe5b34591845530"
+    },
+    {
+      "file": "themes-final2-dark-main.png",
+      "sha256": "811b51a94ac376968987aea0add458b803449498b392b5fe69f54d9d06a85914"
+    },
+    {
+      "file": "themes-final2-dark-playlist.png",
+      "sha256": "dc93e862c040bc57488c43a22726c8ebcd890c57fbc93a745ab4d9f8116f146c"
+    },
+    {
+      "file": "themes-final2-halloween-main.png",
+      "sha256": "eb656ea75b6724b39ed212a72bf468a1b790e5f45753d6ab2bee41ec810cfb19"
+    },
+    {
+      "file": "themes-final2-halloween-playlist.png",
+      "sha256": "b01b44cf1467a2c947c9f8f43d7369a4d9acc3adc10a31f4e52c66e8c601a856"
+    },
+    {
+      "file": "themes-final2-inverse-main.png",
+      "sha256": "13a8f9f50aca626f489456bc8167214486989169c5ac19ddc3cea8dbee60053b"
+    },
+    {
+      "file": "themes-final2-inverse-playlist.png",
+      "sha256": "2ac4daa9894390894bf848d4f32a850b25707766bd46d88a89cff54b58d2be45"
+    },
+    {
+      "file": "themes-final2-light-main.png",
+      "sha256": "bea9e328f580796e056c7bbd8b036c8e0b044b8954a7d958dc491a1acfe3130e"
+    },
+    {
+      "file": "themes-final2-light-playlist.png",
+      "sha256": "97b282fc57c59070ced354be2422257e6fc1c1346ba7ac44c78e6281ea419382"
+    },
+    {
+      "file": "themes-final2-original-main.png",
+      "sha256": "5abdf99970680b55a37bd04c347ddd3aae86be68caa6cf2b97fc62bcc1191832"
+    },
+    {
+      "file": "themes-final2-original-playlist.png",
+      "sha256": "1a3ec90e9b1e26d8ee4dbf51f7169acc0e3fae1ac83a50dae3ba1a85debd1d97"
+    },
+    {
+      "file": "themes-final2-restore-original.png",
+      "sha256": "150b39fd30fd7e6949086debd486036cc76c9f739d3c65e126d62574ddafa935"
+    },
+    {
+      "file": "themes-final2-selector-original.png",
+      "sha256": "dd7e53144f179a0a98abcd398b8ce0c9b33dc8fb7293fc5dba8a6829c4e93b2e"
+    },
+    {
+      "file": "themes-final2-summer-main.png",
+      "sha256": "098bda6f74410fe76a85b6013b05f4a3eff86ec3448fa012d3df216f492d37e7"
+    },
+    {
+      "file": "themes-final2-summer-playlist.png",
+      "sha256": "a8ad5ebcc74fb4a340272b050bb867a092e776a02ff3f77b792be43924f4c287"
+    },
+    {
+      "file": "themes-playing-cyberpunk.png",
+      "sha256": "089f93e4a6f9c39a961bc54939029738c4c9efc725bf3f944b34b6a8ea29e156"
+    },
+    {
+      "file": "themes-playing-light-main.png",
+      "sha256": "7f85df5efb6e3d6b615a0ec334103f4dfdd7bc278645137856393b568732119d"
+    },
+    {
+      "file": "themes-playing-light-playlist.png",
+      "sha256": "c7d14d8401e54fb1c3651c95d9164bec339cd1e84f3519e1039bd69161e99220"
+    },
+    {
+      "file": "themes-restored-light-main.png",
+      "sha256": "bea9e328f580796e056c7bbd8b036c8e0b044b8954a7d958dc491a1acfe3130e"
+    },
+    {
+      "file": "themes-restored-light-playlist.png",
+      "sha256": "97b282fc57c59070ced354be2422257e6fc1c1346ba7ac44c78e6281ea419382"
+    }
+  ]
+}

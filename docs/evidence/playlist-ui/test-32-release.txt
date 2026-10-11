@@ -1,0 +1,135 @@
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/32/release/test-test_player_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/32/release/test-test_player_window.exe tests/test_player_window.cpp build/32/release/playlist.o build/32/release/playlist_view.o build/32/release/m3u.o build/32/release/tags.o build/32/release/playback.o build/32/release/playlist_worker.o build/32/release/audio-test.o build/32/release/util.o build/32/release/miniaudio_impl.o build/32/release/ui_theme.o build/32/release/plwnd.o build/32/release/mainwnd.o build/32/release/visualizer.o build/32/release/ui_draw.o build/32/release/ui_player.o build/32/release/eqwnd.o build/32/release/theme_window.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/32/release/test-test_playlist_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/32/release/test-test_playlist_window.exe tests/test_playlist_window.cpp build/32/release/playlist.o build/32/release/playlist_view.o build/32/release/m3u.o build/32/release/tags.o build/32/release/playback.o build/32/release/playlist_worker.o build/32/release/audio-test.o build/32/release/util.o build/32/release/miniaudio_impl.o build/32/release/ui_theme.o build/32/release/plwnd.o build/32/release/mainwnd.o build/32/release/visualizer.o build/32/release/ui_draw.o build/32/release/ui_player.o build/32/release/eqwnd.o build/32/release/theme_window.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/32/release/test-test_themes.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/32/release/test-test_themes.exe tests/test_themes.cpp build/32/release/playlist.o build/32/release/playlist_view.o build/32/release/m3u.o build/32/release/tags.o build/32/release/playback.o build/32/release/playlist_worker.o build/32/release/audio-test.o build/32/release/util.o build/32/release/miniaudio_impl.o build/32/release/ui_theme.o build/32/release/plwnd.o build/32/release/mainwnd.o build/32/release/visualizer.o build/32/release/ui_draw.o build/32/release/ui_player.o build/32/release/eqwnd.o build/32/release/theme_window.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm -lpsapi
+==> build/32/release/test-build_third_party_smoke.exe
+Dependency smoke: real miniaudio WAV decoding PASS
+==> build/32/release/test-test_fft.exe
+
+=== FFT Tests (M4-T3) ===
+
+  test_fft_sine_peak... (freq=1000Hz peakBin=12 expectedBin=12) PASS
+  test_hann_window... PASS
+  test_log_bins... [0]:0-0 [31]:205-255 (startBins[0]=0) PASS
+  test_fft_zero_input... PASS
+
+Results: 4/4 tests passed
+
+==> build/32/release/test-test_format_time.exe
+
+=== M3-T1: FormatTime unit tests ===
+
+  test 1: FormatTime(0s, elapsed) = "00:00"                    test 2: FormatTime(45s, elapsed) = "00:45"                   test 3: FormatTime(125s, elapsed) = "02:05"                  test 4: FormatTime(45s, remaining, dur=120s) = "-01:15"      test 5: FormatTime(0s, remaining) = "02:00" (no minus at start)   test 6: FormatTime(7200s, elapsed) = "99:59" (capped)        test 7: FormatTime(59.6s, elapsed) = "01:00" (rounded)       test 8: FormatTime with tiny buffer (cchMax < 6) — no crash   test 9: FormatTime(59s, elapsed) = "00:59"                   test 10: FormatTime(3600s, elapsed) = "60:00"
+--- Results: 10 tests, 0 failures ---
+
+==> build/32/release/test-test_map_sample_to_y.exe
+
+=== MapSampleToY Tests (M4-T2) ===
+
+  test_zero_amplitude... PASS
+  test_positive_amplitude... PASS
+  test_negative_amplitude... PASS
+  test_clamping... PASS
+  test_small_height... PASS
+  test_linear_interpolation... PASS
+
+Results: 6/6 tests passed
+
+==> build/32/release/test-test_ring_buffer.exe
+
+=== Ring Buffer Tests (M4-T1) ===
+
+  test_write_read_order... PASS
+  test_wraparound... (writePos=0 count=512) (writePos=8 count=512) [ 519 518 517 516 515 514 513 512 ]
+PASS
+  test_empty_read... PASS
+  test_partial_read... PASS
+  test_write_full_overwrite... PASS
+  test_large_read... PASS
+
+Results: 6/6 tests passed
+
+==> build/32/release/test-test_audio_integration.exe
+PASS mismatched_rate_duration_seek_position
+PASS no_track_failure_and_reload
+PASS decoder_formats
+PASS real_controller_natural_end
+PASS real_repeat_one_restarts_loaded_sound
+PASS visualization_callback_does_not_wait
+6 real audio cases
+==> build/32/release/test-test_m3u.exe
+PASS relative_absolute_extinf
+PASS plain_and_unsupported
+PASS malformed_extinf
+PASS unicode_roundtrip
+PASS encoding_errors_and_legacy
+PASS actual_file_roundtrip_and_errors
+6 m3u cases
+==> build/32/release/test-test_playback.exe
+PASS end_advances_stops
+PASS repeat_wrap_and_previous
+PASS missing_skip_and_all_bad_bound
+PASS paused_no_advance_and_remove
+PASS failed_explicit_and_clear
+PASS repeat_modes_cycle
+PASS repeat_one_eof_and_manual_navigation
+PASS repeat_one_preserves_shuffle_cycle
+8 playback cases
+==> build/32/release/test-test_player_window.exe
+PASS transport_and_seek_use_real_audio
+PASS capture_cancel_and_release_outside
+PASS geometry_dpi_and_keyboard_seek
+3 player window cases
+==> build/32/release/test-test_playlist.exe
+PASS add_remove_identity
+PASS invalid_operations
+PASS reorder_current
+PASS multiple_reorder
+PASS sequential_limits
+PASS sequential_repeat
+PASS shuffled_cycle
+PASS shuffled_history_and_add
+PASS sort_and_visible_shuffle
+PASS selection_range_toggle
+PASS extensions_and_titles
+11 playlist cases
+==> build/32/release/test-test_playlist_view.exe
+PASS filter_preserves_canonical_playback
+PASS unicode_metadata_and_empty_results
+2 playlist view cases
+==> build/32/release/test-test_playlist_window.exe
+PASS dropped_files_and_invalid_filter
+PASS dropped_folder_recursive_and_missing_file
+PASS scale_layout_and_overlap
+PASS dock_follow_detach_and_reattach
+PASS filter_selection_removes_canonical_item
+PASS play_selection_and_center_current
+PASS session_survives_window_restart
+7 playlist window integration cases
+==> build/32/release/test-test_playlist_worker.exe
+PASS actual_metadata_job
+PASS recursive_filter
+PASS generation_cancel_and_shutdown
+3 worker cases
+==> build/32/release/test-test_tags.exe
+PASS mp3_v3
+PASS mp3_v4
+PASS flac_comments
+PASS ogg_spanning_pages
+PASS id3_v1
+PASS wav_native_duration
+PASS missing_invalid
+PASS truncation_bounds
+8 tags cases
+==> build/32/release/test-test_themes.exe
+PASS catalog_and_contrast
+PASS typography_fits_fixed_controls
+PASS selection_persistence_and_fallback
+PASS all_windows_and_state_survive_switches
+PASS resource_recovery_and_repeat_switching
+PASS selector_categories_restore_and_new_window
+PASS sustained_switch_memory
+7 theme cases
+==> build/32/release/test-test_ui_draw.exe
+PASS dc_render_resize_recreate
+1 UI render cases
+All tests passed.

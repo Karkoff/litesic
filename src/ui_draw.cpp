@@ -15,11 +15,24 @@ bool Canvas::Initialize() {
     if (!factory_ && FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED,&factory_))) return false;
     if (!write_ && FAILED(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),
         reinterpret_cast<IUnknown**>(&write_)))) return false;
-    const float sizes[] = {12,10,14,27};
+    if(themeGeneration_!=ThemeGeneration()) {
+        for(auto& p:ellipsis_) Release(p);
+        for(auto& p:fonts_) Release(p);
+        themeGeneration_=ThemeGeneration();
+    }
+    const auto& typography=ActiveTheme().typography;
     for (int i=0;i<4;++i) if (!fonts_[i]) {
-        if (FAILED(write_->CreateTextFormat(i==3?L"Consolas":L"Segoe UI",nullptr,
-            i>=2?DWRITE_FONT_WEIGHT_SEMI_BOLD:DWRITE_FONT_WEIGHT_NORMAL,DWRITE_FONT_STYLE_NORMAL,
-            DWRITE_FONT_STRETCH_NORMAL,sizes[i],L"pt-BR",&fonts_[i]))) return false;
+        const wchar_t* family=i==3?typography.digital:typography.body;
+        IDWriteFontCollection* collection=nullptr;
+        if(SUCCEEDED(write_->GetSystemFontCollection(&collection,FALSE))) {
+            UINT32 index=0;BOOL exists=FALSE;collection->FindFamilyName(family,&index,&exists);
+            if(!exists) family=L"Segoe UI";
+            collection->Release();
+        }
+        if (FAILED(write_->CreateTextFormat(family,nullptr,
+            static_cast<DWRITE_FONT_WEIGHT>(typography.weights[i]),
+            i==2 && typography.italicHeading?DWRITE_FONT_STYLE_ITALIC:DWRITE_FONT_STYLE_NORMAL,
+            DWRITE_FONT_STRETCH_NORMAL,typography.sizes[i],L"pt-BR",&fonts_[i]))) return false;
         fonts_[i]->SetWordWrapping(DWRITE_WORD_WRAPPING_NO_WRAP);
         fonts_[i]->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
         DWRITE_TRIMMING trim{DWRITE_TRIMMING_GRANULARITY_CHARACTER,0,0};
@@ -73,15 +86,15 @@ void Canvas::TextAt(Rect r,const std::wstring& text,uint32_t color,Font font,boo
     Color(color); target_->DrawText(text.c_str(),static_cast<UINT32>(text.size()),format,Native(r),brush_,D2D1_DRAW_TEXT_OPTIONS_CLIP);
 }
 void Canvas::Button(Rect r,const std::wstring& text,bool active,bool hover,bool pressed,bool enabled,bool focus) {
-    Fill(r,pressed?Border:active?Active:hover?Hover:Surface,3);
+    Fill(r,!enabled?Surface:pressed?palette.pressed:active?Active:hover?Hover:Surface,3);
     Stroke(r,focus?Accent:active?Green:Border,3);
     TextAt(r,text,enabled?(active?Green:Text):Muted,Font::Body,true);
 }
 void Canvas::Slider(Rect r,float value,bool enabled,bool focus) {
     value=std::isfinite(value)?std::max(0.f,std::min(value,1.f)):0;
     float y=r.y+r.h/2, x=r.x+6+(r.w-12)*value;
-    Line(r.x+6,y,r.x+r.w-6,y,Border,4);
-    Line(r.x+6,y,x,y,enabled?Green:Muted,4);
+    Line(r.x+6,y,r.x+r.w-6,y,palette.sliderTrack,4);
+    Line(r.x+6,y,x,y,enabled?palette.sliderFill:Muted,4);
     Circle(x,y,5,Bronze,enabled?Text:Muted);
     if (focus) Stroke(r,Accent,3);
 }
@@ -93,4 +106,87 @@ void Canvas::TitleBar(float width,const std::wstring& caption,bool minimize,int 
 }
 void Canvas::Clip(Rect r) { target_->PushAxisAlignedClip(Native(r),D2D1_ANTIALIAS_MODE_PER_PRIMITIVE); }
 void Canvas::Unclip() { target_->PopAxisAlignedClip(); }
+}
+
+// A short-lived renderer keeps native popup navigation, submenus and dismissal.
+// Resources and item data exist only during TrackPopupMenu's modal loop.
+#include <memory>
+#include <vector>
+namespace Ui {
+namespace {
+struct MenuEntry { HMENU menu; UINT position,type; std::wstring text; bool submenu; };
+struct MenuSkin {
+    std::vector<std::unique_ptr<MenuEntry>> entries;
+    HFONT font; HBRUSH background; float scale;
+    int S(int n) const { return static_cast<int>(std::lround(n*scale)); }
+    explicit MenuSkin(float value):scale(value) {
+        font=CreateFontW(-S(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
+            OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,ActiveTheme().typography.body);
+        background=CreateSolidBrush(NativeColor(Surface));
+    }
+    void Prepare(HMENU menu) {
+        MENUINFO info{};info.cbSize=sizeof(info);info.fMask=MIM_BACKGROUND;info.hbrBack=background;SetMenuInfo(menu,&info);
+        for(int i=0;i<GetMenuItemCount(menu);++i) {
+            wchar_t text[512]{};MENUITEMINFOW item{};item.cbSize=sizeof(item);
+            item.fMask=MIIM_FTYPE|MIIM_STRING|MIIM_SUBMENU;item.dwTypeData=text;item.cch=ARRAYSIZE(text);
+            if(!GetMenuItemInfoW(menu,i,TRUE,&item)) continue;
+            auto entry=std::make_unique<MenuEntry>(MenuEntry{menu,static_cast<UINT>(i),item.fType,text,item.hSubMenu!=nullptr});
+            if(item.hSubMenu) Prepare(item.hSubMenu);
+            item.fMask=MIIM_FTYPE|MIIM_DATA;item.fType|=MFT_OWNERDRAW;
+            item.dwItemData=reinterpret_cast<ULONG_PTR>(entry.get());SetMenuItemInfoW(menu,i,TRUE,&item);
+            entries.push_back(std::move(entry));
+        }
+    }
+    ~MenuSkin() {
+        for(auto& e:entries) {
+            MENUITEMINFOW item{};item.cbSize=sizeof(item);item.fMask=MIIM_FTYPE|MIIM_DATA;item.fType=e->type;
+            SetMenuItemInfoW(e->menu,e->position,TRUE,&item);
+            MENUINFO info{};info.cbSize=sizeof(info);info.fMask=MIM_BACKGROUND;info.hbrBack=nullptr;SetMenuInfo(e->menu,&info);
+        }
+        DeleteObject(font);DeleteObject(background);
+    }
+    MenuEntry* Find(ULONG_PTR data) {
+        for(auto& e:entries) if(reinterpret_cast<ULONG_PTR>(e.get())==data) return e.get();
+        return nullptr;
+    }
+};
+MenuSkin* activeMenu=nullptr;
+}
+BOOL TrackThemedMenu(HMENU menu,UINT flags,int x,int y,HWND owner,float scale) {
+    MenuSkin skin(scale);skin.Prepare(menu);auto previous=activeMenu;activeMenu=&skin;
+    BOOL result=TrackPopupMenu(menu,flags,x,y,0,owner,nullptr);activeMenu=previous;return result;
+}
+bool ThemeMenuMessage(UINT message,WPARAM,LPARAM lp,LRESULT& result) {
+    if(!activeMenu) return false;
+    auto& skin=*activeMenu;
+    if(message==WM_MEASUREITEM) {
+        auto item=reinterpret_cast<MEASUREITEMSTRUCT*>(lp);
+        if(item->CtlType!=ODT_MENU) return false;
+        auto entry=skin.Find(item->itemData);if(!entry) return false;
+        HDC dc=GetDC(nullptr);auto old=SelectObject(dc,skin.font);SIZE size{};
+        GetTextExtentPoint32W(dc,entry->text.c_str(),static_cast<int>(entry->text.size()),&size);
+        SelectObject(dc,old);ReleaseDC(nullptr,dc);
+        item->itemWidth=size.cx+skin.S(52);item->itemHeight=skin.S(entry->type&MFT_SEPARATOR?10:30);
+        result=TRUE;return true;
+    }
+    if(message!=WM_DRAWITEM) return false;
+    auto item=reinterpret_cast<DRAWITEMSTRUCT*>(lp);if(item->CtlType!=ODT_MENU) return false;
+    auto entry=skin.Find(item->itemData);if(!entry) return false;
+    HDC dc=item->hDC;RECT r=item->rcItem;
+    bool chosen=(item->itemState&ODS_SELECTED)!=0;
+    HBRUSH brush=CreateSolidBrush(NativeColor(chosen?Hover:Surface));FillRect(dc,&r,brush);DeleteObject(brush);
+    int saved=SaveDC(dc);SetBkMode(dc,TRANSPARENT);SelectObject(dc,skin.font);
+    if(entry->type&MFT_SEPARATOR) {
+        HPEN pen=CreatePen(PS_SOLID,1,NativeColor(Border));SelectObject(dc,pen);
+        MoveToEx(dc,r.left+skin.S(8),(r.top+r.bottom)/2,nullptr);LineTo(dc,r.right-skin.S(8),(r.top+r.bottom)/2);
+        RestoreDC(dc,saved);DeleteObject(pen);
+    } else {
+        SetTextColor(dc,NativeColor(item->itemState&ODS_DISABLED?Muted:Text));
+        RECT text=r;text.left+=skin.S(28);text.right-=skin.S(24);
+        DrawTextW(dc,entry->text.c_str(),-1,&text,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);
+        if(item->itemState&ODS_CHECKED) {text=r;text.left+=skin.S(6);text.right=text.left+skin.S(20);DrawTextW(dc,L"✓",1,&text,DT_SINGLELINE|DT_VCENTER);}
+        RestoreDC(dc,saved);
+    }
+    result=TRUE;return true;
+}
 }

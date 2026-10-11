@@ -1,0 +1,434 @@
+{
+  "32-debug": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 68870144,
+      "working_set": 72134656,
+      "gdi": 52,
+      "user": 51,
+      "handles": 695
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 66510848,
+      "working_set": 70356992,
+      "gdi": 52,
+      "user": 51,
+      "handles": 695
+    },
+    "samples": [
+      {
+        "switches": 180,
+        "private_bytes": 68870144,
+        "working_set": 72134656,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 360,
+        "private_bytes": 68870144,
+        "working_set": 72134656,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 540,
+        "private_bytes": 68870144,
+        "working_set": 72138752,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 720,
+        "private_bytes": 68870144,
+        "working_set": 72138752,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 900,
+        "private_bytes": 68870144,
+        "working_set": 72138752,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 1080,
+        "private_bytes": 68685824,
+        "working_set": 71979008,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 1260,
+        "private_bytes": 67256320,
+        "working_set": 70565888,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 1440,
+        "private_bytes": 66486272,
+        "working_set": 70332416,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 1620,
+        "private_bytes": 66490368,
+        "working_set": 70336512,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 1800,
+        "private_bytes": 66510848,
+        "working_set": 70356992,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      },
+      {
+        "switches": 1980,
+        "private_bytes": 66510848,
+        "working_set": 70356992,
+        "gdi": 52,
+        "user": 51,
+        "handles": 695
+      }
+    ]
+  },
+  "32-release": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 69246976,
+      "working_set": 68292608,
+      "gdi": 52,
+      "user": 51,
+      "handles": 693
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 66875392,
+      "working_set": 66510848,
+      "gdi": 52,
+      "user": 51,
+      "handles": 693
+    },
+    "samples": [
+      {
+        "switches": 180,
+        "private_bytes": 69246976,
+        "working_set": 68292608,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 360,
+        "private_bytes": 69246976,
+        "working_set": 68292608,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 540,
+        "private_bytes": 69246976,
+        "working_set": 68296704,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 720,
+        "private_bytes": 69246976,
+        "working_set": 68296704,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 900,
+        "private_bytes": 69246976,
+        "working_set": 68296704,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 1080,
+        "private_bytes": 69062656,
+        "working_set": 68136960,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 1260,
+        "private_bytes": 67624960,
+        "working_set": 66719744,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 1440,
+        "private_bytes": 66854912,
+        "working_set": 66486272,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 1620,
+        "private_bytes": 66854912,
+        "working_set": 66486272,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 1800,
+        "private_bytes": 66875392,
+        "working_set": 66506752,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      },
+      {
+        "switches": 1980,
+        "private_bytes": 66875392,
+        "working_set": 66510848,
+        "gdi": 52,
+        "user": 51,
+        "handles": 693
+      }
+    ]
+  },
+  "64-debug": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 94920704,
+      "working_set": 83898368,
+      "gdi": 52,
+      "user": 51,
+      "handles": 822
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 84934656,
+      "working_set": 82120704,
+      "gdi": 52,
+      "user": 51,
+      "handles": 822
+    },
+    "samples": [
+      {
+        "switches": 180,
+        "private_bytes": 94920704,
+        "working_set": 83898368,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 360,
+        "private_bytes": 94920704,
+        "working_set": 83898368,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 540,
+        "private_bytes": 94920704,
+        "working_set": 83902464,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 720,
+        "private_bytes": 94920704,
+        "working_set": 83906560,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 900,
+        "private_bytes": 94920704,
+        "working_set": 83906560,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1080,
+        "private_bytes": 94920704,
+        "working_set": 83906560,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1260,
+        "private_bytes": 85962752,
+        "working_set": 82989056,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1440,
+        "private_bytes": 85962752,
+        "working_set": 82989056,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1620,
+        "private_bytes": 84910080,
+        "working_set": 82096128,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1800,
+        "private_bytes": 84934656,
+        "working_set": 82120704,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1980,
+        "private_bytes": 84934656,
+        "working_set": 82120704,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      }
+    ]
+  },
+  "64-release": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 95596544,
+      "working_set": 80011264,
+      "gdi": 52,
+      "user": 51,
+      "handles": 822
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 85622784,
+      "working_set": 78254080,
+      "gdi": 52,
+      "user": 51,
+      "handles": 822
+    },
+    "samples": [
+      {
+        "switches": 180,
+        "private_bytes": 95596544,
+        "working_set": 80011264,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 360,
+        "private_bytes": 95596544,
+        "working_set": 80011264,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 540,
+        "private_bytes": 95596544,
+        "working_set": 80019456,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 720,
+        "private_bytes": 94818304,
+        "working_set": 80019456,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 900,
+        "private_bytes": 94822400,
+        "working_set": 80023552,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1080,
+        "private_bytes": 94822400,
+        "working_set": 80023552,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1260,
+        "private_bytes": 85585920,
+        "working_set": 78213120,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1440,
+        "private_bytes": 85585920,
+        "working_set": 78213120,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1620,
+        "private_bytes": 85585920,
+        "working_set": 78217216,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1800,
+        "private_bytes": 85610496,
+        "working_set": 78241792,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      },
+      {
+        "switches": 1980,
+        "private_bytes": 85622784,
+        "working_set": 78254080,
+        "gdi": 52,
+        "user": 51,
+        "handles": 822
+      }
+    ]
+  }
+}

@@ -13,6 +13,7 @@ int S(float value) { return static_cast<int>(std::lround(value*scale)); }
 LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp) {
     switch(message) {
     case WM_ERASEBKGND:return 1;
+    case Ui::WM_THEME_CHANGED: InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_NCHITTEST: {
         POINT p{GET_X_LPARAM(lp),GET_Y_LPARAM(lp)}; ScreenToClient(hwnd,&p);
         if(p.y<S(32) && p.x<S(428)) return HTCAPTION;
@@ -51,7 +52,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp) {
             if(!canvas.End()) InvalidateRect(hwnd,nullptr,FALSE);
         } else {
             // Clearly unavailable fallback, never an apparently working EQ.
-            SetBkMode(dc,OPAQUE); SetBkColor(dc,RGB(43,32,24)); SetTextColor(dc,RGB(230,225,215));
+            SetBkMode(dc,OPAQUE); SetBkColor(dc,Ui::NativeColor(Ui::Surface)); SetTextColor(dc,Ui::NativeColor(Ui::Text));
             DrawTextW(dc,L"Equalizador indisponível — DSP pendente",-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
         }
         EndPaint(hwnd,&ps);return 0;

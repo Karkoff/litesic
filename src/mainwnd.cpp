@@ -134,51 +134,51 @@ static void ApplyInterfaceScale(HWND hwnd)
 #define CLASS_NAME L"LiteSic.MainWnd"
 
 /* Cor de fundo da janela (placeholder — arte real vem depois). */
-static const COLORREF BG_COLOR = RGB(0x3c, 0x28, 0x1e);
+#define BG_COLOR (Ui::NativeColor(Ui::Background))
 
 /* Cor da barra de título (placeholder). */
-static const COLORREF TITLEBAR_COLOR = RGB(0x5a, 0x42, 0x32);
+#define TITLEBAR_COLOR (Ui::NativeColor(Ui::Border))
 
 /* Cores dos botões. */
-static const COLORREF BTN_BG_NORMAL   = RGB(0xc0, 0xa0, 0x60);
-static const COLORREF BTN_BG_HOVER    = RGB(0xe0, 0xc0, 0x80);
-static const COLORREF BTN_BG_PRESSED  = RGB(0xa0, 0x80, 0x40);
+#define BTN_BG_NORMAL (Ui::NativeColor(Ui::Surface))
+#define BTN_BG_HOVER (Ui::NativeColor(Ui::Hover))
+#define BTN_BG_PRESSED (Ui::NativeColor(Ui::palette.pressed))
 
 /* Cor do ícone "X" (fechar) — vermelho. */
-static const COLORREF CLOSE_ICON_COLOR = RGB(0xff, 0x40, 0x40);
+#define CLOSE_ICON_COLOR (Ui::NativeColor(Ui::Danger))
 
 /* Cores dos botões de controle (play/pause/stop). */
-static const COLORREF CTRL_BG_NORMAL   = RGB(0x6a, 0x5a, 0x3a);
-static const COLORREF CTRL_BG_HOVER    = RGB(0x8a, 0x7a, 0x5a);
+#define CTRL_BG_NORMAL (Ui::NativeColor(Ui::Surface))
+#define CTRL_BG_HOVER (Ui::NativeColor(Ui::Hover))
 
 /* Cores do display LCD. */
-static const COLORREF LCD_BG_COLOR     = RGB(0x0a, 0x0a, 0x0a);
-static const COLORREF LCD_TEXT_COLOR   = RGB(0x00, 0xff, 0x40); /* verde LCD */
-static const COLORREF LCD_DIM_COLOR    = RGB(0x00, 0x30, 0x10);
+#define LCD_BG_COLOR (Ui::NativeColor(Ui::Display))
+#define LCD_TEXT_COLOR (Ui::NativeColor(Ui::Green)) /* verde LCD */
+#define LCD_DIM_COLOR (Ui::NativeColor(Ui::Active))
 
 /* Cor do título rolando. */
-static const COLORREF TITLE_TEXT_COLOR = RGB(0xf0, 0xd8, 0x90);
+#define TITLE_TEXT_COLOR (Ui::NativeColor(Ui::Text))
 
 /* Cores dos indicadores de áudio (kbps/kHz). */
-static const COLORREF AUDIO_INFO_COLOR = RGB(0xb8, 0xa0, 0x78);
+#define AUDIO_INFO_COLOR (Ui::NativeColor(Ui::Muted))
 
 /* Cor da barra de busca. */
-static const COLORREF SEEK_BAR_BG      = RGB(0x2a, 0x2a, 0x2a);
-static const COLORREF SEEK_BAR_FILL    = RGB(0x66, 0xcc, 0x44);
-static const COLORREF SEEK_BAR_THUMB   = RGB(0xee, 0xee, 0xee);
+#define SEEK_BAR_BG (Ui::NativeColor(Ui::palette.sliderTrack))
+#define SEEK_BAR_FILL (Ui::NativeColor(Ui::palette.sliderFill))
+#define SEEK_BAR_THUMB (Ui::NativeColor(Ui::Text))
 
 /* Cores dos sliders de volume/pan. */
-static const COLORREF SLIDER_BG        = RGB(0x2a, 0x2a, 0x2a);
-static const COLORREF SLIDER_FILL      = RGB(0x66, 0xcc, 0x44);
-static const COLORREF SLIDER_THUMB     = RGB(0xee, 0xee, 0xee);
+#define SLIDER_BG (Ui::NativeColor(Ui::palette.sliderTrack))
+#define SLIDER_FILL (Ui::NativeColor(Ui::palette.sliderFill))
+#define SLIDER_THUMB (Ui::NativeColor(Ui::Text))
 
 /* Cores dos botões de navegação. */
-static const COLORREF NAV_BG_NORMAL    = RGB(0x5a, 0x4a, 0x2a);
-static const COLORREF NAV_BG_HOVER     = RGB(0x7a, 0x6a, 0x4a);
+#define NAV_BG_NORMAL (Ui::NativeColor(Ui::Surface))
+#define NAV_BG_HOVER (Ui::NativeColor(Ui::Hover))
 
 /* Cores dos toggles. */
-static const COLORREF TOGGLE_ON_BG     = RGB(0x44, 0x88, 0x22);
-static const COLORREF TOGGLE_OFF_BG    = RGB(0x3a, 0x3a, 0x3a);
+#define TOGGLE_ON_BG (Ui::NativeColor(Ui::Active))
+#define TOGGLE_OFF_BG (Ui::NativeColor(Ui::Surface))
 
 /* ------------------------------------------------------------------ */
 /* Estado da janela (módulo-local)                                      */
@@ -296,7 +296,7 @@ static void DrawTitleButton(HDC hdc, TitleBarButton btn)
     /* Desenhar ícone "—" (minimizar) ou "X" (fechar). */
     if (btn == BTN_MINIMIZE)
     {
-        HPEN pen = CreatePen(PS_SOLID, 1, RGB(0x00, 0x00, 0x00));
+        HPEN pen = CreatePen(PS_SOLID, 1, Ui::NativeColor(Ui::Text));
         HGDIOBJ oldPen = SelectObject(hdc, pen);
         MoveToEx(hdc, r.left + 4, r.top + r.bottom / 2, NULL);
         LineTo(hdc, r.right - 4, r.top + r.bottom / 2);
@@ -412,7 +412,7 @@ static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
     DeleteObject(bgBrush);
 
     /* Borda sutil. */
-    HPEN pen = CreatePen(PS_SOLID, 1, RGB(0x22, 0x44, 0x22));
+    HPEN pen = CreatePen(PS_SOLID, 1, Ui::NativeColor(Ui::Border));
     HGDIOBJ oldPen = SelectObject(hdc, pen);
     HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(NULL_BRUSH));
     Rectangle(hdc, lcdRect.left, lcdRect.top, lcdRect.right, lcdRect.bottom);
@@ -478,7 +478,7 @@ static void DrawTitleButtonScaled(HDC hdc, TitleBarButton btn)
     FillRect(hdc, &r, brush);
     DeleteObject(brush);
 
-    int iconColor = (btn == BTN_CLOSE) ? RGB(0xff, 0x40, 0x40) : RGB(0x00, 0x00, 0x00);
+    int iconColor = (btn == BTN_CLOSE) ? Ui::NativeColor(Ui::Danger) : Ui::NativeColor(Ui::Text);
     HPEN pen = CreatePen(PS_SOLID, MainWnd_DPIScale(1), iconColor);
     HGDIOBJ oldPen = SelectObject(hdc, pen);
 
@@ -516,7 +516,7 @@ static void DrawLcdDisplayScaled(HDC hdc)
     DeleteObject(bgBrush);
 
     /* Borda sutil. */
-    HPEN pen = CreatePen(PS_SOLID, MainWnd_DPIScale(1), RGB(0x22, 0x44, 0x22));
+    HPEN pen = CreatePen(PS_SOLID, MainWnd_DPIScale(1), Ui::NativeColor(Ui::Border));
     HGDIOBJ oldPen = SelectObject(hdc, pen);
     HGDIOBJ oldBrush = SelectObject(hdc, GetStockObject(NULL_BRUSH));
     Rectangle(hdc, lcdRect.left, lcdRect.top, lcdRect.right, lcdRect.bottom);
@@ -1242,7 +1242,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             RECT prevR = { MainWnd_DPIScale(BTN_PREV_X), MainWnd_DPIScale(NAV_Y),
                            MainWnd_DPIScale(BTN_PREV_X + NAV_BTN_W), MainWnd_DPIScale(NAV_Y + NAV_BTN_H) };
             HBRUSH b = CreateSolidBrush(NAV_BG_NORMAL); FillRect(memDC, &prevR, b); DeleteObject(b);
-            SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
+            SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, Ui::NativeColor(Ui::Text));
             DrawTextW(memDC, L"<<", 2, &prevR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             RECT nextR = { MainWnd_DPIScale(BTN_NEXT_X), MainWnd_DPIScale(NAV_Y),
@@ -1253,13 +1253,13 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             RECT shufR = { MainWnd_DPIScale(BTN_SHUFFLE_X), MainWnd_DPIScale(TOGGLE_Y),
                            MainWnd_DPIScale(BTN_SHUFFLE_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
             b = CreateSolidBrush(g_shuffleOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &shufR, b); DeleteObject(b);
-            SetTextColor(memDC, g_shuffleOn ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
+            SetTextColor(memDC, g_shuffleOn ? Ui::NativeColor(Ui::Text) : AUDIO_INFO_COLOR);
             DrawTextW(memDC, L"SHUF", 4, &shufR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             RECT repR = { MainWnd_DPIScale(BTN_REPEAT_X), MainWnd_DPIScale(TOGGLE_Y),
                           MainWnd_DPIScale(BTN_REPEAT_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
             b = CreateSolidBrush(g_repeatMode != RepeatMode::Off ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
-            SetTextColor(memDC, g_repeatMode != RepeatMode::Off ? RGB(0xff, 0xff, 0xcc) : AUDIO_INFO_COLOR);
+            SetTextColor(memDC, g_repeatMode != RepeatMode::Off ? Ui::NativeColor(Ui::Text) : AUDIO_INFO_COLOR);
             DrawTextW(memDC, g_repeatMode == RepeatMode::One ? L"REP 1" : L"REP", -1, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
@@ -1268,7 +1268,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * ------------------------------------------------------------------ */
         {
             HBRUSH b;
-            SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, RGB(0xff, 0xff, 0xcc));
+            SetBkMode(memDC, TRANSPARENT); SetTextColor(memDC, Ui::NativeColor(Ui::Text));
             RECT playR = { MainWnd_DPIScale(BTN_PLAY_X), MainWnd_DPIScale(BTN_PLAY_Y),
                            MainWnd_DPIScale(BTN_PLAY_X + CTRL_BTN_W), MainWnd_DPIScale(BTN_PLAY_Y + CTRL_BTN_H) };
             b = CreateSolidBrush(CTRL_BG_NORMAL); FillRect(memDC, &playR, b); DeleteObject(b);
@@ -1319,6 +1319,12 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
      * Menu de contexto — Configurações > Aparência > Escala da interface.
      * Clique direito em qualquer ponto da janela.
      * ------------------------------------------------------------------ */
+    case WM_MEASUREITEM: case WM_DRAWITEM: {
+        LRESULT result{};
+        if(Ui::ThemeMenuMessage(msg,wParam,lParam,result)) return result;
+        break;
+    }
+
     case WM_CONTEXTMENU:
     {
         struct ScaleMenuItem { int id; int percent; const wchar_t *label; };
@@ -1342,6 +1348,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         HMENU hMenu = CreatePopupMenu();
         AppendMenuW(hMenu, MF_STRING, 900, L"Lista de reprodução");
+        AppendMenuW(hMenu, MF_STRING, 901, L"Aparência > Temas...");
         AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hScale, L"Aparência > Escala da interface");
 
         int x = (int)(short)LOWORD(lParam);
@@ -1354,7 +1361,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             y = r.top;
         }
 
-        TrackPopupMenu(hMenu, TPM_RIGHTBUTTON, x, y, 0, hwnd, NULL);
+        Ui::TrackThemedMenu(hMenu, TPM_RIGHTBUTTON, x, y, hwnd, MainWnd_DPIScaleFloat(1));
         DestroyMenu(hMenu);
         break;
     }
@@ -1363,6 +1370,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         int cmdId = LOWORD(wParam);
         if (cmdId == 900) { PlWnd_Show(); break; }
+        if (cmdId == 901) { Ui::ShowThemes(hwnd); break; }
         static const struct { int id; int percent; } scaleCmds[] = {
             { IDM_SCALE_AUTO, 0 },   { IDM_SCALE_80, 80 },   { IDM_SCALE_90, 90 },
             { IDM_SCALE_100, 100 }, { IDM_SCALE_110, 110 }, { IDM_SCALE_125, 125 },
@@ -1382,6 +1390,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
 
+    case Ui::WM_THEME_CHANGED:
     case WM_PLAYER_CHANGED:
         InvalidateRect(hwnd, nullptr, FALSE);
         break;

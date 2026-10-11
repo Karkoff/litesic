@@ -1,0 +1,237 @@
+{
+  "captures": [
+    {
+      "file": "adjust-verified-main.png",
+      "sha256": "e5304ea4134e0bf7d02f3929a887e2286bbf9433dd738ab20c04c812819e1f14",
+      "utc": "2026-10-11T14:10:26.730609+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.MainWnd",
+      "client": [
+        690,
+        435
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-playlist.png",
+      "sha256": "f0b89f6c9a088f4d123b0d510b3f8c31f9cd0a902a3c14fec982aaf2cdc5465c",
+      "utc": "2026-10-11T14:10:30.327643+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.PlaylistWnd",
+      "client": [
+        690,
+        540
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-main-menu.png",
+      "sha256": "1f1ac4bd1b8c987156fad3cd439d4b1f4d6db0e7b1b094a77a3d6a1d917261cc",
+      "utc": "2026-10-11T14:11:20.399515+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "#32768",
+      "client": [
+        342,
+        135
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-themes.png",
+      "sha256": "b6d74716dd44679f6a933d7995de8698edf7f99c0738115dde0f4a09469081f6",
+      "utc": "2026-10-11T14:11:51.536403+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.ThemesWnd",
+      "client": [
+        780,
+        645
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-categories.png",
+      "sha256": "b33a2a8351bd2aba1b64d33fa57aebb5d69eaf97e9ec87501aa80b934f36f7ae",
+      "utc": "2026-10-11T14:12:08.546551+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "#32768",
+      "client": [
+        225,
+        315
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-classic-filter.png",
+      "sha256": "affb8e749243ece38ec7bff415c5eeabdb4f6d9ea2cf3c0ab88d1b49c2e3bdcb",
+      "utc": "2026-10-11T14:12:36.021635+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.ThemesWnd",
+      "client": [
+        780,
+        645
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-light-selector.png",
+      "sha256": "488cf01e146a765811349a38a5dac2e85552a76c50ef358e8bd4e9bf7daf75ba",
+      "utc": "2026-10-11T14:12:47.300031+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.ThemesWnd",
+      "client": [
+        780,
+        645
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-restore-original.png",
+      "sha256": "1885a2f421b5bbe9cb004da68b64f980b8944fcd710370d7f523a5f165b07bfe",
+      "utc": "2026-10-11T14:13:08.422316+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.ThemesWnd",
+      "client": [
+        780,
+        645
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-verified-carbon-restored.png",
+      "sha256": "1728e1c8185fed219da043e767be5a6445496a43b9cd32d7b8aa6e4acd990570",
+      "utc": "2026-10-11T14:13:24.785944+00:00",
+      "exe_sha256": "0b0007aa5bba10a572eaa81fc57aebed95267710fe9b7f8c8df6305892816dc0",
+      "class": "LiteSic.ThemesWnd",
+      "client": [
+        780,
+        645
+      ],
+      "final_binary": true
+    },
+    {
+      "file": "adjust-final-add-menu.png",
+      "sha256": "34428da8b2ca14736df5ccac64193e9dace2a85967fe0050a1ff080fa43963d2",
+      "utc": "2026-10-11T14:03:00.736167+00:00",
+      "exe_sha256": "c46f73ad144624ba55798f8d7a524d528df19126cfd0c4f364be9622ad23a72c",
+      "class": "#32768",
+      "client": [
+        251,
+        90
+      ],
+      "final_binary": false
+    },
+    {
+      "file": "adjust-final-list-menu.png",
+      "sha256": "0f3c5d75fbb11e6383628c30c09db76b4907b6625e15cc7e34663c6194ab69d4",
+      "utc": "2026-10-11T14:03:58.092509+00:00",
+      "exe_sha256": "c46f73ad144624ba55798f8d7a524d528df19126cfd0c4f364be9622ad23a72c",
+      "class": "#32768",
+      "client": [
+        297,
+        390
+      ],
+      "final_binary": false
+    },
+    {
+      "file": "adjust-final-selection.png",
+      "sha256": "17a3456f659b11f3170fcff6d76104f20778faa59cd76091e04f5aff1f5e3803",
+      "utc": "2026-10-11T14:04:42.452628+00:00",
+      "exe_sha256": "c46f73ad144624ba55798f8d7a524d528df19126cfd0c4f364be9622ad23a72c",
+      "class": "LiteSic.PlaylistWnd",
+      "client": [
+        690,
+        540
+      ],
+      "final_binary": false
+    },
+    {
+      "file": "adjust-final-restored-selection.png",
+      "sha256": "17a3456f659b11f3170fcff6d76104f20778faa59cd76091e04f5aff1f5e3803",
+      "utc": "2026-10-11T14:05:03.407640+00:00",
+      "exe_sha256": "c46f73ad144624ba55798f8d7a524d528df19126cfd0c4f364be9622ad23a72c",
+      "class": "LiteSic.PlaylistWnd",
+      "client": [
+        690,
+        540
+      ],
+      "final_binary": false
+    },
+    {
+      "file": "adjust-final-play-restored.png",
+      "sha256": "cc3ebb6dc74f0ae59fe6240156f0bfabd559a059c276a23f0abef82283485b43",
+      "utc": "2026-10-11T14:05:38.741620+00:00",
+      "exe_sha256": "c46f73ad144624ba55798f8d7a524d528df19126cfd0c4f364be9622ad23a72c",
+      "class": "LiteSic.MainWnd",
+      "client": [
+        690,
+        435
+      ],
+      "final_binary": false
+    }
+  ],
+  "checks": 356,
+  "driver_guards": 27,
+  "note": "Five complementary captures preceded only Unicode sidecar and GDI fallback fixes; nine use the final binary.",
+  "sources": {
+    "src\\app.cpp": "72cf2dc86d43cd80ec7c281f7b69a7dd446e7145affcfd1ad67b72f769b6c201",
+    "src\\audio.cpp": "5b7545fd649131abbe29f6a35d6714b0d2c341bfcc8bcf9cef2361584f0ba6e3",
+    "src\\audio.h": "90f565811185c6451c0407bd39798a139bc4c6b845ff38e36291b3db4b159b5d",
+    "src\\eqwnd.cpp": "e03f40744fa599735f8c567dda0ba8df656469bcd39d2acec5ea81d0dac2ae4c",
+    "src\\eqwnd.h": "b73ec12ae8e436f98655f63e02743d71ab94d2d415883a8f7c838312632b3508",
+    "src\\m3u.cpp": "c77227bbe06e4d3ee4c33d3a5389dc4a0a1e8bbe372172b753277f56cf18379c",
+    "src\\m3u.h": "22c32d4f17c3f7449c85bd26e622b8f4c88f3f41eba0b3ef04aaee8518067c6a",
+    "src\\ma_config.h": "bd799f400d6e64e96a919c659a827c389fc9b63da30bad07eb83e5b2e8b743d4",
+    "src\\mainwnd.cpp": "c757fcd9dababf168b9e0ae4591adb3be6320ea756d37c6d9cb2f52d1d2ade6b",
+    "src\\mainwnd.h": "75c9b00755838af8170f97de9aa16338de7c8e59ba1d64e8d6b6f3a653dba462",
+    "src\\miniaudio_impl.c": "f19c3b042d344432f7fc32b0a1f7e22f7d5365e44e5ae520d374611b11c50a7e",
+    "src\\playback.cpp": "3b03b8171a657d92f19911ef833a700cea886235d87dbc3045488cc80cec33f7",
+    "src\\playback.h": "ccd62d76edc0ec4a10a94af96470981f8dd0209b9b2f1103f53138d310ba1438",
+    "src\\playlist.cpp": "5b053d414f745ea63d5ce08df828d251df88db33d49fd25a1fd9ed0e51f6dcec",
+    "src\\playlist.h": "2d517c1c9bbed72e4110c84427d1ec0b3a78f749dc940e0250cc43435737f5b9",
+    "src\\playlist_view.cpp": "1a68ee71760d41995b92f0905ecb31ca925f698d5d48f53ac7ae71fdc529c5c9",
+    "src\\playlist_view.h": "8fd5b3a55b6441bcd4e9bae18e3b33202969a502536bf7e77112fcc5c4602274",
+    "src\\playlist_worker.cpp": "086aa0954762a40c4c8f8b9691b0b2e0559dff2d7cd263f8606cd2e01602dbce",
+    "src\\playlist_worker.h": "c7165e6fb61b7a33fda727cce155291f1e66a0a70b87696d19a3cba5f6204742",
+    "src\\plwnd.cpp": "cc404ce131730158d403665c1d95a487fd2b1eb4352d62447a4739840c0c334c",
+    "src\\plwnd.h": "99bf0e0d9e88c529cf2ef44195d0bf985b5351750a0e0c6fb7eda19c89d57fb7",
+    "src\\tags.cpp": "08808335b9c337bde66345b1f1dfaf2348f613e7e3a0acd61ebf99f7425eb664",
+    "src\\tags.h": "45b0aeeff0e65111f0775c9df6743f8268eb57b729363090047f799b876b0bba",
+    "src\\theme_window.cpp": "aefae08424aa2194c5036458b8c44e30368c58c78b9c643137467954359feae9",
+    "src\\ui_draw.cpp": "b70786a9a8537bb49f8fe6626c7dadc1c3653f27eaeadca7e0d97e4827978242",
+    "src\\ui_draw.h": "7d6d98f162321d25ba20388034a6fd87154454f7c14599c99d2f2a15f48d0645",
+    "src\\ui_player.cpp": "acab3a935620e37f11790537eb03a8f9ffdc8714370356c32c8e4415d9ce51bd",
+    "src\\ui_player.h": "b6c7bbc31d60ba4fd3ad31759acd82d8f7b0e2654b7d76547afa9d2305071873",
+    "src\\ui_theme.cpp": "c2d52945160b436a10897fe27f2417ccab5f857a9c449a00d13611206b5a2a55",
+    "src\\ui_theme.h": "c911548a3b81f21c1f50b8b4120d2ec0cba222417143111df7f8c77b5512f7fb",
+    "src\\util.cpp": "7d783ba84871b40bf95fa9a3a9a582d1f6dcdac436249182673c81a2451eb12b",
+    "src\\util.h": "d5971e1be0f3aa4d132c08e2209bc13294b699a3d1b7f64349df6ad7fb2e81d3",
+    "src\\visualizer.cpp": "2bc6f55ec23d291e7a87b26a305cb07f7889f546b2be91afd67f3111d2fbba9e",
+    "src\\visualizer.h": "1c028fc823c08d3f4941cf0b78ee1177f15dec6307d89768e8d52f799710b1c0"
+  },
+  "artifacts": {
+    "adjust-final-add-menu.png": "34428da8b2ca14736df5ccac64193e9dace2a85967fe0050a1ff080fa43963d2",
+    "adjust-final-list-menu.png": "0f3c5d75fbb11e6383628c30c09db76b4907b6625e15cc7e34663c6194ab69d4",
+    "adjust-final-play-restored.png": "cc3ebb6dc74f0ae59fe6240156f0bfabd559a059c276a23f0abef82283485b43",
+    "adjust-final-restored-selection.png": "17a3456f659b11f3170fcff6d76104f20778faa59cd76091e04f5aff1f5e3803",
+    "adjust-final-selection.png": "17a3456f659b11f3170fcff6d76104f20778faa59cd76091e04f5aff1f5e3803",
+    "adjust-verified-carbon-restored.png": "1728e1c8185fed219da043e767be5a6445496a43b9cd32d7b8aa6e4acd990570",
+    "adjust-verified-categories.png": "b33a2a8351bd2aba1b64d33fa57aebb5d69eaf97e9ec87501aa80b934f36f7ae",
+    "adjust-verified-classic-filter.png": "affb8e749243ece38ec7bff415c5eeabdb4f6d9ea2cf3c0ab88d1b49c2e3bdcb",
+    "adjust-verified-light-selector.png": "488cf01e146a765811349a38a5dac2e85552a76c50ef358e8bd4e9bf7daf75ba",
+    "adjust-verified-main-menu.png": "1f1ac4bd1b8c987156fad3cd439d4b1f4d6db0e7b1b094a77a3d6a1d917261cc",
+    "adjust-verified-main.png": "e5304ea4134e0bf7d02f3929a887e2286bbf9433dd738ab20c04c812819e1f14",
+    "adjust-verified-playlist.png": "f0b89f6c9a088f4d123b0d510b3f8c31f9cd0a902a3c14fec982aaf2cdc5465c",
+    "adjust-verified-restore-original.png": "1885a2f421b5bbe9cb004da68b64f980b8944fcd710370d7f523a5f165b07bfe",
+    "adjust-verified-themes.png": "b6d74716dd44679f6a933d7995de8698edf7f99c0738115dde0f4a09469081f6",
+    "build-32-debug.txt": "ac18d1d99c17cff0a3f6a19355d512ffbcb3905f11c6b82b5a80b431ee680f5e",
+    "build-32-release.txt": "d21f31c754185dc1b191de2a7e5351445e77021be9e1ecaab832137b14bf6f93",
+    "build-64-debug.txt": "adeb23e025af84cbf2cdf12d2c5e3ba48253e701aedaca2ae4e490daf41550ad",
+    "build-64-release.txt": "2c01eb322f0bf94d80d6ff1a25d2249913cd18f3550c493e89ff2823de64145a",
+    "driver-tests.txt": "c16b4542fe358f2f4c17a54e417a1936f0aed087327810f4aaa7401fab951a3f",
+    "memory.json": "6bfc9d37ba910aa2496a0950579347873fbdd4bde1c423a8bb83d90271ea83ea",
+    "test-32-debug.txt": "5de524013ed99a81b383b0881c92dcd9ef459482f6e1a72e2a7e02e01c4865cd",
+    "test-32-release.txt": "c3ae2911eb325c091e39d87d2d4be238193aeb0141542823a92efde2aa2b318c",
+    "test-64-debug.txt": "e88f8104c4bc360ed7c570af56e02b17bfea9b64fe425e94d14697cf831343ea",
+    "test-64-release.txt": "2862ea7a0d050938b9735f7199f118b0a49234e2269983a757af7dd0e52f0e38"
+  }
+}

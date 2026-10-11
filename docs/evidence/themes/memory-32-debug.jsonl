@@ -1,0 +1,11 @@
+{"switches": 180, "private_bytes": 66052096, "working_set": 63803392, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 360, "private_bytes": 66052096, "working_set": 63811584, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 540, "private_bytes": 65867776, "working_set": 63655936, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 720, "private_bytes": 63664128, "working_set": 62005248, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 900, "private_bytes": 63664128, "working_set": 62005248, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 1080, "private_bytes": 63664128, "working_set": 62005248, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 1260, "private_bytes": 63664128, "working_set": 62005248, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 1440, "private_bytes": 63664128, "working_set": 62001152, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 1620, "private_bytes": 63664128, "working_set": 62001152, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 1800, "private_bytes": 63684608, "working_set": 62025728, "gdi": 21, "user": 18, "handles": 503}
+{"switches": 1980, "private_bytes": 63684608, "working_set": 62025728, "gdi": 21, "user": 18, "handles": 503}

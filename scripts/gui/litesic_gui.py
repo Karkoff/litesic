@@ -133,8 +133,8 @@ def connect(dialog=False, target='main', menu_index=None):
         window = owned[0]
     else:
         window = main
-        if target in ('playlist', 'eq'):
-            class_name = 'LiteSic.PlaylistWnd' if target == 'playlist' else 'LiteSic.EqualizerWnd'
+        if target in ('playlist', 'eq', 'themes'):
+            class_name = {'playlist':'LiteSic.PlaylistWnd','eq':'LiteSic.EqualizerWnd','themes':'LiteSic.ThemesWnd'}[target]
             candidates = app.windows(class_name=class_name, visible_only=True)
             candidates = [p for p in candidates if gui.GetWindow(p.handle, 4) == main.handle]
             if len(candidates) != 1: raise RuntimeError('Esperado um painel pertencente ao player lançado.')
@@ -157,7 +157,7 @@ def foreground(window):
     time.sleep(0.12)
     hwnd = gui.GetForegroundWindow()
     same_process = process.GetWindowThreadProcessId(hwnd)[1] == window.process_id()
-    menu_owner = window.class_name() == '#32768' and gui.GetClassName(hwnd) in (CLASS, 'LiteSic.PlaylistWnd')
+    menu_owner = window.class_name() == '#32768' and gui.GetClassName(hwnd) in (CLASS, 'LiteSic.PlaylistWnd', 'LiteSic.ThemesWnd')
     if not same_process or (hwnd != window.handle and not menu_owner):
         raise RuntimeError('Foco não confirmado na janela alvo. Nenhuma entrada foi enviada.')
 
@@ -215,7 +215,9 @@ def click(state, window, x, y, button, modifier='', double=False):
     client = window.client_rect()
     if not (0 <= x < client.width() and 0 <= y < client.height()): raise ValueError('Ponto fora da janela.')
     foreground(window)
-    point = window.client_to_screen((x, y))
+    # pywinauto 0.6.9 client_to_screen adds the outer rectangle origin.
+    # Native frames need the true client origin, including caption/borders.
+    point = gui.ClientToScreen(window.handle, (x, y))
     under = gui.WindowFromPoint(point)
     if process.GetWindowThreadProcessId(under)[1] != state['pid'] or gui.GetAncestor(under, 2) != window.handle:
         raise RuntimeError('Ponto coberto por outra janela. Nenhum clique enviado.')
@@ -223,7 +225,7 @@ def click(state, window, x, y, button, modifier='', double=False):
     if window.class_name() == '#32768':
         from pywinauto import mouse
         mouse.click(button=button, coords=point)
-    else: window.click_input(coords=(x, y), button=button,
+    else: window.click_input(coords=point, absolute=True, button=button,
                              pressed='control' if modifier == 'ctrl' else modifier, double=double)
 
 def fixture():
@@ -289,6 +291,27 @@ def run(args):
     if args.action == 'click':
         if args.x is None or args.y is None: raise ValueError('click requer --x e --y em pixels do cliente.')
         click(state, window, args.x, args.y, args.button, args.modifier, args.double)
+    elif args.action == 'theme':
+        if args.target != 'themes' or args.dialog: raise ValueError('Tema somente no seletor de aparência.')
+        names = ('LiteSic Original','Escuro','Claro','Inverso','Alto Contraste','Monocromático',
+            'Verão','Inverno','Primavera','Outono','Tropical','Aurora Boreal','Natal','Ano Novo',
+            'Carnaval','Páscoa','Halloween','Festa Junina','Dia dos Namorados','Dia das Crianças',
+            'Cyberpunk','Matrix','Neon Blue','Neon Purple','Terminal Retro','Synthwave','Midnight',
+            'Carbon','Oceano','Floresta','Deserto','Montanha','Pôr do Sol','Sakura','Winamp Classic','Vintage Audio')
+        if args.query not in names: raise ValueError('Tema fora do catálogo de validação.')
+        observed(state,window);foreground(window)
+        combos=[e for e in window.children(class_name='ComboBox') if e.control_id()==701]
+        lists=[e for e in window.children(class_name='ListBox') if e.control_id()==702]
+        if len(combos)!=1 or len(lists)!=1: raise RuntimeError('Seletor de tema ambíguo.')
+        # The category model is retained behind a themed menu launcher. These
+        # scalar native control messages select the same 'Todos' state as its menu.
+        combos[0].send_message(0x014E, 0, 0)  # CB_SETCURSEL
+        window.send_message(0x0111, 701 | (1 << 16), combos[0].handle)  # CBN_SELCHANGE
+        lists[0].select(args.query)
+        selected=lists[0].selected_indices()
+        texts=lists[0].item_texts()
+        if len(selected)!=1 or not 0<=selected[0]<len(texts) or texts[selected[0]]!=args.query:
+            raise RuntimeError('Tema selecionado não confirmado.')
     elif args.action == 'search':
         if args.target != 'playlist' or args.dialog: raise ValueError('Pesquisa somente na playlist.')
         if args.query not in ('Teste-020', 'Alpha', 'inexistente-validacao'):
@@ -381,9 +404,9 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag', 'search'])
+    parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag', 'search', 'theme'])
     parser.add_argument('--query')
-    parser.add_argument('--target', choices=['main','playlist','eq','menu'], default='main')
+    parser.add_argument('--target', choices=['main','playlist','eq','menu','themes'], default='main')
     parser.add_argument('--fixture', default='silence')
     parser.add_argument('--menu-index',type=int,choices=range(4))
     parser.add_argument('--modifier', choices=['','ctrl','shift'], default='')

@@ -20,10 +20,10 @@
 /* Constantes auxiliares                                              */
 /* ------------------------------------------------------------------ */
 
-static const COLORREF OSCILLOSCOPE_COLOR = RGB(0x00, 0xcc, 0xff);
-static const COLORREF SPECTRUM_BG_COLOR  = RGB(0x0a, 0x0a, 0x1a);
-static const COLORREF SPECTRUM_BAR_COLOR = RGB(0x00, 0xff, 0x40);
-static const COLORREF SPECTRUM_BORDER_COLOR = RGB(0x22, 0x44, 0x66);
+#define OSCILLOSCOPE_COLOR (Ui::NativeColor(Ui::palette.osc))
+#define SPECTRUM_BG_COLOR (Ui::NativeColor(Ui::Display))
+#define SPECTRUM_BAR_COLOR (Ui::NativeColor(Ui::palette.fft))
+#define SPECTRUM_BORDER_COLOR (Ui::NativeColor(Ui::Active))
 
 /* ------------------------------------------------------------------ */
 /* FFT simples (radix-2, tamanho fixo) — M4-T3                        */
@@ -326,10 +326,10 @@ void DrawVisualizerD2D(Ui::Canvas& c, Ui::Rect r, VizMode mode) {
     float samples[FFT_SIZE]{};
     int count=Audio_GetVisualizationSamples(samples,FFT_SIZE);
     if(mode==VIZ_MODE_OSCILLOSCOPE) {
-        if(count<2) c.Line(r.x,r.y+r.h/2,r.x+r.w,r.y+r.h/2,Ui::Green);
+        if(count<2) c.Line(r.x,r.y+r.h/2,r.x+r.w,r.y+r.h/2,Ui::palette.osc);
         else for(int i=1;i<count;++i)
             c.Line(r.x+(i-1)*r.w/(count-1),r.y+MapSampleToY(samples[i-1],static_cast<int>(r.h-2))+1,
-                r.x+i*r.w/(count-1),r.y+MapSampleToY(samples[i],static_cast<int>(r.h-2))+1,Ui::Green);
+                r.x+i*r.w/(count-1),r.y+MapSampleToY(samples[i],static_cast<int>(r.h-2))+1,Ui::palette.osc);
     } else {
         static float smooth[SPECTRUM_BARS]{};
         float levels[SPECTRUM_BARS]{};
@@ -352,7 +352,7 @@ void DrawVisualizerD2D(Ui::Canvas& c, Ui::Rect r, VizMode mode) {
         for(int i=0;i<SPECTRUM_BARS;++i) {
             smooth[i]=fmaxf(levels[i],smooth[i]*.85f);
             float height=fmaxf(1,smooth[i]*(r.h-2));
-            c.Fill({r.x+i*r.w/SPECTRUM_BARS+1,r.y+r.h-height-1,r.w/SPECTRUM_BARS-2,height},Ui::Green);
+            c.Fill({r.x+i*r.w/SPECTRUM_BARS+1,r.y+r.h-height-1,r.w/SPECTRUM_BARS-2,height},Ui::palette.fft);
         }
     }
     c.Unclip();

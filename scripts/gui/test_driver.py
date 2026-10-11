@@ -8,6 +8,18 @@ from unittest.mock import patch, Mock
 import litesic_gui as driver
 
 class DriverGuards(unittest.TestCase):
+    def test_theme_cannot_target_player(self):
+        args=SimpleNamespace(action='theme',dialog=False,target='main',menu_index=None,query='Claro')
+        with patch.object(driver,'connect',return_value=({},Mock())),patch.object(driver,'observed') as observed:
+            with self.assertRaises(ValueError): driver.run(args)
+            observed.assert_not_called()
+
+    def test_theme_rejects_unknown_name_before_input(self):
+        args=SimpleNamespace(action='theme',dialog=False,target='themes',menu_index=None,query='unknown')
+        with patch.object(driver,'connect',return_value=({},Mock())),patch.object(driver,'observed') as observed:
+            with self.assertRaises(ValueError): driver.run(args)
+            observed.assert_not_called()
+
     def test_closeout_m3u_paths_remain_confined(self):
         for kind,title in (('m3u-save-closeout','Salvar lista M3U'),('m3u-open-closeout','Abrir lista M3U')):
             with patch.object(Path,'exists',return_value=True):
@@ -44,11 +56,13 @@ class DriverGuards(unittest.TestCase):
         window.client_rect.return_value.width.return_value=100
         window.client_rect.return_value.height.return_value=100
         gui=Mock();gui.WindowFromPoint.return_value=42;gui.GetAncestor.return_value=42
+        gui.ClientToScreen.return_value=(350,380)
         process=Mock();process.GetWindowThreadProcessId.return_value=(1,123)
         with patch.object(driver,'modules',return_value=[Mock(),Mock(),gui,process,Mock(),Mock()]), \
              patch.object(driver,'observed'),patch.object(driver,'foreground'):
             driver.click({'pid':123},window,50,50,'left','ctrl')
-            window.click_input.assert_called_once_with(coords=(50,50),button='left',pressed='control',double=False)
+            gui.ClientToScreen.assert_called_once_with(42,(50,50))
+            window.click_input.assert_called_once_with(coords=(350,380),absolute=True,button='left',pressed='control',double=False)
 
     def check_panel_owner(self, target):
         with tempfile.TemporaryDirectory() as tmp:
@@ -70,6 +84,9 @@ class DriverGuards(unittest.TestCase):
 
     def test_eq_with_unrelated_owner_rejected(self):
         self.check_panel_owner('eq')
+
+    def test_themes_with_unrelated_owner_rejected(self):
+        self.check_panel_owner('themes')
 
     def test_arbitrary_executable_rejected(self):
         with self.assertRaises(ValueError): driver.validate_exe(driver.ROOT / 'build' / 'other.exe')

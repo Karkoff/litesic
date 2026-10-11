@@ -1,14 +1,18 @@
 # Ambiente de desenvolvimento Windows
 
 Atualização UI/UX: player e playlist migrados parcialmente para Direct2D/DirectWrite,
-EQ explicitamente indisponível até DSP real. A suíte atual tem quinze binários,
-80 casos por variante (320 execuções nas quatro). Ver [relatório UI/UX](design/UI-VALIDATION-2026-10-11.md)
+EQ explicitamente indisponível até DSP real. A suíte atual tem dezesseis binários,
+89 verificações por variante (356 execuções nas quatro), incluindo sete casos
+de temas; 27 guardas de automação. Ver [sistema de temas](THEMES.md) e
+[relatório UI/UX histórico](design/UI-VALIDATION-2026-10-11.md)
 para capturas, aumento de memória, fases pendentes e limites DPI/Windows 7.
 
 Este procedimento mantém o ambiente usado na M5. A playlist está implementada;
-seu checkpoint manual continua pendente. Equalizador (M6) e integração das
+seu checkpoint manual passou. Os novos temas aguardam aceite visual humano.
+Equalizador (M6) e integração das
 janelas (M7) permanecem planejados. Validação atual:
-[M5-VALIDATION-2026-10-11.md](M5-VALIDATION-2026-10-11.md). Histórico do ambiente:
+[M5-CLOSEOUT-2026-10-11.md](M5-CLOSEOUT-2026-10-11.md), [THEMES.md](THEMES.md)
+e [playlist/menus atuais](PLAYLIST-UI-2026-10-11.md). Histórico do ambiente:
 [VALIDATION-2026-10-10.md](VALIDATION-2026-10-10.md).
 
 ## Requisitos e escolha da toolchain

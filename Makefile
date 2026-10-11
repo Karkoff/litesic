@@ -43,14 +43,17 @@ TEST_SRCS := $(wildcard tests/*.c)
 TEST_BINS := $(patsubst tests/%.c,$(BUILD_DIR)/test-%.exe,$(TEST_SRCS))
 CPP_TEST_SRCS := $(wildcard tests/*.cpp)
 TEST_BINS += $(patsubst tests/%.cpp,$(BUILD_DIR)/test-%.exe,$(CPP_TEST_SRCS))
-TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o)
-TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o)
+TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o)
+TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o)
 $(BUILD_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_player_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_player_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_ui_draw.exe: TEST_EXTRA_OBJS := $(BUILD_DIR)/ui_draw.o
 $(BUILD_DIR)/test-test_ui_draw.exe: $(BUILD_DIR)/ui_draw.o
+$(BUILD_DIR)/test-test_themes.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_themes.exe: $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_themes.exe: LDLIBS += -lpsapi
 
 all: $(TARGET)
 

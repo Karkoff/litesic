@@ -1,12 +1,51 @@
 #pragma once
 #include <cstdint>
+#include <cstddef>
+#include <windows.h>
 
 // Shared DIP/color contract. No audio or HWND state belongs here.
 namespace Ui {
-constexpr uint32_t Background = 0x3B2820, Surface = 0x2B2018, Border = 0x5A4633;
-constexpr uint32_t Bronze = 0x887B5B, Green = 0x00E676, Accent = 0xC4FF00;
-constexpr uint32_t Text = 0xE6E1D7, Muted = 0xA8A096, Danger = 0xFF6668;
-constexpr uint32_t Display = 0x10140F, Active = 0x23402B, Hover = 0x513C2C;
+struct ThemePalette {
+    uint32_t background, surface, border, bronze, green, accent;
+    uint32_t text, muted, danger, display, active, hover;
+    uint32_t pressed, selection, sliderTrack, sliderFill, fft, osc, warning;
+};
+struct Typography {
+    const wchar_t* body;
+    const wchar_t* digital;
+    float sizes[4];
+    int weights[4];
+    bool italicHeading;
+};
+struct Theme {
+    const wchar_t* id;
+    const wchar_t* name;
+    const wchar_t* category;
+    ThemePalette palette;
+    Typography typography;
+};
+// UI-thread-only live palette. References keep existing rendering call sites simple.
+inline ThemePalette palette{0x3B2820,0x2B2018,0x5A4633,0x887B5B,0x00E676,0xC4FF00,
+    0xE6E1D7,0xA8A096,0xFF6668,0x10140F,0x23402B,0x513C2C,
+    0x5A4633,0x5A4633,0x5A4633,0x00E676,0x00E676,0x00E676,0xFFCC66};
+inline const uint32_t &Background=palette.background, &Surface=palette.surface, &Border=palette.border;
+inline const uint32_t &Bronze=palette.bronze, &Green=palette.green, &Accent=palette.accent;
+inline const uint32_t &Text=palette.text, &Muted=palette.muted, &Danger=palette.danger;
+inline const uint32_t &Display=palette.display, &Active=palette.active, &Hover=palette.hover;
+constexpr UINT WM_THEME_CHANGED = WM_APP + 88;
+size_t ThemeCount();
+const Theme& ThemeAt(size_t index);
+const Theme& ActiveTheme();
+unsigned ThemeGeneration();
+// nullptr disables persistence for isolated tests; paths must be absolute.
+void ThemeConfigure(const wchar_t* iniPath);
+bool SelectTheme(const wchar_t* id, bool save = true);
+bool RestoreTheme();
+bool ThemeInitializeUser();
+double Contrast(uint32_t a, uint32_t b);
+inline COLORREF NativeColor(uint32_t rgb) { return RGB((rgb>>16)&255,(rgb>>8)&255,rgb&255); }
+void ShowThemes(HWND owner);
+bool ThemeDialogMessage(MSG* message);
 constexpr float Space = 8, TitleHeight = 32, ControlHeight = 28;
 constexpr float PlayerWidth = 460, PlayerHeight = 290;
 constexpr float PlaylistWidth = 460, PlaylistHeight = 360;

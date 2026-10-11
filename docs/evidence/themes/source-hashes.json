@@ -1,0 +1,138 @@
+[
+  {
+    "file": "src/app.cpp",
+    "sha256": "72cf2dc86d43cd80ec7c281f7b69a7dd446e7145affcfd1ad67b72f769b6c201"
+  },
+  {
+    "file": "src/audio.cpp",
+    "sha256": "5b7545fd649131abbe29f6a35d6714b0d2c341bfcc8bcf9cef2361584f0ba6e3"
+  },
+  {
+    "file": "src/audio.h",
+    "sha256": "90f565811185c6451c0407bd39798a139bc4c6b845ff38e36291b3db4b159b5d"
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "sha256": "e03f40744fa599735f8c567dda0ba8df656469bcd39d2acec5ea81d0dac2ae4c"
+  },
+  {
+    "file": "src/eqwnd.h",
+    "sha256": "b73ec12ae8e436f98655f63e02743d71ab94d2d415883a8f7c838312632b3508"
+  },
+  {
+    "file": "src/m3u.cpp",
+    "sha256": "c77227bbe06e4d3ee4c33d3a5389dc4a0a1e8bbe372172b753277f56cf18379c"
+  },
+  {
+    "file": "src/m3u.h",
+    "sha256": "22c32d4f17c3f7449c85bd26e622b8f4c88f3f41eba0b3ef04aaee8518067c6a"
+  },
+  {
+    "file": "src/ma_config.h",
+    "sha256": "bd799f400d6e64e96a919c659a827c389fc9b63da30bad07eb83e5b2e8b743d4"
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "sha256": "31bec1fa96a94041eb4eeec6c08394ca49823641100fc5de581471200285ee6a"
+  },
+  {
+    "file": "src/mainwnd.h",
+    "sha256": "75c9b00755838af8170f97de9aa16338de7c8e59ba1d64e8d6b6f3a653dba462"
+  },
+  {
+    "file": "src/miniaudio_impl.c",
+    "sha256": "f19c3b042d344432f7fc32b0a1f7e22f7d5365e44e5ae520d374611b11c50a7e"
+  },
+  {
+    "file": "src/playback.cpp",
+    "sha256": "3b03b8171a657d92f19911ef833a700cea886235d87dbc3045488cc80cec33f7"
+  },
+  {
+    "file": "src/playback.h",
+    "sha256": "ccd62d76edc0ec4a10a94af96470981f8dd0209b9b2f1103f53138d310ba1438"
+  },
+  {
+    "file": "src/playlist.cpp",
+    "sha256": "5b053d414f745ea63d5ce08df828d251df88db33d49fd25a1fd9ed0e51f6dcec"
+  },
+  {
+    "file": "src/playlist.h",
+    "sha256": "2d517c1c9bbed72e4110c84427d1ec0b3a78f749dc940e0250cc43435737f5b9"
+  },
+  {
+    "file": "src/playlist_view.cpp",
+    "sha256": "1a68ee71760d41995b92f0905ecb31ca925f698d5d48f53ac7ae71fdc529c5c9"
+  },
+  {
+    "file": "src/playlist_view.h",
+    "sha256": "8fd5b3a55b6441bcd4e9bae18e3b33202969a502536bf7e77112fcc5c4602274"
+  },
+  {
+    "file": "src/playlist_worker.cpp",
+    "sha256": "086aa0954762a40c4c8f8b9691b0b2e0559dff2d7cd263f8606cd2e01602dbce"
+  },
+  {
+    "file": "src/playlist_worker.h",
+    "sha256": "c7165e6fb61b7a33fda727cce155291f1e66a0a70b87696d19a3cba5f6204742"
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "sha256": "650ccfdf022c69d90d094d3d85d6fc5459a8731e0c48e69c187ac68a47e454c9"
+  },
+  {
+    "file": "src/plwnd.h",
+    "sha256": "99bf0e0d9e88c529cf2ef44195d0bf985b5351750a0e0c6fb7eda19c89d57fb7"
+  },
+  {
+    "file": "src/tags.cpp",
+    "sha256": "08808335b9c337bde66345b1f1dfaf2348f613e7e3a0acd61ebf99f7425eb664"
+  },
+  {
+    "file": "src/tags.h",
+    "sha256": "45b0aeeff0e65111f0775c9df6743f8268eb57b729363090047f799b876b0bba"
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "sha256": "be737168a7e84386c8056b9732e3572ac5d391f3c5c96e9a836208eec8233605"
+  },
+  {
+    "file": "src/ui_draw.cpp",
+    "sha256": "bb0ddc237432bcbc2e5448917bef2ad92a5e901202065c67b550d63ea38b51f5"
+  },
+  {
+    "file": "src/ui_draw.h",
+    "sha256": "70a9c845f53fc0f97190512121d2be3129c405ea4df3f11adededaabd4bff495"
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "sha256": "acab3a935620e37f11790537eb03a8f9ffdc8714370356c32c8e4415d9ce51bd"
+  },
+  {
+    "file": "src/ui_player.h",
+    "sha256": "b6c7bbc31d60ba4fd3ad31759acd82d8f7b0e2654b7d76547afa9d2305071873"
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "sha256": "c2d52945160b436a10897fe27f2417ccab5f857a9c449a00d13611206b5a2a55"
+  },
+  {
+    "file": "src/ui_theme.h",
+    "sha256": "c911548a3b81f21c1f50b8b4120d2ec0cba222417143111df7f8c77b5512f7fb"
+  },
+  {
+    "file": "src/util.cpp",
+    "sha256": "7d783ba84871b40bf95fa9a3a9a582d1f6dcdac436249182673c81a2451eb12b"
+  },
+  {
+    "file": "src/util.h",
+    "sha256": "d5971e1be0f3aa4d132c08e2209bc13294b699a3d1b7f64349df6ad7fb2e81d3"
+  },
+  {
+    "file": "src/visualizer.cpp",
+    "sha256": "2bc6f55ec23d291e7a87b26a305cb07f7889f546b2be91afd67f3111d2fbba9e"
+  },
+  {
+    "file": "src/visualizer.h",
+    "sha256": "1c028fc823c08d3f4941cf0b78ee1177f15dec6307d89768e8d52f799710b1c0"
+  }
+]

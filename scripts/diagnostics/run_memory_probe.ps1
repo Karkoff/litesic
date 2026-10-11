@@ -17,7 +17,7 @@ try {
     $flags = @('-std=c++17','-Wall','-Wextra','-g','-O0','-DDEBUG','-D_WIN32_WINNT=0x0601','-DUNICODE','-D_UNICODE','-DLITESIC_TEST','-DPSAPI_VERSION=1','-Isrc','-Ithird_party')
     & $compiler @flags -c "$outDir/ui_draw-gdi.cpp" -o "$outDir/ui_draw-gdi.o"
     if($LASTEXITCODE -ne 0) { throw 'Compilação GDI falhou' }
-    $objects = 'playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl plwnd mainwnd visualizer ui_player eqwnd'.Split(' ') | ForEach-Object { "build/64/debug/$_.o" }
+    $objects = 'playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl plwnd mainwnd visualizer ui_player eqwnd ui_theme theme_window'.Split(' ') | ForEach-Object { "build/64/debug/$_.o" }
     $libs = @('-static','-static-libgcc','-static-libstdc++','-lcomdlg32','-lcomctl32','-luser32','-lkernel32','-lgdi32','-lole32','-lshell32','-lwinmm','-ld2d1','-ldwrite','-lpsapi','-lm')
     $backends=if($Isolation){@('fonts','software')}else{@('gdi','d2d')}
     if($Isolation) {

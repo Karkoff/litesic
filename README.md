@@ -19,18 +19,29 @@ LiteSic é um player de áudio para Windows que recria a experiência clássica 
 **Estado atual: M0–M5 concluídas.** A playlist está implementada e integrada,
 com testes, validação gráfica e PASS manual do usuário para o visual,
 arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
-Play destaca e centraliza a faixa selecionada.
+Play destaca e centraliza a faixa selecionada. A seleção primária também
+volta destacada ao reabrir, pronta para Play. **Adicionar ▾**, **Remover** e
+**Lista ▾** ficam no rodapé; Arquivos/Pasta estão agrupados em Adicionar.
 Equalizador e a integração completa das três janelas permanecem planejados.
 Player e playlist já possuem encaixe magnético e movimento conjunto.
 Veja o [encerramento técnico da M5](docs/M5-CLOSEOUT-2026-10-11.md).
 Modernização UI/UX **IN_PROGRESS**: player e playlist já usam Direct2D/DirectWrite,
 com pesquisa que preserva a fila e os cinco transportes separados. O painel EQ
 é explicitamente indisponível até a implementação do DSP. Baseline repetida:
-292 aprovações; suíte atual: **328 (82 por variante)**. A investigação de memória
+292 aprovações; suíte atual: **356 (89 por variante)**. A investigação de memória
 reproduziu o custo de inicialização gráfica, sem crescimento contínuo na carga
 curta do backend atual. UI-00..08 ainda não estão concluídas; M6 não iniciada.
 Veja [implementação, capturas e pendências](docs/design/UI-VALIDATION-2026-10-11.md)
 e [plano por fase](docs/design/LITESIC-UI-IMPLEMENTATION-PLAN.md).
+
+**Temas visuais:** 36 opções em **botão direito no player → Aparência > Temas...**,
+com categorias, prévias, aplicação imediata e preferência persistente.
+LiteSic Original continua sendo o padrão; player e playlist compartilham a
+aparência sem interromper a reprodução. Validação técnica PASS; aceite visual
+humano dos novos temas pendente. Seletor e menus próprios usam a paleta ativa.
+Veja [sistema de temas](docs/THEMES.md),
+[relatório atual de playlist, menus e temas](docs/PLAYLIST-UI-2026-10-11.md) e
+[galeria inicial dos oito temas representativos](docs/evidence/themes/index.html).
 O ambiente e os comandos atualizados estão em
 [`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
 

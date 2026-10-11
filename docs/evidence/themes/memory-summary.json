@@ -1,0 +1,82 @@
+{
+  "32-debug": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 66052096,
+      "working_set": 63803392,
+      "gdi": 21,
+      "user": 18,
+      "handles": 503
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 63684608,
+      "working_set": 62025728,
+      "gdi": 21,
+      "user": 18,
+      "handles": 503
+    },
+    "min_private": 63664128,
+    "max_private": 66052096
+  },
+  "32-release": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 65961984,
+      "working_set": 60375040,
+      "gdi": 21,
+      "user": 18,
+      "handles": 503
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 63594496,
+      "working_set": 58601472,
+      "gdi": 21,
+      "user": 18,
+      "handles": 503
+    },
+    "min_private": 63569920,
+    "max_private": 65961984
+  },
+  "64-debug": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 91103232,
+      "working_set": 67969024,
+      "gdi": 21,
+      "user": 18,
+      "handles": 630
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 81108992,
+      "working_set": 71159808,
+      "gdi": 21,
+      "user": 18,
+      "handles": 630
+    },
+    "min_private": 81084416,
+    "max_private": 91103232
+  },
+  "64-release": {
+    "first": {
+      "switches": 180,
+      "private_bytes": 94896128,
+      "working_set": 78979072,
+      "gdi": 52,
+      "user": 51,
+      "handles": 822
+    },
+    "last": {
+      "switches": 1980,
+      "private_bytes": 84910080,
+      "working_set": 78393344,
+      "gdi": 52,
+      "user": 51,
+      "handles": 822
+    },
+    "min_private": 84885504,
+    "max_private": 94896128
+  }
+}

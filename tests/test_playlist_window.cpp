@@ -114,8 +114,8 @@ static void filter_selection_removes_canonical_item() {
     SetWindowTextW(edit,L"BETA");
     SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0); CHECK(PlayerPlaylist().Count()==3);
     // The window was set to 144 DPI by the previous production DPI test.
-    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,200));
-    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,200));
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,140));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,140));
     SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0);
     CHECK(PlayerPlaylist().Count()==2); CHECK(PlayerPlaylist().At(0)->displayTitle==L"Alpha");
     CHECK(PlayerPlaylist().At(1)->displayTitle==L"Gamma");
@@ -127,13 +127,13 @@ static void play_selection_and_center_current() {
     // Known client geometry at the 150% scale used by the DPI test.
     SetWindowPos(playlist,nullptr,0,0,480,450,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
     PlWnd_Refresh();
-    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,200));
-    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,200));
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,140));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,140));
     CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==0);
     CHECK(PlayerPlayback().PlayIndex(50)); PlWnd_Refresh(true);
-    // Seven complete rows: the current track must be the fourth (middle).
-    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,300));
-    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,300));
+    // Six complete rows: the current track must occupy the fourth row.
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,240));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,240));
     CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==50);
     Audio_Pause(); CHECK(PlWnd_PlaySelected()); CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
     SetWindowTextW(GetDlgItem(playlist,520),L"does-not-match");
@@ -149,12 +149,17 @@ static void session_survives_window_restart() {
     std::wstring path=FullPath(L"build\\playlist-session-test.m3u8");
     DeleteFileW(path.c_str()); PlWnd_Shutdown(); PlayerPlayback().Clear();
     CHECK(PlWnd_Create(instance,owner,path.c_str()));
+    std::wstring unicodeTrack=FullPath(L"build\\faixa-音.wav");
+    CHECK(CopyFileW(FullPath(L"tests\\fixtures\\native-44100.wav").c_str(),unicodeTrack.c_str(),FALSE));
     PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
     PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\missing.wav"));
-    PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
+    PlayerPlaylist().Add(unicodeTrack);
     PlayerPlaylist().At(0)->displayTitle=L"Título com acentuação";
     PlayerPlaylist().MoveTo(1,2);
     auto expected=PlayerPlaylist().Tracks();
+    EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+    PlWnd_Refresh();SendMessageW(playlist,WM_KEYDOWN,VK_HOME,0);SendMessageW(playlist,WM_KEYDOWN,VK_DOWN,0);
+    CHECK(PlayerPlaylist().GetCurrentIndex()==-1); // Selection alone never starts audio.
     PlWnd_Shutdown(); PlayerPlayback().Clear();
     CHECK(PlWnd_Create(instance,owner,path.c_str()));
     CHECK(PlayerPlaylist().Count()==3);
@@ -162,10 +167,22 @@ static void session_survives_window_restart() {
         CHECK(PlayerPlaylist().At(i)->path==expected[i].path);
         CHECK(PlayerPlaylist().At(i)->displayTitle==expected[i].displayTitle);
     }
+    EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+    CHECK(Audio_TestInit(48000));CHECK(Audio_GetState()!=AUDIO_STATE_PLAYING);
+    CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==1);
+    Audio_Shutdown();
+    PlWnd_Shutdown();PlayerPlayback().Clear();
+    CHECK(WritePrivateProfileStringW(L"Selection",L"Path",L"stale-entry.wav",(path+L".ini").c_str()));
+    CHECK(PlWnd_Create(instance,owner,path.c_str()));
+    EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+    CHECK(Audio_TestInit(48000));CHECK(PlWnd_PlaySelected());
+    CHECK(PlayerPlaylist().GetCurrentIndex()==0); // Stale companion state cannot select a different entry.
+    Audio_Shutdown();
     // Saving a deliberately cleared playlist must not resurrect old entries.
     PlayerPlayback().Clear(); PlWnd_Shutdown();
     CHECK(PlWnd_Create(instance,owner,path.c_str())); CHECK(PlayerPlaylist().Count()==0);
-    PlWnd_Shutdown(); CHECK(DeleteFileW(path.c_str()));
+    PlWnd_Shutdown(); CHECK(DeleteFileW(path.c_str()));DeleteFileW((path+L".ini").c_str());
+    CHECK(DeleteFileW(unicodeTrack.c_str()));
 }
 int main() {
     HINSTANCE instance=GetModuleHandleW(nullptr);

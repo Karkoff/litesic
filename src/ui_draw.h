@@ -6,6 +6,9 @@
 #include <string>
 
 namespace Ui {
+// Native menu navigation, application palette and typography. The caller owns HMENU.
+BOOL TrackThemedMenu(HMENU menu, UINT flags, int x, int y, HWND owner, float scale);
+bool ThemeMenuMessage(UINT message, WPARAM wp, LPARAM lp, LRESULT& result);
 // UI-thread owned, reusable Direct2D 1.0 / DirectWrite resources per window.
 class Canvas {
 public:
@@ -38,5 +41,6 @@ private:
     ID2D1SolidColorBrush* brush_ = nullptr;
     IDWriteTextFormat* fonts_[4]{};
     IDWriteInlineObject* ellipsis_[4]{};
+    unsigned themeGeneration_ = 0;
 };
 }
