@@ -1,0 +1,36 @@
+{
+  "captures": [
+    {
+      "file": "footer-final-playlist.png",
+      "sha256": "6d64c5aa8f981311fc7a2c8951405467fa40cd407a03a917a6d4c0b85748ade7",
+      "utc": "2026-10-11T14:30:35.906147+00:00",
+      "exe_sha256": "86713a1ac3c1a89412125202f3e314f4cdde6b1bfb5c65cdeacb752dee9c0d9b",
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "file": "footer-final-narrow.png",
+      "sha256": "c1042ebcc9ad56f2f8131afa6c3a5ed9499a57a04ddd0762deb05c9e78f6a1ff",
+      "utc": "2026-10-11T14:30:47.818598+00:00",
+      "exe_sha256": "86713a1ac3c1a89412125202f3e314f4cdde6b1bfb5c65cdeacb752dee9c0d9b",
+      "client": [
+        413,
+        360
+      ]
+    }
+  ],
+  "full_suite": "89 cases x64 Debug before final GDI close-border correction",
+  "final_playlist_suite": "7 cases, including clicking Clear Search",
+  "artifacts": {
+    "footer-build-32-debug.txt": "88404e13b95cbc65475b5ec24238f4540599ab5c1834e700ebed1c0afbdd6e7e",
+    "footer-build-32-release.txt": "2f2a4228f904dbe39e94f14acd841cc9139cfa014e15fbc14c2c85c7f02f2d8f",
+    "footer-build-64-debug.txt": "77ecddf90bab80e6101466496bbaa1bc8a21e9163817bd1d60ef3acda777dd9a",
+    "footer-build-64-release.txt": "f05609adf0af72b0c82f05667df0c708af9876e3a0f9bee04b301718e472b9af",
+    "footer-final-narrow.png": "c1042ebcc9ad56f2f8131afa6c3a5ed9499a57a04ddd0762deb05c9e78f6a1ff",
+    "footer-final-playlist.png": "6d64c5aa8f981311fc7a2c8951405467fa40cd407a03a917a6d4c0b85748ade7",
+    "footer-playlist-test.txt": "e3e68950591762b183e55a3c19b1d5ce68869f56fab1be0ef9b015989a836969",
+    "footer-test-64-debug.txt": "e88f8104c4bc360ed7c570af56e02b17bfea9b64fe425e94d14697cf831343ea"
+  }
+}

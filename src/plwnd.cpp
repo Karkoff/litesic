@@ -82,7 +82,7 @@ void AvoidOverlap() {
     if(y+height>work.bottom) y=std::max<int>(work.top,parent.top-height-S(4));
     SetWindowPos(window,nullptr,x,y,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
-RECT List() { RECT r = Client(); r.left = S(8); r.top = S(84); r.right -= S(20); r.bottom -= S(64); return r; }
+RECT List() { RECT r = Client(); r.left = S(8); r.top = S(84); r.right -= S(20); r.bottom -= S(28); return r; }
 int Visible() { RECT r = List(); return std::max<int>(1, (r.bottom - r.top) / S(24)); }
 void ClampTop() { top = std::max(0, std::min(top, view.Count() - Visible())); }
 void LayoutSearch() {
@@ -104,10 +104,16 @@ RECT Button(int id) {
     RECT r = Client();
     if (id == -1) return {r.right - S(32), S(4), r.right - S(4), S(28)};
     if (id == ClearSearch) return {r.right-S(36),S(38),r.right-S(8),S(66)};
-    int width = (r.right - S(32)) / 3;
+    int width = S(FOOTER_BUTTON_W);
     int column=id==AddMenu?0:id==Remove?1:2;
-    int x = S(8) + column * (width + S(8));
-    return {x, r.bottom-S(60), x + width, r.bottom-S(32)};
+    int x = r.right-S(8)-(3-column)*width-(2-column)*S(8);
+    return {x, r.bottom-S(22), x + width, r.bottom-S(22)+S(FOOTER_BUTTON_H)};
+}
+// A small outlined eraser and cleared baseline; independent of icon fonts.
+template<class Line> void EraserIcon(float x,float y,Line line) {
+    line(x-6,y+1,x+1,y-6);line(x+1,y-6,x+7,y);
+    line(x+7,y,x,y+7);line(x,y+7,x-6,y+1);
+    line(x-3,y-2,x+3,y+4);line(x-7,y+8,x+7,y+8);
 }
 int HitButton(POINT p) {
     for (int id : {-1, static_cast<int>(AddMenu), static_cast<int>(Remove), static_cast<int>(ListMenu),ClearSearch}) {
@@ -215,13 +221,16 @@ void Paint(HWND hwnd) {
         canvas.TitleBar(width,L"LITESIC · PLAYLIST",false,hover==-1?2:0,pressed==-1?2:0);
         for(int id : {static_cast<int>(AddMenu),static_cast<int>(Remove),static_cast<int>(ListMenu)}) {
             RECT b=Button(id);
-            canvas.Button({b.left/scale,b.top/scale,(b.right-b.left)/scale,(b.bottom-b.top)/scale},
-                id==AddMenu?L"Adicionar ▾":id==Remove?L"Remover":L"Lista ▾",
-                false,hover==id,pressed==id,id!=Remove || !selected.empty());
+            Rect button{b.left/scale,b.top/scale,(b.right-b.left)/scale,(b.bottom-b.top)/scale};
+            canvas.Fill(button,pressed==id?Border:hover==id?Hover:Surface,3);
+            canvas.Stroke(button,Bronze,3);
+            canvas.TextAt(button,id==AddMenu?L"ADIC ▾":id==Remove?L"REMOVER":L"LISTA ▾",
+                id==Remove && selected.empty()?Muted:Ui::Text,Font::Small,true);
         }
         canvas.Fill({8,36,width-16,32},Surface,3); canvas.Stroke({8,36,width-16,32},Border,3);
         if(query.empty() && GetFocus()!=search) canvas.TextAt({16,38,width-60,28},L"Pesquisar músicas...",Muted);
-        canvas.Button({width-36,38,28,28},L"×",false,hover==ClearSearch,pressed==ClearSearch);
+        canvas.Button({width-36,38,28,28},L"",false,hover==ClearSearch,pressed==ClearSearch);
+        EraserIcon(width-22,51,[&](float x1,float y1,float x2,float y2) {canvas.Line(x1,y1,x2,y2,Ui::Text,1.5f);});
         canvas.Fill({8,72,width-28,12},Surface);
         canvas.TextAt({12,70,24,14},L"#",Muted,Font::Small);
         canvas.TextAt({42,70,width-130,14},L"Título",Muted,Font::Small);
@@ -263,7 +272,7 @@ void Paint(HWND hwnd) {
                     swprintf(duration,ARRAYSIZE(duration),L" · %u:%02u",total/60,total%60);footer+=duration; }
             }
         }
-        canvas.TextAt({8,height-26,width-16,24},footer,Muted,Font::Small);
+        canvas.TextAt({8,height-26,Button(AddMenu).left/scale-16,24},footer,Muted,Font::Small);
         if(canvas.End()) { EndPaint(hwnd,&ps); return; }
     }
     HDC dc = CreateCompatibleDC(target); HBITMAP bitmap = CreateCompatibleBitmap(target, r.right, r.bottom);
@@ -276,9 +285,17 @@ void Paint(HWND hwnd) {
     for (int id : {-1, static_cast<int>(AddMenu), static_cast<int>(Remove), static_cast<int>(ListMenu)}) {
         RECT b = Button(id);
         Fill(dc, b, pressed == id ? Ui::NativeColor(Ui::palette.pressed) : hover == id ? Ui::NativeColor(Ui::Hover) : Ui::NativeColor(Ui::Surface));
-        Text(dc, b, id == -1 ? L"×" : id == AddMenu ? L"Adicionar" : id == Remove ? L"Remover" : L"Lista",
+        if(id!=-1) {HBRUSH outline=CreateSolidBrush(Ui::NativeColor(Ui::Bronze));FrameRect(dc,&b,outline);DeleteObject(outline);}
+        Text(dc, b, id == -1 ? L"×" : id == AddMenu ? L"ADIC ▾" : id == Remove ? L"REMOVER" : L"LISTA ▾",
             id == -1 ? Ui::NativeColor(Ui::Danger) : Ui::NativeColor(Ui::Text), DT_CENTER);
     }
+    RECT clear=Button(ClearSearch);
+    Fill(dc,clear,pressed==ClearSearch?Ui::NativeColor(Ui::Border):hover==ClearSearch?Ui::NativeColor(Ui::Hover):Ui::NativeColor(Ui::Surface));
+    HPEN eraser=CreatePen(PS_SOLID,std::max(1,S(1)),Ui::NativeColor(Ui::Text));auto oldPen=SelectObject(dc,eraser);
+    EraserIcon(r.right/scale-22,51,[&](float x1,float y1,float x2,float y2) {
+        MoveToEx(dc,static_cast<int>(std::lround(x1*scale)),static_cast<int>(std::lround(y1*scale)),nullptr);
+        LineTo(dc,static_cast<int>(std::lround(x2*scale)),static_cast<int>(std::lround(y2*scale)));
+    });SelectObject(dc,oldPen);DeleteObject(eraser);
     RECT list = List(); Fill(dc, list, Ui::NativeColor(Ui::Surface));
     int saved = SaveDC(dc); IntersectClipRect(dc, list.left, list.top, list.right, list.bottom);
     for (int index = top; index < PlayerPlaylist().Count(); ++index) {
@@ -314,7 +331,7 @@ void Paint(HWND hwnd) {
     std::wstring footer = status;
     if (footer.empty()) footer = std::to_wstring(count) + L" faixas · " + std::to_wstring(selected.size()) +
         L" selecionadas" + (worker.Busy() ? L" · lendo..." : L"");
-    Text(dc, {S(5),r.bottom-S(23),r.right-S(5),r.bottom-S(3)}, footer, Ui::NativeColor(Ui::Muted));
+    Text(dc, {S(8),r.bottom-S(26),Button(AddMenu).left-S(8),r.bottom-S(2)}, footer, Ui::NativeColor(Ui::Muted));
     BitBlt(target,0,0,r.right,r.bottom,dc,0,0,SRCCOPY);
     SelectObject(dc,oldFont); DeleteObject(font); SelectObject(dc,oldBitmap); DeleteObject(bitmap); DeleteDC(dc);
     EndPaint(hwnd,&ps);

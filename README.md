@@ -20,8 +20,10 @@ LiteSic é um player de áudio para Windows que recria a experiência clássica 
 com testes, validação gráfica e PASS manual do usuário para o visual,
 arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
 Play destaca e centraliza a faixa selecionada. A seleção primária também
-volta destacada ao reabrir, pronta para Play. **Adicionar ▾**, **Remover** e
-**Lista ▾** ficam no rodapé; Arquivos/Pasta estão agrupados em Adicionar.
+volta destacada ao reabrir, pronta para Play. **ADIC ▾**, **REMOVER** e
+**LISTA ▾** ficam à direita da barra de status; Arquivos/Pasta estão agrupados
+em Adicionar. A pesquisa tem um ícone de borracha para limpar.
+Veja as [duas correções visuais recentes](docs/PLAYLIST-FOOTER-2026-10-11.md).
 Equalizador e a integração completa das três janelas permanecem planejados.
 Player e playlist já possuem encaixe magnético e movimento conjunto.
 Veja o [encerramento técnico da M5](docs/M5-CLOSEOUT-2026-10-11.md).

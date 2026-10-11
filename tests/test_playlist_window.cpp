@@ -119,7 +119,11 @@ static void filter_selection_removes_canonical_item() {
     SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0);
     CHECK(PlayerPlaylist().Count()==2); CHECK(PlayerPlaylist().At(0)->displayTitle==L"Alpha");
     CHECK(PlayerPlaylist().At(1)->displayTitle==L"Gamma");
-    SetWindowTextW(edit,L""); PlayerPlayback().Clear(); PlWnd_Refresh();
+    RECT client{};GetClientRect(playlist,&client);
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(client.right-33,78));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(client.right-33,78));
+    CHECK(GetWindowTextLengthW(edit)==0);
+    PlayerPlayback().Clear(); PlWnd_Refresh();
 }
 static void play_selection_and_center_current() {
     PlayerPlayback().Clear(); CHECK(Audio_TestInit(48000));
@@ -131,9 +135,9 @@ static void play_selection_and_center_current() {
     SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,140));
     CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==0);
     CHECK(PlayerPlayback().PlayIndex(50)); PlWnd_Refresh(true);
-    // Six complete rows: the current track must occupy the fourth row.
-    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,240));
-    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,240));
+    // Seven complete rows: the current track must occupy the fourth row.
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,250));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,250));
     CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==50);
     Audio_Pause(); CHECK(PlWnd_PlaySelected()); CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
     SetWindowTextW(GetDlgItem(playlist,520),L"does-not-match");
