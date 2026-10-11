@@ -1,5 +1,10 @@
 # PROJECT_STATE — LiteSic
 
+Correção de reprodução em 11/10/2026: duração MP3 armazenada antes de tocar,
+evitando consulta concorrente ao decodificador ativo. Quatro builds e 444
+verificações passaram; ver [auditoria](docs/AUDIO-TRANSITION-AUDIT-2026-10-11.md).
+Esse resultado não altera a cobertura prática ou o encerramento da M9.
+
 Registro canônico criado em 11/10/2026 para persistir a decisão de encerramento
 da M9. As demais milestones continuam descritas no [ROADMAP](docs/ROADMAP.md);
 esta decisão não altera o status delas.

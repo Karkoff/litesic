@@ -21,6 +21,7 @@
 
 #include <cstdint>
 #include "eq_state.h"
+#include "tags.h"
 
 static Eq::Processor g_eq;
 static struct { ma_node_base base; ma_uint32 channels; } g_eqNode{};
@@ -63,6 +64,7 @@ static struct AudioEngine
     __int64    fileSizeBytes;   /* Tamanho em bytes (para bitrate) */
     int        fileSampleRate;  /* Taxa nativa do arquivo carregado */
     int        sourceSampleRate; /* Resource manager may resample to engine rate. */
+    double     durationSeconds; /* UI-owned cache; never scan the live decoder. */
 
     /* M4-T1: Ring buffer de visualização. */
     float        vizBuffer[VISUALIZATION_BUFFER_SIZE]; /* Buffer circular */
@@ -293,6 +295,7 @@ void Audio_Shutdown(void)
     /* Parar e liberar o sound antes de desligar a engine. */
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
+    g_audio.durationSeconds = 0;
     g_audio.currentPath[0] = 0;
 
     /* Encerrar visualização. */
@@ -314,6 +317,7 @@ void Audio_Unload(void) {
     g_eq.RequestReset();
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
+    g_audio.durationSeconds = 0;
     g_audio.currentPath[0] = 0;
     g_audio.fileSampleRate = 0;
     g_audio.fileSizeBytes = 0;
@@ -334,6 +338,8 @@ BOOL Audio_Load(const wchar_t* path)
     /* Parar e liberar o sound anterior se houver. */
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
+    g_audio.durationSeconds = 0;
+    g_audio.sourceSampleRate = 0;
     g_eq.RequestReset();
 
     /* Inicializar sound a partir do arquivo — miniaudio decodifica MP3/WAV/
@@ -361,8 +367,17 @@ BOOL Audio_Load(const wchar_t* path)
     if (ma_decoder_init_file_w(path, nullptr, &probe) == MA_SUCCESS) {
         if (ma_decoder_get_data_format(&probe, nullptr, nullptr, &nativeRate, nullptr, 0) == MA_SUCCESS)
             g_audio.fileSampleRate = static_cast<int>(nativeRate);
+        // MP3 length queries scan and seek. Only use an independent decoder,
+        // before playback, rather than racing the device's active decoder.
+        ma_uint64 frames = 0;
+        if (nativeRate && ma_decoder_get_length_in_pcm_frames(&probe,&frames)==MA_SUCCESS)
+            g_audio.durationSeconds = static_cast<double>(frames)/nativeRate;
         ma_decoder_uninit(&probe);
     }
+    // Unicode Vorbis push mode reports no length; metadata reads the final
+    // granule using another independent decoder and bounded file buffers.
+    if (g_audio.durationSeconds<=0)
+        g_audio.durationSeconds=ReadTrackMetadata(path).duration;
 
     /* Rotear o sound pelo EQ; o tap opcional fica depois do EQ. */
     if (g_eqActive)
@@ -394,17 +409,7 @@ BOOL Audio_Load(const wchar_t* path)
 
 double Audio_GetDurationSeconds(void)
 {
-    if (!g_audio.soundLoaded || g_audio.sourceSampleRate <= 0)
-        return 0.0;
-
-    /* Obter duração em frames e converter para segundos. */
-    ma_uint64 frameCount = 0;
-    ma_sound_get_length_in_pcm_frames(&g_audio.sound, &frameCount);
-    if (frameCount == 0)
-        return 0.0;
-
-    double duration = (double)frameCount / g_audio.sourceSampleRate;
-    return duration;
+    return g_audio.soundLoaded ? g_audio.durationSeconds : 0.0;
 }
 
 /* ------------------------------------------------------------------ */

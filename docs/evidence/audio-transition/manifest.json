@@ -1,0 +1,70 @@
+{
+  "date": "2026-10-11",
+  "base_commit": "0497b82",
+  "sources": {
+    "src/audio.cpp": "df265a8ee8447e793ec33abae289871e449c8c10c35be6f25e240636c4b53185",
+    "tests/test_audio_integration.cpp": "f9bfb633674422fe60aec5babeea85a70b4de03ff7284d18798e3b8800134f6b"
+  },
+  "builds": {
+    "32-debug": "909cce75eb63539c0d36a3cc015ed6fd01c906987b8815d31e83388eb45a5f24",
+    "32-release": "f72b7a5873be032dac44b59b67f406f9bf9e6467f8401e9a291e010a95d2686a",
+    "64-debug": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59",
+    "64-release": "c2cd4c678a8fa6e6deca8d6a7b6c2eca84ca21fbb88c94c4014e72024fde92d5"
+  },
+  "tests": {
+    "32-debug": {
+      "result": "PASS",
+      "checks": 111
+    },
+    "32-release": {
+      "result": "PASS",
+      "checks": 111
+    },
+    "64-debug": {
+      "result": "PASS",
+      "checks": 111
+    },
+    "64-release": {
+      "result": "PASS",
+      "checks": 111
+    }
+  },
+  "captures": {
+    "audio-fixed-near-eof": {
+      "sha256": "6edf01c26d1b2520bb2dfdfb95897f99cee40f117be96affa3d966ea63ab0644",
+      "utc": "2026-10-11T16:56:30.059094+00:00",
+      "process_sha256": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59"
+    },
+    "audio-fixed-climb": {
+      "sha256": "cbc98160da8a4e54736070e97798f74ec9deafe03d6d8cf60d14e90a80bb3da2",
+      "utc": "2026-10-11T16:56:42.833109+00:00",
+      "process_sha256": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59"
+    },
+    "audio-fixed-climb-list": {
+      "sha256": "a3d56341a373da35325d3267744598824922f2f2e113965e81feb0f2e80906f2",
+      "utc": "2026-10-11T16:56:43.436287+00:00",
+      "process_sha256": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59"
+    },
+    "audio-fixed-stable": {
+      "sha256": "2bb962d7309dfb873fe137d2346e2908da2010f34fd1cb80b6d9623006e064cc",
+      "utc": "2026-10-11T16:57:24.049501+00:00",
+      "process_sha256": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59"
+    },
+    "audio-fixed-next": {
+      "sha256": "0ec2905646f5e9689764811ac7c2cff66368e58553154e6d73bf82c97cad4055",
+      "utc": "2026-10-11T16:58:27.975973+00:00",
+      "process_sha256": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59"
+    },
+    "audio-fixed-next-list": {
+      "sha256": "27f99fae40413cf48f903aade8e7f2743b8fa250dbe47cf49daec26b2d989b0f",
+      "utc": "2026-10-11T16:58:28.573422+00:00",
+      "process_sha256": "36992a1489d58db382d44244e852249b1fb9fae805644fe5530a315613227d59"
+    }
+  },
+  "file_audit": {
+    "two_track_full_decode": "PASS",
+    "metadata_entries": 1280,
+    "metadata_scan": "PASS",
+    "device_loads_before_fix_without_UI_duration_queries": 60
+  }
+}

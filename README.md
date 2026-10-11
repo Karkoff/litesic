@@ -34,6 +34,8 @@ automático pelo início, centro ou fim de cada borda. Os painéis encaixados
 acompanham movimento e escala. [Verificação](docs/WINDOW-SNAP-2026-10-11.md).
 Títulos longos deslizam suavemente no LCD nos dois sentidos, com pausa nas
 extremidades; títulos que cabem permanecem parados.
+Corrigida a consulta concorrente de duração MP3 que podia travar e encerrar
+o player durante a reprodução/transição. [Auditoria](docs/AUDIO-TRANSITION-AUDIT-2026-10-11.md).
 **Aparência entre sessões:** visibilidade do visualizador (incluindo player
 compacto), playlist e painel EQ, modo FFT/OSC, escala da interface e tema
 são preservados. Veja [validação da persistência](docs/APPEARANCE-PERSISTENCE-2026-10-11.md).

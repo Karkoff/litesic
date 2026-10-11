@@ -1,0 +1,17 @@
+SIGSEGV captured before correction
+#0  0x00007ffc7a7ab367 in msvcrt!memmove () from C:/WINDOWS/System32/msvcrt.dll
+#1  0x00007ff7a6bd2bfd in ma_dr_mp3_L3_restore_reservoir (h=0x11ce14dcc40, bs=0x10b3bfe490, s=0x11ce14de650, main_data_begin=65) at src/../third_party/miniaudio.h:93815
+#12 0x00007ff7a6bda159 in ma_dr_mp3_get_pcm_frame_count (pMP3=0x11ce14dcc40) at src/../third_party/miniaudio.h:95495
+#13 0x00007ff7a6b73d5d in ma_mp3_get_length_in_pcm_frames (pMP3=0x11ce14dcbd0, pLength=0x10b3bfe840) at src/../third_party/miniaudio.h:65179
+#14 0x00007ff7a6b73342 in ma_mp3_ds_get_length (pDataSource=0x11ce14dcbd0, pLength=0x10b3bfe840) at src/../third_party/miniaudio.h:64684
+#15 0x00007ff7a6b6cae4 in ma_data_source_get_length_in_pcm_frames (pDataSource=0x11ce14dcbd0, pLength=0x10b3bfe840) at src/../third_party/miniaudio.h:59677
+#16 0x00007ff7a6b7880b in ma_decoder_get_length_in_pcm_frames (pDecoder=0x11c953fa270, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:67643
+#17 0x00007ff7a6b75701 in ma_decoder__data_source_on_get_length (pDataSource=0x11c953fa270, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:66197
+#18 0x00007ff7a6b6cae4 in ma_data_source_get_length_in_pcm_frames (pDataSource=0x11c953fa270, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:59677
+#19 0x00007ff7a6b7dc3c in ma_resource_manager_data_buffer_get_length_in_pcm_frames (pDataBuffer=0x11c953fa1f0, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:71610
+#20 0x00007ff7a6b7ca23 in ma_resource_manager_data_buffer_cb__get_length_in_pcm_frames (pDataSource=0x11c953fa1f0, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:71069
+#21 0x00007ff7a6b6cae4 in ma_data_source_get_length_in_pcm_frames (pDataSource=0x11c953fa1f0, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:59677
+#22 0x00007ff7a6b8f160 in ma_sound_get_length_in_pcm_frames (pSound=0x7ff7a6d266f0 <g_audio+1360>, pLength=0x10b3bfe9c0) at src/../third_party/miniaudio.h:79529
+#23 0x00007ff7a6ae28a0 in Audio_GetDurationSeconds () at src/audio.cpp:402
+#24 0x00007ff7a6aeb3ea in PlayerSnapshot () at src/mainwnd.cpp:688
+#25 0x00007ff7a6aed3bc in WndProc (hwnd=0x17135e, msg=15, wParam=0, lParam=0) at src/mainwnd.cpp:1090
