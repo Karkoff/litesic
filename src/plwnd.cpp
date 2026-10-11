@@ -39,6 +39,7 @@ bool sizeMoveLoop = false;
 POINT moveCursor{};
 RECT moveOrigin{};
 std::wstring status;
+std::wstring sessionPath;
 int S(int n) { return static_cast<int>(std::lround(n * scale)); }
 RECT Client() { RECT r{}; GetClientRect(window, &r); return r; }
 RECT WorkArea() {
@@ -451,7 +452,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     case WM_LBUTTONDBLCLK: {
         int row=HitRow(point);
         if (row>=0 && !PlayerPlayback().PlayIndex(row)) Error(L"Não foi possível tocar a faixa selecionada.");
-        PlWnd_Refresh(); return 0;
+        PlWnd_Refresh(true); return 0;
     }
     case WM_MOUSEWHEEL: top-=GET_WHEEL_DELTA_WPARAM(wp)/WHEEL_DELTA*3; ClampTop(); PlWnd_Refresh(); return 0;
     case WM_KEYDOWN:
@@ -460,7 +461,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         else if (wp=='A' && (GetKeyState(VK_CONTROL)&0x8000)) {
             status.clear();
             selected=view.Indices(); PlWnd_Refresh();
-        } else if (wp==VK_RETURN && !selected.empty()) { PlayerPlayback().PlayIndex(selected.front()); PlWnd_Refresh(); }
+        } else if (wp==VK_RETURN && !selected.empty()) { PlayerPlayback().PlayIndex(selected.front()); PlWnd_Refresh(true); }
         else if((wp==VK_UP || wp==VK_DOWN || wp==VK_HOME || wp==VK_END) && view.Count()) {
             int row=view.Row(selected.empty()?-1:selected.back());
             row=wp==VK_HOME?0:wp==VK_END?view.Count()-1:std::clamp(row+(wp==VK_UP?-1:1),0,view.Count()-1);
@@ -525,19 +526,28 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         }
         ClampTop(); PlWnd_Refresh(); return 0;
     case WM_CLOSE: ShowWindow(hwnd,SW_HIDE); return 0;
-    case WM_DESTROY: worker.Stop(); search=nullptr; DeleteObject(searchFont); searchFont=nullptr;
+    case WM_DESTROY:
+        worker.Stop();
+        if (!sessionPath.empty()) {
+            std::wstring error;
+            if (!SaveM3U(sessionPath,PlayerPlaylist().Tracks(),error))
+                MessageBoxW(mainWindow,(L"Não foi possível preservar a playlist.\n"+error).c_str(),L"LiteSic",MB_OK|MB_ICONERROR);
+        }
+        sessionPath.clear(); search=nullptr; DeleteObject(searchFont); searchFont=nullptr;
         DeleteObject(searchBackground); searchBackground=nullptr; canvas.DiscardTarget(); window=nullptr; return 0;
     }
     return DefWindowProcW(hwnd,message,wp,lp);
 }
 }
 
-BOOL PlWnd_Create(HINSTANCE instance, HWND main) {
+BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
     mainWindow=main;
+    sessionPath=sessionFile?sessionFile:L"";
+    selected.clear(); anchor=-1; top=0; status.clear();
     movingList=false; sizeMoveLoop=false; dock=Dock::None;
     WNDCLASSEXW cls{}; cls.cbSize=sizeof(cls); cls.style=CS_DBLCLKS|CS_HREDRAW|CS_VREDRAW;
     cls.lpfnWndProc=Proc; cls.hInstance=instance; cls.hCursor=LoadCursorW(nullptr,IDC_ARROW); cls.lpszClassName=kClass;
-    if (!RegisterClassExW(&cls)) return FALSE;
+    if (!RegisterClassExW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) return FALSE;
     scale=MainWnd_DPIScaleFloat(1);
     RECT parent{}; GetWindowRect(main,&parent); RECT work=WorkArea();
     int width=S(460),height=S(360),x=std::max(work.left,std::min(parent.left,work.right-width));
@@ -559,6 +569,20 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main) {
     window=CreateWindowExW(WS_EX_ACCEPTFILES,kClass,L"LiteSic — Lista de reprodução",WS_POPUP,
         x,y,width,height,main,nullptr,instance,nullptr);
     if (window) {
+        if (!sessionPath.empty()) {
+            DWORD attributes=GetFileAttributesW(sessionPath.c_str());
+            if (attributes!=INVALID_FILE_ATTRIBUTES || GetLastError()!=ERROR_FILE_NOT_FOUND) {
+                std::vector<Track> tracks; std::wstring error;
+                if (LoadM3U(sessionPath,tracks,error)) {
+                    for (const auto& track:tracks) AddTrack(track);
+                } else {
+                    status=error;
+                    // Do not replace an unreadable session with an empty list.
+                    sessionPath.clear();
+                }
+            }
+        }
+        PlWnd_Refresh();
         RECT list{}; GetWindowRect(window,&list); RememberDock(initial,list);
         PlWnd_MainMoved(); ShowWindow(window,SW_SHOWNOACTIVATE); UpdateWindow(window);
     }
@@ -582,12 +606,26 @@ void PlWnd_MainMoved() {
 void PlWnd_Show() { if(window) { ShowWindow(window,SW_SHOW); SetForegroundWindow(window); } }
 void PlWnd_Toggle() { if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); PlWnd_Refresh(); } }
 bool PlWnd_IsVisible() { return window && IsWindowVisible(window); }
-void PlWnd_Refresh() {
+void PlWnd_Refresh(bool revealCurrent) {
+    int current=PlayerPlaylist().GetCurrentIndex();
+    view.Update(PlayerPlaylist(),query);
+    if (revealCurrent && current>=0) {
+        if (view.Row(current)<0 && search) SetWindowTextW(search,L"");
+        selected={current}; anchor=current;
+        top=view.Row(current)-Visible()/2;
+    }
     view.Update(PlayerPlaylist(),query); ClampTop();
     selected.erase(std::remove_if(selected.begin(),selected.end(),[](int index) { return view.Row(index)<0; }),selected.end());
     if(view.Row(anchor)<0) anchor=selected.empty()?-1:selected.front();
     if(window) InvalidateRect(window,nullptr,FALSE);
     if(mainWindow) PostMessageW(mainWindow,WM_PLAYER_CHANGED,0,0);
+}
+bool PlWnd_PlaySelected() {
+    int index=selected.empty()?-1:selected.front();
+    bool ok=index>=0 && index!=PlayerPlaylist().GetCurrentIndex()
+        ? PlayerPlayback().PlayIndex(index) : PlayerPlayback().Play();
+    PlWnd_Refresh(true);
+    return ok;
 }
 void PlWnd_ScaleChanged() {
     if(!window) return;

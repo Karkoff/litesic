@@ -45,7 +45,7 @@ O produto prevê três janelas independentes:
 | **Motor de áudio** | [miniaudio](https://miniaud.io) — single-header, multi-backend |
 | **Interface** | Player e playlist sem borda; playlist redimensionável e com encaixe magnético ao player |
 | **Repetição** | Desligada → lista (`REP`) → faixa atual (`REP 1`); Anterior/Próximo continuam navegando |
-| **Playlist** | Arquivos/pastas, seleção múltipla, arraste para reordenar, ordenação, M3U e tags em background |
+| **Playlist** | Arquivos/pastas, seleção múltipla, arraste para reordenar, ordenação, M3U, tags em background e recuperação automática ao reabrir |
 | **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica |
 | **Equalizador** | Planejado para M6: 10 bandas, pré-amp e presets |
 | **Compatibilidade** | Alvo Windows 7–11, x86/x64; validação Win7 pendente na M9 |
@@ -194,6 +194,10 @@ player para mover a playlist encaixada; arraste a barra da própria playlist
 para soltá-la e aproxime uma borda do player para encaixar novamente.
 Os controles ficam na ordem Anterior, Play, Pause, Stop, Próximo. Adicione
 arquivos por **+ Arquivos** ou **+ Pasta** na playlist modernizada.
+Ao fechar o programa, a playlist é salva em `%LOCALAPPDATA%\LiteSic\playlist.m3u8`
+e recuperada na próxima abertura, preservando a ordem e as entradas repetidas.
+Play toca a faixa selecionada e a destaca no centro da lista (limitado pelas
+extremidades); um filtro que esconda a faixa é limpo para mostrá-la.
 Veja [validação dos ajustes](docs/PLAYER-ADJUSTMENTS-2026-10-11.md).
 
 ```bash

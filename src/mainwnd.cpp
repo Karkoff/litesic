@@ -649,11 +649,11 @@ static BOOL PtInNavBtn(int x, int y, int *pBtnId)
 
 static void ExecutePlayerControl(HWND hwnd,int id) {
     switch(id) {
-    case 1: PlayerPlayback().Previous(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(); break;
-    case 2: PlayerPlayback().Next(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(); break;
+    case 1: PlayerPlayback().Previous(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(true); break;
+    case 2: PlayerPlayback().Next(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(true); break;
     case 3: g_shuffleOn=!g_shuffleOn; break;
     case 4: g_repeatMode=NextRepeatMode(g_repeatMode); break;
-    case 5: g_playbackError=!PlayerPlayback().Play(); PlWnd_Refresh(); break;
+    case 5: g_playbackError=!PlWnd_PlaySelected(); break;
     case 6: Audio_Pause(); break;
     case 7: Audio_Stop(); g_seekValue=0; g_scrollElapsedMs=0; g_playbackError=false; break;
     case 11: PlWnd_Toggle(); break;
@@ -826,7 +826,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         if (wParam == POSITION_TIMER_ID)
         {
-            if (PlayerPlayback().Update(g_shuffleOn, g_repeatMode)) PlWnd_Refresh();
+            if (PlayerPlayback().Update(g_shuffleOn, g_repeatMode)) PlWnd_Refresh(true);
             const Track* current = PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex());
             uint64_t id = current ? current->id : 0;
             if (id != g_displayTrack) {
@@ -931,11 +931,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             int btnId = 0;
             if (PtInNavBtn(mx, my, &btnId)) {
                 switch (btnId) {
-                case 1: PlayerPlayback().Previous(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(); break;
-                case 2: PlayerPlayback().Next(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(); break;
+                case 1: PlayerPlayback().Previous(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(true); break;
+                case 2: PlayerPlayback().Next(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(true); break;
                 case 3: g_shuffleOn = !g_shuffleOn; break;
                 case 4: g_repeatMode = NextRepeatMode(g_repeatMode); break;
-                case 5: PlayerPlayback().Play(); PlWnd_Refresh(); break;
+                case 5: PlWnd_PlaySelected(); break;
                 case 6: Audio_Pause(); break;
                 case 7: Audio_Stop(); g_seekValue = 0; g_scrollElapsedMs = 0; break;
                 }

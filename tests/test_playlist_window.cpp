@@ -121,6 +121,52 @@ static void filter_selection_removes_canonical_item() {
     CHECK(PlayerPlaylist().At(1)->displayTitle==L"Gamma");
     SetWindowTextW(edit,L""); PlayerPlayback().Clear(); PlWnd_Refresh();
 }
+static void play_selection_and_center_current() {
+    PlayerPlayback().Clear(); CHECK(Audio_TestInit(48000));
+    for(int i=0;i<100;++i) PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
+    // Known client geometry at the 150% scale used by the DPI test.
+    SetWindowPos(playlist,nullptr,0,0,480,450,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+    PlWnd_Refresh();
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,200));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,200));
+    CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==0);
+    CHECK(PlayerPlayback().PlayIndex(50)); PlWnd_Refresh(true);
+    // Seven complete rows: the current track must be the fourth (middle).
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,300));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,300));
+    CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==50);
+    Audio_Pause(); CHECK(PlWnd_PlaySelected()); CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
+    SetWindowTextW(GetDlgItem(playlist,520),L"does-not-match");
+    PlWnd_Refresh(true);
+    CHECK(GetWindowTextLengthW(GetDlgItem(playlist,520))==0);
+    // Revealing also selects the track, even when a filter hid it.
+    SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0);
+    CHECK(PlayerPlaylist().Count()==99); CHECK(PlayerPlaylist().GetCurrentIndex()==-1);
+    PlayerPlayback().Clear(); Audio_Shutdown(); PlWnd_Refresh();
+}
+static void session_survives_window_restart() {
+    HWND owner=GetWindow(playlist,GW_OWNER); HINSTANCE instance=GetModuleHandleW(nullptr);
+    std::wstring path=FullPath(L"build\\playlist-session-test.m3u8");
+    DeleteFileW(path.c_str()); PlWnd_Shutdown(); PlayerPlayback().Clear();
+    CHECK(PlWnd_Create(instance,owner,path.c_str()));
+    PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
+    PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\missing.wav"));
+    PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
+    PlayerPlaylist().At(0)->displayTitle=L"Título com acentuação";
+    PlayerPlaylist().MoveTo(1,2);
+    auto expected=PlayerPlaylist().Tracks();
+    PlWnd_Shutdown(); PlayerPlayback().Clear();
+    CHECK(PlWnd_Create(instance,owner,path.c_str()));
+    CHECK(PlayerPlaylist().Count()==3);
+    for(int i=0;i<3;++i) {
+        CHECK(PlayerPlaylist().At(i)->path==expected[i].path);
+        CHECK(PlayerPlaylist().At(i)->displayTitle==expected[i].displayTitle);
+    }
+    // Saving a deliberately cleared playlist must not resurrect old entries.
+    PlayerPlayback().Clear(); PlWnd_Shutdown();
+    CHECK(PlWnd_Create(instance,owner,path.c_str())); CHECK(PlayerPlaylist().Count()==0);
+    PlWnd_Shutdown(); CHECK(DeleteFileW(path.c_str()));
+}
 int main() {
     HINSTANCE instance=GetModuleHandleW(nullptr);
     HWND owner=CreateWindowExW(0,L"STATIC",L"playlist integration owner",WS_POPUP,0,0,1,1,nullptr,nullptr,instance,nullptr);CHECK(owner);
@@ -129,5 +175,7 @@ int main() {
     int cases=0;CASE(dropped_files_and_invalid_filter);CASE(dropped_folder_recursive_and_missing_file);CASE(scale_layout_and_overlap);
     CASE(dock_follow_detach_and_reattach);
     CASE(filter_selection_removes_canonical_item);
+    CASE(play_selection_and_center_current);
+    CASE(session_survives_window_restart);
     PlWnd_Shutdown();DestroyWindow(owner);std::printf("%d playlist window integration cases\n",cases);
 }

@@ -7,6 +7,8 @@
  */
 
 #include <windows.h>
+#include <shlobj.h>
+#include <string>
 
 #include "mainwnd.h"
 #include "plwnd.h"
@@ -57,7 +59,17 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
         if (SUCCEEDED(com)) CoUninitialize();
         return 1;
     }
-    if (!PlWnd_Create(hInstance, hwnd)) {
+    wchar_t appData[MAX_PATH]{};
+    std::wstring session;
+    if (SUCCEEDED(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA|CSIDL_FLAG_CREATE,
+                                  nullptr,SHGFP_TYPE_CURRENT,appData))) {
+        std::wstring directory=std::wstring(appData)+L"\\LiteSic";
+        if (CreateDirectoryW(directory.c_str(),nullptr) || GetLastError()==ERROR_ALREADY_EXISTS)
+            session=directory+L"\\playlist.m3u8";
+    }
+    if (session.empty()) MessageBoxW(hwnd,L"Não foi possível acessar a pasta de dados. A playlist não será preservada nesta sessão.",
+                                   L"LiteSic",MB_OK|MB_ICONWARNING);
+    if (!PlWnd_Create(hInstance, hwnd, session.c_str())) {
         DestroyWindow(hwnd);
         if (SUCCEEDED(com)) CoUninitialize();
         return 1;
