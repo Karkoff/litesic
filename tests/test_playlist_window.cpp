@@ -134,6 +134,22 @@ static void play_selection_and_center_current() {
     SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,140));
     SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,140));
     CHECK(PlWnd_PlaySelected()); CHECK(PlayerPlaylist().GetCurrentIndex()==0);
+    // Playing a visible bottom row must not move it. Clicking the same
+    // coordinates afterwards must still select exactly the same track.
+    for(auto point : {MAKELPARAM(80,350),MAKELPARAM(80,390),MAKELPARAM(80,140)}) {
+        SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,point);
+        SendMessageW(playlist,WM_LBUTTONUP,0,point);
+        CHECK(PlWnd_PlaySelected());
+        int expected=PlayerPlaylist().GetCurrentIndex();
+        CHECK(expected==(HIWORD(point)==350?6:HIWORD(point)==390?7:0));
+        SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,point);
+        SendMessageW(playlist,WM_LBUTTONUP,0,point);
+        CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==expected);
+    }
+    CHECK(PlayerPlayback().PlayIndex(80)); PlWnd_Refresh(true);
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,250));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,250));
+    CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==80);
     CHECK(PlayerPlayback().PlayIndex(50)); PlWnd_Refresh(true);
     // Seven complete rows: the current track must occupy the fourth row.
     SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,250));

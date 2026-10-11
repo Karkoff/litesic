@@ -657,7 +657,12 @@ void PlWnd_Refresh(bool revealCurrent) {
     if (revealCurrent && current>=0) {
         if (view.Row(current)<0 && search) SetWindowTextW(search,L"");
         selected={current}; anchor=current;
-        top=view.Row(current)-Visible()/2;
+        const int row=view.Row(current);
+        const RECT list=List();
+        // Even a partially visible last row is already in view. Only scroll
+        // when the playing track is outside the current viewport.
+        if(row<top || (row-top)*S(24)>=list.bottom-list.top)
+            top=row-Visible()/2;
     }
     view.Update(PlayerPlaylist(),query); ClampTop();
     selected.erase(std::remove_if(selected.begin(),selected.end(),[](int index) { return view.Row(index)<0; }),selected.end());
