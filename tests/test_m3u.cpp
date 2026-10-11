@@ -20,10 +20,14 @@ static void malformed_extinf() {
     CHECK(tracks.size()==2);CHECK(tracks[0].duration==-1);CHECK(tracks[1].displayTitle==L"b");
 }
 static void unicode_roundtrip() {
-    Track t;t.path=L"C:\\Música\\Canção.wav";t.displayTitle=L"日本語 — canção";t.duration=2.25;
+    Track t;t.path=L"C:\\Música\\Canção.wav";t.displayTitle=L"日本語 — canção";t.duration=2.25;t.favorite=true;
     std::vector<Track> result;std::wstring decoded;
     CHECK(DecodeText(EncodeUtf8(WriteM3U({t})),decoded));CHECK(ParseM3U(decoded,L"D:\\mix.m3u",result));
     CHECK(result.size()==1);CHECK(result[0].path==t.path);CHECK(result[0].displayTitle==t.displayTitle);CHECK(result[0].duration==2.25);
+    CHECK(result[0].favorite);
+    Track plain=t;plain.favorite=false;
+    CHECK(ParseM3U(WriteM3U({t,plain}),L"D:\\mix.m3u",result));CHECK(result.size()==2);
+    CHECK(result[0].favorite&&!result[1].favorite);
 }
 static void encoding_errors_and_legacy() {
     std::wstring text;CHECK(!DecodeText(std::string("\xff"),text));CHECK(DecodeText(std::string("\xe7"),text,true));CHECK(text==L"ç");

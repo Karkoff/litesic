@@ -1,0 +1,23 @@
+make: Nothing to be done for 'all'.
+make: 'build/64/release/test-build_third_party_smoke.exe' is up to date.
+make: 'build/64/release/test-test_fft.exe' is up to date.
+make: 'build/64/release/test-test_format_time.exe' is up to date.
+make: 'build/64/release/test-test_map_sample_to_y.exe' is up to date.
+make: 'build/64/release/test-test_ring_buffer.exe' is up to date.
+make: 'build/64/release/test-test_appearance.exe' is up to date.
+make: 'build/64/release/test-test_audio_integration.exe' is up to date.
+make: 'build/64/release/test-test_eq_audio.exe' is up to date.
+make: 'build/64/release/test-test_eq_filter.exe' is up to date.
+make: 'build/64/release/test-test_eq_window.exe' is up to date.
+make: 'build/64/release/test-test_m3u.exe' is up to date.
+make: 'build/64/release/test-test_playback.exe' is up to date.
+make: 'build/64/release/test-test_player_window.exe' is up to date.
+make: 'build/64/release/test-test_playlist.exe' is up to date.
+make: 'build/64/release/test-test_playlist_view.exe' is up to date.
+make: 'build/64/release/test-test_playlist_window.exe' is up to date.
+make: 'build/64/release/test-test_playlist_worker.exe' is up to date.
+make: 'build/64/release/test-test_tags.exe' is up to date.
+make: 'build/64/release/test-test_themes.exe' is up to date.
+make: 'build/64/release/test-test_title_scroll.exe' is up to date.
+make: 'build/64/release/test-test_ui_draw.exe' is up to date.
+make: 'build/64/release/test-test_window_snap.exe' is up to date.

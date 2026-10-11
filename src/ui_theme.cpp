@@ -6,6 +6,7 @@
 #include <string>
 #include <vector>
 #include <initializer_list>
+#include <cwchar>
 
 namespace Ui {
 namespace {
@@ -114,13 +115,44 @@ AppearanceState LoadAppearance() {
     };
     state.visualizerVisible=choice(L"VisualizerVisible",1,{0,1})!=0;
     state.playlistVisible=choice(L"PlaylistVisible",1,{0,1})!=0;
+    state.playlistFavoritesOnly=choice(L"PlaylistFavoritesOnly",0,{0,1})!=0;
     state.equalizerVisible=choice(L"EqualizerVisible",0,{0,1})!=0;
     state.spectrum=choice(L"Spectrum",0,{0,1})!=0;
     state.scalePercent=choice(L"ScalePercent",0,{0,80,90,100,110,125,150});
+    if(!path.empty()) {
+        wchar_t text[32]{},*end=nullptr;
+        GetPrivateProfileStringW(L"Appearance",L"VolumePermille",L"",text,32,path.c_str());
+        long value=std::wcstol(text,&end,10);
+        if(end!=text && *end==L'\0' && value>=0 && value<=1000)
+            state.volumePermille=static_cast<int>(value);
+    }
     return state;
 }
 bool SaveAppearanceValue(const wchar_t* key,int value) {
     return path.empty() || WritePrivateProfileStringW(L"Appearance",key,std::to_wstring(value).c_str(),path.c_str());
+}
+bool LoadEqualizerPosition(PanelPosition& position) {
+    if(path.empty())return false;
+    auto read=[&](const wchar_t* key,int low,int high,int& result){
+        wchar_t text[32]{},*end=nullptr;
+        GetPrivateProfileStringW(L"EqualizerWindow",key,L"",text,32,path.c_str());
+        long value=std::wcstol(text,&end,10);
+        if(end==text||*end||value<low||value>high)return false;
+        result=static_cast<int>(value);return true;
+    };
+    PanelPosition saved;int version=0;
+    if(!read(L"Version",1,1,version)||!read(L"Left",-100000,100000,saved.left)||
+       !read(L"Top",-100000,100000,saved.top)||!read(L"Dock",0,4,saved.side)||
+       !read(L"Anchor",0,2,saved.anchor))return false;
+    position=saved;return true;
+}
+bool SaveEqualizerPosition(const PanelPosition& position) {
+    if(path.empty())return true;
+    std::wstring data;
+    auto add=[&](const wchar_t* key,int value){data+=std::wstring(key)+L"="+std::to_wstring(value)+L'\0';};
+    add(L"Version",1);add(L"Left",position.left);add(L"Top",position.top);
+    add(L"Dock",position.side);add(L"Anchor",position.anchor);data+=L'\0';
+    return WritePrivateProfileSectionW(L"EqualizerWindow",data.c_str(),path.c_str())!=FALSE;
 }
 void ThemeConfigure(const wchar_t* iniPath) {
     path=iniPath?iniPath:L"";

@@ -16,7 +16,7 @@
 
 LiteSic é um player de áudio para Windows que recria a experiência clássica do Winamp, construído em **C++17 nativo** com **Win32 API + Direct2D/DirectWrite**, mantendo GDI como fallback durante a migração. Alvo de compatibilidade Windows 7–11. Sem Qt, sem .NET, sem MFC.
 
-**Estado atual: M0–M5 concluídas.** A playlist está implementada e integrada,
+**Estado atual: M0–M6 COMPLETE.** A playlist está implementada e integrada,
 com testes, validação gráfica e PASS manual do usuário para o visual,
 arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
 Play destaca a faixa selecionada e só a centraliza quando ela está fora da
@@ -25,9 +25,27 @@ volta destacada ao reabrir, pronta para Play. **ADIC ▾**, **REMOVER** e
 **LISTA ▾** ficam à direita da barra de status; Arquivos/Pasta estão agrupados
 em Adicionar. A pesquisa tem um ícone de borracha para limpar.
 Veja as [duas correções visuais recentes](docs/PLAYLIST-FOOTER-2026-10-11.md).
-**M6 COMPLETE:** equalizador real implementado, com dez bandas, PRE,
+**M6 COMPLETE:** aceite final visual, audível, funcional e de uso prolongado
+informado pelo usuário em 11/10/2026, após os ajustes integrados.
+[Encerramento, quatro builds e validação final](docs/M6-CLOSEOUT-2026-10-11.md).
+A [auditoria integrada anterior](docs/M6-INTEGRATED-VALIDATION-2026-10-11.md)
+permanece como histórico, com suas medições e limitações originais.
+[Ajustes visuais posteriores](docs/UI-BUTTON-STATES-2026-10-11.md): estados
+ativos com fundo claro, indicador EQ e comandos do equalizador no rodapé.
+[Atualização de volume e painéis](docs/VOLUME-DOCKING-2026-10-11.md): último
+volume persistido, EQ do tamanho do player compacto, formação mantida ao mover
+e posições da playlist e do equalizador preservadas ao reabrir.
+[Favoritos e informações das músicas](docs/PLAYLIST-FAVORITES-2026-10-11.md):
+estrelas persistentes, abas Geral/Favoritas, faixa em negrito e informações pelo
+menu de contexto. Temas mantém a posição da lista ao aplicar; botões do EQ
+têm largura uniforme.
+Play iniciado em Favoritas toca somente as músicas marcadas, respeitando
+shuffle e repetição; sem repetição, para no fim das favoritas.
+[Correção da pesquisa em playlists grandes](docs/SEARCH-FREEZE-2026-10-11.md):
+metadados são aplicados em lotes, sem acumular varreduras por notificações antigas.
+Equalizador real implementado, com dez bandas, PRE,
 ON/OFF suave, sete presets, curva, teclado e persistência. Continua funcionando
-com o painel oculto. Quatro builds e **420 verificações** passaram; o usuário confirmou o funcionamento em 11/10/2026. [Relatório, medições e capturas](docs/M6-EQUALIZER-2026-10-11.md).
+com o painel oculto. Na entrega original, quatro builds e **420 verificações** passaram; o usuário confirmou o funcionamento em 11/10/2026. [Relatório, medições e capturas](docs/M6-EQUALIZER-2026-10-11.md).
 A integração adicional das três janelas permanece na M7.
 EQ e playlist encaixam no player com captura de 24 DIP e alinhamento
 automático pelo início, centro ou fim de cada borda. Os painéis encaixados
@@ -53,8 +71,9 @@ e [plano por fase](docs/design/LITESIC-UI-IMPLEMENTATION-PLAN.md).
 **Temas visuais:** 36 opções em **botão direito no player → Aparência > Temas...**,
 com categorias, prévias, aplicação imediata e preferência persistente.
 LiteSic Original continua sendo o padrão; player, playlist e EQ compartilham a
-aparência sem interromper a reprodução. Validação técnica PASS; aceite visual
-humano dos novos temas pendente. Seletor e menus próprios usam a paleta ativa.
+aparência sem interromper a reprodução. Validação técnica PASS e aceite visual
+final da M6 informado pelo usuário; não há registro de aprovação individual
+dos 36 temas. Seletor e menus próprios usam a paleta ativa.
 Veja [sistema de temas](docs/THEMES.md),
 [relatório atual de playlist, menus e temas](docs/PLAYLIST-UI-2026-10-11.md) e
 [galeria inicial dos oito temas representativos](docs/evidence/themes/index.html).

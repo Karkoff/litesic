@@ -1,0 +1,41 @@
+{
+  "baseline-test": {
+    "executables": 19,
+    "cases": 97,
+    "complete": false,
+    "capture_groups_pending": 3,
+    "deferred_executables": 3,
+    "deferred_functional_cases": 14
+  },
+  "baseline-functional": {
+    "executables": 22,
+    "cases": 111,
+    "complete": true,
+    "capture_groups_pending": 3,
+    "pending_basis": "Capture opt-out active; baseline predates PENDING log marker."
+  },
+  "final-64-release-test": {
+    "executables": 23,
+    "cases": 122,
+    "complete": true,
+    "capture_groups_pending": 3
+  },
+  "final-64-debug-test": {
+    "executables": 23,
+    "cases": 122,
+    "complete": true,
+    "capture_groups_pending": 3
+  },
+  "final-32-release-test": {
+    "executables": 23,
+    "cases": 122,
+    "complete": true,
+    "capture_groups_pending": 3
+  },
+  "final-32-debug-test": {
+    "executables": 23,
+    "cases": 122,
+    "complete": true,
+    "capture_groups_pending": 3
+  }
+}

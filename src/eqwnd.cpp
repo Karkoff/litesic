@@ -1,9 +1,10 @@
-﻿#include "eqwnd.h"
+#include "eqwnd.h"
 #include "window_snap.h"
 #include "mainwnd.h"
 #include "ui_draw.h"
 #include "eq_state.h"
 #include "audio.h"
+#include "plwnd.h"
 #include <windowsx.h>
 #include <cmath>
 #include <algorithm>
@@ -20,16 +21,40 @@ float dragY=0,dragGain=0;
 int S(float v){return int(std::lround(v*scale));}
 float Gain(int id){return id==3?Eq::State().preamp:Eq::State().gains[id-4];}
 bool Enabled(int id){return id<4 || Eq::Available(id-4,Audio_GetSampleRate());}
-void Hide(HWND hwnd){Eq::Save();ShowWindow(hwnd,SW_HIDE);Ui::SaveAppearanceValue(L"EqualizerVisible",0);}
+void SavePosition(){
+    if(!window)return;
+    RECT panel{};if(GetWindowRect(window,&panel))
+        Ui::SaveEqualizerPosition({panel.left,panel.top,static_cast<int>(dock.side),static_cast<int>(dock.anchor)});
+}
+bool RestorePosition(RECT& panel,RECT& parent,const RECT& work){
+    Ui::PanelPosition saved;if(!Ui::LoadEqualizerPosition(saved))return false;
+    dock={static_cast<WindowSnap::Side>(saved.side),static_cast<WindowSnap::Anchor>(saved.anchor)};
+    panel={saved.left,saved.top,saved.left+S(460),saved.top+S(Ui::EqHeight)};
+    if(dock.side==WindowSnap::Side::None){
+        MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
+        WindowSnap::KeepVisible(panel,GetMonitorInfoW(MonitorFromRect(&panel,MONITOR_DEFAULTTONEAREST),&monitor)?monitor.rcWork:work);
+    }else{
+        WindowSnap::Place(panel,parent,dock);
+        RECT group{},peer{},fitted{};UnionRect(&group,&parent,&panel);
+        if(PlWnd_DockedRect(parent,peer))UnionRect(&group,&group,&peer);
+        fitted=group;WindowSnap::KeepVisible(fitted,work);
+        OffsetRect(&parent,fitted.left-group.left,fitted.top-group.top);
+        OffsetRect(&panel,fitted.left-group.left,fitted.top-group.top);
+        SetWindowPos(mainWindow,nullptr,parent.left,parent.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
+    }
+    return true;
+}
+void Hide(HWND hwnd){SavePosition();Eq::Save();ShowWindow(hwnd,SW_HIDE);Ui::SaveAppearanceValue(L"EqualizerVisible",0);InvalidateRect(mainWindow,nullptr,FALSE);}
+Ui::Rect Button(int id){return {76.f+id*128,192,120,18};}
 int Hit(float x,float y){
-    if(y>=40&&y<68){if(x>=12&&x<100)return 0;if(x>=112&&x<300)return 1;if(x>=312&&x<448)return 2;}
-    if(y>=112&&y<208)for(int i=0;i<11;++i)if(std::abs(x-(60+i*37))<16)return i+3;
+    for(int id=0;id<3;++id)if(Button(id).Contains(x,y))return id;
+    if(y>=56&&y<142)for(int i=0;i<11;++i)if(std::abs(x-(60+i*37))<16)return i+3;
     return -1;
 }
 void PresetMenu(HWND hwnd){
     HMENU menu=CreatePopupMenu();for(unsigned i=0;i<Eq::PresetCount();++i)
         AppendMenuW(menu,MF_STRING|(Eq::State().preset==int(i)?MF_CHECKED:0),100+i,Eq::PresetAt(i).name);
-    POINT p{S(112),S(68)};ClientToScreen(hwnd,&p);
+    POINT p{S(204),S(210)};ClientToScreen(hwnd,&p);
     int id=Ui::TrackThemedMenu(menu,TPM_RETURNCMD|TPM_NONOTIFY,p.x,p.y,hwnd,scale);DestroyMenu(menu);
     if(id>=100 && id<100+int(Eq::PresetCount())){Eq::ApplyPreset(id-100);Eq::Save();}
 }
@@ -58,7 +83,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
             dock=WindowSnap::Snap(panel,parent,S(24));
             SetWindowPos(hwnd,nullptr,panel.left,panel.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
             moving=false;}
-        EqWnd_MainMoved();return 0;}
+        EqWnd_MainMoved();SavePosition();return 0;}
     case WM_ERASEBKGND:return 1;
     case Ui::WM_THEME_CHANGED:InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_NCHITTEST:{POINT p{GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};ScreenToClient(hwnd,&p);
@@ -70,7 +95,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
         InvalidateRect(hwnd,nullptr,FALSE);return 0;}
     case WM_MOUSEMOVE:{float x=GET_X_LPARAM(lp)/scale,y=GET_Y_LPARAM(lp)/scale;
         hover=Hit(x,y);TRACKMOUSEEVENT track{sizeof(track),TME_LEAVE,hwnd,0};TrackMouseEvent(&track);
-        if(pressed>=3&&GetCapture()==hwnd)Eq::SetGain(pressed-4,dragGain+(dragY-y)*24/70);
+        if(pressed>=3&&GetCapture()==hwnd)Eq::SetGain(pressed-4,dragGain+(dragY-y)*24/60);
         InvalidateRect(hwnd,nullptr,FALSE);return 0;}
     case WM_MOUSELEAVE:hover=-1;InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_LBUTTONUP:{int id=pressed;pressed=-1;if(GetCapture()==hwnd)ReleaseCapture();
@@ -92,63 +117,76 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
     case WM_SETFOCUS:case WM_KILLFOCUS:InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_CLOSE:Hide(hwnd);return 0;
     case WM_DPICHANGED:{scale=LOWORD(wp)/96.f*MainWnd_UserScaleMultiplier();auto r=reinterpret_cast<RECT*>(lp);
-        SetWindowPos(hwnd,nullptr,r->left,r->top,S(460),S(244),SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();return 0;}
+        SetWindowPos(hwnd,nullptr,r->left,r->top,S(460),S(Ui::EqHeight),SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();return 0;}
     case WM_PAINT:{using namespace Ui;PAINTSTRUCT ps{};HDC dc=BeginPaint(hwnd,&ps);RECT r{};GetClientRect(hwnd,&r);
         if(canvas.Begin(dc,r,scale)){
-            canvas.Fill({0,0,460,244},Background);canvas.TitleBar(460,L"LITESIC · EQUALIZADOR",false);
+            canvas.Fill({0,0,460,EqHeight},Background);canvas.TitleBar(460,L"EQUALIZADOR",false);
             const auto& state=Eq::State();bool hasFocus=GetFocus()==hwnd;
-            canvas.Button({12,40,88,28},state.enabled?L"EQ ON":L"EQ OFF",state.enabled,hover==0,pressed==0,true,hasFocus&&focus==0);
+            canvas.Fill(Button(0),state.enabled?SelectedButtonFill():pressed==0?Border:hover==0?Hover:Surface,3);
+            canvas.Stroke(Button(0),hasFocus&&focus==0?Accent:Bronze,3);
+            canvas.TextAt(Button(0),state.enabled?L"EQ ON":L"EQ OFF",state.enabled?SelectedButtonText:Text,Font::Small,true);
             std::wstring name=L"Preset: ";name+=state.preset<0?L"Custom":Eq::PresetAt(state.preset).name;
-            canvas.Button({112,40,188,28},name,false,hover==1,pressed==1,true,hasFocus&&focus==1);
-            canvas.Button({312,40,136,28},L"Redefinir",false,hover==2,pressed==2,true,hasFocus&&focus==2);
-            canvas.TextAt({12,72,436,20},L"±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera",Muted,Font::Small,true);
-            canvas.Fill({8,96,444,114},Surface,3);
-            for(int j=0;j<3;++j){float y=126+j*35;canvas.Line(44,y,446,y,Border);canvas.TextAt({9,y-8,36,16},j==0?L"+12":j==1?L"0":L"−12",Muted,Font::Small);}
+            for(int id:{1,2}){auto b=Button(id);canvas.Fill(b,pressed==id?Border:hover==id?Hover:Surface,3);canvas.Stroke(b,hasFocus&&focus==id?Accent:Bronze,3);canvas.TextAt(b,id==1?name:L"Redefinir",Text,Font::Small,true);}
+            canvas.TextAt({8,190,60,22},L"EQ",Muted,Font::Small);
+            canvas.TextAt({12,164,436,20},L"±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera",Muted,Font::Small,true);
+            canvas.Fill({8,40,444,104},Surface,3);
+            for(int j=0;j<3;++j){float y=70+j*30;canvas.Line(44,y,446,y,Border);canvas.TextAt({9,y-8,36,16},j==0?L"+12":j==1?L"0":L"−12",Muted,Font::Small);}
             const wchar_t* labels[]={L"PRE",L"60",L"170",L"310",L"600",L"1k",L"3k",L"6k",L"12k",L"14k",L"16k"};
-            for(int i=0;i<11;++i){int id=i+3;float x=60+i*37,y=161-Gain(id)*70/24;bool enabled=Enabled(id);
-                if(i>1)canvas.Line(x-37,161-Gain(id-1)*70/24,x,y,Accent,1.5f);
-                canvas.Line(x,126,x,196,enabled?palette.sliderTrack:Border,3);
+            for(int i=0;i<11;++i){int id=i+3;float x=60+i*37,y=100-Gain(id)*60/24;bool enabled=Enabled(id);
+                if(i>1)canvas.Line(x-37,100-Gain(id-1)*60/24,x,y,Accent,1.5f);
+                canvas.Line(x,70,x,130,enabled?palette.sliderTrack:Border,3);
                 canvas.Circle(x,y,pressed==id?6:5,enabled?(hover==id?Accent:palette.sliderFill):Muted,Border);
-                if(hasFocus&&focus==id)canvas.Stroke({x-13,116,26,87},Accent,3);
+                if(hasFocus&&focus==id)canvas.Stroke({x-13,60,26,77},Accent,3);
                 wchar_t gain[32];swprintf(gain,32,L"%+.1f",double(Gain(id)));
-                canvas.TextAt({x-18,98,36,18},enabled?gain:L"N/A",enabled?Text:Muted,Font::Small,true);
-                canvas.TextAt({x-18,211,36,18},labels[i],enabled?Text:Muted,Font::Small,true);
+                canvas.TextAt({x-18,42,36,18},enabled?gain:L"N/A",enabled?Text:Muted,Font::Small,true);
+                canvas.TextAt({x-18,145,36,18},labels[i],enabled?Text:Muted,Font::Small,true);
             }
-            bool boost=state.preamp>0;for(float gain:state.gains)boost=boost||gain>0;
-            canvas.TextAt({8,228,444,16},boost?L"Ganhos positivos podem clipar: reduza o PRE.":L"Bandas N/A: indisponíveis nesta taxa; valores preservados.",boost?palette.warning:Muted,Font::Small,true);
             if(!canvas.End())InvalidateRect(hwnd,nullptr,FALSE);
         }else{SetBkColor(dc,NativeColor(Surface));SetTextColor(dc,NativeColor(Text));DrawTextW(dc,L"Equalizador: renderização indisponível",-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE);}
         EndPaint(hwnd,&ps);return 0;}
-    case WM_DESTROY:Eq::Save();window=nullptr;canvas.DiscardTarget();return 0;
+    case WM_DESTROY:SavePosition();Eq::Save();window=nullptr;canvas.Reset();return 0;
     }return DefWindowProcW(hwnd,message,wp,lp);
 }
 }
 void EqWnd_Toggle(HWND main){
+    bool restored=false;
     if(!window){mainWindow=main;dock={};moving=false;sizeMoveLoop=false;WNDCLASSEXW cls{};cls.cbSize=sizeof(cls);cls.lpfnWndProc=Proc;cls.hInstance=GetModuleHandleW(nullptr);
         cls.hCursor=LoadCursorW(nullptr,IDC_ARROW);cls.lpszClassName=L"LiteSic.EqualizerWnd";
         if(!RegisterClassExW(&cls)&&GetLastError()!=ERROR_CLASS_ALREADY_EXISTS)return;
         scale=MainWnd_DPIScaleFloat(1);RECT parent{};GetWindowRect(main,&parent);MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
         GetMonitorInfoW(MonitorFromWindow(main,MONITOR_DEFAULTTONEAREST),&monitor);
-        RECT panel{0,0,S(460),S(244)};
+        RECT panel{0,0,S(460),S(Ui::EqHeight)};
+        restored=RestorePosition(panel,parent,monitor.rcWork);
         // Prefer the right edge, then another complete side that fits.
-        for(auto side:{WindowSnap::Side::Right,WindowSnap::Side::Left,WindowSnap::Side::Bottom,WindowSnap::Side::Top}){
+        if(!restored)for(auto side:{WindowSnap::Side::Right,WindowSnap::Side::Left,WindowSnap::Side::Bottom,WindowSnap::Side::Top}){
             WindowSnap::Place(panel,parent,{side,WindowSnap::Anchor::Start});
             if(panel.left>=monitor.rcWork.left&&panel.right<=monitor.rcWork.right&&
                 panel.top>=monitor.rcWork.top&&panel.bottom<=monitor.rcWork.bottom){dock={side,WindowSnap::Anchor::Start};break;}
         }
         int x=panel.left,y=panel.top;
-        if(dock.side==WindowSnap::Side::None){
+        if(!restored&&dock.side==WindowSnap::Side::None){
             x=std::max<int>(monitor.rcWork.left,std::min<int>(parent.right,monitor.rcWork.right-S(460)));
-            y=std::max<int>(monitor.rcWork.top,std::min<int>(parent.top,monitor.rcWork.bottom-S(244)));
+            y=std::max<int>(monitor.rcWork.top,std::min<int>(parent.top,monitor.rcWork.bottom-S(Ui::EqHeight)));
         }
-        window=CreateWindowExW(0,cls.lpszClassName,L"LiteSic — Equalizador",WS_POPUP,x,y,S(460),S(244),main,nullptr,cls.hInstance,nullptr);
-    }if(window){ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);}
+        window=CreateWindowExW(0,cls.lpszClassName,L"LiteSic — Equalizador",WS_POPUP,x,y,S(460),S(Ui::EqHeight),main,nullptr,cls.hInstance,nullptr);
+    }if(window){SavePosition();ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);EqWnd_MainMoved(restored);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);InvalidateRect(mainWindow,nullptr,FALSE);}
 }
-void EqWnd_ScaleChanged(){scale=MainWnd_DPIScaleFloat(1);if(window)SetWindowPos(window,nullptr,0,0,S(460),S(244),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();}
-void EqWnd_MainMoved(){
+bool EqWnd_IsVisible(){return window&&IsWindowVisible(window);}
+void EqWnd_ScaleChanged(){scale=MainWnd_DPIScaleFloat(1);if(window)SetWindowPos(window,nullptr,0,0,S(460),S(Ui::EqHeight),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();}
+bool EqWnd_DockedRect(const RECT& owner,RECT& panel){
+    if(!window||moving||dock.side==WindowSnap::Side::None||!IsWindowVisible(window))return false;
+    GetWindowRect(window,&panel);WindowSnap::Place(panel,owner,dock);return true;
+}
+void EqWnd_MainMoved(bool preserveDock){
     if(!window||!mainWindow||moving||dock.side==WindowSnap::Side::None||IsIconic(mainWindow))return;
     RECT parent{},panel{};GetWindowRect(mainWindow,&parent);GetWindowRect(window,&panel);
-    RECT aligned=panel;WindowSnap::Place(aligned,parent,dock);
+    RECT aligned=panel;
+    MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
+    RECT peer{};bool hasPeer=WindowSnap::OtherPanel(mainWindow,window,peer);
+    if(preserveDock)WindowSnap::Place(aligned,parent,dock);
+    else if(GetMonitorInfoW(MonitorFromWindow(mainWindow,MONITOR_DEFAULTTONEAREST),&monitor))
+        WindowSnap::PlaceVisible(aligned,parent,dock,monitor.rcWork,hasPeer?&peer:nullptr);
+    else WindowSnap::Place(aligned,parent,dock);
     if(aligned.left!=panel.left||aligned.top!=panel.top)
         SetWindowPos(window,nullptr,aligned.left,aligned.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
 }

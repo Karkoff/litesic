@@ -1,5 +1,21 @@
 # Ambiente de desenvolvimento Windows
 
+## Auditoria integrada M6 — 11/10/2026
+
+Estado atual: **M6 COMPLETE**, após aceite final informado pelo usuário.
+Ver [encerramento e validação final](M6-CLOSEOUT-2026-10-11.md).
+A [validação integrada](M6-INTEGRATED-VALIDATION-2026-10-11.md) permanece
+como registro histórico da etapa READY_FOR_HUMAN_ACCEPTANCE.
+As seções anteriores à implementação, mantidas abaixo como histórico,
+não descrevem o estado atual do EQ. Para testes sem captura de janelas:
+`$env:LITESIC_NO_CAPTURE='1'` antes de `scripts/dev.ps1 -Action test`.
+As verificações de pixels dessas janelas são explicitamente pendentes,
+enquanto controles, geometria, áudio, estado, persistência e recursos são
+testados. `eq-probe.exe <modo> [segundos]` usa pintura normal, sem PrintWindow;
+modo 10 alterna temas/presets e mantém LCD/OSC/painéis na carga offline;
+FFT é medido separadamente no modo 3.
+Não mede saída física ou underruns do dispositivo.
+
 ## Atualização M6 — 11/10/2026
 
 EQ real integrado ao grafo miniaudio: dez bandas, PRE, bypass, presets,

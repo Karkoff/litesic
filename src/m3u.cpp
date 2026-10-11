@@ -52,10 +52,12 @@ bool ParseM3U(const std::wstring& text, const std::wstring& playlistPath, std::v
     std::wstring line, title;
     double duration = -1;
     bool first = true;
+    bool favorite = false;
     while (std::getline(input, line)) {
         if (first && !line.empty() && line[0] == 0xfeff) line.erase(0, 1);
         first = false; line = Trim(line);
         if (line.empty()) continue;
+        if(line==L"#LITESIC-FAVORITE:1"){favorite=true;continue;}
         if (line.compare(0, 8, L"#EXTINF:") == 0) {
             auto comma = line.find(L',', 8);
             title.clear(); duration = -1;
@@ -82,9 +84,10 @@ bool ParseM3U(const std::wstring& text, const std::wstring& playlistPath, std::v
             track.path = FullPath(line);
             track.displayTitle = title.empty() ? FileTitle(track.path) : title;
             track.duration = duration;
+            track.favorite = favorite;
             result.push_back(std::move(track));
         }
-        title.clear(); duration = -1;
+        title.clear(); duration = -1; favorite = false;
     }
     return true;
 }
@@ -96,6 +99,7 @@ std::wstring WriteM3U(const std::vector<Track>& tracks) {
         std::wstring title = track.displayTitle;
         for (auto& c : title) if (c == L'\r' || c == L'\n') c = L' ';
         if (track.path.find_first_of(L"\r\n") != std::wstring::npos) continue;
+        if(track.favorite)output << L"#LITESIC-FAVORITE:1\r\n";
         output << L"#EXTINF:" << (std::isfinite(track.duration) ? track.duration : -1)
                << L"," << title << L"\r\n" << FullPath(track.path) << L"\r\n";
     }

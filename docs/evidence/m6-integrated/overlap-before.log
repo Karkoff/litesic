@@ -1,0 +1,6 @@
+FAIL tests/test_eq_window.cpp:101: !IntersectRect(&overlap,&panel,&pl)
+PASS controls_publish_dsp_and_hidden_processing
+PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE
+PASS all_themes_preserve_parameters
+PASS docking_follow_detach_and_scale
+PASS docked_panel_remains_reachable_at_monitor_edge

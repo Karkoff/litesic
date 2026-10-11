@@ -22,8 +22,9 @@ constexpr RepeatMode NextRepeatMode(RepeatMode mode) {
 class PlaybackController {
 public:
     PlaybackController(Playlist& list, PlaybackBackend backend) : list_(list), backend_(backend) {}
-    bool PlayIndex(int index);
+    bool PlayIndex(int index, bool favoritesOnly = false);
     bool Play();
+    bool Play(bool favoritesOnly);
     bool Next(bool shuffle, bool repeat);
     bool Previous(bool shuffle, bool repeat);
     bool Update(bool shuffle, RepeatMode repeat);
@@ -31,9 +32,11 @@ public:
     void Clear();
 private:
     bool LoadIndex(int index, bool resetNavigation);
+    void SetScope(bool favoritesOnly);
     Playlist& list_;
     PlaybackBackend backend_;
     uint64_t loaded_ = 0;
+    bool favoritesOnly_ = false;
 };
 Playlist& PlayerPlaylist();
 PlaybackController& PlayerPlayback();

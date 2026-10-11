@@ -6,6 +6,12 @@
 #include <string>
 
 namespace Ui {
+// A light, theme-tinted selection with a dark foreground across all palettes.
+inline uint32_t SelectedButtonFill() {
+    auto light=[](unsigned c){return (c+3*255)/4;};
+    return (light((Accent>>16)&255)<<16)|(light((Accent>>8)&255)<<8)|light(Accent&255);
+}
+constexpr uint32_t SelectedButtonText = 0x182020;
 // Native menu navigation, application palette and typography. The caller owns HMENU.
 BOOL TrackThemedMenu(HMENU menu, UINT flags, int x, int y, HWND owner, float scale);
 bool ThemeMenuMessage(UINT message, WPARAM wp, LPARAM lp, LRESULT& result);
@@ -19,12 +25,13 @@ public:
     bool Begin(HDC dc, const RECT& pixels, float scale);
     bool End();
     void DiscardTarget();
+    void Reset();
     void Fill(Rect r, uint32_t color, float radius = 0);
     void Stroke(Rect r, uint32_t color, float radius = 0, float width = 1);
     void Line(float x1, float y1, float x2, float y2, uint32_t color, float width = 1);
     void Circle(float x, float y, float radius, uint32_t fill, uint32_t border);
     void TextAt(Rect r, const std::wstring& text, uint32_t color = Text,
-                Font font = Font::Body, bool center = false);
+                Font font = Font::Body, bool center = false, bool bold = false);
     bool ScrollingText(Rect r,const std::wstring& text,double elapsedMs,
                        uint32_t color = Text,Font font = Font::Heading);
     void Button(Rect r, const std::wstring& text, bool active = false,
@@ -41,8 +48,8 @@ private:
     IDWriteFactory* write_ = nullptr;
     ID2D1DCRenderTarget* target_ = nullptr;
     ID2D1SolidColorBrush* brush_ = nullptr;
-    IDWriteTextFormat* fonts_[4]{};
-    IDWriteInlineObject* ellipsis_[4]{};
+    IDWriteTextFormat* fonts_[8]{};
+    IDWriteInlineObject* ellipsis_[8]{};
     unsigned themeGeneration_ = 0;
     IDWriteTextLayout* scrollLayout_ = nullptr;
     std::wstring scrollText_;

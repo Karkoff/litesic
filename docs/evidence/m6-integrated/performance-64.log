@@ -1,0 +1,66 @@
+{"mode":6,"frames":512,"rate":48000,"channels":2,"mean_us":10.720,"p99_us":20.400,"max_us":80.800,"audio_budget_pct":0.101,"process_cpu_ms":500.000,"wall_ms":932.859,"working_set":68304896,"private_bytes":64446464,"gdi":47,"user":48}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":7,"frames":512,"rate":48000,"channels":2,"mean_us":1.777,"p99_us":4.100,"max_us":12.800,"audio_budget_pct":0.017,"process_cpu_ms":531.250,"wall_ms":892.411,"working_set":66322432,"private_bytes":63766528,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":0,"frames":512,"rate":48000,"channels":2,"mean_us":12.175,"p99_us":22.800,"max_us":30.000,"audio_budget_pct":0.114,"process_cpu_ms":593.750,"wall_ms":905.731,"working_set":66785280,"private_bytes":63295488,"gdi":47,"user":48}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":1,"frames":512,"rate":48000,"channels":2,"mean_us":14.180,"p99_us":23.700,"max_us":64.500,"audio_budget_pct":0.133,"process_cpu_ms":500.000,"wall_ms":936.484,"working_set":66715648,"private_bytes":63594496,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":2,"frames":512,"rate":48000,"channels":2,"mean_us":35.938,"p99_us":57.900,"max_us":85.700,"audio_budget_pct":0.337,"process_cpu_ms":625.000,"wall_ms":977.937,"working_set":66973696,"private_bytes":63733760,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":3,"frames":512,"rate":48000,"channels":2,"mean_us":36.020,"p99_us":58.900,"max_us":111.100,"audio_budget_pct":0.338,"process_cpu_ms":1062.500,"wall_ms":2108.586,"working_set":73543680,"private_bytes":80117760,"gdi":49,"user":49}
+COUNTERS threads=86 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":4,"frames":512,"rate":48000,"channels":2,"mean_us":35.571,"p99_us":55.800,"max_us":61.500,"audio_budget_pct":0.333,"process_cpu_ms":1171.875,"wall_ms":2168.103,"working_set":61579264,"private_bytes":76853248,"gdi":7,"user":9}
+COUNTERS threads=79 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":8,"frames":512,"rate":48000,"channels":2,"mean_us":37.380,"p99_us":61.100,"max_us":81.000,"audio_budget_pct":0.350,"process_cpu_ms":1359.375,"wall_ms":1934.875,"working_set":62492672,"private_bytes":78880768,"gdi":9,"user":11}
+COUNTERS threads=80 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":5,"frames":512,"rate":48000,"channels":2,"mean_us":37.848,"p99_us":67.300,"max_us":83.600,"audio_budget_pct":0.355,"process_cpu_ms":2015.625,"wall_ms":3982.935,"working_set":76931072,"private_bytes":112156672,"gdi":13,"user":14}
+COUNTERS threads=150 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":9,"frames":512,"rate":48000,"channels":2,"mean_us":36.210,"p99_us":55.800,"max_us":92.400,"audio_budget_pct":0.339,"process_cpu_ms":781.250,"wall_ms":1033.698,"working_set":55595008,"private_bytes":62611456,"gdi":5,"user":9}
+COUNTERS threads=44 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":10,"frames":512,"rate":48000,"channels":2,"mean_us":26.963,"p99_us":59.500,"max_us":87.200,"audio_budget_pct":0.253,"process_cpu_ms":1765.625,"wall_ms":2884.507,"working_set":70475776,"private_bytes":97443840,"gdi":12,"user":14}
+COUNTERS threads=115 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":6,"frames":512,"rate":48000,"channels":2,"mean_us":11.005,"p99_us":19.900,"max_us":73.500,"audio_budget_pct":0.103,"process_cpu_ms":453.125,"wall_ms":909.261,"working_set":66842624,"private_bytes":63750144,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":7,"frames":512,"rate":48000,"channels":2,"mean_us":1.740,"p99_us":3.300,"max_us":18.800,"audio_budget_pct":0.016,"process_cpu_ms":453.125,"wall_ms":895.518,"working_set":65757184,"private_bytes":63856640,"gdi":47,"user":48}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":0,"frames":512,"rate":48000,"channels":2,"mean_us":12.004,"p99_us":22.800,"max_us":64.100,"audio_budget_pct":0.113,"process_cpu_ms":546.875,"wall_ms":950.541,"working_set":66834432,"private_bytes":63660032,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":1,"frames":512,"rate":48000,"channels":2,"mean_us":13.570,"p99_us":22.000,"max_us":39.700,"audio_budget_pct":0.127,"process_cpu_ms":593.750,"wall_ms":911.080,"working_set":66740224,"private_bytes":64634880,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":2,"frames":512,"rate":48000,"channels":2,"mean_us":36.656,"p99_us":59.000,"max_us":101.300,"audio_budget_pct":0.344,"process_cpu_ms":609.375,"wall_ms":921.922,"working_set":66797568,"private_bytes":64483328,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":3,"frames":512,"rate":48000,"channels":2,"mean_us":36.288,"p99_us":58.500,"max_us":81.800,"audio_budget_pct":0.340,"process_cpu_ms":1156.250,"wall_ms":2071.969,"working_set":73211904,"private_bytes":79720448,"gdi":49,"user":49}
+COUNTERS threads=86 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":4,"frames":512,"rate":48000,"channels":2,"mean_us":37.186,"p99_us":57.100,"max_us":201.900,"audio_budget_pct":0.349,"process_cpu_ms":1343.750,"wall_ms":2291.742,"working_set":61562880,"private_bytes":78123008,"gdi":7,"user":9}
+COUNTERS threads=79 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":8,"frames":512,"rate":48000,"channels":2,"mean_us":37.607,"p99_us":78.800,"max_us":205.700,"audio_budget_pct":0.353,"process_cpu_ms":1203.125,"wall_ms":1950.731,"working_set":62521344,"private_bytes":78520320,"gdi":9,"user":11}
+COUNTERS threads=80 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":5,"frames":512,"rate":48000,"channels":2,"mean_us":37.814,"p99_us":72.200,"max_us":100.800,"audio_budget_pct":0.355,"process_cpu_ms":2359.375,"wall_ms":4130.570,"working_set":77074432,"private_bytes":113426432,"gdi":13,"user":14}
+COUNTERS threads=150 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":9,"frames":512,"rate":48000,"channels":2,"mean_us":36.427,"p99_us":63.800,"max_us":153.200,"audio_budget_pct":0.342,"process_cpu_ms":718.750,"wall_ms":1106.995,"working_set":55959552,"private_bytes":62488576,"gdi":5,"user":9}
+COUNTERS threads=44 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":10,"frames":512,"rate":48000,"channels":2,"mean_us":26.648,"p99_us":60.100,"max_us":86.300,"audio_budget_pct":0.250,"process_cpu_ms":1703.125,"wall_ms":2692.415,"working_set":70680576,"private_bytes":95875072,"gdi":12,"user":14}
+COUNTERS threads=115 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":6,"frames":512,"rate":48000,"channels":2,"mean_us":11.358,"p99_us":20.200,"max_us":272.100,"audio_budget_pct":0.106,"process_cpu_ms":562.500,"wall_ms":945.727,"working_set":66809856,"private_bytes":64552960,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":7,"frames":512,"rate":48000,"channels":2,"mean_us":1.704,"p99_us":3.300,"max_us":7.000,"audio_budget_pct":0.016,"process_cpu_ms":546.875,"wall_ms":796.495,"working_set":66461696,"private_bytes":63598592,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":0,"frames":512,"rate":48000,"channels":2,"mean_us":11.883,"p99_us":22.400,"max_us":57.800,"audio_budget_pct":0.111,"process_cpu_ms":609.375,"wall_ms":929.012,"working_set":66838528,"private_bytes":64704512,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":1,"frames":512,"rate":48000,"channels":2,"mean_us":14.194,"p99_us":22.900,"max_us":61.800,"audio_budget_pct":0.133,"process_cpu_ms":546.875,"wall_ms":820.936,"working_set":66822144,"private_bytes":64892928,"gdi":49,"user":49}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":2,"frames":512,"rate":48000,"channels":2,"mean_us":38.824,"p99_us":59.100,"max_us":87.300,"audio_budget_pct":0.364,"process_cpu_ms":562.500,"wall_ms":961.445,"working_set":66961408,"private_bytes":63430656,"gdi":47,"user":48}
+COUNTERS threads=51 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":3,"frames":512,"rate":48000,"channels":2,"mean_us":36.513,"p99_us":58.400,"max_us":374.000,"audio_budget_pct":0.342,"process_cpu_ms":1140.625,"wall_ms":2038.326,"working_set":73621504,"private_bytes":81305600,"gdi":49,"user":49}
+COUNTERS threads=86 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":4,"frames":512,"rate":48000,"channels":2,"mean_us":37.039,"p99_us":58.300,"max_us":92.100,"audio_budget_pct":0.347,"process_cpu_ms":1265.625,"wall_ms":2328.969,"working_set":61485056,"private_bytes":78327808,"gdi":7,"user":9}
+COUNTERS threads=79 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":8,"frames":512,"rate":48000,"channels":2,"mean_us":37.786,"p99_us":79.500,"max_us":369.400,"audio_budget_pct":0.354,"process_cpu_ms":1125.000,"wall_ms":1892.805,"working_set":62689280,"private_bytes":78508032,"gdi":9,"user":11}
+COUNTERS threads=80 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":5,"frames":512,"rate":48000,"channels":2,"mean_us":37.724,"p99_us":74.700,"max_us":83.900,"audio_budget_pct":0.354,"process_cpu_ms":2078.125,"wall_ms":3950.083,"working_set":77062144,"private_bytes":111874048,"gdi":13,"user":14}
+COUNTERS threads=150 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":9,"frames":512,"rate":48000,"channels":2,"mean_us":36.263,"p99_us":56.500,"max_us":74.600,"audio_budget_pct":0.340,"process_cpu_ms":734.375,"wall_ms":1084.947,"working_set":55472128,"private_bytes":62418944,"gdi":5,"user":9}
+COUNTERS threads=44 samples=2000 peak_cpu_one_core_pct=0.000
+{"mode":10,"frames":512,"rate":48000,"channels":2,"mean_us":27.622,"p99_us":73.200,"max_us":236.300,"audio_budget_pct":0.259,"process_cpu_ms":1859.375,"wall_ms":2831.248,"working_set":70512640,"private_bytes":96468992,"gdi":12,"user":14}
+COUNTERS threads=115 samples=2000 peak_cpu_one_core_pct=0.000

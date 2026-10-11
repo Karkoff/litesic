@@ -20,5 +20,19 @@ static void generation_cancel_and_shutdown(){PlaylistWorker worker;CHECK(worker.
     LONG generation=worker.NewGeneration();auto results=Await(worker);for(auto& r:results)CHECK(r.generation!=generation);
     PlaylistJob missing;missing.path=L"missing.wav";CHECK(worker.Submit(missing));results=Await(worker);CHECK(results.size()==1);CHECK(!results[0].metadata.readable);
     worker.Stop();CHECK(!worker.Submit(missing));CHECK(worker.Start(window));worker.Stop();}
+static void notifications_coalesce_until_drain(){
+    MSG message{};while(PeekMessageW(&message,window,WM_PLAYLIST_RESULTS,WM_PLAYLIST_RESULTS,PM_REMOVE)){}
+    PlaylistWorker worker;CHECK(worker.Start(window));
+    for(int batch=0;batch<2;++batch){
+        for(int i=0;i<16;++i){PlaylistJob job;job.id=i;job.path=L"tests\\fixtures\\native-44100.wav";CHECK(worker.Submit(job));}
+        DWORD deadline=GetTickCount()+10000;
+        while(worker.Busy()){CHECK(static_cast<LONG>(GetTickCount()-deadline)<0);Sleep(1);}
+        // Completion may race the Busy flag; allow its coalesced wakeup to finish.
+        Sleep(10);int notifications=0;
+        while(PeekMessageW(&message,window,WM_PLAYLIST_RESULTS,WM_PLAYLIST_RESULTS,PM_REMOVE))++notifications;
+        CHECK(notifications==1);CHECK(worker.Drain().size()==16);
+    }
+    worker.Stop();
+}
 int main(){window=CreateWindowExW(0,L"STATIC",L"worker-test",0,0,0,0,0,HWND_MESSAGE,nullptr,GetModuleHandleW(nullptr),nullptr);CHECK(window);
-    int cases=0;CASE(actual_metadata_job);CASE(recursive_filter);CASE(generation_cancel_and_shutdown);DestroyWindow(window);std::printf("%d worker cases\n",cases);}
+    int cases=0;CASE(actual_metadata_job);CASE(recursive_filter);CASE(generation_cancel_and_shutdown);CASE(notifications_coalesce_until_drain);DestroyWindow(window);std::printf("%d worker cases\n",cases);}

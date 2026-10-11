@@ -35,6 +35,8 @@ static void catalog_and_contrast() {
     for(size_t i=0;i<36;++i) {
         auto& t=Ui::ThemeAt(i);auto& p=t.palette;
         CHECK(*t.id && *t.name && *t.category);CHECK(ids.insert(t.id).second);
+        CHECK(Ui::SelectTheme(t.id,false));
+        CHECK(Ui::Contrast(Ui::SelectedButtonFill(),Ui::SelectedButtonText)>=4.5);
         uint32_t roles[]={p.background,p.surface,p.border,p.bronze,p.green,p.accent,p.text,p.muted,p.danger,
             p.display,p.active,p.hover,p.pressed,p.selection,p.sliderTrack,p.sliderFill,p.fft,p.osc,p.warning};
         for(auto c:roles) CHECK(c<=0xFFFFFF);
@@ -54,6 +56,7 @@ static void catalog_and_contrast() {
     CHECK(Ui::ThemeAt(0).palette.background==0x3B2820);
     CHECK(Ui::ThemeAt(0).palette.green==0x00E676);
     std::fputs("\n]\n",catalog);std::fclose(catalog);
+    CHECK(Ui::SelectTheme(Ui::ThemeAt(0).id,false));
 }
 static void typography_fits_fixed_controls() {
     IDWriteFactory* factory=nullptr;CHECK(SUCCEEDED(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),reinterpret_cast<IUnknown**>(&factory))));
@@ -61,7 +64,8 @@ static void typography_fits_fixed_controls() {
         const auto& type=Ui::ThemeAt(i).typography;
         struct Sample {const wchar_t* text;int font;float width,height;};
         for(auto sample : {Sample{L"+ Arquivos",0,100,28},Sample{L"Balanço",0,55,28},Sample{L"Volume",0,52,28},
-                           Sample{L"99:59",3,108,44},Sample{L"LITESIC · PLAYLIST",2,376,32}}) {
+                           Sample{L"99:59",3,108,44},Sample{L"PLAYLIST",2,376,32},
+                           Sample{L"EQ OFF",1,120,18},Sample{L"Preset: Clássica",1,120,18},Sample{L"Redefinir",1,120,18}}) {
             IDWriteTextFormat* format=nullptr;IDWriteTextLayout* layout=nullptr;
             CHECK(SUCCEEDED(factory->CreateTextFormat(sample.font==3?type.digital:type.body,nullptr,
                 static_cast<DWRITE_FONT_WEIGHT>(type.weights[sample.font]),sample.font==2 && type.italicHeading?DWRITE_FONT_STYLE_ITALIC:DWRITE_FONT_STYLE_NORMAL,
@@ -111,8 +115,10 @@ static void all_windows_and_state_survive_switches() {
     RECT beforeMain{},beforeList{};GetWindowRect(mainWindow,&beforeMain);GetWindowRect(playlist,&beforeList);
     for(size_t i=0;i<36;++i) {
         CHECK(Ui::SelectTheme(Ui::ThemeAt(i).id,false));
-        CHECK(PaintedPixel(mainWindow,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
-        CHECK(PaintedPixel(playlist,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+        if(CaptureAllowed()) {
+            CHECK(PaintedPixel(mainWindow,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+            CHECK(PaintedPixel(playlist,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+        } else { UpdateWindow(mainWindow);UpdateWindow(playlist); }
         CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);CHECK(Audio_GetPositionSeconds()==.5);
         CHECK(PlayerPlaylist().Count()==2 && PlayerPlaylist().At(0)->id==current && PlayerPlaylist().At(1)->id==second);
         CHECK(PlayerPlaylist().GetCurrentIndex()==0);
@@ -152,9 +158,21 @@ static void selector_categories_restore_and_new_window() {
     SendMessageW(list,LB_SETCURSEL,1,0);
     SendMessageW(selector,WM_COMMAND,MAKEWPARAM(702,LBN_SELCHANGE),reinterpret_cast<LPARAM>(list));
     CHECK(!wcscmp(Ui::ActiveTheme().id,L"vintage"));
-    CHECK(PaintedPixel(mainWindow,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+    if(CaptureAllowed())CHECK(PaintedPixel(mainWindow,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
     SendMessageW(GetDlgItem(selector,703),BM_CLICK,0,0);CHECK(!wcscmp(Ui::ActiveTheme().id,L"original"));
+    CHECK(SendMessageW(list,LB_GETCOUNT,0,0)==2); // Applying/restoring does not change the chosen category.
+    SendMessageW(combo,CB_SETCURSEL,0,0);
+    SendMessageW(selector,WM_COMMAND,MAKEWPARAM(701,CBN_SELCHANGE),reinterpret_cast<LPARAM>(combo));
     CHECK(SendMessageW(list,LB_GETCOUNT,0,0)==36);
+    SendMessageW(list,LB_SETTOPINDEX,12,0);SendMessageW(list,LB_SETCURSEL,14,0);
+    auto top=SendMessageW(list,LB_GETTOPINDEX,0,0);
+    SendMessageW(selector,WM_COMMAND,MAKEWPARAM(702,LBN_SELCHANGE),reinterpret_cast<LPARAM>(list));
+    CHECK(SendMessageW(list,LB_GETTOPINDEX,0,0)==top&&SendMessageW(list,LB_GETCURSEL,0,0)==14);
+    CHECK(GetWindowLongPtrW(selector,GWL_STYLE)&WS_CLIPCHILDREN);
+    auto point=[](int x,int y){return MAKELPARAM(MainWnd_DPIScale(x),MainWnd_DPIScale(y));};
+    SendMessageW(selector,WM_LBUTTONDOWN,MK_LBUTTON,point(503,200));
+    SendMessageW(selector,WM_MOUSEMOVE,MK_LBUTTON,point(503,360));SendMessageW(selector,WM_LBUTTONUP,0,point(503,360));
+    CHECK(SendMessageW(list,LB_GETTOPINDEX,0,0)>=20);
     MSG escape{};escape.hwnd=list;escape.message=WM_KEYDOWN;escape.wParam=VK_ESCAPE;
     CHECK(Ui::ThemeDialogMessage(&escape));CHECK(!IsWindow(selector));
 }
@@ -170,8 +188,10 @@ static void sustained_switch_memory() {
     for(int batch=0;batch<=10;++batch) {
         for(int i=0;i<180;++i) {
             Ui::SelectTheme(Ui::ThemeAt(i%36).id,false);
-            CHECK(PaintedPixel(mainWindow,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
-            CHECK(PaintedPixel(playlist,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+            if(CaptureAllowed()) {
+                CHECK(PaintedPixel(mainWindow,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+                CHECK(PaintedPixel(playlist,2,MainWnd_DPIScale(35))==Ui::NativeColor(Ui::Background));
+            } else { UpdateWindow(mainWindow);UpdateWindow(playlist); }
         }
         PROCESS_MEMORY_COUNTERS_EX memory{};memory.cb=sizeof(memory);
         CHECK(GetProcessMemoryInfo(GetCurrentProcess(),reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&memory),sizeof(memory)));

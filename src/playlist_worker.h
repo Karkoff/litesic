@@ -41,10 +41,12 @@ private:
     void ScanFolder(const PlaylistJob& job);
     bool Cancelled(LONG generation) const;
     bool Publish(PlaylistResult result);
+    bool Notify();
     CRITICAL_SECTION lock_{};
     HANDLE thread_ = nullptr, stop_ = nullptr, ready_ = nullptr, space_ = nullptr;
     HWND destination_ = nullptr;
     bool initialized_ = false;
+    bool notificationPending_ = false;
     mutable volatile LONG generation_ = 1, pending_ = 0;
     std::deque<PlaylistJob> jobs_;
     std::deque<PlaylistResult> results_;

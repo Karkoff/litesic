@@ -107,9 +107,12 @@ void Playlist::ShuffleVisible() {
         std::swap(tracks_[i], tracks_[Random() % (i + 1)]);
 }
 void Playlist::Clear() { tracks_.clear(); current_ = 0; ResetNavigation(); }
-int Playlist::Next(bool shuffle, bool repeat) {
+int Playlist::Next(bool shuffle, bool repeat, bool favoritesOnly) {
     if (!Count()) return -1;
-    int current = GetCurrentIndex(), next = current + 1;
+    int current = GetCurrentIndex(), next = -1;
+    auto eligible=[&](int i){return !favoritesOnly||tracks_[i].favorite;};
+    int eligibleCount=0;for(int i=0;i<Count();++i)if(eligible(i))++eligibleCount;
+    if(!eligibleCount)return -1;
     if (shuffle) {
         // One shuffled cycle visits every identity once. Repeat starts a new
         // cycle, excluding the just-played track from the first draw (if > 1).
@@ -117,18 +120,19 @@ int Playlist::Next(bool shuffle, bool repeat) {
             visited_.push_back(current_);
         std::vector<int> candidates;
         for (int i = 0; i < Count(); ++i)
-            if (std::find(visited_.begin(), visited_.end(), tracks_[i].id) == visited_.end())
+            if (eligible(i)&&std::find(visited_.begin(), visited_.end(), tracks_[i].id) == visited_.end())
                 candidates.push_back(i);
         if (candidates.empty()) {
             if (!repeat) return -1;
             visited_.clear();
             for (int i = 0; i < Count(); ++i)
-                if (Count() == 1 || i != current) candidates.push_back(i);
+                if (eligible(i)&&(eligibleCount == 1 || i != current)) candidates.push_back(i);
         }
         next = candidates[Random() % candidates.size()];
-    } else if (next >= Count()) {
-        if (!repeat) return -1;
-        next = 0;
+    } else {
+        for(int i=current+1;i<Count();++i)if(eligible(i)){next=i;break;}
+        if(next<0&&repeat)for(int i=0;i<Count();++i)if(eligible(i)){next=i;break;}
+        if(next<0)return -1;
     }
     if (shuffle && current >= 0) {
         history_.push_back(current_);
@@ -138,17 +142,20 @@ int Playlist::Next(bool shuffle, bool repeat) {
     if (shuffle) visited_.push_back(current_);
     return next;
 }
-int Playlist::Previous(bool shuffle, bool repeat) {
+int Playlist::Previous(bool shuffle, bool repeat, bool favoritesOnly) {
     if (!Count()) return -1;
     if (shuffle) {
         while (!history_.empty()) {
             uint64_t id = history_.back(); history_.pop_back();
-            if (Find(id) >= 0) { current_ = id; return Find(id); }
+            int index=Find(id);
+            if (index>=0&&(!favoritesOnly||tracks_[index].favorite)) { current_ = id; return index; }
         }
         return -1;
     }
-    int previous = GetCurrentIndex() - 1;
-    if (previous < 0) { if (!repeat) return -1; previous = Count() - 1; }
+    int previous=-1;
+    for(int i=GetCurrentIndex()-1;i>=0;--i)if(!favoritesOnly||tracks_[i].favorite){previous=i;break;}
+    if(previous<0&&repeat)for(int i=Count()-1;i>=0;--i)if(!favoritesOnly||tracks_[i].favorite){previous=i;break;}
+    if(previous<0)return -1;
     current_ = tracks_[previous].id;
     return previous;
 }

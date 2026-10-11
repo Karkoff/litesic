@@ -78,10 +78,10 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
         bool enabled=id==3 || id==4 || s.loaded || ((id==1 || id==2 || id==5) && s.hasPlaylist);
         bool active=(id==3 && s.shuffle) || (id==4 && s.repeat!=RepeatMode::Off) ||
             (id==5 && s.playback==AUDIO_STATE_PLAYING) || (id==6 && s.playback==AUDIO_STATE_PAUSED);
-        c.Circle(x,y,17,s.pressed==id?Border:s.hover==id?Hover:Surface,
+        c.Circle(x,y,17,active?SelectedButtonFill():s.pressed==id?Border:s.hover==id?Hover:Surface,
             s.focus==id?Accent:active?Green:Bronze);
-        uint32_t color=enabled?(active?Green:Text):Muted;
-        if(id==3 || id==4) ModeIcon(c,id,x,y,Green,s.repeat==RepeatMode::One);
+        uint32_t color=enabled?(active?SelectedButtonText:Text):Muted;
+        if(id==3 || id==4) ModeIcon(c,id,x,y,color,s.repeat==RepeatMode::One);
         if(id==5) Triangle(c,x,y,1,color);
         if(id==6) {c.Line(x-3,y-6,x-3,y+6,color,3);c.Line(x+3,y-6,x+3,y+6,color,3);}
         if(id==7) c.Fill({x-5,y-5,10,10},color,1);
@@ -103,10 +103,10 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
     c.TextAt({12,height-24,256,22},s.technical,Muted,Font::Small);
     for(int id : {16,11,12}) {
         auto r=PlayerControlRect(id,s.visualizerVisible);
-        bool active=(id==11 && s.playlistVisible) || (id==16 && s.visualizerVisible);
-        c.Fill(r,s.pressed==id?Border:s.hover==id?Hover:active?Active:Surface,3);
+        bool active=(id==11 && s.playlistVisible) || (id==16 && s.visualizerVisible) || (id==12 && s.equalizerVisible);
+        c.Fill(r,active?SelectedButtonFill():s.pressed==id?Border:s.hover==id?Hover:Surface,3);
         c.Stroke(r,s.focus==id?Accent:active?Green:Bronze,3);
-        c.TextAt(r,id==16?L"VIZ":id==11?L"LISTA":L"EQ",Text,Font::Small,true);
+        c.TextAt(r,id==16?L"VIZ":id==11?L"LISTA":L"EQ",active?SelectedButtonText:Text,Font::Small,true);
     }
     return c.End();
 }

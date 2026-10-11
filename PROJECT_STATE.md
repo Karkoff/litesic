@@ -1,5 +1,13 @@
 # PROJECT_STATE — LiteSic
 
+**M6 — COMPLETE, por decisão explícita do usuário em 11/10/2026.**
+O usuário informou aprovação visual, audível, funcional, de uso prolongado
+e do comportamento geral após os ajustes. Esse aceite final substitui
+READY_FOR_HUMAN_ACCEPTANCE. [Encerramento e validação final](docs/M6-CLOSEOUT-2026-10-11.md).
+M0–M5: COMPLETE. M9: COMPLETE, conforme decisão preservada abaixo.
+Próxima milestone: **M7 — Integração das Janelas**, não iniciada nesta execução.
+A auditoria e suas evidências anteriores permanecem como histórico.
+
 Correção de reprodução em 11/10/2026: duração MP3 armazenada antes de tocar,
 evitando consulta concorrente ao decodificador ativo. Quatro builds e 444
 verificações passaram; ver [auditoria](docs/AUDIO-TRANSITION-AUDIT-2026-10-11.md).

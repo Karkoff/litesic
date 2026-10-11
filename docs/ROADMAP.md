@@ -20,7 +20,7 @@ próxima.
 | M3 | [docs/milestones/M3.md](milestones/M3.md) | Player principal: LCD, título rolando, kbps/kHz/estéreo, seek, volume, balanço, prev/next, shuffle/repeat | sim |
 | M4 | [docs/milestones/M4.md](milestones/M4.md) | Visualizador: espectro FFT + osciloscópio | sim (validada) |
 | M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background — COMPLETE, checkpoint manual PASS | sim |
-| M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador real — COMPLETE, funcionamento confirmado pelo usuário | sim |
+| M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador real — COMPLETE, aceite final visual, audível e funcional informado pelo usuário | sim |
 | M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: snap/dock entre janelas, mostrar/ocultar EQ/PL | sim |
 | M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos estilo Winamp, teclas de mídia, always-on-top, instância única, persistência | sim |
 | M9 | [docs/milestones/M9.md](milestones/M9.md) | Compatibilidade — COMPLETE por decisão explícita; Windows 11 confirmado; testes Windows 7/8/8.1/10 e x86/x64 pendentes, não bloqueantes | encerrada por decisão |
@@ -47,6 +47,15 @@ Ver [estado canônico](../PROJECT_STATE.md) e
 
 ## Modernização transversal UI/UX — IN_PROGRESS
 
+**M0–M5: COMPLETE. M6: COMPLETE. M9: COMPLETE.**
+O usuário informou o aceite final visual, audível, funcional e de uso
+prolongado da M6 em 11/10/2026, substituindo READY_FOR_HUMAN_ACCEPTANCE.
+[Encerramento e validação final](M6-CLOSEOUT-2026-10-11.md).
+A [auditoria sobre a35c993](M6-INTEGRATED-VALIDATION-2026-10-11.md) mantém
+suas medições e pendências históricas, sem atribuir medições ao aceite humano.
+**M7 — Integração das Janelas** é a próxima milestone; sua implementação
+não foi iniciada nesta execução.
+
 As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
 Direct2D/DirectWrite; pesquisa preserva índices canônicos e docking da M5.
 UI-00..02 concluídas; UI-03..08 ainda IN_PROGRESS. M6 tem DSP real e painel
@@ -63,8 +72,9 @@ Encerramento atualizado da M5, investigação de memória e preparação da M6:
 36 temas implementados, com aplicação imediata, persistência e seletor de
 categorias/prévias. Quatro builds e 356 verificações passaram; 27 guardas de
 automação e carga sustentada de 1.980 trocas por variante passaram. Aceite
-visual humano dos novos temas pendente; M5 funcional mantém seu aceite
-anterior. M6 implementada e aceita pelo usuário; ajustes de encaixe documentados em [WINDOW-SNAP](WINDOW-SNAP-2026-10-11.md).
+visual humano dos novos temas estava pendente nesse relatório histórico;
+o aceite visual final da M6 foi posteriormente informado pelo usuário, sem
+registro individual dos 36 temas. M5 funcional mantém seu aceite anterior. M6 implementada e aceita pelo usuário; ajustes de encaixe documentados em [WINDOW-SNAP](WINDOW-SNAP-2026-10-11.md).
 [Arquitetura, catálogo e evidências](THEMES.md).
 Complemento entregue: seleção primária restaurada ao reabrir, comandos da
 playlist no rodapé, dropdown Adicionar e seletor/menus com tema compartilhado.

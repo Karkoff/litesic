@@ -4,6 +4,9 @@
 #include <cstdint>
 struct TrackMetadata {
     std::wstring title, artist;
+    std::wstring album, genre, year, trackNumber;
+    uint64_t fileBytes = 0;
+    uint32_t sampleRate = 0, channels = 0;
     double duration = -1;
     bool readable = false;
 };

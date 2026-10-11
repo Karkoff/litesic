@@ -1,0 +1,75 @@
+{
+  "date": "2026-10-11",
+  "milestone": "M6",
+  "status": "COMPLETE",
+  "baseline_head": "a35c993ed89fc021cf8730f13bddaf7a1273a6eb",
+  "human_acceptance": "Final visual, audible, functional, prolonged-use and general acceptance reported by user; not repeated by agent.",
+  "capture_performed": false,
+  "environment": {
+    "LITESIC_NO_CAPTURE": "1",
+    "toolchain": "MinGW-w64/MSVCRT"
+  },
+  "cases_per_variant": 136,
+  "variants": [
+    {
+      "architecture": "x64",
+      "configuration": "debug",
+      "command": "make ARCH=64 DEBUG=1 all test",
+      "exit_code": 0,
+      "build": "PASS",
+      "functional_cases_passed": 136,
+      "test_executables": 23,
+      "capture_assertion_groups_omitted": 3,
+      "log": "docs/evidence/m6-closeout/validation-64-debug.log",
+      "log_sha256": "0b86f9073dd8e8b95f492b50268f7b2a2a8d6e5bd57a8f9f596f42d6810c54fc",
+      "binary_sha256": "38b816c0c441f8863be5d0be94cb8a34b5bab3cdddbdb318526ffe8009ab2ef4"
+    },
+    {
+      "architecture": "x64",
+      "configuration": "release",
+      "command": "make ARCH=64 DEBUG=0 all test",
+      "exit_code": 0,
+      "build": "PASS",
+      "functional_cases_passed": 136,
+      "test_executables": 23,
+      "capture_assertion_groups_omitted": 3,
+      "log": "docs/evidence/m6-closeout/validation-64-release.log",
+      "log_sha256": "79d15a87aa41b3b495ca77818eba9e0e81dbd99e76139b64dec12f9a9cde7395",
+      "binary_sha256": "ce7a5591615c251d54f2b71c1e234fe9e2a0cf6f85afe643a89a894654deba91"
+    },
+    {
+      "architecture": "x86",
+      "configuration": "debug",
+      "command": "make ARCH=32 DEBUG=1 all test",
+      "exit_code": 0,
+      "build": "PASS",
+      "functional_cases_passed": 136,
+      "test_executables": 23,
+      "capture_assertion_groups_omitted": 3,
+      "log": "docs/evidence/m6-closeout/validation-32-debug.log",
+      "log_sha256": "359ff8215b7e5212e3073b3eec8b7ad8b65d63a3ef5389f412bd5972671b6ff0",
+      "binary_sha256": "70922cd9bbfe365b563be85b64c345ed789c9527103ad0f389d1c7f6f18dcb6c"
+    },
+    {
+      "architecture": "x86",
+      "configuration": "release",
+      "command": "make ARCH=32 DEBUG=0 all test",
+      "exit_code": 0,
+      "build": "PASS",
+      "functional_cases_passed": 136,
+      "test_executables": 23,
+      "capture_assertion_groups_omitted": 3,
+      "log": "docs/evidence/m6-closeout/validation-32-release.log",
+      "log_sha256": "f79c77bf55173f1f22838c518ac9a9c890c36c64ac85ab90ee184a3f4b4a1a2e",
+      "binary_sha256": "3072e9f8e91983d456eb3f2c2a173b6391937412fdc3f2071548a5e85efc1103"
+    }
+  ],
+  "total_functional_passes": 544,
+  "total_test_executions": 92,
+  "total_capture_assertion_groups_omitted": 12,
+  "notes": [
+    "Incremental builds; existing up-to-date objects reused.",
+    "No newly instrumented manual measurements.",
+    "Historical evidence manifest retained unchanged."
+  ]
+}

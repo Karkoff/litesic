@@ -46,6 +46,43 @@ static void repeat_one_preserves_shuffle_cycle(){
     c.Clear();ended=true;state=AUDIO_STATE_PLAYING;
     CHECK(c.Update(true,RepeatMode::One));CHECK(state==AUDIO_STATE_STOPPED);
 }
+static void favorites_sequence_repeat_and_general_scope(){
+    Playlist p;for(auto name:{L"general0.wav",L"fav1.wav",L"general2.wav",L"fav3.wav",L"general4.wav"})p.Add(name);
+    p.At(1)->favorite=p.At(3)->favorite=true;PlaybackController c(p,Backend());
+    CHECK(c.PlayIndex(1,true));ended=true;CHECK(c.Update(false,RepeatMode::Off));CHECK(p.GetCurrentIndex()==3);
+    ended=true;CHECK(c.Update(false,RepeatMode::Off));CHECK(state==AUDIO_STATE_STOPPED&&p.GetCurrentIndex()==3);
+    CHECK(c.PlayIndex(3,true));ended=true;CHECK(c.Update(false,RepeatMode::All));CHECK(p.GetCurrentIndex()==1);
+    int before=loads;ended=true;CHECK(c.Update(false,RepeatMode::One));CHECK(p.GetCurrentIndex()==1&&loads==before);
+    CHECK(c.Previous(false,true));CHECK(p.GetCurrentIndex()==3);
+    CHECK(c.Previous(false,false));CHECK(p.GetCurrentIndex()==1);
+    CHECK(c.PlayIndex(1,false));ended=true;CHECK(c.Update(false,RepeatMode::Off));CHECK(p.GetCurrentIndex()==2);
+    CHECK(c.Play(true));CHECK(p.GetCurrentIndex()==1); // Current general track cannot leak into Favorites.
+    CHECK(!c.PlayIndex(2,true));CHECK(p.GetCurrentIndex()==1);
+    p.At(1)->favorite=p.At(3)->favorite=false;CHECK(!c.Play(true));CHECK(state==AUDIO_STATE_STOPPED);
+}
+static void favorites_shuffle_history_and_edits(){
+    Playlist p(1);for(int i=0;i<6;++i)p.Add(L"song.wav");
+    for(int i:{1,3,5})p.At(i)->favorite=true;
+    PlaybackController c(p,Backend());CHECK(c.PlayIndex(1,true));
+    bool seen[6]{};seen[1]=true;
+    for(int i=0;i<2;++i){CHECK(c.Next(true,false));int current=p.GetCurrentIndex();CHECK(p.At(current)->favorite&&!seen[current]);seen[current]=true;}
+    CHECK(!c.Next(true,false));CHECK(state==AUDIO_STATE_STOPPED);
+    CHECK(c.Play());ended=true;CHECK(c.Update(true,RepeatMode::All));CHECK(p.At(p.GetCurrentIndex())->favorite);
+    CHECK(c.PlayIndex(1,true));CHECK(c.Next(true,false));CHECK(c.Previous(true,false));CHECK(p.GetCurrentIndex()==1);
+    p.At(1)->favorite=false;ended=true;CHECK(c.Update(false,RepeatMode::One));CHECK(p.GetCurrentIndex()==3);
+    c.RemoveAt(3);CHECK(c.Next(false,false));CHECK(p.At(p.GetCurrentIndex())->favorite);
+    CHECK(!c.Next(false,false));CHECK(state==AUDIO_STATE_STOPPED);
+}
+static void favorites_skip_invalid_and_bound_repeat(){
+    Playlist p;p.Add(L"general.wav");p.Add(L"bad.wav");p.Add(L"fav.wav");p.Add(L"general2.wav");
+    p.At(1)->favorite=p.At(2)->favorite=true;PlaybackController c(p,Backend());
+    CHECK(!c.PlayIndex(1,true));CHECK(c.Next(false,false));CHECK(p.GetCurrentIndex()==2);
+    broken=true;loads=0;CHECK(!c.Next(true,true));CHECK(loads<=p.Count());CHECK(state==AUDIO_STATE_STOPPED);
+    p.At(1)->favorite=p.At(2)->favorite=false;loads=0;
+    CHECK(!c.Next(true,true));CHECK(loads==0);CHECK(!c.Previous(false,true));
+}
 int main(){int cases=0;CASE(end_advances_stops);CASE(repeat_wrap_and_previous);CASE(missing_skip_and_all_bad_bound);
     CASE(paused_no_advance_and_remove);CASE(failed_explicit_and_clear);CASE(repeat_modes_cycle);
-    CASE(repeat_one_eof_and_manual_navigation);CASE(repeat_one_preserves_shuffle_cycle);std::printf("%d playback cases\n",cases);}
+    CASE(repeat_one_eof_and_manual_navigation);CASE(repeat_one_preserves_shuffle_cycle);
+    CASE(favorites_sequence_repeat_and_general_scope);CASE(favorites_shuffle_history_and_edits);CASE(favorites_skip_invalid_and_bound_repeat);
+    std::printf("%d playback cases\n",cases);}

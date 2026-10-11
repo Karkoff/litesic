@@ -1,5 +1,17 @@
 # Automação gráfica de desenvolvimento
 
+## Auditoria integrada sem capturas — 11/10/2026
+
+Esta rodada tem restrição explícita de screenshots, gravações e capturas
+equivalentes. O driver histórico captura automaticamente após certas ações;
+essas ações não foram usadas nesta rodada. Os testes Win32 enviam mensagens
+às próprias janelas e verificam estado/posição, sem entrada no desktop pessoal.
+Use `$env:LITESIC_NO_CAPTURE='1'` antes das suítes: imagens/pixels de janelas
+ficam pendentes e são indicados no log; os demais testes continuam executando.
+Desenho sintético em Canvas e pintura normal WM_PAINT não capturam janelas.
+O probe de desempenho agora usa RedrawWindow, sem PrintWindow nem arquivos
+de imagem. [Relatório e evidências atuais](M6-INTEGRATED-VALIDATION-2026-10-11.md).
+
 ## M6 — EQ real e sessão isolada
 
 `-Action launch -Validation` passa `--validation` ao executável permitido e

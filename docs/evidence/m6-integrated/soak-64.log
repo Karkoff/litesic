@@ -1,0 +1,11 @@
+SAMPLE seconds=30 private=97329152 ws=71663616 gdi=12 user=14 threads=114 cpu_one_core_pct=22.385
+SAMPLE seconds=60 private=97570816 ws=71958528 gdi=12 user=14 threads=111 cpu_one_core_pct=25.000
+SAMPLE seconds=90 private=97570816 ws=71962624 gdi=12 user=14 threads=111 cpu_one_core_pct=14.062
+SAMPLE seconds=120 private=97767424 ws=72151040 gdi=12 user=14 threads=111 cpu_one_core_pct=19.993
+SAMPLE seconds=150 private=97869824 ws=72278016 gdi=12 user=14 threads=110 cpu_one_core_pct=17.188
+SAMPLE seconds=180 private=97865728 ws=72286208 gdi=12 user=14 threads=110 cpu_one_core_pct=10.938
+SAMPLE seconds=210 private=97972224 ws=72343552 gdi=12 user=14 threads=109 cpu_one_core_pct=25.000
+SAMPLE seconds=240 private=98103296 ws=72482816 gdi=12 user=14 threads=109 cpu_one_core_pct=20.312
+SAMPLE seconds=270 private=98103296 ws=72495104 gdi=12 user=14 threads=109 cpu_one_core_pct=18.473
+{"mode":10,"frames":512,"rate":48000,"channels":2,"mean_us":57.389,"p99_us":107.900,"max_us":291.300,"audio_budget_pct":0.538,"process_cpu_ms":43234.375,"wall_ms":300009.094,"working_set":72716288,"private_bytes":98140160,"gdi":12,"user":14}
+COUNTERS threads=110 samples=12334 peak_cpu_one_core_pct=37.500

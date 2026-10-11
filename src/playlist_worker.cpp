@@ -19,7 +19,7 @@ void PlaylistWorker::Stop() {
     if (stop_) CloseHandle(stop_);
     if (ready_) CloseHandle(ready_);
     if (space_) CloseHandle(space_);
-    jobs_.clear(); results_.clear(); pending_ = 0;
+    jobs_.clear(); results_.clear(); pending_ = 0; notificationPending_=false;
     DeleteCriticalSection(&lock_);
     initialized_ = false; thread_ = stop_ = ready_ = space_ = nullptr;
 }
@@ -54,8 +54,17 @@ bool PlaylistWorker::Publish(PlaylistResult result) {
     EnterCriticalSection(&lock_);
     results_.push_back(std::move(result));
     LeaveCriticalSection(&lock_);
-    // Message carries no heap pointer. Draining/shutdown owns all result memory.
-    return PostMessageW(destination_, WM_PLAYLIST_RESULTS, 0, 0) != FALSE;
+    return Notify();
+}
+bool PlaylistWorker::Notify(){
+    EnterCriticalSection(&lock_);
+    bool post=!notificationPending_;notificationPending_=true;
+    LeaveCriticalSection(&lock_);
+    // One wakeup per drain, including job completion. Never queue one UI
+    // refresh per track: stale wakeups can starve input and painting.
+    if(!post||PostMessageW(destination_,WM_PLAYLIST_RESULTS,0,0))return true;
+    EnterCriticalSection(&lock_);notificationPending_=false;LeaveCriticalSection(&lock_);
+    return false;
 }
 std::vector<PlaylistResult> PlaylistWorker::Drain() {
     std::vector<PlaylistResult> drained;
@@ -64,6 +73,7 @@ std::vector<PlaylistResult> PlaylistWorker::Drain() {
     while (!results_.empty()) {
         drained.push_back(std::move(results_.front())); results_.pop_front();
     }
+    notificationPending_=false;
     LeaveCriticalSection(&lock_);
     if (!drained.empty()) ReleaseSemaphore(space_, static_cast<LONG>(drained.size()), nullptr);
     return drained;
@@ -123,6 +133,6 @@ void PlaylistWorker::Run() {
             }
         }
         InterlockedDecrement(&pending_);
-        PostMessageW(destination_, WM_PLAYLIST_RESULTS, 0, 0);
+        Notify();
     }
 }

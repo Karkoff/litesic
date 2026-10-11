@@ -3,11 +3,16 @@
 #include "plwnd.h"
 #include "playback.h"
 #include "m3u.h"
+#include "playlist_worker.h"
+#include "ui_theme.h"
 #include "check.h"
 #include <shellapi.h>
 #include <shlobj.h>
 #include <cstring>
 static HWND playlist;
+static HWND information;
+static BOOL CALLBACK FindInformation(HWND hwnd,LPARAM){wchar_t name[80]{};GetClassNameW(hwnd,name,80);if(!wcscmp(name,L"LiteSic.TrackInfoWnd"))information=hwnd;return TRUE;}
+static void CALLBACK OpenInformationCommand(HWND,UINT,UINT_PTR id,DWORD){KillTimer(playlist,id);EndMenu();PostMessageW(playlist,WM_COMMAND,PL_COMMAND_INFORMATION,0);}
 static BOOL CALLBACK FindPlaylist(HWND hwnd, LPARAM) {
     wchar_t name[64]; GetClassNameW(hwnd,name,64);
     if (!wcscmp(name,L"LiteSic.PlaylistWnd")) playlist=hwnd;
@@ -104,6 +109,19 @@ static void dock_follow_detach_and_reattach() {
         RECT overlap{};CHECK(!IntersectRect(&overlap,&parent,&list));
     }
 }
+static void dock_follow_stays_inside_work_area() {
+    HWND owner=GetWindow(playlist,GW_OWNER);MONITORINFO m{};m.cbSize=sizeof(m);
+    CHECK(GetMonitorInfoW(MonitorFromWindow(owner,MONITOR_DEFAULTTONEAREST),&m));
+    SetWindowPos(owner,nullptr,m.rcWork.left+600,m.rcWork.top+300,400,200,SWP_NOZORDER|SWP_NOACTIVATE);
+    RECT parent{},panel{};GetWindowRect(owner,&parent);GetWindowRect(playlist,&panel);
+    RECT proposed{parent.right,parent.top,parent.right+panel.right-panel.left,parent.top+panel.bottom-panel.top};
+    SendMessageW(playlist,WM_MOVING,0,reinterpret_cast<LPARAM>(&proposed));
+    SetWindowPos(playlist,nullptr,proposed.left,proposed.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
+    SendMessageW(playlist,WM_EXITSIZEMOVE,0,0);
+    SetWindowPos(owner,nullptr,m.rcWork.right-400,m.rcWork.top+300,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
+    PlWnd_MainMoved();GetWindowRect(playlist,&panel);
+    CHECK(panel.left>=m.rcWork.left&&panel.right<=m.rcWork.right&&panel.top>=m.rcWork.top&&panel.bottom<=m.rcWork.bottom);
+}
 static void filter_selection_removes_canonical_item() {
     PlayerPlayback().Clear();
     PlayerPlaylist().Add(L"Alpha.wav"); PlayerPlaylist().Add(L"Beta.wav"); PlayerPlaylist().Add(L"Gamma.wav");
@@ -175,6 +193,7 @@ static void session_survives_window_restart() {
     PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\missing.wav"));
     PlayerPlaylist().Add(unicodeTrack);
     PlayerPlaylist().At(0)->displayTitle=L"Título com acentuação";
+    PlayerPlaylist().At(0)->favorite=true;
     PlayerPlaylist().MoveTo(1,2);
     auto expected=PlayerPlaylist().Tracks();
     EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
@@ -186,6 +205,7 @@ static void session_survives_window_restart() {
     for(int i=0;i<3;++i) {
         CHECK(PlayerPlaylist().At(i)->path==expected[i].path);
         CHECK(PlayerPlaylist().At(i)->displayTitle==expected[i].displayTitle);
+        CHECK(PlayerPlaylist().At(i)->favorite==expected[i].favorite);
     }
     EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
     CHECK(Audio_TestInit(48000));CHECK(Audio_GetState()!=AUDIO_STATE_PLAYING);
@@ -204,6 +224,128 @@ static void session_survives_window_restart() {
     PlWnd_Shutdown(); CHECK(DeleteFileW(path.c_str()));DeleteFileW((path+L".ini").c_str());
     CHECK(DeleteFileW(unicodeTrack.c_str()));
 }
+static void favorites_tabs_and_track_information(){
+    PlayerPlayback().Clear();CHECK(Audio_TestInit(48000));
+    for(auto path:{L"tests\\fixtures\\native-44100.wav",L"tests\\fixtures\\tagged.mp3",L"tests\\fixtures\\tagged.flac"})PlayerPlaylist().Add(FullPath(path));
+    auto track=PlayerPlaylist().At(1);track->metadata=ReadTrackMetadata(track->path);track->metadataPending=false;track->duration=track->metadata.duration;
+    CHECK(PlayerPlayback().PlayIndex(0));PlWnd_Refresh();
+    RECT r{};GetClientRect(playlist,&r);
+    auto click=[](int x,int y){SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(x,y));};
+    // Playlist remains at 150% after the production DPI test.
+    click(r.right-147,180);CHECK(PlayerPlaylist().At(1)->favorite);CHECK(PlayerPlaylist().GetCurrentIndex()==0&&Audio_GetState()==AUDIO_STATE_PLAYING);
+    click(168,78);click(80,140);CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==1);
+    CHECK(SetTimer(playlist,888,20,OpenInformationCommand));
+    SendMessageW(playlist,WM_CONTEXTMENU,reinterpret_cast<WPARAM>(playlist),MAKELPARAM(-1,-1));
+    DWORD deadline=GetTickCount()+2000;
+    while(!information&&GetTickCount()<deadline){MSG msg{};while(PeekMessageW(&msg,nullptr,0,0,PM_REMOVE)){TranslateMessage(&msg);DispatchMessageW(&msg);}EnumThreadWindows(GetCurrentThreadId(),FindInformation,0);Sleep(1);}
+    CHECK(information);wchar_t text[4096]{};GetWindowTextW(GetDlgItem(information,801),text,4096);
+    CHECK(wcsstr(text,L"Canção M5")&&wcsstr(text,L"Artista: LiteSic")&&wcsstr(text,L"MP3")&&wcsstr(text,L"Hz")&&wcsstr(text,L"tagged.mp3"));
+    CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);MSG escape{};escape.hwnd=GetDlgItem(information,801);escape.message=WM_KEYDOWN;escape.wParam=VK_ESCAPE;
+    CHECK(PlWnd_DialogMessage(&escape));CHECK(!IsWindow(information));information=nullptr;
+    click(r.right-147,140);CHECK(!PlayerPlaylist().At(1)->favorite);CHECK(PlayerPlaylist().Count()==3&&Audio_GetState()==AUDIO_STATE_PLAYING);
+    click(50,78);click(80,140);CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==0);
+    PlayerPlayback().Clear();Audio_Shutdown();PlWnd_Refresh();
+}
+static void large_search_ignores_stale_metadata_notifications(){
+    PlayerPlayback().Clear();
+    for(int i=0;i<10453;++i)PlayerPlaylist().Add(L"synthetic\\Band - Song "+std::to_wstring(i)+L".mp3");
+    PlayerPlaylist().At(7654)->displayTitle=L"Match ey";PlWnd_Refresh();
+    HWND edit=GetDlgItem(playlist,520);CHECK(edit);SetWindowTextW(edit,L"ey");
+    DWORD start=GetTickCount();
+    // Old messages must not trigger thousands of full-library filter scans.
+    for(int i=0;i<1000;++i){SendMessageW(playlist,WM_PLAYLIST_RESULTS,0,0);SendMessageW(playlist,WM_TIMER,524,0);}
+    CHECK(GetTickCount()-start<2000);
+    SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(80,140));
+    SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(80,140));
+    SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0);
+    CHECK(PlayerPlaylist().Count()==10452);
+    for(const auto& track:PlayerPlaylist().Tracks())CHECK(track.displayTitle!=L"Match ey");
+    SetWindowTextW(edit,L"");PlayerPlayback().Clear();PlWnd_Refresh();
+}
+static void playback_follows_tab_that_started_play(){
+    PlayerPlayback().Clear();CHECK(Audio_TestInit(48000));
+    for(int i=0;i<3;++i)PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
+    PlayerPlaylist().At(1)->favorite=true;PlWnd_Refresh();
+    auto click=[](int x,int y){SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(x,y));};
+    click(168,78);click(80,140);CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==1);
+    click(50,78);CHECK(!PlayerPlayback().Next(false,false));CHECK(Audio_GetState()==AUDIO_STATE_STOPPED);
+    // Explicit Play of that same track from General changes the playback scope.
+    click(80,180);CHECK(PlWnd_PlaySelected());CHECK(PlayerPlaylist().GetCurrentIndex()==1);
+    CHECK(PlayerPlayback().Next(false,false));CHECK(PlayerPlaylist().GetCurrentIndex()==2);
+    click(168,78);SendMessageW(playlist,WM_LBUTTONDBLCLK,MK_LBUTTON,MAKELPARAM(80,140));
+    CHECK(PlayerPlaylist().GetCurrentIndex()==1);CHECK(!PlayerPlayback().Next(false,false));
+    SendMessageW(playlist,WM_KEYDOWN,VK_RETURN,0);CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
+    CHECK(!PlayerPlayback().Next(false,false));CHECK(Audio_GetState()==AUDIO_STATE_STOPPED);
+    click(50,78);PlayerPlayback().Clear();Audio_Shutdown();PlWnd_Refresh();
+}
+static void geometry_survives_restart(){
+    PlWnd_Shutdown();PlayerPlayback().Clear();
+    HINSTANCE instance=GetModuleHandleW(nullptr);
+    HWND owner=CreateWindowExW(0,L"STATIC",L"geometry test owner",WS_POPUP,0,0,260,100,nullptr,nullptr,instance,nullptr);CHECK(owner);
+    MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
+    CHECK(GetMonitorInfoW(MonitorFromWindow(owner,MONITOR_DEFAULTTONEAREST),&monitor));
+    const RECT work=monitor.rcWork;
+    const auto path=FullPath(L"build\\playlist-geometry-test.m3u8"),ini=path+L".ini";
+    DeleteFileW(path.c_str());DeleteFileW(ini.c_str());
+    for(int side=0;side<5;++side){
+        CHECK(PlWnd_Create(instance,owner,path.c_str()));EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+        int mx=work.left+(work.right-work.left-260)/2,my=work.top+(work.bottom-work.top-100)/2;
+        SetWindowPos(owner,nullptr,mx,my,260,100,SWP_NOZORDER|SWP_NOACTIVATE);
+        RECT panel{mx,my+100,mx+300,my+280};
+        if(side==1)panel={mx,my-180,mx+300,my};
+        if(side==2)panel={mx+260,my,mx+560,my+180};
+        if(side==3)panel={mx-300,my,mx,my+180};
+        if(side==4)panel={work.left+10,work.top+10,work.left+310,work.top+190};
+        SendMessageW(playlist,WM_MOVING,0,reinterpret_cast<LPARAM>(&panel));
+        SetWindowPos(playlist,nullptr,panel.left,panel.top,300,180,SWP_NOZORDER|SWP_NOACTIVATE);
+        SendMessageW(playlist,WM_EXITSIZEMOVE,0,0);
+        RECT expected{},expectedOwner{};GetWindowRect(playlist,&expected);GetWindowRect(owner,&expectedOwner);
+        // Hiding/reopening the panel and restarting the session both retain its position.
+        SendMessageW(playlist,WM_CLOSE,0,0);PlWnd_Show();
+        RECT actual{};GetWindowRect(playlist,&actual);CHECK(EqualRect(&expected,&actual));
+        PlWnd_Shutdown();
+        SetWindowPos(owner,nullptr,work.left,work.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
+        CHECK(PlWnd_Create(instance,owner,path.c_str()));EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+        GetWindowRect(playlist,&actual);CHECK(EqualRect(&expected,&actual));
+        GetWindowRect(owner,&actual);CHECK(EqualRect(&expectedOwner,&actual));
+        RECT moved{expectedOwner.left+5,expectedOwner.top+5,expectedOwner.right+5,expectedOwner.bottom+5};
+        SetWindowPos(owner,nullptr,moved.left,moved.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);PlWnd_MainMoved(true);
+        GetWindowRect(playlist,&actual);
+        if(side!=4)OffsetRect(&expected,5,5);
+        CHECK(EqualRect(&expected,&actual));PlWnd_Shutdown();
+    }
+    CHECK(WritePrivateProfileStringW(L"Geometry",L"Left",L"100000",ini.c_str()));
+    CHECK(WritePrivateProfileStringW(L"Geometry",L"Top",L"100000",ini.c_str()));
+    CHECK(PlWnd_Create(instance,owner,path.c_str()));EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+    RECT actual{};GetWindowRect(playlist,&actual);
+    CHECK(actual.left>=work.left&&actual.top>=work.top&&actual.right<=work.right&&actual.bottom<=work.bottom);
+    PlWnd_Shutdown();DeleteFileW(path.c_str());DeleteFileW(ini.c_str());DestroyWindow(owner);
+}
+static void active_tab_survives_restart(){
+    PlWnd_Shutdown();PlayerPlayback().Clear();
+    HINSTANCE instance=GetModuleHandleW(nullptr);
+    HWND owner=CreateWindowExW(0,L"STATIC",L"tab persistence test",WS_POPUP,100,100,300,100,nullptr,nullptr,instance,nullptr);CHECK(owner);
+    const auto ini=FullPath(L"build\\playlist-tab-"+std::to_wstring(sizeof(void*)*8)+
+#ifdef DEBUG
+        L"-debug.ini");
+#else
+        L"-release.ini");
+#endif
+    DeleteFileW(ini.c_str());Ui::ThemeConfigure(ini.c_str());
+    auto create=[&](){CHECK(PlWnd_Create(instance,owner));EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+        PlayerPlaylist().Add(L"General.wav");PlayerPlaylist().Add(L"Favorite.wav");PlayerPlaylist().At(1)->favorite=true;PlWnd_Refresh();};
+    auto click=[](int x,int y){SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(x,y));SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(x,y));};
+    create();click(112,52);CHECK(Ui::LoadAppearance().playlistFavoritesOnly);
+    SendMessageW(playlist,WM_CLOSE,0,0);PlWnd_Show();CHECK(Ui::LoadAppearance().playlistFavoritesOnly);
+    PlWnd_Shutdown();PlayerPlayback().Clear();Ui::ThemeConfigure(ini.c_str());create();
+    click(80,96);SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0);
+    CHECK(PlayerPlaylist().Count()==1&&PlayerPlaylist().At(0)->path==L"General.wav");
+    click(38,52);CHECK(!Ui::LoadAppearance().playlistFavoritesOnly);
+    PlWnd_Shutdown();PlayerPlayback().Clear();Ui::ThemeConfigure(ini.c_str());create();
+    click(80,96);SendMessageW(playlist,WM_KEYDOWN,VK_DELETE,0);
+    CHECK(PlayerPlaylist().Count()==1&&PlayerPlaylist().At(0)->path==L"Favorite.wav");
+    PlWnd_Shutdown();PlayerPlayback().Clear();Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());DestroyWindow(owner);
+}
 int main() {
     HINSTANCE instance=GetModuleHandleW(nullptr);
     HWND owner=CreateWindowExW(0,L"STATIC",L"playlist integration owner",WS_POPUP,0,0,1,1,nullptr,nullptr,instance,nullptr);CHECK(owner);
@@ -211,8 +353,14 @@ int main() {
     ShowWindow(playlist,SW_HIDE);
     int cases=0;CASE(dropped_files_and_invalid_filter);CASE(dropped_folder_recursive_and_missing_file);CASE(scale_layout_and_overlap);
     CASE(dock_follow_detach_and_reattach);
+    CASE(dock_follow_stays_inside_work_area);
     CASE(filter_selection_removes_canonical_item);
     CASE(play_selection_and_center_current);
+    CASE(large_search_ignores_stale_metadata_notifications);
+    CASE(favorites_tabs_and_track_information);
+    CASE(playback_follows_tab_that_started_play);
     CASE(session_survives_window_restart);
+    CASE(geometry_survives_restart);
+    CASE(active_tab_survives_restart);
     PlWnd_Shutdown();DestroyWindow(owner);std::printf("%d playlist window integration cases\n",cases);
 }

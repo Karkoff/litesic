@@ -95,6 +95,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
     while (GetMessageW(&msg, NULL, 0, 0) > 0)
     {
         if(Ui::ThemeDialogMessage(&msg)) continue;
+        if(PlWnd_DialogMessage(&msg)) continue;
         TranslateMessage(&msg);
         DispatchMessageW(&msg);
     }

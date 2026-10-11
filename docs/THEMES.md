@@ -1,7 +1,26 @@
 # Temas visuais do LiteSic
 
-**Implementado e validado tecnicamente em 11/10/2026. Aceite visual humano
-dos novos temas: pendente.** São 36 temas selecionáveis, com aplicação imediata
+A janela TEMAS preserva seleção e posição da lista ao aplicar um tema.
+A rolagem lateral atualiza somente sua região, com a pintura do fundo
+recortada para os controles filhos. Ver [ajustes e validação](PLAYLIST-FAVORITES-2026-10-11.md).
+
+Os botões ativos usam fundo claro com tonalidade do tema e texto/ícone escuro,
+incluindo shuffle, repeat, FFT/OSC e os atalhos VIZ/LISTA/EQ. O atalho EQ
+acompanha a visibilidade do painel, independentemente de o DSP estar ON/OFF.
+Playlist e equalizador exibem apenas o nome do painel no cabeçalho; os
+comandos do EQ ficam à direita do rodapé, no padrão dos outros painéis.
+
+Auditoria integrada histórica: [M6](M6-INTEGRATED-VALIDATION-2026-10-11.md).
+EQ real implementado; referências ao painel indisponível abaixo pertencem
+ao histórico anterior à M6. Nesta auditoria não foram feitas capturas:
+paletas/contraste, seleção, persistência, parâmetros DSP e recursos foram
+verificados por testes; as assertivas automatizadas de pixels foram omitidas.
+Posteriormente o usuário informou o aceite visual final da M6; ver
+[encerramento](M6-CLOSEOUT-2026-10-11.md). Esse aceite não registra
+aprovação individual dos 36 temas nem novas capturas.
+
+**Registro histórico da ampliação de temas em 11/10/2026: implementado e
+validado tecnicamente; aceite visual dos novos temas ainda pendente naquela etapa.** São 36 temas selecionáveis, com aplicação imediata
 e preferência persistente. A M5 funcional já tinha seu aceite; esta ampliação
 visual não inicia M6 nem implementa DSP do equalizador.
 

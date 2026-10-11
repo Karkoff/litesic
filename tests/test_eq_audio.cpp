@@ -4,14 +4,14 @@
 #include <vector>
 #include <cmath>
 static double RMS(const std::vector<float>& v,unsigned channel=0){double sum=0;for(unsigned i=v.size()/4;i<v.size()/2;++i)sum+=v[i*2+channel]*v[i*2+channel];return std::sqrt(sum/(v.size()/4));}
-static std::vector<float> Render(const wchar_t* file,bool enabled,float gain=0,float volume=1,float pan=0){
-    Eq::ApplyPreset(0);Eq::SetEnabled(enabled);Eq::SetGain(4,gain);CHECK(Audio_TestInit(48000));CHECK(Audio_VizInit());
-    CHECK(Audio_Load(file));Audio_SetVolume(volume);Audio_SetPan(pan);Audio_Play();std::vector<float> out(48000);CHECK(Audio_TestRead(out.data(),24000));
+static std::vector<float> Render(const wchar_t* file,bool enabled,float gain=0,float volume=1,float pan=0,unsigned rate=48000){
+    Eq::ApplyPreset(0);Eq::SetEnabled(enabled);Eq::SetGain(4,gain);CHECK(Audio_TestInit(rate));CHECK(Audio_VizInit());
+    CHECK(Audio_Load(file));CHECK(Audio_GetSampleRate()==int(rate));Audio_SetVolume(volume);Audio_SetPan(pan);Audio_Play();std::vector<float> out(rate);CHECK(Audio_TestRead(out.data(),rate/2));
     float viz[2048];CHECK(Audio_GetVisualizationSamples(viz,2048)==2048);double v=0;for(float x:viz)v+=x*x;
     CHECK(std::isfinite(v)&&v>0);Audio_Shutdown();return out;
 }
-static void codecs_and_mono_use_real_node(){for(const wchar_t* file:{L"tests\\eq_fixtures\\eq-tone-1.wav",L"tests\\eq_fixtures\\eq-tone-2.wav",L"tests\\eq_fixtures\\eq-tone.mp3",L"tests\\eq_fixtures\\eq-tone.flac",L"tests\\eq_fixtures\\eq-tone.ogg"}){
-    auto dry=Render(file,false);auto flat=Render(file,true);auto boost=Render(file,true,6);auto cut=Render(file,true,-6);
+static void codecs_and_mono_use_real_node(){for(unsigned rate:{32000u,44100u,48000u,96000u})for(const wchar_t* file:{L"tests\\eq_fixtures\\eq-tone-1.wav",L"tests\\eq_fixtures\\eq-tone-2.wav",L"tests\\eq_fixtures\\eq-tone.mp3",L"tests\\eq_fixtures\\eq-tone.flac",L"tests\\eq_fixtures\\eq-tone.ogg"}){
+    auto dry=Render(file,false,0,1,0,rate);auto flat=Render(file,true,0,1,0,rate);auto boost=Render(file,true,6,1,0,rate);auto cut=Render(file,true,-6,1,0,rate);
     CHECK(RMS(dry)>.001);CHECK(std::abs(RMS(flat)/RMS(dry)-1)<1e-6);
     CHECK(std::abs(20*std::log10(RMS(boost)/RMS(dry))-6)<.1);CHECK(std::abs(20*std::log10(RMS(cut)/RMS(dry))+6)<.1);}}
 static void volume_pan_and_transport(){auto full=Render(L"tests\\eq_fixtures\\eq-tone-2.wav",true,6);auto quiet=Render(L"tests\\eq_fixtures\\eq-tone-2.wav",true,6,.25f);

@@ -12,13 +12,23 @@ bool PlaybackController::LoadIndex(int index, bool resetNavigation) {
     backend_.play();
     return backend_.state() == AUDIO_STATE_PLAYING;
 }
-bool PlaybackController::PlayIndex(int index) { return LoadIndex(index, true); }
+void PlaybackController::SetScope(bool favoritesOnly){
+    if(favoritesOnly_!=favoritesOnly){favoritesOnly_=favoritesOnly;list_.SetCurrentIndex(list_.GetCurrentIndex());}
+}
+bool PlaybackController::PlayIndex(int index,bool favoritesOnly) {
+    const Track* track=list_.At(index);
+    if(!track||(favoritesOnly&&!track->favorite))return false;
+    SetScope(favoritesOnly);return LoadIndex(index,true);
+}
+bool PlaybackController::Play(bool favoritesOnly){SetScope(favoritesOnly);return Play();}
 bool PlaybackController::Play() {
     int index = list_.GetCurrentIndex();
-    if (index < 0) index = 0;
+    if(index<0||(favoritesOnly_&&!list_.At(index)->favorite)){
+        index=-1;for(int i=0;i<list_.Count();++i)if(!favoritesOnly_||list_.At(i)->favorite){index=i;break;}
+    }
     const Track* track = list_.At(index);
-    if (!track) return false;
-    if (loaded_ != track->id) return PlayIndex(index);
+    if (!track) {backend_.stop();return false;}
+    if (loaded_ != track->id) return LoadIndex(index,true);
     if (backend_.atEnd()) { backend_.stop(); backend_.seek(0); }
     backend_.play();
     return backend_.state() == AUDIO_STATE_PLAYING;
@@ -27,7 +37,7 @@ bool PlaybackController::Next(bool shuffle, bool repeat) {
     // Missing/corrupt entries are skipped, with a strict one-list bound even
     // under repeat. A list of broken files cannot spin the UI thread forever.
     for (int attempts = 0; attempts < list_.Count(); ++attempts) {
-        int index = list_.Next(shuffle, repeat);
+        int index = list_.Next(shuffle, repeat, favoritesOnly_);
         if (index < 0) break;
         if (LoadIndex(index, false)) return true;
     }
@@ -37,7 +47,7 @@ bool PlaybackController::Next(bool shuffle, bool repeat) {
 bool PlaybackController::Previous(bool shuffle, bool repeat) {
     if (loaded_ && backend_.position() > 3) { backend_.seek(0); return true; }
     for (int attempts = 0; attempts < list_.Count(); ++attempts) {
-        int index = list_.Previous(shuffle, repeat);
+        int index = list_.Previous(shuffle, repeat, favoritesOnly_);
         if (index < 0) return false;
         if (LoadIndex(index, false)) return true;
     }
@@ -48,7 +58,7 @@ bool PlaybackController::Update(bool shuffle, RepeatMode repeat) {
     const Track* track = list_.At(list_.GetCurrentIndex());
     // Repeat-one is an EOF policy. Explicit navigation remains independent,
     // and restarting the loaded sound preserves shuffle's visit/history state.
-    if (repeat == RepeatMode::One && track && loaded_ == track->id) {
+    if (repeat == RepeatMode::One && track && loaded_ == track->id && (!favoritesOnly_||track->favorite)) {
         // The sound has ended internally, while the transport still reports
         // PLAYING until this timer update. Stop first so Play restarts it.
         backend_.stop();
@@ -62,7 +72,7 @@ void PlaybackController::RemoveAt(int index) {
     if (track && track->id == loaded_) { backend_.unload(); loaded_ = 0; }
     list_.RemoveAt(index);
 }
-void PlaybackController::Clear() { backend_.unload(); loaded_ = 0; list_.Clear(); }
+void PlaybackController::Clear() { backend_.unload(); loaded_ = 0; favoritesOnly_=false; list_.Clear(); }
 
 Playlist& PlayerPlaylist() { static Playlist list(GetTickCount() | 1u); return list; }
 PlaybackController& PlayerPlayback() {

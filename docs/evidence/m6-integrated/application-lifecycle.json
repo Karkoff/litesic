@@ -1,0 +1,16 @@
+﻿[
+    {
+        "run":  1,
+        "exit_code":  0,
+        "profile":  "D:\\Projetos\\IA\\litesic\\build\\audit-m6\\build\\gui\\m6-session",
+        "eq_hidden":  true,
+        "custom_gains_preserved":  true
+    },
+    {
+        "run":  2,
+        "exit_code":  0,
+        "profile":  "D:\\Projetos\\IA\\litesic\\build\\audit-m6\\build\\gui\\m6-session",
+        "eq_hidden":  true,
+        "custom_gains_preserved":  true
+    }
+]

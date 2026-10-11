@@ -78,14 +78,20 @@ void ID3(const std::vector<uint8_t>& h, TrackMetadata& tags) {
         const uint8_t* data = bytes.data() + offset;
         uint8_t flags = version == 2 ? 0 : frame[9];
         bool unsupported = version == 3 ? (flags & 0xe0) != 0 : version == 4 ? (flags & 0x4c) != 0 : false;
-        if (!unsupported && (id == "TIT2" || id == "TT2" || id == "TPE1" || id == "TP1")) {
+        if (!unsupported && (id == "TIT2" || id == "TT2" || id == "TPE1" || id == "TP1" ||
+            id=="TALB"||id=="TAL"||id=="TCON"||id=="TCO"||id=="TYER"||id=="TYE"||id=="TDRC"||id=="TRCK"||id=="TRK")) {
             auto value = version == 4 && ((flags & 2) || (h[5] & 0x80)) ? Unsync(data, n) : std::vector<uint8_t>(data, data + n);
             if (version == 4 && (flags & 1)) {
                 if (value.size() >= 4) value.erase(value.begin(), value.begin() + 4); else value.clear();
             }
             std::wstring text = Text(value.data(), value.size());
             if (!text.empty()) {
-                if (id == "TIT2" || id == "TT2") tags.title = text; else tags.artist = text;
+                if (id == "TIT2" || id == "TT2") tags.title = text;
+                else if(id=="TPE1"||id=="TP1")tags.artist=text;
+                else if(id=="TALB"||id=="TAL")tags.album=text;
+                else if(id=="TCON"||id=="TCO")tags.genre=text;
+                else if(id=="TRCK"||id=="TRK")tags.trackNumber=text;
+                else tags.year=text;
             }
         }
         offset += n;
@@ -109,6 +115,10 @@ void Comments(const uint8_t* p, size_t n, TrackMetadata& tags) {
             if (DecodeText(comment.substr(equal + 1), value)) {
                 if (key == "TITLE" && tags.title.empty()) tags.title = Clean(value);
                 if (key == "ARTIST" && tags.artist.empty()) tags.artist = Clean(value);
+                if (key == "ALBUM" && tags.album.empty()) tags.album = Clean(value);
+                if (key == "GENRE" && tags.genre.empty()) tags.genre = Clean(value);
+                if (key == "DATE" && tags.year.empty()) tags.year = Clean(value);
+                if (key == "TRACKNUMBER" && tags.trackNumber.empty()) tags.trackNumber = Clean(value);
             }
         }
         p += len; n -= len;
@@ -163,7 +173,11 @@ TrackMetadata ParseTags(const std::vector<uint8_t>& head, const std::vector<uint
     TrackMetadata tags;
     if (tail.size() >= 128) {
         const uint8_t* p = tail.data() + tail.size() - 128;
-        if (!std::memcmp(p, "TAG", 3)) { tags.title = Latin(p + 3, 30); tags.artist = Latin(p + 33, 30); }
+        if (!std::memcmp(p, "TAG", 3)) {
+            tags.title = Latin(p + 3, 30); tags.artist = Latin(p + 33, 30);
+            tags.album=Latin(p+63,30);tags.year=Latin(p+93,4);
+            if(p[125]==0&&p[126])tags.trackNumber=std::to_wstring(p[126]);
+        }
     }
     ID3(head, tags); Flac(head, tags); Ogg(head, tags);
     return tags;
@@ -193,6 +207,7 @@ TrackMetadata ReadTrackMetadata(const std::wstring& path) {
     }
     CloseHandle(file);
     TrackMetadata tags = ParseTags(head, tail);
+    tags.fileBytes=size.QuadPart>0?static_cast<uint64_t>(size.QuadPart):0;
     ma_decoder decoder;
     if (ma_decoder_init_file_w(path.c_str(), nullptr, &decoder) == MA_SUCCESS) {
         ma_uint64 frames = 0; ma_uint32 rate = 0;
@@ -213,6 +228,8 @@ TrackMetadata ReadTrackMetadata(const std::wstring& path) {
             }
         }
         tags.readable = true;
+        tags.sampleRate=rate;
+        ma_decoder_get_data_format(&decoder,nullptr,&tags.channels,nullptr,nullptr,0);
         ma_decoder_uninit(&decoder);
     }
     return tags;

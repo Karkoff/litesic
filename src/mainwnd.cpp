@@ -22,6 +22,7 @@
 #include "plwnd.h"
 #include "ui_player.h"
 #include "eqwnd.h"
+#include "window_snap.h"
 
 #include <windows.h>
 #include <cmath>
@@ -197,8 +198,15 @@ static BOOL g_showRemaining = FALSE;
 /* M3-T2: contador de ms para scroll do título. */
 static DWORD g_scrollElapsedMs = 0;
 static DWORD g_scrollTick = 0;
+static bool g_scrollTimerActive = false;
 static bool g_titleOverflow = false;
 static std::wstring g_scrollTitle;
+static void UpdateScrollTimer(HWND hwnd) {
+    bool needed=g_titleOverflow && IsWindowVisible(hwnd) && !IsIconic(hwnd);
+    if(needed==g_scrollTimerActive)return;
+    if(needed){g_scrollTick=GetTickCount();g_scrollTimerActive=SetTimer(hwnd,SCROLL_TIMER_ID,30,nullptr)!=0;}
+    else {KillTimer(hwnd,SCROLL_TIMER_ID);g_scrollTimerActive=false;}
+}
 
 /* M3-T4/M3-T5: estado de arraste do slider. */
 static SliderType g_draggingSlider = SLIDER_NONE;
@@ -682,7 +690,7 @@ static PlayerViewState PlayerSnapshot() {
     s.seek=g_seekValue; s.volume=g_volumeValue; s.pan=g_panValue;
     s.hover=g_controlHover; s.pressed=g_controlPressed; s.focus=g_controlFocus;
     s.titleHover=g_hoverBtn; s.titlePressed=g_pressedBtn;
-    s.playlistVisible=PlWnd_IsVisible(); s.hasPlaylist=PlayerPlaylist().Count()>0;
+    s.playlistVisible=PlWnd_IsVisible(); s.equalizerVisible=EqWnd_IsVisible(); s.hasPlaylist=PlayerPlaylist().Count()>0;
     wchar_t time[16]{},duration[16]{},name[MAX_PATH]{};
     FormatTime(Audio_GetPositionSeconds(),g_showRemaining,Audio_GetDurationSeconds(),time,ARRAYSIZE(time));
     FormatTime(Audio_GetDurationSeconds(),FALSE,Audio_GetDurationSeconds(),duration,ARRAYSIZE(duration));
@@ -783,7 +791,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         SetTimer(hwnd, POSITION_TIMER_ID, 250, NULL);
 
         /* Timer para scroll do título (30ms — ~33fps suave). */
-        SetTimer(hwnd, SCROLL_TIMER_ID, 30, NULL);
+        g_scrollTimerActive=false;
+        g_titleOverflow=false;
         g_scrollTick=GetTickCount();
 
         /* Timer do visualizador (~60fps). */
@@ -792,8 +801,32 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
 
+    case WM_WINDOWPOSCHANGING: {
+        auto position=reinterpret_cast<WINDOWPOS*>(lParam);
+        if(IsIconic(hwnd)||((position->flags&(SWP_NOMOVE|SWP_NOSIZE))==(SWP_NOMOVE|SWP_NOSIZE)))break;
+        RECT current{};GetWindowRect(hwnd,&current);
+        int x=position->flags&SWP_NOMOVE?current.left:position->x;
+        int y=position->flags&SWP_NOMOVE?current.top:position->y;
+        int w=position->flags&SWP_NOSIZE?current.right-current.left:position->cx;
+        int h=position->flags&SWP_NOSIZE?current.bottom-current.top:position->cy;
+        RECT owner{x,y,x+w,y+h},group=owner,panel{};
+        bool attached=false;
+        if(PlWnd_DockedRect(owner,panel)){UnionRect(&group,&group,&panel);attached=true;}
+        if(EqWnd_DockedRect(owner,panel)){UnionRect(&group,&group,&panel);attached=true;}
+        MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
+        if(attached&&GetMonitorInfoW(MonitorFromRect(&owner,MONITOR_DEFAULTTONEAREST),&monitor)){
+            RECT fitted=group;WindowSnap::KeepVisible(fitted,monitor.rcWork);
+            if(fitted.left!=group.left||fitted.top!=group.top){
+                position->x=x+fitted.left-group.left;position->y=y+fitted.top-group.top;
+                position->flags&=~SWP_NOMOVE;
+            }
+        }
+        break;
+    }
     case WM_WINDOWPOSCHANGED:
-        PlWnd_MainMoved(); EqWnd_MainMoved();
+        // Both panels use the new owner geometry, never the peer's old rectangle.
+        PlWnd_MainMoved(true); EqWnd_MainMoved(true);
+        UpdateScrollTimer(hwnd);
         return DefWindowProcW(hwnd, msg, wParam, lParam); // Also delivers WM_SIZE/WM_MOVE.
 
     case WM_ERASEBKGND: return 1;
@@ -1088,6 +1121,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         RECT client{}; GetClientRect(hwnd,&client);
         if(PaintPlayer(g_canvas,hdc,client,g_dpiScale,PlayerSnapshot(),&g_titleOverflow)) {
+            UpdateScrollTimer(hwnd);
             EndPaint(hwnd,&ps); break;
         }
 
@@ -1186,6 +1220,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 MainWnd_DPIScale(TITLE_X + TITLE_W), MainWnd_DPIScale(TITLE_Y) + MainWnd_DPIScale(14)
             };
             int areaW = area.right - area.left;
+            g_titleOverflow=Audio_HasTrack() && textSize.cx>areaW;
+            UpdateScrollTimer(hwnd);
 
             if (textSize.cx > 0)
             {
@@ -1271,14 +1307,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
             RECT shufR = { MainWnd_DPIScale(BTN_SHUFFLE_X), MainWnd_DPIScale(TOGGLE_Y),
                            MainWnd_DPIScale(BTN_SHUFFLE_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
-            b = CreateSolidBrush(g_shuffleOn ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &shufR, b); DeleteObject(b);
-            SetTextColor(memDC, g_shuffleOn ? Ui::NativeColor(Ui::Text) : AUDIO_INFO_COLOR);
+            b = CreateSolidBrush(g_shuffleOn ? Ui::NativeColor(Ui::SelectedButtonFill()) : TOGGLE_OFF_BG); FillRect(memDC, &shufR, b); DeleteObject(b);
+            SetTextColor(memDC, g_shuffleOn ? Ui::NativeColor(Ui::SelectedButtonText) : AUDIO_INFO_COLOR);
             DrawTextW(memDC, L"SHUF", 4, &shufR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             RECT repR = { MainWnd_DPIScale(BTN_REPEAT_X), MainWnd_DPIScale(TOGGLE_Y),
                           MainWnd_DPIScale(BTN_REPEAT_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
-            b = CreateSolidBrush(g_repeatMode != RepeatMode::Off ? TOGGLE_ON_BG : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
-            SetTextColor(memDC, g_repeatMode != RepeatMode::Off ? Ui::NativeColor(Ui::Text) : AUDIO_INFO_COLOR);
+            b = CreateSolidBrush(g_repeatMode != RepeatMode::Off ? Ui::NativeColor(Ui::SelectedButtonFill()) : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
+            SetTextColor(memDC, g_repeatMode != RepeatMode::Off ? Ui::NativeColor(Ui::SelectedButtonText) : AUDIO_INFO_COLOR);
             DrawTextW(memDC, g_repeatMode == RepeatMode::One ? L"REP 1" : L"REP", -1, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
@@ -1329,9 +1365,10 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             auto button=PlayerControlRect(id,g_visualizerVisible);
             RECT rect{MainWnd_DPIScale(static_cast<int>(button.x)),MainWnd_DPIScale(static_cast<int>(button.y)),
                 MainWnd_DPIScale(static_cast<int>(button.x+button.w)),MainWnd_DPIScale(static_cast<int>(button.y+button.h))};
-            bool active=(id==16 && g_visualizerVisible) || (id==11 && PlWnd_IsVisible());
-            HBRUSH brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Active:Ui::Surface));FillRect(memDC,&rect,brush);DeleteObject(brush);
+            bool active=(id==16 && g_visualizerVisible) || (id==11 && PlWnd_IsVisible()) || (id==12 && EqWnd_IsVisible());
+            HBRUSH brush=CreateSolidBrush(Ui::NativeColor(active?Ui::SelectedButtonFill():Ui::Surface));FillRect(memDC,&rect,brush);DeleteObject(brush);
             brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Green:Ui::Bronze));FrameRect(memDC,&rect,brush);DeleteObject(brush);
+            SetTextColor(memDC,Ui::NativeColor(active?Ui::SelectedButtonText:Ui::Text));
             DrawTextW(memDC,id==16?L"VIZ":id==11?L"LISTA":L"EQ",-1,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
         }
         /* Copiar buffer para a tela. */
@@ -1428,6 +1465,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
     case WM_DESTROY:
     {
+        Ui::SaveAppearanceValue(L"VolumePermille",static_cast<int>(std::lround(g_volumeValue*1000)));
         KillTimer(hwnd, POSITION_TIMER_ID);
         KillTimer(hwnd, SCROLL_TIMER_ID);
         KillTimer(hwnd, VIZ_TIMER_ID);
@@ -1435,7 +1473,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         EqWnd_Shutdown();
         Audio_Shutdown();
         if(g_tooltip) DestroyWindow(g_tooltip);
-        g_tooltip=nullptr; g_canvas.DiscardTarget();
+        g_tooltip=nullptr; g_canvas.Reset();
         PostQuitMessage(0);
         break;
     }
@@ -1474,6 +1512,7 @@ BOOL MainWnd_RegisterClass(HINSTANCE hInstance)
 HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow)
 {
     auto appearance=Ui::LoadAppearance();
+    g_volumeValue=appearance.volumePermille/1000.f;
     g_visualizerVisible=appearance.visualizerVisible;
     g_userScalePercent=appearance.scalePercent;
     g_vizMode=appearance.spectrum?VIZ_MODE_SPECTRUM:VIZ_MODE_OSCILLOSCOPE;

@@ -1,0 +1,281 @@
+﻿[
+    {
+        "seconds":  0,
+        "private_bytes":  1884160,
+        "working_set":  9842688,
+        "cpu_ms":  0,
+        "threads":  4,
+        "gdi":  7,
+        "user":  2
+    },
+    {
+        "seconds":  1,
+        "private_bytes":  63307776,
+        "working_set":  67575808,
+        "cpu_ms":  515.625,
+        "threads":  51,
+        "gdi":  52,
+        "user":  51
+    },
+    {
+        "seconds":  2,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  3,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  4,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  5,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  6,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  7,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  8,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  515.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  9,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  531.25,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  10,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  531.25,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  11,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  546.875,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  12,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  13,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  14,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  15,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  16,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  17,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  18,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  578.125,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  19,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  20,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  21,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  22,
+        "private_bytes":  63361024,
+        "working_set":  67657728,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  23,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  24,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  25,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  26,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  27,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  593.75,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  28,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  29,
+        "private_bytes":  63361024,
+        "working_set":  67416064,
+        "cpu_ms":  640.625,
+        "threads":  52,
+        "gdi":  50,
+        "user":  50
+    },
+    {
+        "seconds":  30,
+        "private_bytes":  63283200,
+        "working_set":  67395584,
+        "cpu_ms":  640.625,
+        "threads":  50,
+        "gdi":  50,
+        "user":  49
+    }
+]

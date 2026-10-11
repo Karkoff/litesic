@@ -1,0 +1,4 @@
+FAIL tests/test_eq_window.cpp:88: panel.left>=work.left && panel.top>=work.top && panel.right<=work.right && panel.bottom<=work.bottom
+PASS controls_publish_dsp_and_hidden_processing
+PASS all_themes_preserve_parameters
+PASS docking_follow_detach_and_scale

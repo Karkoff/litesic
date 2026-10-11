@@ -1,0 +1,791 @@
+{
+  "date": "2026-10-11",
+  "branch": "master",
+  "head": "a35c993ed89fc021cf8730f13bddaf7a1273a6eb",
+  "m6_status": "READY_FOR_HUMAN_ACCEPTANCE",
+  "capture_performed": false,
+  "commit_or_push_performed": false,
+  "functional_cases_final": 488,
+  "python_guards_final": 27,
+  "capture_assertion_groups_pending": 12,
+  "notes": [
+    "Logs copied verbatim; some baseline logs use UTF-16LE.",
+    "Final binaries are not committed. Hashes identify local audited builds.",
+    "Measured probes precede final playlist reopening adjustment; final builds/tests include it.",
+    "Performance is offline; actual executable measured separately only at idle.",
+    "No screenshot, desktop pixel capture, or personal profile data included."
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/m6-integrated/application-idle.json",
+      "bytes": 6420,
+      "sha256": "d1362e503c81c08a016cb7e8c9f539a6fa55b4d8a2efdc67e6323682a3ebd581"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/application-lifecycle.json",
+      "bytes": 452,
+      "sha256": "3729a7a1c8dd782930a2dee579f7fcf80dc640154eae0321dc1ac015298bc1a1"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/application-lifecycle.log",
+      "bytes": 66,
+      "sha256": "f434f181f6ab177d349b101a8a3bd1b2a144155ea416d98004ec8c1eace2cfed"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/application-lifecycle.ps1",
+      "bytes": 3086,
+      "sha256": "cd1f1acd946a680865a4f09f5fb14053b6a21369de37852a9ce3479df4db7b5e"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/baseline-build.log",
+      "bytes": 1472,
+      "sha256": "4dbd9f8d714b48750d090c611adcf142f39a721c64c2930cb5d8f744802fb0fd"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/baseline-functional.log",
+      "bytes": 38858,
+      "sha256": "c8e300b514e614e165bfb46ee027c08789b8bad185c98157963949635877f549"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/baseline-test.log",
+      "bytes": 5117,
+      "sha256": "121f4f2c2ba932d638f2b88248a7c9d8115d7b2fe1fb5aafa17a6ae7857d2073"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/edge-before.log",
+      "bytes": 260,
+      "sha256": "5958e72b73f3845f8debd9fcf7253ef30ea304da1a6581c5d0d3964341bf2ee8"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-32-debug-build.log",
+      "bytes": 23453,
+      "sha256": "fc6ff063700f2374f3bebe83d6d87a83418d5a058f663f6d81802b4512be5d7c"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-32-debug-test.log",
+      "bytes": 13394,
+      "sha256": "d427b4eccc36dd7aed0b83ca04cff4734ef6a8bd35c7dc456146e60b10b9b233"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-32-release-build.log",
+      "bytes": 27290,
+      "sha256": "520543f6f96fedf775f537f4662886d82a80c5a5c565f85e746ad47625c93dd5"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-32-release-test.log",
+      "bytes": 13564,
+      "sha256": "14debe3042078dbe021956c9476ff91d326640d46a601ff0f0844ca07f3dfdf4"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-64-debug-build.log",
+      "bytes": 24110,
+      "sha256": "e8f008ce836c999c739c184351659c7b08816105e210433a2a608297d36f40fa"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-64-debug-test.log",
+      "bytes": 13392,
+      "sha256": "97d003499942493a939a2b0b985c0c986583cbaf7414b17aeb8630e60dc85043"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-64-release-build.log",
+      "bytes": 27991,
+      "sha256": "f46dfce7ac2b4cfed4929f9e07b5989218d005ce2e614c7584e61f44b85b4b24"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-64-release-test.log",
+      "bytes": 13562,
+      "sha256": "3c9a6d89539bc9e8dd415e0f410e29f1bf3b0caadbf37aa18b578f4b43cda0fc"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/final-checks.sh",
+      "bytes": 761,
+      "sha256": "4760236e73b98264e5bb49e3b0bd85e678424409f010fd68f0f1809a3200e493"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/four-variants.sh",
+      "bytes": 689,
+      "sha256": "8af8e2219b545e747ee99ea08dd81c907cc260c4a455bcaf44922a0e63e99c27"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/gui-guards.log",
+      "bytes": 7382,
+      "sha256": "b92d39630141fc36556eb5896ceb383df9bf49bd10317b5aaaffe1e53bb546bc"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/last-regression.sh",
+      "bytes": 362,
+      "sha256": "120ae61c7ec0dcdcad92c94bb276088f7fe56b9adc5658cc08654520c03809db"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/lifecycle-debug-1.log",
+      "bytes": 17684,
+      "sha256": "85e9949d6bfa43f62810d6605a8aebd060a7c4a1200213bb99f2ee59d94e5b7c"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/lifecycle-debug-2.log",
+      "bytes": 17666,
+      "sha256": "9bb554a6716f2142a4e93d7faea4ee7e8beb62c72eddae4816db2d25f22bbf91"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/lifecycle.gdb",
+      "bytes": 322,
+      "sha256": "16bfb72650f2bcfb629326eb56c825b88d4044aa0a69f76d988078ac2ee73b4c"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/overlap-before.log",
+      "bytes": 310,
+      "sha256": "6291124cd5fe4418a42ab9197b0fbc0d61f9ee7f7d511ff8646d743749fa6f31"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/paced-64.log",
+      "bytes": 2974,
+      "sha256": "621dca140ec9adea87344b336954b317db9dea5abfa92cac63798f1e1fc1c0ba"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/paced.sh",
+      "bytes": 120,
+      "sha256": "bc4b7e79fae58c477f8170d6fc3a030aff89490d1995d3cc27b52ff872eba7d6"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/performance-32-summary.json",
+      "bytes": 3256,
+      "sha256": "ed4cf9d0e444a30b26873876b6ee18e6011c3b4efb01044e6168dd50f1639a51"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/performance-32.log",
+      "bytes": 9901,
+      "sha256": "dd70b1c1bf9d92f33d5de005801dd0ab2661dac440b4fd2a8bcbed8e1caa6c61"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/performance-64-summary.json",
+      "bytes": 3238,
+      "sha256": "01b7e65402834919f604a0c93b7ba595c71888bf203fd845a582c04c11abf21f"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/performance-64.log",
+      "bytes": 9834,
+      "sha256": "2926d71afd38c312ab82ca8134a1613e6f6ec111a2fe0f0c79851fd97de88dc8"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/sample-isolated-app.ps1",
+      "bytes": 2175,
+      "sha256": "21fe4a731c0f6727047dabc0cd8c9f0d8d822c338eca8e20043e5f1c6d4cffc1"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/soak-64.log",
+      "bytes": 1205,
+      "sha256": "bf35eba7aec7f5974371176258739e99eb845afc285669ab50353d68dff2d8a3"
+    },
+    {
+      "path": "docs/evidence/m6-integrated/test-summary.json",
+      "bytes": 958,
+      "sha256": "b71f2df0b966cfeb57fd5e8a975c5a459aff5853a038e3b99a2d26585a5fe33c"
+    }
+  ],
+  "modified_sources_and_documents": [
+    {
+      "path": "PROJECT_STATE.md",
+      "bytes": 2212,
+      "sha256": "ad0c2840db56308869fa5c147252503a2a25964ef64894492ec666feacfefe3d"
+    },
+    {
+      "path": "README.md",
+      "bytes": 13632,
+      "sha256": "539baab84bc0adfae59bd5e3387ce29061789ec8f355312879dcce5425e66a87"
+    },
+    {
+      "path": "docs/DEVELOPMENT.md",
+      "bytes": 11256,
+      "sha256": "c10c3d4d6fb39dd9c415ccaee22541072b5b97a6b05de2851cfb1db16e37ecb3"
+    },
+    {
+      "path": "docs/GUI-AUTOMATION.md",
+      "bytes": 18724,
+      "sha256": "7ef1167d0b02ec5f6b431b11c17eb156af3ff2a4a4d70ab0817bbbae14fc3e11"
+    },
+    {
+      "path": "docs/M6-INTEGRATED-VALIDATION-2026-10-11.md",
+      "bytes": 24550,
+      "sha256": "55436a9acde78ee1cf0abf6f0da034dc6114c182ad977eeaff15cf8e04ba0c36"
+    },
+    {
+      "path": "docs/ROADMAP.md",
+      "bytes": 5743,
+      "sha256": "1c929244b5f907128330722157779aa687a1aa1e9849e7dd6882dfa41fb3eb87"
+    },
+    {
+      "path": "docs/THEMES.md",
+      "bytes": 14024,
+      "sha256": "2d3ecc49b21be08dd34ff51895f9c60caf5b015c4d461081af83124486da21ce"
+    },
+    {
+      "path": "docs/milestones/M6.md",
+      "bytes": 4679,
+      "sha256": "2f461e2a4edf3825bac6d08c81f4001441735a8dbd948559916bdf2e35910683"
+    },
+    {
+      "path": "scripts/diagnostics/eq_probe.cpp",
+      "bytes": 6300,
+      "sha256": "1d3f4e5070995e4ae4ce8817f10ad7f39eaf466cd222d9e66e00e270344a0bd2"
+    },
+    {
+      "path": "src/eqwnd.cpp",
+      "bytes": 11040,
+      "sha256": "e35048c28cf2efe14cc5ccffa5fd29c0951a4889768417d39e1f4bbc46e6bc37"
+    },
+    {
+      "path": "src/mainwnd.cpp",
+      "bytes": 65074,
+      "sha256": "8d0e290d7e767e1e3596289d89031229b09ee43c01d08228ae0d731646f48750"
+    },
+    {
+      "path": "src/plwnd.cpp",
+      "bytes": 39692,
+      "sha256": "baeb78cf18d32e26a30bba6b2bb80b6994a5d1a8bf9a46d9b81716b7dc207ebb"
+    },
+    {
+      "path": "src/window_snap.h",
+      "bytes": 4098,
+      "sha256": "7e3079009fdf281e14212717a760b648fdd25b8d4e7d3f441ff0666b260dc581"
+    },
+    {
+      "path": "tests/check.h",
+      "bytes": 629,
+      "sha256": "03ebc66368342de16ae9d7eb33b903b9386520b0b907ac993fe4ea893c1c7ab4"
+    },
+    {
+      "path": "tests/test_eq_audio.cpp",
+      "bytes": 2843,
+      "sha256": "8681d04de4d17f2a38b1f33bf947ca2d57885f297c3d3ebd3de176d5dead7c88"
+    },
+    {
+      "path": "tests/test_eq_audit.cpp",
+      "bytes": 6534,
+      "sha256": "0562fae6fd6c408b72ceb3e6e50f045466619622cc51a1dbb32c2c0d4a1bcf8d"
+    },
+    {
+      "path": "tests/test_eq_window.cpp",
+      "bytes": 9866,
+      "sha256": "e8f7a138e73a2e71c76a04610a05e0a8a2567357027880e41d7d02291b46c2a2"
+    },
+    {
+      "path": "tests/test_player_window.cpp",
+      "bytes": 8459,
+      "sha256": "77bdc2e1ea70fea11673fb31fe39b6b883e05562ca3986d39c9c0be36c1354bc"
+    },
+    {
+      "path": "tests/test_playlist_window.cpp",
+      "bytes": 14078,
+      "sha256": "d5bdbab9f2c8e5977ce68deb9b225c4286b60a1a9ea433ac2e940289c7a91c09"
+    },
+    {
+      "path": "tests/test_themes.cpp",
+      "bytes": 12443,
+      "sha256": "6dabfe98755a3ce17135374c40c7b3100afb446db0ad31c21b39f50ce7158ee0"
+    },
+    {
+      "path": "tests/test_ui_draw.cpp",
+      "bytes": 2866,
+      "sha256": "cac5de78929853953603094eeb59de87c0e3dc93669a30183545ea785bf18566"
+    },
+    {
+      "path": "tests/test_window_snap.cpp",
+      "bytes": 2409,
+      "sha256": "49152d3cc961908f9d3d2ec497c414811c193388db5b9f314c023bb3719be354"
+    }
+  ],
+  "final_local_binaries": [
+    {
+      "path": "build/64/release/LiteSic.exe",
+      "bytes": 3859721,
+      "sha256": "1e9c4149fff9e7de004b330457c1ad24dcdbddaf778af413791dc297fdf82ef0"
+    },
+    {
+      "path": "build/64/release/test-build_third_party_smoke.exe",
+      "bytes": 811280,
+      "sha256": "9b357180bd2fa5bf27b96964fb16189d4477eb64d6b46e0692d24d2b32578bf1"
+    },
+    {
+      "path": "build/64/release/test-test_fft.exe",
+      "bytes": 89009,
+      "sha256": "761fbb378904feea91be4cdd4e5ef2dfced42233ba64704a970f7d02eb44630f"
+    },
+    {
+      "path": "build/64/release/test-test_format_time.exe",
+      "bytes": 81129,
+      "sha256": "da2e116dc7ecefdc29bd532ffe6d13a159d0b4c1d673d0783d5de2a3c74f5906"
+    },
+    {
+      "path": "build/64/release/test-test_map_sample_to_y.exe",
+      "bytes": 79382,
+      "sha256": "0ebe61d177a501bdd6720eb338395fc439e2fdb4e5aee66dbd498be68f12b3c9"
+    },
+    {
+      "path": "build/64/release/test-test_ring_buffer.exe",
+      "bytes": 84963,
+      "sha256": "27dc4a535e546d0641b9884af2b30cd05d9174789b9dd4b8b97f88d7ece3a0f1"
+    },
+    {
+      "path": "build/64/release/test-test_appearance.exe",
+      "bytes": 3582051,
+      "sha256": "cf93f56be18cd997bb9de1bf4be61961c872113d240aaa8139a7eacda1a9893f"
+    },
+    {
+      "path": "build/64/release/test-test_audio_integration.exe",
+      "bytes": 3587580,
+      "sha256": "8b9cdb0518f8fc0e514e1cdccd05b19c2702c1bd52b0b4cf10b1d7f3362670b0"
+    },
+    {
+      "path": "build/64/release/test-test_eq_audio.exe",
+      "bytes": 3583850,
+      "sha256": "bba388fb31b0e44d443039286bd1de8b595bbfdf929f6f1782d526a591af2943"
+    },
+    {
+      "path": "build/64/release/test-test_eq_audit.exe",
+      "bytes": 3593519,
+      "sha256": "9418583686425b1f61fd3f43337feb851a6e1f3182560034243a8f3fb8475317"
+    },
+    {
+      "path": "build/64/release/test-test_eq_filter.exe",
+      "bytes": 3606567,
+      "sha256": "3de694a30ed55b031cb9f707f923c1ff2d0ae949b5f8be93a45bbec0de42da50"
+    },
+    {
+      "path": "build/64/release/test-test_eq_window.exe",
+      "bytes": 3793932,
+      "sha256": "44b7455b14d533d0f880386ae95194c827c9e037f3695d30197bd0148f7b7ebb"
+    },
+    {
+      "path": "build/64/release/test-test_m3u.exe",
+      "bytes": 3756213,
+      "sha256": "809b0cff97c635b70fad59c170aa4ea38138889f2f7dd8fb4a68fb407ff1c1ff"
+    },
+    {
+      "path": "build/64/release/test-test_playback.exe",
+      "bytes": 3588649,
+      "sha256": "cfd3be47447b6cb8b0d16d4046df4c61f623a7f3e87cdd1daceb2a5b2ae2794b"
+    },
+    {
+      "path": "build/64/release/test-test_player_window.exe",
+      "bytes": 3792893,
+      "sha256": "1f7511c5201dee8726b2847bad4ec62fc9a0f7b59dce753576caa961fd6a5142"
+    },
+    {
+      "path": "build/64/release/test-test_playlist.exe",
+      "bytes": 3599764,
+      "sha256": "790f1b22085332c326d825aa76966bc64525da182ea9f8f01c101890d8f69478"
+    },
+    {
+      "path": "build/64/release/test-test_playlist_view.exe",
+      "bytes": 3581410,
+      "sha256": "f47561666d88ef098ce4ff67db0b8db29f499de6fe140efdd7df4b84bc9cf31b"
+    },
+    {
+      "path": "build/64/release/test-test_playlist_window.exe",
+      "bytes": 3801091,
+      "sha256": "da84862bd4a672c0378efe2d99f58095a90ef2262a37860982729a6d27c6eb72"
+    },
+    {
+      "path": "build/64/release/test-test_playlist_worker.exe",
+      "bytes": 3598437,
+      "sha256": "07b7a9b48994f00204868aeb4342b836ea92869eb66d1dd9c70d4a17581a7f19"
+    },
+    {
+      "path": "build/64/release/test-test_tags.exe",
+      "bytes": 3750211,
+      "sha256": "4178aa16fcd5205dc7e25ad20065342d37b655226f43a511d68c14f5f1038fb4"
+    },
+    {
+      "path": "build/64/release/test-test_themes.exe",
+      "bytes": 3809382,
+      "sha256": "277de631e9cb877be2a8ba92fa43bf63d4a7a3a64c56845f456e3d25bd142266"
+    },
+    {
+      "path": "build/64/release/test-test_title_scroll.exe",
+      "bytes": 3579522,
+      "sha256": "daf45ebd3102b70d4009e76ccf39586d422a7b61df9af54bf79748fc5ed7901f"
+    },
+    {
+      "path": "build/64/release/test-test_ui_draw.exe",
+      "bytes": 3608387,
+      "sha256": "4496deecd7db565454598bfc1ebd57921fd9c44c887434aa238d1988d7832b5b"
+    },
+    {
+      "path": "build/64/release/test-test_window_snap.exe",
+      "bytes": 3582249,
+      "sha256": "95a2e7d7a1e0a89f17c3b83b6540769357ce0723c8e4fca9e17320076a1c6a12"
+    },
+    {
+      "path": "build/64/debug/LiteSic.exe",
+      "bytes": 8576003,
+      "sha256": "4c78021dff7f5b1ba5c2fd61676d133e5fc9ac32a6f8ca0f0454bf5ac5958f3e"
+    },
+    {
+      "path": "build/64/debug/test-build_third_party_smoke.exe",
+      "bytes": 2197967,
+      "sha256": "f7a64b51dabc9a5fc483433331163e955d95cab59a6ea0f2664be7733b0dac91"
+    },
+    {
+      "path": "build/64/debug/test-test_fft.exe",
+      "bytes": 114472,
+      "sha256": "05130a0c26e44b7f46690b54ac165f1f37eb87245fdd8c584ee7a86d6249a69f"
+    },
+    {
+      "path": "build/64/debug/test-test_format_time.exe",
+      "bytes": 104253,
+      "sha256": "78442d3fdf3f64ed68091330906926f435a8b569f2f9f9cf85284f1779bf8101"
+    },
+    {
+      "path": "build/64/debug/test-test_map_sample_to_y.exe",
+      "bytes": 104615,
+      "sha256": "ac8dfec9f23d9d452bc0a6bb682b5e653f2ef14232d774b87ba1bc02fda62b6c"
+    },
+    {
+      "path": "build/64/debug/test-test_ring_buffer.exe",
+      "bytes": 107529,
+      "sha256": "b6293b45fd2d6f93577a7fc02ccff41e074bf2e4f3bd86ea4d40c1b6cb303f02"
+    },
+    {
+      "path": "build/64/debug/test-test_appearance.exe",
+      "bytes": 7117961,
+      "sha256": "ee7535eebb2a2d295e5ec8c69427012c648db846cc151d142ec8fb7012db6d61"
+    },
+    {
+      "path": "build/64/debug/test-test_audio_integration.exe",
+      "bytes": 7146001,
+      "sha256": "bef51b06bf9616a9f0f3c97262d7b51297edc2f85ad8fda1f4d0f32c2f7a3239"
+    },
+    {
+      "path": "build/64/debug/test-test_eq_audio.exe",
+      "bytes": 7062667,
+      "sha256": "20444e91e65f504fb7e91b4ea42247d3966f0fa6da383667a06cabd209c42271"
+    },
+    {
+      "path": "build/64/debug/test-test_eq_audit.exe",
+      "bytes": 7138295,
+      "sha256": "68e420ebc35b6f8b3faa8b9d425b863ae1d471e96569c493ff852f352325d835"
+    },
+    {
+      "path": "build/64/debug/test-test_eq_filter.exe",
+      "bytes": 7237724,
+      "sha256": "8d6370b28a8d6aab3edd00af71a364af271ac90b11afb105b17ad1721d4779d3"
+    },
+    {
+      "path": "build/64/debug/test-test_eq_window.exe",
+      "bytes": 8604520,
+      "sha256": "6af2f9be26309e20eb5164f7e9a6f7124a2d34cddd75d1d33875de1b0bea3cfb"
+    },
+    {
+      "path": "build/64/debug/test-test_m3u.exe",
+      "bytes": 7321736,
+      "sha256": "1cbf715b3d3a667c643dcb1c4678b6b66122b841b3ab236e77459f290dbee524"
+    },
+    {
+      "path": "build/64/debug/test-test_playback.exe",
+      "bytes": 7111514,
+      "sha256": "dc5ad291b95507e910ae4b1d4b9f9db666b85d37c95c39681f18a10e92ad9c9f"
+    },
+    {
+      "path": "build/64/debug/test-test_player_window.exe",
+      "bytes": 8591854,
+      "sha256": "ad118017fcc6cc48c5adb570b8d21f9d4613f1a6b0ea504f08d636165145a656"
+    },
+    {
+      "path": "build/64/debug/test-test_playlist.exe",
+      "bytes": 7262844,
+      "sha256": "5b03ca27a4105a0d9ff2ba29a67310fb5b06286d6ba8571b5254d5dbb639251d"
+    },
+    {
+      "path": "build/64/debug/test-test_playlist_view.exe",
+      "bytes": 7114649,
+      "sha256": "96c8d6acfef3a8d30e777e242040139b066fbf05c39fc56aa21bf47ae9a7654c"
+    },
+    {
+      "path": "build/64/debug/test-test_playlist_window.exe",
+      "bytes": 8617021,
+      "sha256": "2b07bb09105c777fea55a616618fd34f0455c44dd635bfd43dd5581a20c21530"
+    },
+    {
+      "path": "build/64/debug/test-test_playlist_worker.exe",
+      "bytes": 7246395,
+      "sha256": "b3c6056f0c952b0dca3c36f2f1666360d3e404d1e6fbc62cef0f91a5a68b0dc7"
+    },
+    {
+      "path": "build/64/debug/test-test_tags.exe",
+      "bytes": 7296570,
+      "sha256": "2376de3c035ee57585264b1c0131ad4b4ca9c49440a1c98ea0fc14bbb31e4477"
+    },
+    {
+      "path": "build/64/debug/test-test_themes.exe",
+      "bytes": 8762020,
+      "sha256": "c8c88b450a181b7938fe9bea3103ea29146108888ecc6bf6f2c1440001956ff2"
+    },
+    {
+      "path": "build/64/debug/test-test_title_scroll.exe",
+      "bytes": 7010262,
+      "sha256": "f7dd21549e1946dda588abe876722952fb608a05ebdf768aa94881b1e575fc42"
+    },
+    {
+      "path": "build/64/debug/test-test_ui_draw.exe",
+      "bytes": 7271658,
+      "sha256": "f77d6d6e4ab67f20ad8bea48967eb649236d1b87b3007342101d7e70d2875062"
+    },
+    {
+      "path": "build/64/debug/test-test_window_snap.exe",
+      "bytes": 7035562,
+      "sha256": "7669e3bb18af1273cd016f3e983f59de4b9072ea1ee4399554c9096e84577786"
+    },
+    {
+      "path": "build/32/release/LiteSic.exe",
+      "bytes": 3742244,
+      "sha256": "983058da176d86b4a81c68dff4b1d756350c3ca9723f2bacdaa97b136ba3ab3e"
+    },
+    {
+      "path": "build/32/release/test-build_third_party_smoke.exe",
+      "bytes": 911227,
+      "sha256": "2b11b55da7eb85b478f4cd30f426eda1bebebdf93a6808a50b89e90b2cf8b513"
+    },
+    {
+      "path": "build/32/release/test-test_fft.exe",
+      "bytes": 91160,
+      "sha256": "62d98a6bd6711f2433aeb85bf84b37dd54c27e6d04f180dc164a5a001cab9815"
+    },
+    {
+      "path": "build/32/release/test-test_format_time.exe",
+      "bytes": 83285,
+      "sha256": "a643f408c27dacdb7421a76a7430406de77a02820460b5095bf4ea2c33d8cd4e"
+    },
+    {
+      "path": "build/32/release/test-test_map_sample_to_y.exe",
+      "bytes": 80511,
+      "sha256": "6d4e6efefa59b4be1a3f133a55d4fe9d78d5505fd79fd66f7943be8cc76237db"
+    },
+    {
+      "path": "build/32/release/test-test_ring_buffer.exe",
+      "bytes": 86531,
+      "sha256": "d9046e4023f87705d17fb1fb9b3039eb31563edae18257e4a05cd939a8e37048"
+    },
+    {
+      "path": "build/32/release/test-test_appearance.exe",
+      "bytes": 3430099,
+      "sha256": "5947058ec365694ce6d5a00967219036d974f134b2535c28e508af23c6424484"
+    },
+    {
+      "path": "build/32/release/test-test_audio_integration.exe",
+      "bytes": 3435681,
+      "sha256": "884053e077af0bb7b171765e1002aa9f3863729a8d6fea2af9f23185a4ddc99c"
+    },
+    {
+      "path": "build/32/release/test-test_eq_audio.exe",
+      "bytes": 3431523,
+      "sha256": "874389b8899e56eb1a220e8ff0541ca7427a2940fae018496ebcef14883cda7c"
+    },
+    {
+      "path": "build/32/release/test-test_eq_audit.exe",
+      "bytes": 3442727,
+      "sha256": "052f9e9038ca9b76f621cd24364feb0db66ff7133c49ccb470ee0466dc35ca95"
+    },
+    {
+      "path": "build/32/release/test-test_eq_filter.exe",
+      "bytes": 3456208,
+      "sha256": "5542ecf62aceccf326100346ba136a8e09f6a8303a1a8678f98064d156c2c364"
+    },
+    {
+      "path": "build/32/release/test-test_eq_window.exe",
+      "bytes": 3679740,
+      "sha256": "b9bfdf03528a4e81951ad87d71c500192bcd06135259c1a58e0283777e5ac6bf"
+    },
+    {
+      "path": "build/32/release/test-test_m3u.exe",
+      "bytes": 3591356,
+      "sha256": "d11caed5fa206f5caeb9deaecda1000ae7820f2499e76bcf7a2661848c4136f6"
+    },
+    {
+      "path": "build/32/release/test-test_playback.exe",
+      "bytes": 3437656,
+      "sha256": "236b88e4d183c931b164c849caf70047d1137eb7ba3f93d5f6508db09dd818c7"
+    },
+    {
+      "path": "build/32/release/test-test_player_window.exe",
+      "bytes": 3677023,
+      "sha256": "7dd175791d903ee83d1d8f5c3a3020be87dac2144e5568db57e50f68c8efa683"
+    },
+    {
+      "path": "build/32/release/test-test_playlist.exe",
+      "bytes": 3447296,
+      "sha256": "342eb568823c53d14042833f35c7a37660a6db5ccfffd0e42e88d85e36b488bd"
+    },
+    {
+      "path": "build/32/release/test-test_playlist_view.exe",
+      "bytes": 3429366,
+      "sha256": "77483a5bea06c14a45ef615cac2251ef53055fefc5fb23178d93e0576c6990f6"
+    },
+    {
+      "path": "build/32/release/test-test_playlist_window.exe",
+      "bytes": 3684130,
+      "sha256": "fd193a7d9917331d886dc42bd1a04ca9d7905242aff9329a6a8a96798711b35a"
+    },
+    {
+      "path": "build/32/release/test-test_playlist_worker.exe",
+      "bytes": 3446238,
+      "sha256": "acd9b7b5b5cb585a32144a9ad7907f0f110c241c3dcdd004b05ab79e6577548d"
+    },
+    {
+      "path": "build/32/release/test-test_tags.exe",
+      "bytes": 3583963,
+      "sha256": "984d3b40a7d7f7c6f94566183a30a04c8aa7eeab8a93d54a1ead186331e3973b"
+    },
+    {
+      "path": "build/32/release/test-test_themes.exe",
+      "bytes": 3691242,
+      "sha256": "2a06b0a4bc60c0f940396ec4d53c70107b8fd7ba8e6cd8ab69e5768d26295426"
+    },
+    {
+      "path": "build/32/release/test-test_title_scroll.exe",
+      "bytes": 3427450,
+      "sha256": "5c42ae6cf0d66003b9f504cbe4f1e38442267d4ad3faac975c66228e7600ca45"
+    },
+    {
+      "path": "build/32/release/test-test_ui_draw.exe",
+      "bytes": 3457483,
+      "sha256": "3422f7961c3a995862c7ae3ed39c4c8cdf3d4ad549f4e3b38640c18fadef45df"
+    },
+    {
+      "path": "build/32/release/test-test_window_snap.exe",
+      "bytes": 3430706,
+      "sha256": "96780e933e0d00c187461921a53b841a79614bfd4ed9f1e309fac726718cd0ad"
+    },
+    {
+      "path": "build/32/debug/LiteSic.exe",
+      "bytes": 7767786,
+      "sha256": "eb9fafa15da966fea134b902b0c66975b2236a2071c86673e952d014b41117be"
+    },
+    {
+      "path": "build/32/debug/test-build_third_party_smoke.exe",
+      "bytes": 2038804,
+      "sha256": "9b50c3f5c959098f6ddb955137a42d23c12d8096b198f2af810f32e57944d56e"
+    },
+    {
+      "path": "build/32/debug/test-test_fft.exe",
+      "bytes": 114055,
+      "sha256": "3a6824563990b06e3bdfdca9355127e96fc27cd43a580f4987e606b4af0c173f"
+    },
+    {
+      "path": "build/32/debug/test-test_format_time.exe",
+      "bytes": 103659,
+      "sha256": "b395a0abd4a63d1ef6f030b84f0357f436e2369731e23bcc00fc7f0fa72aeb60"
+    },
+    {
+      "path": "build/32/debug/test-test_map_sample_to_y.exe",
+      "bytes": 104006,
+      "sha256": "456f4c1711e13a0108fefbb61432f9691a0c6e3b46f75b007dcdfb11fbc593dc"
+    },
+    {
+      "path": "build/32/debug/test-test_ring_buffer.exe",
+      "bytes": 106924,
+      "sha256": "33a70785728137fd15b9748b6ef30096b620fa3641a85e799525001a63864be3"
+    },
+    {
+      "path": "build/32/debug/test-test_appearance.exe",
+      "bytes": 6392758,
+      "sha256": "a197d6a45c339bbf704feb29b6f978e32127bf720fced0b6b2038b87f0057ff6"
+    },
+    {
+      "path": "build/32/debug/test-test_audio_integration.exe",
+      "bytes": 6421636,
+      "sha256": "d25924ff9b82cf33dd8eb99b4bfcb092164c4deda3841974ca935b6c4eb0d24d"
+    },
+    {
+      "path": "build/32/debug/test-test_eq_audio.exe",
+      "bytes": 6338922,
+      "sha256": "db248a21b5788d43198829457a42ed1e8439e0e141a183d31cc35ec9e719e420"
+    },
+    {
+      "path": "build/32/debug/test-test_eq_audit.exe",
+      "bytes": 6403741,
+      "sha256": "10baf1e544b7bd1bb2526c7ed55a98061167c054e57949cb2435d974d1708cf3"
+    },
+    {
+      "path": "build/32/debug/test-test_eq_filter.exe",
+      "bytes": 6502585,
+      "sha256": "d5d3841758e6f1e937fc8d61ada918998f10ced249a59859287232f5a7957f4b"
+    },
+    {
+      "path": "build/32/debug/test-test_eq_window.exe",
+      "bytes": 7785312,
+      "sha256": "8c8936916c245674c8a5827b825f1071ea8c65bb4d81d0f0c15c7cbb87b27e22"
+    },
+    {
+      "path": "build/32/debug/test-test_m3u.exe",
+      "bytes": 6585308,
+      "sha256": "1d96dc0bc935344341045e4e167eedc783f7b165c322dd4c57670329623d1a1b"
+    },
+    {
+      "path": "build/32/debug/test-test_playback.exe",
+      "bytes": 6391786,
+      "sha256": "dc4fe4fef377314c6b24514e6097a00d97ad9b2b95ef27a6026347ce710dc3cd"
+    },
+    {
+      "path": "build/32/debug/test-test_player_window.exe",
+      "bytes": 7783945,
+      "sha256": "26fd1690af6c9bc21ac07d37cd7e5f8e5761b2e4845f7c7a895f087c38f51304"
+    },
+    {
+      "path": "build/32/debug/test-test_playlist.exe",
+      "bytes": 6516329,
+      "sha256": "70741849ed75c9a587216fa2d47e016c4750aaaf54a8500eddf4c65b48a0c412"
+    },
+    {
+      "path": "build/32/debug/test-test_playlist_view.exe",
+      "bytes": 6395369,
+      "sha256": "5b5f67c62bd7384ab7388d8a8fc10127058c38901e4261d475a039e83740aac2"
+    },
+    {
+      "path": "build/32/debug/test-test_playlist_window.exe",
+      "bytes": 7805112,
+      "sha256": "473a2a0548356ff0e5e4922b42b059cedccd4a97dcd92b6d7602dc72693d1e28"
+    },
+    {
+      "path": "build/32/debug/test-test_playlist_worker.exe",
+      "bytes": 6514132,
+      "sha256": "b524bd35fb997dfe0b4c7ff36810768e04f12ad311935f6d76457547c20782a7"
+    },
+    {
+      "path": "build/32/debug/test-test_tags.exe",
+      "bytes": 6555443,
+      "sha256": "331c1f153a624d0342d67944853f2bb7e124996f6d31bb8128ec0214966ac295"
+    },
+    {
+      "path": "build/32/debug/test-test_themes.exe",
+      "bytes": 7922504,
+      "sha256": "cece417f86b4072b13dd2048b2cd87481f551f615d8481ddadd2586c0814d5c7"
+    },
+    {
+      "path": "build/32/debug/test-test_title_scroll.exe",
+      "bytes": 6294433,
+      "sha256": "6bd3a8840e583a78b190158d2c679ce94c8da54c9cc3c6d59a2068ab0467d901"
+    },
+    {
+      "path": "build/32/debug/test-test_ui_draw.exe",
+      "bytes": 6538639,
+      "sha256": "6a85db6eae4a45787102f843c4ab3ab5f808320999c43d634d1d7525c7923d41"
+    },
+    {
+      "path": "build/32/debug/test-test_window_snap.exe",
+      "bytes": 6314431,
+      "sha256": "a5ca8e03fc6478b3602c9aa6cb87b1c8127235ae859e3b38de85c4d8b8f153e4"
+    }
+  ],
+  "measured_probe_binaries": [
+    {
+      "path": "build/64/release/eq-probe.exe",
+      "bytes": 3790257,
+      "sha256": "54eec4ce1f2c45ac5240417a2054db2f2c3f1930db5ba48c73c63c2ab8943fc0"
+    },
+    {
+      "path": "build/32/release/eq-probe.exe",
+      "bytes": 3674028,
+      "sha256": "65fb6e6391bb810e5015dc0e78d78a0aa36952c7e821ba3a78b7c61c99a2fbd7"
+    }
+  ]
+}

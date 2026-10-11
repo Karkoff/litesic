@@ -2,12 +2,15 @@
 #include <cstdint>
 #include <string>
 #include <vector>
+#include "tags.h"
 
 struct Track {
     uint64_t id = 0;
     std::wstring path, displayTitle;
     double duration = -1;
     bool metadataPending = true, metadataLoaded = false, failed = false;
+    bool favorite = false;
+    TrackMetadata metadata;
 };
 
 bool IsSupportedAudioFile(const wchar_t* path);
@@ -29,8 +32,8 @@ public:
     int Count() const { return static_cast<int>(tracks_.size()); }
     int GetCurrentIndex() const { return Find(current_); }
     bool SetCurrentIndex(int index);
-    int Next(bool shuffle, bool repeat);
-    int Previous(bool shuffle = false, bool repeat = false);
+    int Next(bool shuffle, bool repeat, bool favoritesOnly = false);
+    int Previous(bool shuffle = false, bool repeat = false, bool favoritesOnly = false);
     int Find(uint64_t id) const;
     const Track* At(int index) const;
     Track* At(int index);

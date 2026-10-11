@@ -13,10 +13,13 @@ HBRUSH background=nullptr;
 float scale=1;
 Canvas canvas;
 bool scrollDragging=false;
+int scrollGrab=0;
 std::vector<size_t> visible;
 const wchar_t* groups[]={L"Todos",L"Essenciais",L"Sazonais",L"Comemorativos",L"Tecnológicos",L"Naturais",L"Clássicos"};
 int S(int value) { return static_cast<int>(value*scale+.5f); }
+void RefreshRail(){RECT r{S(498),S(80),S(508),S(374)};InvalidateRect(window,&r,FALSE);}
 void Rebuild() {
+    int top=static_cast<int>(SendMessageW(list,LB_GETTOPINDEX,0,0));
     if(background) DeleteObject(background);
     background=CreateSolidBrush(NativeColor(Surface));
     HFONT oldFont=font,oldSmall=small;
@@ -28,7 +31,8 @@ void Rebuild() {
     if(oldFont) DeleteObject(oldFont);
     if(oldSmall) DeleteObject(oldSmall);
     SendMessageW(list,LB_SETITEMHEIGHT,0,S(42));
-    InvalidateRect(window,nullptr,TRUE);InvalidateRect(list,nullptr,TRUE);
+    SendMessageW(list,LB_SETTOPINDEX,top,0);
+    InvalidateRect(window,nullptr,FALSE);InvalidateRect(list,nullptr,FALSE);
 }
 void Populate() {
     int group=static_cast<int>(SendMessageW(categories,CB_GETCURSEL,0,0));
@@ -48,8 +52,10 @@ void Apply(size_t index) {
 int Rows() { return 7; }
 void ScrollTo(int y) {
     int count=static_cast<int>(visible.size());
-    int top=std::clamp((y-S(80))*std::max(0,count-Rows())/S(294),0,std::max(0,count-Rows()));
-    SendMessageW(list,LB_SETTOPINDEX,top,0);InvalidateRect(window,nullptr,FALSE);
+    int thumb=count>Rows()?S(294)*Rows()/count:S(294);
+    int top=std::clamp((y-S(80)-scrollGrab)*std::max(0,count-Rows())/std::max(1,S(294)-thumb),0,std::max(0,count-Rows()));
+    if(top!=SendMessageW(list,LB_GETTOPINDEX,0,0))SendMessageW(list,LB_SETTOPINDEX,top,0);
+    RefreshRail();
 }
 LRESULT CALLBACK ButtonProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR,DWORD_PTR) {
     if(msg==WM_MOUSEMOVE) {
@@ -60,9 +66,12 @@ LRESULT CALLBACK ButtonProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR,DWOR
     return DefSubclassProc(hwnd,msg,wp,lp);
 }
 LRESULT CALLBACK ListProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR,DWORD_PTR) {
+    if(msg==WM_ERASEBKGND){RECT r{};GetClientRect(hwnd,&r);
+        r.top=std::min<int>(r.bottom,static_cast<int>(SendMessageW(hwnd,LB_GETCOUNT,0,0))*S(42));
+        FillRect(reinterpret_cast<HDC>(wp),&r,background);return 1;}
     if(msg==WM_NCDESTROY) RemoveWindowSubclass(hwnd,ListProc,1);
     LRESULT result=DefSubclassProc(hwnd,msg,wp,lp);
-    if(msg==WM_MOUSEWHEEL || msg==WM_KEYDOWN || msg==WM_LBUTTONUP) InvalidateRect(window,nullptr,FALSE);
+    if(msg==WM_MOUSEWHEEL || msg==WM_KEYDOWN || msg==WM_LBUTTONUP) RefreshRail();
     return result;
 }
 LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
@@ -88,14 +97,14 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         for(int id:{703,704,705,706}) SetWindowSubclass(GetDlgItem(hwnd,id),ButtonProc,1,0);
         Rebuild();Populate();return 0;
     case WM_THEME_CHANGED:
-        Rebuild();Populate();return 0;
+        Rebuild();return 0;
     case WM_COMMAND:
         if(LOWORD(wp)==701 && HIWORD(wp)==CBN_SELCHANGE) Populate();
         if(LOWORD(wp)==702 && HIWORD(wp)==LBN_SELCHANGE) {
             int row=static_cast<int>(SendMessageW(list,LB_GETCURSEL,0,0));
             if(row>=0 && static_cast<size_t>(row)<visible.size()) Apply(visible[row]);
         }
-        if(LOWORD(wp)==703) {SendMessageW(categories,CB_SETCURSEL,0,0);Apply(0);Populate();}
+        if(LOWORD(wp)==703) Apply(0);
         if(LOWORD(wp)==704 || LOWORD(wp)==705) DestroyWindow(hwnd);
         if(LOWORD(wp)==706) {
             HMENU menu=CreatePopupMenu();
@@ -155,7 +164,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         HBRUSH brush=CreateSolidBrush(NativeColor(Background));FillRect(dc,&r,brush);DeleteObject(brush);
         RECT title{0,0,r.right,S(32)};brush=CreateSolidBrush(NativeColor(Border));FillRect(dc,&title,brush);DeleteObject(brush);
         auto oldFont=SelectObject(dc,font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,NativeColor(Text));title.left=S(12);title.right-=S(40);
-        DrawTextW(dc,L"LITESIC · TEMAS",-1,&title,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);SelectObject(dc,oldFont);
+        DrawTextW(dc,L"TEMAS",-1,&title,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);SelectObject(dc,oldFont);
         RECT rail{S(498),S(80),S(508),S(374)};brush=CreateSolidBrush(NativeColor(palette.sliderTrack));FillRect(dc,&rail,brush);DeleteObject(brush);
         int count=static_cast<int>(visible.size()),top=static_cast<int>(SendMessageW(list,LB_GETTOPINDEX,0,0));
         if(count>Rows()) {int h=S(294)*Rows()/count;rail.top+=(S(294)-h)*top/(count-Rows());rail.bottom=rail.top+h;
@@ -163,7 +172,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         if(canvas.Begin(dc,r,scale)) {
             canvas.Fill({0,0,r.right/scale,r.bottom/scale},Background);
             canvas.Fill({0,0,r.right/scale,32},Border);
-            canvas.TextAt({12,0,460,32},L"LITESIC · TEMAS",Text,Font::Heading);
+            canvas.TextAt({12,0,460,32},L"TEMAS",Text,Font::Heading);
             canvas.Fill({498,80,10,294},palette.sliderTrack,3);
             if(count>Rows()) {float h=294.f*Rows()/count;canvas.Fill({498,80+(294-h)*top/(count-Rows()),10,h},Bronze,3);}
             canvas.End();
@@ -177,7 +186,11 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
     }
     case WM_LBUTTONDOWN:
         if(GET_X_LPARAM(lp)>=S(496) && GET_Y_LPARAM(lp)>=S(80) && GET_Y_LPARAM(lp)<S(374)) {
-            scrollDragging=true;SetCapture(hwnd);ScrollTo(GET_Y_LPARAM(lp));
+            int count=static_cast<int>(visible.size()),thumb=count>Rows()?S(294)*Rows()/count:S(294);
+            int top=static_cast<int>(SendMessageW(list,LB_GETTOPINDEX,0,0));
+            int thumbTop=S(80)+(S(294)-thumb)*top/std::max(1,count-Rows());
+            int y=GET_Y_LPARAM(lp);scrollGrab=y>=thumbTop&&y<thumbTop+thumb?y-thumbTop:thumb/2;
+            scrollDragging=true;SetCapture(hwnd);ScrollTo(y);
         } return 0;
     case WM_MOUSEMOVE: if(scrollDragging) ScrollTo(GET_Y_LPARAM(lp));return 0;
     case WM_LBUTTONUP: scrollDragging=false;if(GetCapture()==hwnd) ReleaseCapture();return 0;
@@ -185,7 +198,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
     case WM_KEYDOWN: if(wp==VK_ESCAPE) DestroyWindow(hwnd);return 0;
     case WM_CLOSE: DestroyWindow(hwnd);return 0;
     case WM_DESTROY:
-        canvas.DiscardTarget();DeleteObject(font);DeleteObject(small);DeleteObject(background);font=small=nullptr;background=nullptr;
+        canvas.Reset();DeleteObject(font);DeleteObject(small);DeleteObject(background);font=small=nullptr;background=nullptr;
         window=list=categories=nullptr;return 0;
     }
     return DefWindowProcW(hwnd,msg,wp,lp);
@@ -198,9 +211,9 @@ void ShowThemes(HWND owner) {
     cls.lpszClassName=L"LiteSic.ThemesWnd";cls.hCursor=LoadCursorW(nullptr,IDC_ARROW);
     if(!RegisterClassW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) return;
     RECT parent{};GetWindowRect(owner,&parent);
-    RECT r{0,0,S(520),S(430)};DWORD style=WS_POPUP;
+    RECT r{0,0,S(520),S(430)};DWORD style=WS_POPUP|WS_CLIPCHILDREN;
     AdjustWindowRectEx(&r,style,FALSE,WS_EX_TOOLWINDOW);
-    CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,L"LiteSic — Aparência — Temas",style|WS_VISIBLE,
+    CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,L"Temas",style|WS_VISIBLE,
         parent.left,parent.top,r.right-r.left,r.bottom-r.top,owner,nullptr,cls.hInstance,nullptr);
 }
 bool ThemeDialogMessage(MSG* message) {

@@ -6,12 +6,14 @@
 namespace Ui {
 template<class T> static void Release(T*& p) { if (p) { p->Release(); p = nullptr; } }
 static D2D1_RECT_F Native(Rect r) { return D2D1::RectF(r.x,r.y,r.x+r.w,r.y+r.h); }
-Canvas::~Canvas() {
+Canvas::~Canvas() { Reset(); }
+void Canvas::Reset() {
     Release(scrollLayout_);
     DiscardTarget();
     for (auto& p : ellipsis_) Release(p);
     for (auto& p : fonts_) Release(p);
     Release(write_); Release(factory_);
+    themeGeneration_=0;
 }
 bool Canvas::Initialize() {
     if (!factory_ && FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED,&factory_))) return false;
@@ -24,8 +26,9 @@ bool Canvas::Initialize() {
         themeGeneration_=ThemeGeneration();
     }
     const auto& typography=ActiveTheme().typography;
-    for (int i=0;i<4;++i) if (!fonts_[i]) {
-        const wchar_t* family=i==3?typography.digital:typography.body;
+    for (int i=0;i<8;++i) if (!fonts_[i]) {
+        int role=i%4;
+        const wchar_t* family=role==3?typography.digital:typography.body;
         IDWriteFontCollection* collection=nullptr;
         if(SUCCEEDED(write_->GetSystemFontCollection(&collection,FALSE))) {
             UINT32 index=0;BOOL exists=FALSE;collection->FindFamilyName(family,&index,&exists);
@@ -33,9 +36,9 @@ bool Canvas::Initialize() {
             collection->Release();
         }
         if (FAILED(write_->CreateTextFormat(family,nullptr,
-            static_cast<DWRITE_FONT_WEIGHT>(typography.weights[i]),
-            i==2 && typography.italicHeading?DWRITE_FONT_STYLE_ITALIC:DWRITE_FONT_STYLE_NORMAL,
-            DWRITE_FONT_STRETCH_NORMAL,typography.sizes[i],L"pt-BR",&fonts_[i]))) return false;
+            static_cast<DWRITE_FONT_WEIGHT>(i>=4?700:typography.weights[role]),
+            role==2 && typography.italicHeading?DWRITE_FONT_STYLE_ITALIC:DWRITE_FONT_STYLE_NORMAL,
+            DWRITE_FONT_STRETCH_NORMAL,typography.sizes[role],L"pt-BR",&fonts_[i]))) return false;
         fonts_[i]->SetWordWrapping(DWRITE_WORD_WRAPPING_NO_WRAP);
         fonts_[i]->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
         DWRITE_TRIMMING trim{DWRITE_TRIMMING_GRANULARITY_CHARACTER,0,0};
@@ -82,9 +85,9 @@ void Canvas::Circle(float x,float y,float radius,uint32_t fill,uint32_t border) 
     auto e=D2D1::Ellipse(D2D1::Point2F(x,y),radius,radius);
     Color(fill); target_->FillEllipse(e,brush_); Color(border); target_->DrawEllipse(e,brush_);
 }
-void Canvas::TextAt(Rect r,const std::wstring& text,uint32_t color,Font font,bool center) {
+void Canvas::TextAt(Rect r,const std::wstring& text,uint32_t color,Font font,bool center,bool bold) {
     if (r.w<=0 || r.h<=0) return;
-    auto format=fonts_[static_cast<int>(font)];
+    auto format=fonts_[static_cast<int>(font)+(bold?4:0)];
     format->SetTextAlignment(center?DWRITE_TEXT_ALIGNMENT_CENTER:DWRITE_TEXT_ALIGNMENT_LEADING);
     Color(color); target_->DrawText(text.c_str(),static_cast<UINT32>(text.size()),format,Native(r),brush_,D2D1_DRAW_TEXT_OPTIONS_CLIP);
 }
@@ -110,9 +113,9 @@ bool Canvas::ScrollingText(Rect r,const std::wstring& text,double elapsedMs,uint
     Unclip();return overflow>.5f;
 }
 void Canvas::Button(Rect r,const std::wstring& text,bool active,bool hover,bool pressed,bool enabled,bool focus) {
-    Fill(r,!enabled?Surface:pressed?palette.pressed:active?Active:hover?Hover:Surface,3);
+    Fill(r,!enabled?Surface:active?SelectedButtonFill():pressed?palette.pressed:hover?Hover:Surface,3);
     Stroke(r,focus?Accent:active?Green:Border,3);
-    TextAt(r,text,enabled?(active?Green:Text):Muted,Font::Body,true);
+    TextAt(r,text,enabled?(active?SelectedButtonText:Text):Muted,Font::Body,true);
 }
 void Canvas::Slider(Rect r,float value,bool enabled,bool focus) {
     value=std::isfinite(value)?std::max(0.f,std::min(value,1.f)):0;
