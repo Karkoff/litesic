@@ -17,11 +17,12 @@ Ui::Rect PlayerControlRect(int id) {
     case 12:return {BTN_EQ_X,FOOTER_BUTTON_Y,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
     case 13:return {364,VIZ_Y,40,20};
     case 14:return {408,VIZ_Y,40,20};
+    case 16:return {276,FOOTER_BUTTON_Y,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
     default:return {0,0,0,0};
     }
 }
 int PlayerControlAt(float x,float y) {
-    for(int i=1;i<=14;++i) if(PlayerControlRect(i).Contains(x,y)) return i;
+    for(int i=1;i<=16;++i) if(PlayerControlRect(i).Contains(x,y)) return i;
     return 0;
 }
 static void Triangle(Ui::Canvas& c,float x,float y,float direction,uint32_t color) {
@@ -90,16 +91,18 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
     c.TextAt({306,VOLPAN_Y,12,VOLPAN_H},L"L",Muted,Font::Small);
     c.Slider(PlayerControlRect(10),s.pan,true,s.focus==10);
     c.TextAt({440,VOLPAN_Y,12,VOLPAN_H},L"R",Muted,Font::Small);
-    DrawVisualizerD2D(c,{VIZ_X,VIZ_Y,VIZ_W,VIZ_H},s.visualization);
-    c.Button(PlayerControlRect(13),L"FFT",s.visualization==VIZ_MODE_SPECTRUM,s.hover==13,false,true,s.focus==13);
-    c.Button(PlayerControlRect(14),L"OSC",s.visualization==VIZ_MODE_OSCILLOSCOPE,s.hover==14,false,true,s.focus==14);
-    c.TextAt({12,266,316,22},s.technical,Muted,Font::Small);
-    for(int id : {11,12}) {
+    if(s.visualizerVisible) {
+        DrawVisualizerD2D(c,{VIZ_X,VIZ_Y,VIZ_W,VIZ_H},s.visualization);
+        c.Button(PlayerControlRect(13),L"FFT",s.visualization==VIZ_MODE_SPECTRUM,s.hover==13,false,true,s.focus==13);
+        c.Button(PlayerControlRect(14),L"OSC",s.visualization==VIZ_MODE_OSCILLOSCOPE,s.hover==14,false,true,s.focus==14);
+    }
+    c.TextAt({12,266,256,22},s.technical,Muted,Font::Small);
+    for(int id : {16,11,12}) {
         auto r=PlayerControlRect(id);
-        bool active=id==11 && s.playlistVisible;
+        bool active=(id==11 && s.playlistVisible) || (id==16 && s.visualizerVisible);
         c.Fill(r,s.pressed==id?Border:s.hover==id?Hover:active?Active:Surface,3);
         c.Stroke(r,s.focus==id?Accent:active?Green:Bronze,3);
-        c.TextAt(r,id==11?L"LISTA":L"EQ …",id==12?Muted:Text,Font::Small,true);
+        c.TextAt(r,id==16?L"VIZ":id==11?L"LISTA":L"EQ …",id==12?Muted:Text,Font::Small,true);
     }
     return c.End();
 }

@@ -10,12 +10,22 @@ static void Click(int id) {
     auto r=PlayerControlRect(id); LPARAM p=Point(r.x+r.w/2,r.y+r.h/2);
     SendMessageW(window,WM_LBUTTONDOWN,MK_LBUTTON,p);SendMessageW(window,WM_LBUTTONUP,0,p);
 }
+static COLORREF VizPixel() {
+    RECT r{};GetClientRect(window,&r);HDC screen=GetDC(window),dc=CreateCompatibleDC(screen);
+    HBITMAP bitmap=CreateCompatibleBitmap(screen,r.right,r.bottom);auto old=SelectObject(dc,bitmap);
+    CHECK(PrintWindow(window,dc,0));COLORREF color=GetPixel(dc,MainWnd_DPIScale(20),MainWnd_DPIScale(230));
+    SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);ReleaseDC(window,screen);return color;
+}
 static void transport_and_seek_use_real_audio() {
     CHECK(Audio_TestInit(48000));
     PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
     CHECK(PlayerPlayback().PlayIndex(0)); Click(7);
     Click(5); CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
     Click(6); CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
+    ShowWindow(window,SW_SHOWNOACTIVATE);
+    COLORREF visible=VizPixel();CHECK(visible!=Ui::NativeColor(Ui::Background));
+    Click(16);CHECK(VizPixel()==Ui::NativeColor(Ui::Background));CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
+    Click(16);CHECK(VizPixel()==visible);CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
     SendMessageW(window,WM_LBUTTONDOWN,MK_LBUTTON,Point(SEEK_X+SEEK_W/2,SEEK_Y+10));
     SendMessageW(window,WM_LBUTTONUP,0,Point(SEEK_X+SEEK_W/2,SEEK_Y+10));
     CHECK(std::abs(Audio_GetPositionSeconds()-1)<.02);

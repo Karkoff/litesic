@@ -212,10 +212,11 @@ static int g_controlHover=0, g_controlPressed=0, g_controlFocus=0;
 static HWND g_tooltip=nullptr;
 static std::wstring g_tooltipTitle;
 static bool g_playbackError=false;
+static bool g_visualizerVisible=true;
 
 static void UpdateTooltipRects(HWND hwnd) {
     if(!g_tooltip) return;
-    for(int id=1;id<=15;++id) {
+    for(int id=1;id<=16;++id) {
         auto r=id==15?Ui::Rect{TITLE_X,TITLE_Y,TITLE_W,TITLE_H}:PlayerControlRect(id);
         TOOLINFOW tool{}; tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;
         tool.rect={MainWnd_DPIScale(static_cast<int>(r.x)),MainWnd_DPIScale(static_cast<int>(r.y)),
@@ -229,8 +230,8 @@ static void CreatePlayerTooltips(HWND hwnd) {
         CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,hwnd,nullptr,GetModuleHandleW(nullptr),nullptr);
     const wchar_t* labels[]={L"",L"Anterior",L"Próximo",L"Aleatório",L"Repetir: desligado → lista → faixa",
         L"Reproduzir",L"Pausar",L"Parar",L"Posição da faixa",L"Volume",L"Balanço: esquerda / direita",
-        L"Mostrar / ocultar playlist",L"Equalizador indisponível: DSP pendente na M6",L"Espectro FFT",L"Osciloscópio"};
-    for(int id=1;id<=15;++id) {
+        L"Mostrar / ocultar playlist",L"Equalizador indisponível: DSP pendente na M6",L"Espectro FFT",L"Osciloscópio",L"",L"Mostrar / ocultar visualizador"};
+    for(int id=1;id<=16;++id) {
         TOOLINFOW tool{};tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;tool.uFlags=TTF_SUBCLASS;
         tool.lpszText=id==15?LPSTR_TEXTCALLBACKW:const_cast<wchar_t*>(labels[id]);
         SendMessageW(g_tooltip,TTM_ADDTOOLW,0,reinterpret_cast<LPARAM>(&tool));
@@ -660,6 +661,7 @@ static void ExecutePlayerControl(HWND hwnd,int id) {
     case 12: EqWnd_Toggle(hwnd); break;
     case 13: g_vizMode=VIZ_MODE_SPECTRUM; break;
     case 14: g_vizMode=VIZ_MODE_OSCILLOSCOPE; break;
+    case 16: g_visualizerVisible=!g_visualizerVisible; break;
     }
 }
 
@@ -667,6 +669,7 @@ static PlayerViewState PlayerSnapshot() {
     PlayerViewState s;
     s.loaded=Audio_HasTrack(); s.playback=Audio_GetState();
     s.shuffle=g_shuffleOn; s.repeat=g_repeatMode; s.visualization=g_vizMode;
+    s.visualizerVisible=g_visualizerVisible;
     s.seek=g_seekValue; s.volume=g_volumeValue; s.pan=g_panValue;
     s.hover=g_controlHover; s.pressed=g_controlPressed; s.focus=g_controlFocus;
     s.titleHover=g_hoverBtn; s.titlePressed=g_pressedBtn;
@@ -727,7 +730,7 @@ static BOOL PtInPanSlider(int x, int y)
 static BOOL PtInVizArea(int x, int y)
 {
     RECT r = { VIZ_X, VIZ_Y, VIZ_X + VIZ_W, VIZ_Y + VIZ_H };
-    return PtInRect(&r, (POINT){ x, y });
+    return g_visualizerVisible && PtInRect(&r, (POINT){ x, y });
 }
 
 /* ------------------------------------------------------------------ */
@@ -797,10 +800,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
     case WM_KEYDOWN: {
-        const int order[]={1,5,6,7,2,8,9,10,3,4,11,12,13,14};
+        const int order[]={1,5,6,7,2,8,9,10,3,4,16,11,12,13,14};
         if(wParam==VK_TAB) {
             int next=0;
-            for(int i=0;i<14;++i) if(order[i]==g_controlFocus) next=(i+((GetKeyState(VK_SHIFT)&0x8000)?13:1))%14;
+            for(int i=0;i<15;++i) if(order[i]==g_controlFocus) next=(i+((GetKeyState(VK_SHIFT)&0x8000)?14:1))%15;
+            if(!g_visualizerVisible) while(order[next]==13 || order[next]==14) next=(next+((GetKeyState(VK_SHIFT)&0x8000)?14:1))%15;
             g_controlFocus=order[next]; InvalidateRect(hwnd,nullptr,FALSE); return 0;
         }
         if(wParam==VK_SPACE || wParam==VK_RETURN) {
@@ -845,7 +849,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         }
         else if (wParam == VIZ_TIMER_ID)
         {
-            if (Audio_GetState() == AUDIO_STATE_PLAYING && IsWindowVisible(hwnd) && !IsIconic(hwnd))
+            if (g_visualizerVisible && Audio_GetState() == AUDIO_STATE_PLAYING && IsWindowVisible(hwnd) && !IsIconic(hwnd))
             {
                 RECT vizRect = {
                     MainWnd_DPIScale(VIZ_X), MainWnd_DPIScale(VIZ_Y),
@@ -879,6 +883,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
         SetFocus(hwnd);
         int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my));
+        if(!g_visualizerVisible && (control==13 || control==14)) control=0;
         g_controlFocus=control;
         if(control && (control<8 || control>10)) {
             g_controlPressed=control; SetCapture(hwnd);
@@ -957,6 +962,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
         int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my));
+        if(!g_visualizerVisible && (control==13 || control==14)) control=0;
         if(control!=g_controlHover) { g_controlHover=control; InvalidateRect(hwnd,nullptr,FALSE); }
         TRACKMOUSEEVENT tracking{sizeof(tracking),TME_LEAVE,hwnd,0}; TrackMouseEvent(&tracking);
 
@@ -1288,7 +1294,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         /* ------------------------------------------------------------------
          * Visualizador — M4-T2 (osciloscópio) / M4-T3 (espectro).
          * ------------------------------------------------------------------ */
-        {
+        if(g_visualizerVisible) {
             int vizX = MainWnd_DPIScale(VIZ_X);
             int vizY = MainWnd_DPIScale(VIZ_Y);
             int vizW = MainWnd_DPIScale(VIZ_W);
@@ -1304,6 +1310,17 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             }
         }
 
+        // Footer controls remain available in the GDI fallback.
+        SetBkMode(memDC,TRANSPARENT);SetTextColor(memDC,Ui::NativeColor(Ui::Text));
+        for(int id:{16,11,12}) {
+            auto button=PlayerControlRect(id);
+            RECT rect{MainWnd_DPIScale(static_cast<int>(button.x)),MainWnd_DPIScale(static_cast<int>(button.y)),
+                MainWnd_DPIScale(static_cast<int>(button.x+button.w)),MainWnd_DPIScale(static_cast<int>(button.y+button.h))};
+            bool active=(id==16 && g_visualizerVisible) || (id==11 && PlWnd_IsVisible());
+            HBRUSH brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Active:Ui::Surface));FillRect(memDC,&rect,brush);DeleteObject(brush);
+            brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Green:Ui::Bronze));FrameRect(memDC,&rect,brush);DeleteObject(brush);
+            DrawTextW(memDC,id==16?L"VIZ":id==11?L"LISTA":L"EQ ...",-1,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
+        }
         /* Copiar buffer para a tela. */
         BitBlt(hdc, 0, 0, scaledW, scaledH, memDC, 0, 0, SRCCOPY);
 

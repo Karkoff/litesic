@@ -62,7 +62,7 @@ O produto prevê três janelas independentes:
 | **Interface** | Player e playlist sem borda; playlist redimensionável e com encaixe magnético ao player |
 | **Repetição** | Desligada → lista (`REP`) → faixa atual (`REP 1`); Anterior/Próximo continuam navegando |
 | **Playlist** | Arquivos/pastas, seleção múltipla, arraste para reordenar, ordenação, M3U, tags em background e recuperação automática ao reabrir |
-| **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica |
+| **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica; botão **VIZ** ao lado de LISTA/EQ para ocultar ou mostrar |
 | **Equalizador** | Planejado para M6: 10 bandas, pré-amp e presets |
 | **Compatibilidade** | Alvo Windows 7–11, x86/x64; validação Win7 pendente na M9 |
 | **DPI** | Suporte a alta densidade de pixels |

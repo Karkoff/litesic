@@ -8,6 +8,7 @@
 struct PlayerViewState {
     std::wstring title, subtitle, technical, time, duration;
     bool loaded = false, shuffle = false, playlistVisible = false, hasPlaylist = false;
+    bool visualizerVisible = true;
     AudioState playback = AUDIO_STATE_STOPPED;
     RepeatMode repeat = RepeatMode::Off;
     VizMode visualization = VIZ_MODE_OSCILLOSCOPE;
