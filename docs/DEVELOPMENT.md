@@ -1,5 +1,19 @@
 # Ambiente de desenvolvimento Windows
 
+## Build solicitada pelo usuário
+
+Por preferência permanente registrada em 11/10/2026, todo pedido de build
+gera **Release x64 e x86**, salvo instrução explícita em contrário:
+
+```powershell
+./scripts/dev.ps1 -Action build -Architecture 64
+./scripts/dev.ps1 -Action build -Architecture 32
+```
+
+Executáveis: `build/64/release/LiteSic.exe` e
+`build/32/release/LiteSic.exe`. Builds Debug são adicionais e não substituem
+essas entregas. Ver a regra em [AGENT.md](../AGENT.md).
+
 ## Auditoria integrada M6 — 11/10/2026
 
 Estado atual: **M6 COMPLETE**, após aceite final informado pelo usuário.

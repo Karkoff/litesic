@@ -35,6 +35,12 @@ Ver [decisão M9](docs/M9-CLOSEOUT-2026-10-11.md).
   versão maior do Windows é proibida, a menos que tenha fallback.
 - **Build**: `Makefile` + tasks do VS Code (`Ctrl+Shift+B`). Comandos:
   `make`, `make DEBUG=1`, `make ARCH=32`, `make clean`.
+- **Preferência permanente de build (11/10/2026):** sempre que o usuário
+  pedir uma build, gerar as duas versões **Release x64 e x86**, com
+  `make ARCH=64 DEBUG=0` e `make ARCH=32 DEBUG=0`. Debug é adicional quando
+  solicitado ou necessário ao diagnóstico; não substitui as releases.
+  Entregar os caminhos dos dois executáveis. Uma instrução explícita
+  posterior do usuário pode limitar as arquiteturas daquela execução.
 
 ## Regras de código (não negociáveis)
 
