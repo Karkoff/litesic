@@ -144,6 +144,8 @@ bool LoadEqualizerPosition(PanelPosition& position) {
     if(!read(L"Version",1,1,version)||!read(L"Left",-100000,100000,saved.left)||
        !read(L"Top",-100000,100000,saved.top)||!read(L"Dock",0,4,saved.side)||
        !read(L"Anchor",0,2,saved.anchor))return false;
+    saved.parent=static_cast<int>(GetPrivateProfileIntW(L"EqualizerWindow",L"Parent",0,path.c_str()));
+    if(saved.parent<0||saved.parent>1)return false;
     position=saved;return true;
 }
 bool SaveEqualizerPosition(const PanelPosition& position) {
@@ -151,7 +153,7 @@ bool SaveEqualizerPosition(const PanelPosition& position) {
     std::wstring data;
     auto add=[&](const wchar_t* key,int value){data+=std::wstring(key)+L"="+std::to_wstring(value)+L'\0';};
     add(L"Version",1);add(L"Left",position.left);add(L"Top",position.top);
-    add(L"Dock",position.side);add(L"Anchor",position.anchor);data+=L'\0';
+    add(L"Dock",position.side);add(L"Anchor",position.anchor);add(L"Parent",position.parent);data+=L'\0';
     return WritePrivateProfileSectionW(L"EqualizerWindow",data.c_str(),path.c_str())!=FALSE;
 }
 void ThemeConfigure(const wchar_t* iniPath) {

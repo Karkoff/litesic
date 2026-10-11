@@ -5,7 +5,15 @@ O usuário informou aprovação visual, audível, funcional, de uso prolongado
 e do comportamento geral após os ajustes. Esse aceite final substitui
 READY_FOR_HUMAN_ACCEPTANCE. [Encerramento e validação final](docs/M6-CLOSEOUT-2026-10-11.md).
 M0–M5: COMPLETE. M9: COMPLETE, conforme decisão preservada abaixo.
-Próxima milestone: **M7 — Integração das Janelas**, não iniciada nesta execução.
+**M7 — Integração das Janelas: COMPLETE (11/10/2026).**
+Aceite humano final concedido pelo usuário: **“TUDO PASS”**.
+[Encerramento formal](docs/M7-CLOSEOUT-2026-10-11.md). [Validação M7](docs/M7-INTEGRATED-VALIDATION.md) e
+[auditoria do roadmap](docs/ROADMAP-IMPLEMENTATION-AUDIT.md).
+Complemento aprovado: [compactação de painéis ocultos](docs/M7-VISIBILITY-COMPACTION.md),
+com restauração da formação ao reabrir e prioridade ao arraste manual.
+Próxima milestone: **M8 — Acabamento**, aberta, incluindo internacionalização
+integral em 18 idiomas, seleção automática/manual e tooltips multilíngues.
+M10 continua aberta, com distribuição limpa e reproduzível planejada.
 A auditoria e suas evidências anteriores permanecem como histórico.
 
 Correção de reprodução em 11/10/2026: duração MP3 armazenada antes de tocar,

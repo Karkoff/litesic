@@ -21,10 +21,10 @@ próxima.
 | M4 | [docs/milestones/M4.md](milestones/M4.md) | Visualizador: espectro FFT + osciloscópio | sim (validada) |
 | M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background — COMPLETE, checkpoint manual PASS | sim |
 | M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador real — COMPLETE, aceite final visual, audível e funcional informado pelo usuário | sim |
-| M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: snap/dock entre janelas, mostrar/ocultar EQ/PL | sim |
-| M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos estilo Winamp, teclas de mídia, always-on-top, instância única, persistência | sim |
+| M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: pares completos, movimento transitivo e compactação — COMPLETE, aceite humano TUDO PASS | sim |
+| M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos, mídia, always-on-top, instância única, persistência, DPI/zoom, 18 idiomas e tooltips — aberta | sim |
 | M9 | [docs/milestones/M9.md](milestones/M9.md) | Compatibilidade — COMPLETE por decisão explícita; Windows 11 confirmado; testes Windows 7/8/8.1/10 e x86/x64 pendentes, não bloqueantes | encerrada por decisão |
-| M10 | [docs/milestones/M10.md](milestones/M10.md) | Distribuição: builds 32/64, zip portátil, instalador Inno Setup | build final |
+| M10 | [docs/milestones/M10.md](milestones/M10.md) | Distribuição: builds 32/64, pacote limpo reproduzível, portátil e instalador opcional — aberta | build final |
 
 ## M9 — encerramento por decisão do usuário
 
@@ -53,8 +53,12 @@ prolongado da M6 em 11/10/2026, substituindo READY_FOR_HUMAN_ACCEPTANCE.
 [Encerramento e validação final](M6-CLOSEOUT-2026-10-11.md).
 A [auditoria sobre a35c993](M6-INTEGRATED-VALIDATION-2026-10-11.md) mantém
 suas medições e pendências históricas, sem atribuir medições ao aceite humano.
-**M7 — Integração das Janelas** é a próxima milestone; sua implementação
-não foi iniciada nesta execução.
+**M7 — Integração das Janelas: COMPLETE**, com aceite humano final
+**“TUDO PASS”** concedido pelo usuário em 11/10/2026.
+[Encerramento formal e testes atuais](M7-CLOSEOUT-2026-10-11.md).
+Ver [validação M7](M7-INTEGRATED-VALIDATION.md) e
+[matriz de requisitos, com baseline histórico de 48 tarefas](ROADMAP-IMPLEMENTATION-AUDIT.md).
+M8 é a próxima milestone com trabalho residual; não foi implementada neste ciclo.
 
 As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
 Direct2D/DirectWrite; pesquisa preserva índices canônicos e docking da M5.
@@ -79,6 +83,22 @@ registro individual dos 36 temas. M5 funcional mantém seu aceite anterior. M6 i
 Complemento entregue: seleção primária restaurada ao reabrir, comandos da
 playlist no rodapé, dropdown Adicionar e seletor/menus com tema compartilhado.
 [Relatório e nova validação nas quatro variantes](PLAYLIST-UI-2026-10-11.md).
+
+## Auditoria das entregas antecipadas — 11/10/2026
+
+M8 permanece aberta: zoom/DPI e persistência parcial já existem; faltam
+atalhos globais, teclas de mídia, sempre no topo, instância única e conclusão
+da persistência/modo portátil. Acrescentados M8-T6…T8: internacionalização
+integral em 18 idiomas, detecção Windows/manual, troca ao vivo e tooltips.
+[Escopo e aceitação detalhados](M8-I18N-REQUIREMENTS.md).
+M10 permanece aberta: builds existem, mas
+reprodutibilidade formal, zips portáteis e eventual instalador não foram
+concluídos. M10-T2 exige separar build interno e distribuição, somente
+LiteSic.exe na raiz, recursos/locales/licenças/dados necessários em subpastas,
+validação do pacote e execução final portátil/instalada. Ver [M10](milestones/M10.md).
+M9 continua COMPLETE por decisão anterior; os ensaios físicos
+pendentes não foram inventados nem executados neste ciclo.
+Detalhes por tarefa na [auditoria](ROADMAP-IMPLEMENTATION-AUDIT.md).
 
 ## Futuro (fora do roadmap atual)
 

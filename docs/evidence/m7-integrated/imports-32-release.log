@@ -1,0 +1,10 @@
+﻿DLL Name: COMCTL32.dll
+DLL Name: COMDLG32.DLL
+DLL Name: d2d1.dll
+DLL Name: DWrite.dll
+DLL Name: GDI32.dll
+DLL Name: KERNEL32.dll
+DLL Name: msvcrt.dll
+DLL Name: ole32.dll
+DLL Name: SHELL32.dll
+DLL Name: USER32.dll

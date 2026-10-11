@@ -1,0 +1,54 @@
+ M .gitignore
+ M Makefile
+ M PROJECT_STATE.md
+ M README.md
+ M docs/GUI-AUTOMATION.md
+ M docs/ROADMAP.md
+ M docs/evidence/.gitattributes
+ M docs/milestones/M10.md
+ M docs/milestones/M7.md
+ M docs/milestones/M8.md
+ M src/eqwnd.cpp
+ M src/mainwnd.cpp
+ M src/plwnd.cpp
+ M src/ui_theme.cpp
+ M src/ui_theme.h
+ M src/window_snap.h
+ M tests/test_appearance.cpp
+ M tests/test_window_snap.cpp
+?? docs/M7-INTEGRATED-VALIDATION.md
+?? docs/ROADMAP-IMPLEMENTATION-AUDIT.md
+?? docs/evidence/m7-integrated/baseline-64-release.log
+?? docs/evidence/m7-integrated/changes.txt
+?? docs/evidence/m7-integrated/final-32-debug.log
+?? docs/evidence/m7-integrated/final-32-release.log
+?? docs/evidence/m7-integrated/final-64-debug.log
+?? docs/evidence/m7-integrated/final-64-release.log
+?? docs/evidence/m7-integrated/gui-events.jsonl
+?? docs/evidence/m7-integrated/gui-guards.log
+?? docs/evidence/m7-integrated/imports-32-release.log
+?? docs/evidence/m7-integrated/imports-64-release.log
+?? docs/evidence/m7-integrated/isolated-playlist.m3u8
+?? docs/evidence/m7-integrated/isolated-playlist.m3u8.ini
+?? docs/evidence/m7-integrated/isolated-settings.ini
+?? docs/evidence/m7-integrated/m7-chain-eq-moved.png
+?? docs/evidence/m7-integrated/m7-chain-main-before.png
+?? docs/evidence/m7-integrated/m7-chain-main-moved.png
+?? docs/evidence/m7-integrated/m7-chain-playlist-moved.png
+?? docs/evidence/m7-integrated/m7-drag-interrupted-eq.png
+?? docs/evidence/m7-integrated/m7-eq-detached.png
+?? docs/evidence/m7-integrated/m7-eq-hidden.png
+?? docs/evidence/m7-integrated/m7-eq-open.png
+?? docs/evidence/m7-integrated/m7-eq-shown.png
+?? docs/evidence/m7-integrated/m7-horizontal-detach.png
+?? docs/evidence/m7-integrated/m7-horizontal-reattach.png
+?? docs/evidence/m7-integrated/m7-initial.png
+?? docs/evidence/m7-integrated/m7-pl-hidden.png
+?? docs/evidence/m7-integrated/m7-pl-shown.png
+?? docs/evidence/m7-integrated/m7-restarted-eq.png
+?? docs/evidence/m7-integrated/m7-restarted-playlist.png
+?? docs/evidence/m7-integrated/m7-restarted.png
+?? docs/evidence/m7-integrated/manifest.json
+?? src/skin.cpp
+?? src/skin.h
+?? tests/test_window_integration.cpp

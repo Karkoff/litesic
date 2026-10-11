@@ -61,6 +61,10 @@ static void equalizer_position_roundtrip_and_validation(){
         Ui::ThemeConfigure(ini.c_str());CHECK(Ui::LoadEqualizerPosition(actual));
         CHECK(actual.left==-200&&actual.top==300&&actual.side==side&&actual.anchor==anchor);
     }
+    CHECK(Ui::SaveEqualizerPosition({-200,300,4,2,1}));CHECK(Ui::LoadEqualizerPosition(actual));CHECK(actual.parent==1);
+    CHECK(WritePrivateProfileStringW(L"EqualizerWindow",L"Parent",nullptr,ini.c_str()));
+    CHECK(Ui::LoadEqualizerPosition(actual));CHECK(actual.parent==0); // Legacy INI attaches to player.
+    CHECK(WritePrivateProfileStringW(L"EqualizerWindow",L"Parent",L"2",ini.c_str()));CHECK(!Ui::LoadEqualizerPosition(actual));
     for(auto key:{L"Version",L"Left",L"Top",L"Dock",L"Anchor"})for(auto value:{L"garbage",L"999999999999999999999",L""}){
         CHECK(Ui::SaveEqualizerPosition({-200,300,4,2}));
         CHECK(WritePrivateProfileStringW(L"EqualizerWindow",key,value,ini.c_str()));

@@ -1,0 +1,199 @@
+{
+  "date": "2026-10-11",
+  "branch": "master",
+  "head": "82d28ce20146e6da8fd0a6289da8c151969d6db1",
+  "status": "READY_FOR_HUMAN_ACCEPTANCE",
+  "commit_push": false,
+  "integrated_tests": {
+    "cases_per_variant": 145,
+    "test_executables_per_variant": 24,
+    "variants": 4,
+    "passes": 580,
+    "capture_groups_omitted": 12
+  },
+  "gui_driver_guard_tests": 27,
+  "gui": {
+    "architecture": "x64",
+    "configuration": "Release",
+    "physical_scale_percent": 150,
+    "profile": "build/gui/m6-session",
+    "scope": "Isolated LiteSic windows only; screenshot permission explicitly granted by user",
+    "interrupted_drag_count": 1,
+    "interrupted_drag_counted_as_pass": false,
+    "sessions_closed": true
+  },
+  "binaries": [
+    {
+      "path": "build/64/debug/LiteSic.exe",
+      "bytes": 8825548,
+      "sha256": "124c2617a07cd8808277059186bdc65df9e297f82b0ffafdea6146d6de4bdab2"
+    },
+    {
+      "path": "build/64/release/LiteSic.exe",
+      "bytes": 3970326,
+      "sha256": "4c7247c54c05bff45e90956384f2a194bed3ad683cd1400f41e28697e6a08a6f"
+    },
+    {
+      "path": "build/32/debug/LiteSic.exe",
+      "bytes": 7999044,
+      "sha256": "fa4050e05bfae19aeb11969b6f188ea5141b4f66d771e4c45b74e248276a6861"
+    },
+    {
+      "path": "build/32/release/LiteSic.exe",
+      "bytes": 3888790,
+      "sha256": "f7f1c78a142b6f8b2c6c25604b8c921e9fe67d966a1681ce04af8dac180c99ba"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "docs/evidence/m7-integrated/baseline-64-release.log",
+      "bytes": 27075,
+      "sha256": "969e8ae4981ad3f87a5639490259cd563716844a482edf462177ac896e407cd7"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/changes.txt",
+      "bytes": 2177,
+      "sha256": "12d5584d5f09e978e17ff1a2658fcbf6f0ea1fa04e41aa796836c476fa2db1c6"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/final-32-debug.log",
+      "bytes": 34510,
+      "sha256": "0488315ebd8d11b3807cc2a02d6a89c8bb78a3f1891297545c0f85962d02e3d1"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/final-32-release.log",
+      "bytes": 38394,
+      "sha256": "d818037cf7be52a668a49a2eccac275cf74998ac16b79fbccafd281095e44b41"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/final-64-debug.log",
+      "bytes": 34428,
+      "sha256": "ca8b5087139016920bb1e3c2012d6dc767b198b9fdb24172977059d1a4c0cecb"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/final-64-release.log",
+      "bytes": 31910,
+      "sha256": "026968aa8ce6dc261689843b99165a64878ddbb31fdb951d781c1ccb9caf044b"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/gui-events.jsonl",
+      "bytes": 24959,
+      "sha256": "4accd1aa7b120844ca3e6d7658fb3b80901678d17761b3793ccd1f61f750d41b"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/gui-guards.log",
+      "bytes": 7362,
+      "sha256": "6bf73ee7ce381afb6c35a9e906e4621cfb8ba45021a88a977d4bcecc8abc814a"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/imports-32-release.log",
+      "bytes": 226,
+      "sha256": "29813284d1bc792638d197cf57a5fb6ebad44654d8d7119378067075ba1ca2ac"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/imports-64-release.log",
+      "bytes": 226,
+      "sha256": "64c26fbbc691aa2e6e6dcf81ce77f915abe70e11b0c3f86774c4e620a64fa6a3"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/isolated-playlist.m3u8",
+      "bytes": 9,
+      "sha256": "058ed0fea4fcbea0706176503d71018df34c40c412f02667bcb375633a6082ad"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/isolated-playlist.m3u8.ini",
+      "bytes": 312,
+      "sha256": "658762e8a2f8c54c53f2f403d498c4638971845a8b6fae3abf1db50a411e7c11"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/isolated-settings.ini",
+      "bytes": 366,
+      "sha256": "1da7a7c3ed0b2069cdc3becb0f81df6fc9d77e45f03c916162c706282ac4acb1"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-chain-eq-moved.png",
+      "bytes": 13085,
+      "sha256": "092f915f4271e96d4aacac92ab087ff1b2126c9fa752748097f50c2dc9ca4d64"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-chain-main-before.png",
+      "bytes": 23699,
+      "sha256": "f746273f9fecd130ba236ec69b52ef0f7d55d0e39f850755f155a8528c3697dc"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-chain-main-moved.png",
+      "bytes": 23699,
+      "sha256": "f746273f9fecd130ba236ec69b52ef0f7d55d0e39f850755f155a8528c3697dc"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-chain-playlist-moved.png",
+      "bytes": 14938,
+      "sha256": "666618db24dda964439c9eaa07e8d425e262304fa8250f773ad0649ae9644a46"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-drag-interrupted-eq.png",
+      "bytes": 13373,
+      "sha256": "cf80b8d2a0c01dc74f0a29b9a35ed33872d6cb6ff5d0eb22cd7281b853ead92d"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-eq-detached.png",
+      "bytes": 13373,
+      "sha256": "cf80b8d2a0c01dc74f0a29b9a35ed33872d6cb6ff5d0eb22cd7281b853ead92d"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-eq-hidden.png",
+      "bytes": 24039,
+      "sha256": "525ceb0494f02675ccf86a6eab3bfaafae51613f58220158f81ca582bc9d6389"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-eq-open.png",
+      "bytes": 23968,
+      "sha256": "150135f18473fba1d0c5ab13e6a22319495d0698b1f6f85a53d618563ad1c027"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-eq-shown.png",
+      "bytes": 23968,
+      "sha256": "150135f18473fba1d0c5ab13e6a22319495d0698b1f6f85a53d618563ad1c027"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-horizontal-detach.png",
+      "bytes": 13373,
+      "sha256": "cf80b8d2a0c01dc74f0a29b9a35ed33872d6cb6ff5d0eb22cd7281b853ead92d"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-horizontal-reattach.png",
+      "bytes": 13373,
+      "sha256": "cf80b8d2a0c01dc74f0a29b9a35ed33872d6cb6ff5d0eb22cd7281b853ead92d"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-initial.png",
+      "bytes": 24032,
+      "sha256": "fd5a8522804ee402a68f5c5c818f901961dcb906ddab98ab6133b1d4536880ad"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-pl-hidden.png",
+      "bytes": 24049,
+      "sha256": "6c0cdf93fc7076ac1cd15b8940d3ad2239ff62a9d4262950ae3333b8660b62df"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-pl-shown.png",
+      "bytes": 23979,
+      "sha256": "dc59f7dbd99e360dbff31a271a7dfb4aae3adfd5b75d8084aaf249e34ffc1baa"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-restarted-eq.png",
+      "bytes": 13085,
+      "sha256": "092f915f4271e96d4aacac92ab087ff1b2126c9fa752748097f50c2dc9ca4d64"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-restarted-playlist.png",
+      "bytes": 14938,
+      "sha256": "666618db24dda964439c9eaa07e8d425e262304fa8250f773ad0649ae9644a46"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/m7-restarted.png",
+      "bytes": 23699,
+      "sha256": "f746273f9fecd130ba236ec69b52ef0f7d55d0e39f850755f155a8528c3697dc"
+    }
+  ]
+}

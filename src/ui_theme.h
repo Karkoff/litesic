@@ -52,7 +52,7 @@ struct AppearanceState {
 // Uses the same settings.ini configured for themes; no path means isolated defaults.
 AppearanceState LoadAppearance();
 bool SaveAppearanceValue(const wchar_t* key, int value);
-struct PanelPosition { int left=0,top=0,side=0,anchor=0; };
+struct PanelPosition { int left=0,top=0,side=0,anchor=0,parent=0; };
 bool LoadEqualizerPosition(PanelPosition& position);
 bool SaveEqualizerPosition(const PanelPosition& position);
 double Contrast(uint32_t a, uint32_t b);

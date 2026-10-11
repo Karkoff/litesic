@@ -46,7 +46,13 @@ metadados são aplicados em lotes, sem acumular varreduras por notificações an
 Equalizador real implementado, com dez bandas, PRE,
 ON/OFF suave, sete presets, curva, teclado e persistência. Continua funcionando
 com o painel oculto. Na entrega original, quatro builds e **420 verificações** passaram; o usuário confirmou o funcionamento em 11/10/2026. [Relatório, medições e capturas](docs/M6-EQUALIZER-2026-10-11.md).
-A integração adicional das três janelas permanece na M7.
+A integração M7 está **COMPLETE**, com aceite humano “TUDO PASS”:  encaixe entre quaisquer
+dos três painéis, movimento transitivo, persistência dos vínculos e recuperação
+de posições. [Validação M7](docs/M7-INTEGRATED-VALIDATION.md) e
+[auditoria do roadmap](docs/ROADMAP-IMPLEMENTATION-AUDIT.md).
+[Compactação por visibilidade](docs/M7-VISIBILITY-COMPACTION.md): ocultar um
+painel intermediário fecha o espaço; reabrir recompõe a formação, respeitando
+um novo posicionamento manual.
 EQ e playlist encaixam no player com captura de 24 DIP e alinhamento
 automático pelo início, centro ou fim de cada borda. Os painéis encaixados
 acompanham movimento e escala. [Verificação](docs/WINDOW-SNAP-2026-10-11.md).
@@ -192,10 +198,10 @@ O projeto é dividido em milestones incrementais, cada uma com tarefas verificá
 | **M4** | Visualizador — osciloscópio + espectro FFT | ✅ Concluída |
 | **M5** | Lista de reprodução — add/drag&drop, reordenar, M3U | COMPLETE — implementação/testes e checkpoint manual PASS |
 | **M6** | Equalizador — DSP, interface e testes entregues | COMPLETE — funcionamento confirmado pelo usuário |
-| **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | 📝 Planejada |
-| **M8** | Acabamento — atalhos, teclas de mídia, instância única | 📝 Planejada |
+| **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | COMPLETE — implementação/testes e aceite humano TUDO PASS |
+| **M8** | Acabamento — atalhos, mídia, DPI, persistência, 18 idiomas e tooltips | 📝 Planejada |
 | **M9** | Compatibilidade — encerrada por decisão explícita do usuário | COMPLETE — testes futuros não bloqueantes |
-| **M10** | Distribuição — builds 32/64, zip portátil, instalador | 📝 Planejada |
+| **M10** | Distribuição — builds 32/64, pacote limpo portátil e instalador opcional | 📝 Planejada |
 
 > 🖥️ Milestones com indicador visual terminam em algo executável para validação manual.
 

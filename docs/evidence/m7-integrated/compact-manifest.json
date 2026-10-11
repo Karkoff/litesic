@@ -1,0 +1,50 @@
+{
+  "date": "2026-10-11",
+  "cases_per_variant": 148,
+  "variants": 4,
+  "total_passes": 592,
+  "capture_groups_omitted": 12,
+  "interactive_validation": "Unavailable: input desktop inaccessible; launch rejected by driver. No captures of this adjustment.",
+  "records": [
+    {
+      "path": "docs/evidence/m7-integrated/compact-64-debug.log",
+      "bytes": 18927,
+      "sha256": "8584533696e070cafeb4c85178f656ba9cf03f3e9f6b26ffa70a69e639ef4819"
+    },
+    {
+      "path": "build/64/debug/LiteSic.exe",
+      "bytes": 8830267,
+      "hash_status": "Unavailable: Windows reports file in use by another process; no process terminated."
+    },
+    {
+      "path": "docs/evidence/m7-integrated/compact-64-release.log",
+      "bytes": 19167,
+      "sha256": "2e350b02d2530d978b93cb4bf9aa176085abbd22531041b2dbfc20e4602cf991"
+    },
+    {
+      "path": "build/64/release/LiteSic.exe",
+      "bytes": 3970469,
+      "sha256": "ecaba0fd754d7f85f3cc0fe0889cd6f1665c50e86453de1029dec5618e0eb3b6"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/compact-32-debug.log",
+      "bytes": 18969,
+      "sha256": "227b2690d6ff0120b38b94f3854098d6a0b92957074a29e72be6a7fd1f69ff9a"
+    },
+    {
+      "path": "build/32/debug/LiteSic.exe",
+      "bytes": 8001808,
+      "sha256": "8874e0ab6afc61b5a48daa60e7a398b852941d75e5cce19574495d3d97a1657c"
+    },
+    {
+      "path": "docs/evidence/m7-integrated/compact-32-release.log",
+      "bytes": 19209,
+      "sha256": "66d964ec136a0fd5aa175d6f1cad9c6f19570d48b646525a069545a9e739475f"
+    },
+    {
+      "path": "build/32/release/LiteSic.exe",
+      "bytes": 3888902,
+      "sha256": "367524036f22d0973336e22c821d97ce8eb7a5c9ec8baad03803089555a263cf"
+    }
+  ]
+}

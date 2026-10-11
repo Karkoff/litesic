@@ -22,7 +22,7 @@
 #include "plwnd.h"
 #include "ui_player.h"
 #include "eqwnd.h"
-#include "window_snap.h"
+#include "skin.h"
 
 #include <windows.h>
 #include <cmath>
@@ -761,6 +761,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     switch (msg)
     {
     case WM_CREATE:
+        Skin::Bind(Skin::Player,hwnd);
     {
         /* Calcular fator de escala DPI para esta janela e redimensionar a
          * janela (criada em tamanho lógico 1x) para o tamanho físico real
@@ -801,34 +802,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
 
-    case WM_WINDOWPOSCHANGING: {
-        auto position=reinterpret_cast<WINDOWPOS*>(lParam);
-        if(IsIconic(hwnd)||((position->flags&(SWP_NOMOVE|SWP_NOSIZE))==(SWP_NOMOVE|SWP_NOSIZE)))break;
-        RECT current{};GetWindowRect(hwnd,&current);
-        int x=position->flags&SWP_NOMOVE?current.left:position->x;
-        int y=position->flags&SWP_NOMOVE?current.top:position->y;
-        int w=position->flags&SWP_NOSIZE?current.right-current.left:position->cx;
-        int h=position->flags&SWP_NOSIZE?current.bottom-current.top:position->cy;
-        RECT owner{x,y,x+w,y+h},group=owner,panel{};
-        bool attached=false;
-        if(PlWnd_DockedRect(owner,panel)){UnionRect(&group,&group,&panel);attached=true;}
-        if(EqWnd_DockedRect(owner,panel)){UnionRect(&group,&group,&panel);attached=true;}
-        MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
-        if(attached&&GetMonitorInfoW(MonitorFromRect(&owner,MONITOR_DEFAULTTONEAREST),&monitor)){
-            RECT fitted=group;WindowSnap::KeepVisible(fitted,monitor.rcWork);
-            if(fitted.left!=group.left||fitted.top!=group.top){
-                position->x=x+fitted.left-group.left;position->y=y+fitted.top-group.top;
-                position->flags&=~SWP_NOMOVE;
-            }
-        }
-        break;
-    }
+    case WM_ENTERSIZEMOVE:Skin::BeginMove(Skin::Player);return 0;
+    case WM_MOVING:Skin::Moving(Skin::Player,*reinterpret_cast<RECT*>(lParam),MainWnd_DPIScale(24));return TRUE;
+    case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Player,MainWnd_DPIScale(24));return 0;
+    case WM_WINDOWPOSCHANGING:Skin::Constrain(Skin::Player,*reinterpret_cast<WINDOWPOS*>(lParam));break;
     case WM_WINDOWPOSCHANGED:
-        // Both panels use the new owner geometry, never the peer's old rectangle.
-        PlWnd_MainMoved(true); EqWnd_MainMoved(true);
-        UpdateScrollTimer(hwnd);
-        return DefWindowProcW(hwnd, msg, wParam, lParam); // Also delivers WM_SIZE/WM_MOVE.
-
+        Skin::Changed(Skin::Player);UpdateScrollTimer(hwnd);
+        return DefWindowProcW(hwnd,msg,wParam,lParam);
+    case WM_DISPLAYCHANGE:Skin::Recover();return 0;
     case WM_ERASEBKGND: return 1;
     case WM_DPICHANGED: {
         g_dpiScale=LOWORD(wParam)/96.f*UserScaleMultiplier();

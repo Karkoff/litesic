@@ -10,3 +10,7 @@ __pycache__/
 !LiteSic.ini.example
 .vscode/ipch/
 *.log
+# M7 evidence contains only logs and settings from the isolated test profile.
+!docs/evidence/m7-integrated/*.log
+!docs/evidence/m7-integrated/isolated-*.ini
+!docs/evidence/m7-closeout/*.log

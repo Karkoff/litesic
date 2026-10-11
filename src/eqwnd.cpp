@@ -1,5 +1,5 @@
 #include "eqwnd.h"
-#include "window_snap.h"
+#include "skin.h"
 #include "mainwnd.h"
 #include "ui_draw.h"
 #include "eq_state.h"
@@ -11,9 +11,7 @@
 
 namespace {
 HWND window=nullptr,mainWindow=nullptr;
-WindowSnap::Dock dock;
-bool moving=false,sizeMoveLoop=false;
-POINT moveCursor{}; RECT moveOrigin{};
+auto& dock=Skin::Attachment(Skin::Equalizer);
 float scale=1;
 Ui::Canvas canvas;
 int hover=-1,pressed=-1,focus=0;
@@ -24,16 +22,17 @@ bool Enabled(int id){return id<4 || Eq::Available(id-4,Audio_GetSampleRate());}
 void SavePosition(){
     if(!window)return;
     RECT panel{};if(GetWindowRect(window,&panel))
-        Ui::SaveEqualizerPosition({panel.left,panel.top,static_cast<int>(dock.side),static_cast<int>(dock.anchor)});
+        Ui::SaveEqualizerPosition({panel.left,panel.top,static_cast<int>(dock.side),static_cast<int>(dock.anchor),Skin::Parent(Skin::Equalizer)});
 }
 bool RestorePosition(RECT& panel,RECT& parent,const RECT& work){
     Ui::PanelPosition saved;if(!Ui::LoadEqualizerPosition(saved))return false;
     dock={static_cast<WindowSnap::Side>(saved.side),static_cast<WindowSnap::Anchor>(saved.anchor)};
+    Skin::RestoreParent(Skin::Equalizer,saved.parent);
     panel={saved.left,saved.top,saved.left+S(460),saved.top+S(Ui::EqHeight)};
     if(dock.side==WindowSnap::Side::None){
         MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
         WindowSnap::KeepVisible(panel,GetMonitorInfoW(MonitorFromRect(&panel,MONITOR_DEFAULTTONEAREST),&monitor)?monitor.rcWork:work);
-    }else{
+    }else if(saved.parent==Skin::Player){
         WindowSnap::Place(panel,parent,dock);
         RECT group{},peer{},fitted{};UnionRect(&group,&parent,&panel);
         if(PlWnd_DockedRect(parent,peer))UnionRect(&group,&group,&peer);
@@ -44,7 +43,7 @@ bool RestorePosition(RECT& panel,RECT& parent,const RECT& work){
     }
     return true;
 }
-void Hide(HWND hwnd){SavePosition();Eq::Save();ShowWindow(hwnd,SW_HIDE);Ui::SaveAppearanceValue(L"EqualizerVisible",0);InvalidateRect(mainWindow,nullptr,FALSE);}
+void Hide(HWND hwnd){SavePosition();Eq::Save();ShowWindow(hwnd,SW_HIDE);Skin::Reconcile();Ui::SaveAppearanceValue(L"EqualizerVisible",0);InvalidateRect(mainWindow,nullptr,FALSE);}
 Ui::Rect Button(int id){return {76.f+id*128,192,120,18};}
 int Hit(float x,float y){
     for(int id=0;id<3;++id)if(Button(id).Contains(x,y))return id;
@@ -67,23 +66,12 @@ void Activate(HWND hwnd,int id){
 LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
     LRESULT result=0;if(Ui::ThemeMenuMessage(message,wp,lp,result))return result;
     switch(message){
-    case WM_ENTERSIZEMOVE:
-        sizeMoveLoop=true;GetCursorPos(&moveCursor);GetWindowRect(hwnd,&moveOrigin);return 0;
-    case WM_MOVING:{
-        moving=true;dock={};auto proposed=reinterpret_cast<RECT*>(lp);
-        POINT cursor{};GetCursorPos(&cursor);
-        if(sizeMoveLoop&&(cursor.x!=moveCursor.x||cursor.y!=moveCursor.y))
-            OffsetRect(proposed,moveOrigin.left+cursor.x-moveCursor.x-proposed->left,
-                moveOrigin.top+cursor.y-moveCursor.y-proposed->top);
-        RECT parent{};GetWindowRect(mainWindow,&parent);
-        WindowSnap::Snap(*proposed,parent,S(24));return TRUE;}
-    case WM_EXITSIZEMOVE:{
-        sizeMoveLoop=false;
-        if(moving){RECT panel{},parent{};GetWindowRect(hwnd,&panel);GetWindowRect(mainWindow,&parent);
-            dock=WindowSnap::Snap(panel,parent,S(24));
-            SetWindowPos(hwnd,nullptr,panel.left,panel.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
-            moving=false;}
-        EqWnd_MainMoved();SavePosition();return 0;}
+    case WM_ENTERSIZEMOVE:Skin::BeginMove(Skin::Equalizer);return 0;
+    case WM_MOVING:Skin::Moving(Skin::Equalizer,*reinterpret_cast<RECT*>(lp),S(24));return TRUE;
+    case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Equalizer,S(24));SavePosition();return 0;
+    case WM_WINDOWPOSCHANGING:Skin::Constrain(Skin::Equalizer,*reinterpret_cast<WINDOWPOS*>(lp));break;
+    case WM_WINDOWPOSCHANGED:Skin::Changed(Skin::Equalizer);break;
+    case WM_DISPLAYCHANGE:Skin::Recover();return 0;
     case WM_ERASEBKGND:return 1;
     case Ui::WM_THEME_CHANGED:InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_NCHITTEST:{POINT p{GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};ScreenToClient(hwnd,&p);
@@ -144,13 +132,13 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
             if(!canvas.End())InvalidateRect(hwnd,nullptr,FALSE);
         }else{SetBkColor(dc,NativeColor(Surface));SetTextColor(dc,NativeColor(Text));DrawTextW(dc,L"Equalizador: renderização indisponível",-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE);}
         EndPaint(hwnd,&ps);return 0;}
-    case WM_DESTROY:SavePosition();Eq::Save();window=nullptr;canvas.Reset();return 0;
+    case WM_DESTROY:SavePosition();Eq::Save();Skin::Unbind(Skin::Equalizer);window=nullptr;canvas.Reset();return 0;
     }return DefWindowProcW(hwnd,message,wp,lp);
 }
 }
 void EqWnd_Toggle(HWND main){
     bool restored=false;
-    if(!window){mainWindow=main;dock={};moving=false;sizeMoveLoop=false;WNDCLASSEXW cls{};cls.cbSize=sizeof(cls);cls.lpfnWndProc=Proc;cls.hInstance=GetModuleHandleW(nullptr);
+    if(!window){mainWindow=main;dock={};Skin::RestoreParent(Skin::Equalizer,Skin::Player);WNDCLASSEXW cls{};cls.cbSize=sizeof(cls);cls.lpfnWndProc=Proc;cls.hInstance=GetModuleHandleW(nullptr);
         cls.hCursor=LoadCursorW(nullptr,IDC_ARROW);cls.lpszClassName=L"LiteSic.EqualizerWnd";
         if(!RegisterClassExW(&cls)&&GetLastError()!=ERROR_CLASS_ALREADY_EXISTS)return;
         scale=MainWnd_DPIScaleFloat(1);RECT parent{};GetWindowRect(main,&parent);MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
@@ -169,26 +157,17 @@ void EqWnd_Toggle(HWND main){
             y=std::max<int>(monitor.rcWork.top,std::min<int>(parent.top,monitor.rcWork.bottom-S(Ui::EqHeight)));
         }
         window=CreateWindowExW(0,cls.lpszClassName,L"LiteSic — Equalizador",WS_POPUP,x,y,S(460),S(Ui::EqHeight),main,nullptr,cls.hInstance,nullptr);
-    }if(window){SavePosition();ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);EqWnd_MainMoved(restored);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);InvalidateRect(mainWindow,nullptr,FALSE);}
+    }if(window){Skin::Bind(Skin::Equalizer,window);SavePosition();ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);EqWnd_MainMoved(restored);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);InvalidateRect(mainWindow,nullptr,FALSE);}
 }
 bool EqWnd_IsVisible(){return window&&IsWindowVisible(window);}
 void EqWnd_ScaleChanged(){scale=MainWnd_DPIScaleFloat(1);if(window)SetWindowPos(window,nullptr,0,0,S(460),S(Ui::EqHeight),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();}
-bool EqWnd_DockedRect(const RECT& owner,RECT& panel){
-    if(!window||moving||dock.side==WindowSnap::Side::None||!IsWindowVisible(window))return false;
-    GetWindowRect(window,&panel);WindowSnap::Place(panel,owner,dock);return true;
-}
-void EqWnd_MainMoved(bool preserveDock){
-    if(!window||!mainWindow||moving||dock.side==WindowSnap::Side::None||IsIconic(mainWindow))return;
-    RECT parent{},panel{};GetWindowRect(mainWindow,&parent);GetWindowRect(window,&panel);
-    RECT aligned=panel;
-    MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
-    RECT peer{};bool hasPeer=WindowSnap::OtherPanel(mainWindow,window,peer);
-    if(preserveDock)WindowSnap::Place(aligned,parent,dock);
-    else if(GetMonitorInfoW(MonitorFromWindow(mainWindow,MONITOR_DEFAULTTONEAREST),&monitor))
-        WindowSnap::PlaceVisible(aligned,parent,dock,monitor.rcWork,hasPeer?&peer:nullptr);
-    else WindowSnap::Place(aligned,parent,dock);
-    if(aligned.left!=panel.left||aligned.top!=panel.top)
-        SetWindowPos(window,nullptr,aligned.left,aligned.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
-}
+bool EqWnd_DockedRect(const RECT& owner,RECT& panel){return Skin::DockedRect(Skin::Equalizer,owner,panel);}
+void EqWnd_MainMoved(bool preserveDock){if(preserveDock)Skin::Reconcile();else Skin::Recover();}
 void EqWnd_Shutdown(){if(window)DestroyWindow(window);mainWindow=nullptr;dock={};Eq::Save();}
-void EqWnd_Restore(HWND main){if(Ui::LoadAppearance().equalizerVisible)EqWnd_Toggle(main);}
+void EqWnd_Restore(HWND main){
+    bool visible=Ui::LoadAppearance().equalizerVisible;
+    if(visible||Skin::Parent(Skin::Playlist)==Skin::Equalizer){
+        EqWnd_Toggle(main);if(!visible)Hide(window);
+    }
+    Skin::Reconcile();
+}

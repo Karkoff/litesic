@@ -1,5 +1,5 @@
 #include "plwnd.h"
-#include "window_snap.h"
+#include "skin.h"
 #include "mainwnd.h"
 #include "playback.h"
 #include "playlist_worker.h"
@@ -43,12 +43,8 @@ bool dragging = false, scrollDrag = false, deferSelection = false;
 POINT down{};
 float scale = 1;
 using Dock = WindowSnap::Side;
-Dock dock = Dock::None;
-WindowSnap::Anchor dockAnchor = WindowSnap::Anchor::Start;
-bool movingList = false;
-bool sizeMoveLoop = false;
-POINT moveCursor{};
-RECT moveOrigin{};
+auto& dock=Skin::Attachment(Skin::Playlist).side;
+auto& dockAnchor=Skin::Attachment(Skin::Playlist).anchor;
 std::wstring status;
 std::wstring sessionPath;
 int S(int n) { return static_cast<int>(std::lround(n * scale)); }
@@ -57,12 +53,6 @@ RECT WorkArea() {
     MONITORINFO monitor{}; monitor.cbSize=sizeof(monitor);
     if (GetMonitorInfoW(MonitorFromWindow(mainWindow,MONITOR_DEFAULTTONEAREST),&monitor)) return monitor.rcWork;
     RECT work{}; SystemParametersInfoW(SPI_GETWORKAREA,0,&work,0); return work;
-}
-Dock Snap(RECT& list) {
-    RECT parent{}; GetWindowRect(mainWindow,&parent);
-    auto attachment=WindowSnap::Snap(list,parent,S(24));
-    dockAnchor=attachment.anchor;
-    return attachment.side;
 }
 void RememberDock(Dock side,const RECT&) { dock=side; }
 bool RestoreGeometry(RECT& panel,Dock& side) {
@@ -79,8 +69,9 @@ bool RestoreGeometry(RECT& panel,Dock& side) {
     MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
     if(!GetMonitorInfoW(MonitorFromRect(&owner,MONITOR_DEFAULTTONEAREST),&monitor))return false;
     WindowSnap::KeepVisible(owner,monitor.rcWork);
-    panel={x,y,x+S(w),y+S(h)};side=static_cast<Dock>(d);dockAnchor=static_cast<WindowSnap::Anchor>(a);
-    if(side!=Dock::None){
+    panel={x,y,x+S(w),y+S(h)};side=static_cast<Dock>(d);dock=side;dockAnchor=static_cast<WindowSnap::Anchor>(a);
+    Skin::RestoreParent(Skin::Playlist,read(L"Parent",Skin::Player));side=dock;
+    if(side!=Dock::None&&Skin::Parent(Skin::Playlist)==Skin::Player){
         WindowSnap::Place(panel,owner,{side,dockAnchor});
         RECT group{},fitted{};UnionRect(&group,&owner,&panel);fitted=group;
         WindowSnap::KeepVisible(fitted,monitor.rcWork);
@@ -102,7 +93,7 @@ bool SaveGeometry(const std::wstring& ini){
     add(L"Version",1);add(L"Left",panel.left);add(L"Top",panel.top);
     add(L"Width",static_cast<int>(std::lround((panel.right-panel.left)/scale)));
     add(L"Height",static_cast<int>(std::lround((panel.bottom-panel.top)/scale)));
-    add(L"Dock",static_cast<int>(dock));add(L"Anchor",static_cast<int>(dockAnchor));
+    add(L"Dock",static_cast<int>(dock));add(L"Anchor",static_cast<int>(dockAnchor));add(L"Parent",Skin::Parent(Skin::Playlist));
     add(L"MainLeft",owner.left);add(L"MainTop",owner.top);state+=L'\0';
     return WritePrivateProfileSectionW(L"Geometry",state.c_str(),ini.c_str())!=FALSE;
 }
@@ -477,34 +468,12 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         LayoutSearch();InvalidateRect(hwnd,nullptr,FALSE);InvalidateRect(search,nullptr,TRUE);return 0;
     case WM_CTLCOLOREDIT: SetTextColor(reinterpret_cast<HDC>(wp),Ui::NativeColor(Ui::Text));
         SetBkColor(reinterpret_cast<HDC>(wp),Ui::NativeColor(Ui::Surface)); return reinterpret_cast<LRESULT>(searchBackground);
-    case WM_ENTERSIZEMOVE:
-        sizeMoveLoop=true; GetCursorPos(&moveCursor); GetWindowRect(hwnd,&moveOrigin); return 0;
-    case WM_MOVING: {
-        movingList=true; dock=Dock::None;
-        auto proposed=reinterpret_cast<RECT*>(lp);
-        POINT cursor{}; GetCursorPos(&cursor);
-        // Derive mouse movement from the drag origin, not the last snapped
-        // position, so small consecutive movements can escape the magnet.
-        // Keyboard moves retain the native proposed rectangle.
-        if (sizeMoveLoop && (cursor.x!=moveCursor.x || cursor.y!=moveCursor.y)) {
-            int x=moveOrigin.left+cursor.x-moveCursor.x,y=moveOrigin.top+cursor.y-moveCursor.y;
-            OffsetRect(proposed,x-proposed->left,y-proposed->top);
-        }
-        Snap(*proposed);
-        return TRUE;
-    }
-    case WM_EXITSIZEMOVE: {
-        sizeMoveLoop=false;
-        if (movingList) {
-            RECT list{}; GetWindowRect(hwnd,&list);
-            RememberDock(Snap(list),list);
-            SetWindowPos(hwnd,nullptr,list.left,list.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
-            movingList=false;
-        }
-        // Resizing an attached playlist preserves its facing edge.
-        PlWnd_MainMoved();
-        return 0;
-    }
+    case WM_ENTERSIZEMOVE:Skin::BeginMove(Skin::Playlist);return 0;
+    case WM_MOVING:Skin::Moving(Skin::Playlist,*reinterpret_cast<RECT*>(lp),S(24));return TRUE;
+    case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Playlist,S(24));return 0;
+    case WM_WINDOWPOSCHANGING:Skin::Constrain(Skin::Playlist,*reinterpret_cast<WINDOWPOS*>(lp));break;
+    case WM_WINDOWPOSCHANGED:Skin::Changed(Skin::Playlist);break;
+    case WM_DISPLAYCHANGE:Skin::Recover();return 0;
     case WM_GETMINMAXINFO: {
         auto info = reinterpret_cast<MINMAXINFO*>(lp);
         info->ptMinTrackSize = {S(275),S(180)}; return 0;
@@ -690,7 +659,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
             }
         }
         RefreshInformation(); PlWnd_Refresh(); return 0;}
-    case WM_CLOSE: ShowWindow(hwnd,SW_HIDE); Ui::SaveAppearanceValue(L"PlaylistVisible",0); return 0;
+    case WM_CLOSE: ShowWindow(hwnd,SW_HIDE);Skin::Reconcile(); Ui::SaveAppearanceValue(L"PlaylistVisible",0); return 0;
     case WM_DESTROY:
         KillTimer(hwnd,ResultsTimer);resultsScheduled=false;
         worker.Stop();
@@ -718,7 +687,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
             }
         }
         sessionPath.clear(); search=nullptr; DeleteObject(searchFont); searchFont=nullptr;
-        DeleteObject(searchBackground); searchBackground=nullptr; canvas.Reset(); window=nullptr; return 0;
+        DeleteObject(searchBackground); searchBackground=nullptr; canvas.Reset();Skin::Unbind(Skin::Playlist); window=nullptr; return 0;
     }
     return DefWindowProcW(hwnd,message,wp,lp);
 }
@@ -728,7 +697,7 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
     mainWindow=main;
     sessionPath=sessionFile?sessionFile:L"";
     selected.clear(); anchor=-1; top=0; status.clear();
-    movingList=false; sizeMoveLoop=false; dock=Dock::None; dockAnchor=WindowSnap::Anchor::Start;
+    Skin::Bind(Skin::Player,main);dock=Dock::None;Skin::RestoreParent(Skin::Playlist,Skin::Player); dockAnchor=WindowSnap::Anchor::Start;
     WNDCLASSEXW cls{}; cls.cbSize=sizeof(cls); cls.style=CS_DBLCLKS|CS_HREDRAW|CS_VREDRAW;
     cls.lpfnWndProc=Proc; cls.hInstance=instance; cls.hCursor=LoadCursorW(nullptr,IDC_ARROW); cls.lpszClassName=kClass;
     if (!RegisterClassExW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) return FALSE;
@@ -755,6 +724,7 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
     window=CreateWindowExW(WS_EX_ACCEPTFILES,kClass,L"LiteSic — Lista de reprodução",WS_POPUP,
         x,y,width,height,main,nullptr,instance,nullptr);
     if (window) {
+        Skin::Bind(Skin::Playlist,window);
         if (!sessionPath.empty()) {
             DWORD attributes=GetFileAttributesW(sessionPath.c_str());
             if (attributes!=INVALID_FILE_ATTRIBUTES || GetLastError()!=ERROR_FILE_NOT_FOUND) {
@@ -782,23 +752,9 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
     }
     return window!=nullptr;
 }
-void PlWnd_Shutdown() { if (window) DestroyWindow(window); mainWindow=nullptr; dock=Dock::None; }
-bool PlWnd_DockedRect(const RECT& owner,RECT& panel) {
-    if(!window||movingList||dock==Dock::None||!IsWindowVisible(window))return false;
-    GetWindowRect(window,&panel);WindowSnap::Place(panel,owner,{dock,dockAnchor});return true;
-}
-void PlWnd_MainMoved(bool preserveDock) {
-    if (!window || !mainWindow || dock==Dock::None || movingList || IsIconic(mainWindow)) return;
-    RECT parent{},list{}; GetWindowRect(mainWindow,&parent); GetWindowRect(window,&list);
-    RECT aligned=list;
-    WindowSnap::Dock attachment{dock,dockAnchor};
-    RECT peer{};bool hasPeer=WindowSnap::OtherPanel(mainWindow,window,peer);
-    if(preserveDock)WindowSnap::Place(aligned,parent,attachment);
-    else WindowSnap::PlaceVisible(aligned,parent,attachment,WorkArea(),hasPeer?&peer:nullptr);
-    dock=attachment.side;
-    if (aligned.left!=list.left || aligned.top!=list.top)
-        SetWindowPos(window,nullptr,aligned.left,aligned.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
-}
+void PlWnd_Shutdown() { if (window) DestroyWindow(window);Skin::Unbind(Skin::Playlist); mainWindow=nullptr; dock=Dock::None; }
+bool PlWnd_DockedRect(const RECT& owner,RECT& panel){return Skin::DockedRect(Skin::Playlist,owner,panel);}
+void PlWnd_MainMoved(bool preserveDock){if(preserveDock)Skin::Reconcile();else Skin::Recover();}
 void PlWnd_Show() { if(window) { ShowWindow(window,SW_SHOW); PlWnd_MainMoved(); Ui::SaveAppearanceValue(L"PlaylistVisible",1); SetForegroundWindow(window); } }
 void PlWnd_Toggle() { if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); PlWnd_MainMoved(); Ui::SaveAppearanceValue(L"PlaylistVisible",IsWindowVisible(window)!=FALSE); PlWnd_Refresh(); } }
 bool PlWnd_IsVisible() { return window && IsWindowVisible(window); }

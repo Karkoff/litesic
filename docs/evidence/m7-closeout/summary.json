@@ -1,0 +1,54 @@
+[
+  {
+    "architecture": "64",
+    "configuration": "debug",
+    "cases": 148,
+    "test_executables": 24,
+    "skips": [
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE"
+    ],
+    "passed": true,
+    "sha256": "e9ff4bab2904fad81b72de836719e20f4b5baaf212105ed5aaa92513a2eba47d"
+  },
+  {
+    "architecture": "64",
+    "configuration": "release",
+    "cases": 148,
+    "test_executables": 24,
+    "skips": [
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE"
+    ],
+    "passed": true,
+    "sha256": "ecaba0fd754d7f85f3cc0fe0889cd6f1665c50e86453de1029dec5618e0eb3b6"
+  },
+  {
+    "architecture": "32",
+    "configuration": "debug",
+    "cases": 148,
+    "test_executables": 24,
+    "skips": [
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE"
+    ],
+    "passed": true,
+    "sha256": "8874e0ab6afc61b5a48daa60e7a398b852941d75e5cce19574495d3d97a1657c"
+  },
+  {
+    "architecture": "32",
+    "configuration": "release",
+    "cases": 148,
+    "test_executables": 24,
+    "skips": [
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE",
+      "PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE"
+    ],
+    "passed": true,
+    "sha256": "367524036f22d0973336e22c821d97ce8eb7a5c9ec8baad03803089555a263cf"
+  }
+]

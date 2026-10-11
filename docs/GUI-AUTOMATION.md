@@ -1,5 +1,15 @@
 # Automação gráfica de desenvolvimento
 
+## M7 — sessão isolada e autorização de capturas
+
+Na rodada M7 o usuário autorizou explicitamente capturas **somente das
+janelas da sessão isolada**. Essa autorização é específica e posterior à
+restrição da auditoria M6 abaixo. A suíte automatizada continua usando
+`LITESIC_NO_CAPTURE=1`; a inspeção interativa representativa usa o helper
+existente com `-Validation`, sem abrir o perfil pessoal.
+Resultados, tentativas interrompidas e limites:
+[M7-INTEGRATED-VALIDATION.md](M7-INTEGRATED-VALIDATION.md).
+
 ## Auditoria integrada sem capturas — 11/10/2026
 
 Esta rodada tem restrição explícita de screenshots, gravações e capturas

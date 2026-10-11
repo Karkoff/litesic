@@ -1,3 +1,5 @@
 # Preserve byte-for-byte evidence and its recorded SHA-256 on every platform.
 m6-integrated/** -text -whitespace
 m6-closeout/** -text -whitespace
+m7-integrated/** -text -whitespace
+m7-closeout/** -text -whitespace
