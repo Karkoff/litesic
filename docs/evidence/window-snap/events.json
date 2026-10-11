@@ -1,0 +1,678 @@
+[
+  {
+    "utc": "2026-10-11T16:10:16.986719+00:00",
+    "action": "launch",
+    "args": {
+      "action": "launch",
+      "validation": true,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "release",
+      "dialog": false,
+      "label": "snap-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 25760496,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-initial.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:10:29.040076+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-eq-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 38671086,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizador",
+      "rect": [
+        2265,
+        863,
+        2955,
+        1229
+      ],
+      "client": [
+        690,
+        366
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-eq-initial.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:10:29.667657+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "playlist",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-pl-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 18812548,
+      "class": "LiteSic.PlaylistWnd",
+      "title": "LiteSic — Lista de reprodução",
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "child_count": 1,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-pl-initial.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:10:43.110009+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-before-move",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 25760496,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-before-move.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:10:43.754260+00:00",
+    "action": "drag",
+    "args": {
+      "action": "drag",
+      "validation": false,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": 190,
+      "end_y": 64,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-main-moved",
+      "x": 110,
+      "y": 24,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 25760496,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1655,
+        903,
+        2345,
+        1338
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-main-moved.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:10:46.418898+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-eq-follow",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 38671086,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizador",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ],
+      "client": [
+        690,
+        366
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-eq-follow.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:10:47.050949+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "playlist",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-pl-follow",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 18812548,
+      "class": "LiteSic.PlaylistWnd",
+      "title": "LiteSic — Lista de reprodução",
+      "rect": [
+        1655,
+        1338,
+        2345,
+        1878
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "child_count": 1,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-pl-follow.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:11:06.709316+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-eq-before-drag",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 38671086,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizador",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ],
+      "client": [
+        690,
+        366
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-eq-before-drag.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:11:07.303058+00:00",
+    "action": "drag",
+    "args": {
+      "action": "drag",
+      "validation": false,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": 180,
+      "end_y": 34,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-eq-aligned",
+      "x": 160,
+      "y": 24,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 38671086,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizador",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ],
+      "client": [
+        690,
+        366
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-eq-aligned.png",
+      "sha256": "77e2e0036e73042889b1bfb12f2f00fd2addaf4bc239749692556ec7c005a08f",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:11:09.954164+00:00",
+    "action": "drag",
+    "args": {
+      "action": "drag",
+      "validation": false,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": 240,
+      "end_y": 34,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-eq-detached",
+      "x": 160,
+      "y": 24,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 38671086,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizador",
+      "rect": [
+        2417,
+        912,
+        3107,
+        1278
+      ],
+      "client": [
+        690,
+        366
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-eq-detached.png",
+      "sha256": "77e2e0036e73042889b1bfb12f2f00fd2addaf4bc239749692556ec7c005a08f",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:11:31.894954+00:00",
+    "action": "drag",
+    "args": {
+      "action": "drag",
+      "validation": false,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": 168,
+      "end_y": 15,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-eq-reattached",
+      "x": 240,
+      "y": 24,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 38671086,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizador",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ],
+      "client": [
+        690,
+        366
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-eq-reattached.png",
+      "sha256": "77e2e0036e73042889b1bfb12f2f00fd2addaf4bc239749692556ec7c005a08f",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:11:34.115221+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "playlist",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-pl-before-drag",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 18812548,
+      "class": "LiteSic.PlaylistWnd",
+      "title": "LiteSic — Lista de reprodução",
+      "rect": [
+        1655,
+        1338,
+        2345,
+        1878
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "child_count": 1,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-pl-before-drag.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:11:34.746091+00:00",
+    "action": "drag",
+    "args": {
+      "action": "drag",
+      "validation": false,
+      "query": null,
+      "target": "playlist",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": 180,
+      "end_y": 44,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "snap-pl-aligned",
+      "x": 160,
+      "y": 24,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 18812548,
+      "class": "LiteSic.PlaylistWnd",
+      "title": "LiteSic — Lista de reprodução",
+      "rect": [
+        1655,
+        1338,
+        2345,
+        1878
+      ],
+      "client": [
+        690,
+        540
+      ],
+      "child_count": 1,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\snap-pl-aligned.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 60832,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:10:17.623000+00:00",
+        "sha256": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+      }
+    }
+  }
+]

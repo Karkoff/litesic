@@ -15,6 +15,11 @@
 #define AUDIO_H
 
 #include <windows.h>
+#include "eq_dsp.h"
+void Audio_UpdateEq(const Eq::Parameters& parameters);
+void Audio_SetEqBand(int band,float gainDb);
+void Audio_SetEqEnabled(bool enabled);
+void Audio_SetPreamp(float gainDb);
 
 /* ------------------------------------------------------------------ */
 /* Inicialização / desligamento                                         */
@@ -68,6 +73,7 @@ BOOL Audio_TestInit(unsigned rate);
 BOOL Audio_TestRead(float* frames, unsigned count);
 unsigned long long Audio_TestCursor(void);
 void Audio_TestVizLock(BOOL lock);
+void Audio_TestSkipEq(BOOL skip);
 #endif
 
 /* Retorna a posição atual em segundos. */

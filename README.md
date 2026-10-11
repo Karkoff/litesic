@@ -25,25 +25,32 @@ volta destacada ao reabrir, pronta para Play. **ADIC ▾**, **REMOVER** e
 **LISTA ▾** ficam à direita da barra de status; Arquivos/Pasta estão agrupados
 em Adicionar. A pesquisa tem um ícone de borracha para limpar.
 Veja as [duas correções visuais recentes](docs/PLAYLIST-FOOTER-2026-10-11.md).
-Equalizador e a integração completa das três janelas permanecem planejados.
-Player e playlist já possuem encaixe magnético e movimento conjunto.
+**M6 COMPLETE:** equalizador real implementado, com dez bandas, PRE,
+ON/OFF suave, sete presets, curva, teclado e persistência. Continua funcionando
+com o painel oculto. Quatro builds e **420 verificações** passaram; o usuário confirmou o funcionamento em 11/10/2026. [Relatório, medições e capturas](docs/M6-EQUALIZER-2026-10-11.md).
+A integração adicional das três janelas permanece na M7.
+EQ e playlist encaixam no player com captura de 24 DIP e alinhamento
+automático pelo início, centro ou fim de cada borda. Os painéis encaixados
+acompanham movimento e escala. [Verificação](docs/WINDOW-SNAP-2026-10-11.md).
+Títulos longos deslizam suavemente no LCD nos dois sentidos, com pausa nas
+extremidades; títulos que cabem permanecem parados.
 **Aparência entre sessões:** visibilidade do visualizador (incluindo player
 compacto), playlist e painel EQ, modo FFT/OSC, escala da interface e tema
 são preservados. Veja [validação da persistência](docs/APPEARANCE-PERSISTENCE-2026-10-11.md).
 Veja o [encerramento técnico da M5](docs/M5-CLOSEOUT-2026-10-11.md).
 Modernização UI/UX **IN_PROGRESS**: player e playlist já usam Direct2D/DirectWrite,
 com pesquisa que preserva a fila e os cinco transportes separados. O painel EQ
-é explicitamente indisponível até a implementação do DSP. Baseline repetida:
+agora controla o DSP real. Histórico anterior à M6 — baseline repetida:
 292 aprovações; rodada anterior: **356 (89 por variante)**. Após persistir a
 aparência, a suíte x64 Debug tem **93 testes aprovados**. A investigação de memória
 reproduziu o custo de inicialização gráfica, sem crescimento contínuo na carga
-curta do backend atual. UI-00..08 ainda não estão concluídas; M6 não iniciada.
+curta do backend atual. UI-00..08 ainda não estão concluídas; M6 teve o funcionamento confirmado pelo usuário.
 Veja [implementação, capturas e pendências](docs/design/UI-VALIDATION-2026-10-11.md)
 e [plano por fase](docs/design/LITESIC-UI-IMPLEMENTATION-PLAN.md).
 
 **Temas visuais:** 36 opções em **botão direito no player → Aparência > Temas...**,
 com categorias, prévias, aplicação imediata e preferência persistente.
-LiteSic Original continua sendo o padrão; player e playlist compartilham a
+LiteSic Original continua sendo o padrão; player, playlist e EQ compartilham a
 aparência sem interromper a reprodução. Validação técnica PASS; aceite visual
 humano dos novos temas pendente. Seletor e menus próprios usam a paleta ativa.
 Veja [sistema de temas](docs/THEMES.md),
@@ -67,7 +74,7 @@ O produto prevê três janelas independentes:
 | **Repetição** | Desligada → lista (`REP`) → faixa atual (`REP 1`); Anterior/Próximo continuam navegando |
 | **Playlist** | Arquivos/pastas, seleção múltipla, arraste para reordenar, ordenação, M3U, tags em background e recuperação automática ao reabrir |
 | **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica; botão **VIZ** ao lado de LISTA/EQ para ocultar ou mostrar, reduzindo/restaurando a altura do player |
-| **Equalizador** | Planejado para M6: 10 bandas, pré-amp e presets |
+| **Equalizador** | DSP real: 10 bandas ±12 dB, PRE ±12 dB, ON/OFF suave, presets, curva e persistência |
 | **Compatibilidade** | Alvo Windows 7–11, x86/x64; M9 COMPLETE por decisão do usuário. Windows 11 confirmado; testes práticos Windows 7/8/8.1/10 e validação específica x86/x64 pendentes |
 | **DPI** | Suporte a alta densidade de pixels |
 | **Runtime** | Runtime GCC/C++ estático; depende das DLLs de sistema Windows |
@@ -163,7 +170,7 @@ O projeto é dividido em milestones incrementais, cada uma com tarefas verificá
 | **M3** | Player principal — LCD, título rolando, seek, volume, shuffle/repeat | ✅ Concluída |
 | **M4** | Visualizador — osciloscópio + espectro FFT | ✅ Concluída |
 | **M5** | Lista de reprodução — add/drag&drop, reordenar, M3U | COMPLETE — implementação/testes e checkpoint manual PASS |
-| **M6** | Equalizador — 10 bandas, presets, tempo real | 📝 Planejada |
+| **M6** | Equalizador — DSP, interface e testes entregues | COMPLETE — funcionamento confirmado pelo usuário |
 | **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | 📝 Planejada |
 | **M8** | Acabamento — atalhos, teclas de mídia, instância única | 📝 Planejada |
 | **M9** | Compatibilidade — encerrada por decisão explícita do usuário | COMPLETE — testes futuros não bloqueantes |
@@ -211,8 +218,9 @@ Os testes novos da M5 usam o modelo, parser M3U, tags, controlador, worker,
 repetição/encaixe, além dos 27 anteriores.
 Antes da modernização eram 73 casos por variante, 292 aprovações nas quatro variantes. A GUI foi
 exercitada nas quatro, com cobertura detalhada em x64 Debug.
-Parte dos testes antigos de DSP ainda usa cópias dos algoritmos. INI e
-equalizador continuam fora desta etapa.
+Parte dos testes antigos de DSP ainda usa cópias dos algoritmos. A M6 acrescentou
+testes do DSP de produção, grafo de áudio com sinais nos quatro codecs,
+INI e painel Win32: 20 executáveis, 105 verificações por variante.
 
 Uso dos ajustes: clique em repetir para alternar os três modos. Arraste o
 player para mover a playlist encaixada; arraste a barra da própria playlist

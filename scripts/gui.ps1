@@ -20,7 +20,8 @@ param(
     [int]$EndX,
     [int]$EndY,
     [int]$MenuIndex = -1,
-    [switch]$Dialog
+    [switch]$Dialog,
+    [switch]$Validation
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -47,6 +48,7 @@ $driverArgs = @((Join-Path $PSScriptRoot 'gui\litesic_gui.py'), $Action,
 if ($Label) { $driverArgs += @('--label', $Label) }
 if ($Action -in @('search','theme')) { $driverArgs += @('--query', $Query) }
 if ($Dialog) { $driverArgs += '--dialog' }
+if ($Validation) { $driverArgs += '--validation' }
 if ($MenuIndex -ge 0) { $driverArgs += @('--menu-index',$MenuIndex) }
 if ($Action -in @('click','drag')) { $driverArgs += @('--x', $X, '--y', $Y, '--button', $Button) }
 if ($Action -eq 'click' -and $Modifier) { $driverArgs += @('--modifier', $Modifier) }

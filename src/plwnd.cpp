@@ -1,4 +1,5 @@
 #include "plwnd.h"
+#include "window_snap.h"
 #include "mainwnd.h"
 #include "playback.h"
 #include "playlist_worker.h"
@@ -31,9 +32,9 @@ int anchor = -1, top = 0, insertion = -1, hover = 0, pressed = 0;
 bool dragging = false, scrollDrag = false, deferSelection = false;
 POINT down{};
 float scale = 1;
-enum class Dock { None, Bottom, Top, Right, Left };
+using Dock = WindowSnap::Side;
 Dock dock = Dock::None;
-int dockOffset = 0;
+WindowSnap::Anchor dockAnchor = WindowSnap::Anchor::Start;
 bool movingList = false;
 bool sizeMoveLoop = false;
 POINT moveCursor{};
@@ -47,31 +48,13 @@ RECT WorkArea() {
     if (GetMonitorInfoW(MonitorFromWindow(mainWindow,MONITOR_DEFAULTTONEAREST),&monitor)) return monitor.rcWork;
     RECT work{}; SystemParametersInfoW(SPI_GETWORKAREA,0,&work,0); return work;
 }
-// Snap only facing edges with an overlapping span: nearby windows cannot
-// become attached through a distant corner or while rows are reordered.
 Dock Snap(RECT& list) {
     RECT parent{}; GetWindowRect(mainWindow,&parent);
-    int tolerance=S(12), best=tolerance+1, dx=0, dy=0;
-    Dock side=Dock::None;
-    auto choose=[&](Dock candidate,int distance,int x,int y) {
-        if (std::abs(distance)<best) { best=std::abs(distance); side=candidate; dx=x; dy=y; }
-    };
-    if (list.left<parent.right && list.right>parent.left) {
-        choose(Dock::Bottom,list.top-parent.bottom,0,parent.bottom-list.top);
-        choose(Dock::Top,list.bottom-parent.top,0,parent.top-list.bottom);
-    }
-    if (list.top<parent.bottom && list.bottom>parent.top) {
-        choose(Dock::Right,list.left-parent.right,parent.right-list.left,0);
-        choose(Dock::Left,list.right-parent.left,parent.left-list.right,0);
-    }
-    if (side!=Dock::None) OffsetRect(&list,dx,dy);
-    return side;
+    auto attachment=WindowSnap::Snap(list,parent,S(24));
+    dockAnchor=attachment.anchor;
+    return attachment.side;
 }
-void RememberDock(Dock side,const RECT& list) {
-    RECT parent{}; GetWindowRect(mainWindow,&parent);
-    dock=side;
-    dockOffset=(side==Dock::Bottom || side==Dock::Top) ? list.left-parent.left : list.top-parent.top;
-}
+void RememberDock(Dock side,const RECT&) { dock=side; }
 void AvoidOverlap() {
     RECT parent{}, list{}, overlap{};
     GetWindowRect(mainWindow,&parent); GetWindowRect(window,&list);
@@ -581,7 +564,7 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
     mainWindow=main;
     sessionPath=sessionFile?sessionFile:L"";
     selected.clear(); anchor=-1; top=0; status.clear();
-    movingList=false; sizeMoveLoop=false; dock=Dock::None;
+    movingList=false; sizeMoveLoop=false; dock=Dock::None; dockAnchor=WindowSnap::Anchor::Start;
     WNDCLASSEXW cls{}; cls.cbSize=sizeof(cls); cls.style=CS_DBLCLKS|CS_HREDRAW|CS_VREDRAW;
     cls.lpfnWndProc=Proc; cls.hInstance=instance; cls.hCursor=LoadCursorW(nullptr,IDC_ARROW); cls.lpszClassName=kClass;
     if (!RegisterClassExW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) return FALSE;
@@ -637,16 +620,10 @@ void PlWnd_Shutdown() { if (window) DestroyWindow(window); mainWindow=nullptr; d
 void PlWnd_MainMoved() {
     if (!window || !mainWindow || dock==Dock::None || movingList || IsIconic(mainWindow)) return;
     RECT parent{},list{}; GetWindowRect(mainWindow,&parent); GetWindowRect(window,&list);
-    int x=parent.left+dockOffset,y=parent.top+dockOffset;
-    switch (dock) {
-    case Dock::Bottom: y=parent.bottom; break;
-    case Dock::Top: y=parent.top-(list.bottom-list.top); break;
-    case Dock::Right: x=parent.right; break;
-    case Dock::Left: x=parent.left-(list.right-list.left); break;
-    case Dock::None: return;
-    }
-    if (x!=list.left || y!=list.top)
-        SetWindowPos(window,nullptr,x,y,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
+    RECT aligned=list;
+    WindowSnap::Place(aligned,parent,{dock,dockAnchor});
+    if (aligned.left!=list.left || aligned.top!=list.top)
+        SetWindowPos(window,nullptr,aligned.left,aligned.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
 }
 void PlWnd_Show() { if(window) { ShowWindow(window,SW_SHOW); Ui::SaveAppearanceValue(L"PlaylistVisible",1); SetForegroundWindow(window); } }
 void PlWnd_Toggle() { if(window) { ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE); Ui::SaveAppearanceValue(L"PlaylistVisible",IsWindowVisible(window)!=FALSE); PlWnd_Refresh(); } }

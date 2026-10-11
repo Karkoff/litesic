@@ -1,0 +1,29 @@
+{
+  "sources": {
+    "src/title_scroll.h": "441985f2de32eed52e05b28009db271bbde46d87c36199f55a904ba15b8c8bf1",
+    "src/ui_draw.cpp": "5690e3ecc439a518dfd8fe54f6e122bf4bd4403f0a9e91ec804f7943c8ca2f38",
+    "src/ui_draw.h": "78be2e1f323aa0f75332531a83440c4dd5abb5a282966934c95015f858b4dc1b",
+    "src/ui_player.cpp": "bd3b079bf98522ef2663d813a0b1acd6f2c8b998d90cbe352341bdce95303333",
+    "src/ui_player.h": "bb509d559a0f333d54a4641f3f487e1871bf3bfde8733d46ff0193cf330c35fc",
+    "src/mainwnd.cpp": "0d4167fe4d6ec6d5ddd37c87de6f7fa8bd450d9fab1e46d23b163fac6d2569fa",
+    "tests/test_title_scroll.cpp": "9151c8feb55a6d60c60c492d9e65ecae65af4dbd7402e1ae4129e50352376090",
+    "tests/test_ui_draw.cpp": "1d87981d2dc21d81f413666ba36fbc0761593db5dd6fa5e65fb7a389c57186c4"
+  },
+  "builds": {
+    "32-debug": "1b99004a30acfe477ac9e0a2b74480626d53ff17bde0d44141481c1b31c01cda",
+    "32-release": "54aa2c38d042dc799f2a4151edc534bd02d3ac2d7e4e5ad7e6e2c7280b98af4e",
+    "64-debug": "3e6290a8e339bac2794c3936ddf4c480c130e79acafe4bafdd551f1e17ed4ee2",
+    "64-release": "8a5e541d38c983a8e8ee6ecc513c59b48562bf6566176c140775b69695e0861d"
+  },
+  "tests": {
+    "32-release": "PASS",
+    "64-release": "PASS"
+  },
+  "captures": {
+    "title-before-play": "7f95eaa0c8087073b1fbd7c59f087f1b4bcd51d28b65e2c6d7f113267ed64bb6",
+    "title-start": "8639538f7dbb6b1a45fde9922d56cd7a3d28c43e33f853d1269fac17c276dc98",
+    "title-moving-a": "b4a1aabd86f3f7f839adbb3dbde2918625137a910f2e582bc8c62d81c6f76a72",
+    "title-moving-b": "6014c134937dbf497f77dea8d1cf87d6e21511deac93f5a3d8adb2f7ab89f72b",
+    "title-return": "66d41a0bf08ccd423b812e50b92d84e48f626c05fa1edf6213a1eece4ba67fcb"
+  }
+}

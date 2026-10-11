@@ -16,7 +16,12 @@ static void dc_render_resize_recreate() {
             canvas.TitleBar(460,L"LiteSic · Áudio",true);
             canvas.Button({8,40,100,28},L"Reproduzir",true,false,false,true,true);
             canvas.Slider({8,80,200,28},0.5f);
+            canvas.Fill({0,110,460,60},Ui::Background);
+            CHECK(canvas.ScrollingText({8,120,100,28},L"A long music title that must move smoothly in both directions",2750));
+            CHECK(!canvas.ScrollingText({8,160,100,28},L"Short",2750));
             CHECK(canvas.End()); GdiFlush();
+            CHECK(GetPixel(dc,static_cast<int>(5*scale),static_cast<int>(130*scale))==Ui::NativeColor(Ui::Background));
+            CHECK(GetPixel(dc,static_cast<int>(115*scale),static_cast<int>(130*scale))==Ui::NativeColor(Ui::Background));
             CHECK(GetPixel(dc,static_cast<int>(200*scale),static_cast<int>(200*scale))==RGB(0x3B,0x28,0x20));
             canvas.DiscardTarget(); // Same production recovery as device loss.
         }

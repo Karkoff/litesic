@@ -20,6 +20,32 @@
 #include "../third_party/miniaudio.h"
 
 #include <cstdint>
+#include "eq_state.h"
+
+static Eq::Processor g_eq;
+static struct { ma_node_base base; ma_uint32 channels; } g_eqNode{};
+static BOOL g_eqActive=FALSE;
+static void EqProcess(ma_node*,const float** in,ma_uint32* ni,float** out,ma_uint32* no) {
+    ma_uint32 n=*ni<*no?*ni:*no;
+    g_eq.Process(out[0],in[0],n);*ni=*no=n;
+}
+static ma_node_vtable eqVtable={EqProcess,nullptr,1,1,0};
+static BOOL InitEq(ma_engine* engine) {
+    ma_uint32 channels=ma_engine_get_channels(engine);
+    if(!channels || channels>Eq::MaxChannels) return FALSE;
+    g_eq.Initialize(ma_engine_get_sample_rate(engine),channels,Eq::State());
+    auto config=ma_node_config_init();config.vtable=&eqVtable;
+    config.pInputChannels=&channels;config.pOutputChannels=&channels;
+    if(ma_node_init(ma_engine_get_node_graph(engine),&config,nullptr,&g_eqNode.base)!=MA_SUCCESS) return FALSE;
+    if(ma_node_attach_output_bus(&g_eqNode.base,0,ma_engine_get_endpoint(engine),0)!=MA_SUCCESS) {
+        ma_node_uninit(&g_eqNode.base,nullptr);return FALSE;
+    }
+    g_eqActive=TRUE;return TRUE;
+}
+void Audio_UpdateEq(const Eq::Parameters& p) { if(g_eqActive) g_eq.Publish(p); }
+void Audio_SetEqBand(int b,float v){Eq::SetGain(b,v);}
+void Audio_SetEqEnabled(bool v){Eq::SetEnabled(v);}
+void Audio_SetPreamp(float v){Eq::SetGain(-1,v);}
 
 /* ------------------------------------------------------------------ */
 /* Estado interno (opaco)                                               */
@@ -67,6 +93,7 @@ static BOOL InitEngine(const ma_engine_config* config)
         return FALSE;
     }
 
+    if(!InitEq(&g_audio.engine)) { ma_engine_uninit(&g_audio.engine);return FALSE; }
     g_audio.active   = TRUE;
     g_audio.state    = AUDIO_STATE_STOPPED;
     g_audio.fileSizeBytes = 0;
@@ -101,9 +128,8 @@ void Audio_TestVizLock(BOOL lock) {
 /* ------------------------------------------------------------------ */
 /* Visualização — M4-T1                                                 */
 /* Um nó "tap" é inserido no grafo do ma_engine entre o sound e o       */
-/* endpoint. Ele repassa o áudio sem alteração e copia uma mistura mono */
-/* para o ring buffer, então a UI vê exatamente o que vai para o        */
-/* dispositivo, sem decoder auxiliar nem seek.                          */
+/* endpoint, agora depois do EQ. Copia uma mistura mono pós-EQ/pan e    */
+/* anterior ao volume master do endpoint; mantém o contrato da M4.      */
 /* ------------------------------------------------------------------ */
 
 typedef struct
@@ -114,6 +140,12 @@ typedef struct
 
 static VizTapNode g_vizTap{};
 static BOOL       g_vizTapActive = FALSE;
+#ifdef LITESIC_TEST
+void Audio_TestSkipEq(BOOL skip) {
+    if(g_audio.soundLoaded) ma_node_attach_output_bus(&g_audio.sound,0,
+        skip?(g_vizTapActive?static_cast<ma_node*>(&g_vizTap.base):ma_engine_get_endpoint(&g_audio.engine)):&g_eqNode.base,0);
+}
+#endif
 
 /* Escreve amostras mono no ring buffer (seção crítica curta: só cópia). */
 static void Audio_VizWriteBlock(const float* samples, int frameCount)
@@ -205,6 +237,7 @@ BOOL Audio_VizInit(void)
         ma_node_attach_output_bus(&g_vizTap.base, 0,
                                   ma_engine_get_endpoint(&g_audio.engine), 0);
         g_vizTapActive = TRUE;
+        ma_node_attach_output_bus(&g_eqNode.base,0,&g_vizTap.base,0);
     }
 
     return TRUE;
@@ -214,6 +247,7 @@ void Audio_VizShutdown(void)
 {
     if (g_vizTapActive)
     {
+        if(g_eqActive) ma_node_attach_output_bus(&g_eqNode.base,0,ma_engine_get_endpoint(&g_audio.engine),0);
         ma_node_uninit(&g_vizTap.base, NULL);
         g_vizTapActive = FALSE;
     }
@@ -255,6 +289,7 @@ void Audio_Shutdown(void)
     if (!g_audio.active)
         return;
 
+    ma_engine_stop(&g_audio.engine);
     /* Parar e liberar o sound antes de desligar a engine. */
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
@@ -262,6 +297,8 @@ void Audio_Shutdown(void)
 
     /* Encerrar visualização. */
     Audio_VizShutdown();
+
+    if(g_eqActive) {ma_node_uninit(&g_eqNode.base,nullptr);g_eqActive=FALSE;}
 
     ma_engine_uninit(&g_audio.engine);
     g_audio.active   = FALSE;
@@ -274,6 +311,7 @@ BOOL Audio_IsActive(void)
 }
 
 void Audio_Unload(void) {
+    g_eq.RequestReset();
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
     g_audio.currentPath[0] = 0;
@@ -296,6 +334,7 @@ BOOL Audio_Load(const wchar_t* path)
     /* Parar e liberar o sound anterior se houver. */
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
+    g_eq.RequestReset();
 
     /* Inicializar sound a partir do arquivo — miniaudio decodifica MP3/WAV/
      * FLAC nativamente. OGG/Vorbis é habilitado pelo stb_vorbis incluído
@@ -325,9 +364,9 @@ BOOL Audio_Load(const wchar_t* path)
         ma_decoder_uninit(&probe);
     }
 
-    /* Rotear a saída do sound pelo nó de visualização. */
-    if (g_vizTapActive)
-        ma_node_attach_output_bus(&g_audio.sound, 0, &g_vizTap.base, 0);
+    /* Rotear o sound pelo EQ; o tap opcional fica depois do EQ. */
+    if (g_eqActive)
+        ma_node_attach_output_bus(&g_audio.sound, 0, &g_eqNode.base, 0);
 
     /* Salvar caminho e tamanho do arquivo. */
     wcsncpy_s(g_audio.currentPath, ARRAYSIZE(g_audio.currentPath),
@@ -400,6 +439,7 @@ void Audio_Stop(void)
     ma_sound_stop(&g_audio.sound);
     ma_sound_seek_to_pcm_frame(&g_audio.sound, 0);
     g_audio.state = AUDIO_STATE_STOPPED;
+    g_eq.RequestReset();
 }
 
 AudioState Audio_GetState(void)
@@ -516,6 +556,7 @@ void Audio_SeekSeconds(double seconds)
 
     ma_uint64 targetFrame = (ma_uint64)(seconds * sampleRate);
     ma_sound_seek_to_pcm_frame(&g_audio.sound, targetFrame);
+    g_eq.RequestReset();
 }
 
 /* ------------------------------------------------------------------ */

@@ -1,5 +1,18 @@
 # Ambiente de desenvolvimento Windows
 
+## Atualização M6 — 11/10/2026
+
+EQ real integrado ao grafo miniaudio: dez bandas, PRE, bypass, presets,
+persistência e painel com os 36 temas. Quatro builds e suítes passaram:
+20 executáveis, 105 verificações por variante na rodada original. M6 está
+COMPLETE após confirmação do usuário. Ajustes posteriores incluem encaixe
+do EQ/playlist e título rolando no LCD. [Contratos, testes, medições e limites](M6-EQUALIZER-2026-10-11.md).
+`scripts/dev.ps1 -Action eq-probe` mede o grafo offline;
+`scripts/diagnostics/run_eq_probe.ps1` compara três rodadas com áudio de b27da1e.
+`scripts/gui.ps1 -Action launch -Validation` usa INI/playlist isolados.
+
+As notas abaixo registram também o ambiente e etapas anteriores à M6.
+
 Atualização UI/UX: player e playlist migrados parcialmente para Direct2D/DirectWrite,
 EQ explicitamente indisponível até DSP real. A suíte atual tem dezesseis binários,
 89 verificações por variante (356 execuções nas quatro), incluindo sete casos

@@ -1,0 +1,34 @@
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/app.o src/app.cpp
+powershell : src/app.cpp: In function 'void InitDpiAwareness()':
+No linha:2 caractere:1
++ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev.ps1 - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (src/app.cpp: In...piAwareness()'::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+src/app.cpp:28:13: warning: cast between incompatible function types from 'FARPROC' {aka 'int 
+(__attribute__((stdcall)) *)()'} to 'PFN_SetProcessDpiAwarenessContext' {aka 'int (__attribute__((stdcall)) 
+*)(void*)'} [-Wcast-function-type]
+   28 |             (PFN_SetProcessDpiAwarenessContext)GetProcAddress(
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   29 |                 hUser32, "SetProcessDpiAwarenessContext");
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/eqwnd.o src/eqwnd.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/mainwnd.o src/mainwnd.cpp
+src/mainwnd.cpp: In function 'float GetDpiScaleFactor(HWND)':
+src/mainwnd.cpp:58:23: warning: cast between incompatible function types from 'FARPROC' {aka 'int 
+(__attribute__((stdcall)) *)()'} to 'PFN_GetDpiForWindow' {aka 'unsigned int (__attribute__((stdcall)) *)(HWND__*)'} 
+[-Wcast-function-type]
+   58 |             pGetDpi = (PFN_GetDpiForWindow)GetProcAddress(
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |                 hUser32, "GetDpiForWindow");
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/mainwnd.cpp: At global scope:
+src/mainwnd.cpp:407:13: warning: 'void DrawLcdDisplay(HWND, HDC, LPCWSTR)' defined but not used [-Wunused-function]
+  407 | static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
+      |             ^~~~~~~~~~~~~~
+src/mainwnd.cpp:278:13: warning: 'void DrawTitleButton(HDC, TitleBarButton)' defined but not used [-Wunused-function]
+  278 | static void DrawTitleButton(HDC hdc, TitleBarButton btn)
+      |             ^~~~~~~~~~~~~~~
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/plwnd.o src/plwnd.cpp
+/mingw32/bin/g++.exe -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -mwindows -municode -o build/32/debug/LiteSic.exe build/32/debug/app.o build/32/debug/audio.o build/32/debug/eq_dsp.o build/32/debug/eq_state.o build/32/debug/eqwnd.o build/32/debug/m3u.o build/32/debug/mainwnd.o build/32/debug/playback.o build/32/debug/playlist.o build/32/debug/playlist_view.o build/32/debug/playlist_worker.o build/32/debug/plwnd.o build/32/debug/tags.o build/32/debug/theme_window.o build/32/debug/ui_draw.o build/32/debug/ui_player.o build/32/debug/ui_theme.o build/32/debug/util.o build/32/debug/visualizer.o build/32/debug/miniaudio_impl.o build/32/debug/app.res.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm

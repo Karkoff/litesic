@@ -1,0 +1,28 @@
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/eqwnd.o src/eqwnd.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/mainwnd.o src/mainwnd.cpp
+powershell : src/mainwnd.cpp: In function 'float GetDpiScaleFactor(HWND)':
+No linha:2 caractere:1
++ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev.ps1 - ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (src/mainwnd.cpp...eFactor(HWND)'::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+src/mainwnd.cpp:58:23: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 
+'PFN_GetDpiForWindow' {aka 'unsigned int (*)(HWND__*)'} [-Wcast-function-type]
+   58 |             pGetDpi = (PFN_GetDpiForWindow)GetProcAddress(
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   59 |                 hUser32, "GetDpiForWindow");
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/mainwnd.cpp: At global scope:
+src/mainwnd.cpp:410:13: warning: 'void DrawLcdDisplay(HWND, HDC, LPCWSTR)' defined but not used [-Wunused-function]
+  410 | static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
+      |             ^~~~~~~~~~~~~~
+src/mainwnd.cpp:281:13: warning: 'void DrawTitleButton(HDC, TitleBarButton)' defined but not used [-Wunused-function]
+  281 | static void DrawTitleButton(HDC hdc, TitleBarButton btn)
+      |             ^~~~~~~~~~~~~~~
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/plwnd.o src/plwnd.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/theme_window.o src/theme_window.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/ui_draw.o src/ui_draw.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/ui_player.o src/ui_player.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/64/debug/visualizer.o src/visualizer.cpp
+/mingw64/bin/g++.exe -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -mwindows -municode -o build/64/debug/LiteSic.exe build/64/debug/app.o build/64/debug/audio.o build/64/debug/eq_dsp.o build/64/debug/eq_state.o build/64/debug/eqwnd.o build/64/debug/m3u.o build/64/debug/mainwnd.o build/64/debug/playback.o build/64/debug/playlist.o build/64/debug/playlist_view.o build/64/debug/playlist_worker.o build/64/debug/plwnd.o build/64/debug/tags.o build/64/debug/theme_window.o build/64/debug/ui_draw.o build/64/debug/ui_player.o build/64/debug/ui_theme.o build/64/debug/util.o build/64/debug/visualizer.o build/64/debug/miniaudio_impl.o build/64/debug/app.res.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm

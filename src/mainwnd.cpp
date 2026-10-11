@@ -196,6 +196,9 @@ static BOOL g_showRemaining = FALSE;
 
 /* M3-T2: contador de ms para scroll do título. */
 static DWORD g_scrollElapsedMs = 0;
+static DWORD g_scrollTick = 0;
+static bool g_titleOverflow = false;
+static std::wstring g_scrollTitle;
 
 /* M3-T4/M3-T5: estado de arraste do slider. */
 static SliderType g_draggingSlider = SLIDER_NONE;
@@ -230,7 +233,7 @@ static void CreatePlayerTooltips(HWND hwnd) {
         CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,hwnd,nullptr,GetModuleHandleW(nullptr),nullptr);
     const wchar_t* labels[]={L"",L"Anterior",L"Próximo",L"Aleatório",L"Repetir: desligado → lista → faixa",
         L"Reproduzir",L"Pausar",L"Parar",L"Posição da faixa",L"Volume",L"Balanço: esquerda / direita",
-        L"Mostrar / ocultar playlist",L"Equalizador indisponível: DSP pendente na M6",L"Espectro FFT",L"Osciloscópio",L"",L"Mostrar / ocultar visualizador"};
+        L"Mostrar / ocultar playlist",L"Mostrar / ocultar equalizador",L"Espectro FFT",L"Osciloscópio",L"",L"Mostrar / ocultar visualizador"};
     for(int id=1;id<=16;++id) {
         TOOLINFOW tool{};tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;tool.uFlags=TTF_SUBCLASS;
         tool.lpszText=id==15?LPSTR_TEXTCALLBACKW:const_cast<wchar_t*>(labels[id]);
@@ -687,6 +690,8 @@ static PlayerViewState PlayerSnapshot() {
     Audio_GetTrackName(name,ARRAYSIZE(name)); s.title=name;
     if(const Track* track=PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex())) s.title=track->displayTitle;
     if(!s.loaded) s.title=L"Sua música, por perto";
+    if(s.title!=g_scrollTitle){g_scrollTitle=s.title;g_scrollElapsedMs=0;}
+    s.titleElapsedMs=g_scrollElapsedMs;
     g_tooltipTitle=s.title;
     s.subtitle=!s.loaded?L"Adicione arquivos pela playlist":s.playback==AUDIO_STATE_PLAYING?L"Reproduzindo":
         s.playback==AUDIO_STATE_PAUSED?L"Pausado":L"Pronto para reproduzir";
@@ -778,7 +783,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         SetTimer(hwnd, POSITION_TIMER_ID, 250, NULL);
 
         /* Timer para scroll do título (30ms — ~33fps suave). */
-        // DirectWrite ellipsis + tooltip replace continuous idle marquee repaint.
+        SetTimer(hwnd, SCROLL_TIMER_ID, 30, NULL);
+        g_scrollTick=GetTickCount();
 
         /* Timer do visualizador (~60fps). */
         SetTimer(hwnd, VIZ_TIMER_ID, 33, NULL);
@@ -787,7 +793,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     }
 
     case WM_WINDOWPOSCHANGED:
-        PlWnd_MainMoved();
+        PlWnd_MainMoved(); EqWnd_MainMoved();
         return DefWindowProcW(hwnd, msg, wParam, lParam); // Also delivers WM_SIZE/WM_MOVE.
 
     case WM_ERASEBKGND: return 1;
@@ -866,13 +872,13 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         }
         else if (wParam == SCROLL_TIMER_ID)
         {
-            /* Atualizar contador de scroll do título. */
-            g_scrollElapsedMs += 30;
-
-            /* Invalidar apenas a área do título para redraw. */
-            RECT titleRect = { MainWnd_DPIScale(TITLE_X), MainWnd_DPIScale(TITLE_Y),
-                               MainWnd_DPIScale(TITLE_X + TITLE_W), MainWnd_DPIScale(TITLE_Y + TITLE_H) };
-            InvalidateRect(hwnd, &titleRect, FALSE);
+            DWORD now=GetTickCount(),delta=now-g_scrollTick;g_scrollTick=now;
+            if(g_titleOverflow && IsWindowVisible(hwnd) && !IsIconic(hwnd)) {
+                g_scrollElapsedMs+=delta;
+                RECT titleRect={MainWnd_DPIScale(TITLE_X),MainWnd_DPIScale(TITLE_Y),
+                    MainWnd_DPIScale(TITLE_X+TITLE_W),MainWnd_DPIScale(TITLE_Y+23)};
+                InvalidateRect(hwnd,&titleRect,FALSE);
+            }
         }
         break;
     }
@@ -1081,7 +1087,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         HDC hdc = BeginPaint(hwnd, &ps);
 
         RECT client{}; GetClientRect(hwnd,&client);
-        if(PaintPlayer(g_canvas,hdc,client,g_dpiScale,PlayerSnapshot())) {
+        if(PaintPlayer(g_canvas,hdc,client,g_dpiScale,PlayerSnapshot(),&g_titleOverflow)) {
             EndPaint(hwnd,&ps); break;
         }
 
@@ -1326,7 +1332,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             bool active=(id==16 && g_visualizerVisible) || (id==11 && PlWnd_IsVisible());
             HBRUSH brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Active:Ui::Surface));FillRect(memDC,&rect,brush);DeleteObject(brush);
             brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Green:Ui::Bronze));FrameRect(memDC,&rect,brush);DeleteObject(brush);
-            DrawTextW(memDC,id==16?L"VIZ":id==11?L"LISTA":L"EQ ...",-1,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
+            DrawTextW(memDC,id==16?L"VIZ":id==11?L"LISTA":L"EQ",-1,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
         }
         /* Copiar buffer para a tela. */
         BitBlt(hdc, 0, 0, scaledW, scaledH, memDC, 0, 0, SRCCOPY);

@@ -1,4 +1,5 @@
 #include "ui_draw.h"
+#include "title_scroll.h"
 #include <algorithm>
 #include <cmath>
 
@@ -6,6 +7,7 @@ namespace Ui {
 template<class T> static void Release(T*& p) { if (p) { p->Release(); p = nullptr; } }
 static D2D1_RECT_F Native(Rect r) { return D2D1::RectF(r.x,r.y,r.x+r.w,r.y+r.h); }
 Canvas::~Canvas() {
+    Release(scrollLayout_);
     DiscardTarget();
     for (auto& p : ellipsis_) Release(p);
     for (auto& p : fonts_) Release(p);
@@ -16,6 +18,7 @@ bool Canvas::Initialize() {
     if (!write_ && FAILED(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),
         reinterpret_cast<IUnknown**>(&write_)))) return false;
     if(themeGeneration_!=ThemeGeneration()) {
+        Release(scrollLayout_);
         for(auto& p:ellipsis_) Release(p);
         for(auto& p:fonts_) Release(p);
         themeGeneration_=ThemeGeneration();
@@ -84,6 +87,27 @@ void Canvas::TextAt(Rect r,const std::wstring& text,uint32_t color,Font font,boo
     auto format=fonts_[static_cast<int>(font)];
     format->SetTextAlignment(center?DWRITE_TEXT_ALIGNMENT_CENTER:DWRITE_TEXT_ALIGNMENT_LEADING);
     Color(color); target_->DrawText(text.c_str(),static_cast<UINT32>(text.size()),format,Native(r),brush_,D2D1_DRAW_TEXT_OPTIONS_CLIP);
+}
+bool Canvas::ScrollingText(Rect r,const std::wstring& text,double elapsedMs,uint32_t color,Font font) {
+    if(r.w<=0 || r.h<=0)return false;
+    if(!scrollLayout_ || text!=scrollText_ || r.w!=scrollWidth_ || r.h!=scrollHeight_ || font!=scrollFont_) {
+        Release(scrollLayout_);
+        auto format=fonts_[static_cast<int>(font)];
+        if(FAILED(write_->CreateTextLayout(text.c_str(),static_cast<UINT32>(text.size()),format,r.w,r.h,&scrollLayout_))) {
+            TextAt(r,text,color,font);return false;
+        }
+        DWRITE_TRIMMING trim{DWRITE_TRIMMING_GRANULARITY_NONE,0,0};
+        scrollLayout_->SetTrimming(&trim,nullptr);
+        scrollLayout_->SetTextAlignment(DWRITE_TEXT_ALIGNMENT_LEADING);
+        DWRITE_TEXT_METRICS metrics{};
+        scrollLayout_->GetMetrics(&metrics);scrollExtent_=metrics.widthIncludingTrailingWhitespace;
+        scrollLayout_->SetMaxWidth(std::max(r.w,scrollExtent_+1));
+        scrollText_=text;scrollWidth_=r.w;scrollHeight_=r.h;scrollFont_=font;
+    }
+    float overflow=std::max(0.f,scrollExtent_-r.w);
+    Clip(r);Color(color);
+    target_->DrawTextLayout(D2D1::Point2F(r.x-TitleScrollOffset(overflow,elapsedMs),r.y),scrollLayout_,brush_);
+    Unclip();return overflow>.5f;
 }
 void Canvas::Button(Rect r,const std::wstring& text,bool active,bool hover,bool pressed,bool enabled,bool focus) {
     Fill(r,!enabled?Surface:pressed?palette.pressed:active?Active:hover?Hover:Surface,3);

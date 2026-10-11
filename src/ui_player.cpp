@@ -56,7 +56,7 @@ static void ModeIcon(Ui::Canvas& c,int id,float x,float y,uint32_t color,bool on
         if(one) c.TextAt({x-4,y-7,8,14},L"1",color,Ui::Font::Small,true);
     }
 }
-bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const PlayerViewState& s) {
+bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const PlayerViewState& s,bool* titleOverflow) {
     using namespace Ui;
     if(!c.Begin(dc,pixels,scale)) return false;
     const float height=static_cast<float>(PlayerLayoutHeight(s.visualizerVisible));
@@ -66,7 +66,8 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
     c.Fill({8,38,444,50},Display,3);
     c.Stroke({LCD_X,LCD_Y,LCD_W,LCD_H},Active,2);
     c.TextAt({LCD_X,LCD_Y,LCD_W,LCD_H},s.time,Green,Font::Digital,true);
-    c.TextAt({TITLE_X,TITLE_Y,TITLE_W,23},s.title,Green,Font::Heading);
+    bool overflow=c.ScrollingText({TITLE_X,TITLE_Y,TITLE_W,23},s.title,s.titleElapsedMs,Green,Font::Heading);
+    if(titleOverflow)*titleOverflow=overflow && s.loaded;
     c.TextAt({TITLE_X,TITLE_Y+23,TITLE_W,19},s.subtitle,Muted,Font::Small);
     c.TextAt({12,SEEK_Y,34,SEEK_H},L"TEMPO",Muted,Font::Small);
     c.Slider(PlayerControlRect(8),s.seek,s.loaded,s.focus==8);
@@ -105,7 +106,7 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
         bool active=(id==11 && s.playlistVisible) || (id==16 && s.visualizerVisible);
         c.Fill(r,s.pressed==id?Border:s.hover==id?Hover:active?Active:Surface,3);
         c.Stroke(r,s.focus==id?Accent:active?Green:Bronze,3);
-        c.TextAt(r,id==16?L"VIZ":id==11?L"LISTA":L"EQ …",id==12?Muted:Text,Font::Small,true);
+        c.TextAt(r,id==16?L"VIZ":id==11?L"LISTA":L"EQ",Text,Font::Small,true);
     }
     return c.End();
 }

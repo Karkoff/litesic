@@ -43,7 +43,7 @@ TEST_SRCS := $(wildcard tests/*.c)
 TEST_BINS := $(patsubst tests/%.c,$(BUILD_DIR)/test-%.exe,$(TEST_SRCS))
 CPP_TEST_SRCS := $(wildcard tests/*.cpp)
 TEST_BINS += $(patsubst tests/%.cpp,$(BUILD_DIR)/test-%.exe,$(CPP_TEST_SRCS))
-TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o)
+TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o)
 TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o)
 $(BUILD_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
@@ -54,8 +54,16 @@ $(BUILD_DIR)/test-test_ui_draw.exe: $(BUILD_DIR)/ui_draw.o
 $(BUILD_DIR)/test-test_themes.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_themes.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_themes.exe: LDLIBS += -lpsapi
+$(BUILD_DIR)/test-test_eq_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_eq_window.exe: $(TEST_UI_OBJS)
 
 all: $(TARGET)
+
+$(BUILD_DIR)/eq-probe.exe: scripts/diagnostics/eq_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(LDLIBS) -lpsapi
+
+eq-probe: $(BUILD_DIR)/eq-probe.exe
+	@set -e; for mode in 6 0 1 2 3 4 5; do "$(BUILD_DIR)/eq-probe.exe" $$mode; done
 
 $(TARGET): $(OBJS) Makefile
 	$(CXX) $(LDFLAGS) -mwindows -municode -o $@ $(OBJS) $(LDLIBS)

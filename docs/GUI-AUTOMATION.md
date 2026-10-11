@@ -1,5 +1,20 @@
 # Automação gráfica de desenvolvimento
 
+## M6 — EQ real e sessão isolada
+
+`-Action launch -Validation` passa `--validation` ao executável permitido e
+usa exclusivamente `build/gui/m6-session/settings.ini` e `playlist.m3u8`.
+Lançamentos normais conservam a sessão pessoal. As mesmas guardas de
+PID/criação/hash/proprietário/observação continuam valendo. O menu de presets
+agora reconhece `LiteSic.EqualizerWnd` como dono permitido no mesmo processo.
+
+O EQ tem dez bandas e PRE reais, ON/OFF, presets, curva e teclado. Capturas
+interativas de arraste, ON, Rock, restauração e temas; integridade das 36
+paletas nas quatro variantes e medições estão no
+[relatório M6](M6-EQUALIZER-2026-10-11.md). O painel antigo indisponível descrito
+nas seções históricas abaixo foi substituído. O usuário confirmou o funcionamento da M6; a rodada posterior de encaixe
+e alinhamento está em [WINDOW-SNAP](WINDOW-SNAP-2026-10-11.md).
+
 ## Temas — validação atual em 11/10/2026
 
 Após os ajustes de playlist/menus, o seletor tem moldura, botões e rolagem

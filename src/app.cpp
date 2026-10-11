@@ -41,12 +41,21 @@ static void InitDpiAwareness(void)
 /* ------------------------------------------------------------------ */
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
-                    LPWSTR /*lpCmdLine*/, int nCmdShow)
+                    LPWSTR lpCmdLine, int nCmdShow)
 {
     /* Configurar Per-Monitor DPI Awareness V2 antes de criar janelas. */
     InitDpiAwareness();
     HRESULT com = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-    Ui::ThemeInitializeUser();
+    std::wstring validationDirectory;
+    // Fixed, executable-relative developer session. Never touches the personal INI/playlist.
+    if(!wcscmp(lpCmdLine,L"--validation")) {
+        wchar_t executable[MAX_PATH]{};GetModuleFileNameW(nullptr,executable,MAX_PATH);
+        validationDirectory=executable;
+        for(int i=0;i<4;++i)validationDirectory=validationDirectory.substr(0,validationDirectory.find_last_of(L"\\/"));
+        validationDirectory+=L"\\build\\gui";CreateDirectoryW(validationDirectory.c_str(),nullptr);
+        validationDirectory+=L"\\m6-session";CreateDirectoryW(validationDirectory.c_str(),nullptr);
+        Ui::ThemeConfigure((validationDirectory+L"\\settings.ini").c_str());
+    } else Ui::ThemeInitializeUser();
 
     /* Registrar a classe da janela (uma vez). */
     if (!MainWnd_RegisterClass(hInstance))
@@ -64,7 +73,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
     }
     wchar_t appData[MAX_PATH]{};
     std::wstring session;
-    if (SUCCEEDED(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA|CSIDL_FLAG_CREATE,
+    if(!validationDirectory.empty()) session=validationDirectory+L"\\playlist.m3u8";
+    else if (SUCCEEDED(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA|CSIDL_FLAG_CREATE,
                                   nullptr,SHGFP_TYPE_CURRENT,appData))) {
         std::wstring directory=std::wstring(appData)+L"\\LiteSic";
         if (CreateDirectoryW(directory.c_str(),nullptr) || GetLastError()==ERROR_ALREADY_EXISTS)

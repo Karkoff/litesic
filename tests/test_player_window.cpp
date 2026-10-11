@@ -96,7 +96,7 @@ static void appearance_persists_across_window_recreation() {
     window=MainWnd_Create(instance,SW_SHOWNOACTIVATE);CHECK(window);
     CHECK(PlWnd_Create(instance,window));CHECK(!PlWnd_IsVisible());
     EqWnd_Restore(window);eqWindow=nullptr;EnumThreadWindows(GetCurrentThreadId(),FindPanels,0);
-    CHECK(eqWindow && IsWindowVisible(eqWindow));CHECK(MainWnd_UserScaleMultiplier()==.9f);
+    CHECK(eqWindow && IsWindowVisible(eqWindow));CHECK(std::abs(MainWnd_UserScaleMultiplier()-.9f)<1e-6f);
     RECT r{};GetClientRect(window,&r);CHECK(r.bottom==MainWnd_DPIScale(PlayerLayoutHeight(false)));
     auto state=Ui::LoadAppearance();CHECK(state.spectrum && !state.visualizerVisible);
     Click(16,false);Click(11);CHECK(PlWnd_IsVisible());

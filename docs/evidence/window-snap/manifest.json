@@ -1,0 +1,157 @@
+{
+  "date": "2026-10-11",
+  "builds": {
+    "32-debug": "52b8cbcf877dc90ab5f10e7b59e8886427752604c4c118730b966fe1efbd89b1",
+    "32-release": "a3673aa091c36b02bc295ce8a73d2b1397ea4fea91a2a37c8ddc1083b9e5f0e3",
+    "64-debug": "1610530e27cc07f9347eac1652e448d3ef326d0ce13abc43a289c95f46edb69f",
+    "64-release": "40e6e98573b3c8133ea8f4a709eec24e92081c72331c1db3335c5ddd503c825f"
+  },
+  "sources": {
+    "src/window_snap.h": "a167c7e7b7bce39a3348561d67f8ec7dcd3fddc92616471b3c3c5c11c349d75a",
+    "src/plwnd.cpp": "3b02b82b966107b76385a989de9b28fe3cd6de8d7548533339465e600129ca25",
+    "src/eqwnd.cpp": "23774f27c6ddcab3ab0c1b45090bdc3558819667be93f1a141c9fc782beb8bde",
+    "src/eqwnd.h": "86362c46d39fe091cc493a17099872b50070cdb88491dc191559199c328b34ce",
+    "src/mainwnd.cpp": "e588ca3b6440f79eb8e9797ae9763b18cec9a5a5976f62fcf601f8eb1d616e66",
+    "tests/test_window_snap.cpp": "d658e4e2320e4b1abd59162349fc641f90377ba44237d365db97f9f751d3db79",
+    "tests/test_playlist_window.cpp": "e3e1bec9bf540f28740abac0803469d26b65199cd7efee8a3e3e3dc015aafe54",
+    "tests/test_eq_window.cpp": "5d44bdad0abe65aa8bb621bb3f25cd4894c88f751ea1c4e4d1d86f0da066056c"
+  },
+  "captures": {
+    "snap-initial": {
+      "file": "snap-initial.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ]
+    },
+    "snap-eq-initial": {
+      "file": "snap-eq-initial.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+      "rect": [
+        2265,
+        863,
+        2955,
+        1229
+      ]
+    },
+    "snap-pl-initial": {
+      "file": "snap-pl-initial.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ]
+    },
+    "snap-before-move": {
+      "file": "snap-before-move.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ]
+    },
+    "snap-main-moved": {
+      "file": "snap-main-moved.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+      "rect": [
+        1655,
+        903,
+        2345,
+        1338
+      ]
+    },
+    "snap-eq-follow": {
+      "file": "snap-eq-follow.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ]
+    },
+    "snap-pl-follow": {
+      "file": "snap-pl-follow.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "rect": [
+        1655,
+        1338,
+        2345,
+        1878
+      ]
+    },
+    "snap-eq-before-drag": {
+      "file": "snap-eq-before-drag.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ]
+    },
+    "snap-eq-aligned": {
+      "file": "snap-eq-aligned.png",
+      "sha256": "77e2e0036e73042889b1bfb12f2f00fd2addaf4bc239749692556ec7c005a08f",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ]
+    },
+    "snap-eq-detached": {
+      "file": "snap-eq-detached.png",
+      "sha256": "77e2e0036e73042889b1bfb12f2f00fd2addaf4bc239749692556ec7c005a08f",
+      "rect": [
+        2417,
+        912,
+        3107,
+        1278
+      ]
+    },
+    "snap-eq-reattached": {
+      "file": "snap-eq-reattached.png",
+      "sha256": "77e2e0036e73042889b1bfb12f2f00fd2addaf4bc239749692556ec7c005a08f",
+      "rect": [
+        2345,
+        903,
+        3035,
+        1269
+      ]
+    },
+    "snap-pl-before-drag": {
+      "file": "snap-pl-before-drag.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "rect": [
+        1655,
+        1338,
+        2345,
+        1878
+      ]
+    },
+    "snap-pl-aligned": {
+      "file": "snap-pl-aligned.png",
+      "sha256": "06ef7f47bc13fcd4529f115bd33654799a71b1e2a0de570b56c584426b30a4f7",
+      "rect": [
+        1655,
+        1338,
+        2345,
+        1878
+      ]
+    }
+  },
+  "cases": {
+    "32-debug": 108,
+    "32-release": 108,
+    "64-debug": 108,
+    "64-release": 108
+  }
+}

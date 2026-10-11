@@ -1,0 +1,262 @@
+[
+  {
+    "utc": "2026-10-11T16:23:21.182273+00:00",
+    "action": "launch",
+    "args": {
+      "action": "launch",
+      "validation": true,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "release",
+      "dialog": false,
+      "label": "title-before-play",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 71766784,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\title-before-play.png",
+      "sha256": "7f95eaa0c8087073b1fbd7c59f087f1b4bcd51d28b65e2c6d7f113267ed64bb6",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 54552,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:23:21.394000+00:00",
+        "sha256": "8a5e541d38c983a8e8ee6ecc513c59b48562bf6566176c140775b69695e0861d"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:23:35.642408+00:00",
+    "action": "click",
+    "args": {
+      "action": "click",
+      "validation": false,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "title-start",
+      "x": 254,
+      "y": 206,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 71766784,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\title-start.png",
+      "sha256": "8639538f7dbb6b1a45fde9922d56cd7a3d28c43e33f853d1269fac17c276dc98",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 54552,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:23:21.394000+00:00",
+        "sha256": "8a5e541d38c983a8e8ee6ecc513c59b48562bf6566176c140775b69695e0861d"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:23:37.260045+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "title-moving-a",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 71766784,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\title-moving-a.png",
+      "sha256": "b4a1aabd86f3f7f839adbb3dbde2918625137a910f2e582bc8c62d81c6f76a72",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 54552,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:23:21.394000+00:00",
+        "sha256": "8a5e541d38c983a8e8ee6ecc513c59b48562bf6566176c140775b69695e0861d"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:23:45.640911+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "title-moving-b",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 71766784,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\title-moving-b.png",
+      "sha256": "6014c134937dbf497f77dea8d1cf87d6e21511deac93f5a3d8adb2f7ab89f72b",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 54552,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:23:21.394000+00:00",
+        "sha256": "8a5e541d38c983a8e8ee6ecc513c59b48562bf6566176c140775b69695e0861d"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-11T16:24:32.568304+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "title-return",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 71766784,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\title-return.png",
+      "sha256": "66d41a0bf08ccd423b812e50b92d84e48f626c05fa1edf6213a1eece4ba67fcb",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 54552,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-11T16:23:21.394000+00:00",
+        "sha256": "8a5e541d38c983a8e8ee6ecc513c59b48562bf6566176c140775b69695e0861d"
+      }
+    }
+  }
+]

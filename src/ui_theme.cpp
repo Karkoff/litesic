@@ -1,4 +1,5 @@
 #include "ui_theme.h"
+#include "eq_state.h"
 #include <shlobj.h>
 #include <algorithm>
 #include <cmath>
@@ -123,6 +124,7 @@ bool SaveAppearanceValue(const wchar_t* key,int value) {
 }
 void ThemeConfigure(const wchar_t* iniPath) {
     path=iniPath?iniPath:L"";
+    Eq::Configure(iniPath);
     wchar_t id[128]=L"original";
     if(!path.empty()) GetPrivateProfileStringW(L"Appearance",L"Theme",L"original",id,128,path.c_str());
     SelectTheme(id,false);

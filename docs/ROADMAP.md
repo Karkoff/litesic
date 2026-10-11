@@ -20,7 +20,7 @@ próxima.
 | M3 | [docs/milestones/M3.md](milestones/M3.md) | Player principal: LCD, título rolando, kbps/kHz/estéreo, seek, volume, balanço, prev/next, shuffle/repeat | sim |
 | M4 | [docs/milestones/M4.md](milestones/M4.md) | Visualizador: espectro FFT + osciloscópio | sim (validada) |
 | M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background — COMPLETE, checkpoint manual PASS | sim |
-| M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador: 10 bandas, pré-amp, presets, tempo real | sim |
+| M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador real — COMPLETE, funcionamento confirmado pelo usuário | sim |
 | M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: snap/dock entre janelas, mostrar/ocultar EQ/PL | sim |
 | M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos estilo Winamp, teclas de mídia, always-on-top, instância única, persistência | sim |
 | M9 | [docs/milestones/M9.md](milestones/M9.md) | Compatibilidade — COMPLETE por decisão explícita; Windows 11 confirmado; testes Windows 7/8/8.1/10 e x86/x64 pendentes, não bloqueantes | encerrada por decisão |
@@ -49,13 +49,14 @@ Ver [estado canônico](../PROJECT_STATE.md) e
 
 As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
 Direct2D/DirectWrite; pesquisa preserva índices canônicos e docking da M5.
-UI-00..02 concluídas; UI-03..08 ainda IN_PROGRESS. M6/DSP não implementado:
-EQ permanece indisponível. M5 tem checkpoint humano PASS; M9 está COMPLETE por decisão explícita do usuário; os testes práticos
+UI-00..02 concluídas; UI-03..08 ainda IN_PROGRESS. M6 tem DSP real e painel
+operável, com funcionamento confirmado pelo usuário. M5 tem checkpoint humano PASS; M9 está COMPLETE por decisão explícita do usuário; os testes práticos
 de Windows 7/8/8.1/10 e a validação específica x86/x64 permanecem pendentes,
 sem bloquear o avanço ou reabrir automaticamente a milestone. Ver [plano](design/LITESIC-UI-IMPLEMENTATION-PLAN.md)
 e [relatório com testes/capturas/limitações](design/UI-VALIDATION-2026-10-11.md).
 Encerramento atualizado da M5, investigação de memória e preparação da M6:
-[relatório técnico](M5-CLOSEOUT-2026-10-11.md). M6 não iniciada.
+[relatório técnico](M5-CLOSEOUT-2026-10-11.md). Atualização da M6:
+[implementação, testes e medições](M6-EQUALIZER-2026-10-11.md).
 
 ## Ampliação visual — temas
 
@@ -63,7 +64,8 @@ Encerramento atualizado da M5, investigação de memória e preparação da M6:
 categorias/prévias. Quatro builds e 356 verificações passaram; 27 guardas de
 automação e carga sustentada de 1.980 trocas por variante passaram. Aceite
 visual humano dos novos temas pendente; M5 funcional mantém seu aceite
-anterior. M6/DSP não iniciada. [Arquitetura, catálogo e evidências](THEMES.md).
+anterior. M6 implementada e aceita pelo usuário; ajustes de encaixe documentados em [WINDOW-SNAP](WINDOW-SNAP-2026-10-11.md).
+[Arquitetura, catálogo e evidências](THEMES.md).
 Complemento entregue: seleção primária restaurada ao reabrir, comandos da
 playlist no rodapé, dropdown Adicionar e seletor/menus com tema compartilhado.
 [Relatório e nova validação nas quatro variantes](PLAYLIST-UI-2026-10-11.md).

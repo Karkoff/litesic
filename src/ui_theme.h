@@ -57,7 +57,7 @@ bool ThemeDialogMessage(MSG* message);
 constexpr float Space = 8, TitleHeight = 32, ControlHeight = 28;
 constexpr float PlayerWidth = 460, PlayerHeight = 290;
 constexpr float PlaylistWidth = 460, PlaylistHeight = 360;
-constexpr float EqWidth = 460, EqHeight = 210;
+constexpr float EqWidth = 460, EqHeight = 244;
 enum class Font { Body, Small, Heading, Digital };
 struct Rect {
     float x, y, w, h;

@@ -157,7 +157,7 @@ def foreground(window):
     time.sleep(0.12)
     hwnd = gui.GetForegroundWindow()
     same_process = process.GetWindowThreadProcessId(hwnd)[1] == window.process_id()
-    menu_owner = window.class_name() == '#32768' and gui.GetClassName(hwnd) in (CLASS, 'LiteSic.PlaylistWnd', 'LiteSic.ThemesWnd')
+    menu_owner = window.class_name() == '#32768' and gui.GetClassName(hwnd) in (CLASS, 'LiteSic.PlaylistWnd', 'LiteSic.ThemesWnd', 'LiteSic.EqualizerWnd')
     if not same_process or (hwnd != window.handle and not menu_owner):
         raise RuntimeError('Foco não confirmado na janela alvo. Nenhuma entrada foi enviada.')
 
@@ -275,7 +275,7 @@ def run(args):
                 raise RuntimeError('A sessão anterior ainda está ativa. Use close antes de launch.')
         path = validate_exe(ROOT / 'build' / args.arch / args.config / 'LiteSic.exe')
         *_, Application = modules()
-        app = Application(backend='win32').start('"' + str(path) + '"', work_dir=str(ROOT), timeout=15)
+        app = Application(backend='win32').start('"' + str(path) + '"' + (' --validation' if args.validation else ''), work_dir=str(ROOT), timeout=15)
         try:
             state = {**identity(app.process), 'sha256': digest(path)}
         except Exception:
@@ -405,6 +405,7 @@ def run(args):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag', 'search', 'theme'])
+    parser.add_argument('--validation',action='store_true',help='Fixed isolated build/gui/m6-session configuration')
     parser.add_argument('--query')
     parser.add_argument('--target', choices=['main','playlist','eq','menu','themes'], default='main')
     parser.add_argument('--fixture', default='silence')

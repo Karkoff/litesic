@@ -1,0 +1,2247 @@
+{
+  "initial_commit": "b27da1e",
+  "tests": {
+    "32-debug": {
+      "checks": 105,
+      "pass_labels": 95,
+      "executables": 20,
+      "test_binary_sha256": "27cb76d1f9da1638c003556dd4033e731b94ead402858720fe86a252c7101161",
+      "application_sha256": "4e9402878cebf60769ea0b3b6198ac64bd1b2e555f5a84b432d5b411edd1080d"
+    },
+    "32-release": {
+      "checks": 105,
+      "pass_labels": 95,
+      "executables": 20,
+      "test_binary_sha256": "e7052751e09e2c8b40dbd6cdf8099fce6ee3b8cb341309e9a8fe6f86cfcbccff",
+      "application_sha256": "13167e9332c55b25a238ecd16482a4fdf681f2bf0117197cd308ba1cadc46427"
+    },
+    "64-debug": {
+      "checks": 105,
+      "pass_labels": 95,
+      "executables": 20,
+      "test_binary_sha256": "f693d17ed11a8099ab3ed3f401b5d52cbcbb3ffcf020041834afbd8899297e1f",
+      "application_sha256": "e89d0de4998d9807a8ba0bf853a9ce847846d038193935b24fb3bb3610daee46"
+    },
+    "64-release": {
+      "checks": 105,
+      "pass_labels": 95,
+      "executables": 20,
+      "test_binary_sha256": "c3b0b0a9f52f927f68e723646912d4cf0f6c8c5bc85dc8fd4bedf75827a651cd",
+      "application_sha256": "81afbacdcb2a2b26d880f9e84ea6d833adb862f09bb729f50319b338ddf1f44a"
+    }
+  },
+  "files": [
+    {
+      "path": "src/app.cpp",
+      "sha256": "e7299276f8107de0d7c870fb827f0553f2bc71277bdf747e880155d65780e86e"
+    },
+    {
+      "path": "src/audio.cpp",
+      "sha256": "2bda6abe61b785c00a70b1e09e710cf79b8dd5176b986a040f930344dd30ca16"
+    },
+    {
+      "path": "src/eqwnd.cpp",
+      "sha256": "09126f5fdf565138a90fd6fa782f543cc9b372ac24b53d7e21f5342f389acfe8"
+    },
+    {
+      "path": "src/eqwnd.h",
+      "sha256": "dc120f41aad031f8be92826f38d5092d05cf4c29a82e399c020ac83497610be0"
+    },
+    {
+      "path": "src/eq_dsp.cpp",
+      "sha256": "bc0ac25f7f6c3e9f1bfb47dcebc21ef6327f642d3fd7ac6fb769b802655b94a8"
+    },
+    {
+      "path": "src/eq_dsp.h",
+      "sha256": "570477f9a91a82a69adb62b0597f3b2385583a8a10fd1d1ed2ada8e3590cb2ff"
+    },
+    {
+      "path": "src/eq_state.cpp",
+      "sha256": "01b5e1e3a934ec8a42609a567abaea26837ac5fa77ce1908aefd7c4b3998a266"
+    },
+    {
+      "path": "src/eq_state.h",
+      "sha256": "ad6371f3c0e294054d83014eae583fb2e04200e0d2a7340e252949a1f716d01d"
+    },
+    {
+      "path": "src/mainwnd.cpp",
+      "sha256": "8a2de24b88813d3220368a5decdb38da9c4acf19b47b46138a11826ce48484d3"
+    },
+    {
+      "path": "src/ui_player.cpp",
+      "sha256": "483bf7b33554c6a3ba16a613e80ccfc92432fc2bf855e31bddd2d9d3f4ada081"
+    },
+    {
+      "path": "src/ui_theme.cpp",
+      "sha256": "0ba824e9917ad0a75ac58b4c106425add563c407ba6d22711686514782159059"
+    },
+    {
+      "path": "src/ui_theme.h",
+      "sha256": "0f03570e94aeb195f2a6c3bd35702b3b2e5cf748b1176b31cd66f9998c9c20e2"
+    },
+    {
+      "path": "tests/test_eq_audio.cpp",
+      "sha256": "8bf81841af24086cf4d6770ab124e272368cb004c283c0e62755b0db3339fa58"
+    },
+    {
+      "path": "tests/test_eq_filter.cpp",
+      "sha256": "b015dcd221a2ffb83fe589fdbc0e4b663d0bd8ac05112f1c836f583e814c315a"
+    },
+    {
+      "path": "tests/test_eq_window.cpp",
+      "sha256": "7a061b0db9f88ba17ba6cf61e8e63d9f04e8fa1365e5e62481601845906c694b"
+    },
+    {
+      "path": "tests/test_player_window.cpp",
+      "sha256": "3cf391dde7650c31a5ccbd81b4a5d3e276eede9306a5eef02c321a87785da4a8"
+    },
+    {
+      "path": "tests/eq_fixtures/eq-tone-1.wav",
+      "sha256": "b208f4419f5472a0680f48f82d2539bfca591b4831b3e5ef7987d96c819e5f07"
+    },
+    {
+      "path": "tests/eq_fixtures/eq-tone-2.wav",
+      "sha256": "ae24b21b65b3a533b0ffe940dc1e5e6b3d0211f7ef9e34ca0ae689af3e319c1b"
+    },
+    {
+      "path": "tests/eq_fixtures/eq-tone.flac",
+      "sha256": "32c86bd0bdb5ee4af401b87be7cdfda45e5e0ba9c76e7d12c2a4d685392ba595"
+    },
+    {
+      "path": "tests/eq_fixtures/eq-tone.mp3",
+      "sha256": "57802775e5d727adcded525aa530381273b81c3bbd5e45ec4cbf01ae9fc954c1"
+    },
+    {
+      "path": "tests/eq_fixtures/eq-tone.ogg",
+      "sha256": "c17303c8e0329ac4d0188bb0c2a21aa827b991db973b44506241d0c826e74ad2"
+    },
+    {
+      "path": "tests/fixtures/generate_eq.py",
+      "sha256": "86a3be837ba3a75f8cb71766c5830315af90c0cb3c0e529be44ac039ac86a709"
+    },
+    {
+      "path": "scripts/dev.ps1",
+      "sha256": "aa58ec2f444986c4484245a4ea045deffbedb9b5d1893f99c9e703f46c3e63a4"
+    },
+    {
+      "path": "scripts/gui.ps1",
+      "sha256": "68e458aaae5dec1050890a549ecf76848142fa347c0d184d7f2b733a92e691b0"
+    },
+    {
+      "path": "scripts/diagnostics/eq_probe.cpp",
+      "sha256": "2352f005e71c66fa36e819b79d0a00decfd7139d434cd1a7830c0445206b3bcd"
+    },
+    {
+      "path": "scripts/diagnostics/run_eq_probe.ps1",
+      "sha256": "2807cc0461275bb3e8a920ac63df98dd13c21e652389b440ff815dcf152906cb"
+    },
+    {
+      "path": "scripts/gui/litesic_gui.py",
+      "sha256": "a4cff09e2436e4098e3ada9d2e330b4b605ddb698a28990f296f2d148fb07ec3"
+    },
+    {
+      "path": "Makefile",
+      "sha256": "b39bc13e2d247f571db80513717d886e7d898de6309fb3ad85837835a4462269"
+    },
+    {
+      "path": "docs/evidence/m6/eq-aurora.png",
+      "sha256": "7a516036e35cc12f05f7ebc9fe7d8793057acd43111e5e2b0c5caa904d78dede"
+    },
+    {
+      "path": "docs/evidence/m6/eq-autumn.png",
+      "sha256": "aea073f76b0e28092561ba8481297b2cb261e547d0dcf90d361c7d10b55f4e71"
+    },
+    {
+      "path": "docs/evidence/m6/eq-carbon.png",
+      "sha256": "fee55f49ba313d22f6f8012b3d2a2ddf471269b268d2f7385a87a7e213020288"
+    },
+    {
+      "path": "docs/evidence/m6/eq-carnival.png",
+      "sha256": "267635e1ed263b8d910384b50030529cc64f50d5a4b718b6b7a8f007a81bb078"
+    },
+    {
+      "path": "docs/evidence/m6/eq-children.png",
+      "sha256": "514904688512a4161fa0f6532968f29620bcbdd7bf74030818b65e51d0007ed2"
+    },
+    {
+      "path": "docs/evidence/m6/eq-christmas.png",
+      "sha256": "df5cf12311a4e35f807ed876f2b9ab77b57e4259db9e7e2c207018b8d2c6859f"
+    },
+    {
+      "path": "docs/evidence/m6/eq-cyberpunk.png",
+      "sha256": "649f6bb24764914befba50f37f4fd7e5f958672761c8c5eac6e2d623900d9523"
+    },
+    {
+      "path": "docs/evidence/m6/eq-dark.png",
+      "sha256": "5617a6e8bba5263678e183e0f9fdc89b42fd578efa8d9e6e3071a57f241570e5"
+    },
+    {
+      "path": "docs/evidence/m6/eq-desert.png",
+      "sha256": "81a65e0ba7a26fefb34aa8048bb3f6057d0b2312df7d29da92d0f01f33293251"
+    },
+    {
+      "path": "docs/evidence/m6/eq-easter.png",
+      "sha256": "6f60fe85a5a28a889e3eb5eae53cd9fda6c4c2f71a6778b8197633e3baaf10a4"
+    },
+    {
+      "path": "docs/evidence/m6/eq-forest.png",
+      "sha256": "c7c952443496e2e39f8e96cdcc9b60fc754f5955958b9084d01cce1195dec29f"
+    },
+    {
+      "path": "docs/evidence/m6/eq-halloween.png",
+      "sha256": "3b17da27260f6dd296c6e38c93c9d407404903dc8703fa0fa8ae91c46089aef9"
+    },
+    {
+      "path": "docs/evidence/m6/eq-high-contrast.png",
+      "sha256": "4a58eb95136a01a40396a61af36f576d075174a30109f55dd1cbe78326f749ea"
+    },
+    {
+      "path": "docs/evidence/m6/eq-inverse.png",
+      "sha256": "2e998576a41f53b3100702e30b1c0a36efe4e7ac99efa814e82ad2979d3da9b7"
+    },
+    {
+      "path": "docs/evidence/m6/eq-june-festival.png",
+      "sha256": "2d13aa1f90fd86c06cf9740927d1498a63e4082a5fee06b62a9284a76e8562e0"
+    },
+    {
+      "path": "docs/evidence/m6/eq-light.png",
+      "sha256": "0867a3fb14c5f05979a9a1a8f24500b0f42cc1da8ed0276d4138b98462708f95"
+    },
+    {
+      "path": "docs/evidence/m6/eq-matrix.png",
+      "sha256": "677d15a15e029f0047ff9ae9f24b2af88e81cf6cea8c049fa5f52d7a11f1dde0"
+    },
+    {
+      "path": "docs/evidence/m6/eq-midnight.png",
+      "sha256": "c2b154cd0a1cb07970c08a49e15d275f55922fbf0518d6aee116f443963eaaf0"
+    },
+    {
+      "path": "docs/evidence/m6/eq-mono.png",
+      "sha256": "d7a5916e2c3fcad8c38864e58f1e63eab3b30bc906488f11a278ac9a418c1fe6"
+    },
+    {
+      "path": "docs/evidence/m6/eq-mountain.png",
+      "sha256": "3ce09d38db79fbbba29515f6ea93e5dd9e045b967be8c2196ab5ece15d854738"
+    },
+    {
+      "path": "docs/evidence/m6/eq-neon-blue.png",
+      "sha256": "d912ca9365cda8fd88a16dc00241322c8626b4617fc256c678b2a496fdd0f90a"
+    },
+    {
+      "path": "docs/evidence/m6/eq-neon-purple.png",
+      "sha256": "26dd0f7db35ff7d260c9c45d9bdb8c8d08ad3a8706c416de7790021265c78c97"
+    },
+    {
+      "path": "docs/evidence/m6/eq-new-year.png",
+      "sha256": "bc51aca5bac764bd10c5a33252164474e67e36bc82b1f6e2f3f04efe04b7e694"
+    },
+    {
+      "path": "docs/evidence/m6/eq-ocean.png",
+      "sha256": "0f6766fb50cbc47ee680918e910d70ef65ae4576682f2b3a513660a6c06042d1"
+    },
+    {
+      "path": "docs/evidence/m6/eq-original.png",
+      "sha256": "15a6dd9e5bac3a994e4023f39b3840325cf9759ae8e363a71a00e10ddcd263f1"
+    },
+    {
+      "path": "docs/evidence/m6/eq-sakura.png",
+      "sha256": "808cc1fb2704531772ca90f9a899d931558738f18b6bd8bd8256d844ae7f2357"
+    },
+    {
+      "path": "docs/evidence/m6/eq-spring.png",
+      "sha256": "c559f95781b7c45fe9550cfe2517de777a86b47445df59717ae40e11537f0877"
+    },
+    {
+      "path": "docs/evidence/m6/eq-summer.png",
+      "sha256": "2600e9dcba9c6486679de9c816c6df355fc669ee5ef3cb54bf32fca2d747fbe9"
+    },
+    {
+      "path": "docs/evidence/m6/eq-sunset.png",
+      "sha256": "6194c102e4ff9b57057da3625bbd5e65a40a199b93b4b2b5032d4e38724ead96"
+    },
+    {
+      "path": "docs/evidence/m6/eq-synthwave.png",
+      "sha256": "d030c9f37e37bfbd4c2da84b295fa13acd8e8999ce15fa3052ef3f02141dcb4e"
+    },
+    {
+      "path": "docs/evidence/m6/eq-terminal.png",
+      "sha256": "716014907aeb9183408a075bc445a0f1e5eaac2839544a022b6113e328e5cece"
+    },
+    {
+      "path": "docs/evidence/m6/eq-tropical.png",
+      "sha256": "8e4f161052ac141054af44bd9e4278a13e38a5fe4b91a14bae95f9616f8a7115"
+    },
+    {
+      "path": "docs/evidence/m6/eq-valentines.png",
+      "sha256": "d7900a98aa5ef33fe958d099c3b80e6cfcf9e2ae1d8aea4c6eafc2b288bd3798"
+    },
+    {
+      "path": "docs/evidence/m6/eq-vintage.png",
+      "sha256": "63f4b1e9509b08dde5138924faa4c8d5b88e802153eee37030abd9b754885c9c"
+    },
+    {
+      "path": "docs/evidence/m6/eq-winamp.png",
+      "sha256": "b8007c56f243e34ed888036b8f7767afcd05d945466c592404d2ae80e5e48f4d"
+    },
+    {
+      "path": "docs/evidence/m6/eq-winter.png",
+      "sha256": "ba23b2f9cea52d6c17d82c7ace9a51213f41ab70b884f84d2c7a4aa1d28bad88"
+    },
+    {
+      "path": "docs/evidence/m6/gui-guards.log",
+      "sha256": "50a757fc659c64fc12cf53be321a0efbf902c88774af254844aa336ccb7047d1"
+    },
+    {
+      "path": "docs/evidence/m6/index.html",
+      "sha256": "670379de35bc6ef3b127a740ba9d8b183927f80050c208b45054a271c0fde176"
+    },
+    {
+      "path": "docs/evidence/m6/m6-before-interact.png",
+      "sha256": "f2d738f852882d34d9f9e8aa42cfb3f92bbf5779681893bc7f9a4d9b88a71389"
+    },
+    {
+      "path": "docs/evidence/m6/m6-build-32-debug.log",
+      "sha256": "d04e21191799de9e73ed86c892c71adf857f774c52e69222fe7a1b33ce3f0dba"
+    },
+    {
+      "path": "docs/evidence/m6/m6-build-32-release.log",
+      "sha256": "b7014e223464a3fed8bf8376b402d362571c6b569772af442202d9bfa3a97e67"
+    },
+    {
+      "path": "docs/evidence/m6/m6-build-64-debug.log",
+      "sha256": "2158ebe13545af0efe392132a73cfb9148a13e3db75c7980b1e046e5e8bbdc87"
+    },
+    {
+      "path": "docs/evidence/m6/m6-build-64-release.log",
+      "sha256": "83ce9af1977b2b7a18a4bb5cb2613d7cdfc9821b5b1f4013211888625807aea7"
+    },
+    {
+      "path": "docs/evidence/m6/m6-claro-eq.png",
+      "sha256": "842b99f086d4065481fe74970fc9e179b3ce2d7f2a337d83855f77e332d40b4d"
+    },
+    {
+      "path": "docs/evidence/m6/m6-claro-selector.png",
+      "sha256": "0e20644c5d689f8cb0374a8ee9b2cc8f431f010910cacc46ffb53fec094b4e4e"
+    },
+    {
+      "path": "docs/evidence/m6/m6-context-menu.png",
+      "sha256": "d2e5bf7e1a97494cac58381cb021c166032fb5d998d509d9eb9850d01af00957"
+    },
+    {
+      "path": "docs/evidence/m6/m6-context-open.png",
+      "sha256": "459b9c90a8e6fe82dde1575eae498e2c3235717d98d7c95266b4bc4888336bad"
+    },
+    {
+      "path": "docs/evidence/m6/m6-cyberpunk-eq.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69"
+    },
+    {
+      "path": "docs/evidence/m6/m6-cyberpunk-selector.png",
+      "sha256": "76641781463719eab67cf34e8dc635dcd5f1404be60ef17844450a629ae435f5"
+    },
+    {
+      "path": "docs/evidence/m6/m6-eq-custom.png",
+      "sha256": "3ceaf2063dd99156bd2e40c61d4354f1e10a9f2c26c9d289d343add63d60cace"
+    },
+    {
+      "path": "docs/evidence/m6/m6-eq-flat.png",
+      "sha256": "f2d738f852882d34d9f9e8aa42cfb3f92bbf5779681893bc7f9a4d9b88a71389"
+    },
+    {
+      "path": "docs/evidence/m6/m6-eq-on.png",
+      "sha256": "2474c3ef5fd7117989b5b9b7898595768a7fcdec2c75c5f362ad32cae7d753f4"
+    },
+    {
+      "path": "docs/evidence/m6/m6-final-release-eq.png",
+      "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69"
+    },
+    {
+      "path": "docs/evidence/m6/m6-final-release.png",
+      "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c"
+    },
+    {
+      "path": "docs/evidence/m6/m6-initial.png",
+      "sha256": "2c8530967ea8f8b8259faf71a466f5f3ba48b4442ce88db20181bf544b0c30f5"
+    },
+    {
+      "path": "docs/evidence/m6/m6-main-reobserve.png",
+      "sha256": "2c8530967ea8f8b8259faf71a466f5f3ba48b4442ce88db20181bf544b0c30f5"
+    },
+    {
+      "path": "docs/evidence/m6/m6-observe-main.png",
+      "sha256": "2c8530967ea8f8b8259faf71a466f5f3ba48b4442ce88db20181bf544b0c30f5"
+    },
+    {
+      "path": "docs/evidence/m6/m6-open-again.png",
+      "sha256": "af42bbfab977a16bf0ae95f0b7b5f08dcb5540044e64b0e4391c18a6c7f5414e"
+    },
+    {
+      "path": "docs/evidence/m6/m6-open-eq.png",
+      "sha256": "af42bbfab977a16bf0ae95f0b7b5f08dcb5540044e64b0e4391c18a6c7f5414e"
+    },
+    {
+      "path": "docs/evidence/m6/m6-open-third.png",
+      "sha256": "af42bbfab977a16bf0ae95f0b7b5f08dcb5540044e64b0e4391c18a6c7f5414e"
+    },
+    {
+      "path": "docs/evidence/m6/m6-preset-menu-reobserve.png",
+      "sha256": "8db116dcc048132c4994b71188d20e86c4c70679c8a3cb71ce694f5db8398899"
+    },
+    {
+      "path": "docs/evidence/m6/m6-presets-menu.png",
+      "sha256": "8db116dcc048132c4994b71188d20e86c4c70679c8a3cb71ce694f5db8398899"
+    },
+    {
+      "path": "docs/evidence/m6/m6-presets-open.png",
+      "sha256": "a0d9785e5e2e71e13f5d7e1364fbcb0cdc8bd19b9ed5e3a2c43c2a9e44dc4941"
+    },
+    {
+      "path": "docs/evidence/m6/m6-reopened-eq.png",
+      "sha256": "f105cc44697d0095eb22ee6f06bb07b5f3a12e60255fa6089e237cccedd1cd09"
+    },
+    {
+      "path": "docs/evidence/m6/m6-reopened.png",
+      "sha256": "459b9c90a8e6fe82dde1575eae498e2c3235717d98d7c95266b4bc4888336bad"
+    },
+    {
+      "path": "docs/evidence/m6/m6-rock-eq.png",
+      "sha256": "768b78377dcf3930344c9b69d75001f7b48e7b6cabd72df3057cbf7afe4a9472"
+    },
+    {
+      "path": "docs/evidence/m6/m6-rock-selected.png",
+      "sha256": "edfc48d84cd04f8cda92c58258558e8d8aa5b15f268dcf671ceae1e069445e63"
+    },
+    {
+      "path": "docs/evidence/m6/m6-test-32-debug.log",
+      "sha256": "112f3fe06125b408ebc42918f43afd679d5fd05134ff8f6024f5f86ca06a55a8"
+    },
+    {
+      "path": "docs/evidence/m6/m6-test-32-release.log",
+      "sha256": "04d71823791eab06d00686bb6227175340a3aa764d4cf6773b60849606d430f8"
+    },
+    {
+      "path": "docs/evidence/m6/m6-test-64-debug.log",
+      "sha256": "d6a79b0634629c7466c6c54b517e357d69842f4dfe3dbeac3aca67dd0c1d6c20"
+    },
+    {
+      "path": "docs/evidence/m6/m6-test-64-release.log",
+      "sha256": "5d931b4c99a6a29973dd1a13721a8bd7421b0f15a9df548b45c52bd65ed83043"
+    },
+    {
+      "path": "docs/evidence/m6/m6-theme-claro-observe.png",
+      "sha256": "0e20644c5d689f8cb0374a8ee9b2cc8f431f010910cacc46ffb53fec094b4e4e"
+    },
+    {
+      "path": "docs/evidence/m6/m6-theme-main.png",
+      "sha256": "459b9c90a8e6fe82dde1575eae498e2c3235717d98d7c95266b4bc4888336bad"
+    },
+    {
+      "path": "docs/evidence/m6/m6-themes-open.png",
+      "sha256": "edfc48d84cd04f8cda92c58258558e8d8aa5b15f268dcf671ceae1e069445e63"
+    },
+    {
+      "path": "docs/evidence/m6/m6-themes-selector.png",
+      "sha256": "91046b661cbb6fcec7c5d105d1adb8ba2d288b7e594ff9db59137ce24d712b05"
+    },
+    {
+      "path": "docs/evidence/m6/performance-32-release.json",
+      "sha256": "8e0fe6f829a91e58120ba0b4e20dbed04a1799d086462d407c1ddb92e3202dee"
+    },
+    {
+      "path": "docs/evidence/m6/performance-64-release.json",
+      "sha256": "ee642d09773cd4f1d9175fcad8b76efe28f86346fe82da427514a87d8d6d4927"
+    },
+    {
+      "path": "docs/evidence/m6/representative-themes.png",
+      "sha256": "f4e3e4ba22800d968296ce88a7295faf09faa393dd6932e945517d4556a536f5"
+    }
+  ],
+  "gui": [
+    {
+      "utc": "2026-10-11T15:29:15.166115+00:00",
+      "action": "launch",
+      "args": {
+        "action": "launch",
+        "validation": true,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-initial",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5508740,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-initial.png",
+        "sha256": "2c8530967ea8f8b8259faf71a466f5f3ba48b4442ce88db20181bf544b0c30f5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:29:42.086223+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-open-eq",
+        "x": 631,
+        "y": 416,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5508740,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-open-eq.png",
+        "sha256": "af42bbfab977a16bf0ae95f0b7b5f08dcb5540044e64b0e4391c18a6c7f5414e",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:29:49.768651+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-eq-flat",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 12390202,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-eq-flat.png",
+        "sha256": "f2d738f852882d34d9f9e8aa42cfb3f92bbf5779681893bc7f9a4d9b88a71389",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:30:50.017550+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-observe-main",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5508740,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-observe-main.png",
+        "sha256": "2c8530967ea8f8b8259faf71a466f5f3ba48b4442ce88db20181bf544b0c30f5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:31:10.607648+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-open-again",
+        "x": 631,
+        "y": 416,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5508740,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-open-again.png",
+        "sha256": "af42bbfab977a16bf0ae95f0b7b5f08dcb5540044e64b0e4391c18a6c7f5414e",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:35:15.443634+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-main-reobserve",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5508740,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-main-reobserve.png",
+        "sha256": "2c8530967ea8f8b8259faf71a466f5f3ba48b4442ce88db20181bf544b0c30f5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:35:36.560900+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-open-third",
+        "x": 631,
+        "y": 416,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5508740,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-open-third.png",
+        "sha256": "af42bbfab977a16bf0ae95f0b7b5f08dcb5540044e64b0e4391c18a6c7f5414e",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:35:37.667268+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-before-interact",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 12390202,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-before-interact.png",
+        "sha256": "f2d738f852882d34d9f9e8aa42cfb3f92bbf5779681893bc7f9a4d9b88a71389",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:35:46.676752+00:00",
+      "action": "drag",
+      "args": {
+        "action": "drag",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": 367,
+        "end_y": 214,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-eq-custom",
+        "x": 367,
+        "y": 241,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 12390202,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-eq-custom.png",
+        "sha256": "3ceaf2063dd99156bd2e40c61d4354f1e10a9f2c26c9d289d343add63d60cace",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:35:58.006964+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-eq-on",
+        "x": 80,
+        "y": 80,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 12390202,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-eq-on.png",
+        "sha256": "2474c3ef5fd7117989b5b9b7898595768a7fcdec2c75c5f362ad32cae7d753f4",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:36:27.291615+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-presets-open",
+        "x": 260,
+        "y": 80,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 12390202,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-presets-open.png",
+        "sha256": "a0d9785e5e2e71e13f5d7e1364fbcb0cdc8bd19b9ed5e3a2c43c2a9e44dc4941",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:36:28.401054+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "menu",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-presets-menu",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6034200,
+        "class": "#32768",
+        "title": "",
+        "rect": [
+          2445,
+          965,
+          2610,
+          1286
+        ],
+        "client": [
+          159,
+          315
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-presets-menu.png",
+        "sha256": "8db116dcc048132c4994b71188d20e86c4c70679c8a3cb71ce694f5db8398899",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:37:54.182190+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "menu",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-preset-menu-reobserve",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6034200,
+        "class": "#32768",
+        "title": "",
+        "rect": [
+          2445,
+          965,
+          2610,
+          1286
+        ],
+        "client": [
+          159,
+          315
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-preset-menu-reobserve.png",
+        "sha256": "8db116dcc048132c4994b71188d20e86c4c70679c8a3cb71ce694f5db8398899",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:38:38.544457+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "menu",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-rock-selected",
+        "x": 75,
+        "y": 70,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5115974,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1575,
+          1298,
+          2265,
+          1838
+        ],
+        "client": [
+          690,
+          540
+        ],
+        "child_count": 1,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-rock-selected.png",
+        "sha256": "edfc48d84cd04f8cda92c58258558e8d8aa5b15f268dcf671ceae1e069445e63",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:38:39.666734+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-rock-eq",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 12390202,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-rock-eq.png",
+        "sha256": "768b78377dcf3930344c9b69d75001f7b48e7b6cabd72df3057cbf7afe4a9472",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 57176,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:29:15.379000+00:00",
+          "sha256": "19ead7679507502ab0267ff3ad91ee8b5f50a3f35254ec1a02f807fc75ce8d5b"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:41:32.832947+00:00",
+      "action": "launch",
+      "args": {
+        "action": "launch",
+        "validation": true,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-reopened",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 15011560,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-reopened.png",
+        "sha256": "459b9c90a8e6fe82dde1575eae498e2c3235717d98d7c95266b4bc4888336bad",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:41:34.492856+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-reopened-eq",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1446026,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-reopened-eq.png",
+        "sha256": "f105cc44697d0095eb22ee6f06bb07b5f3a12e60255fa6089e237cccedd1cd09",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:41:48.753287+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-theme-main",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 15011560,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-theme-main.png",
+        "sha256": "459b9c90a8e6fe82dde1575eae498e2c3235717d98d7c95266b4bc4888336bad",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:41:49.344892+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-context-open",
+        "x": 80,
+        "y": 25,
+        "button": "right",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 15011560,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-context-open.png",
+        "sha256": "459b9c90a8e6fe82dde1575eae498e2c3235717d98d7c95266b4bc4888336bad",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:41:50.435451+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "menu",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-context-menu",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6688388,
+        "class": "#32768",
+        "title": "",
+        "rect": [
+          1655,
+          888,
+          2003,
+          1029
+        ],
+        "client": [
+          342,
+          135
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-context-menu.png",
+        "sha256": "d2e5bf7e1a97494cac58381cb021c166032fb5d998d509d9eb9850d01af00957",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:42:13.849071+00:00",
+      "action": "click",
+      "args": {
+        "action": "click",
+        "validation": false,
+        "query": null,
+        "target": "menu",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-themes-open",
+        "x": 140,
+        "y": 70,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 5574568,
+        "class": "LiteSic.PlaylistWnd",
+        "title": "LiteSic — Lista de reprodução",
+        "rect": [
+          1575,
+          1298,
+          2265,
+          1838
+        ],
+        "client": [
+          690,
+          540
+        ],
+        "child_count": 1,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-themes-open.png",
+        "sha256": "edfc48d84cd04f8cda92c58258558e8d8aa5b15f268dcf671ceae1e069445e63",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:42:14.941875+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "themes",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-themes-selector",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6753924,
+        "class": "LiteSic.ThemesWnd",
+        "title": "LiteSic — Aparência — Temas",
+        "rect": [
+          1575,
+          863,
+          2355,
+          1508
+        ],
+        "client": [
+          780,
+          645
+        ],
+        "child_count": 6,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-themes-selector.png",
+        "sha256": "91046b661cbb6fcec7c5d105d1adb8ba2d288b7e594ff9db59137ce24d712b05",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:43:02.015463+00:00",
+      "action": "theme",
+      "args": {
+        "action": "theme",
+        "validation": false,
+        "query": "Claro",
+        "target": "themes",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-claro-selector",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6753924,
+        "class": "LiteSic.ThemesWnd",
+        "title": "LiteSic — Aparência — Temas",
+        "rect": [
+          1575,
+          863,
+          2355,
+          1508
+        ],
+        "client": [
+          780,
+          645
+        ],
+        "child_count": 6,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-claro-selector.png",
+        "sha256": "0e20644c5d689f8cb0374a8ee9b2cc8f431f010910cacc46ffb53fec094b4e4e",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:43:03.058581+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-claro-eq",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1446026,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-claro-eq.png",
+        "sha256": "842b99f086d4065481fe74970fc9e179b3ce2d7f2a337d83855f77e332d40b4d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:43:43.089542+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "themes",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-theme-claro-observe",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6753924,
+        "class": "LiteSic.ThemesWnd",
+        "title": "LiteSic — Aparência — Temas",
+        "rect": [
+          1575,
+          863,
+          2355,
+          1508
+        ],
+        "client": [
+          780,
+          645
+        ],
+        "child_count": 6,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-theme-claro-observe.png",
+        "sha256": "0e20644c5d689f8cb0374a8ee9b2cc8f431f010910cacc46ffb53fec094b4e4e",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:44:15.150060+00:00",
+      "action": "theme",
+      "args": {
+        "action": "theme",
+        "validation": false,
+        "query": "Cyberpunk",
+        "target": "themes",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-cyberpunk-selector",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 6753924,
+        "class": "LiteSic.ThemesWnd",
+        "title": "LiteSic — Aparência — Temas",
+        "rect": [
+          1575,
+          863,
+          2355,
+          1508
+        ],
+        "client": [
+          780,
+          645
+        ],
+        "child_count": 6,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-cyberpunk-selector.png",
+        "sha256": "76641781463719eab67cf34e8dc635dcd5f1404be60ef17844450a629ae435f5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:44:16.152108+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-cyberpunk-eq",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 1446026,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-cyberpunk-eq.png",
+        "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 20028,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+          "created": "2026-10-11T15:41:33.034000+00:00",
+          "sha256": "f57afbd9f53a7981eeb15c7aa7fe8681b3f9658d7f27ad405169fa95858b6e2d"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:56:30.383344+00:00",
+      "action": "launch",
+      "args": {
+        "action": "launch",
+        "validation": true,
+        "query": null,
+        "target": "main",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "release",
+        "dialog": false,
+        "label": "m6-final-release",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 7343748,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1575,
+          863,
+          2265,
+          1298
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-final-release.png",
+        "sha256": "e0f0b2e3a936ff15c8375765c357c8b99c9f66d915a33c0223ec3bd05346f70c",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 24392,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-11T15:56:30.585000+00:00",
+          "sha256": "81afbacdcb2a2b26d880f9e84ea6d833adb862f09bb729f50319b338ddf1f44a"
+        }
+      }
+    },
+    {
+      "utc": "2026-10-11T15:56:32.047900+00:00",
+      "action": "capture",
+      "args": {
+        "action": "capture",
+        "validation": false,
+        "query": null,
+        "target": "eq",
+        "fixture": "silence",
+        "menu_index": null,
+        "modifier": "",
+        "double": false,
+        "width": null,
+        "height": null,
+        "end_x": null,
+        "end_y": null,
+        "arch": "64",
+        "config": "debug",
+        "dialog": false,
+        "label": "m6-final-release-eq",
+        "x": null,
+        "y": null,
+        "button": "left",
+        "key": null
+      },
+      "ok": true,
+      "result": {
+        "hwnd": 16847590,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizador",
+        "rect": [
+          2277,
+          863,
+          2967,
+          1229
+        ],
+        "client": [
+          690,
+          366
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\m6-final-release-eq.png",
+        "sha256": "fb1fd579103b464bad1684780dc61594181aa8d1fd1b0b90f56a2a9363a92b69",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 24392,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-11T15:56:30.585000+00:00",
+          "sha256": "81afbacdcb2a2b26d880f9e84ea6d833adb862f09bb729f50319b338ddf1f44a"
+        }
+      }
+    }
+  ],
+  "performance": {
+    "32": {
+      "before": {
+        "mode": 6,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 32.843,
+        "p99_us": 39.8,
+        "max_us": 70.7,
+        "audio_budget_pct": 0.308,
+        "process_cpu_ms": 78.125,
+        "wall_ms": 69.102,
+        "working_set": 14929920,
+        "private_bytes": 4698112,
+        "gdi": 3,
+        "user": 7
+      },
+      "6": {
+        "mode": 6,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 31.306,
+        "p99_us": 45.3,
+        "max_us": 65.4,
+        "audio_budget_pct": 0.293,
+        "process_cpu_ms": 62.5,
+        "wall_ms": 66.146,
+        "working_set": 14893056,
+        "private_bytes": 4718592,
+        "gdi": 3,
+        "user": 7
+      },
+      "0": {
+        "mode": 0,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 33.494,
+        "p99_us": 42.2,
+        "max_us": 60.4,
+        "audio_budget_pct": 0.314,
+        "process_cpu_ms": 78.125,
+        "wall_ms": 70.464,
+        "working_set": 14913536,
+        "private_bytes": 4739072,
+        "gdi": 3,
+        "user": 7
+      },
+      "1": {
+        "mode": 1,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 36.029,
+        "p99_us": 49.7,
+        "max_us": 119.0,
+        "audio_budget_pct": 0.338,
+        "process_cpu_ms": 78.125,
+        "wall_ms": 75.954,
+        "working_set": 14938112,
+        "private_bytes": 4726784,
+        "gdi": 3,
+        "user": 7
+      },
+      "2": {
+        "mode": 2,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 125.847,
+        "p99_us": 157.2,
+        "max_us": 216.2,
+        "audio_budget_pct": 1.18,
+        "process_cpu_ms": 265.625,
+        "wall_ms": 264.508,
+        "working_set": 14954496,
+        "private_bytes": 4722688,
+        "gdi": 3,
+        "user": 7
+      },
+      "3": {
+        "mode": 3,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 127.646,
+        "p99_us": 160.6,
+        "max_us": 267.7,
+        "audio_budget_pct": 1.197,
+        "process_cpu_ms": 937.5,
+        "wall_ms": 1624.972,
+        "working_set": 45248512,
+        "private_bytes": 50696192,
+        "gdi": 5,
+        "user": 8
+      },
+      "4": {
+        "mode": 4,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 125.738,
+        "p99_us": 162.5,
+        "max_us": 240.0,
+        "audio_budget_pct": 1.179,
+        "process_cpu_ms": 1140.625,
+        "wall_ms": 1742.647,
+        "working_set": 45768704,
+        "private_bytes": 51171328,
+        "gdi": 5,
+        "user": 8
+      },
+      "5": {
+        "mode": 5,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 134.854,
+        "p99_us": 171.2,
+        "max_us": 239.7,
+        "audio_budget_pct": 1.264,
+        "process_cpu_ms": 3359.375,
+        "wall_ms": 5866.083,
+        "working_set": 65642496,
+        "private_bytes": 78974976,
+        "gdi": 13,
+        "user": 14
+      }
+    },
+    "64": {
+      "before": {
+        "mode": 6,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 9.63,
+        "p99_us": 16.7,
+        "max_us": 23.8,
+        "audio_budget_pct": 0.09,
+        "process_cpu_ms": 15.625,
+        "wall_ms": 20.288,
+        "working_set": 15077376,
+        "private_bytes": 3985408,
+        "gdi": 3,
+        "user": 7
+      },
+      "6": {
+        "mode": 6,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 9.39,
+        "p99_us": 16.1,
+        "max_us": 24.0,
+        "audio_budget_pct": 0.088,
+        "process_cpu_ms": 15.625,
+        "wall_ms": 19.819,
+        "working_set": 15056896,
+        "private_bytes": 4014080,
+        "gdi": 3,
+        "user": 7
+      },
+      "0": {
+        "mode": 0,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 11.192,
+        "p99_us": 19.6,
+        "max_us": 49.2,
+        "audio_budget_pct": 0.105,
+        "process_cpu_ms": 15.625,
+        "wall_ms": 23.547,
+        "working_set": 15048704,
+        "private_bytes": 4018176,
+        "gdi": 3,
+        "user": 7
+      },
+      "1": {
+        "mode": 1,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 12.806,
+        "p99_us": 19.0,
+        "max_us": 28.7,
+        "audio_budget_pct": 0.12,
+        "process_cpu_ms": 31.25,
+        "wall_ms": 26.977,
+        "working_set": 15028224,
+        "private_bytes": 4009984,
+        "gdi": 3,
+        "user": 7
+      },
+      "2": {
+        "mode": 2,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 37.94,
+        "p99_us": 57.9,
+        "max_us": 134.9,
+        "audio_budget_pct": 0.356,
+        "process_cpu_ms": 78.125,
+        "wall_ms": 79.924,
+        "working_set": 15134720,
+        "private_bytes": 4014080,
+        "gdi": 3,
+        "user": 7
+      },
+      "3": {
+        "mode": 3,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 36.39,
+        "p99_us": 59.1,
+        "max_us": 88.7,
+        "audio_budget_pct": 0.341,
+        "process_cpu_ms": 765.625,
+        "wall_ms": 1758.856,
+        "working_set": 52039680,
+        "private_bytes": 58507264,
+        "gdi": 5,
+        "user": 8
+      },
+      "4": {
+        "mode": 4,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 36.152,
+        "p99_us": 57.5,
+        "max_us": 88.8,
+        "audio_budget_pct": 0.339,
+        "process_cpu_ms": 875.0,
+        "wall_ms": 1514.771,
+        "working_set": 52662272,
+        "private_bytes": 59584512,
+        "gdi": 5,
+        "user": 8
+      },
+      "5": {
+        "mode": 5,
+        "frames": 512,
+        "rate": 48000,
+        "channels": 2,
+        "blocks": 2000,
+        "mean_us": 37.53,
+        "p99_us": 58.0,
+        "max_us": 115.8,
+        "audio_budget_pct": 0.352,
+        "process_cpu_ms": 2890.625,
+        "wall_ms": 5533.553,
+        "working_set": 77029376,
+        "private_bytes": 111411200,
+        "gdi": 13,
+        "user": 14
+      }
+    }
+  }
+}

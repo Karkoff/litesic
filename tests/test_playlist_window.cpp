@@ -77,7 +77,7 @@ static void dock_follow_detach_and_reattach() {
     SetWindowPos(playlist,nullptr,proposed.left,proposed.top,480,450,SWP_NOZORDER|SWP_NOACTIVATE);
     SendMessageW(playlist,WM_EXITSIZEMOVE,0,0);
     SetWindowPos(owner,nullptr,550,530,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);PlWnd_MainMoved();
-    RECT list{};GetWindowRect(playlist,&list);CHECK(list.left==560);CHECK(list.top==730);
+    RECT list{};GetWindowRect(playlist,&list);CHECK(list.left==550);CHECK(list.top==730);
     proposed={1100,900,1580,1350};
     SendMessageW(playlist,WM_MOVING,0,reinterpret_cast<LPARAM>(&proposed));
     SetWindowPos(playlist,nullptr,1100,900,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);
@@ -97,10 +97,10 @@ static void dock_follow_detach_and_reattach() {
         SendMessageW(playlist,WM_EXITSIZEMOVE,0,0);
         SetWindowPos(owner,nullptr,parent.left+20,parent.top+30,420,220,SWP_NOZORDER|SWP_NOACTIVATE);
         PlWnd_MainMoved();GetWindowRect(owner,&parent);GetWindowRect(playlist,&list);
-        if(side==0){CHECK(list.top==parent.bottom);CHECK(list.left==parent.left+10);}
-        if(side==1){CHECK(list.bottom==parent.top);CHECK(list.left==parent.left+10);}
-        if(side==2){CHECK(list.left==parent.right);CHECK(list.top==parent.top+10);}
-        if(side==3){CHECK(list.right==parent.left);CHECK(list.top==parent.top+10);}
+        if(side==0){CHECK(list.top==parent.bottom);CHECK(list.left==parent.left);}
+        if(side==1){CHECK(list.bottom==parent.top);CHECK(list.left==parent.left);}
+        if(side==2){CHECK(list.left==parent.right);CHECK(list.top==parent.top);}
+        if(side==3){CHECK(list.right==parent.left);CHECK(list.top==parent.top);}
         RECT overlap{};CHECK(!IntersectRect(&overlap,&parent,&list));
     }
 }
