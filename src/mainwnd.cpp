@@ -32,6 +32,7 @@ static void UpdateTooltipRects(HWND hwnd);
 
 /* DPI scale factor — inicializa em WM_CREATE. */
 static float g_dpiScale = 1.0f;
+static bool g_visualizerVisible=true;
 
 /* Escala de interface definida pelo usuário (Configurações > Aparência).
  * 0 = Automática (segue só o DPI do monitor); caso contrário, percentual
@@ -111,7 +112,7 @@ static void ApplyInterfaceScale(HWND hwnd)
     g_dpiScale = GetDpiScaleFactor(hwnd) * UserScaleMultiplier();
 
     int scaledW = MainWnd_DPIScale(MAINWND_WIDTH);
-    int scaledH = MainWnd_DPIScale(MAINWND_HEIGHT);
+    int scaledH = MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible));
 
     RECT cur{};
     GetWindowRect(hwnd, &cur);
@@ -212,12 +213,11 @@ static int g_controlHover=0, g_controlPressed=0, g_controlFocus=0;
 static HWND g_tooltip=nullptr;
 static std::wstring g_tooltipTitle;
 static bool g_playbackError=false;
-static bool g_visualizerVisible=true;
 
 static void UpdateTooltipRects(HWND hwnd) {
     if(!g_tooltip) return;
     for(int id=1;id<=16;++id) {
-        auto r=id==15?Ui::Rect{TITLE_X,TITLE_Y,TITLE_W,TITLE_H}:PlayerControlRect(id);
+        auto r=id==15?Ui::Rect{TITLE_X,TITLE_Y,TITLE_W,TITLE_H}:PlayerControlRect(id,g_visualizerVisible);
         TOOLINFOW tool{}; tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;
         tool.rect={MainWnd_DPIScale(static_cast<int>(r.x)),MainWnd_DPIScale(static_cast<int>(r.y)),
             MainWnd_DPIScale(static_cast<int>(r.x+r.w)),MainWnd_DPIScale(static_cast<int>(r.y+r.h))};
@@ -661,7 +661,12 @@ static void ExecutePlayerControl(HWND hwnd,int id) {
     case 12: EqWnd_Toggle(hwnd); break;
     case 13: g_vizMode=VIZ_MODE_SPECTRUM; break;
     case 14: g_vizMode=VIZ_MODE_OSCILLOSCOPE; break;
-    case 16: g_visualizerVisible=!g_visualizerVisible; break;
+    case 16:
+        g_visualizerVisible=!g_visualizerVisible;
+        SetWindowPos(hwnd,nullptr,0,0,MainWnd_DPIScale(MAINWND_WIDTH),
+            MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible)),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+        UpdateTooltipRects(hwnd);
+        break;
     }
 }
 
@@ -788,7 +793,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     case WM_DPICHANGED: {
         g_dpiScale=LOWORD(wParam)/96.f*UserScaleMultiplier();
         auto r=reinterpret_cast<RECT*>(lParam);
-        SetWindowPos(hwnd,nullptr,r->left,r->top,MainWnd_DPIScale(MAINWND_WIDTH),MainWnd_DPIScale(MAINWND_HEIGHT),SWP_NOZORDER|SWP_NOACTIVATE);
+        SetWindowPos(hwnd,nullptr,r->left,r->top,MainWnd_DPIScale(MAINWND_WIDTH),MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible)),SWP_NOZORDER|SWP_NOACTIVATE);
         PlWnd_ScaleChanged(); EqWnd_ScaleChanged(); UpdateTooltipRects(hwnd); InvalidateRect(hwnd,nullptr,FALSE); return 0;
     }
     case WM_NOTIFY: {
@@ -882,7 +887,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
         SetFocus(hwnd);
-        int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my));
+        int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my),g_visualizerVisible);
         if(!g_visualizerVisible && (control==13 || control==14)) control=0;
         g_controlFocus=control;
         if(control && (control<8 || control>10)) {
@@ -961,7 +966,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         int const mx = MainWnd_DPIUnscale((int)(short)LOWORD(lParam));
         int const my = MainWnd_DPIUnscale((int)(short)HIWORD(lParam));
 
-        int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my));
+        int control=PlayerControlAt(static_cast<float>(mx),static_cast<float>(my),g_visualizerVisible);
         if(!g_visualizerVisible && (control==13 || control==14)) control=0;
         if(control!=g_controlHover) { g_controlHover=control; InvalidateRect(hwnd,nullptr,FALSE); }
         TRACKMOUSEEVENT tracking{sizeof(tracking),TME_LEAVE,hwnd,0}; TrackMouseEvent(&tracking);
@@ -1032,7 +1037,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         int control=g_controlPressed; g_controlPressed=0;
         TitleBarButton titlePressed=g_pressedBtn;
         if(GetCapture()==hwnd) ReleaseCapture();
-        if(control && control==PlayerControlAt(static_cast<float>(mx),static_cast<float>(my))) {
+        if(control && control==PlayerControlAt(static_cast<float>(mx),static_cast<float>(my),g_visualizerVisible)) {
             ExecutePlayerControl(hwnd,control); InvalidateRect(hwnd,nullptr,FALSE); return 0;
         }
 
@@ -1082,7 +1087,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * Dimensões escaladas pelo DPI para telas high-DPI (4K etc.). */
         HDC memDC = CreateCompatibleDC(hdc);
         int scaledW = MainWnd_DPIScale(MAINWND_WIDTH);
-        int scaledH = MainWnd_DPIScale(MAINWND_HEIGHT);
+        int scaledH = MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible));
         HBITMAP memBM = CreateCompatibleBitmap(hdc, scaledW, scaledH);
         HGDIOBJ oldObj = SelectObject(memDC, memBM);
 
@@ -1313,7 +1318,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         // Footer controls remain available in the GDI fallback.
         SetBkMode(memDC,TRANSPARENT);SetTextColor(memDC,Ui::NativeColor(Ui::Text));
         for(int id:{16,11,12}) {
-            auto button=PlayerControlRect(id);
+            auto button=PlayerControlRect(id,g_visualizerVisible);
             RECT rect{MainWnd_DPIScale(static_cast<int>(button.x)),MainWnd_DPIScale(static_cast<int>(button.y)),
                 MainWnd_DPIScale(static_cast<int>(button.x+button.w)),MainWnd_DPIScale(static_cast<int>(button.y+button.h))};
             bool active=(id==16 && g_visualizerVisible) || (id==11 && PlWnd_IsVisible());

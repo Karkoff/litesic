@@ -17,5 +17,6 @@ struct PlayerViewState {
     TitleBarButton titleHover = BTN_NONE, titlePressed = BTN_NONE;
 };
 bool PaintPlayer(Ui::Canvas& canvas,HDC dc,const RECT& pixels,float scale,const PlayerViewState& state);
-Ui::Rect PlayerControlRect(int id);
-int PlayerControlAt(float x,float y);
+int PlayerLayoutHeight(bool visualizerVisible);
+Ui::Rect PlayerControlRect(int id, bool visualizerVisible = true);
+int PlayerControlAt(float x,float y, bool visualizerVisible = true);

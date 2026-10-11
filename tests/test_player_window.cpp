@@ -6,8 +6,8 @@
 #include <cmath>
 static HWND window;
 static LPARAM Point(float x,float y) {return MAKELPARAM(MainWnd_DPIScale(static_cast<int>(x)),MainWnd_DPIScale(static_cast<int>(y)));}
-static void Click(int id) {
-    auto r=PlayerControlRect(id); LPARAM p=Point(r.x+r.w/2,r.y+r.h/2);
+static void Click(int id,bool visible=true) {
+    auto r=PlayerControlRect(id,visible); LPARAM p=Point(r.x+r.w/2,r.y+r.h/2);
     SendMessageW(window,WM_LBUTTONDOWN,MK_LBUTTON,p);SendMessageW(window,WM_LBUTTONUP,0,p);
 }
 static COLORREF VizPixel() {
@@ -24,8 +24,17 @@ static void transport_and_seek_use_real_audio() {
     Click(6); CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
     ShowWindow(window,SW_SHOWNOACTIVATE);
     COLORREF visible=VizPixel();CHECK(visible!=Ui::NativeColor(Ui::Background));
-    Click(16);CHECK(VizPixel()==Ui::NativeColor(Ui::Background));CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
-    Click(16);CHECK(VizPixel()==visible);CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
+    RECT expanded{},compact{},restored{};GetWindowRect(window,&expanded);
+    Click(16);GetWindowRect(window,&compact);
+    CHECK(compact.left==expanded.left && compact.top==expanded.top);
+    CHECK(compact.right==expanded.right);
+    CHECK(compact.bottom-compact.top==MainWnd_DPIScale(PlayerLayoutHeight(false)));
+    CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
+    auto button=PlayerControlRect(16,false);
+    CHECK(PlayerControlAt(button.x+button.w/2,button.y+button.h/2,false)==16);
+    CHECK(PlayerControlAt(384,VIZ_Y+10,false)!=13);
+    Click(16,false);GetWindowRect(window,&restored);
+    CHECK(EqualRect(&expanded,&restored));CHECK(VizPixel()==visible);CHECK(Audio_GetState()==AUDIO_STATE_PAUSED);
     SendMessageW(window,WM_LBUTTONDOWN,MK_LBUTTON,Point(SEEK_X+SEEK_W/2,SEEK_Y+10));
     SendMessageW(window,WM_LBUTTONUP,0,Point(SEEK_X+SEEK_W/2,SEEK_Y+10));
     CHECK(std::abs(Audio_GetPositionSeconds()-1)<.02);

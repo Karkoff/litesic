@@ -4,13 +4,31 @@ O botão **VIZ**, à esquerda de LISTA e EQ no rodapé do player, alterna a
 visibilidade do osciloscópio/espectro FFT. Usa o tema ativo, tooltip e
 navegação por teclado. O modo FFT/OSC escolhido é preservado ao restaurar.
 
-Ocultar mantém as dimensões da janela e deixa livre a área do visualizador.
+Ocultar reduz a altura da janela de 290 para 214 DIP, sem área vazia;
+mostrar restaura os 290 DIP. O rodapé, seus botões e tooltips acompanham
+o tamanho atual, inclusive ao mudar DPI ou escala da interface.
 O desenho periódico fica suspenso enquanto oculto; a reprodução e os
 controles de áudio continuam disponíveis. A visibilidade começa ativada
 ao abrir o aplicativo; esta opção não é persistida entre sessões.
 O caminho GDI também oferece o botão e respeita a visibilidade.
 
-## Verificação
+## Ajuste posterior: player compacto
+
+As quatro variantes x86/x64 Debug/Release foram compiladas novamente.
+A suíte x64 Debug passou (89 testes); o teste de janela verifica a altura
+compacta, largura e posição preservadas, clique no VIZ reposicionado,
+restauração exata do retângulo original e estado pausado do áudio preservado.
+No Windows 11, escala 150%, as capturas confirmam 690 × 435 → 690 × 321
+→ 690 × 435 pixels. O encaixe da playlist usa a notificação existente de
+mudança de geometria da janela principal.
+
+| Expandido | Compacto | Restaurado |
+|---|---|---|
+| ![Expandido](evidence/visualizer-compact/viz-resize-expanded.png) | ![Compacto](evidence/visualizer-compact/viz-resize-compact.png) | ![Restaurado](evidence/visualizer-compact/viz-resize-restored.png) |
+
+Logs e registros desta rodada: `evidence/visualizer-compact/`.
+
+## Verificação inicial (antes do ajuste de altura)
 
 - Compilação x86/x64 Debug/Release: PASS, sem novos avisos.
 - Suíte x64 Debug: 89 testes aprovados. O teste da janela real verifica

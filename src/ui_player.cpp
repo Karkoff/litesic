@@ -1,7 +1,9 @@
 #include "ui_player.h"
 #include <cmath>
 
-Ui::Rect PlayerControlRect(int id) {
+int PlayerLayoutHeight(bool visible) { return visible ? MAINWND_HEIGHT : MAINWND_HEIGHT-(VIZ_H+8); }
+Ui::Rect PlayerControlRect(int id,bool visible) {
+    const float footerY=FOOTER_BUTTON_Y-(visible?0:VIZ_H+8);
     switch(id) {
     case 1:return {BTN_PREV_X,NAV_Y,NAV_BTN_W,NAV_BTN_H};
     case 2:return {BTN_NEXT_X,NAV_Y,NAV_BTN_W,NAV_BTN_H};
@@ -13,16 +15,16 @@ Ui::Rect PlayerControlRect(int id) {
     case 8:return {SEEK_X,SEEK_Y,SEEK_W,SEEK_H};
     case 9:return {VOLUME_SLIDER_X,VOLPAN_Y,VOLUME_SLIDER_W,VOLPAN_H};
     case 10:return {PAN_SLIDER_X,VOLPAN_Y,PAN_SLIDER_W,VOLPAN_H};
-    case 11:return {BTN_LIST_X,FOOTER_BUTTON_Y,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
-    case 12:return {BTN_EQ_X,FOOTER_BUTTON_Y,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
-    case 13:return {364,VIZ_Y,40,20};
-    case 14:return {408,VIZ_Y,40,20};
-    case 16:return {276,FOOTER_BUTTON_Y,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
+    case 11:return {BTN_LIST_X,footerY,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
+    case 12:return {BTN_EQ_X,footerY,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
+    case 13:return visible?Ui::Rect{364,VIZ_Y,40,20}:Ui::Rect{};
+    case 14:return visible?Ui::Rect{408,VIZ_Y,40,20}:Ui::Rect{};
+    case 16:return {276,footerY,FOOTER_BUTTON_W,FOOTER_BUTTON_H};
     default:return {0,0,0,0};
     }
 }
-int PlayerControlAt(float x,float y) {
-    for(int i=1;i<=16;++i) if(PlayerControlRect(i).Contains(x,y)) return i;
+int PlayerControlAt(float x,float y,bool visible) {
+    for(int i=1;i<=16;++i) if(PlayerControlRect(i,visible).Contains(x,y)) return i;
     return 0;
 }
 static void Triangle(Ui::Canvas& c,float x,float y,float direction,uint32_t color) {
@@ -57,8 +59,9 @@ static void ModeIcon(Ui::Canvas& c,int id,float x,float y,uint32_t color,bool on
 bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const PlayerViewState& s) {
     using namespace Ui;
     if(!c.Begin(dc,pixels,scale)) return false;
-    c.Fill({0,0,PlayerWidth,PlayerHeight},Background);
-    c.Stroke({.5f,.5f,PlayerWidth-1,PlayerHeight-1},Border,3);
+    const float height=static_cast<float>(PlayerLayoutHeight(s.visualizerVisible));
+    c.Fill({0,0,PlayerWidth,height},Background);
+    c.Stroke({.5f,.5f,PlayerWidth-1,height-1},Border,3);
     c.TitleBar(PlayerWidth,L"♫  LITESIC",true,s.titleHover,s.titlePressed);
     c.Fill({8,38,444,50},Display,3);
     c.Stroke({LCD_X,LCD_Y,LCD_W,LCD_H},Active,2);
@@ -96,9 +99,9 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
         c.Button(PlayerControlRect(13),L"FFT",s.visualization==VIZ_MODE_SPECTRUM,s.hover==13,false,true,s.focus==13);
         c.Button(PlayerControlRect(14),L"OSC",s.visualization==VIZ_MODE_OSCILLOSCOPE,s.hover==14,false,true,s.focus==14);
     }
-    c.TextAt({12,266,256,22},s.technical,Muted,Font::Small);
+    c.TextAt({12,height-24,256,22},s.technical,Muted,Font::Small);
     for(int id : {16,11,12}) {
-        auto r=PlayerControlRect(id);
+        auto r=PlayerControlRect(id,s.visualizerVisible);
         bool active=(id==11 && s.playlistVisible) || (id==16 && s.visualizerVisible);
         c.Fill(r,s.pressed==id?Border:s.hover==id?Hover:active?Active:Surface,3);
         c.Stroke(r,s.focus==id?Accent:active?Green:Bronze,3);
