@@ -16,17 +16,19 @@
 
 LiteSic é um player de áudio para Windows que recria a experiência clássica do Winamp, construído em **C++17 nativo** com **Win32 API + Direct2D/DirectWrite**, mantendo GDI como fallback durante a migração. Alvo de compatibilidade Windows 7–11. Sem Qt, sem .NET, sem MFC.
 
-**Estado atual: M0–M4 concluídas; M5 IN_PROGRESS.** A playlist está implementada
-e integrada, com testes e validação gráfica. Faltam os critérios manuais do
-checkpoint, incluindo o gesto de drop pelo Explorer e a aprovação do usuário.
+**Estado atual: M0–M5 concluídas.** A playlist está implementada e integrada,
+com testes, validação gráfica e PASS manual do usuário para o visual,
+arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
+Play destaca e centraliza a faixa selecionada.
 Equalizador e a integração completa das três janelas permanecem planejados.
 Player e playlist já possuem encaixe magnético e movimento conjunto.
-Veja o [relatório da M5](docs/M5-VALIDATION-2026-10-11.md).
+Veja o [encerramento técnico da M5](docs/M5-CLOSEOUT-2026-10-11.md).
 Modernização UI/UX **IN_PROGRESS**: player e playlist já usam Direct2D/DirectWrite,
 com pesquisa que preserva a fila e os cinco transportes separados. O painel EQ
 é explicitamente indisponível até a implementação do DSP. Baseline repetida:
-292 aprovações; suíte atual: **320 (80 por variante)**. Há aumento de memória a
-investigar; não foi declarado aceite visual humano nem conclusão de UI-00..08.
+292 aprovações; suíte atual: **328 (82 por variante)**. A investigação de memória
+reproduziu o custo de inicialização gráfica, sem crescimento contínuo na carga
+curta do backend atual. UI-00..08 ainda não estão concluídas; M6 não iniciada.
 Veja [implementação, capturas e pendências](docs/design/UI-VALIDATION-2026-10-11.md)
 e [plano por fase](docs/design/LITESIC-UI-IMPLEMENTATION-PLAN.md).
 O ambiente e os comandos atualizados estão em
@@ -137,7 +139,7 @@ O projeto é dividido em milestones incrementais, cada uma com tarefas verificá
 | **M2** | Motor de áudio — abrir/tocar/pausar/parar, posição/duração | ✅ Concluída |
 | **M3** | Player principal — LCD, título rolando, seek, volume, shuffle/repeat | ✅ Concluída |
 | **M4** | Visualizador — osciloscópio + espectro FFT | ✅ Concluída |
-| **M5** | Lista de reprodução — add/drag&drop, reordenar, M3U | IN_PROGRESS — implementação/testes prontos; checkpoint manual pendente |
+| **M5** | Lista de reprodução — add/drag&drop, reordenar, M3U | COMPLETE — implementação/testes e checkpoint manual PASS |
 | **M6** | Equalizador — 10 bandas, presets, tempo real | 📝 Planejada |
 | **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | 📝 Planejada |
 | **M8** | Acabamento — atalhos, teclas de mídia, instância única | 📝 Planejada |

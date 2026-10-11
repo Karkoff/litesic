@@ -95,10 +95,18 @@ Não adivinhar assinaturas de API ou comportamento de biblioteca — checar.
 
 ## Fluxo de execução de tarefas
 
-O fluxo de "implementar → testar → commitar → perguntar próxima tarefa" está
+O fluxo de "implementar → testar → commitar → fazer push → perguntar próxima tarefa" está
 definido como uma skill em `.agent/skills/litesic-task/SKILL.md`. Use-a
 sempre que for executar uma tarefa do roadmap — não improvise um fluxo
 diferente.
+
+**Preferência permanente do usuário (11/10/2026):** após finalizar cada
+tarefa e concluir as verificações pertinentes, fazer commit e push para o
+remote da branch atual imediatamente, sem pedir nova confirmação. Incluir
+somente as alterações da tarefa; preservar alterações anteriores alheias ao
+escopo. Uma instrução explícita posterior para não commitar ou não fazer push
+prevalece sobre esta preferência. Se houver falha ou bloqueio, informar o
+estado real e não declarar a sincronização concluída.
 
 ## Roadmap
 

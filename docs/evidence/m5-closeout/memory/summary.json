@@ -1,0 +1,78 @@
+{
+  "gdi": {
+    "working_set_median_MiB": 15.69,
+    "private_bytes_median_MiB": 3.86,
+    "trials": 3,
+    "filter_private_range_bytes": [
+      [
+        4554752,
+        4554752
+      ],
+      [
+        4562944,
+        4562944
+      ],
+      [
+        4558848,
+        4558848
+      ]
+    ]
+  },
+  "fonts": {
+    "working_set_median_MiB": 20.03,
+    "private_bytes_median_MiB": 6.74,
+    "trials": 3,
+    "filter_private_range_bytes": [
+      [
+        7520256,
+        7520256
+      ],
+      [
+        7356416,
+        7356416
+      ],
+      [
+        7454720,
+        7454720
+      ]
+    ]
+  },
+  "software": {
+    "working_set_median_MiB": 36.83,
+    "private_bytes_median_MiB": 20.26,
+    "trials": 3,
+    "filter_private_range_bytes": [
+      [
+        22290432,
+        24338432
+      ],
+      [
+        22179840,
+        23760896
+      ],
+      [
+        22986752,
+        24625152
+      ]
+    ]
+  },
+  "d2d": {
+    "working_set_median_MiB": 58.67,
+    "private_bytes_median_MiB": 74.35,
+    "trials": 3,
+    "filter_private_range_bytes": [
+      [
+        78438400,
+        78438400
+      ],
+      [
+        77606912,
+        77606912
+      ],
+      [
+        79069184,
+        79069184
+      ]
+    ]
+  }
+}

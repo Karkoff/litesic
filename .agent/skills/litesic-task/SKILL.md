@@ -53,7 +53,7 @@ ajuda ao usuário:
 1. MCP **context7** — documentação da biblioteca/API em questão.
 2. MCP **github** — exemplos de código e issues de projetos parecidos.
 
-## Passo 3 — Marcar o checkbox e commitar
+## Passo 3 — Marcar o checkbox, commitar e fazer push
 
 Só chegue aqui se compilação e testes estiverem 100% verdes.
 
@@ -67,10 +67,17 @@ Só chegue aqui se compilação e testes estiverem 100% verdes.
 ```
 git add <arquivos da tarefa> docs/milestones/M<n>.md
 git commit -m "M<n>-T<n>: <resumo curto do que foi feito>"
+git push
 ```
 
 Adicione apenas os arquivos relevantes à tarefa (nunca `git add -A` sem
 checar `git status` antes). Nunca use `--no-verify`.
+
+Por preferência permanente do usuário, registrada em `AGENT.md` em
+11/10/2026, commit e push devem ocorrer logo após concluir cada tarefa e
+suas verificações, sem nova confirmação, salvo instrução explícita posterior
+em contrário. Usar o remote/upstream da branch atual; não forçar push.
+Conferir o resultado do push e relatar falhas ou bloqueios com precisão.
 
 ## Passo 4 — Checkpoint visual (entre milestones)
 
@@ -89,7 +96,7 @@ milestone** (conferir em `docs/milestones/M<n>.md` — todos os checkboxes
    testes passando.
 4. Quando o usuário confirmar, marque os checkboxes restantes do
    "Checkpoint da milestone" em `docs/milestones/M<n>.md` e faça um
-   commit `M<n>: checkpoint validado`.
+   commit `M<n>: checkpoint validado`, seguido de push.
 
 Se a tarefa NÃO é a última da milestone, pule este passo.
 

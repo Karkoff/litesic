@@ -1,0 +1,180 @@
+{
+    "process":  {
+                    "pid":  40664,
+                    "exe":  "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+                    "created":  "2026-10-11T12:48:07.590000+00:00",
+                    "sha256":  "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d",
+                    "observation":  {
+                                        "hwnd":  2756694,
+                                        "rect":  [
+                                                     1575,
+                                                     863,
+                                                     2265,
+                                                     1298
+                                                 ],
+                                        "time":  1791722888.5913808
+                                    }
+                },
+    "samples":  [
+                    {
+                        "seconds":  0.0026497,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1046.875,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  1.0266667,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1046.875,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  2.0369710999999997,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1062.5,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  3.0475830999999998,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1062.5,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  4.0555401999999994,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  5.0650017,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  6.0732494999999993,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  7.0815680999999993,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  8.0913776999999989,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  9.0979841999999991,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  10.1100025,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  11.1323162,
+                        "working_set":  62898176,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  12.1425285,
+                        "working_set":  62414848,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  13.1538027,
+                        "working_set":  62414848,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1078.125,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  14.176115999999999,
+                        "working_set":  62414848,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1093.75,
+                        "responding":  true
+                    },
+                    {
+                        "seconds":  15.1851034,
+                        "working_set":  62414848,
+                        "private_bytes":  134500352,
+                        "handles":  678,
+                        "gdi":  17,
+                        "user":  22,
+                        "cpu_ms":  1093.75,
+                        "responding":  true
+                    }
+                ]
+}

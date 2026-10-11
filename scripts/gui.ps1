@@ -1,11 +1,12 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('setup','doctor','fixture','m5-fixtures','launch','inspect','capture','click','key','open-fixture','close','test','drag','resize')]
+    [ValidateSet('setup','doctor','fixture','m5-fixtures','launch','inspect','capture','click','key','open-fixture','close','test','drag','resize','search')]
     [string]$Action,
     [ValidateSet('32','64')][string]$Architecture = '64',
     [ValidateSet('debug','release')][string]$Configuration = 'debug',
     [string]$Label,
+    [string]$Query,
     [int]$X = -1,
     [int]$Y = -1,
     [ValidateSet('left','right')][string]$Button = 'left',
@@ -44,6 +45,7 @@ if ($Action -eq 'test') {
 $driverArgs = @((Join-Path $PSScriptRoot 'gui\litesic_gui.py'), $Action,
     '--arch', $Architecture, '--config', $Configuration, '--target', $Target, '--fixture', $Fixture)
 if ($Label) { $driverArgs += @('--label', $Label) }
+if ($Action -eq 'search') { $driverArgs += @('--query', $Query) }
 if ($Dialog) { $driverArgs += '--dialog' }
 if ($MenuIndex -ge 0) { $driverArgs += @('--menu-index',$MenuIndex) }
 if ($Action -in @('click','drag')) { $driverArgs += @('--x', $X, '--y', $Y, '--button', $Button) }

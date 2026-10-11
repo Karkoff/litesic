@@ -203,6 +203,22 @@ OCR, não verifica qualidade audível e não substitui testes funcionais complet
 
 ## Evidências e limites
 
+### Encerramento da M5
+
+A rodada atual está em [M5-CLOSEOUT-2026-10-11.md](M5-CLOSEOUT-2026-10-11.md),
+com 33 PNGs selecionados e manifesto em `docs/evidence/m5-closeout/`.
+Esse pacote versionável complementa os artefatos temporários ignorados abaixo.
+Não inclui a playlist pessoal usada como backup.
+
+O auxiliar aceita `-Action search -Target playlist -Query Teste-020` depois
+de uma captura recente e clique inspecionado no campo. As únicas consultas
+permitidas são `Teste-020`, `Alpha` e `inexistente-validacao`; o Edit visível
+deve ter foco antes da digitação. As fixtures `m3u-save-closeout` e
+`m3u-open-closeout` usam exclusivamente `build/gui/m5-closeout-export.m3u8`.
+As guardas foram ampliadas para 24 testes. Diagnósticos passivos, comparação
+de renderers e auditoria do pacote estão em `scripts/diagnostics/`; comandos
+e limites metodológicos constam no relatório de encerramento.
+
 `build/gui/` contém PNGs reais, `events.jsonl`, `session.json`, fixture e
 `poc-verification.json`. Capturas usam `PrintWindow`/GDI na janela alvo, inclusive
 quando parcialmente fora da tela, sem fotografar o desktop inteiro. São imagens

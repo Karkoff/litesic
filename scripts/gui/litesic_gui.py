@@ -243,6 +243,8 @@ def fixture_text(kind, title):
         'invalid': (('Abrir','Open'), [OUT/'m5-fixtures'/'invalid.wav']),
         'm3u-save': (('Salvar lista M3U',), [OUT/'m5-export-validated.m3u']),
         'm3u-open': (('Abrir lista M3U',), [OUT/'m5-export-validated.m3u']),
+        'm3u-save-closeout': (('Salvar lista M3U',), [OUT/'m5-closeout-export.m3u8']),
+        'm3u-open-closeout': (('Abrir lista M3U',), [OUT/'m5-closeout-export.m3u8']),
         'folder': (('Procurar Pasta','Browse For Folder'), [OUT/'m5-fixtures']),
         'large-folder': (('Procurar Pasta','Browse For Folder'), [OUT/'m5-large']),
     }
@@ -251,7 +253,7 @@ def fixture_text(kind, title):
     if title not in titles: raise ValueError('Fixture incompatível com o diálogo atual: '+title)
     for path in paths:
         if not path.resolve().is_relative_to(OUT.resolve()): raise ValueError('Fixture fora do diretório de evidências.')
-        if kind != 'm3u-save' and not path.exists(): raise RuntimeError('Fixture ausente: '+str(path))
+        if kind not in ('m3u-save','m3u-save-closeout') and not path.exists(): raise RuntimeError('Fixture ausente: '+str(path))
     return str(paths[0]) if len(paths)==1 else ' '.join('"'+str(p)+'"' for p in paths)
 
 def run(args):
@@ -287,6 +289,27 @@ def run(args):
     if args.action == 'click':
         if args.x is None or args.y is None: raise ValueError('click requer --x e --y em pixels do cliente.')
         click(state, window, args.x, args.y, args.button, args.modifier, args.double)
+    elif args.action == 'search':
+        if args.target != 'playlist' or args.dialog: raise ValueError('Pesquisa somente na playlist.')
+        if args.query not in ('Teste-020', 'Alpha', 'inexistente-validacao'):
+            raise ValueError('Consulta fora das fixtures de validação.')
+        observed(state, window)
+        # Do not focus the parent: the production edit hides on empty blur.
+        _, _, gui, process, _, _ = modules()
+        focused = gui.GetForegroundWindow()
+        if process.GetWindowThreadProcessId(focused)[1] != state['pid']:
+            raise RuntimeError('Playlist não está em primeiro plano; clique na pesquisa novamente.')
+        edits = [e for e in window.children(class_name='Edit') if e.control_id() == 520]
+        if len(edits) != 1: raise RuntimeError('Campo de pesquisa ambíguo.')
+        # The production edit starts hidden until its painted placeholder is clicked.
+        if not edits[0].is_visible(): raise RuntimeError('Clique na pesquisa antes de digitar.')
+        if not edits[0].has_keyboard_focus(): raise RuntimeError('Foco não confirmado na pesquisa.')
+        edits[0].type_keys('^a', set_foreground=False)
+        edits[0].type_keys(args.query, with_spaces=True, set_foreground=False, pause=0.02)
+        deadline = time.monotonic() + 3
+        while edits[0].window_text() != args.query and time.monotonic() < deadline:
+            time.sleep(0.05)
+        if edits[0].window_text() != args.query: raise RuntimeError('Pesquisa digitada não confirmada.')
     elif args.action == 'resize':
         if args.target != 'playlist' or args.dialog: raise ValueError('Redimensionamento somente da playlist.')
         if not 275 <= args.width <= 1200 or not 180 <= args.height <= 1000: raise ValueError('Dimensões fora dos limites.')
@@ -358,7 +381,8 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag'])
+    parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag', 'search'])
+    parser.add_argument('--query')
     parser.add_argument('--target', choices=['main','playlist','eq','menu'], default='main')
     parser.add_argument('--fixture', default='silence')
     parser.add_argument('--menu-index',type=int,choices=range(4))

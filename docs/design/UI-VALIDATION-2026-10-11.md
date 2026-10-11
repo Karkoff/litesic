@@ -1,5 +1,10 @@
 # Migração visual do LiteSic — 11/10/2026
 
+> Atualização posterior: **aceite visual humano PASS** e M5 concluída,
+> incluindo Explorer/M3U. Aumento de memória investigado em 12 processos,
+> sem refatorar produção. Ver [encerramento técnico](../M5-CLOSEOUT-2026-10-11.md).
+> UI-00..08 continuam IN_PROGRESS; o texto abaixo preserva o estado histórico.
+
 Implementação **parcial e funcional**, sem commit/push. A modernização completa
 UI-00..08 ainda não está concluída. Aceite estético humano: **PENDENTE**.
 Windows 7: **PENDENTE DE VALIDAÇÃO EM M9**.

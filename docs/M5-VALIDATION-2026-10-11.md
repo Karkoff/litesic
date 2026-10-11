@@ -1,5 +1,11 @@
 # M5 — implementação e validação em 11/10/2026
 
+> Histórico da implementação inicial. Atualização posterior: **M5 COMPLETE**,
+> com aceite visual, Explorer e M3U confirmados pelo usuário. Persistência,
+> centralização, pesquisa, docking e memória foram revalidados no
+> [encerramento técnico](M5-CLOSEOUT-2026-10-11.md). As pendências e descrições
+> de implementação abaixo referem-se à versão anterior.
+
 **Situação: IN_PROGRESS.** O escopo funcional está implementado e integrado.
 Os quatro builds, os testes e as interações gráficas descritas abaixo passaram.
 Faltam o gesto físico de drop pelo Explorer, a conferência manual externa do

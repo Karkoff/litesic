@@ -1,0 +1,997 @@
+{
+  "captures": [
+    {
+      "label": "closeout-synthetic-list",
+      "utc": "2026-10-11T12:28:33.040335+00:00",
+      "file": "closeout-synthetic-list.png",
+      "sha256": "844d07ec95436e57b15517c429cd375c4579c4994c1700d3f96ee0a7c45e7931",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-offcenter-selected",
+      "utc": "2026-10-11T12:29:27.122056+00:00",
+      "file": "closeout-offcenter-selected.png",
+      "sha256": "0b8e50784d4f9c8ce80eb27ddccc859b02c3f1337c6121d1737cb7e7d0823de7",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-playing-main",
+      "utc": "2026-10-11T12:29:43.874954+00:00",
+      "file": "closeout-playing-main.png",
+      "sha256": "87eba158f884c22d790a82020556ddf69c9a9d0144d8de16c357db6843247c90",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-playing-centered",
+      "utc": "2026-10-11T12:29:48.496990+00:00",
+      "file": "closeout-playing-centered.png",
+      "sha256": "6a239ce34573c296dbff3462dadec2df888811cd22e1f5a05033957583a1917b",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-search-pass",
+      "utc": "2026-10-11T12:36:36.107947+00:00",
+      "file": "closeout-search-pass.png",
+      "sha256": "4e66e326ab3bf553ccf03ad5a5f7c684e8285a432cc978868b08e28ad3d6630d",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-canonical-playing",
+      "utc": "2026-10-11T12:37:04.796967+00:00",
+      "file": "closeout-canonical-playing.png",
+      "sha256": "77740d0a215b90c1b81ee1df80661e200e43e0e6eaaf65bc2990a667818ac01e",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-canonical-playing-list",
+      "utc": "2026-10-11T12:37:09.428387+00:00",
+      "file": "closeout-canonical-playing-list.png",
+      "sha256": "29a04d895a0046f820b96be19196d5515cd1ce64c0200a058a401b9f5772ca86",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-filter-cleared",
+      "utc": "2026-10-11T12:37:26.766428+00:00",
+      "file": "closeout-filter-cleared.png",
+      "sha256": "f36c8940353fc8e3b67d5aab8b4971dbd6fe0102bba8c0133caf87bc6bf9d55d",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-multi-ctrl",
+      "utc": "2026-10-11T12:38:30.491258+00:00",
+      "file": "closeout-multi-ctrl.png",
+      "sha256": "cc34342b30d3a57c286353fcf6f920644a39c5192e6ead77cee587671f9ee45c",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-multi-shift",
+      "utc": "2026-10-11T12:38:42.356606+00:00",
+      "file": "closeout-multi-shift.png",
+      "sha256": "dc7febbf0151dc74bce3258f7db6d8a3aa69799cd8beeab71cafdd6b004f337d",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-reorder-before",
+      "utc": "2026-10-11T12:38:54.309421+00:00",
+      "file": "closeout-reorder-before.png",
+      "sha256": "673e9ffe3fd60b8eeeb5d53634964bc5907b3b296ef43f46ab4ce6221c890667",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-reorder-after",
+      "utc": "2026-10-11T12:39:07.572307+00:00",
+      "file": "closeout-reorder-after.png",
+      "sha256": "bdc08d5036a60820df4796ad1967c7958c84bd395849ca6845a4c9b1ecd02d61",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-resized",
+      "utc": "2026-10-11T12:39:21.931066+00:00",
+      "file": "closeout-resized.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2077,
+        1730
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-dock-main-before",
+      "utc": "2026-10-11T12:39:44.178930+00:00",
+      "file": "closeout-dock-main-before.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-dock-main-moved",
+      "utc": "2026-10-11T12:40:13.677333+00:00",
+      "file": "closeout-dock-main-moved.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1725,
+        913,
+        2415,
+        1348
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-dock-list-followed",
+      "utc": "2026-10-11T12:40:19.651051+00:00",
+      "file": "closeout-dock-list-followed.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1725,
+        1348,
+        2227,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-detached-main-before",
+      "utc": "2026-10-11T12:40:41.258908+00:00",
+      "file": "closeout-detached-main-before.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1725,
+        913,
+        2415,
+        1348
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-detached-main-moved",
+      "utc": "2026-10-11T12:40:58.452863+00:00",
+      "file": "closeout-detached-main-moved.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1775,
+        913,
+        2465,
+        1348
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-detached-list-stable",
+      "utc": "2026-10-11T12:41:05.261558+00:00",
+      "file": "closeout-detached-list-stable.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1815,
+        1420,
+        2317,
+        1852
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-rejoin-snapped",
+      "utc": "2026-10-11T12:42:23.988039+00:00",
+      "file": "closeout-rejoin-snapped.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1770,
+        1348,
+        2272,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-snapped-main-before",
+      "utc": "2026-10-11T12:42:29.281864+00:00",
+      "file": "closeout-snapped-main-before.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1775,
+        913,
+        2465,
+        1348
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-snapped-main-moved",
+      "utc": "2026-10-11T12:42:44.531512+00:00",
+      "file": "closeout-snapped-main-moved.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1825,
+        913,
+        2515,
+        1348
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-snapped-list-followed",
+      "utc": "2026-10-11T12:42:50.520511+00:00",
+      "file": "closeout-snapped-list-followed.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1820,
+        1348,
+        2322,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-exported-list",
+      "utc": "2026-10-11T12:44:09.598913+00:00",
+      "file": "closeout-exported-list.png",
+      "sha256": "cc8296a099ba7ff4475e5e61e681fe6c65d5f4112cd6805abf57f1970cc84896",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1820,
+        1348,
+        2322,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-imported-list",
+      "utc": "2026-10-11T12:44:55.373259+00:00",
+      "file": "closeout-imported-list.png",
+      "sha256": "64dc40bd76ae431dc83e94bdf599b0ac2444efede2cf6df1f1ba34f870d68501",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1820,
+        1348,
+        2322,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-after-multi-files",
+      "utc": "2026-10-11T12:45:30.982067+00:00",
+      "file": "closeout-after-multi-files.png",
+      "sha256": "323589ad5dbfc6f6c5c80f209c8c6c848660504c190129c1439e8fc4a7bccf3b",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1820,
+        1348,
+        2322,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-folder-added-list",
+      "utc": "2026-10-11T12:46:03.162933+00:00",
+      "file": "closeout-folder-added-list.png",
+      "sha256": "1356d5cf6f08925825651399cdcd94bf7eb5ef7280b230496aa65b404ee53420",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1820,
+        1348,
+        2322,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-large-ready",
+      "utc": "2026-10-11T12:47:27.385873+00:00",
+      "file": "closeout-large-ready.png",
+      "sha256": "39d171f5c79bfaf11e00e48f81dfbdec7f47ab936a220d6df3818f403af597e3",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1820,
+        1348,
+        2322,
+        1780
+      ],
+      "client": [
+        502,
+        432
+      ]
+    },
+    {
+      "label": "closeout-reopened-list",
+      "utc": "2026-10-11T12:48:56.629901+00:00",
+      "file": "closeout-reopened-list.png",
+      "sha256": "5290a508e445dd829b6544e010420f70a16ceef262bb826e98c198766551db23",
+      "process": {
+        "pid": 40664,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:48:07.590000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-repeat-list",
+      "utc": "2026-10-11T12:53:25.498043+00:00",
+      "file": "closeout-repeat-list.png",
+      "sha256": "6203378bafdce7941a2de2e5d4b24717ed96f252059ed8dd0821b5b96208d612",
+      "process": {
+        "pid": 52396,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:53:18.432000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        1298,
+        2265,
+        1838
+      ],
+      "client": [
+        690,
+        540
+      ]
+    },
+    {
+      "label": "closeout-paused-a",
+      "utc": "2026-10-11T12:34:05.884335+00:00",
+      "file": "closeout-paused-a.png",
+      "sha256": "bf2058fe74a726ae9dd0ac1dfa682ce84a717f78a5bf246ca5ff03d7da945327",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-paused-b",
+      "utc": "2026-10-11T12:35:38.780253+00:00",
+      "file": "closeout-paused-b.png",
+      "sha256": "0f04818b6e90385a8eeb1d4b35c30c2acdf2106853e231af37470bf5a853c8ce",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ]
+    },
+    {
+      "label": "closeout-stopped",
+      "utc": "2026-10-11T12:37:52.737297+00:00",
+      "file": "closeout-stopped.png",
+      "sha256": "b1760e6c74958580d33dfd8d1d3b14167c459cc156d6664eba02f96870ade78c",
+      "process": {
+        "pid": 43648,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\debug\\LiteSic.exe",
+        "created": "2026-10-11T12:28:29.110000+00:00",
+        "sha256": "9a650a54fbe0d66b5cb5de1feb7e5cb50a6326cb652ee3613528f3ea5e832e0d"
+      },
+      "rect": [
+        1575,
+        863,
+        2265,
+        1298
+      ],
+      "client": [
+        690,
+        435
+      ]
+    }
+  ],
+  "tests": {
+    "variants": 4,
+    "executables_per_variant": 15,
+    "cases_per_variant": 82,
+    "total_cases": 328,
+    "driver_guards": 24
+  },
+  "automated_audit": "PASS: capture/binary/source hashes, resize/dock geometry, logs, M3U order and paths, session hash, 12 memory runs",
+  "scope": "UI semantics inspected visually; manual visual/Explorer/M3U PASS supplied by user. No personal playlist copied into this evidence package.",
+  "artifacts": [
+    {
+      "file": "build-32-debug.txt",
+      "sha256": "5c6eb084e45a6c9dc45e25a70b47e7fc0077f30cb517ae48a5ae386c5f04895d"
+    },
+    {
+      "file": "build-32-release.txt",
+      "sha256": "9f19ebdb19938144df2093323115dd3ca42a16fd854336545d31753d1e20cfa3"
+    },
+    {
+      "file": "build-64-debug.txt",
+      "sha256": "15de7f4c7b34214bc278a68e846835dee15a4d907b3a253fe2dec8974b72debb"
+    },
+    {
+      "file": "build-64-release.txt",
+      "sha256": "9f19ebdb19938144df2093323115dd3ca42a16fd854336545d31753d1e20cfa3"
+    },
+    {
+      "file": "closeout-after-multi-files.png",
+      "sha256": "323589ad5dbfc6f6c5c80f209c8c6c848660504c190129c1439e8fc4a7bccf3b"
+    },
+    {
+      "file": "closeout-canonical-playing-list.png",
+      "sha256": "29a04d895a0046f820b96be19196d5515cd1ce64c0200a058a401b9f5772ca86"
+    },
+    {
+      "file": "closeout-canonical-playing.png",
+      "sha256": "77740d0a215b90c1b81ee1df80661e200e43e0e6eaaf65bc2990a667818ac01e"
+    },
+    {
+      "file": "closeout-detached-list-stable.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998"
+    },
+    {
+      "file": "closeout-detached-main-before.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227"
+    },
+    {
+      "file": "closeout-detached-main-moved.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227"
+    },
+    {
+      "file": "closeout-dock-list-followed.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998"
+    },
+    {
+      "file": "closeout-dock-main-before.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227"
+    },
+    {
+      "file": "closeout-dock-main-moved.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227"
+    },
+    {
+      "file": "closeout-exported-list.png",
+      "sha256": "cc8296a099ba7ff4475e5e61e681fe6c65d5f4112cd6805abf57f1970cc84896"
+    },
+    {
+      "file": "closeout-filter-cleared.png",
+      "sha256": "f36c8940353fc8e3b67d5aab8b4971dbd6fe0102bba8c0133caf87bc6bf9d55d"
+    },
+    {
+      "file": "closeout-folder-added-list.png",
+      "sha256": "1356d5cf6f08925825651399cdcd94bf7eb5ef7280b230496aa65b404ee53420"
+    },
+    {
+      "file": "closeout-imported-list.png",
+      "sha256": "64dc40bd76ae431dc83e94bdf599b0ac2444efede2cf6df1f1ba34f870d68501"
+    },
+    {
+      "file": "closeout-large-ready.png",
+      "sha256": "39d171f5c79bfaf11e00e48f81dfbdec7f47ab936a220d6df3818f403af597e3"
+    },
+    {
+      "file": "closeout-multi-ctrl.png",
+      "sha256": "cc34342b30d3a57c286353fcf6f920644a39c5192e6ead77cee587671f9ee45c"
+    },
+    {
+      "file": "closeout-multi-shift.png",
+      "sha256": "dc7febbf0151dc74bce3258f7db6d8a3aa69799cd8beeab71cafdd6b004f337d"
+    },
+    {
+      "file": "closeout-offcenter-selected.png",
+      "sha256": "0b8e50784d4f9c8ce80eb27ddccc859b02c3f1337c6121d1737cb7e7d0823de7"
+    },
+    {
+      "file": "closeout-paused-a.png",
+      "sha256": "bf2058fe74a726ae9dd0ac1dfa682ce84a717f78a5bf246ca5ff03d7da945327"
+    },
+    {
+      "file": "closeout-paused-b.png",
+      "sha256": "0f04818b6e90385a8eeb1d4b35c30c2acdf2106853e231af37470bf5a853c8ce"
+    },
+    {
+      "file": "closeout-playing-centered.png",
+      "sha256": "6a239ce34573c296dbff3462dadec2df888811cd22e1f5a05033957583a1917b"
+    },
+    {
+      "file": "closeout-playing-main.png",
+      "sha256": "87eba158f884c22d790a82020556ddf69c9a9d0144d8de16c357db6843247c90"
+    },
+    {
+      "file": "closeout-rejoin-snapped.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998"
+    },
+    {
+      "file": "closeout-reopened-list.png",
+      "sha256": "5290a508e445dd829b6544e010420f70a16ceef262bb826e98c198766551db23"
+    },
+    {
+      "file": "closeout-reorder-after.png",
+      "sha256": "bdc08d5036a60820df4796ad1967c7958c84bd395849ca6845a4c9b1ecd02d61"
+    },
+    {
+      "file": "closeout-reorder-before.png",
+      "sha256": "673e9ffe3fd60b8eeeb5d53634964bc5907b3b296ef43f46ab4ce6221c890667"
+    },
+    {
+      "file": "closeout-repeat-list.png",
+      "sha256": "6203378bafdce7941a2de2e5d4b24717ed96f252059ed8dd0821b5b96208d612"
+    },
+    {
+      "file": "closeout-resized.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998"
+    },
+    {
+      "file": "closeout-search-pass.png",
+      "sha256": "4e66e326ab3bf553ccf03ad5a5f7c684e8285a432cc978868b08e28ad3d6630d"
+    },
+    {
+      "file": "closeout-snapped-list-followed.png",
+      "sha256": "57c98e331825a9572f887242382bf236fb6835ded7c1b163add89154f4a69998"
+    },
+    {
+      "file": "closeout-snapped-main-before.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227"
+    },
+    {
+      "file": "closeout-snapped-main-moved.png",
+      "sha256": "43d01e6d9c434ae6fd690f96cd2679b3bb0e627230c539c7b3be5914e2b1d227"
+    },
+    {
+      "file": "closeout-stopped.png",
+      "sha256": "b1760e6c74958580d33dfd8d1d3b14167c459cc156d6664eba02f96870ade78c"
+    },
+    {
+      "file": "closeout-synthetic-list.png",
+      "sha256": "844d07ec95436e57b15517c429cd375c4579c4994c1700d3f96ee0a7c45e7931"
+    },
+    {
+      "file": "driver-tests.txt",
+      "sha256": "4c55f70bf9cf96b0fd52ef01d79933094f9ee8eaa99fac6bb8d9026ba8702057"
+    },
+    {
+      "file": "memory/binaries.json",
+      "sha256": "0d8d4e53a1da074e53a6ad2ef9e66e5e5c48f960f76db863914c22303db8d599"
+    },
+    {
+      "file": "memory/d2d-1.jsonl",
+      "sha256": "f7c481316cf6af1af38b3726519c9b6ad17de8f473a5eeffef302a4361c27ee9"
+    },
+    {
+      "file": "memory/d2d-2.jsonl",
+      "sha256": "b2fc1365aeac35c3cddd826f3a25d604ac24abd1e5238eb6efe202373248d8e8"
+    },
+    {
+      "file": "memory/d2d-3.jsonl",
+      "sha256": "c36bb32a710fb62656303f764b604cf52c4bdb1574e6685ed4cb3b8114848585"
+    },
+    {
+      "file": "memory/fonts-1.jsonl",
+      "sha256": "7ce25cb503eee659ebc7e1fc92a79fcc2e46cee829fd8eccf3a9a9a57c72da63"
+    },
+    {
+      "file": "memory/fonts-2.jsonl",
+      "sha256": "e7caafefcda294ca16b780b1081f1f5223065ff408a41c0389bc767aa85968ce"
+    },
+    {
+      "file": "memory/fonts-3.jsonl",
+      "sha256": "b68c49cd9eefbf04e09a8c0f4392d38643576f529fbbf094167526fa7631b040"
+    },
+    {
+      "file": "memory/gdi-1.jsonl",
+      "sha256": "802c536c6d59d00acf65afc9d0cbfb38b7305bec129fc479032d76ab5e74ade0"
+    },
+    {
+      "file": "memory/gdi-2.jsonl",
+      "sha256": "99cd50ee32aa584ee87374e2572dead0d83d62c48586b77db1df0b3996e49d40"
+    },
+    {
+      "file": "memory/gdi-3.jsonl",
+      "sha256": "4e694368db5292a1965e8159c59a85f46f28d1db474310804d1d82b1472e8dc3"
+    },
+    {
+      "file": "memory/live-large-stopped.json",
+      "sha256": "4cb23c6265edf94ccf0d1ac8e5d0b31e3a3210ed0cab154e866edb2f9f16b6e2"
+    },
+    {
+      "file": "memory/live-paused.json",
+      "sha256": "f16d5a9355f3fb25a8598d28e48c3cd50b28161765fbbd7c2b3cdad78aea9e89"
+    },
+    {
+      "file": "memory/live-reopened-no-dialogs.json",
+      "sha256": "f55839bac355985e768670be708cedbdea850722058a807d56b38f54d76c8319"
+    },
+    {
+      "file": "memory/software-1.jsonl",
+      "sha256": "5d237f12cf5b48a14c127abd1ef543cd34a029e0bfad3499ee4bc41dc3c401b0"
+    },
+    {
+      "file": "memory/software-2.jsonl",
+      "sha256": "b9c958af1026ac71a77d4a52da9333819fe4c27b8257fbfef32af704c69e5628"
+    },
+    {
+      "file": "memory/software-3.jsonl",
+      "sha256": "161f689e88b2152620d3120152a69b8f6bda0e8fc4c3f508fd945ce1f55b9ab7"
+    },
+    {
+      "file": "memory/summary.json",
+      "sha256": "03abd74c2743f6e13ed938806a29b2027ff39fbc24cde8c38d7d0611131459f1"
+    },
+    {
+      "file": "persistence-comparison.json",
+      "sha256": "9e7d9b7dd7baf3c37d560980bf30c379578e949e40f0309c751cfdd53313aca6"
+    },
+    {
+      "file": "persistence-repeat.json",
+      "sha256": "af710be8143f58e2261714c8c51934b56b8954146d6ebd325358ef3f676e93af"
+    },
+    {
+      "file": "production-source-hashes.json",
+      "sha256": "fad09703e95d24b576efb05b57b1df3137811447c719f1b896f3abca40871df4"
+    },
+    {
+      "file": "session-restored.json",
+      "sha256": "09ef65a3416c66f5fc01e264504cd00972ba3c6fb7bd1dc56a39e3fdb67c1ef2"
+    },
+    {
+      "file": "test-32-debug.txt",
+      "sha256": "c58ff7eb722406244aa3462a70cecf1c127ba799e7c659e33ddfc3a19d4cd3ce"
+    },
+    {
+      "file": "test-32-release.txt",
+      "sha256": "c54fa14708452cfaa96d40ebefc7c41082939b6a458cb7b67204e0dacf6e2cae"
+    },
+    {
+      "file": "test-64-debug.txt",
+      "sha256": "8563f1cd77c5ea270f34c086153f5e982758afad47fd20a748b44d72c5d47c57"
+    },
+    {
+      "file": "test-64-release.txt",
+      "sha256": "ac4b2a7890104c680d416138fcb97a9cf5a5cfc0b368bb5845830f1125e0d62b"
+    },
+    {
+      "file": "wmp-reference.json",
+      "sha256": "33349f7bca223778442387ac696c8db1139bde54aa2aa28b990b94483b32f5d3"
+    }
+  ]
+}

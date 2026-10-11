@@ -1,0 +1,22 @@
+[
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "7C7759FD4B1387FB73DE3893869E97817A80A4475C570EF24D17CA7F3D6E829E",
+        "Path":  "D:\\Projetos\\IA\\litesic\\build\\m5-closeout\\memory\\probe-d2d.exe"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "66E1DFAFF4E268565583C45E94DDCCACDD1B30C6B818190FE3EE7C75510B2D16",
+        "Path":  "D:\\Projetos\\IA\\litesic\\build\\m5-closeout\\memory\\probe-fonts.exe"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "BE28127470C50C13ACE480CFDDFF43B5E92C1F5C11C1F90A4410995B0CE6C9DF",
+        "Path":  "D:\\Projetos\\IA\\litesic\\build\\m5-closeout\\memory\\probe-gdi.exe"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "BD9674C087D9046085BFCC2A146EFF301627AE989437F44DD25114A2B8D479DB",
+        "Path":  "D:\\Projetos\\IA\\litesic\\build\\m5-closeout\\memory\\probe-software.exe"
+    }
+]

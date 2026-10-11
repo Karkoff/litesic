@@ -3,10 +3,32 @@ import json
 from pathlib import Path
 import tempfile
 import unittest
+from types import SimpleNamespace
 from unittest.mock import patch, Mock
 import litesic_gui as driver
 
 class DriverGuards(unittest.TestCase):
+    def test_closeout_m3u_paths_remain_confined(self):
+        for kind,title in (('m3u-save-closeout','Salvar lista M3U'),('m3u-open-closeout','Abrir lista M3U')):
+            with patch.object(Path,'exists',return_value=True):
+                result=Path(driver.fixture_text(kind,title)).resolve()
+            self.assertEqual(result, (driver.OUT/'m5-closeout-export.m3u8').resolve())
+
+    def test_closeout_m3u_wrong_dialog_rejected(self):
+        with self.assertRaises(ValueError): driver.fixture_text('m3u-save-closeout','Abrir')
+
+    def test_search_cannot_target_main_window(self):
+        args=SimpleNamespace(action='search',dialog=False,target='main',menu_index=None,query='Teste-020')
+        with patch.object(driver,'connect',return_value=({},Mock())),patch.object(driver,'observed') as observed:
+            with self.assertRaises(ValueError): driver.run(args)
+            observed.assert_not_called()
+
+    def test_search_rejects_arbitrary_text_before_input(self):
+        args=SimpleNamespace(action='search',dialog=False,target='playlist',menu_index=None,query='not-an-allowed-fixture')
+        with patch.object(driver,'connect',return_value=({},Mock())),patch.object(driver,'observed') as observed:
+            with self.assertRaises(ValueError): driver.run(args)
+            observed.assert_not_called()
+
     def test_fixture_cannot_be_used_in_wrong_dialog(self):
         with self.assertRaises(ValueError): driver.fixture_text('silence','Salvar lista M3U')
 

@@ -1,0 +1,27 @@
+[
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "D273C7AA7F024B62A15786CBA343ECE4FB0537F7B75FB2319D57A78ABD7471DC",
+        "Path":  "D:\\Projetos\\IA\\litesic\\src\\app.cpp"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "5B7545FD649131ABBE29F6A35D6714B0D2C341BFCC8BCF9CEF2361584F0BA6E3",
+        "Path":  "D:\\Projetos\\IA\\litesic\\src\\audio.cpp"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "4EF50A93C311A5273203576543A01CB34B79A767720406ADA684C35D973903F9",
+        "Path":  "D:\\Projetos\\IA\\litesic\\src\\mainwnd.cpp"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "71007B61BA341565540F90CF0894A7BC7BCF558F661AF727AF0909FD651F2B0D",
+        "Path":  "D:\\Projetos\\IA\\litesic\\src\\plwnd.cpp"
+    },
+    {
+        "Algorithm":  "SHA256",
+        "Hash":  "14E10A32984607177E3E40FEC6C06FB875CE735701CB6BE949A3438E01D5C93D",
+        "Path":  "D:\\Projetos\\IA\\litesic\\src\\ui_draw.cpp"
+    }
+]
