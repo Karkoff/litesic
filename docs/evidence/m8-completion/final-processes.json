@@ -1,0 +1,49 @@
+[
+  {
+    "case": "same_profile_forwards_audio_arguments",
+    "result": "PASS",
+    "primary_pid": 62240,
+    "secondary_exit": 0
+  },
+  {
+    "case": "x86_to_x64_unicode_relative_file",
+    "result": "PASS"
+  },
+  {
+    "case": "second_instance_restores_minimized_topmost_primary",
+    "result": "PASS"
+  },
+  {
+    "case": "all_four_global_hotkeys_released_on_process_close",
+    "result": "PASS"
+  },
+  {
+    "case": "all_requested_files_persist",
+    "result": "PASS",
+    "tracks": 3
+  },
+  {
+    "case": "session_restart_from_different_cwd",
+    "result": "PASS"
+  },
+  {
+    "case": "complete_preferences_survive_restart",
+    "result": "PASS"
+  },
+  {
+    "case": "crashed_primary_profile_recovery",
+    "result": "PASS"
+  },
+  {
+    "case": "different_profiles_are_independent",
+    "result": "PASS"
+  },
+  {
+    "case": "portable_executable_relative_data",
+    "result": "PASS"
+  },
+  {
+    "case": "explicit_relative_profile_resolves_from_cwd",
+    "result": "PASS"
+  }
+]

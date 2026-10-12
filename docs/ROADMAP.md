@@ -4,6 +4,20 @@
 `docs/milestones/` com a lista detalhada de tarefas (cada tarefa é um
 checkbox `- [ ]`, marcado `- [x]` quando concluída).
 
+**M8 — COMPLETE; aceite humano PASS (12/10/2026).**
+Decisão expressa do usuário: **M8-DEC-2026-10-12**, solicitação
+“LITESIC — ENCERRAMENTO DEFINITIVO DA M8”. Resultados técnicos, evidências
+originais e aceites anteriores preservados. Validações físicas, assistivas e
+linguísticas não realizadas são observações futuras não bloqueantes e não
+reabrem automaticamente a milestone; não são convertidas em PASS técnico.
+M0–M7 e M9 permanecem COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho**,
+antes da **M10 — Distribuição**; ambas ainda não iniciadas.
+Neste encerramento não foram repetidos testes ou auditorias nem implementadas
+funcionalidades. Consolidação, commit e push para `origin/master` autorizados.
+
+Os baselines e pendências abaixo são históricos; o encerramento acima prevalece
+para o estado atual. [Relatório final M8](M8-COMPLETION.md).
+
 Convenção de ID de tarefa: `M<n>-T<n>` (ex.: `M2-T3`). Convenção de commit:
 `M<n>-T<n>: <resumo curto>`.
 
@@ -22,7 +36,7 @@ próxima.
 | M5 | [docs/milestones/M5.md](milestones/M5.md) | Lista de reprodução: add/drag&drop, reordenar, M3U, tags em background — COMPLETE, checkpoint manual PASS | sim |
 | M6 | [docs/milestones/M6.md](milestones/M6.md) | Equalizador real — COMPLETE, aceite final visual, audível e funcional informado pelo usuário | sim |
 | M7 | [docs/milestones/M7.md](milestones/M7.md) | Integração: pares completos, movimento transitivo e compactação — COMPLETE, aceite humano TUDO PASS | sim |
-| M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento: atalhos, mídia, always-on-top, instância única, persistência, DPI/zoom, 18 idiomas e tooltips — aberta | sim |
+| M8 | [docs/milestones/M8.md](milestones/M8.md) | Acabamento — COMPLETE; aceite humano PASS; observações futuras não bloqueantes | sim |
 | M9 | [docs/milestones/M9.md](milestones/M9.md) | Compatibilidade — COMPLETE por decisão explícita; Windows 11 confirmado; testes Windows 7/8/8.1/10 e x86/x64 pendentes, não bloqueantes | encerrada por decisão |
 | M10 | [docs/milestones/M10.md](milestones/M10.md) | Distribuição: builds 32/64, pacote limpo reproduzível, portátil e instalador opcional — aberta | build final |
 
@@ -58,7 +72,7 @@ suas medições e pendências históricas, sem atribuir medições ao aceite hum
 [Encerramento formal e testes atuais](M7-CLOSEOUT-2026-10-11.md).
 Ver [validação M7](M7-INTEGRATED-VALIDATION.md) e
 [matriz de requisitos, com baseline histórico de 48 tarefas](ROADMAP-IMPLEMENTATION-AUDIT.md).
-M8 permanece aberta. M8-T6 COMPLETE: [18 catálogos e tipografia](M8-T6-I18N.md),
+Histórico anterior ao encerramento: M8-T6 COMPLETE: [18 catálogos e tipografia](M8-T6-I18N.md),
 quatro builds e 644 casos PASS no baseline T6. **M8-T7 COMPLETE:**
 [seleção Windows/manual e atualização ao vivo](M8-T7-LANGUAGE-SELECTION.md),
 191 IDs por catálogo, quatro builds, 684 casos e 32 guardas PASS.
@@ -66,7 +80,7 @@ quatro builds e 644 casos PASS no baseline T6. **M8-T7 COMPLETE:**
 46 chaves novas, 237 IDs × 18 idiomas, 36 temas, quatro builds, 716 casos,
 36 guardas e dois casos gráficos adicionais PASS (3.092 frames). Aceite visual
 humano T8 concedido pelo usuário; T7 tem PASS humano explícito. M8-T1…T5 e checkpoint
-continuam pendentes; revisão linguística humana necessária. O aceite visual
+continuavam pendentes nesse baseline; revisão linguística humana como observação futura não bloqueante. O aceite visual
 não substitui a revisão profissional dos 18 idiomas. [Consolidação](M8-CONSOLIDATION.md).
 
 As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
@@ -95,7 +109,7 @@ playlist no rodapé, dropdown Adicionar e seletor/menus com tema compartilhado.
 
 ## Auditoria das entregas antecipadas — 11/10/2026
 
-M8 permanece aberta: zoom/DPI e persistência parcial já existem; faltam
+Na auditoria de 11/10/2026, M8 estava aberta: zoom/DPI e persistência parcial já existem; faltam
 atalhos globais, teclas de mídia, sempre no topo, instância única e conclusão
 da persistência/modo portátil. Acrescentados M8-T6…T8: internacionalização
 integral em 18 idiomas, detecção Windows/manual, troca ao vivo e tooltips.
@@ -115,5 +129,5 @@ Streaming (rádios HTTP/Icecast), skins, mini-player, bandeja do sistema,
 associação de arquivos, suporte a AAC/M4A (Media Foundation) e Opus.
 
 [Auditoria integral restante da M8 e plano de conclusão](M8-REMAINING-REQUIREMENTS-AUDIT.md):
-T1–T5 e refinamentos específicos DPI/acessibilidade pendentes; T6–T8 COMPLETE.
-Consolidação T6–T8 publicada em `1aa560f`; M8 permanece aberta.
+T1–T8 COMPLETE; aceite humano final PASS. Consolidação T6–T8 publicada em
+`1aa560f`; resultados e baselines históricos preservados.

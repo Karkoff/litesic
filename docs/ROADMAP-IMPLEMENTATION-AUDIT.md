@@ -1,5 +1,19 @@
 # Auditoria de implementação do roadmap — LiteSic
 
+**M8 — COMPLETE; aceite humano PASS (12/10/2026).**
+Decisão expressa do usuário: **M8-DEC-2026-10-12**, solicitação
+“LITESIC — ENCERRAMENTO DEFINITIVO DA M8”. Resultados técnicos, evidências
+originais e aceites anteriores preservados. Validações físicas, assistivas e
+linguísticas não realizadas são observações futuras não bloqueantes e não
+reabrem automaticamente a milestone; não são convertidas em PASS técnico.
+M0–M7 e M9 permanecem COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho**,
+antes da **M10 — Distribuição**; ambas ainda não iniciadas.
+Neste encerramento não foram repetidos testes ou auditorias nem implementadas
+funcionalidades. Consolidação, commit e push para `origin/master` autorizados.
+
+Os baselines e pendências abaixo são históricos; o encerramento acima prevalece
+para o estado atual. [Relatório final M8](M8-COMPLETION.md).
+
 Data: 11/10/2026. Base efetiva: `master`, HEAD `82d28ce` (posterior ao
 `3ca057a` informado no pedido); working tree inicialmente limpa na rodada histórica.
 Esta matriz foi atualizada no encerramento formal da M7. Baseline histórica x64 Release: 136 casos/23 binários,
@@ -62,11 +76,11 @@ o trabalho M7. A evidência final e os limites ficam em
 | M7 | M7-T2 | Encaixe (snap) entre janelas | [ ]; encaixe direto e toggles antecipados | ALREADY_ACCEPTED | src/window_snap.h: Snap/Graph, skin.cpp: SnapToPeers | test_window_snap.cpp; test_window_integration.cpp | M7-INTEGRATED-VALIDATION; logs/testes Win32 atuais | Aceite humano final “TUDO PASS” em 11/10/2026. | Preservar aceite; ver M7-CLOSEOUT-2026-10-11. | M7 COMPLETE; M8 apenas planejada. |
 | M7 | M7-T3 | Mover em conjunto | [ ]; encaixe direto e toggles antecipados | ALREADY_ACCEPTED | src/skin.cpp: Changed/Constrain/Reconcile | test_window_integration.cpp; test_eq_window.cpp | M7-INTEGRATED-VALIDATION; logs/testes Win32 atuais | Aceite humano final “TUDO PASS” em 11/10/2026. | Preservar aceite; ver M7-CLOSEOUT-2026-10-11. | M7 COMPLETE; M8 apenas planejada. |
 | M7 | M7-T4 | Botões EQ/PL mostram/ocultam | [ ]; encaixe direto e toggles antecipados | ALREADY_ACCEPTED | src/mainwnd.cpp, eqwnd.cpp, plwnd.cpp: toggles | test_eq_window.cpp, test_player_window.cpp; sessão isolada | M7-INTEGRATED-VALIDATION; logs/testes Win32 atuais | Aceite humano final “TUDO PASS” em 11/10/2026. | Preservar aceite; ver M7-CLOSEOUT-2026-10-11. | M7 COMPLETE; M8 apenas planejada. |
-| M8 | M8-T1 | Atalhos Winamp e despacho nos três painéis | [ ]; M8 aberta | PARTIALLY_IMPLEMENTED | mainwnd/eqwnd/plwnd WM_KEYDOWN; app loop | Testes locais de teclado PASS; sem ZXCVB/L/Ctrl+D global | M8-REMAINING-REQUIREMENTS-AUDIT.md; regressão nova | Faltam aceleradores globais e seek independente do slider; conservar edição da pesquisa. | T1: reutilizar ações e centralizar despacho. | Não implementado neste ciclo. |
-| M8 | M8-T2 | Quatro teclas de mídia | [ ]; M8 aberta | NOT_IMPLEMENTED | WM_APPCOMMAND ausente | Sem teste de despacho multimídia existente | Auditoria residual, busca src | Play/Pause, Stop, Next e Previous não têm handlers. | T2: despachar mensagens, testar e conferir teclado. | Sem reabrir milestones anteriores. |
-| M8 | M8-T3 | Sempre no topo, zoom, DPI e posicionamento | [ ]; M8 aberta | PARTIALLY_IMPLEMENTED | InitDpiAwareness; ApplyInterfaceScale; Canvas; WM_DPICHANGED | Tests existentes PASS; probe x86/x64, 24 amostras | Auditoria residual; remaining-probe-{32,64}.txt | Topo ausente; zoom negativo desloca para zero; DPI auxiliar/local incompleto; área útil pequena excedida. | Reutilizar pipeline DIP/pixel; completar topo e lacunas específicas. | Não foi observada dupla escala no caminho player/EQ testado; matriz física pendente. |
-| M8 | M8-T4 | Instância única e arquivos pela linha de comando | [ ]; M8 aberta | NOT_IMPLEMENTED | app sem mutex/WM_COPYDATA/parsing normal | Sem ensaio de instância única existente | Auditoria residual; app.cpp | Falta encaminhar/acrescentar arquivos e ativar instância. | T4: mutex e IPC Unicode limitado. | --validation não é modo de produto. |
-| M8 | M8-T5 | Configuração, sessão e runtime portátil | [ ]; M8 aberta | PARTIALLY_IMPLEMENTED | ui_theme/eq_state/plwnd/M3U/Language | Round-trips atuais PASS; regressão 716 casos | Auditoria residual, matriz por campo | Faltam balanço, shuffle/repeat/topo, portátil/data/migração e origem principal independente da sessão PL. | Reutilizar INI LOCALAPPDATA documentado; completar campos/contrato. | Não recriar persistência nem empacotar M10. |
+| M8 | M8-T1 | Atalhos estilo Winamp | Anterior [ ]; agora técnica implementada | IMPLEMENTED_AND_VERIFIED | mainwnd/app/eqwnd/plwnd | Transporte nos três painéis, EDIT, integração e regressões | M8-COMPLETION.md | Aceite final humano pendente. | Conferência final de teclado pelo usuário. | ZXCVB/L/Ctrl+D, seek e navegação local preservada. |
+| M8 | M8-T2 | Teclas de mídia e atalhos globais opcionais | Anterior ausente | IMPLEMENTED_AND_VERIFIED | mainwnd WM_APPCOMMAND/WM_HOTKEY, forwarding EQ/PL | Quatro comandos, conflitos, rollback e liberação | M8-COMPLETION.md | Teclado físico permanece ensaio humano. | Aceite final M8. | Opt-in Ctrl+Alt+F9–F12, padrão desativado. |
+| M8 | M8-T3 | Sempre no topo, zoom e DPI | Anterior parcial | IMPLEMENTED_AND_VERIFIED | mainwnd/ui_scale/eqwnd/plwnd/theme_window | Topmost conjunto, DPI local/auxiliar, hit-test/24 amostras | M8-COMPLETION.md | Matriz física multi-DPI/resolução pendente. | Aceite visual/humano. | Menu existente mantido; sem novo motor DPI. |
+| M8 | M8-T4 | Instância única por perfil | Anterior ausente | IMPLEMENTED_AND_VERIFIED | runtime/app/mainwnd WM_COPYDATA | Processos reais, crash, Unicode x86→x64, perfis/timeout/pacote inválido | M8-COMPLETION.md | Explorer/níveis de integridade distintos permanecem ensaios humanos. | Aceite final M8. | Sem serviço, confirmação explícita de recebimento. |
+| M8 | M8-T5 | Persistência completa e runtime portátil | Anterior parcial | IMPLEMENTED_AND_VERIFIED | runtime/ui_theme/mainwnd/INI/M3U existentes | Round-trip/bordas/Unicode/read-only/reinício/cwd | M8-COMPLETION.md | Sem migração automática, política de cópia voluntária documentada. | Aceite final M8. | LOCALAPPDATA existente; portátil data junto ao exe; sem M10. |
 | M8 | M8-T6 | Catálogos, cobertura, Unicode e tipografia | COMPLETE; [x] | IMPLEMENTED_AND_VERIFIED | i18n/Canvas, 18 catálogos e inventário | Validador fonte e testes atuais PASS | M8-CONSOLIDATION.md; auditoria residual | Revisão linguística integral e legibilidade/RTL geral ficam no checkpoint. | Revisar achados concretos, sem regenerar catálogos. | 237 IDs atuais por idioma, 46 tooltip.*; T6 técnica preservada. |
 | M8 | M8-T7 | Windows automático/manual, persistência e atualização | COMPLETE; [x]; PASS humano | ALREADY_ACCEPTED | language_selection e cinco janelas | Testes de preferência/troca/áudio/modelo/geometria PASS novamente | Consolidação e evidências novas; T7 histórica | Revisão linguística não foi concedida pelo aceite visual. | Preservar entrega aceita, sem nova aprovação T7. | Publicada em 1aa560f. |
 | M8 | M8-T8 | Tooltips multilíngues explicativos | COMPLETE; [x]; TUDO PASS humano | ALREADY_ACCEPTED | ui_tooltip, estado real e tokens de tema | 8 casos/variante e 2 gráficos adicionais PASS; 3.092 frames | Consolidação/evidence/m8-consolidation; inventário T8 | UIA/MSAA Canvas e revisão linguística não equivalem a tooltips aceitos. | Preservar T8; tratar lacunas gerais no checkpoint M8. | Publicada em 1aa560f; 18 idiomas/36 temas. |
@@ -79,8 +93,9 @@ o trabalho M7. A evidência final e os limites ficam em
 
 ## Resumo por milestone
 
-Contagens atuais: 51 tarefas; 39 aceitas, duas verificadas, quatro parciais,
-quatro não implementadas e duas bloqueadas apenas no ensaio físico M9.
+Contagens técnicas atuais: 51 tarefas; 39 aceitas, sete verificadas, uma parcial,
+duas não implementadas e duas bloqueadas apenas no ensaio físico M9.
+Verificação técnica não concede aceite humano da M8.
 M7 incorpora o aceite humano final “TUDO PASS”.
 
 | Milestone | Total | ALREADY_ACCEPTED | IMPLEMENTED_AND_VERIFIED | IMPLEMENTED_NOT_VERIFIED | PARTIALLY_IMPLEMENTED | NOT_IMPLEMENTED | BLOCKED | NOT_APPLICABLE |
@@ -93,7 +108,7 @@ M7 incorpora o aceite humano final “TUDO PASS”.
 | M5 | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 |
 | M6 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 |
 | M7 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 |
-| M8 | 8 | 2 | 1 | 0 | 3 | 2 | 0 | 0 |
+| M8 | 8 | 2 | 6 | 0 | 0 | 0 | 0 | 0 |
 | M9 | 3 | 0 | 1 | 0 | 0 | 0 | 2 | 0 |
 | M10 | 3 | 0 | 0 | 0 | 1 | 2 | 0 | 0 |
 
@@ -130,7 +145,7 @@ M7 incorpora o aceite humano final “TUDO PASS”.
 
 M7 COMPLETE: aceite humano e testes atuais no [encerramento](M7-CLOSEOUT-2026-10-11.md).
 As 48 tarefas originais foram preservadas, com três novas tarefas M8 (51 atuais).
-M8 continua aberta: DPI por monitor, zoom/persistência e refinamentos existentes
+Histórico antes da implementação residual: M8 continuava aberta; DPI por monitor, zoom/persistência e refinamentos existentes
 são reutilizados; atalhos parciais, mídia, topo, instância única, configuração
 residual e lacunas específicas DPI/acessibilidade continuam pendentes. Na auditoria original, os 18 idiomas, seleção
 automática/manual e tooltips ainda eram planejamento. Atualização posterior:
@@ -157,11 +172,22 @@ T6, T7 e T8 COMPLETE; aceite visual T8 TUDO PASS registrado.
 [Regressão executada novamente e publicação](M8-CONSOLIDATION.md).
 Resultados anteriores nesta matriz são históricos; não são contados como execuções novas.
 
-## Auditoria integral atual da M8
+## Auditoria integral anterior e atualização M8
 
 [Matriz completa e plano para conclusão](M8-REMAINING-REQUIREMENTS-AUDIT.md):
 oito tarefas, todos os 15 critérios i18n, campos de configuração, DPI/monitores
-e refinamento/acessibilidade. M8 permanece OPEN/IN_PROGRESS; T6–T8 COMPLETE.
+e refinamento/acessibilidade. Naquele baseline, M8 permanecia OPEN/IN_PROGRESS; T6–T8 COMPLETE.
 M7/M9 não reabertas; nenhuma lacuna implementada neste ciclo. As linhas M8
-acima expressam o estado atual; medições anteriores do documento são históricas.
+acima expressam o estado daquele baseline; medições anteriores do documento são históricas.
 Consolidação 1aa560f publicada, local/remoto conferidos.
+
+## Estado residual em 12/10/2026
+
+T1–T5 agora implementadas; T6–T8 e aceites preservados. As pendências descritas
+nos parágrafos históricos acima foram confrontadas e corrigidas nesta rodada.
+A matriz por tarefa acima expressa o estado técnico atual; a matriz transversal
+completa e limites humanos estão em [M8-REMAINING-REQUIREMENTS-AUDIT.md](M8-REMAINING-REQUIREMENTS-AUDIT.md).
+M8 COMPLETE, aceite humano PASS em 12/10/2026; consolidação, commit e push
+autorizados. Resultados técnicos preservados. Limites físicos/assistivos/
+linguísticos são observações futuras não bloqueantes no relatório final.
+Próxima atividade: **Auditoria Geral de Desempenho → M10 — Distribuição**.

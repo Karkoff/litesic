@@ -4,9 +4,11 @@ namespace I18n {
 inline constexpr char EnglishCatalog[] = u8R"CATALOG(
 appearance.auto_language	Automatic (Windows): {language}
 appearance.auto_scale	Automatic (recommended)
+appearance.hotkeys	Global shortcuts (Ctrl+Alt+F9–F12)
 appearance.language	Language
 appearance.scale_menu	Appearance > Interface scale
 appearance.themes_menu	Appearance > Themes...
+appearance.topmost	Always on top
 audio.mono	Mono
 audio.multichannel	Multichannel
 audio.stereo	Stereo
@@ -25,6 +27,8 @@ equalizer.unavailable	N/A
 errors.audio_read	Could not read the audio file.
 errors.data_folder	Could not access the data folder. The playlist will not be preserved in this session.
 errors.eq_render	Equalizer: rendering unavailable
+errors.hotkeys	Global shortcuts could not be registered. Another application may be using them.
+errors.instance	Could not open this profile or forward the requested files. Retry after closing the existing instance.
 errors.language_change	The language preference could not be applied or saved. Check the resources and settings folder.
 errors.m3u_invalid	Invalid playlist or larger than 16 MiB.
 errors.m3u_open	Could not open the playlist.

@@ -1,0 +1,83 @@
+Window: "LiteSic", App: LiteSic.exe.
+	0 painel LiteSic Description: LiteSic
+		1 painel LiteSic — Equalizador Description: LiteSic — Equalizador
+			2 caixa de seleção Ativar o equalizador Description: Ativar o equalizador
+			3 botão Escolher um preset do equalizador Description: Escolher um preset do equalizador
+			4 botão Redefinir todos os ganhos para zero Description: Redefinir todos os ganhos para zero
+			5 controle deslizante (settable, string) Pré-amplificação: +0.0 dB Description: Pré-amplificação: +0.0 dB Value: 0.000000
+			6 controle deslizante (settable, string) 60 Hz — Ganho: +0.0 dB Description: 60 Hz — Ganho: +0.0 dB Value: 0.000000
+			7 controle deslizante (settable, string) 170 Hz — Ganho: +0.0 dB Description: 170 Hz — Ganho: +0.0 dB Value: 0.000000
+			8 controle deslizante (settable, string) 310 Hz — Ganho: +0.0 dB Description: 310 Hz — Ganho: +0.0 dB Value: 0.000000
+			9 controle deslizante (settable, string) 600 Hz — Ganho: +0.0 dB Description: 600 Hz — Ganho: +0.0 dB Value: 0.000000
+			10 controle deslizante (settable, string) 1000 Hz — Ganho: +0.0 dB Description: 1000 Hz — Ganho: +0.0 dB Value: 0.000000
+			11 controle deslizante (settable, string) 3000 Hz — Ganho: +0.0 dB Description: 3000 Hz — Ganho: +0.0 dB Value: 0.000000
+			12 controle deslizante (settable, string) 6000 Hz — Ganho: +0.0 dB Description: 6000 Hz — Ganho: +0.0 dB Value: 0.000000
+			13 controle deslizante (settable, string) 12000 Hz — Ganho: +0.0 dB Description: 12000 Hz — Ganho: +0.0 dB Value: 0.000000
+			14 controle deslizante (settable, string) 14000 Hz — Ganho: +0.0 dB Description: 14000 Hz — Ganho: +0.0 dB Value: 0.000000
+			15 controle deslizante (settable, string) 16000 Hz — Ganho: +0.0 dB Description: 16000 Hz — Ganho: +0.0 dB Value: 0.000000
+			16 botão Ocultar equalizador Description: Ocultar equalizador
+			17 text ±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera Description: ±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera
+		18 painel LiteSic — Lista de reprodução Description: LiteSic — Lista de reprodução
+			19 item de tabulação (selectable) Mostrar todas as faixas Description: Mostrar todas as faixas
+			20 item de tabulação (selectable) Mostrar faixas favoritas Description: Mostrar faixas favoritas
+			21 botão Limpar pesquisa Description: Limpar pesquisa
+			22 botão Adicionar arquivos ou pasta Description: Adicionar arquivos ou pasta
+			23 botão Remover as faixas selecionadas Description: Remover as faixas selecionadas
+			24 botão Abrir, salvar, ordenar ou limpar a playlist Description: Abrir, salvar, ordenar ou limpar a playlist
+			25 botão Ocultar playlist Description: Ocultar playlist
+			26 text 2 faixas · 1 selecionada · 1:32 Description: 2 faixas · 1 selecionada · 1:32
+			27 item de lista (selectable) native-44100 Description: Selecionar; clique duplo para reproduzir
+			28 caixa de seleção Adicionar aos favoritos Description: Adicionar aos favoritos
+			49 item de lista (selectable) long-silence Description: Selecionar; clique duplo para reproduzir
+			50 caixa de seleção Adicionar aos favoritos Description: Adicionar aos favoritos
+		29 botão Anterior Description: Reproduzir a faixa anterior
+		30 botão Próximo Description: Reproduzir a próxima faixa
+		31 caixa de seleção Aleatório Description: Ativar reprodução aleatória
+		32 caixa de seleção Repetir: desligado → lista → faixa Description: Repetição desativada
+		33 botão Reproduzir Description: Iniciar ou retomar a reprodução
+		34 botão Pausar Description: Pausar a reprodução
+		35 botão Parar Description: Parar a reprodução
+		36 controle deslizante (settable, string) Posição da faixa Description: Ir para uma posição da faixa Value: 6
+		37 controle deslizante (settable, string) Volume Description: Volume: 80% Value: 80
+		38 controle deslizante (settable, string) Balanço: esquerda / direita Description: Balanço: 0 (−100 esquerda, +100 direita) Value: 0
+		39 caixa de seleção Mostrar / ocultar playlist Description: Ocultar playlist
+		40 caixa de seleção Mostrar / ocultar equalizador Description: Ocultar equalizador
+		41 botão de opção (selectable) Espectro FFT Description: Mostrar espectro de frequências
+		42 botão de opção (selectable) Osciloscópio Description: Mostrar forma de onda do áudio
+		43 text long-silence Description: long-silence
+		44 caixa de seleção Mostrar / ocultar visualizador Description: Ocultar visualizador
+		45 botão Minimizar o player Description: Minimizar o player
+		46 botão Fechar esta janela Description: Fechar esta janela
+		47 text Alternar tempo decorrido / restante Description: Alternar tempo decorrido / restante
+		1 painel LiteSic — Equalizador Description: LiteSic — Equalizador
+			2 caixa de seleção Ativar o equalizador Description: Ativar o equalizador
+			3 botão Escolher um preset do equalizador Description: Escolher um preset do equalizador
+			4 botão Redefinir todos os ganhos para zero Description: Redefinir todos os ganhos para zero
+			5 controle deslizante (settable, string) Pré-amplificação: +0.0 dB Description: Pré-amplificação: +0.0 dB Value: 0.000000
+			6 controle deslizante (settable, string) 60 Hz — Ganho: +0.0 dB Description: 60 Hz — Ganho: +0.0 dB Value: 0.000000
+			7 controle deslizante (settable, string) 170 Hz — Ganho: +0.0 dB Description: 170 Hz — Ganho: +0.0 dB Value: 0.000000
+			8 controle deslizante (settable, string) 310 Hz — Ganho: +0.0 dB Description: 310 Hz — Ganho: +0.0 dB Value: 0.000000
+			9 controle deslizante (settable, string) 600 Hz — Ganho: +0.0 dB Description: 600 Hz — Ganho: +0.0 dB Value: 0.000000
+			10 controle deslizante (settable, string) 1000 Hz — Ganho: +0.0 dB Description: 1000 Hz — Ganho: +0.0 dB Value: 0.000000
+			11 controle deslizante (settable, string) 3000 Hz — Ganho: +0.0 dB Description: 3000 Hz — Ganho: +0.0 dB Value: 0.000000
+			12 controle deslizante (settable, string) 6000 Hz — Ganho: +0.0 dB Description: 6000 Hz — Ganho: +0.0 dB Value: 0.000000
+			13 controle deslizante (settable, string) 12000 Hz — Ganho: +0.0 dB Description: 12000 Hz — Ganho: +0.0 dB Value: 0.000000
+			14 controle deslizante (settable, string) 14000 Hz — Ganho: +0.0 dB Description: 14000 Hz — Ganho: +0.0 dB Value: 0.000000
+			15 controle deslizante (settable, string) 16000 Hz — Ganho: +0.0 dB Description: 16000 Hz — Ganho: +0.0 dB Value: 0.000000
+			16 botão Ocultar equalizador Description: Ocultar equalizador
+			17 text ±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera Description: ±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera
+		18 painel LiteSic — Lista de reprodução Description: LiteSic — Lista de reprodução
+			19 item de tabulação (selectable) Mostrar todas as faixas Description: Mostrar todas as faixas
+			20 item de tabulação (selectable) Mostrar faixas favoritas Description: Mostrar faixas favoritas
+			21 botão Limpar pesquisa Description: Limpar pesquisa
+			22 botão Adicionar arquivos ou pasta Description: Adicionar arquivos ou pasta
+			23 botão Remover as faixas selecionadas Description: Remover as faixas selecionadas
+			24 botão Abrir, salvar, ordenar ou limpar a playlist Description: Abrir, salvar, ordenar ou limpar a playlist
+			25 botão Ocultar playlist Description: Ocultar playlist
+			26 text 2 faixas · 1 selecionada · 1:32 Description: 2 faixas · 1 selecionada · 1:32
+			27 item de lista (selectable) native-44100 Description: Selecionar; clique duplo para reproduzir
+			28 caixa de seleção Adicionar aos favoritos Description: Adicionar aos favoritos
+			49 item de lista (selectable) long-silence Description: Selecionar; clique duplo para reproduzir
+			50 caixa de seleção Adicionar aos favoritos Description: Adicionar aos favoritos
+
+The focused UI element is 0 painel LiteSic Description: LiteSic.

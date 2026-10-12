@@ -1,3 +1,6 @@
+#include "ui_accessibility.h"
+#include <oleacc.h>
+#include "ui_scale.h"
 #include "ui_tooltip.h"
 #include "i18n.h"
 #include "language_selection.h"
@@ -41,10 +44,11 @@ bool favoritesOnly=false,starClick=false;
 uint64_t contextId=0;
 PlaylistWorker worker;
 std::vector<int> selected;
+int keyboardFocus=0;
 int anchor = -1, top = 0, insertion = -1, hover = 0, pressed = 0;
 bool dragging = false, scrollDrag = false, deferSelection = false;
 POINT down{};
-float scale = 1;
+float scale = 1,monitorDpi=1,informationScale=1,informationDpi=1;
 using Dock = WindowSnap::Side;
 auto& dock=Skin::Attachment(Skin::Playlist).side;
 auto& dockAnchor=Skin::Attachment(Skin::Playlist).anchor;
@@ -74,6 +78,7 @@ bool RestoreGeometry(RECT& panel,Dock& side) {
     if(w<275||w>4096||h<180||h>4096||d<0||d>4||a<0||a>2||
        x< -100000||x>100000||y< -100000||y>100000||mx< -100000||mx>100000||my< -100000||my>100000)return false;
     RECT owner{};GetWindowRect(mainWindow,&owner);
+    Ui::PanelPosition savedMain;if(Ui::LoadPlayerPosition(savedMain)){mx=owner.left;my=owner.top;}
     owner={mx,my,mx+owner.right-owner.left,my+owner.bottom-owner.top};
     MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
     if(!GetMonitorInfoW(MonitorFromRect(&owner,MONITOR_DEFAULTTONEAREST),&monitor))return false;
@@ -290,36 +295,45 @@ LRESULT CALLBACK InformationEditProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp,UINT
     if(msg==WM_NCDESTROY)RemoveWindowSubclass(hwnd,InformationEditProc,1);
     return DefSubclassProc(hwnd,msg,wp,lp);
 }
+int IS(int value){return int(std::lround(value*informationScale));}
 LRESULT CALLBACK InformationProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp){
     switch(msg){
     case WM_CREATE:
         information=hwnd;informationText.clear();
         informationEdit=CreateWindowExW(I18n::IsRtl()?WS_EX_RTLREADING:0,L"EDIT",L"",WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_VSCROLL|ES_MULTILINE|ES_READONLY|ES_AUTOVSCROLL|(I18n::IsRtl()?ES_RIGHT:0),
-            S(12),S(12),S(536),S(328),hwnd,reinterpret_cast<HMENU>(801),GetModuleHandleW(nullptr),nullptr);
+            IS(12),IS(12),IS(536),IS(328),hwnd,reinterpret_cast<HMENU>(801),GetModuleHandleW(nullptr),nullptr);
         SetWindowSubclass(informationEdit,InformationEditProc,1,0);
-        CreateWindowExW(0,L"BUTTON",I18n::Text("common.close").c_str(),WS_CHILD|WS_VISIBLE|WS_TABSTOP,S(448),S(348),S(100),S(28),hwnd,reinterpret_cast<HMENU>(802),GetModuleHandleW(nullptr),nullptr);
-        Ui::Tooltips::Attach(hwnd,[](POINT){return Ui::Tooltips::Target{};},[](int){return std::wstring{};},[]{return scale;});
-        Ui::Tooltips::AttachControl(informationEdit,"tooltip.info",[]{return scale;});
-        Ui::Tooltips::AttachControl(GetDlgItem(hwnd,802),"tooltip.close",[]{return scale;});
+        Ui::Accessibility::NameNative(informationEdit,I18n::Text("info.caption"),I18n::Text("tooltip.info"));
+        CreateWindowExW(0,L"BUTTON",I18n::Text("common.close").c_str(),WS_CHILD|WS_VISIBLE|WS_TABSTOP,IS(448),IS(348),IS(100),IS(28),hwnd,reinterpret_cast<HMENU>(802),GetModuleHandleW(nullptr),nullptr);
+        Ui::Tooltips::Attach(hwnd,[](POINT){return Ui::Tooltips::Target{};},[](int){return std::wstring{};},[]{return informationScale;});
+        Ui::Tooltips::AttachControl(informationEdit,"tooltip.info",[]{return informationScale;});
+        Ui::Tooltips::AttachControl(GetDlgItem(hwnd,802),"tooltip.close",[]{return informationScale;});
         SendMessageW(hwnd,Ui::WM_THEME_CHANGED,0,0);RefreshInformation();return 0;
     case I18n::WM_LANGUAGE_CHANGED:{
         SetWindowTextW(hwnd,I18n::Text("info.caption").c_str());
         SetDlgItemTextW(hwnd,802,I18n::Text("common.close").c_str());
         auto top=SendMessageW(informationEdit,EM_GETFIRSTVISIBLELINE,0,0);
         DWORD start=0,end=0;SendMessageW(informationEdit,EM_GETSEL,reinterpret_cast<WPARAM>(&start),reinterpret_cast<LPARAM>(&end));
-        I18n::UpdateEditDirection(informationEdit);RefreshInformation();
+        I18n::UpdateEditDirection(informationEdit);Ui::Accessibility::NameNative(informationEdit,I18n::Text("info.caption"),I18n::Text("tooltip.info"));RefreshInformation();
         SendMessageW(informationEdit,EM_SETSEL,start,end);
         SendMessageW(informationEdit,EM_LINESCROLL,0,top-SendMessageW(informationEdit,EM_GETFIRSTVISIBLELINE,0,0));
         SendMessageW(hwnd,Ui::WM_THEME_CHANGED,0,0);return 0;}
     case Ui::WM_THEME_CHANGED:{
-        HFONT old=informationFont;informationFont=CreateFontW(-S(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,I18n::ScriptFont()?I18n::ScriptFont():Ui::ActiveTheme().typography.body);
+        HFONT old=informationFont;informationFont=CreateFontW(-IS(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,I18n::ScriptFont()?I18n::ScriptFont():Ui::ActiveTheme().typography.body);
         SendMessageW(informationEdit,WM_SETFONT,reinterpret_cast<WPARAM>(informationFont),TRUE);
         SendDlgItemMessageW(hwnd,802,WM_SETFONT,reinterpret_cast<WPARAM>(informationFont),TRUE);if(old)DeleteObject(old);
         if(informationBackground)DeleteObject(informationBackground);
         informationBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
         InvalidateRect(hwnd,nullptr,TRUE);InvalidateRect(informationEdit,nullptr,TRUE);return 0;}
-    case WM_SIZE:{RECT r{};GetClientRect(hwnd,&r);MoveWindow(informationEdit,S(12),S(12),std::max<int>(1,r.right-S(24)),std::max<int>(1,r.bottom-S(60)),TRUE);
-        MoveWindow(GetDlgItem(hwnd,802),r.right-S(112),r.bottom-S(40),S(100),S(28),TRUE);return 0;}
+    case WM_DPICHANGED:{
+        if(!lp)return 0;
+        informationDpi=LOWORD(wp)/96.f;informationScale=Ui::FitScale(informationDpi*MainWnd_UserScaleMultiplier(),560,388,Ui::MonitorWork(*reinterpret_cast<RECT*>(lp)));
+        RECT r=*reinterpret_cast<RECT*>(lp);DWORD style=DWORD(GetWindowLongPtrW(hwnd,GWL_STYLE));RECT size{0,0,IS(560),IS(388)};AdjustWindowRectEx(&size,style,FALSE,WS_EX_TOOLWINDOW);
+        SetWindowPos(hwnd,nullptr,r.left,r.top,size.right-size.left,size.bottom-size.top,SWP_NOZORDER|SWP_NOACTIVATE);
+        SendMessageW(hwnd,Ui::WM_THEME_CHANGED,0,0);return 0;
+    }
+    case WM_SIZE:{RECT r{};GetClientRect(hwnd,&r);MoveWindow(informationEdit,IS(12),IS(12),std::max<int>(1,r.right-IS(24)),std::max<int>(1,r.bottom-IS(60)),TRUE);
+        MoveWindow(GetDlgItem(hwnd,802),r.right-IS(112),r.bottom-IS(40),IS(100),IS(28),TRUE);return 0;}
     case WM_CTLCOLORSTATIC:case WM_CTLCOLOREDIT:
         SetTextColor(reinterpret_cast<HDC>(wp),Ui::NativeColor(Ui::Text));SetBkColor(reinterpret_cast<HDC>(wp),Ui::NativeColor(Ui::Surface));return reinterpret_cast<LRESULT>(informationBackground);
     case WM_ERASEBKGND:{RECT r{};GetClientRect(hwnd,&r);FillRect(reinterpret_cast<HDC>(wp),&r,informationBackground);return 1;}
@@ -333,10 +347,26 @@ void ShowInformation(const Track& track){
     if(information){RefreshInformation();ShowWindow(information,SW_SHOW);SetForegroundWindow(information);return;}
     WNDCLASSW cls{};cls.lpfnWndProc=InformationProc;cls.hInstance=GetModuleHandleW(nullptr);cls.hCursor=LoadCursorW(nullptr,IDC_ARROW);cls.lpszClassName=L"LiteSic.TrackInfoWnd";
     if(!RegisterClassW(&cls)&&GetLastError()!=ERROR_CLASS_ALREADY_EXISTS)return;
-    RECT parent{};GetWindowRect(window,&parent);RECT r{0,0,S(560),S(388)};
+    informationDpi=Ui::WindowDpi(window);informationScale=scale;
+    RECT parent{};GetWindowRect(window,&parent);RECT r{0,0,IS(560),IS(388)};
     DWORD style=WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN;AdjustWindowRectEx(&r,style,FALSE,WS_EX_TOOLWINDOW);
     HWND h=CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,I18n::Text("info.caption").c_str(),style,parent.left,parent.top,r.right-r.left,r.bottom-r.top,window,nullptr,cls.hInstance,nullptr);
     if(h){ShowWindow(h,SW_SHOWNOACTIVATE);SetFocus(informationEdit);}
+}
+std::wstring FooterText(){
+    std::wstring footer=status;
+        if(footer.empty()) {
+            footer=I18n::Count("playlist.tracks",PlayerPlaylist().Count())+L" · "+I18n::Count("playlist.selected",selected.size());
+            if(!query.empty()) footer+=L" · "+I18n::Count("playlist.visible",view.Count());
+            if(worker.Busy()) footer+=(L" · "+I18n::Text("playlist.reading"));
+            else if(PlayerPlaylist().Count()) {
+                double seconds=0;bool known=true;
+                for(const auto& track:PlayerPlaylist().Tracks()) {if(track.duration<0) known=false;else seconds+=track.duration;}
+                if(known) { wchar_t duration[32]{};unsigned total=static_cast<unsigned>(std::min(seconds,359999.));
+                    swprintf(duration,ARRAYSIZE(duration),L" · %u:%02u",total/60,total%60);footer+=duration; }
+            }
+        }
+    return footer;
 }
 void Paint(HWND hwnd) {
     PAINTSTRUCT ps{}; HDC target = BeginPaint(hwnd, &ps); RECT r = Client();
@@ -383,23 +413,15 @@ void Paint(HWND hwnd) {
         if(!view.Count()) canvas.TextAt(area,!query.empty()?I18n::Text("playlist.no_results").c_str():favoritesOnly?I18n::Text("playlist.favorite_hint").c_str():I18n::Text("playlist.empty").c_str(),Muted,Font::Body,true);
         if(dragging && insertion>=0) canvas.Line(area.x,area.y+(insertion-top)*24,area.x+area.w,area.y+(insertion-top)*24,Green,2);
         canvas.Unclip();
+        if(GetFocus()==hwnd&&keyboardFocus){RECT focusRect=keyboardFocus==531?List():keyboardFocus>=1000?RECT{r.right-S(110),List().top+(view.Row(keyboardFocus-1000)-top)*S(24),r.right-S(84),List().top+(view.Row(keyboardFocus-1000)-top+1)*S(24)}:Button(keyboardFocus==1?-1:keyboardFocus);
+            canvas.Stroke({focusRect.left/scale,focusRect.top/scale,(focusRect.right-focusRect.left)/scale,(focusRect.bottom-focusRect.top)/scale},Green,0,2);
+        }
         canvas.Fill({width-16,area.y,8,area.h},Surface,3);
         if(view.Count()>Visible()) {
             float thumb=std::max(16.f,area.h*Visible()/view.Count());
             canvas.Fill({width-16,area.y+(area.h-thumb)*top/(view.Count()-Visible()),8,thumb},Bronze,3);
         }
-        std::wstring footer=status;
-        if(footer.empty()) {
-            footer=I18n::Count("playlist.tracks",PlayerPlaylist().Count())+L" · "+I18n::Count("playlist.selected",selected.size());
-            if(!query.empty()) footer+=L" · "+I18n::Count("playlist.visible",view.Count());
-            if(worker.Busy()) footer+=(L" · "+I18n::Text("playlist.reading"));
-            else if(PlayerPlaylist().Count()) {
-                double seconds=0;bool known=true;
-                for(const auto& track:PlayerPlaylist().Tracks()) {if(track.duration<0) known=false;else seconds+=track.duration;}
-                if(known) { wchar_t duration[32]{};unsigned total=static_cast<unsigned>(std::min(seconds,359999.));
-                    swprintf(duration,ARRAYSIZE(duration),L" · %u:%02u",total/60,total%60);footer+=duration; }
-            }
-        }
+        std::wstring footer=FooterText();
         canvas.TextAt({8,height-26,Button(AddMenu).left/scale-16,24},footer,Muted,Font::Small);
         if(canvas.End()) { EndPaint(hwnd,&ps); return; }
     }
@@ -477,6 +499,7 @@ Ui::Tooltips::Target TooltipHit(POINT p){
     if(id){r=Button(id);return {id==-1?1:id,r};}
     RECT client=Client();
     r={S(176),S(40),client.right-S(40),S(64)};if(PtInRect(&r,p))return {520,r};
+    r={S(8),client.bottom-S(26),Button(AddMenu).left-S(8),client.bottom};if(PtInRect(&r,p))return {532,r};
     r=List();
     if(p.x>=client.right-S(18)&&p.x<client.right-S(8)&&p.y>=r.top&&p.y<r.bottom)return {530,{client.right-S(18),r.top,client.right-S(8),r.bottom}};
     int index=HitRow(p);if(index<0)return {};
@@ -486,6 +509,7 @@ Ui::Tooltips::Target TooltipHit(POINT p){
 }
 std::wstring TooltipText(int id){
     const char* key=nullptr;
+    if(id==532)return FooterText();
     if(id>=1000){auto t=PlayerPlaylist().At(id-1000);return t?I18n::Text(t->favorite?"tooltip.favorite_off":"tooltip.favorite_on"):std::wstring{};}
     switch(id){
     case 1:key="tooltip.hide_playlist";break;case AddMenu:key="tooltip.add";break;
@@ -496,31 +520,68 @@ std::wstring TooltipText(int id){
     }
     return key?I18n::Text(key):std::wstring{};
 }
+void FocusControl(int id){keyboardFocus=id;if(id==SearchId){ShowWindow(search,SW_SHOW);SetFocus(search);}else SetFocus(window);Ui::Accessibility::Focus(window,id);InvalidateRect(window,nullptr,FALSE);}
+std::vector<int> FocusOrder(){std::vector<int> ids={GeneralTab,FavoritesTab,SearchId,ClearSearch,531};if(!selected.empty())ids.push_back(1000+selected.front());ids.insert(ids.end(),{AddMenu,Remove,ListMenu,1});return ids;}
+void NextFocus(bool backwards){auto ids=FocusOrder();auto it=std::find(ids.begin(),ids.end(),keyboardFocus);int index=it==ids.end()?-1:int(it-ids.begin());FocusControl(ids[(index+(backwards?int(ids.size())-1:1)+int(ids.size()))%int(ids.size())]);}
+void ActivateControl(int id){
+    if(id>=1000){if(auto t=PlayerPlaylist().At(id-1000)){t->favorite=!t->favorite;RefreshInformation();PlWnd_Refresh();}return;}
+    if(id==SearchId){FocusControl(id);return;}
+    if(id==1){SendMessageW(window,WM_CLOSE,0,0);return;}
+    if(id==531){if(!selected.empty())PlayerPlayback().PlayIndex(selected.front(),favoritesOnly);PlWnd_Refresh(true);return;}
+    RECT r=Button(id==1?-1:id);LPARAM point=MAKELPARAM((r.left+r.right)/2,(r.top+r.bottom)/2);
+    SendMessageW(window,WM_LBUTTONDOWN,0,point);SendMessageW(window,WM_LBUTTONUP,0,point);
+}
+LRESULT CALLBACK SearchKeyboard(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp,UINT_PTR,DWORD_PTR){
+    if(msg==WM_GETDLGCODE&&wp==VK_TAB)return DLGC_WANTTAB;
+    if(msg==WM_KEYDOWN&&wp==VK_TAB){NextFocus(GetKeyState(VK_SHIFT)<0);return 0;}
+    if(msg==WM_NCDESTROY)RemoveWindowSubclass(hwnd,SearchKeyboard,99);
+    return DefSubclassProc(hwnd,msg,wp,lp);
+}
+void AttachAccessibility(HWND hwnd){Ui::Accessibility::Attach(hwnd,[hwnd]{std::vector<Ui::Accessibility::Control> controls;
+    for(int id:std::initializer_list<int>{GeneralTab,FavoritesTab,ClearSearch,SearchId,AddMenu,Remove,ListMenu,1}){
+        LONG state=STATE_SYSTEM_FOCUSABLE;if(GetFocus()==hwnd&&keyboardFocus==id)state|=STATE_SYSTEM_FOCUSED;
+        if((id==GeneralTab&&!favoritesOnly)||(id==FavoritesTab&&favoritesOnly))state|=STATE_SYSTEM_SELECTED;
+        if(id==Remove&&selected.empty())state|=STATE_SYSTEM_UNAVAILABLE;
+        auto text=TooltipText(id);RECT bounds=Button(id==1?-1:id);if(id==SearchId){GetWindowRect(search,&bounds);MapWindowPoints(nullptr,hwnd,reinterpret_cast<POINT*>(&bounds),2);}
+        controls.push_back({id,bounds,text,text,L"",id==SearchId?ROLE_SYSTEM_TEXT:id==GeneralTab||id==FavoritesTab?ROLE_SYSTEM_PAGETAB:ROLE_SYSTEM_PUSHBUTTON,state});
+    }
+    RECT r=List(),client=Client();auto footer=FooterText();controls.push_back({532,{S(8),client.bottom-S(26),Button(AddMenu).left-S(8),client.bottom},footer,footer,L"",ROLE_SYSTEM_STATICTEXT,0});for(int row=top;row<std::min(view.Count(),top+Visible());++row){int index=view.Canonical(row);auto t=PlayerPlaylist().At(index);int y=r.top+(row-top)*S(24);
+        LONG state=STATE_SYSTEM_FOCUSABLE;if(std::binary_search(selected.begin(),selected.end(),index))state|=STATE_SYSTEM_SELECTED;
+        if(GetFocus()==hwnd&&keyboardFocus==531&&!selected.empty()&&selected.front()==index)state|=STATE_SYSTEM_FOCUSED;
+        controls.push_back({200000+index,{r.left,y,client.right-S(110),y+S(24)},t->displayTitle,TooltipText(531),L"",ROLE_SYSTEM_LISTITEM,state});
+        LONG star=STATE_SYSTEM_FOCUSABLE|(t->favorite?STATE_SYSTEM_CHECKED:0);if(GetFocus()==hwnd&&keyboardFocus==1000+index)star|=STATE_SYSTEM_FOCUSED;
+        auto text=TooltipText(1000+index);controls.push_back({1000+index,{client.right-S(110),y,client.right-S(84),y+S(24)},text,text,L"",ROLE_SYSTEM_CHECKBUTTON,star});
+    }return controls;
+},[](int id){if(id>=200000){PlayerPlayback().PlayIndex(id-200000,favoritesOnly);PlWnd_Refresh(true);}else ActivateControl(id);},[](int id){if(id>=200000){selected={id-200000};anchor=selected.front();FocusControl(531);}else FocusControl(id);});}
 LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     POINT point{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
     LRESULT menuResult{};
     if(Ui::ThemeMenuMessage(message,wp,lp,menuResult)) return menuResult;
     switch (message) {
-    case WM_CREATE: window = hwnd; scale = MainWnd_DPIScaleFloat(1); DragAcceptFiles(hwnd,TRUE);
-        resultsScheduled=false;
+    case WM_CREATE: window = hwnd; monitorDpi=Ui::WindowDpi(hwnd);scale=Ui::FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),460,360,Ui::MonitorWork(hwnd));
+        {auto create=reinterpret_cast<CREATESTRUCTW*>(lp);float initial=MainWnd_DPIScaleFloat(1);SetWindowPos(hwnd,nullptr,0,0,int(std::lround(create->cx/initial*scale)),int(std::lround(create->cy/initial*scale)),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);}DragAcceptFiles(hwnd,TRUE);
+        resultsScheduled=false;keyboardFocus=0;
         query.clear(); favoritesOnly=Ui::LoadAppearance().playlistFavoritesOnly;starClick=false;contextId=0;view.Update(PlayerPlaylist(),query,favoritesOnly);
         searchBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
         search=CreateWindowExW(0,L"EDIT",L"",WS_CHILD|WS_TABSTOP|ES_AUTOHSCROLL,
             0,0,1,1,hwnd,reinterpret_cast<HMENU>(SearchId),GetModuleHandleW(nullptr),nullptr);
-        I18n::UpdateEditDirection(search);
+        SetWindowSubclass(search,SearchKeyboard,99,0);
+        AttachAccessibility(hwnd);
+        I18n::UpdateEditDirection(search);Ui::Accessibility::NameNative(search,I18n::Text("playlist.search"),I18n::Text("tooltip.search"));
         SendMessageW(search,EM_SETLIMITTEXT,512,0); LayoutSearch();
         SendMessageW(search,EM_SETCUEBANNER,FALSE,reinterpret_cast<LPARAM>(I18n::Text("playlist.search").c_str()));
         Ui::Tooltips::Attach(hwnd,TooltipHit,TooltipText,[]{return scale;});
         Ui::Tooltips::AttachControl(search,"tooltip.search",[]{return scale;});
         if (!worker.Start(hwnd)) status.Set("errors.worker");
         return 0;
+    case WM_SETFOCUS:case WM_KILLFOCUS:InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_ERASEBKGND: return 1;
     case WM_PAINT: Paint(hwnd); return 0;
     case WM_SIZE: LayoutSearch(); ClampTop(); InvalidateRect(hwnd,nullptr,FALSE); return 0;
     case I18n::WM_LANGUAGE_CHANGED:
         SetWindowTextW(hwnd,I18n::Format("window.caption",{{"title",I18n::Text("playlist.title")}}).c_str());
         SendMessageW(search,EM_SETCUEBANNER,FALSE,reinterpret_cast<LPARAM>(I18n::Text("playlist.search").c_str()));
-        I18n::UpdateEditDirection(search);LayoutSearch();
+        I18n::UpdateEditDirection(search);Ui::Accessibility::NameNative(search,I18n::Text("playlist.search"),I18n::Text("tooltip.search"));LayoutSearch();
         InvalidateRect(hwnd,nullptr,FALSE);InvalidateRect(search,nullptr,TRUE);return 0;
     case Ui::WM_THEME_CHANGED:
         DeleteObject(searchBackground);searchBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
@@ -538,10 +599,12 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         info->ptMinTrackSize = {S(275),S(180)}; return 0;
     }
     case WM_DPICHANGED: {
-        scale = LOWORD(wp) / 96.0f * MainWnd_UserScaleMultiplier();
+        if(!lp)return 0;
+        RECT oldClient=Client();float oldScale=scale;
+        monitorDpi=LOWORD(wp)/96.f;scale=Ui::FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),460,360,Ui::MonitorWork(*reinterpret_cast<RECT*>(lp)));
         auto suggested = reinterpret_cast<RECT*>(lp);
-        SetWindowPos(hwnd,nullptr,suggested->left,suggested->top,suggested->right-suggested->left,
-            suggested->bottom-suggested->top,SWP_NOZORDER|SWP_NOACTIVATE);
+        SetWindowPos(hwnd,nullptr,suggested->left,suggested->top,int(std::lround(oldClient.right/oldScale*scale)),
+            int(std::lround(oldClient.bottom/oldScale*scale)),SWP_NOZORDER|SWP_NOACTIVATE);
         PlWnd_MainMoved(); return 0;
     }
     case WM_NCHITTEST: {
@@ -559,9 +622,9 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         return HTCLIENT;
     }
     case WM_LBUTTONDOWN: {
-        SetFocus(hwnd); pressed = HitButton(point);
+        SetFocus(hwnd); pressed = HitButton(point);keyboardFocus=pressed==-1?1:pressed?pressed:531;
         if (pressed) { SetCapture(hwnd); InvalidateRect(hwnd,nullptr,FALSE); return 0; }
-        if(point.x>=S(172)&&point.y>=S(36) && point.y<S(68)) { ShowWindow(search,SW_SHOW); SetFocus(search); return 0; }
+        if(point.x>=S(172)&&point.y>=S(36) && point.y<S(68)) { FocusControl(SearchId); return 0; }
         RECT list=List();
         if (point.x>list.right && point.y>=list.top && point.y<list.bottom && view.Count()>Visible()) {
             scrollDrag=true; SetCapture(hwnd);
@@ -626,20 +689,25 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     }
     case WM_CAPTURECHANGED: starClick=false;dragging=false; scrollDrag=false; pressed=0; InvalidateRect(hwnd,nullptr,FALSE); return 0;
     case WM_LBUTTONDBLCLK: {
+        keyboardFocus=531;
         RECT client=Client();if(point.x>=client.right-S(110)&&point.x<client.right-S(84))return 0;
         int row=HitRow(point);
         if (row>=0 && !PlayerPlayback().PlayIndex(row,favoritesOnly)) Error("errors.play_selected");
         PlWnd_Refresh(true); return 0;
     }
     case WM_MOUSEWHEEL: top-=GET_WHEEL_DELTA_WPARAM(wp)/WHEEL_DELTA*3; ClampTop(); PlWnd_Refresh(); return 0;
+    case WM_APPCOMMAND:return SendMessageW(mainWindow,WM_APPCOMMAND,wp,lp);
     case WM_KEYDOWN:
-        if(wp==VK_TAB) { ShowWindow(search,SW_SHOW); SetFocus(search); }
+        {MSG key{hwnd,WM_KEYDOWN,wp,lp,0,{0,0}};if(MainWnd_TranslateShortcut(&key))return 0;}
+        if(wp==VK_TAB) NextFocus(GetKeyState(VK_SHIFT)<0);
+        else if((wp==VK_RETURN||wp==VK_SPACE)&&keyboardFocus&&keyboardFocus!=531)ActivateControl(keyboardFocus);
         else if (wp==VK_DELETE) RemoveSelected();
         else if (wp=='A' && (GetKeyState(VK_CONTROL)&0x8000)) {
             status.clear();
             selected=view.Indices(); PlWnd_Refresh();
         } else if (wp==VK_RETURN && !selected.empty()) { PlayerPlayback().PlayIndex(selected.front(),favoritesOnly); PlWnd_Refresh(true); }
         else if((wp==VK_UP || wp==VK_DOWN || wp==VK_HOME || wp==VK_END) && view.Count()) {
+            keyboardFocus=531;
             int row=view.Row(selected.empty()?-1:selected.back());
             row=wp==VK_HOME?0:wp==VK_END?view.Count()-1:std::clamp(row+(wp==VK_UP?-1:1),0,view.Count()-1);
             selected={view.Canonical(row)};anchor=selected.front();
@@ -850,7 +918,8 @@ bool PlWnd_PlaySelected() {
 }
 void PlWnd_ScaleChanged() {
     if(!window) return;
-    float old=scale; scale=MainWnd_DPIScaleFloat(1); RECT r=Client();
+    if(information){RECT r{};GetWindowRect(information,&r);SendMessageW(information,WM_DPICHANGED,MAKELONG(int(informationDpi*96),int(informationDpi*96)),reinterpret_cast<LPARAM>(&r));}
+    float old=scale; scale=Ui::FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),460,360,Ui::MonitorWork(window)); RECT r=Client();
     SetWindowPos(window,nullptr,0,0,static_cast<int>(r.right/old*scale),static_cast<int>(r.bottom/old*scale),
         SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
     if (dock!=Dock::None) PlWnd_MainMoved(); else AvoidOverlap();
@@ -874,4 +943,12 @@ void PlWnd_AddFiles(HWND owner, bool playFirst) {
     status.clear();
     if (playFirst && first<PlayerPlaylist().Count() && !PlayerPlayback().PlayIndex(first)) Error("errors.play_file");
     PlWnd_Refresh();
+}
+
+bool PlWnd_AppendPaths(const std::vector<std::wstring>& paths){
+    if(paths.size()+PlayerPlaylist().Count()>100000)return false;
+    for(const auto& path:paths){DWORD attrs=GetFileAttributesW(path.c_str());if(attrs==INVALID_FILE_ATTRIBUTES||(!(attrs&FILE_ATTRIBUTE_DIRECTORY)&&!IsSupportedAudioFile(path.c_str())))return false;}
+    for(const auto& path:paths)AddPath(path);
+    if(!paths.empty())PlWnd_Refresh();
+    return true;
 }

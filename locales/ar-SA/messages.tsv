@@ -238,3 +238,7 @@ tooltip.theme_list	اختيار سمة وتطبيقها
 tooltip.theme_reset	استعادة السمة الافتراضية
 tooltip.category	تصفية السمات حسب الفئة
 tooltip.info	تفاصيل المقطع؛ حدد النص لنسخه
+appearance.topmost	دائمًا في المقدمة
+appearance.hotkeys	اختصارات عامة (Ctrl+Alt+F9–F12)
+errors.hotkeys	تعذر تسجيل الاختصارات العامة. قد يستخدمها تطبيق آخر.
+errors.instance	تعذر فتح ملف التعريف أو إرسال الملفات المطلوبة. أغلق النسخة الحالية ثم حاول مجددًا.

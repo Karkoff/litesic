@@ -15,7 +15,7 @@ static void catalogs_are_complete_and_unicode() {
         Catalog catalog;std::wstring code(l.code,l.code+strlen(l.code));
         CHECK(Read(root+L"\\"+code+L"\\messages.tsv",catalog,error));
         CHECK(Validate(catalog,service.Fallback(),l.code,true,error));
-        CHECK(catalog.size()==237);CHECK(service.Install(l.code,std::move(catalog),true,error));
+        CHECK(catalog.size()==241);CHECK(service.Install(l.code,std::move(catalog),true,error));
         CHECK(service.Active()==l.code);CHECK(!service.Text("playlist.title").empty());
     }
     CHECK(service.Select("ja-JP",root,error));CHECK(service.Text("player.play")==L"再生");

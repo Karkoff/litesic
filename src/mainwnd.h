@@ -179,4 +179,7 @@ BOOL MainWnd_RegisterClass(HINSTANCE hInstance);
 /* Cria e exibe a janela principal. Retorna o HWND ou NULL em erro. */
 HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow);
 
+bool MainWnd_TranslateShortcut(MSG* message);
+void MainWnd_ApplyTopmost(HWND hwnd);
+bool MainWnd_SetGlobalHotkeys(HWND hwnd,bool enabled);
 #endif /* MAINWND_H */

@@ -15,3 +15,7 @@ void PlWnd_ScaleChanged();
 void PlWnd_MainMoved(bool preserveDock = false);
 bool PlWnd_DockedRect(const RECT& owner, RECT& panel);
 void PlWnd_AddFiles(HWND owner, bool playFirst = false);
+
+#include <string>
+#include <vector>
+bool PlWnd_AppendPaths(const std::vector<std::wstring>& paths);

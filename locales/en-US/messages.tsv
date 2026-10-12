@@ -238,3 +238,7 @@ tooltip.theme_list	Select and apply a theme
 tooltip.theme_reset	Restore the default theme
 tooltip.category	Filter themes by category
 tooltip.info	Track details; select text to copy
+appearance.topmost	Always on top
+appearance.hotkeys	Global shortcuts (Ctrl+Alt+F9–F12)
+errors.hotkeys	Global shortcuts could not be registered. Another application may be using them.
+errors.instance	Could not open this profile or forward the requested files. Retry after closing the existing instance.

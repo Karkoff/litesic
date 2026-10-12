@@ -1,5 +1,19 @@
 # PROJECT_STATE — LiteSic
 
+**M8 — COMPLETE; aceite humano PASS (12/10/2026).**
+Decisão expressa do usuário: **M8-DEC-2026-10-12**, solicitação
+“LITESIC — ENCERRAMENTO DEFINITIVO DA M8”. Resultados técnicos, evidências
+originais e aceites anteriores preservados. Validações físicas, assistivas e
+linguísticas não realizadas são observações futuras não bloqueantes e não
+reabrem automaticamente a milestone; não são convertidas em PASS técnico.
+M0–M7 e M9 permanecem COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho**,
+antes da **M10 — Distribuição**; ambas ainda não iniciadas.
+Neste encerramento não foram repetidos testes ou auditorias nem implementadas
+funcionalidades. Consolidação, commit e push para `origin/master` autorizados.
+
+Os baselines e pendências abaixo são históricos; o encerramento acima prevalece
+para o estado atual. [Relatório final M8](docs/M8-COMPLETION.md).
+
 **M6 — COMPLETE, por decisão explícita do usuário em 11/10/2026.**
 O usuário informou aprovação visual, audível, funcional, de uso prolongado
 e do comportamento geral após os ajustes. Esse aceite final substitui
@@ -11,7 +25,7 @@ Aceite humano final concedido pelo usuário: **“TUDO PASS”**.
 [auditoria do roadmap](docs/ROADMAP-IMPLEMENTATION-AUDIT.md).
 Complemento aprovado: [compactação de painéis ocultos](docs/M7-VISIBILITY-COMPACTION.md),
 com restauração da formação ao reabrir e prioridade ao arraste manual.
-Próxima milestone: **M8 — Acabamento**, aberta, incluindo internacionalização
+Histórico anterior ao encerramento: **M8 — Acabamento**, incluindo internacionalização
 integral em 18 idiomas, seleção automática/manual e tooltips multilíngues.
 **M8-T6 — COMPLETE (11/10/2026):** serviço central, 18 catálogos com 188 IDs,
 fallback inglês, Unicode, fontes nativas e preparação RTL/troca programática.
@@ -32,9 +46,10 @@ Direct2D/DirectWrite nas cinco janelas, estados atuais, 46 novas chaves,
 [Relatório](docs/M8-T8-TOOLTIPS.md) e [evidências](docs/evidence/m8-tooltips/README.md).
 Aceite visual humano T8 concedido pelo usuário na solicitação de consolidação.
 Não equivale a revisão linguística profissional dos 18 idiomas; limitações
-de acessibilidade Canvas preservadas. M8-T1…T5 e checkpoint continuam abertos.
+de acessibilidade Canvas daquele baseline preservadas. M8-T1…T5 e checkpoint
+posteriormente concluídos e aceitos em 12/10/2026.
 [Consolidação, nova regressão e publicação](docs/M8-CONSOLIDATION.md).
-M8 segue aberta. Ordem aprovada: conclusão M8 → auditoria geral de desempenho → M10.
+M8 COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho → M10 — Distribuição**.
 M10 continua aberta, com distribuição limpa e reproduzível planejada.
 A auditoria e suas evidências anteriores permanecem como histórico.
 
@@ -72,5 +87,5 @@ Plano técnico preservado: [M9](docs/milestones/M9.md). Relatórios históricos
 mantêm o estado da época; este registro prevalece para o status atual da M9.
 
 [Auditoria integral restante da M8 e plano de conclusão](docs/M8-REMAINING-REQUIREMENTS-AUDIT.md):
-T1–T5 e refinamentos específicos DPI/acessibilidade pendentes; T6–T8 COMPLETE.
-Consolidação T6–T8 publicada em `1aa560f`; M8 permanece aberta.
+T1–T8 COMPLETE; aceite humano final PASS. Consolidação T6–T8 publicada em
+`1aa560f`; resultados e baselines históricos preservados.

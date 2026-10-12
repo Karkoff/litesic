@@ -238,3 +238,7 @@ tooltip.theme_list	Selecionar e aplicar um tema
 tooltip.theme_reset	Restaurar o tema predefinido
 tooltip.category	Filtrar temas por categoria
 tooltip.info	Detalhes da faixa; selecione texto para copiar
+appearance.topmost	Sempre no topo
+appearance.hotkeys	Atalhos globais (Ctrl+Alt+F9–F12)
+errors.hotkeys	Não foi possível registar os atalhos globais. Outra aplicação poderá estar a utilizar essas teclas.
+errors.instance	Não foi possível abrir este perfil ou encaminhar os ficheiros pedidos. Tente novamente após fechar a instância existente.

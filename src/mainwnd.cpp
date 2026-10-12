@@ -1,3 +1,7 @@
+#include "ui_accessibility.h"
+#include <oleacc.h>
+#include "ui_scale.h"
+#include "runtime.h"
 #include "ui_tooltip.h"
 #include "i18n.h"
 #include "language_selection.h"
@@ -50,32 +54,7 @@ static int g_userScalePercent = 0;
 
 static float GetDpiScaleFactor(HWND hwnd)
 {
-    /* GetDpiForWindow requer Windows 10 1607+. Fallback para 96 DPI. */
-    typedef UINT (WINAPI *PFN_GetDpiForWindow)(HWND);
-    static PFN_GetDpiForWindow pGetDpi = NULL;
-
-    if (pGetDpi == NULL)
-    {
-        HMODULE hUser32 = LoadLibraryW(L"user32.dll");
-        if (hUser32 != NULL)
-        {
-            pGetDpi = (PFN_GetDpiForWindow)GetProcAddress(
-                hUser32, "GetDpiForWindow");
-            FreeLibrary(hUser32);
-        }
-    }
-
-    if (pGetDpi != NULL)
-    {
-        UINT dpi = pGetDpi(hwnd);
-        return (float)dpi / 96.0f;
-    }
-
-    /* Fallback: usar GetDeviceCaps do DC da janela. */
-    HDC hdc = GetDC(hwnd);
-    int dpiX = GetDeviceCaps(hdc, LOGPIXELSX);
-    ReleaseDC(hwnd, hdc);
-    return (float)dpiX / 96.0f;
+    return Ui::WindowDpi(hwnd);
 }
 
 int MainWnd_DPIScale(int px)
@@ -113,7 +92,7 @@ float MainWnd_UserScaleMultiplier() { return UserScaleMultiplier(); }
  * pelo menu de contexto. */
 static void ApplyInterfaceScale(HWND hwnd)
 {
-    g_dpiScale = GetDpiScaleFactor(hwnd) * UserScaleMultiplier();
+    g_dpiScale = Ui::FitScale(GetDpiScaleFactor(hwnd) * UserScaleMultiplier(),MAINWND_WIDTH,PlayerLayoutHeight(g_visualizerVisible),Ui::MonitorWork(hwnd));
 
     int scaledW = MainWnd_DPIScale(MAINWND_WIDTH);
     int scaledH = MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible));
@@ -124,8 +103,7 @@ static void ApplyInterfaceScale(HWND hwnd)
     int cy = cur.top + (cur.bottom - cur.top) / 2;
     int x = cx - scaledW / 2;
     int y = cy - scaledH / 2;
-    if (x < 0) x = 0;
-    if (y < 0) y = 0;
+    RECT fitted{x,y,x+scaledW,y+scaledH};WindowSnap::KeepVisible(fitted,Ui::MonitorWork(hwnd));x=fitted.left;y=fitted.top;
 
     SetWindowPos(hwnd, NULL, x, y, scaledW, scaledH, SWP_NOZORDER | SWP_NOACTIVATE);
     InvalidateRect(hwnd, NULL, TRUE);
@@ -653,6 +631,7 @@ static void ExecutePlayerControl(HWND hwnd,int id) {
     case 16:
         g_visualizerVisible=!g_visualizerVisible;
         Ui::SaveAppearanceValue(L"VisualizerVisible",g_visualizerVisible);
+        g_dpiScale=Ui::FitScale(g_dpiScale,MAINWND_WIDTH,PlayerLayoutHeight(g_visualizerVisible),Ui::MonitorWork(hwnd));
         SetWindowPos(hwnd,nullptr,0,0,MainWnd_DPIScale(MAINWND_WIDTH),
             MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible)),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
         UpdateTooltipRects(hwnd);
@@ -660,6 +639,46 @@ static void ExecutePlayerControl(HWND hwnd,int id) {
     }
 }
 
+namespace {
+bool topmost=false,globalHotkeys=false;
+constexpr UINT PlaybackCommand=WM_APP+97;
+HWND playerWindow=nullptr;
+void ReleaseHotkeys(HWND hwnd){for(int i=0;i<4;++i)UnregisterHotKey(hwnd,6100+i);}
+bool RegisterPlaybackHotkeys(HWND hwnd){
+    ReleaseHotkeys(hwnd);
+    const UINT keys[]={VK_F9,VK_F10,VK_F11,VK_F12};
+    for(int i=0;i<4;++i)if(!RegisterHotKey(hwnd,6100+i,MOD_CONTROL|MOD_ALT|MOD_NOREPEAT,keys[i])){ReleaseHotkeys(hwnd);return false;}
+    return true;
+}
+BOOL CALLBACK TopmostWindow(HWND hwnd,LPARAM value){
+    wchar_t name[80]{};GetClassNameW(hwnd,name,80);
+    if(wcsncmp(name,L"LiteSic.",8)==0&&wcscmp(name,L"LiteSic.TooltipWnd"))
+        SetWindowPos(hwnd,value?HWND_TOPMOST:HWND_NOTOPMOST,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
+    return TRUE;
+}
+}
+bool MainWnd_SetGlobalHotkeys(HWND hwnd,bool enabled){
+    if(enabled&&!RegisterPlaybackHotkeys(hwnd))return false;
+    if(!enabled)ReleaseHotkeys(hwnd);
+    globalHotkeys=enabled;Ui::SaveAppearanceValue(L"GlobalHotkeys",enabled);return true;
+}
+void MainWnd_ApplyTopmost(HWND){EnumThreadWindows(GetCurrentThreadId(),TopmostWindow,topmost);}
+bool MainWnd_TranslateShortcut(MSG* msg){
+    if(msg->message!=WM_KEYDOWN||!playerWindow)return false;
+    HWND root=GetAncestor(msg->hwnd,GA_ROOT);wchar_t cls[80]{},child[80]{};
+    GetClassNameW(root,cls,80);GetClassNameW(msg->hwnd,child,80);
+    if(wcscmp(cls,L"LiteSic.MainWnd")&&wcscmp(cls,L"LiteSic.PlaylistWnd")&&wcscmp(cls,L"LiteSic.EqualizerWnd"))return false;
+    if(!wcscmp(child,L"Edit")||!wcscmp(child,L"EDIT"))return false;
+    bool ctrl=(GetKeyState(VK_CONTROL)&0x8000)!=0;
+    if((GetKeyState(VK_MENU)&0x8000)||(GetKeyState(VK_SHIFT)&0x8000))return false;
+    int action=0;
+    if(ctrl){if(msg->wParam=='D')action=3;else return false;}
+    else switch(msg->wParam){case 'Z':action=1;break;case 'B':action=2;break;case 'X':action=5;break;case 'C':action=6;break;case 'V':action=7;break;case 'L':action=20;break;
+        // EQ and playlist retain arrow navigation; player sliders retain adjustment.
+        case VK_LEFT:case VK_RIGHT:if((root==playerWindow&&!(g_controlFocus>=8&&g_controlFocus<=10))||!wcscmp(cls,L"LiteSic.PlaylistWnd"))action=msg->wParam==VK_LEFT?21:22;break;}
+    if(!action)return false;
+    SendMessageW(playerWindow,PlaybackCommand,action,0);return true;
+}
 static PlayerViewState PlayerSnapshot() {
     PlayerViewState s;
     s.loaded=Audio_HasTrack(); s.playback=Audio_GetState();
@@ -773,6 +792,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     switch (msg)
     {
     case WM_CREATE:
+        playerWindow=hwnd;
         Skin::Bind(Skin::Player,hwnd);
     {
         /* Calcular fator de escala DPI para esta janela e redimensionar a
@@ -781,6 +801,30 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
          * coordenadas escaladas fica cortado dentro de uma janela pequena. */
         ApplyInterfaceScale(hwnd);
         CreatePlayerTooltips(hwnd);
+        Ui::Accessibility::Attach(hwnd,[hwnd]{
+            std::vector<Ui::Accessibility::Control> controls;auto state=PlayerSnapshot();
+            for(int id=1;id<=19;++id){Ui::Rect r=PlayerControlRect(id,g_visualizerVisible);
+                if(id==15)r={TITLE_X,TITLE_Y,TITLE_W,TITLE_H};
+                if(id==17)r={BTN_MINIMIZE_X,4,BTN_SIZE,24};
+                if(id==18)r={BTN_CLOSE_X,4,BTN_SIZE,24};
+                if(id==19)r={LCD_X,LCD_Y,LCD_W,LCD_H};
+                if(r.w<=0||r.h<=0)continue;
+                LONG flags=id<=14||id==16?STATE_SYSTEM_FOCUSABLE:0;
+                if(GetFocus()==hwnd&&g_controlFocus==id)flags|=STATE_SYSTEM_FOCUSED;
+                if((id==3&&state.shuffle)||(id==4&&state.repeat!=RepeatMode::Off)||(id==11&&state.playlistVisible)||(id==12&&state.equalizerVisible)||(id==16&&state.visualizerVisible))flags|=STATE_SYSTEM_CHECKED;
+                if(((id==6||id==7||id==8)&&!state.loaded)||((id==1||id==2||id==5)&&!state.hasPlaylist))flags|=STATE_SYSTEM_UNAVAILABLE;
+                if((id==13&&state.visualization==VIZ_MODE_SPECTRUM)||(id==14&&state.visualization==VIZ_MODE_OSCILLOSCOPE))flags|=STATE_SYSTEM_CHECKED;
+                std::wstring value=id==8?std::to_wstring(int(state.seek*100)):id==9?std::to_wstring(int(state.volume*100)):id==10?std::to_wstring(int((state.pan*2-1)*100)):L"";
+                controls.push_back({id,{MainWnd_DPIScale(int(r.x)),MainWnd_DPIScale(int(r.y)),MainWnd_DPIScale(int(r.x+r.w)),MainWnd_DPIScale(int(r.y+r.h))},id==15?state.title:id<=16?PlayerControlName(id):PlayerTooltip(id),PlayerTooltip(id),value,id>=8&&id<=10?ROLE_SYSTEM_SLIDER:id==15||id==19?ROLE_SYSTEM_STATICTEXT:id==3||id==4||id==11||id==12||id==16?ROLE_SYSTEM_CHECKBUTTON:id==13||id==14?ROLE_SYSTEM_RADIOBUTTON:ROLE_SYSTEM_PUSHBUTTON,flags});
+            }return controls;
+        },[hwnd](int id){if(id==17)ShowWindow(hwnd,SW_MINIMIZE);else if(id==18)PostMessageW(hwnd,WM_CLOSE,0,0);else ExecutePlayerControl(hwnd,id);InvalidateRect(hwnd,nullptr,FALSE);},[hwnd](int id){g_controlFocus=id;Ui::Accessibility::Focus(hwnd,id);InvalidateRect(hwnd,nullptr,FALSE);},[hwnd](int id,double value){
+            if(id<8||id>10||value<(id==10?-100:0)||value>100)return false;
+            if(id==8){if(!Audio_HasTrack())return false;g_seekValue=float(value/100);Audio_SeekSeconds(g_seekValue*Audio_GetDurationSeconds());}
+            if(id==9){g_volumeValue=float(value/100);Audio_SetVolume(g_volumeValue);}
+            if(id==10){g_panValue=float((value+100)/200);Audio_SetPan(g_panValue*2-1);}
+            InvalidateRect(hwnd,nullptr,FALSE);return true;
+        });
+
 
         /* Garantir que o ícone aparece na taskbar e no Alt+Tab. */
         HICON hIcon = LoadIconW(
@@ -796,6 +840,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         /* Inicializar motor de áudio. */
         Audio_Init();
         Audio_SetVolume(g_volumeValue);
+        Audio_SetPan(g_panValue*2-1);
+        if(globalHotkeys&&!MainWnd_SetGlobalHotkeys(hwnd,true)){globalHotkeys=false;MessageBoxW(hwnd,I18n::Text("errors.hotkeys").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);}
 
         /* M4-T1: Inicializar ring buffer de visualização. */
         Audio_VizInit();
@@ -814,6 +860,24 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
 
+    case WM_COPYDATA:{
+        std::vector<std::wstring> files;if(!Runtime::Decode(reinterpret_cast<COPYDATASTRUCT*>(lParam),files))return FALSE;
+        if(!PlWnd_AppendPaths(files))return FALSE;
+        ShowWindow(hwnd,SW_RESTORE);SetForegroundWindow(hwnd);return TRUE;
+    }
+    case PlaybackCommand:
+        if(wParam==20)PlWnd_AddFiles(hwnd,true);
+        else if(wParam==21||wParam==22){if(Audio_HasTrack())Audio_SeekSeconds(std::clamp(Audio_GetPositionSeconds()+(wParam==21?-5.:5.),0.,Audio_GetDurationSeconds()));}
+        else ExecutePlayerControl(hwnd,int(wParam));
+        InvalidateRect(hwnd,nullptr,FALSE);return 0;
+    case WM_APPCOMMAND:{
+        int action=0;switch(GET_APPCOMMAND_LPARAM(lParam)){
+        case APPCOMMAND_MEDIA_PREVIOUSTRACK:action=1;break;case APPCOMMAND_MEDIA_NEXTTRACK:action=2;break;
+        case APPCOMMAND_MEDIA_STOP:action=7;break;case APPCOMMAND_MEDIA_PLAY_PAUSE:action=Audio_GetState()==AUDIO_STATE_PLAYING?6:5;break;}
+        if(action){SendMessageW(hwnd,PlaybackCommand,action,0);return TRUE;}break;
+    }
+    case WM_HOTKEY:
+        if(wParam>=6100&&wParam<=6103){const int actions[]={Audio_GetState()==AUDIO_STATE_PLAYING?6:5,7,1,2};SendMessageW(hwnd,PlaybackCommand,actions[wParam-6100],0);}return 0;
     case WM_ENTERSIZEMOVE:Skin::BeginMove(Skin::Player);return 0;
     case WM_MOVING:Skin::Moving(Skin::Player,*reinterpret_cast<RECT*>(lParam),MainWnd_DPIScale(24));return TRUE;
     case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Player,MainWnd_DPIScale(24));return 0;
@@ -821,21 +885,23 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     case WM_WINDOWPOSCHANGED:
         Skin::Changed(Skin::Player);UpdateScrollTimer(hwnd);
         return DefWindowProcW(hwnd,msg,wParam,lParam);
-    case WM_DISPLAYCHANGE:Skin::Recover();return 0;
+    case WM_DISPLAYCHANGE:ApplyInterfaceScale(hwnd);PlWnd_ScaleChanged();EqWnd_ScaleChanged();Ui::ThemeScaleChanged();Skin::Recover();return 0;
     case WM_ERASEBKGND: return 1;
     case WM_DPICHANGED: {
-        g_dpiScale=LOWORD(wParam)/96.f*UserScaleMultiplier();
+        if(!lParam)return 0;
         auto r=reinterpret_cast<RECT*>(lParam);
+        g_dpiScale=Ui::FitScale(LOWORD(wParam)/96.f*UserScaleMultiplier(),MAINWND_WIDTH,PlayerLayoutHeight(g_visualizerVisible),Ui::MonitorWork(*r));
         SetWindowPos(hwnd,nullptr,r->left,r->top,MainWnd_DPIScale(MAINWND_WIDTH),MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible)),SWP_NOZORDER|SWP_NOACTIVATE);
         PlWnd_ScaleChanged(); EqWnd_ScaleChanged(); UpdateTooltipRects(hwnd); InvalidateRect(hwnd,nullptr,FALSE); return 0;
     }
     case WM_KEYDOWN: {
+        MSG key{hwnd,WM_KEYDOWN,wParam,lParam,0,{0,0}};if(MainWnd_TranslateShortcut(&key))return 0;
         const int order[]={1,5,6,7,2,8,9,10,3,4,16,11,12,13,14};
         if(wParam==VK_TAB) {
             int next=0;
             for(int i=0;i<15;++i) if(order[i]==g_controlFocus) next=(i+((GetKeyState(VK_SHIFT)&0x8000)?14:1))%15;
             if(!g_visualizerVisible) while(order[next]==13 || order[next]==14) next=(next+((GetKeyState(VK_SHIFT)&0x8000)?14:1))%15;
-            g_controlFocus=order[next]; InvalidateRect(hwnd,nullptr,FALSE); return 0;
+            g_controlFocus=order[next]; Ui::Accessibility::Focus(hwnd,g_controlFocus); InvalidateRect(hwnd,nullptr,FALSE); return 0;
         }
         if(wParam==VK_SPACE || wParam==VK_RETURN) {
             ExecutePlayerControl(hwnd,g_controlFocus?g_controlFocus:Audio_GetState()==AUDIO_STATE_PLAYING?6:5);
@@ -1399,6 +1465,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         }
 
         HMENU hMenu = CreatePopupMenu();
+        AppendMenuW(hMenu,MF_STRING|(topmost?MF_CHECKED:0),902,I18n::Text("appearance.topmost").c_str());
+        AppendMenuW(hMenu,MF_STRING|(globalHotkeys?MF_CHECKED:0),903,I18n::Text("appearance.hotkeys").c_str());
         AppendMenuW(hMenu, MF_STRING, 900, I18n::Text("playlist.title").c_str());
         AppendMenuW(hMenu, MF_STRING, 901, I18n::Text("appearance.themes_menu").c_str());
         AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hScale, I18n::Text("appearance.scale_menu").c_str());
@@ -1428,6 +1496,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 MessageBoxW(hwnd,I18n::Text("errors.language_change").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);
             break;
         }
+        if(cmdId==902){topmost=!topmost;MainWnd_ApplyTopmost(hwnd);Ui::SaveAppearanceValue(L"Topmost",topmost);break;}
+        if(cmdId==903){
+            if(!MainWnd_SetGlobalHotkeys(hwnd,!globalHotkeys))MessageBoxW(hwnd,I18n::Text("errors.hotkeys").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);
+            break;
+        }
         if (cmdId == 900) { PlWnd_Show(); break; }
         if (cmdId == 901) { Ui::ShowThemes(hwnd); break; }
         static const struct { int id; int percent; } scaleCmds[] = {
@@ -1444,6 +1517,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 ApplyInterfaceScale(hwnd);
                 PlWnd_ScaleChanged();
                 EqWnd_ScaleChanged();
+                Ui::ThemeScaleChanged();
                 break;
             }
         }
@@ -1460,6 +1534,12 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
     case WM_DESTROY:
     {
+        ReleaseHotkeys(hwnd);playerWindow=nullptr;
+        Ui::SaveAppearanceValue(L"PanPermille",int(std::lround(g_panValue*1000)));
+        Ui::SaveAppearanceValue(L"Shuffle",g_shuffleOn);
+        Ui::SaveAppearanceValue(L"Repeat",int(g_repeatMode));
+        RECT position{};GetWindowRect(hwnd,&position);
+        Ui::SavePlayerPosition({position.left,position.top});
         Ui::SaveAppearanceValue(L"VolumePermille",static_cast<int>(std::lround(g_volumeValue*1000)));
         KillTimer(hwnd, POSITION_TIMER_ID);
         KillTimer(hwnd, SCROLL_TIMER_ID);
@@ -1507,6 +1587,8 @@ HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow)
 {
     auto appearance=Ui::LoadAppearance();
     g_volumeValue=appearance.volumePermille/1000.f;
+    g_panValue=appearance.panPermille/1000.f;g_shuffleOn=appearance.shuffle;g_repeatMode=RepeatMode(appearance.repeat);
+    topmost=appearance.topmost;globalHotkeys=appearance.globalHotkeys;
     g_visualizerVisible=appearance.visualizerVisible;
     g_userScalePercent=appearance.scalePercent;
     g_vizMode=appearance.spectrum?VIZ_MODE_SPECTRUM:VIZ_MODE_OSCILLOSCOPE;
@@ -1522,6 +1604,8 @@ HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow)
     if (x < 0) x = 0;
     if (y < 0) y = 0;
 
+    Ui::PanelPosition savedPosition;bool hasPosition=Ui::LoadPlayerPosition(savedPosition);
+    if(hasPosition){x=savedPosition.left;y=savedPosition.top;}
     HWND hwnd = CreateWindowExW(
         0,                              /* dwExStyle */
         CLASS_NAME,                     /* lpClassName */
@@ -1539,6 +1623,8 @@ HWND MainWnd_Create(HINSTANCE hInstance, int nCmdShow)
 
     if (hwnd != NULL)
     {
+        if(hasPosition){RECT r{};GetWindowRect(hwnd,&r);r={savedPosition.left,savedPosition.top,savedPosition.left+r.right-r.left,savedPosition.top+r.bottom-r.top};MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);if(GetMonitorInfoW(MonitorFromRect(&r,MONITOR_DEFAULTTONEAREST),&monitor))WindowSnap::KeepVisible(r,monitor.rcWork);SetWindowPos(hwnd,nullptr,r.left,r.top,0,0,SWP_NOSIZE|SWP_NOZORDER|SWP_NOACTIVATE);}
+        MainWnd_ApplyTopmost(hwnd);
         ShowWindow(hwnd, nCmdShow);
         UpdateWindow(hwnd);
     }

@@ -1,3 +1,6 @@
+#include "ui_accessibility.h"
+#include <oleacc.h>
+#include "ui_scale.h"
 #include "ui_tooltip.h"
 #include "i18n.h"
 #include "language_selection.h"
@@ -15,7 +18,7 @@
 namespace {
 HWND window=nullptr,mainWindow=nullptr;
 auto& dock=Skin::Attachment(Skin::Equalizer);
-float scale=1;
+float scale=1,monitorDpi=1;
 Ui::Canvas canvas;
 int hover=-1,pressed=-1,focus=0;
 float dragY=0,dragGain=0;
@@ -72,6 +75,7 @@ std::wstring Tooltip(int id){
     if(id==1)return I18n::Text("tooltip.presets");
     if(id==2)return I18n::Text("tooltip.reset");
     if(id==14)return I18n::Text("tooltip.hide_eq");
+    if(id==15)return I18n::Text("equalizer.help");
     if(id<3||id>13)return {};
     wchar_t gain[32]{};swprintf(gain,32,L"%+.1f",double(Gain(id)));
     if(id==3)return I18n::Format("tooltip.preamp",{{"gain",gain}});
@@ -83,13 +87,23 @@ void AttachTooltips(HWND hwnd){
         if(id>=0&&id<3)r=Button(id);
         else if(id>=3)r={44.f+(id-3)*37,56,32,86};
         else if((r={428,0,32,32}).Contains(x,y))id=14;
+        else if((r={12,164,436,20}).Contains(x,y))id=15;
         return Ui::Tooltips::Target{id<0?0:id+1,{S(r.x),S(r.y),S(r.x+r.w),S(r.y+r.h)}};
     },[](int id){return Tooltip(id-1);},[]{return scale;});
 }
 LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
     LRESULT result=0;if(Ui::ThemeMenuMessage(message,wp,lp,result))return result;
     switch(message){
-    case WM_CREATE:AttachTooltips(hwnd);return 0;
+    case WM_CREATE:monitorDpi=Ui::WindowDpi(hwnd);scale=Ui::FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),460,int(Ui::EqHeight),Ui::MonitorWork(hwnd));
+        SetWindowPos(hwnd,nullptr,0,0,S(460),S(Ui::EqHeight),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);AttachTooltips(hwnd);
+        Ui::Accessibility::Attach(hwnd,[hwnd]{std::vector<Ui::Accessibility::Control> controls;
+            for(int id=0;id<=14;++id){Ui::Rect r=id<3?Button(id):id==14?Ui::Rect{428,0,32,32}:Ui::Rect{44.f+(id-3)*37,56,32,86};
+                LONG flags=STATE_SYSTEM_FOCUSABLE;if(!Enabled(id==14?0:id))flags|=STATE_SYSTEM_UNAVAILABLE;
+                if(id==0&&Eq::State().enabled)flags|=STATE_SYSTEM_CHECKED;
+                if(GetFocus()==hwnd&&focus==id)flags|=STATE_SYSTEM_FOCUSED;
+                auto text=Tooltip(id);controls.push_back({id+1,{S(r.x),S(r.y),S(r.x+r.w),S(r.y+r.h)},text,text,id>=3&&id<=13?std::to_wstring(Gain(id)):L"",id>=3&&id<=13?ROLE_SYSTEM_SLIDER:id==0?ROLE_SYSTEM_CHECKBUTTON:ROLE_SYSTEM_PUSHBUTTON,flags});
+            }auto help=I18n::Text("equalizer.help");controls.push_back({16,{S(12),S(164),S(448),S(184)},help,help,L"",ROLE_SYSTEM_STATICTEXT,0});return controls;
+        },[hwnd](int id){if(id==15)Hide(hwnd);else if(id<=3)Activate(hwnd,id-1);},[hwnd](int id){focus=id-1;Ui::Accessibility::Focus(hwnd,id);InvalidateRect(hwnd,nullptr,FALSE);},[hwnd](int id,double value){if(id<4||id>14||value<-12||value>12)return false;Eq::SetGain(id-5,float(value));Eq::Save();InvalidateRect(hwnd,nullptr,FALSE);return true;});return 0;
     case WM_ENTERSIZEMOVE:Skin::BeginMove(Skin::Equalizer);return 0;
     case WM_MOVING:Skin::Moving(Skin::Equalizer,*reinterpret_cast<RECT*>(lp),S(24));return TRUE;
     case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Equalizer,S(24));SavePosition();return 0;
@@ -119,9 +133,11 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
         else if(id>=3)Eq::Save();
         InvalidateRect(hwnd,nullptr,FALSE);return 0;}
     case WM_CAPTURECHANGED:case WM_CANCELMODE:pressed=-1;Eq::Save();InvalidateRect(hwnd,nullptr,FALSE);return 0;
+    case WM_APPCOMMAND:return SendMessageW(mainWindow,WM_APPCOMMAND,wp,lp);
     case WM_KEYDOWN:
+        {MSG key{hwnd,WM_KEYDOWN,wp,lp,0,{0,0}};if(MainWnd_TranslateShortcut(&key))return 0;}
         if(wp==VK_ESCAPE){Hide(hwnd);return 0;}
-        if(wp==VK_TAB){int step=GetKeyState(VK_SHIFT)<0?-1:1;do{focus=(focus+step+14)%14;}while(!Enabled(focus));}
+        if(wp==VK_TAB){int step=GetKeyState(VK_SHIFT)<0?-1:1;do{focus=(focus+step+14)%14;}while(!Enabled(focus));Ui::Accessibility::Focus(hwnd,focus+1);}
         else if(focus<3&&(wp==VK_SPACE||wp==VK_RETURN))Activate(hwnd,focus);
         else if(focus>=3&&Enabled(focus)){
             float value=Gain(focus);if(wp==VK_UP||wp==VK_RIGHT)value+=.5f;
@@ -131,7 +147,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
         InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_SETFOCUS:case WM_KILLFOCUS:InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_CLOSE:Hide(hwnd);return 0;
-    case WM_DPICHANGED:{scale=LOWORD(wp)/96.f*MainWnd_UserScaleMultiplier();auto r=reinterpret_cast<RECT*>(lp);
+    case WM_DPICHANGED:{if(!lp)return 0;monitorDpi=LOWORD(wp)/96.f;scale=Ui::FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),460,int(Ui::EqHeight),Ui::MonitorWork(*reinterpret_cast<RECT*>(lp)));auto r=reinterpret_cast<RECT*>(lp);
         SetWindowPos(hwnd,nullptr,r->left,r->top,S(460),S(Ui::EqHeight),SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();return 0;}
     case WM_PAINT:{using namespace Ui;PAINTSTRUCT ps{};HDC dc=BeginPaint(hwnd,&ps);RECT r{};GetClientRect(hwnd,&r);
         if(canvas.Begin(dc,r,scale)){
@@ -168,7 +184,7 @@ void EqWnd_Toggle(HWND main){
     if(!window){mainWindow=main;dock={};Skin::RestoreParent(Skin::Equalizer,Skin::Player);WNDCLASSEXW cls{};cls.cbSize=sizeof(cls);cls.lpfnWndProc=Proc;cls.hInstance=GetModuleHandleW(nullptr);
         cls.hCursor=LoadCursorW(nullptr,IDC_ARROW);cls.lpszClassName=L"LiteSic.EqualizerWnd";
         if(!RegisterClassExW(&cls)&&GetLastError()!=ERROR_CLASS_ALREADY_EXISTS)return;
-        scale=MainWnd_DPIScaleFloat(1);RECT parent{};GetWindowRect(main,&parent);MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
+        monitorDpi=Ui::WindowDpi(main);scale=MainWnd_DPIScaleFloat(1);RECT parent{};GetWindowRect(main,&parent);MONITORINFO monitor{};monitor.cbSize=sizeof(monitor);
         GetMonitorInfoW(MonitorFromWindow(main,MONITOR_DEFAULTTONEAREST),&monitor);
         RECT panel{0,0,S(460),S(Ui::EqHeight)};
         restored=RestorePosition(panel,parent,monitor.rcWork);
@@ -184,10 +200,18 @@ void EqWnd_Toggle(HWND main){
             y=std::max<int>(monitor.rcWork.top,std::min<int>(parent.top,monitor.rcWork.bottom-S(Ui::EqHeight)));
         }
         window=CreateWindowExW(0,cls.lpszClassName,I18n::Format("window.caption",{{"title",I18n::Text("equalizer.title")}}).c_str(),WS_POPUP,x,y,S(460),S(Ui::EqHeight),main,nullptr,cls.hInstance,nullptr);
-    }if(window){Skin::Bind(Skin::Equalizer,window);SavePosition();ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);EqWnd_MainMoved(restored);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);InvalidateRect(mainWindow,nullptr,FALSE);}
+    }if(window){MainWnd_ApplyTopmost(main);Skin::Bind(Skin::Equalizer,window);SavePosition();ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);EqWnd_MainMoved(restored);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);InvalidateRect(mainWindow,nullptr,FALSE);}
 }
 bool EqWnd_IsVisible(){return window&&IsWindowVisible(window);}
-void EqWnd_ScaleChanged(){scale=MainWnd_DPIScaleFloat(1);if(window)SetWindowPos(window,nullptr,0,0,S(460),S(Ui::EqHeight),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();}
+void EqWnd_ScaleChanged(){
+    scale=Ui::FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),460,int(Ui::EqHeight),Ui::MonitorWork(window));
+    if(window){
+        SetWindowPos(window,nullptr,0,0,S(460),S(Ui::EqHeight),SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+        // Resizing alone invalidates only exposed strips, leaving old-scale pixels.
+        InvalidateRect(window,nullptr,FALSE);
+    }
+    EqWnd_MainMoved();
+}
 bool EqWnd_DockedRect(const RECT& owner,RECT& panel){return Skin::DockedRect(Skin::Equalizer,owner,panel);}
 void EqWnd_MainMoved(bool preserveDock){if(preserveDock)Skin::Reconcile();else Skin::Recover();}
 void EqWnd_Shutdown(){if(window)DestroyWindow(window);mainWindow=nullptr;dock={};Eq::Save();}

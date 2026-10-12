@@ -238,3 +238,7 @@ tooltip.theme_list	테마 선택 및 적용
 tooltip.theme_reset	기본 테마 복원
 tooltip.category	카테고리별 테마 필터
 tooltip.info	곡 세부 정보; 텍스트를 선택하여 복사
+appearance.topmost	항상 위에 표시
+appearance.hotkeys	전역 단축키 (Ctrl+Alt+F9–F12)
+errors.hotkeys	전역 단축키를 등록할 수 없습니다. 다른 앱이 사용 중일 수 있습니다.
+errors.instance	이 프로필을 열거나 요청한 파일을 전달할 수 없습니다. 기존 인스턴스를 닫은 후 다시 시도하세요.

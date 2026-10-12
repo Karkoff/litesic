@@ -1553,5 +1553,265 @@
     "file": "src/ui_tooltip.cpp",
     "literal": "L\"LiteSic.TooltipWnd\"",
     "reason": "Win32 class identifier; not user-facing prose"
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"LiteSic.\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"LiteSic.TooltipWnd\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"LiteSic.PlaylistWnd\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"LiteSic.EqualizerWnd\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Edit\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"EDIT\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Topmost\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"GlobalHotkeys\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"PanPermille\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Shuffle\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Repeat\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Left\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Top\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Left\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Top\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"--\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"--portable\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"--validation\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"--profile=\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"--locale=\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"--\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\/\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\/\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\build\\\\gui\\\\m6-session\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\data\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\LiteSic\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\.write-check-\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"Local\\\\LiteSic.Profile.\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Shuffle\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Topmost\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"GlobalHotkeys\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Repeat\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"PanPermille\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"settings.ini\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"playlist.m3u8\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"playlist.m3u8.ini\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\\\\\?\\\\UNC\\\\\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\\\\\\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/runtime.cpp",
+    "literal": "L\"\\\\\\\\?\\\\\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Version=1\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Left=\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Top=\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"PlayerWindow\"",
+    "reason": "Technical Win32 class, command-line option, profile path or INI key; no user-facing prose."
   }
 ]

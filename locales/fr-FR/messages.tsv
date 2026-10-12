@@ -238,3 +238,7 @@ tooltip.theme_list	Sélectionner et appliquer un thème
 tooltip.theme_reset	Rétablir le thème par défaut
 tooltip.category	Filtrer les thèmes par catégorie
 tooltip.info	Détails de la piste ; sélectionner le texte à copier
+appearance.topmost	Toujours au premier plan
+appearance.hotkeys	Raccourcis globaux (Ctrl+Alt+F9–F12)
+errors.hotkeys	Impossible d’enregistrer les raccourcis globaux. Une autre application les utilise peut-être.
+errors.instance	Impossible d’ouvrir ce profil ou de transmettre les fichiers demandés. Fermez l’instance existante et réessayez.

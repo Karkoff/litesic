@@ -238,3 +238,7 @@ tooltip.theme_list	Tema seç ve uygula
 tooltip.theme_reset	Varsayılan temayı geri yükle
 tooltip.category	Temaları kategoriye göre filtrele
 tooltip.info	Parça ayrıntıları; kopyalamak için metni seç
+appearance.topmost	Her zaman üstte
+appearance.hotkeys	Genel kısayollar (Ctrl+Alt+F9–F12)
+errors.hotkeys	Genel kısayollar kaydedilemedi. Başka bir uygulama bunları kullanıyor olabilir.
+errors.instance	Bu profil açılamadı veya dosyalar iletilemedi. Mevcut örneği kapatıp yeniden deneyin.

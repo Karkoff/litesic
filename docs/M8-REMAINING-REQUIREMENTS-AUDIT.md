@@ -1,4 +1,86 @@
-# M8 — auditoria integral dos requisitos restantes
+# M8 — matriz atual dos requisitos restantes
+
+**M8 — COMPLETE; aceite humano PASS (12/10/2026).**
+Decisão expressa do usuário: **M8-DEC-2026-10-12**, solicitação
+“LITESIC — ENCERRAMENTO DEFINITIVO DA M8”. Resultados técnicos, evidências
+originais e aceites anteriores preservados. Validações físicas, assistivas e
+linguísticas não realizadas são observações futuras não bloqueantes e não
+reabrem automaticamente a milestone; não são convertidas em PASS técnico.
+M0–M7 e M9 permanecem COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho**,
+antes da **M10 — Distribuição**; ambas ainda não iniciadas.
+Neste encerramento não foram repetidos testes ou auditorias nem implementadas
+funcionalidades. Consolidação, commit e push para `origin/master` autorizados.
+
+Os baselines e pendências abaixo são históricos; o encerramento acima prevalece
+para o estado atual. [Relatório final M8](M8-COMPLETION.md).
+
+[Implementação, contratos, testes e limites atuais](M8-COMPLETION.md).
+
+Retomada final: quatro builds/suítes PASS (31 executáveis por variante), 11
+cenários de processos, 24 amostras DPI simuladas, enumeração MSAA externa dos
+controles em 18 idiomas, 36 guardas e ensaio gráfico de tooltip (3.092 frames)
+PASS. Computer Use confirmou atalhos globais em segundo plano, foco, menus,
+minimização/restauração e zoom real no único monitor físico a 150%.
+Defeito encontrado de repaint parcial do EQ ao mudar zoom corrigido; teste
+reproduz falha antes e PASS depois nas quatro variantes. Nenhum teste removido.
+Evidências finais em [m8-completion](evidence/m8-completion/README.md).
+Revisão linguística humana, leitor de tela, teclado de mídia e matriz física
+multi-DPI/monitores não comprovados; aceites anteriores preservados.
+
+| Requisito | Entrada | Estado atual | Entrega/evidência |
+|---|---|---|---|
+| M8-T1 | Parcial | IMPLEMENTED_AND_VERIFIED | ZXCVB/L/Ctrl+D em três painéis; EDIT protegido; seek preserva navegação/slider local; integração e regressões. |
+| M8-T2 | Ausente | IMPLEMENTED_AND_VERIFIED | Quatro WM_APPCOMMAND, atalhos globais opt-in seguros, conflitos/rollback/liberação; testes com mensagens reais. |
+| M8-T3 | Parcial | IMPLEMENTED_AND_VERIFIED | Menu topo persistente para conjunto; zoom existente e correções DPI/hit-test. |
+| M8-T4 | Ausente | IMPLEMENTED_AND_VERIFIED | Perfil/mutex/IPC Unicode limitado, confirmação/timeout, dois processos, crash, perfis distintos e x86→x64. |
+| M8-T5 | Parcial | IMPLEMENTED_AND_VERIFIED | Campos faltantes, geometria principal independente; instalado/portátil explícito; sem migração destrutiva; round-trip/reinício. |
+| M8-T6 | Verificada | IMPLEMENTED_AND_VERIFIED | Infraestrutura reutilizada, 18 × 241 IDs, fallback e cobertura; linguística humana separada. |
+| M8-T7 | Aceita | ALREADY_ACCEPTED | Aceite PASS preservado; seleção/troca/persistência atuais em regressão. |
+| M8-T8 | Aceita | ALREADY_ACCEPTED | TUDO PASS preservado; tooltips reutilizados em MSAA e informações completas. |
+| DPI negativo | Parcial | IMPLEMENTED_AND_VERIFIED | Clamp pela área útil do monitor, não pela origem global zero. |
+| DPI independente EQ/PL | Parcial | IMPLEMENTED_AND_VERIFIED | DPI local × zoom compartilhado; mudar player não substitui o fator do painel. |
+| Aparência/Informações abertas | Parcial | IMPLEMENTED_AND_VERIFIED | WM_DPICHANGED, zoom, layout/filhos/fontes e tooltips locais. |
+| Área útil compacta | Parcial | IMPLEMENTED_AND_VERIFIED | Escala limitada pela área útil, sem alterar preferência de zoom ou DPI global. |
+| Foco playlist | Parcial | IMPLEMENTED_AND_VERIFIED | Tab/Shift+Tab, pesquisa, abas, limpeza, linhas/favoritos, menus e ocultar; foco visível e edição preservada. |
+| Nomes/papéis/estados/ações | Parcial | IMPLEMENTED_AND_VERIFIED | IAccessible/IEnumVARIANT, WinEvent, setters limitados, annotations dos EDITs, árvore nativa e regressão COM. |
+| Rótulos/ajuda completos | Parcial | IMPLEMENTED_AND_VERIFIED | Nomes/descrições completos e ajuda/rodapé via tooltip/MSAA; ellipsis visual preservada. |
+| Matriz física multi-DPI/monitores | Ensaio indisponível | IMPLEMENTED_NOT_VERIFIED | Simulações/produção não certificam transferência física, desligamento/reconexão ou menus em toda a matriz. |
+| Leitor de tela/legibilidade ampla | Humana | IMPLEMENTED_NOT_VERIFIED | Provedor e bridge nativos verificados; ensaio humano assistivo/naturalidade não realizado. |
+| Aceite final M8 | Ausente | PENDING_HUMAN_ACCEPTANCE | T1–T5 técnicas verificadas não concedem aprovação visual/humana da milestone. |
+
+## Quinze critérios de internacionalização
+
+I01–I10 e I13–I15: infraestrutura/seleção/fallback/plurais/cobertura/recursos
+reutilizados e regressão atual. I11: lacunas técnicas de DPI/adaptação/identificação
+corrigidas, com inspeção representativa; matriz completa humana continua pendente.
+I12: Unicode, fontes, shaping/RTL preservados e testados tecnicamente; revisão
+linguística de scripts/RTL complexos permanece humana. **Revisão linguística
+integral não concedida**. Consultar os 15 critérios históricos abaixo e o
+[contrato oficial](M8-I18N-REQUIREMENTS.md); não há alteração indiscriminada dos
+catálogos anteriores nem nova aprovação T7/T8.
+
+## Persistência e reutilização
+
+Volume/EQ/tema/idioma/zoom/visibilidade/lista/favoritos/seleção/docking já existiam
+com testes; preservados. Novos PanPermille/Shuffle/Repeat/Topmost/GlobalHotkeys
+usam a mesma seção Appearance. PlayerWindow mantém posição independente do sucesso
+da sessão M3U. Instalação continua LOCALAPPDATA; `--portable` usa data junto ao exe.
+Sem migração automática: cópia manual voluntária é a política explicitada.
+
+M0–M7 e M9 permanecem COMPLETE. M10 e auditoria geral de desempenho não iniciadas.
+Aceite final M8 e revisão linguística continuam pendentes; logs/hash/capturas
+atuais e Git ficam no [relatório](M8-COMPLETION.md).
+
+---
+
+## Anexo histórico — auditoria anterior sobre 6ae73fd
+
+Todas as classificações, contagens, falhas reproduzidas e referências a commit/push
+abaixo pertencem à execução anterior, preservadas como evidência da entrada.
+Os probes foram atualizados nesta rodada para verificar as correções; os logs
+antigos em m8-consolidation continuam intactos.
+
+### Auditoria integral anterior dos requisitos restantes
 
 Auditoria em 11/10/2026 America/Sao_Paulo, 12/10 UTC. **M8 OPEN/IN_PROGRESS;
 não está pronta para aceite final. M8-T6, T7 e T8 COMPLETE.**

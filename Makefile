@@ -32,7 +32,7 @@ CFLAGS := -std=c17 -Wall -Wextra $(OPTFLAGS)
 CXXFLAGS := -std=c++17 -Wall -Wextra $(OPTFLAGS)
 DEPFLAGS := -MMD -MP
 LDFLAGS := -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp
-LDLIBS := -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm
+LDLIBS := -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
 
 CPP_SRCS := $(wildcard src/*.cpp)
 CPP_OBJS := $(patsubst src/%.cpp,$(BUILD_DIR)/%.o,$(CPP_SRCS))
@@ -43,8 +43,8 @@ TEST_SRCS := $(wildcard tests/*.c)
 TEST_BINS := $(patsubst tests/%.c,$(BUILD_DIR)/test-%.exe,$(TEST_SRCS))
 CPP_TEST_SRCS := $(wildcard tests/*.cpp)
 TEST_BINS += $(patsubst tests/%.cpp,$(BUILD_DIR)/test-%.exe,$(CPP_TEST_SRCS))
-TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o)
-TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o ui_tooltip.o)
+TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o runtime.o)
+TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o ui_tooltip.o ui_accessibility.o)
 $(BUILD_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_player_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
@@ -68,6 +68,9 @@ $(BUILD_DIR)/test-test_eq_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_eq_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_window_integration.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_window_integration.exe: $(TEST_UI_OBJS)
+
+$(BUILD_DIR)/test-test_m8_remaining.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_m8_remaining.exe: $(TEST_UI_OBJS)
 
 all: $(TARGET) locales
 

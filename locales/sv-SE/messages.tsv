@@ -238,3 +238,7 @@ tooltip.theme_list	Välj och använd ett tema
 tooltip.theme_reset	Återställ standardtemat
 tooltip.category	Filtrera teman efter kategori
 tooltip.info	Spårinformation; markera text för att kopiera
+appearance.topmost	Alltid överst
+appearance.hotkeys	Globala kortkommandon (Ctrl+Alt+F9–F12)
+errors.hotkeys	De globala kortkommandona kunde inte registreras. Ett annat program kanske använder dem.
+errors.instance	Profilen kunde inte öppnas eller filerna kunde inte vidarebefordras. Stäng den befintliga instansen och försök igen.

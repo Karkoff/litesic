@@ -1,0 +1,58 @@
+[
+  {
+    "action": "build",
+    "arch": "64",
+    "config": "debug",
+    "exit": 0,
+    "seconds": 0.8
+  },
+  {
+    "action": "test",
+    "arch": "64",
+    "config": "debug",
+    "exit": 0,
+    "seconds": 75.36
+  },
+  {
+    "action": "build",
+    "arch": "64",
+    "config": "release",
+    "exit": 0,
+    "seconds": 1.14
+  },
+  {
+    "action": "test",
+    "arch": "64",
+    "config": "release",
+    "exit": 0,
+    "seconds": 62.45
+  },
+  {
+    "action": "build",
+    "arch": "32",
+    "config": "debug",
+    "exit": 0,
+    "seconds": 0.78
+  },
+  {
+    "action": "test",
+    "arch": "32",
+    "config": "debug",
+    "exit": 0,
+    "seconds": 88.47
+  },
+  {
+    "action": "build",
+    "arch": "32",
+    "config": "release",
+    "exit": 0,
+    "seconds": 0.8
+  },
+  {
+    "action": "test",
+    "arch": "32",
+    "config": "release",
+    "exit": 0,
+    "seconds": 64.06
+  }
+]

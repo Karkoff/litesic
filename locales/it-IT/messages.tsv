@@ -238,3 +238,7 @@ tooltip.theme_list	Selezionare e applicare un tema
 tooltip.theme_reset	Ripristinare il tema predefinito
 tooltip.category	Filtrare i temi per categoria
 tooltip.info	Dettagli della traccia; selezionare il testo da copiare
+appearance.topmost	Sempre in primo piano
+appearance.hotkeys	Scorciatoie globali (Ctrl+Alt+F9–F12)
+errors.hotkeys	Impossibile registrare le scorciatoie globali. Potrebbero essere usate da un’altra applicazione.
+errors.instance	Impossibile aprire questo profilo o inviare i file richiesti. Chiudere l’istanza esistente e riprovare.

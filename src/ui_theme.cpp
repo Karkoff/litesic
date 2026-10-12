@@ -113,6 +113,10 @@ AppearanceState LoadAppearance() {
         for(int candidate:allowed) if(std::to_wstring(candidate)==value) return candidate;
         return fallback;
     };
+    state.shuffle=choice(L"Shuffle",0,{0,1})!=0;
+    state.topmost=choice(L"Topmost",0,{0,1})!=0;
+    state.globalHotkeys=choice(L"GlobalHotkeys",0,{0,1})!=0;
+    state.repeat=choice(L"Repeat",0,{0,1,2});
     state.visualizerVisible=choice(L"VisualizerVisible",1,{0,1})!=0;
     state.playlistVisible=choice(L"PlaylistVisible",1,{0,1})!=0;
     state.playlistFavoritesOnly=choice(L"PlaylistFavoritesOnly",0,{0,1})!=0;
@@ -120,6 +124,10 @@ AppearanceState LoadAppearance() {
     state.spectrum=choice(L"Spectrum",0,{0,1})!=0;
     state.scalePercent=choice(L"ScalePercent",0,{0,80,90,100,110,125,150});
     if(!path.empty()) {
+        wchar_t pan[32]{},*panEnd=nullptr;
+        GetPrivateProfileStringW(L"Appearance",L"PanPermille",L"",pan,32,path.c_str());
+        long panValue=std::wcstol(pan,&panEnd,10);
+        if(panEnd!=pan&&!*panEnd&&panValue>=0&&panValue<=1000)state.panPermille=int(panValue);
         wchar_t text[32]{},*end=nullptr;
         GetPrivateProfileStringW(L"Appearance",L"VolumePermille",L"",text,32,path.c_str());
         long value=std::wcstol(text,&end,10);
@@ -130,6 +138,18 @@ AppearanceState LoadAppearance() {
 }
 bool SaveAppearanceValue(const wchar_t* key,int value) {
     return path.empty() || WritePrivateProfileStringW(L"Appearance",key,std::to_wstring(value).c_str(),path.c_str());
+}
+bool LoadPlayerPosition(PanelPosition& position){
+    if(path.empty())return false;
+    PanelPosition saved;int version=0;
+    auto read=[&](const wchar_t* key,int low,int high,int& result){wchar_t text[32]{},*end=nullptr;GetPrivateProfileStringW(L"PlayerWindow",key,L"",text,32,path.c_str());long value=std::wcstol(text,&end,10);if(end==text||*end||value<low||value>high)return false;result=int(value);return true;};
+    if(!read(L"Version",1,1,version)||!read(L"Left",-100000,100000,saved.left)||!read(L"Top",-100000,100000,saved.top))return false;
+    position=saved;return true;
+}
+bool SavePlayerPosition(const PanelPosition& position){
+    if(path.empty())return true;
+    std::wstring data=L"Version=1";data+=L'\0';data+=L"Left="+std::to_wstring(position.left);data+=L'\0';data+=L"Top="+std::to_wstring(position.top);data+=L'\0';data+=L'\0';
+    return WritePrivateProfileSectionW(L"PlayerWindow",data.c_str(),path.c_str())!=FALSE;
 }
 bool LoadEqualizerPosition(PanelPosition& position) {
     if(path.empty())return false;

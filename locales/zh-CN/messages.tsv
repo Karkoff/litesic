@@ -238,3 +238,7 @@ tooltip.theme_list	选择并应用主题
 tooltip.theme_reset	恢复默认主题
 tooltip.category	按类别筛选主题
 tooltip.info	歌曲详情；选择文本以复制
+appearance.topmost	置顶显示
+appearance.hotkeys	全局快捷键 (Ctrl+Alt+F9–F12)
+errors.hotkeys	无法注册全局快捷键。其他应用可能正在使用这些快捷键。
+errors.instance	无法打开此配置或转发请求的文件。请关闭现有实例后重试。

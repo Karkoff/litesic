@@ -1,0 +1,329 @@
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_eq_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_eq_window.exe tests/test_eq_window.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_i18n_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_i18n_window.exe tests/test_i18n_window.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_language_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_language_window.exe tests/test_language_window.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o build/64/release/app.res.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_m8_remaining.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_m8_remaining.exe tests/test_m8_remaining.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_player_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_player_window.exe tests/test_player_window.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_playlist_window.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_playlist_window.exe tests/test_playlist_window.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_themes.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_themes.exe tests/test_themes.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm -lpsapi
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_tooltip.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_tooltip.exe tests/test_tooltip.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm -lpsapi
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -DLITESIC_TEST -MMD -MP -MF build/64/release/test-test_window_integration.d -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/64/release/test-test_window_integration.exe tests/test_window_integration.cpp build/64/release/playlist.o build/64/release/playlist_view.o build/64/release/m3u.o build/64/release/tags.o build/64/release/playback.o build/64/release/playlist_worker.o build/64/release/audio-test.o build/64/release/util.o build/64/release/miniaudio_impl.o build/64/release/ui_theme.o build/64/release/eq_dsp.o build/64/release/eq_state.o build/64/release/i18n.o build/64/release/language_selection.o build/64/release/runtime.o build/64/release/skin.o build/64/release/plwnd.o build/64/release/mainwnd.o build/64/release/visualizer.o build/64/release/ui_draw.o build/64/release/ui_player.o build/64/release/eqwnd.o build/64/release/theme_window.o build/64/release/ui_tooltip.o build/64/release/ui_accessibility.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+==> build/64/release/test-build_third_party_smoke.exe
+Dependency smoke: real miniaudio WAV decoding PASS
+==> build/64/release/test-test_fft.exe
+
+=== FFT Tests (M4-T3) ===
+
+  test_fft_sine_peak... (freq=1000Hz peakBin=12 expectedBin=12) PASS
+  test_hann_window... PASS
+  test_log_bins... [0]:0-0 [31]:205-255 (startBins[0]=0) PASS
+  test_fft_zero_input... PASS
+
+Results: 4/4 tests passed
+
+==> build/64/release/test-test_format_time.exe
+
+=== M3-T1: FormatTime unit tests ===
+
+  test 1: FormatTime(0s, elapsed) = "00:00"                    test 2: FormatTime(45s, elapsed) = "00:45"                   test 3: FormatTime(125s, elapsed) = "02:05"                  test 4: FormatTime(45s, remaining, dur=120s) = "-01:15"      test 5: FormatTime(0s, remaining) = "02:00" (no minus at start)   test 6: FormatTime(7200s, elapsed) = "99:59" (capped)        test 7: FormatTime(59.6s, elapsed) = "01:00" (rounded)       test 8: FormatTime with tiny buffer (cchMax < 6) — no crash   test 9: FormatTime(59s, elapsed) = "00:59"                   test 10: FormatTime(3600s, elapsed) = "60:00"               
+--- Results: 10 tests, 0 failures ---
+
+==> build/64/release/test-test_map_sample_to_y.exe
+
+=== MapSampleToY Tests (M4-T2) ===
+
+  test_zero_amplitude... PASS
+  test_positive_amplitude... PASS
+  test_negative_amplitude... PASS
+  test_clamping... PASS
+  test_small_height... PASS
+  test_linear_interpolation... PASS
+
+Results: 6/6 tests passed
+
+==> build/64/release/test-test_ring_buffer.exe
+
+=== Ring Buffer Tests (M4-T1) ===
+
+  test_write_read_order... PASS
+  test_wraparound... (writePos=0 count=512) (writePos=8 count=512) [ 519 518 517 516 515 514 513 512 ]
+PASS
+  test_empty_read... PASS
+  test_partial_read... PASS
+  test_write_full_overwrite... PASS
+  test_large_read... PASS
+
+Results: 6/6 tests passed
+
+==> build/64/release/test-test_appearance.exe
+PASS defaults_without_settings
+PASS preferences_roundtrip_preserves_theme
+PASS invalid_values_use_defaults
+PASS equalizer_position_roundtrip_and_validation
+4 appearance cases
+==> build/64/release/test-test_audio_integration.exe
+PASS mismatched_rate_duration_seek_position
+PASS no_track_failure_and_reload
+PASS decoder_formats
+PASS real_controller_natural_end
+PASS real_repeat_one_restarts_loaded_sound
+PASS visualization_callback_does_not_wait
+PASS mp3_duration_queries_during_render
+PASS real_eof_skips_invalid_file
+8 real audio cases
+==> build/64/release/test-test_config.exe
+PASS command_line_and_profile_contract
+PASS bounded_unicode_ipc
+PASS remaining_configuration_roundtrip
+PASS compact_display_preserves_geometry
+PASS explicit_profile_writability_and_readonly
+5 remaining configuration cases
+==> build/64/release/test-test_eq_audio.exe
+PASS codecs_and_mono_use_real_node
+PASS volume_pan_and_transport
+2 real EQ audio cases
+==> build/64/release/test-test_eq_audit.exe
+PASS impulse_fourier_centers
+MEASURE rate=32000 scenario=0 hz=60 db=13.56406 error=-0.000000
+MEASURE rate=32000 scenario=0 hz=1000 db=19.39934 error=0.000000
+MEASURE rate=32000 scenario=0 hz=8000 db=25.33957 error=0.000001
+MEASURE rate=32000 scenario=0 hz=14000 db=21.08415 error=0.000000
+MEASURE rate=32000 scenario=1 hz=60 db=-13.56406 error=0.000000
+MEASURE rate=32000 scenario=1 hz=1000 db=-19.39934 error=0.000000
+MEASURE rate=32000 scenario=1 hz=8000 db=-25.33957 error=0.000000
+MEASURE rate=32000 scenario=1 hz=14000 db=-21.08415 error=-0.000000
+MEASURE rate=32000 scenario=2 hz=60 db=-9.20264 error=-0.000000
+MEASURE rate=32000 scenario=2 hz=1000 db=3.52103 error=0.000000
+MEASURE rate=32000 scenario=2 hz=8000 db=-2.41099 error=0.000000
+MEASURE rate=32000 scenario=2 hz=14000 db=-0.05790 error=-0.000000
+MEASURE rate=44100 scenario=0 hz=60 db=13.56058 error=0.000000
+MEASURE rate=44100 scenario=0 hz=1000 db=18.63412 error=-0.000000
+MEASURE rate=44100 scenario=0 hz=8000 db=24.03819 error=0.000000
+MEASURE rate=44100 scenario=0 hz=14000 db=33.51189 error=-0.000000
+MEASURE rate=44100 scenario=1 hz=60 db=-13.56058 error=0.000000
+MEASURE rate=44100 scenario=1 hz=1000 db=-18.63412 error=0.000000
+MEASURE rate=44100 scenario=1 hz=8000 db=-24.03819 error=0.000000
+MEASURE rate=44100 scenario=1 hz=14000 db=-33.51189 error=0.000000
+MEASURE rate=44100 scenario=2 hz=60 db=-9.20300 error=-0.000000
+MEASURE rate=44100 scenario=2 hz=1000 db=3.44072 error=-0.000000
+MEASURE rate=44100 scenario=2 hz=8000 db=-1.53558 error=-0.000000
+MEASURE rate=44100 scenario=2 hz=14000 db=5.28355 error=-0.000000
+MEASURE rate=48000 scenario=0 hz=60 db=13.56031 error=-0.000000
+MEASURE rate=48000 scenario=0 hz=1000 db=18.57859 error=-0.000000
+MEASURE rate=48000 scenario=0 hz=8000 db=22.96706 error=-0.000001
+MEASURE rate=48000 scenario=0 hz=14000 db=33.54566 error=-0.000000
+MEASURE rate=48000 scenario=1 hz=60 db=-13.56031 error=0.000000
+MEASURE rate=48000 scenario=1 hz=1000 db=-18.57859 error=-0.000000
+MEASURE rate=48000 scenario=1 hz=8000 db=-22.96706 error=-0.000000
+MEASURE rate=48000 scenario=1 hz=14000 db=-33.54566 error=0.000000
+MEASURE rate=48000 scenario=2 hz=60 db=-9.20304 error=-0.000000
+MEASURE rate=48000 scenario=2 hz=1000 db=3.43123 error=-0.000001
+MEASURE rate=48000 scenario=2 hz=8000 db=-1.99296 error=-0.000000
+MEASURE rate=48000 scenario=2 hz=14000 db=5.15999 error=-0.000000
+MEASURE rate=96000 scenario=0 hz=60 db=13.55953 error=-0.000000
+MEASURE rate=96000 scenario=0 hz=1000 db=18.44452 error=0.000000
+MEASURE rate=96000 scenario=0 hz=8000 db=20.24915 error=0.000000
+MEASURE rate=96000 scenario=0 hz=14000 db=33.95786 error=-0.000000
+MEASURE rate=96000 scenario=1 hz=60 db=-13.55953 error=0.000000
+MEASURE rate=96000 scenario=1 hz=1000 db=-18.44452 error=0.000000
+MEASURE rate=96000 scenario=1 hz=8000 db=-20.24915 error=-0.000000
+MEASURE rate=96000 scenario=1 hz=14000 db=-33.95786 error=0.000000
+MEASURE rate=96000 scenario=2 hz=60 db=-9.20311 error=-0.000000
+MEASURE rate=96000 scenario=2 hz=1000 db=3.41976 error=-0.000000
+MEASURE rate=96000 scenario=2 hz=8000 db=-3.09621 error=0.000000
+MEASURE rate=96000 scenario=2 hz=14000 db=4.79664 error=-0.000000
+PASS cascade_matches_measured_individual_filters
+PASS preamp_positive_zero_negative_and_headroom
+PASS partition_inplace_reset_and_full_channel_isolation
+PASS preset_custom_roundtrip_before_engine_without_eq_window
+MEASURE transition_max_step=0.000519634
+PASS rapid_sine_transitions_are_bounded_and_settle_to_bypass
+6 EQ audit cases
+==> build/64/release/test-test_eq_filter.exe
+PASS all_centers_and_rates
+PASS octave_half_gain
+PASS flat_bypass_and_preamp
+PASS nyquist_invalid_and_channel_isolation
+PASS extremes_and_sweep
+PASS transition_continuity
+PASS concurrent_updates
+PASS presets_and_persistence
+8 EQ DSP cases
+==> build/64/release/test-test_eq_window.exe
+PASS controls_publish_dsp_and_hidden_processing
+PASS all_themes_preserve_parameters
+PASS docking_follow_detach_and_scale
+PASS docked_panel_remains_reachable_at_monitor_edge
+PASS simultaneous_panels_hide_without_stopping_audio
+PASS docked_formation_survives_owner_moves
+PASS position_survives_restart
+7 EQ window cases
+==> build/64/release/test-test_i18n.exe
+PASS catalogs_are_complete_and_unicode
+PASS utf8_rejects_invalid_and_preserves_supplementary
+PASS parser_rejects_structural_errors_transactionally
+PASS fallback_and_partial_catalog
+PASS placeholders_are_checked_and_not_recursively_expanded
+PASS ordered_resolution_and_regional_variants
+PASS integer_plural_boundaries
+PASS arabic_composition_embeds_external_values
+PASS io_errors_preserve_active_catalog_and_unload
+PASS executable_relative_loading_ignores_working_directory
+I18N_METRICS arch=64 init_ms=0.134 mean_select_ms=0.246 fallback_private_delta=4096 warm_private=1699840 final_private=1802240 max_payload_bytes=25614 switches=1980
+PASS repeated_switches_release_catalogs_and_measure_cost
+11 i18n tests passed.
+==> build/64/release/test-test_i18n_window.exe
+PASS all_scripts_themes_and_scales_render
+PASS programmatic_catalog_changes_preserve_functional_state
+2 i18n window tests passed.
+==> build/64/release/test-test_language_selection.exe
+PASS ordered_multisz_and_bounds
+PASS automatic_supported_regional_and_unknown
+PASS native_windows_provider_is_callable
+PASS manual_auto_and_restart_share_existing_ini
+PASS invalid_preferences_and_commands_are_safe
+PASS failed_persistence_keeps_selection_and_catalog
+PASS menu_has_native_names_and_correct_checks
+LANGUAGE_METRICS arch=64 mean_change_ms=0.306 warm_private=1478656 final_private=1626112 switches=1980 catalogs_resident=2
+PASS repeated_live_changes_cost_and_memory
+8 language selection cases
+==> build/64/release/test-test_language_window.exe
+LANGUAGE_RESOURCES arch=64 warm_gdi=18 final_gdi=18 warm_user=19 final_user=19
+LANGUAGE_UI_METRICS arch=64 mean_notify_ms=0.668 switches=36 windows=3
+PASS live_change_preserves_audio_selection_search_eq_and_docking
+PASS auxiliary_windows_tooltips_and_theme_interaction
+2 language window cases
+==> build/64/release/test-test_m3u.exe
+PASS relative_absolute_extinf
+PASS plain_and_unsupported
+PASS malformed_extinf
+PASS unicode_roundtrip
+PASS encoding_errors_and_legacy
+PASS actual_file_roundtrip_and_errors
+6 m3u cases
+==> build/64/release/test-test_m8_remaining.exe
+PASS shortcuts_and_media_on_three_panels
+PASS topmost_owns_all_panels
+PASS hotkey_conflict_rolls_back_and_releases
+PASS playlist_keyboard_reaches_actions
+PASS information_dpi_and_zoom_keep_native_controls
+PASS independent_dpi_and_open_appearance
+PASS zoom_repaints_old_equalizer_pixels
+PASS ipc_is_bounded_and_preserves_files
+PASS accessible_names_roles_actions_and_lifetime
+9 remaining Windows integration cases
+==> build/64/release/test-test_playback.exe
+PASS end_advances_stops
+PASS repeat_wrap_and_previous
+PASS missing_skip_and_all_bad_bound
+PASS paused_no_advance_and_remove
+PASS failed_explicit_and_clear
+PASS repeat_modes_cycle
+PASS repeat_one_eof_and_manual_navigation
+PASS repeat_one_preserves_shuffle_cycle
+PASS favorites_sequence_repeat_and_general_scope
+PASS favorites_shuffle_history_and_edits
+PASS favorites_skip_invalid_and_bound_repeat
+11 playback cases
+==> build/64/release/test-test_player_window.exe
+PASS transport_and_seek_use_real_audio
+PASS capture_cancel_and_release_outside
+PASS geometry_dpi_and_keyboard_seek
+PASS appearance_persists_across_window_recreation
+PASS lcd_timer_only_runs_for_visible_overflow
+5 player window cases
+==> build/64/release/test-test_playlist.exe
+PASS add_remove_identity
+PASS invalid_operations
+PASS reorder_current
+PASS multiple_reorder
+PASS sequential_limits
+PASS sequential_repeat
+PASS shuffled_cycle
+PASS shuffled_history_and_add
+PASS sort_and_visible_shuffle
+PASS selection_range_toggle
+PASS extensions_and_titles
+11 playlist cases
+==> build/64/release/test-test_playlist_view.exe
+PASS filter_preserves_canonical_playback
+PASS unicode_metadata_and_empty_results
+PASS favorites_share_canonical_entries
+3 playlist view cases
+==> build/64/release/test-test_playlist_window.exe
+PASS dropped_files_and_invalid_filter
+PASS dropped_folder_recursive_and_missing_file
+PASS scale_layout_and_overlap
+PASS dock_follow_detach_and_reattach
+PASS dock_follow_stays_inside_work_area
+PASS filter_selection_removes_canonical_item
+PASS play_selection_and_center_current
+PASS large_search_ignores_stale_metadata_notifications
+PASS favorites_tabs_and_track_information
+PASS playback_follows_tab_that_started_play
+PASS session_survives_window_restart
+PASS geometry_survives_restart
+PASS active_tab_survives_restart
+13 playlist window integration cases
+==> build/64/release/test-test_playlist_worker.exe
+PASS actual_metadata_job
+PASS recursive_filter
+PASS generation_cancel_and_shutdown
+PASS notifications_coalesce_until_drain
+4 worker cases
+==> build/64/release/test-test_tags.exe
+PASS mp3_v3
+PASS mp3_v4
+PASS flac_comments
+PASS ogg_spanning_pages
+PASS id3_v1
+PASS wav_native_duration
+PASS missing_invalid
+PASS truncation_bounds
+PASS extended_information_tags
+9 tags cases
+==> build/64/release/test-test_themes.exe
+PASS catalog_and_contrast
+PASS typography_fits_fixed_controls
+PASS selection_persistence_and_fallback
+PASS all_windows_and_state_survive_switches
+PASS resource_recovery_and_repeat_switching
+PASS selector_categories_restore_and_new_window
+PASS sustained_switch_memory
+7 theme cases
+==> build/64/release/test-test_title_scroll.exe
+PASS pauses_and_bidirectional_motion
+1 title scroll cases
+==> build/64/release/test-test_tooltip.exe
+PASS names_and_regions
+PASS dynamic_transport_and_visibility
+PASS dsp_values_and_unavailable_bands
+PASS all_catalogs_and_themes
+PASS edge_placement_and_dpi
+PASS native_controls_and_lifecycle
+PASS favorites_use_real_track
+TOOLTIP_METRICS descriptions=27000 elapsed_ms=17.011 private_delta=0 GDI=12 USER=16
+PASS audio_and_incremental_resources
+8 tooltip cases
+==> build/64/release/test-test_ui_draw.exe
+PASS dc_render_resize_recreate
+1 UI render cases
+==> build/64/release/test-test_window_integration.exe
+PASS transitive_move_in_both_orders
+PASS detached_component_moves_and_reattaches
+PASS player_snaps_to_independent_panel
+PASS hidden_bridge_and_minimize_restore_preserve_audio
+PASS visibility_compacts_restores_and_manual_drag_redefines
+PASS chain_resize_dpi_and_display_recovery
+PASS peer_attachment_persists_and_invalid_cycle_falls_back
+7 window integration cases
+==> build/64/release/test-test_window_snap.exe
+PASS fixed_anchors_and_follow
+PASS tolerance_and_detach
+PASS work_area_edges_and_oversized_panel
+PASS transitive_graph_and_cycle_rejection
+PASS graph_detachment_and_negative_topologies
+PASS monitor_coverage_preserves_legitimate_spanning
+PASS hidden_middle_compacts_all_edges_and_restores
+PASS hidden_corner_compacts_only_when_accessible
+8 window snap cases
+All tests passed.

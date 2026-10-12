@@ -238,3 +238,7 @@ tooltip.theme_list	選擇並套用佈景主題
 tooltip.theme_reset	還原預設佈景主題
 tooltip.category	依類別篩選佈景主題
 tooltip.info	歌曲詳細資料；選取文字以複製
+appearance.topmost	置頂顯示
+appearance.hotkeys	全域快捷鍵 (Ctrl+Alt+F9–F12)
+errors.hotkeys	無法註冊全域快捷鍵。其他應用程式可能正在使用這些快捷鍵。
+errors.instance	無法開啟此設定檔或轉送要求的檔案。請關閉現有執行個體後重試。

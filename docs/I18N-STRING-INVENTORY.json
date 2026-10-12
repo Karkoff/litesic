@@ -4272,5 +4272,37 @@
     "original_locations": [
       "docs/M8-T8-CONTROL-INVENTORY.md"
     ]
+  },
+  {
+    "id": "appearance.topmost",
+    "pt-BR": "Sempre no topo",
+    "en-US": "Always on top",
+    "original_locations": [
+      "src/mainwnd.cpp"
+    ]
+  },
+  {
+    "id": "appearance.hotkeys",
+    "pt-BR": "Atalhos globais (Ctrl+Alt+F9–F12)",
+    "en-US": "Global shortcuts (Ctrl+Alt+F9–F12)",
+    "original_locations": [
+      "src/mainwnd.cpp"
+    ]
+  },
+  {
+    "id": "errors.hotkeys",
+    "pt-BR": "Não foi possível registrar os atalhos globais. Outra aplicação pode estar usando essas teclas.",
+    "en-US": "Global shortcuts could not be registered. Another application may be using them.",
+    "original_locations": [
+      "src/mainwnd.cpp"
+    ]
+  },
+  {
+    "id": "errors.instance",
+    "pt-BR": "Não foi possível abrir este perfil ou encaminhar os arquivos solicitados. Tente novamente após fechar a instância existente.",
+    "en-US": "Could not open this profile or forward the requested files. Retry after closing the existing instance.",
+    "original_locations": [
+      "src/app.cpp"
+    ]
   }
 ]

@@ -1,0 +1,87 @@
+Window: "LiteSic", App: LiteSic.exe.
+	0 painel LiteSic Description: LiteSic
+		1 painel LiteSic — Equalizer Description: LiteSic — Equalizer
+			2 caixa de seleção Enable equalizer Description: Enable equalizer
+			3 botão Choose an equalizer preset Description: Choose an equalizer preset
+			4 botão Reset all gains to zero Description: Reset all gains to zero
+			5 controle deslizante (settable, string) Preamp: +0.0 dB Description: Preamp: +0.0 dB Value: 0.000000
+			6 controle deslizante (settable, string) 60 Hz — Gain: +0.0 dB Description: 60 Hz — Gain: +0.0 dB Value: 0.000000
+			7 controle deslizante (settable, string) 170 Hz — Gain: +0.0 dB Description: 170 Hz — Gain: +0.0 dB Value: 0.000000
+			8 controle deslizante (settable, string) 310 Hz — Gain: +0.0 dB Description: 310 Hz — Gain: +0.0 dB Value: 0.000000
+			9 controle deslizante (settable, string) 600 Hz — Gain: +0.0 dB Description: 600 Hz — Gain: +0.0 dB Value: 0.000000
+			10 controle deslizante (settable, string) 1000 Hz — Gain: +0.0 dB Description: 1000 Hz — Gain: +0.0 dB Value: 0.000000
+			11 controle deslizante (settable, string) 3000 Hz — Gain: +0.0 dB Description: 3000 Hz — Gain: +0.0 dB Value: 0.000000
+			12 controle deslizante (settable, string) 6000 Hz — Gain: +0.0 dB Description: 6000 Hz — Gain: +0.0 dB Value: 0.000000
+			13 controle deslizante (settable, string) 12000 Hz — Gain: +0.0 dB Description: 12000 Hz — Gain: +0.0 dB Value: 0.000000
+			14 controle deslizante (settable, string) 14000 Hz — Gain: +0.0 dB Description: 14000 Hz — Gain: +0.0 dB Value: 0.000000
+			15 controle deslizante (settable, string) 16000 Hz — Gain: +0.0 dB Description: 16000 Hz — Gain: +0.0 dB Value: 0.000000
+			16 botão Hide equalizer Description: Hide equalizer
+			17 text ±12 dB · ↑/↓ adjust · Tab navigate · Space reset Description: ±12 dB · ↑/↓ adjust · Tab navigate · Space reset
+		18 painel LiteSic — Playlist Description: LiteSic — Playlist
+			19 item de tabulação (selectable) Show all tracks Description: Show all tracks
+			20 item de tabulação (selectable) Show favorite tracks Description: Show favorite tracks
+			21 botão Clear search Description: Clear search
+			22 botão Add files or a folder Description: Add files or a folder
+			23 botão Remove selected tracks Description: Remove selected tracks
+			24 botão Open, save, sort or clear the playlist Description: Open, save, sort or clear the playlist
+			25 botão Hide playlist Description: Hide playlist
+			26 text 3 tracks · 1 selected · 3:02 Description: 3 tracks · 1 selected · 3:02
+			27 item de lista (selectable) native-44100 Description: Select; double-click to play
+			28 caixa de seleção Add to favorites Description: Add to favorites
+			29 item de lista (selectable) long-silence Description: Select; double-click to play
+			30 caixa de seleção Add to favorites Description: Add to favorites
+			31 item de lista (selectable) long-silence-next Description: Select; double-click to play
+			32 caixa de seleção Add to favorites Description: Add to favorites
+		33 botão Previous Description: Play the previous track
+		34 botão Next Description: Play the next track
+		35 caixa de seleção Shuffle Description: Enable shuffle
+		36 caixa de seleção Repeat: off → list → track Description: Repeat: off
+		37 botão Play Description: Play or resume playback
+		38 botão (disabled) Pause Description: Pause playback
+		39 botão (disabled) Stop Description: Stop playback
+		40 controle deslizante (disabled, settable, string) Track position Description: Seek within the current track Value: 0
+		41 controle deslizante (settable, string) Volume Description: Volume: 80% Value: 80
+		42 controle deslizante (settable, string) Balance: left / right Description: Balance: 0 (−100 left, +100 right) Value: 0
+		43 caixa de seleção Show / hide playlist Description: Hide playlist
+		44 caixa de seleção Show / hide equalizer Description: Hide equalizer
+		45 botão de opção (selectable) FFT spectrum Description: Show frequency spectrum
+		46 botão de opção (selectable) Oscilloscope Description: Show audio waveform
+		47 text Your music, close by Description: Your music, close by
+		48 caixa de seleção Show / hide visualizer Description: Hide visualizer
+		49 botão Minimize the player Description: Minimize the player
+		50 botão Close this window Description: Close this window
+		51 text Switch elapsed / remaining time Description: Switch elapsed / remaining time
+		1 painel LiteSic — Equalizer Description: LiteSic — Equalizer
+			2 caixa de seleção Enable equalizer Description: Enable equalizer
+			3 botão Choose an equalizer preset Description: Choose an equalizer preset
+			4 botão Reset all gains to zero Description: Reset all gains to zero
+			5 controle deslizante (settable, string) Preamp: +0.0 dB Description: Preamp: +0.0 dB Value: 0.000000
+			6 controle deslizante (settable, string) 60 Hz — Gain: +0.0 dB Description: 60 Hz — Gain: +0.0 dB Value: 0.000000
+			7 controle deslizante (settable, string) 170 Hz — Gain: +0.0 dB Description: 170 Hz — Gain: +0.0 dB Value: 0.000000
+			8 controle deslizante (settable, string) 310 Hz — Gain: +0.0 dB Description: 310 Hz — Gain: +0.0 dB Value: 0.000000
+			9 controle deslizante (settable, string) 600 Hz — Gain: +0.0 dB Description: 600 Hz — Gain: +0.0 dB Value: 0.000000
+			10 controle deslizante (settable, string) 1000 Hz — Gain: +0.0 dB Description: 1000 Hz — Gain: +0.0 dB Value: 0.000000
+			11 controle deslizante (settable, string) 3000 Hz — Gain: +0.0 dB Description: 3000 Hz — Gain: +0.0 dB Value: 0.000000
+			12 controle deslizante (settable, string) 6000 Hz — Gain: +0.0 dB Description: 6000 Hz — Gain: +0.0 dB Value: 0.000000
+			13 controle deslizante (settable, string) 12000 Hz — Gain: +0.0 dB Description: 12000 Hz — Gain: +0.0 dB Value: 0.000000
+			14 controle deslizante (settable, string) 14000 Hz — Gain: +0.0 dB Description: 14000 Hz — Gain: +0.0 dB Value: 0.000000
+			15 controle deslizante (settable, string) 16000 Hz — Gain: +0.0 dB Description: 16000 Hz — Gain: +0.0 dB Value: 0.000000
+			16 botão Hide equalizer Description: Hide equalizer
+			17 text ±12 dB · ↑/↓ adjust · Tab navigate · Space reset Description: ±12 dB · ↑/↓ adjust · Tab navigate · Space reset
+		18 painel LiteSic — Playlist Description: LiteSic — Playlist
+			19 item de tabulação (selectable) Show all tracks Description: Show all tracks
+			20 item de tabulação (selectable) Show favorite tracks Description: Show favorite tracks
+			21 botão Clear search Description: Clear search
+			22 botão Add files or a folder Description: Add files or a folder
+			23 botão Remove selected tracks Description: Remove selected tracks
+			24 botão Open, save, sort or clear the playlist Description: Open, save, sort or clear the playlist
+			25 botão Hide playlist Description: Hide playlist
+			26 text 3 tracks · 1 selected · 3:02 Description: 3 tracks · 1 selected · 3:02
+			27 item de lista (selectable) native-44100 Description: Select; double-click to play
+			28 caixa de seleção Add to favorites Description: Add to favorites
+			29 item de lista (selectable) long-silence Description: Select; double-click to play
+			30 caixa de seleção Add to favorites Description: Add to favorites
+			31 item de lista (selectable) long-silence-next Description: Select; double-click to play
+			32 caixa de seleção Add to favorites Description: Add to favorites
+
+The focused UI element is 0 painel LiteSic Description: LiteSic.

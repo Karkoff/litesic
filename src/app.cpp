@@ -1,3 +1,5 @@
+#include "runtime.h"
+#include <shellapi.h>
 #include "i18n.h"
 #include "language_selection.h"
 /*
@@ -43,32 +45,28 @@ static void InitDpiAwareness(void)
 /* ------------------------------------------------------------------ */
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
-                    LPWSTR lpCmdLine, int nCmdShow)
+                    LPWSTR /*lpCmdLine*/, int nCmdShow)
 {
     /* Configurar Per-Monitor DPI Awareness V2 antes de criar janelas. */
     InitDpiAwareness();
     std::string catalogError;
     HRESULT com = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
-    std::wstring validationDirectory;
-    // Fixed, executable-relative developer session. Never touches the personal INI/playlist.
-    constexpr wchar_t localePrefix[]=L"--validation --locale=";
-    constexpr size_t prefixLength=ARRAYSIZE(localePrefix)-1;
-    bool validation=!wcscmp(lpCmdLine,L"--validation") || !wcsncmp(lpCmdLine,localePrefix,prefixLength);
-    if(validation) {
-        wchar_t executable[MAX_PATH]{};GetModuleFileNameW(nullptr,executable,MAX_PATH);
-        validationDirectory=executable;
-        for(int i=0;i<4;++i)validationDirectory=validationDirectory.substr(0,validationDirectory.find_last_of(L"\\/"));
-        validationDirectory+=L"\\build\\gui";CreateDirectoryW(validationDirectory.c_str(),nullptr);
-        validationDirectory+=L"\\m6-session";CreateDirectoryW(validationDirectory.c_str(),nullptr);
-        Ui::ThemeConfigure((validationDirectory+L"\\settings.ini").c_str());
-    } else Ui::ThemeInitializeUser();
+    int argc=0;LPWSTR* argv=CommandLineToArgvW(GetCommandLineW(),&argc);
+    std::vector<std::wstring> args;for(int i=1;i<argc;++i)args.emplace_back(argv[i]);if(argv)LocalFree(argv);
+    Runtime::Options options;bool parsed=argc>0&&Runtime::Parse(args,options);
+    wchar_t executable[32768]{},localData[MAX_PATH]{};GetModuleFileNameW(nullptr,executable,32768);
+    SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,localData);
+    auto directory=Runtime::ProfileDirectory(executable,localData,options);
+    Runtime::Instance instance;
+    int election=parsed?instance.Enter(directory,options.files):-1;
+    if(election==0){if(SUCCEEDED(com))CoUninitialize();return 0;}
+    bool profileReady=election==1&&Runtime::PrepareProfile(directory);
+    Ui::ThemeConfigure(profileReady?(directory+L"\\settings.ini").c_str():nullptr);
     I18n::InitializeLanguage(Ui::SettingsPath());
-    // Isolated visual fixture overrides only this process, never the saved preference.
-    if(validation&&wcslen(lpCmdLine)>prefixLength){
-        std::wstring locale=lpCmdLine+prefixLength;
-        if(!I18n::Select(std::string(locale.begin(),locale.end()),catalogError))OutputDebugStringA(catalogError.c_str());
+    if(!profileReady){MessageBoxW(nullptr,I18n::Text(election<0?"errors.instance":"errors.data_folder").c_str(),L"LiteSic",MB_OK|MB_ICONERROR);if(SUCCEEDED(com))CoUninitialize();return 1;}
+    if(options.validation&&!options.locale.empty()){
+        if(!I18n::Select(std::string(options.locale.begin(),options.locale.end()),catalogError))OutputDebugStringA(catalogError.c_str());
     }
-
     /* Registrar a classe da janela (uma vez). */
     if (!MainWnd_RegisterClass(hInstance))
     {
@@ -83,17 +81,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
         if (SUCCEEDED(com)) CoUninitialize();
         return 1;
     }
-    wchar_t appData[MAX_PATH]{};
-    std::wstring session;
-    if(!validationDirectory.empty()) session=validationDirectory+L"\\playlist.m3u8";
-    else if (SUCCEEDED(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA|CSIDL_FLAG_CREATE,
-                                  nullptr,SHGFP_TYPE_CURRENT,appData))) {
-        std::wstring directory=std::wstring(appData)+L"\\LiteSic";
-        if (CreateDirectoryW(directory.c_str(),nullptr) || GetLastError()==ERROR_ALREADY_EXISTS)
-            session=directory+L"\\playlist.m3u8";
-    }
-    if (session.empty()) MessageBoxW(hwnd,I18n::Text("errors.data_folder").c_str(),
-                                   L"LiteSic",MB_OK|MB_ICONWARNING);
+    std::wstring session=directory+L"\\playlist.m3u8";
     if (!PlWnd_Create(hInstance, hwnd, session.c_str())) {
         DestroyWindow(hwnd);
         if (SUCCEEDED(com)) CoUninitialize();
@@ -101,11 +89,15 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
     }
 
     EqWnd_Restore(hwnd);
+    MainWnd_ApplyTopmost(hwnd);
+    instance.Publish(hwnd);
+    if(!PlWnd_AppendPaths(options.files))MessageBoxW(hwnd,I18n::Text("errors.play_file").c_str(),L"LiteSic",MB_OK|MB_ICONERROR);
 
     /* Loop de mensagens padrão. */
     MSG msg;
     while (GetMessageW(&msg, NULL, 0, 0) > 0)
     {
+        if(MainWnd_TranslateShortcut(&msg)) continue;
         if(Ui::ThemeDialogMessage(&msg)) continue;
         if(PlWnd_DialogMessage(&msg)) continue;
         TranslateMessage(&msg);

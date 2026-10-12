@@ -48,17 +48,21 @@ struct AppearanceState {
     bool spectrum = false;
     bool playlistFavoritesOnly = false;
     int scalePercent = 0;
-    int volumePermille = 800;
+    int volumePermille = 800, panPermille = 500, repeat = 0;
+    bool shuffle=false,topmost=false,globalHotkeys=false;
 };
 // Uses the same settings.ini configured for themes; no path means isolated defaults.
 AppearanceState LoadAppearance();
 bool SaveAppearanceValue(const wchar_t* key, int value);
 struct PanelPosition { int left=0,top=0,side=0,anchor=0,parent=0; };
 bool LoadEqualizerPosition(PanelPosition& position);
+bool LoadPlayerPosition(PanelPosition& position);
+bool SavePlayerPosition(const PanelPosition& position);
 bool SaveEqualizerPosition(const PanelPosition& position);
 double Contrast(uint32_t a, uint32_t b);
 inline COLORREF NativeColor(uint32_t rgb) { return RGB((rgb>>16)&255,(rgb>>8)&255,rgb&255); }
 void ShowThemes(HWND owner);
+void ThemeScaleChanged();
 bool ThemeDialogMessage(MSG* message);
 constexpr float Space = 8, TitleHeight = 32, ControlHeight = 28;
 constexpr float PlayerWidth = 460, PlayerHeight = 290;

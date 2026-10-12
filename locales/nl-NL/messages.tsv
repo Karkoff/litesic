@@ -238,3 +238,7 @@ tooltip.theme_list	Een thema kiezen en toepassen
 tooltip.theme_reset	Standaardthema herstellen
 tooltip.category	Thema’s op categorie filteren
 tooltip.info	Nummergegevens; selecteer tekst om te kopiëren
+appearance.topmost	Altijd op de voorgrond
+appearance.hotkeys	Globale sneltoetsen (Ctrl+Alt+F9–F12)
+errors.hotkeys	De globale sneltoetsen konden niet worden geregistreerd. Een andere toepassing gebruikt ze mogelijk.
+errors.instance	Dit profiel kon niet worden geopend of de bestanden konden niet worden doorgestuurd. Sluit de bestaande instantie en probeer opnieuw.

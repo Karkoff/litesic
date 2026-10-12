@@ -238,3 +238,7 @@ tooltip.theme_list	Wybierz i zastosuj motyw
 tooltip.theme_reset	Przywróć domyślny motyw
 tooltip.category	Filtruj motywy według kategorii
 tooltip.info	Szczegóły utworu; zaznacz tekst do skopiowania
+appearance.topmost	Zawsze na wierzchu
+appearance.hotkeys	Skróty globalne (Ctrl+Alt+F9–F12)
+errors.hotkeys	Nie można zarejestrować skrótów globalnych. Inna aplikacja może ich używać.
+errors.instance	Nie można otworzyć profilu lub przekazać plików. Zamknij istniejącą instancję i spróbuj ponownie.

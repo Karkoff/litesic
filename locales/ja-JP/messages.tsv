@@ -238,3 +238,7 @@ tooltip.theme_list	テーマを選択して適用
 tooltip.theme_reset	既定のテーマに戻す
 tooltip.category	カテゴリーでテーマを絞り込む
 tooltip.info	曲の詳細。テキストを選択してコピー
+appearance.topmost	常に手前に表示
+appearance.hotkeys	グローバルショートカット (Ctrl+Alt+F9–F12)
+errors.hotkeys	グローバルショートカットを登録できませんでした。他のアプリが使用している可能性があります。
+errors.instance	このプロファイルを開くかファイルを転送できませんでした。既存のインスタンスを閉じて再試行してください。

@@ -16,7 +16,13 @@
 
 LiteSic é um player de áudio para Windows que recria a experiência clássica do Winamp, construído em **C++17 nativo** com **Win32 API + Direct2D/DirectWrite**, mantendo GDI como fallback durante a migração. Alvo de compatibilidade Windows 7–11. Sem Qt, sem .NET, sem MFC.
 
-**Estado atual: M0–M7 e M9 COMPLETE; M8 aberta.** A playlist está implementada e integrada,
+**Estado atual: M0–M9 COMPLETE; M8 com aceite humano PASS em 12/10/2026.**
+[Validação técnica final da M8](docs/M8-COMPLETION.md): quatro builds/suítes,
+atalhos, topo, instância única, persistência, DPI, MSAA e GUI verificados.
+Revisão linguística humana integral dos 18 idiomas e validações físicas/assistivas
+não realizadas são observações futuras não bloqueantes. Próxima atividade:
+**Auditoria Geral de Desempenho**, antes da **M10 — Distribuição**; ambas não iniciadas.
+A playlist está implementada e integrada,
 com testes, validação gráfica e PASS manual do usuário para o visual,
 arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
 Play destaca a faixa selecionada e só a centraliza quando ela está fora da
@@ -211,7 +217,7 @@ O projeto é dividido em milestones incrementais, cada uma com tarefas verificá
 | **M5** | Lista de reprodução — add/drag&drop, reordenar, M3U | COMPLETE — implementação/testes e checkpoint manual PASS |
 | **M6** | Equalizador — DSP, interface e testes entregues | COMPLETE — funcionamento confirmado pelo usuário |
 | **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | COMPLETE — implementação/testes e aceite humano TUDO PASS |
-| **M8** | Acabamento — atalhos, mídia, DPI, persistência, 18 idiomas e tooltips | Em andamento; T6 COMPLETE |
+| **M8** | Acabamento — atalhos, mídia, DPI, persistência, 18 idiomas e tooltips | COMPLETE; aceite humano PASS |
 | **M9** | Compatibilidade — encerrada por decisão explícita do usuário | COMPLETE — testes futuros não bloqueantes |
 | **M10** | Distribuição — builds 32/64, pacote limpo portátil e instalador opcional | 📝 Planejada |
 
@@ -289,8 +295,10 @@ Este projeto está disponível sob a licença MIT. Veja o arquivo [`LICENSE`](LI
 T6, T7 e T8 COMPLETE; T7 tem aceite humano PASS e T8 **TUDO PASS**.
 O aceite visual dos tooltips não equivale a revisão linguística profissional
 dos 18 idiomas. [Nova regressão e publicação](docs/M8-CONSOLIDATION.md).
-Ordem aprovada: conclusão M8 → auditoria geral de desempenho → M10.
+Próxima atividade: **Auditoria Geral de Desempenho → M10 — Distribuição**.
 
 [Auditoria integral restante da M8 e plano de conclusão](docs/M8-REMAINING-REQUIREMENTS-AUDIT.md):
-T1–T5 e refinamentos específicos DPI/acessibilidade pendentes; T6–T8 COMPLETE.
-Consolidação T6–T8 publicada em `1aa560f`; M8 permanece aberta.
+T1–T5 e refinamentos específicos DPI/acessibilidade tecnicamente verificados;
+T1–T8 COMPLETE; aceite humano final M8 PASS por decisão expressa do usuário.
+Consolidação T6–T8 publicada em `1aa560f`; revisão linguística integral não
+realizada permanece observação futura não bloqueante.

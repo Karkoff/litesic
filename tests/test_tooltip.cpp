@@ -116,7 +116,10 @@ static void popup_delay_dismissal_live_update_and_expiry(){
     tip=Hover(mainWindow,p);PumpFor(8250);CHECK(!IsWindowVisible(tip));
     SendMessageW(mainWindow,WM_TIMER,0x4c535454,0);CHECK(!IsWindowVisible(tip));Hide(mainWindow);
     CHECK(I18n::ChangeLanguage(false,"en-US",error));
-    tip=Hover(eq,P(60,100));Eq::SetGain(-1,-2);PumpFor(180);CHECK(TipText(tip)==Description(eq,4));
+    RECT eqClient{};CHECK(GetClientRect(eq,&eqClient));
+    // EQ keeps its local monitor DPI; player P() is not its coordinate converter.
+    float eqScale=eqClient.right/460.f;
+    tip=Hover(eq,{int(std::lround(60*eqScale)),int(std::lround(100*eqScale))});Eq::SetGain(-1,-2);PumpFor(180);CHECK(TipText(tip)==Description(eq,4));
     ShowWindow(eq,SW_HIDE);CHECK(!IsWindowVisible(tip));EqWnd_Toggle(mainWindow);
     tip=Hover(GetDlgItem(playlist,520),{2,2});CHECK(TipText(tip)==I18n::Text("tooltip.search"));Hide(GetDlgItem(playlist,520));
 }

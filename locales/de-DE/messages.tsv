@@ -238,3 +238,7 @@ tooltip.theme_list	Thema auswählen und anwenden
 tooltip.theme_reset	Standardthema wiederherstellen
 tooltip.category	Themen nach Kategorie filtern
 tooltip.info	Titeldetails; Text zum Kopieren auswählen
+appearance.topmost	Immer im Vordergrund
+appearance.hotkeys	Globale Tastenkürzel (Ctrl+Alt+F9–F12)
+errors.hotkeys	Die globalen Tastenkürzel konnten nicht registriert werden. Möglicherweise verwendet sie eine andere Anwendung.
+errors.instance	Das Profil konnte nicht geöffnet oder die Dateien konnten nicht übermittelt werden. Schließen Sie die vorhandene Instanz und versuchen Sie es erneut.

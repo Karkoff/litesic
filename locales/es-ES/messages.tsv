@@ -238,3 +238,7 @@ tooltip.theme_list	Seleccionar y aplicar un tema
 tooltip.theme_reset	Restaurar el tema predeterminado
 tooltip.category	Filtrar temas por categoría
 tooltip.info	Detalles de la pista; seleccionar texto para copiar
+appearance.topmost	Siempre encima
+appearance.hotkeys	Atajos globales (Ctrl+Alt+F9–F12)
+errors.hotkeys	No se pudieron registrar los atajos globales. Otra aplicación podría estar usándolos.
+errors.instance	No se pudo abrir este perfil o enviar los archivos solicitados. Cierre la instancia existente y vuelva a intentarlo.

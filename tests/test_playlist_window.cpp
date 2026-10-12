@@ -1,3 +1,5 @@
+#include "ui_scale.h"
+#include "mainwnd.h"
 // Real Win32 message integration, in this test process. No cross-process
 // pointer injection and no mouse/keyboard input to the user's desktop.
 #include "plwnd.h"
@@ -9,6 +11,7 @@
 #include <shellapi.h>
 #include <shlobj.h>
 #include <cstring>
+#include <cmath>
 static HWND playlist;
 static HWND information;
 static BOOL CALLBACK FindInformation(HWND hwnd,LPARAM){wchar_t name[80]{};GetClassNameW(hwnd,name,80);if(!wcscmp(name,L"LiteSic.TrackInfoWnd"))information=hwnd;return TRUE;}
@@ -238,7 +241,18 @@ static void favorites_tabs_and_track_information(){
     SendMessageW(playlist,WM_CONTEXTMENU,reinterpret_cast<WPARAM>(playlist),MAKELPARAM(-1,-1));
     DWORD deadline=GetTickCount()+2000;
     while(!information&&GetTickCount()<deadline){MSG msg{};while(PeekMessageW(&msg,nullptr,0,0,PM_REMOVE)){TranslateMessage(&msg);DispatchMessageW(&msg);}EnumThreadWindows(GetCurrentThreadId(),FindInformation,0);Sleep(1);}
-    CHECK(information);wchar_t text[4096]{};GetWindowTextW(GetDlgItem(information,801),text,4096);
+    CHECK(information);
+    float originalZoom=MainWnd_UserScaleMultiplier();
+    for(int dpi:{96,120,144,192}){
+        RECT proposed{};CHECK(GetWindowRect(information,&proposed));
+        SendMessageW(information,WM_DPICHANGED,MAKELONG(dpi,dpi),reinterpret_cast<LPARAM>(&proposed));
+        RECT client{};CHECK(GetClientRect(information,&client));
+        float expected=Ui::FitScale(dpi/96.f*originalZoom,560,388,Ui::MonitorWork(information));
+        CHECK(std::abs(client.right-int(std::lround(560*expected)))<=2);
+        RECT editRect{};CHECK(GetWindowRect(GetDlgItem(information,801),&editRect));
+        CHECK(editRect.right>editRect.left&&editRect.bottom>editRect.top);
+    }
+    wchar_t text[4096]{};GetWindowTextW(GetDlgItem(information,801),text,4096);
     CHECK(wcsstr(text,L"Canção M5")&&wcsstr(text,L"Artista: LiteSic")&&wcsstr(text,L"MP3")&&wcsstr(text,L"Hz")&&wcsstr(text,L"tagged.mp3"));
     CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);MSG escape{};escape.hwnd=GetDlgItem(information,801);escape.message=WM_KEYDOWN;escape.wParam=VK_ESCAPE;
     CHECK(PlWnd_DialogMessage(&escape));CHECK(!IsWindow(information));information=nullptr;

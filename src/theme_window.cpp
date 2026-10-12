@@ -1,3 +1,4 @@
+#include "ui_scale.h"
 #include "ui_tooltip.h"
 #include "i18n.h"
 #include "language_selection.h"
@@ -13,7 +14,7 @@ namespace {
 HWND window=nullptr,list=nullptr,categories=nullptr;
 HFONT font=nullptr,small=nullptr;
 HBRUSH background=nullptr;
-float scale=1;
+float scale=1,monitorDpi=1;
 Canvas canvas;
 bool scrollDragging=false;
 int scrollGrab=0;
@@ -39,6 +40,12 @@ void Rebuild() {
     SendMessageW(list,LB_SETITEMHEIGHT,0,S(42));
     SendMessageW(list,LB_SETTOPINDEX,top,0);
     InvalidateRect(window,nullptr,FALSE);InvalidateRect(list,nullptr,FALSE);
+}
+void Relayout(){
+    struct Item{int id,x,y,w,h;};
+    for(auto item:{Item{701,12,12,260,220},{702,12,80,482,294},{703,12,386,180,30},{704,398,386,110,30},{706,12,44,260,28},{705,488,4,28,24}})
+        MoveWindow(GetDlgItem(window,item.id),S(item.x),S(item.y),S(item.w),S(item.h),TRUE);
+    Rebuild();
 }
 void Populate() {
     int group=static_cast<int>(SendMessageW(categories,CB_GETCURSEL,0,0));
@@ -117,6 +124,11 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         SetDlgItemTextW(hwnd,704,I18n::Text("common.close").c_str());
         Populate();SendMessageW(list,LB_SETCURSEL,row,0);SendMessageW(list,LB_SETTOPINDEX,top,0);
         Rebuild();return 0;}
+    case WM_DPICHANGED:{
+        if(!lp)return 0;
+        monitorDpi=LOWORD(wp)/96.f;scale=FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),520,430,MonitorWork(*reinterpret_cast<RECT*>(lp)));
+        auto r=reinterpret_cast<RECT*>(lp);SetWindowPos(hwnd,nullptr,r->left,r->top,S(520),S(430),SWP_NOZORDER|SWP_NOACTIVATE);Relayout();return 0;
+    }
     case WM_THEME_CHANGED:
         Rebuild();return 0;
     case WM_COMMAND:
@@ -227,7 +239,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
 }
 void ShowThemes(HWND owner) {
     if(window) {ShowWindow(window,SW_SHOW);SetForegroundWindow(window);return;}
-    scale=MainWnd_DPIScale(100)/100.f;
+    monitorDpi=WindowDpi(owner);scale=FitScale(monitorDpi*MainWnd_UserScaleMultiplier(),520,430,MonitorWork(owner));
     WNDCLASSW cls{};cls.hInstance=GetModuleHandleW(nullptr);cls.lpfnWndProc=Proc;
     cls.lpszClassName=L"LiteSic.ThemesWnd";cls.hCursor=LoadCursorW(nullptr,IDC_ARROW);
     if(!RegisterClassW(&cls) && GetLastError()!=ERROR_CLASS_ALREADY_EXISTS) return;
@@ -237,6 +249,7 @@ void ShowThemes(HWND owner) {
     CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,I18n::Text("themes.title").c_str(),style|WS_VISIBLE,
         parent.left,parent.top,r.right-r.left,r.bottom-r.top,owner,nullptr,cls.hInstance,nullptr);
 }
+void ThemeScaleChanged(){if(window){RECT r{};GetWindowRect(window,&r);SendMessageW(window,WM_DPICHANGED,MAKELONG(int(monitorDpi*96),int(monitorDpi*96)),reinterpret_cast<LPARAM>(&r));}}
 bool ThemeDialogMessage(MSG* message) {
     if(!window) return false;
     if(message->message==WM_KEYDOWN && message->wParam==VK_ESCAPE &&
