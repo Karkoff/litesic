@@ -349,6 +349,12 @@ arbitrários. Inspecionar resultados, não apenas retorno de execução.
 
 ## Computer Use nativo — disponibilidade
 
+Atualização da consolidação T6–T8: `@oai/sky` listou janelas e capturou/operou
+a sessão isolada x64 Release nesta execução. Play/Pause/Stop foram inspecionados
+e capturas preservadas em [evidências novas](evidence/m8-consolidation/README.md).
+O diagnóstico de indisponibilidade abaixo é histórico, não o resultado atual.
+O auxiliar restrito continua disponível para operações que a API nativa não expõe.
+
 Prefira a integração nativa quando estiver disponível. Nesta instalação, os
 plugins Computer Use estão habilitados e `@oai/sky` importa, mas `list_windows`
 falhou duas vezes, inclusive após reset do REPL, com `native pipe is unavailable`

@@ -1,0 +1,17 @@
+DPI_LAYOUT dpi=96 zoom=1.00 combined=1.000 player_width=460 eq_width=460 hit_tests=PASS
+DPI_LAYOUT dpi=120 zoom=1.00 combined=1.250 player_width=575 eq_width=575 hit_tests=PASS
+DPI_LAYOUT dpi=144 zoom=1.00 combined=1.500 player_width=690 eq_width=690 hit_tests=PASS
+DPI_LAYOUT dpi=192 zoom=1.00 combined=2.000 player_width=920 eq_width=920 hit_tests=PASS
+DPI_LAYOUT dpi=96 zoom=1.25 combined=1.250 player_width=575 eq_width=575 hit_tests=PASS
+DPI_LAYOUT dpi=120 zoom=1.25 combined=1.562 player_width=719 eq_width=719 hit_tests=PASS
+DPI_LAYOUT dpi=144 zoom=1.25 combined=1.875 player_width=863 eq_width=863 hit_tests=PASS
+DPI_LAYOUT dpi=192 zoom=1.25 combined=2.500 player_width=1150 eq_width=1150 hit_tests=PASS
+DPI_LAYOUT dpi=96 zoom=1.50 combined=1.500 player_width=690 eq_width=690 hit_tests=PASS
+DPI_LAYOUT dpi=120 zoom=1.50 combined=1.875 player_width=863 eq_width=863 hit_tests=PASS
+DPI_LAYOUT dpi=144 zoom=1.50 combined=2.250 player_width=1035 eq_width=1035 hit_tests=PASS
+DPI_LAYOUT dpi=192 zoom=1.50 combined=3.000 player_width=1380 eq_width=1380 hit_tests=PASS
+OBSERVED_GAP appearance_dpi_change old_width=520 new_width=520 (no WM_DPICHANGED handler)
+OBSERVED_GAP independent_eq_dpi own192_width=920 after_owner120_width=575
+OBSERVED_GAP negative_zoom before=-900,-200 after=0,0
+OBSERVED_LIMIT small_workarea=800x600 player200=920x580 right=920 (no fit/shrink)
+AUDIT_PROBE layout_samples=12 known_gaps=3 small_screen_limits=1 PASS

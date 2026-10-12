@@ -290,3 +290,7 @@ T6, T7 e T8 COMPLETE; T7 tem aceite humano PASS e T8 **TUDO PASS**.
 O aceite visual dos tooltips não equivale a revisão linguística profissional
 dos 18 idiomas. [Nova regressão e publicação](docs/M8-CONSOLIDATION.md).
 Ordem aprovada: conclusão M8 → auditoria geral de desempenho → M10.
+
+[Auditoria integral restante da M8 e plano de conclusão](docs/M8-REMAINING-REQUIREMENTS-AUDIT.md):
+T1–T5 e refinamentos específicos DPI/acessibilidade pendentes; T6–T8 COMPLETE.
+Consolidação T6–T8 publicada em `1aa560f`; M8 permanece aberta.

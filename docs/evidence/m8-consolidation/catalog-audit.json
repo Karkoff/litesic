@@ -1,0 +1,689 @@
+{
+  "method": "Unicode codepoint length heuristic; not glyph width, linguistic review or defect proof",
+  "catalogs": [
+    {
+      "language": "ar-SA",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "equalizer.unavailable",
+          "length": 8,
+          "english_length": 3,
+          "ratio": 2.67
+        },
+        {
+          "key": "player.pause",
+          "length": 10,
+          "english_length": 5,
+          "ratio": 2.0
+        },
+        {
+          "key": "player.paused",
+          "length": 12,
+          "english_length": 6,
+          "ratio": 2.0
+        },
+        {
+          "key": "equalizer.reset",
+          "length": 9,
+          "english_length": 5,
+          "ratio": 1.8
+        },
+        {
+          "key": "player.shuffle",
+          "length": 12,
+          "english_length": 7,
+          "ratio": 1.71
+        }
+      ]
+    },
+    {
+      "language": "de-DE",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "equalizer.custom",
+          "length": 17,
+          "english_length": 6,
+          "ratio": 2.83
+        },
+        {
+          "key": "player.play",
+          "length": 11,
+          "english_length": 4,
+          "ratio": 2.75
+        },
+        {
+          "key": "player.shuffle",
+          "length": 17,
+          "english_length": 7,
+          "ratio": 2.43
+        },
+        {
+          "key": "equalizer.reset",
+          "length": 12,
+          "english_length": 5,
+          "ratio": 2.4
+        },
+        {
+          "key": "tooltip.repeat_off",
+          "length": 26,
+          "english_length": 11,
+          "ratio": 2.36
+        }
+      ]
+    },
+    {
+      "language": "en-US",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "appearance.auto_scale",
+          "length": 23,
+          "english_length": 23,
+          "ratio": 1.0
+        },
+        {
+          "key": "appearance.scale_menu",
+          "length": 28,
+          "english_length": 28,
+          "ratio": 1.0
+        },
+        {
+          "key": "appearance.themes_menu",
+          "length": 22,
+          "english_length": 22,
+          "ratio": 1.0
+        },
+        {
+          "key": "audio.mono",
+          "length": 4,
+          "english_length": 4,
+          "ratio": 1.0
+        },
+        {
+          "key": "audio.multichannel",
+          "length": 12,
+          "english_length": 12,
+          "ratio": 1.0
+        }
+      ]
+    },
+    {
+      "language": "es-ES",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "playlist.title",
+          "length": 21,
+          "english_length": 8,
+          "ratio": 2.62
+        },
+        {
+          "key": "player.play",
+          "length": 10,
+          "english_length": 4,
+          "ratio": 2.5
+        },
+        {
+          "key": "player.next",
+          "length": 9,
+          "english_length": 4,
+          "ratio": 2.25
+        },
+        {
+          "key": "equalizer.reset",
+          "length": 11,
+          "english_length": 5,
+          "ratio": 2.2
+        },
+        {
+          "key": "tooltip.shuffle_off",
+          "length": 33,
+          "english_length": 15,
+          "ratio": 2.2
+        }
+      ]
+    },
+    {
+      "language": "fr-FR",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "equalizer.reset",
+          "length": 13,
+          "english_length": 5,
+          "ratio": 2.6
+        },
+        {
+          "key": "info.sample_rate",
+          "length": 27,
+          "english_length": 11,
+          "ratio": 2.45
+        },
+        {
+          "key": "player.playing",
+          "length": 16,
+          "english_length": 7,
+          "ratio": 2.29
+        },
+        {
+          "key": "tooltip.shuffle_off",
+          "length": 31,
+          "english_length": 15,
+          "ratio": 2.07
+        },
+        {
+          "key": "equalizer.custom",
+          "length": 12,
+          "english_length": 6,
+          "ratio": 2.0
+        }
+      ]
+    },
+    {
+      "language": "hi-IN",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "equalizer.unavailable",
+          "length": 9,
+          "english_length": 3,
+          "ratio": 3.0
+        },
+        {
+          "key": "player.repeat_short",
+          "length": 7,
+          "english_length": 3,
+          "ratio": 2.33
+        },
+        {
+          "key": "common.no",
+          "length": 4,
+          "english_length": 2,
+          "ratio": 2.0
+        },
+        {
+          "key": "player.left",
+          "length": 2,
+          "english_length": 1,
+          "ratio": 2.0
+        },
+        {
+          "key": "player.right",
+          "length": 2,
+          "english_length": 1,
+          "ratio": 2.0
+        }
+      ]
+    },
+    {
+      "language": "it-IT",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "info.size",
+          "length": 10,
+          "english_length": 4,
+          "ratio": 2.5
+        },
+        {
+          "key": "player.next",
+          "length": 10,
+          "english_length": 4,
+          "ratio": 2.5
+        },
+        {
+          "key": "info.sample_rate",
+          "length": 26,
+          "english_length": 11,
+          "ratio": 2.36
+        },
+        {
+          "key": "equalizer.custom",
+          "length": 14,
+          "english_length": 6,
+          "ratio": 2.33
+        },
+        {
+          "key": "tooltip.shuffle_off",
+          "length": 35,
+          "english_length": 15,
+          "ratio": 2.33
+        }
+      ]
+    },
+    {
+      "language": "ja-JP",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "common.no",
+          "length": 3,
+          "english_length": 2,
+          "ratio": 1.5
+        },
+        {
+          "key": "audio.mono",
+          "length": 4,
+          "english_length": 4,
+          "ratio": 1.0
+        },
+        {
+          "key": "equalizer.on",
+          "length": 5,
+          "english_length": 5,
+          "ratio": 1.0
+        },
+        {
+          "key": "equalizer.unavailable",
+          "length": 3,
+          "english_length": 3,
+          "ratio": 1.0
+        },
+        {
+          "key": "info.artist",
+          "length": 6,
+          "english_length": 6,
+          "ratio": 1.0
+        }
+      ]
+    },
+    {
+      "language": "ko-KR",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "common.no",
+          "length": 3,
+          "english_length": 2,
+          "ratio": 1.5
+        },
+        {
+          "key": "equalizer.custom",
+          "length": 6,
+          "english_length": 6,
+          "ratio": 1.0
+        },
+        {
+          "key": "equalizer.on",
+          "length": 5,
+          "english_length": 5,
+          "ratio": 1.0
+        },
+        {
+          "key": "info.field",
+          "length": 16,
+          "english_length": 16,
+          "ratio": 1.0
+        },
+        {
+          "key": "player.left",
+          "length": 1,
+          "english_length": 1,
+          "ratio": 1.0
+        }
+      ]
+    },
+    {
+      "language": "nl-NL",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "player.playing",
+          "length": 16,
+          "english_length": 7,
+          "ratio": 2.29
+        },
+        {
+          "key": "tooltip.shuffle_on",
+          "length": 32,
+          "english_length": 14,
+          "ratio": 2.29
+        },
+        {
+          "key": "tooltip.shuffle_off",
+          "length": 33,
+          "english_length": 15,
+          "ratio": 2.2
+        },
+        {
+          "key": "equalizer.reset",
+          "length": 10,
+          "english_length": 5,
+          "ratio": 2.0
+        },
+        {
+          "key": "player.next",
+          "length": 8,
+          "english_length": 4,
+          "ratio": 2.0
+        }
+      ]
+    },
+    {
+      "language": "pl-PL",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "themes.all",
+          "length": 9,
+          "english_length": 3,
+          "ratio": 3.0
+        },
+        {
+          "key": "info.sample_rate",
+          "length": 25,
+          "english_length": 11,
+          "ratio": 2.27
+        },
+        {
+          "key": "player.stop",
+          "length": 9,
+          "english_length": 4,
+          "ratio": 2.25
+        },
+        {
+          "key": "playlist.title",
+          "length": 17,
+          "english_length": 8,
+          "ratio": 2.12
+        },
+        {
+          "key": "player.next",
+          "length": 8,
+          "english_length": 4,
+          "ratio": 2.0
+        }
+      ]
+    },
+    {
+      "language": "pt-BR",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "player.play",
+          "length": 10,
+          "english_length": 4,
+          "ratio": 2.5
+        },
+        {
+          "key": "playlist.title",
+          "length": 19,
+          "english_length": 8,
+          "ratio": 2.38
+        },
+        {
+          "key": "equalizer.custom",
+          "length": 13,
+          "english_length": 6,
+          "ratio": 2.17
+        },
+        {
+          "key": "tooltip.shuffle_off",
+          "length": 30,
+          "english_length": 15,
+          "ratio": 2.0
+        },
+        {
+          "key": "tooltip.shuffle_on",
+          "length": 27,
+          "english_length": 14,
+          "ratio": 1.93
+        }
+      ]
+    },
+    {
+      "language": "pt-PT",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "player.play",
+          "length": 10,
+          "english_length": 4,
+          "ratio": 2.5
+        },
+        {
+          "key": "playlist.title",
+          "length": 19,
+          "english_length": 8,
+          "ratio": 2.38
+        },
+        {
+          "key": "equalizer.custom",
+          "length": 13,
+          "english_length": 6,
+          "ratio": 2.17
+        },
+        {
+          "key": "tooltip.show_playlist",
+          "length": 27,
+          "english_length": 13,
+          "ratio": 2.08
+        },
+        {
+          "key": "tooltip.hide_playlist",
+          "length": 27,
+          "english_length": 13,
+          "ratio": 2.08
+        }
+      ]
+    },
+    {
+      "language": "ru-RU",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "player.play",
+          "length": 13,
+          "english_length": 4,
+          "ratio": 3.25
+        },
+        {
+          "key": "player.stop",
+          "length": 10,
+          "english_length": 4,
+          "ratio": 2.5
+        },
+        {
+          "key": "player.shuffle",
+          "length": 17,
+          "english_length": 7,
+          "ratio": 2.43
+        },
+        {
+          "key": "player.paused",
+          "length": 14,
+          "english_length": 6,
+          "ratio": 2.33
+        },
+        {
+          "key": "player.next",
+          "length": 9,
+          "english_length": 4,
+          "ratio": 2.25
+        }
+      ]
+    },
+    {
+      "language": "sv-SE",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "tooltip.shuffle_on",
+          "length": 32,
+          "english_length": 14,
+          "ratio": 2.29
+        },
+        {
+          "key": "tooltip.shuffle_off",
+          "length": 34,
+          "english_length": 15,
+          "ratio": 2.27
+        },
+        {
+          "key": "equalizer.reset",
+          "length": 9,
+          "english_length": 5,
+          "ratio": 1.8
+        },
+        {
+          "key": "info.size",
+          "length": 7,
+          "english_length": 4,
+          "ratio": 1.75
+        },
+        {
+          "key": "info.sample_rate",
+          "length": 17,
+          "english_length": 11,
+          "ratio": 1.55
+        }
+      ]
+    },
+    {
+      "language": "tr-TR",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "common.no",
+          "length": 5,
+          "english_length": 2,
+          "ratio": 2.5
+        },
+        {
+          "key": "player.paused",
+          "length": 12,
+          "english_length": 6,
+          "ratio": 2.0
+        },
+        {
+          "key": "player.next",
+          "length": 7,
+          "english_length": 4,
+          "ratio": 1.75
+        },
+        {
+          "key": "themes.restore",
+          "length": 28,
+          "english_length": 16,
+          "ratio": 1.75
+        },
+        {
+          "key": "tooltip.show_playlist",
+          "length": 22,
+          "english_length": 13,
+          "ratio": 1.69
+        }
+      ]
+    },
+    {
+      "language": "zh-CN",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "equalizer.unavailable",
+          "length": 3,
+          "english_length": 3,
+          "ratio": 1.0
+        },
+        {
+          "key": "player.left",
+          "length": 1,
+          "english_length": 1,
+          "ratio": 1.0
+        },
+        {
+          "key": "player.right",
+          "length": 1,
+          "english_length": 1,
+          "ratio": 1.0
+        },
+        {
+          "key": "window.caption",
+          "length": 17,
+          "english_length": 17,
+          "ratio": 1.0
+        },
+        {
+          "key": "info.field",
+          "length": 15,
+          "english_length": 16,
+          "ratio": 0.94
+        }
+      ]
+    },
+    {
+      "language": "zh-TW",
+      "ids": 237,
+      "tooltip_keys": 46,
+      "empty": 0,
+      "expansion_candidates": [
+        {
+          "key": "equalizer.unavailable",
+          "length": 3,
+          "english_length": 3,
+          "ratio": 1.0
+        },
+        {
+          "key": "player.left",
+          "length": 1,
+          "english_length": 1,
+          "ratio": 1.0
+        },
+        {
+          "key": "player.right",
+          "length": 1,
+          "english_length": 1,
+          "ratio": 1.0
+        },
+        {
+          "key": "window.caption",
+          "length": 17,
+          "english_length": 17,
+          "ratio": 1.0
+        },
+        {
+          "key": "info.field",
+          "length": 15,
+          "english_length": 16,
+          "ratio": 0.94
+        }
+      ]
+    }
+  ]
+}

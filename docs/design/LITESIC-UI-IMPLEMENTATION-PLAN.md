@@ -1,5 +1,11 @@
 # Modernização UI/UX — plano e evidências
 
+Nota de consolidação M8: o corpo deste plano preserva o corte histórico da
+migração visual. M6 já entregou EQ/DSP funcional e aceito; M7 está COMPLETE;
+M8-T6–T8 estão COMPLETE, T7 PASS humano e T8 TUDO PASS. As menções históricas
+a DSP/tooltips indisponíveis não descrevem o código atual. Pendências reais de
+DPI, legibilidade e acessibilidade: [auditoria integral M8](../M8-REMAINING-REQUIREMENTS-AUDIT.md).
+
 Referência PNG aberta e inspecionada em 11/10/2026, antes de alterar fontes.
 A especificação fornecida existe como `LITESIC-UI-UX-PROMPT-CODEX.md`;
 `IMPLEMENTACAO-UI-UX-CODEX.md` não existe neste checkout. Aplicam-se as fases

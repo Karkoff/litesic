@@ -86,5 +86,9 @@ Commit/push autorizados pelo usuário para `origin/master`, sem force push,
 reescrita de histórico ou descarte. O resultado e o hash publicado são
 registrados na auditoria residual posterior e no fechamento da execução.
 
+**Resultado:** commit `1aa560fc0978ba8b53b07bd24746e5d62eb654fd` publicado
+em origin/master; igualdade local/remoto confirmada por ls-remote.
+[Auditoria integral e plano restante da M8](M8-REMAINING-REQUIREMENTS-AUDIT.md).
+
 Evidências novas: [manifesto](evidence/m8-consolidation/manifest.json) e
 [guia dos logs/capturas](evidence/m8-consolidation/README.md).

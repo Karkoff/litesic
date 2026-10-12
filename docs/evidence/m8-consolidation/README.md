@@ -20,3 +20,13 @@ O aceite visual humano T8 **TUDO PASS** veio do usuário; a inspeção desta
 sessão não substitui nem amplia esse aceite para revisão linguística integral.
 Áudio offline e fixture silenciosa não avaliam qualidade sonora subjetiva.
 Não foram feitos testes físicos de troca/desconexão de monitores ou outros Windows.
+
+## Diagnóstico complementar da auditoria
+
+`remaining-probe-{32,64}.txt`, `remaining-probe.json`: 24 amostras totais
+de DPI × zoom, dimensões/hit-test player/EQ, três lacunas e um limite reproduzidos.
+PASS é execução esperada do diagnóstico, não aprovação das lacunas.
+`catalog-audit.json`: 237/46 chaves por catálogo e candidatos de expansão textual;
+heurística de caracteres, sem revisão linguística ou alteração de traduções.
+Fontes/runner em scripts/diagnostics; não entram no exe do produto.
+[Auditoria e reprodução](../../M8-REMAINING-REQUIREMENTS-AUDIT.md).

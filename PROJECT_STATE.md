@@ -70,3 +70,7 @@ Nenhuma alteração de código ou execução de testes nesta tarefa documental.
 Origem, condições e escopo: [registro da decisão](docs/M9-CLOSEOUT-2026-10-11.md).
 Plano técnico preservado: [M9](docs/milestones/M9.md). Relatórios históricos
 mantêm o estado da época; este registro prevalece para o status atual da M9.
+
+[Auditoria integral restante da M8 e plano de conclusão](docs/M8-REMAINING-REQUIREMENTS-AUDIT.md):
+T1–T5 e refinamentos específicos DPI/acessibilidade pendentes; T6–T8 COMPLETE.
+Consolidação T6–T8 publicada em `1aa560f`; M8 permanece aberta.

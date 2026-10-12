@@ -1,0 +1,18 @@
+[
+  {
+    "architecture": "64",
+    "exit_code": 0,
+    "sha256": "7a34680726e1efb8411bd5f8065eb9a8100ef8a3b262cbf39f31258f1c545a50",
+    "layout_samples": 12,
+    "reproduced_gaps": 3,
+    "small_screen_limit": 1
+  },
+  {
+    "architecture": "32",
+    "exit_code": 0,
+    "sha256": "af365122e0ffef596858cc66a2fc01cb498c12aea49a1c951207d63bbd86aadc",
+    "layout_samples": 12,
+    "reproduced_gaps": 3,
+    "small_screen_limit": 1
+  }
+]

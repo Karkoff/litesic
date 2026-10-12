@@ -228,6 +228,23 @@
     "docs/evidence/m8-consolidation/test-32-release.txt": "50febb1ca937b749e94ed1e6d2466b22cb5e9f6be16e549a04b9bebd109ce526",
     "docs/evidence/m8-consolidation/test-64-debug.txt": "6d2836e6121f77272a22733613508a0100f318cc83204ca56c7ea7afde9562ac",
     "docs/evidence/m8-consolidation/test-64-release.txt": "ae27cb80f97d85408bdc6242dd30270624dccef411fae6e3dc26f63debf0f129",
-    "docs/evidence/m8-consolidation/tooltip-gui-64-release.txt": "31eb642083f673ab30fc30dfcd6cc6daabc0c56f99e43701a4394f735f774aa9"
+    "docs/evidence/m8-consolidation/tooltip-gui-64-release.txt": "31eb642083f673ab30fc30dfcd6cc6daabc0c56f99e43701a4394f735f774aa9",
+    "docs/evidence/m8-consolidation/catalog-audit.json": "5f36dea201d9056703b312328b2e77c6543e003318fac846514d151a3d257d78",
+    "docs/evidence/m8-consolidation/README.md": "51154891bcb1d4bb43e2d4e7afa23252fe7ea4365bdf14eda8b66862de3ea470",
+    "docs/evidence/m8-consolidation/remaining-probe-32.txt": "1fdd03e9f4e71a5c168dcf5f453ccce858defc0a853bca12e92d8482bb9d71b9",
+    "docs/evidence/m8-consolidation/remaining-probe-64.txt": "1fdd03e9f4e71a5c168dcf5f453ccce858defc0a853bca12e92d8482bb9d71b9",
+    "docs/evidence/m8-consolidation/remaining-probe.json": "7b7c8f684ecb664171394d0ef64285bc0edf3d40a2c4d1bbe377c9b0f477f3a0"
+  },
+  "consolidation_commit": "1aa560fc0978ba8b53b07bd24746e5d62eb654fd",
+  "consolidation_push": "origin/master hash matched",
+  "audit_probe": {
+    "architectures": [
+      "64",
+      "32"
+    ],
+    "layout_samples": 24,
+    "reproduced_gaps": 3,
+    "small_screen_limit": 1,
+    "product_unchanged": true
   }
 }

@@ -113,3 +113,7 @@ Detalhes por tarefa na [auditoria](ROADMAP-IMPLEMENTATION-AUDIT.md).
 
 Streaming (rádios HTTP/Icecast), skins, mini-player, bandeja do sistema,
 associação de arquivos, suporte a AAC/M4A (Media Foundation) e Opus.
+
+[Auditoria integral restante da M8 e plano de conclusão](M8-REMAINING-REQUIREMENTS-AUDIT.md):
+T1–T5 e refinamentos específicos DPI/acessibilidade pendentes; T6–T8 COMPLETE.
+Consolidação T6–T8 publicada em `1aa560f`; M8 permanece aberta.

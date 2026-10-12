@@ -62,14 +62,14 @@ o trabalho M7. A evidência final e os limites ficam em
 | M7 | M7-T2 | Encaixe (snap) entre janelas | [ ]; encaixe direto e toggles antecipados | ALREADY_ACCEPTED | src/window_snap.h: Snap/Graph, skin.cpp: SnapToPeers | test_window_snap.cpp; test_window_integration.cpp | M7-INTEGRATED-VALIDATION; logs/testes Win32 atuais | Aceite humano final “TUDO PASS” em 11/10/2026. | Preservar aceite; ver M7-CLOSEOUT-2026-10-11. | M7 COMPLETE; M8 apenas planejada. |
 | M7 | M7-T3 | Mover em conjunto | [ ]; encaixe direto e toggles antecipados | ALREADY_ACCEPTED | src/skin.cpp: Changed/Constrain/Reconcile | test_window_integration.cpp; test_eq_window.cpp | M7-INTEGRATED-VALIDATION; logs/testes Win32 atuais | Aceite humano final “TUDO PASS” em 11/10/2026. | Preservar aceite; ver M7-CLOSEOUT-2026-10-11. | M7 COMPLETE; M8 apenas planejada. |
 | M7 | M7-T4 | Botões EQ/PL mostram/ocultam | [ ]; encaixe direto e toggles antecipados | ALREADY_ACCEPTED | src/mainwnd.cpp, eqwnd.cpp, plwnd.cpp: toggles | test_eq_window.cpp, test_player_window.cpp; sessão isolada | M7-INTEGRATED-VALIDATION; logs/testes Win32 atuais | Aceite humano final “TUDO PASS” em 11/10/2026. | Preservar aceite; ver M7-CLOSEOUT-2026-10-11. | M7 COMPLETE; M8 apenas planejada. |
-| M8 | M8-T1 | Atalhos de teclado estilo Winamp | [ ]; milestone aberta | PARTIALLY_IMPLEMENTED | src/mainwnd.cpp: WM_KEYDOWN; eqwnd.cpp/plwnd.cpp | test_player_window.cpp (Tab/setas); sem teste ZXCVB global | Inspeção do código e testes listados; relatório M7 | Tab/Space/Enter e setas locais; faltam Z/X/C/V/B, L, Ctrl+D e despacho com foco nos três painéis. | Completar aceleradores na M8. | Não implementado nesta execução. |
-| M8 | M8-T2 | Teclas de mídia do teclado | [ ]; milestone aberta | NOT_IMPLEMENTED | nenhum WM_APPCOMMAND no código | nenhum teste específico | Inspeção do código e testes listados; relatório M7 | Ausência de WM_APPCOMMAND e dos comandos multimídia. | Implementar na M8 e testar entrada. | Não altera a M7. |
-| M8 | M8-T3 | Sempre no topo e zoom da interface | [ ]; milestone aberta | PARTIALLY_IMPLEMENTED | src/app.cpp: InitDpiAwareness; mainwnd.cpp: ApplyInterfaceScale | test_player_window.cpp, test_appearance.cpp, test_window_integration.cpp | Inspeção do código e testes listados; relatório M7 | DPI/zoom e sua persistência já existem; falta always-on-top para o conjunto e decisão de UI definitiva. | Reutilizar escala; completar toggle e aceite na M8. | DPI é reutilizado pela M7, sem concluir M8. |
-| M8 | M8-T4 | Instância única | [ ]; milestone aberta | NOT_IMPLEMENTED | src/app.cpp: wWinMain sem mutex/WM_COPYDATA | nenhum teste específico | Inspeção do código e testes listados; relatório M7 | Sem CreateMutexW/WM_COPYDATA; argumentos normais não adicionam arquivos. | Implementar instância única e encaminhamento na M8. | Pré-requisito para experiência de distribuição. |
-| M8 | M8-T5 | Configurações em INI e persistência da lista | [ ]; milestone aberta | PARTIALLY_IMPLEMENTED | src/ui_theme.cpp, eq_state.cpp, plwnd.cpp: Geometry/SaveM3U | test_appearance.cpp, test_eq_filter.cpp, test_playlist_window.cpp, test_window_integration.cpp | Inspeção do código e testes listados; relatório M7 | Volume, EQ, tema, zoom, visibilidades, favoritos, playlist e geometria dos painéis existem. Faltam modo portátil, balanço, shuffle/repeat e always-on-top; posição principal depende da sessão PL. Usa LOCALAPPDATA, não o contrato APPDATA/LiteSic.ini. | Consolidar a infraestrutura existente na M8; não criar INI concorrente. | Parent da M7 amplia as seções existentes; não implementa config.h ou modo portátil. |
-| M8 | M8-T6 | Internacionalização integral, 18 idiomas, catálogo e DirectWrite/RTL | COMPLETE; [x]; 11/10/2026 | IMPLEMENTED_AND_VERIFIED | src/i18n.h/.cpp, i18n_english.h, locales, UI migrada | test_i18n.cpp, test_i18n_window.cpp, i18n_catalogs.py; 644 casos, 29 guardas e quatro builds PASS | M8-T6-I18N.md; evidence/m8-i18n (54 capturas inspecionadas) | Revisão linguística humana e RTL complexo pendentes; sem certificação Win7 prática | T7: detecção/menu/persistência/refresh global; T8: tooltips explicativos | 188/188 IDs por idioma; 36 temas × quatro escalas renderizados; M8 aberta; sem commit/push |
-| M8 | M8-T7 | Detecção Windows, menu Idioma e seleção manual persistida/ao vivo | COMPLETE; [x]; 11/10/2026 | IMPLEMENTED_AND_VERIFIED | src/language_selection.h/.cpp, app.cpp, mainwnd.cpp, plwnd.cpp, eqwnd.cpp, theme_window.cpp; INI existente | test_language_selection.cpp (8), test_language_window.cpp (2), suites existentes; 684 casos, 32 guardas e quatro builds PASS | M8-T7-LANGUAGE-SELECTION.md; evidence/m8-language-selection (90 capturas, 50 inspecionadas representativamente) | Revisão linguística humana e ensaios físicos M9 pendentes | T8: tooltips explicativos; M8 permanece aberta | 18 escolhas nativas; 191 IDs; default Windows/manual; refresh cinco janelas, áudio/estado preservados; sem commit/push |
-| M8 | M8-T8 | Tooltips multilíngues dos controles existentes | COMPLETE; [x]; aceite humano TUDO PASS | IMPLEMENTED_AND_VERIFIED | ui_tooltip.h/.cpp, Canvas::TextLayout, mainwnd/eqwnd/plwnd/theme_window, 18 catálogos | test_tooltip (8 + 2 gráficos), suítes 716 casos, 36 guardas, quatro builds PASS | M8-T8-TOOLTIPS.md; inventário; evidence/m8-tooltips, 10 imagens inspecionadas e 3.092 frames | Aceite visual humano T8 concedido; revisão linguística, UIA/MSAA Canvas e multi-DPI físico pendentes | M8-T1…T5 e checkpoint; M8 aberta | 46 IDs novos; 237 IDs × 18 idiomas; 36 temas; estados reais; áudio preservado; sem commit/push |
+| M8 | M8-T1 | Atalhos Winamp e despacho nos três painéis | [ ]; M8 aberta | PARTIALLY_IMPLEMENTED | mainwnd/eqwnd/plwnd WM_KEYDOWN; app loop | Testes locais de teclado PASS; sem ZXCVB/L/Ctrl+D global | M8-REMAINING-REQUIREMENTS-AUDIT.md; regressão nova | Faltam aceleradores globais e seek independente do slider; conservar edição da pesquisa. | T1: reutilizar ações e centralizar despacho. | Não implementado neste ciclo. |
+| M8 | M8-T2 | Quatro teclas de mídia | [ ]; M8 aberta | NOT_IMPLEMENTED | WM_APPCOMMAND ausente | Sem teste de despacho multimídia existente | Auditoria residual, busca src | Play/Pause, Stop, Next e Previous não têm handlers. | T2: despachar mensagens, testar e conferir teclado. | Sem reabrir milestones anteriores. |
+| M8 | M8-T3 | Sempre no topo, zoom, DPI e posicionamento | [ ]; M8 aberta | PARTIALLY_IMPLEMENTED | InitDpiAwareness; ApplyInterfaceScale; Canvas; WM_DPICHANGED | Tests existentes PASS; probe x86/x64, 24 amostras | Auditoria residual; remaining-probe-{32,64}.txt | Topo ausente; zoom negativo desloca para zero; DPI auxiliar/local incompleto; área útil pequena excedida. | Reutilizar pipeline DIP/pixel; completar topo e lacunas específicas. | Não foi observada dupla escala no caminho player/EQ testado; matriz física pendente. |
+| M8 | M8-T4 | Instância única e arquivos pela linha de comando | [ ]; M8 aberta | NOT_IMPLEMENTED | app sem mutex/WM_COPYDATA/parsing normal | Sem ensaio de instância única existente | Auditoria residual; app.cpp | Falta encaminhar/acrescentar arquivos e ativar instância. | T4: mutex e IPC Unicode limitado. | --validation não é modo de produto. |
+| M8 | M8-T5 | Configuração, sessão e runtime portátil | [ ]; M8 aberta | PARTIALLY_IMPLEMENTED | ui_theme/eq_state/plwnd/M3U/Language | Round-trips atuais PASS; regressão 716 casos | Auditoria residual, matriz por campo | Faltam balanço, shuffle/repeat/topo, portátil/data/migração e origem principal independente da sessão PL. | Reutilizar INI LOCALAPPDATA documentado; completar campos/contrato. | Não recriar persistência nem empacotar M10. |
+| M8 | M8-T6 | Catálogos, cobertura, Unicode e tipografia | COMPLETE; [x] | IMPLEMENTED_AND_VERIFIED | i18n/Canvas, 18 catálogos e inventário | Validador fonte e testes atuais PASS | M8-CONSOLIDATION.md; auditoria residual | Revisão linguística integral e legibilidade/RTL geral ficam no checkpoint. | Revisar achados concretos, sem regenerar catálogos. | 237 IDs atuais por idioma, 46 tooltip.*; T6 técnica preservada. |
+| M8 | M8-T7 | Windows automático/manual, persistência e atualização | COMPLETE; [x]; PASS humano | ALREADY_ACCEPTED | language_selection e cinco janelas | Testes de preferência/troca/áudio/modelo/geometria PASS novamente | Consolidação e evidências novas; T7 histórica | Revisão linguística não foi concedida pelo aceite visual. | Preservar entrega aceita, sem nova aprovação T7. | Publicada em 1aa560f. |
+| M8 | M8-T8 | Tooltips multilíngues explicativos | COMPLETE; [x]; TUDO PASS humano | ALREADY_ACCEPTED | ui_tooltip, estado real e tokens de tema | 8 casos/variante e 2 gráficos adicionais PASS; 3.092 frames | Consolidação/evidence/m8-consolidation; inventário T8 | UIA/MSAA Canvas e revisão linguística não equivalem a tooltips aceitos. | Preservar T8; tratar lacunas gerais no checkpoint M8. | Publicada em 1aa560f; 18 idiomas/36 temas. |
 | M9 | M9-T1 | Checar DLLs importadas | [ ]; M9 administrativamente COMPLETE | IMPLEMENTED_AND_VERIFIED | Makefile: -static; res/app.manifest | objdump dos dois Release; evidência nesta rodada | Inspeção do código e testes listados; relatório M7 | Link estático e imports de sistema confirmados por objdump nesta rodada. | Manter checagem após troca de toolchain. | M9 permanece COMPLETE; checkpoint histórico não reescrito. |
 | M9 | M9-T2 | Rodar em VM Windows 7 SP1 (32 e 64 bits) | [ ]; M9 administrativamente COMPLETE | BLOCKED | fontes compatíveis com alvo 0x0601; sem VM disponível | nenhum ensaio físico Win7 nesta rodada | Inspeção do código e testes listados; relatório M7 | VMs Win7 SP1 x86/x64 indisponíveis neste ambiente; ausência de evidência física. | Execução futura pelo usuário, conforme decisão M9. | Bloqueio do ensaio, não do status administrativo M9. |
 | M9 | M9-T3 | Registrar e corrigir divergências | [ ]; M9 administrativamente COMPLETE | BLOCKED | docs/M9-CLOSEOUT-2026-10-11.md | nenhum diagnóstico novo entre sistemas | Inspeção do código e testes listados; relatório M7 | Comparação prática entre sistemas depende de ambientes ainda indisponíveis; ausência de falhas observadas não comprova compatibilidade. | Registrar divergências quando os ensaios futuros ocorrerem. | Não reabrir M9. |
@@ -79,8 +79,8 @@ o trabalho M7. A evidência final e os limites ficam em
 
 ## Resumo por milestone
 
-Contagens atuais: 51 tarefas; 37 aceitas, três verificadas, quatro parciais,
-cinco não implementadas e duas bloqueadas apenas no ensaio físico M9.
+Contagens atuais: 51 tarefas; 39 aceitas, duas verificadas, quatro parciais,
+quatro não implementadas e duas bloqueadas apenas no ensaio físico M9.
 M7 incorpora o aceite humano final “TUDO PASS”.
 
 | Milestone | Total | ALREADY_ACCEPTED | IMPLEMENTED_AND_VERIFIED | IMPLEMENTED_NOT_VERIFIED | PARTIALLY_IMPLEMENTED | NOT_IMPLEMENTED | BLOCKED | NOT_APPLICABLE |
@@ -93,7 +93,7 @@ M7 incorpora o aceite humano final “TUDO PASS”.
 | M5 | 6 | 6 | 0 | 0 | 0 | 0 | 0 | 0 |
 | M6 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 |
 | M7 | 4 | 4 | 0 | 0 | 0 | 0 | 0 | 0 |
-| M8 | 8 | 0 | 2 | 0 | 3 | 3 | 0 | 0 |
+| M8 | 8 | 2 | 1 | 0 | 3 | 2 | 0 | 0 |
 | M9 | 3 | 0 | 1 | 0 | 0 | 0 | 2 | 0 |
 | M10 | 3 | 0 | 0 | 0 | 1 | 2 | 0 | 0 |
 
@@ -122,16 +122,17 @@ M7 incorpora o aceite humano final “TUDO PASS”.
 1. M7 COMPLETE: aceite humano “TUDO PASS” já concedido; não solicitar novamente.
 2. M8: completar atalhos globais e teclas de mídia; sempre no topo; instância
    única; consolidar persistência/modo portátil usando a infraestrutura existente.
-3. M10: reprodutibilidade formal, zips e eventual instalador após modo portátil.
-4. Testes físicos M9 continuam com o usuário, sem reabertura administrativa.
+3. Após concluir M8: auditoria geral de desempenho aprovada pelo usuário.
+4. M10: distribuição limpa/reproduzível, zips e instalador opcional.
+5. Testes físicos M9 continuam com o usuário, sem reabertura administrativa.
 
 ## Consolidação de encerramento — 11/10/2026
 
 M7 COMPLETE: aceite humano e testes atuais no [encerramento](M7-CLOSEOUT-2026-10-11.md).
 As 48 tarefas originais foram preservadas, com três novas tarefas M8 (51 atuais).
 M8 continua aberta: DPI por monitor, zoom/persistência e refinamentos existentes
-são reutilizados; atalhos parciais, mídia, topo, instância única e configuração
-residual continuam pendentes. Na auditoria original, os 18 idiomas, seleção
+são reutilizados; atalhos parciais, mídia, topo, instância única, configuração
+residual e lacunas específicas DPI/acessibilidade continuam pendentes. Na auditoria original, os 18 idiomas, seleção
 automática/manual e tooltips ainda eram planejamento. Atualização posterior:
 M8-T6, M8-T7 e M8-T8 foram implementadas e verificadas em 11/10/2026; seguem
 a conclusão dos requisitos residuais M8-T1…T5 e checkpoint. Ver [entrega T6](M8-T6-I18N.md)
@@ -155,3 +156,12 @@ limitações práticas anteriores preservadas.
 T6, T7 e T8 COMPLETE; aceite visual T8 TUDO PASS registrado.
 [Regressão executada novamente e publicação](M8-CONSOLIDATION.md).
 Resultados anteriores nesta matriz são históricos; não são contados como execuções novas.
+
+## Auditoria integral atual da M8
+
+[Matriz completa e plano para conclusão](M8-REMAINING-REQUIREMENTS-AUDIT.md):
+oito tarefas, todos os 15 critérios i18n, campos de configuração, DPI/monitores
+e refinamento/acessibilidade. M8 permanece OPEN/IN_PROGRESS; T6–T8 COMPLETE.
+M7/M9 não reabertas; nenhuma lacuna implementada neste ciclo. As linhas M8
+acima expressam o estado atual; medições anteriores do documento são históricas.
+Consolidação 1aa560f publicada, local/remoto conferidos.
