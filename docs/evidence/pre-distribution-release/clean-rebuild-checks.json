@@ -1,0 +1,30 @@
+[
+  {
+    "architecture": "64",
+    "source_commit": "23310e32b5ddfa99e2014374d02e9e75f0df9348",
+    "inputs_verified": 81,
+    "translation_units_recompiled": 26,
+    "resource_object_recompiled": true,
+    "all_object_timestamps_after_build_start": true,
+    "pe_machine": "0x8664",
+    "size": 4767936,
+    "sha256": "E9C3963B0CC2D294E8AB9512E5A53AA1166B617D3147809707FD4A5C508FC4B1",
+    "started": "2026-10-12T15:39:07.1035460-03:00",
+    "finished": "2026-10-12T15:39:38.0770239-03:00",
+    "working_tree_clean_at_build": true
+  },
+  {
+    "architecture": "32",
+    "source_commit": "23310e32b5ddfa99e2014374d02e9e75f0df9348",
+    "inputs_verified": 81,
+    "translation_units_recompiled": 26,
+    "resource_object_recompiled": true,
+    "all_object_timestamps_after_build_start": true,
+    "pe_machine": "0x14c",
+    "size": 4694637,
+    "sha256": "93908A174F9B0F9FA5AA35A9F06F9A7DA2D04C07BA460EC44993065EDD82C899",
+    "started": "2026-10-12T15:39:50.8704658-03:00",
+    "finished": "2026-10-12T15:40:20.7952402-03:00",
+    "working_tree_clean_at_build": true
+  }
+]

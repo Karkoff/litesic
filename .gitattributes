@@ -3,3 +3,4 @@ docs/evidence/m8-*/* -text whitespace=-blank-at-eol
 # Preserve raw diagnostic evidence, including original line endings/spacing.
 docs/evidence/clean-runtime/** -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
 docs/evidence/intermittent-failures/** -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab
+docs/evidence/pre-distribution-release/** -text whitespace=-blank-at-eol,-blank-at-eof,-space-before-tab

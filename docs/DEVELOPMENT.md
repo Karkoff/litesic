@@ -48,6 +48,7 @@ os logs automáticos são responsabilidade do helper PowerShell.
 
 Esta preparação é anterior à M10: não gera instalador ou pacote de distribuição.
 Resultado e identificação da preparação: [relatório](CLEAN-RUNTIME-2026-10-12.md).
+Release publicada para avaliação humana: [identidades e validação](PRE-DISTRIBUTION-RELEASE-2026-10-12.md).
 As cinco correções exclusivas dos testes, com 92/92 amostras dirigidas e quatro
 suítes 31/31, estão no [diagnóstico de intermitências](INTERMITTENT-FAILURES-2026-10-12.md).
 O verificador Release também observa avanço real da reprodução via MSAA,
