@@ -14,3 +14,7 @@ __pycache__/
 !docs/evidence/m7-integrated/*.log
 !docs/evidence/m7-integrated/isolated-*.ini
 !docs/evidence/m7-closeout/*.log
+
+# Historical validation evidence referenced by the player-adjustments manifest.
+!docs/evidence/player-adjustments/refine-build-*.log
+!docs/evidence/player-adjustments/refine-tests-*.log

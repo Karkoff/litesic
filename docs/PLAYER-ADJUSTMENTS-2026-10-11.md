@@ -57,6 +57,8 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev.ps1 -Action test
 
 Para Release, omitir `-DebugBuild`; para x86, usar `-Architecture 32`.
 Logs: `build/refine-build-*.log` e `build/refine-tests-*.log`.
+As oito cópias históricas publicadas estão em `evidence/player-adjustments/`,
+com SHA-256 conferido contra o [manifesto](evidence/player-adjustments/manifest.json).
 Sem erros ou warnings novos; permanecem os avisos anteriores de casts DPI
 e duas funções GDI não utilizadas. `git diff --check` passou.
 
