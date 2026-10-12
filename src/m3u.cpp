@@ -1,3 +1,4 @@
+#include "i18n.h"
 #include "m3u.h"
 #include <windows.h>
 #include <sstream>
@@ -105,11 +106,12 @@ std::wstring WriteM3U(const std::vector<Track>& tracks) {
     }
     return output.str();
 }
-bool LoadM3U(const std::wstring& path, std::vector<Track>& result, std::wstring& error) {
+bool LoadM3U(const std::wstring& path, std::vector<Track>& result, std::wstring& error,std::string* errorId) {
+    if(errorId)errorId->clear();
     error.clear(); result.clear();
     HANDLE file = CreateFileW(path.c_str(), GENERIC_READ, FILE_SHARE_READ, nullptr,
                               OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
-    if (file == INVALID_HANDLE_VALUE) { error = L"Não foi possível abrir a lista."; return false; }
+    if (file == INVALID_HANDLE_VALUE) { if(errorId)*errorId="errors.m3u_open";error = I18n::Text("errors.m3u_open").c_str(); return false; }
     LARGE_INTEGER size{};
     bool ok = GetFileSizeEx(file, &size) && size.QuadPart >= 0 && size.QuadPart <= 16 * 1024 * 1024;
     std::string bytes;
@@ -122,16 +124,19 @@ bool LoadM3U(const std::wstring& path, std::vector<Track>& result, std::wstring&
     CloseHandle(file);
     std::wstring text;
     if (!ok || !DecodeText(bytes, text, true)) {
-        error = L"Lista inválida ou maior que 16 MiB."; return false;
+        if(errorId)*errorId="errors.m3u_invalid";
+        error = I18n::Text("errors.m3u_invalid").c_str(); return false;
     }
     return ParseM3U(text, path, result);
 }
-bool SaveM3U(const std::wstring& path, const std::vector<Track>& tracks, std::wstring& error) {
+bool SaveM3U(const std::wstring& path, const std::vector<Track>& tracks, std::wstring& error,std::string* errorId) {
+    if(errorId)errorId->clear();
     error.clear();
     std::wstring full = FullPath(path), directory = full.substr(0, full.find_last_of(L"/\\") + 1);
     wchar_t temporary[MAX_PATH];
     if (!GetTempFileNameW(directory.c_str(), L"LSC", 0, temporary)) {
-        error = L"Não foi possível criar o arquivo temporário."; return false;
+        if(errorId)*errorId="errors.temporary";
+        error = I18n::Text("errors.temporary").c_str(); return false;
     }
     HANDLE file = CreateFileW(temporary, GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
     bool ok = file != INVALID_HANDLE_VALUE;
@@ -144,6 +149,6 @@ bool SaveM3U(const std::wstring& path, const std::vector<Track>& tracks, std::ws
         CloseHandle(file);
     }
     if (ok) ok = MoveFileExW(temporary, full.c_str(), MOVEFILE_REPLACE_EXISTING | MOVEFILE_WRITE_THROUGH);
-    if (!ok) { DeleteFileW(temporary); error = L"Não foi possível salvar a lista."; }
+    if (!ok) { DeleteFileW(temporary);if(errorId)*errorId="errors.m3u_save"; error = I18n::Text("errors.m3u_save").c_str(); }
     return ok;
 }

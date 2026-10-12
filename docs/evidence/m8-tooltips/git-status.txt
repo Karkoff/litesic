@@ -1,0 +1,52 @@
+ M Makefile
+ M PROJECT_STATE.md
+ M README.md
+ M docs/GUI-AUTOMATION.md
+ M docs/M8-I18N-REQUIREMENTS.md
+ M docs/ROADMAP-IMPLEMENTATION-AUDIT.md
+ M docs/ROADMAP.md
+ M docs/design/UI-COMPONENTS.md
+ M docs/milestones/M8.md
+ M scripts/gui.ps1
+ M scripts/gui/litesic_gui.py
+ M scripts/gui/test_driver.py
+ M src/app.cpp
+ M src/eqwnd.cpp
+ M src/m3u.cpp
+ M src/m3u.h
+ M src/mainwnd.cpp
+ M src/playlist_worker.cpp
+ M src/playlist_worker.h
+ M src/plwnd.cpp
+ M src/theme_window.cpp
+ M src/ui_draw.cpp
+ M src/ui_draw.h
+ M src/ui_player.cpp
+ M src/ui_player.h
+ M src/ui_theme.cpp
+ M src/ui_theme.h
+?? docs/I18N-LITERAL-EXCEPTIONS.json
+?? docs/I18N-STRING-INVENTORY.json
+?? docs/M8-T6-I18N.md
+?? docs/M8-T7-LANGUAGE-SELECTION.md
+?? docs/M8-T8-CONTROL-INVENTORY.md
+?? docs/M8-T8-TOOLTIPS.md
+?? docs/evidence/m8-i18n/
+?? docs/evidence/m8-language-selection/
+?? docs/evidence/m8-tooltips/
+?? locales/
+?? scripts/gui/capture_i18n.ps1
+?? scripts/gui/capture_language_selection.ps1
+?? scripts/i18n_catalogs.py
+?? src/i18n.cpp
+?? src/i18n.h
+?? src/i18n_english.h
+?? src/language_selection.cpp
+?? src/language_selection.h
+?? src/ui_tooltip.cpp
+?? src/ui_tooltip.h
+?? tests/test_i18n.cpp
+?? tests/test_i18n_window.cpp
+?? tests/test_language_selection.cpp
+?? tests/test_language_window.cpp
+?? tests/test_tooltip.cpp

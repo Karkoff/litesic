@@ -1,3 +1,4 @@
+#include "i18n.h"
 #include "ui_player.h"
 #include <cmath>
 
@@ -66,10 +67,12 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
     c.Fill({8,38,444,50},Display,3);
     c.Stroke({LCD_X,LCD_Y,LCD_W,LCD_H},Active,2);
     c.TextAt({LCD_X,LCD_Y,LCD_W,LCD_H},s.time,Green,Font::Digital,true);
-    bool overflow=c.ScrollingText({TITLE_X,TITLE_Y,TITLE_W,23},s.title,s.titleElapsedMs,Green,Font::Heading);
+    bool overflow=false;
+    if(s.loaded) overflow=c.ScrollingText({TITLE_X,TITLE_Y,TITLE_W,23},s.title,s.titleElapsedMs,Green,Font::Heading);
+    else c.TextAt({TITLE_X,TITLE_Y,TITLE_W,23},s.title,Green,Font::Heading);
     if(titleOverflow)*titleOverflow=overflow && s.loaded;
     c.TextAt({TITLE_X,TITLE_Y+23,TITLE_W,19},s.subtitle,Muted,Font::Small);
-    c.TextAt({12,SEEK_Y,34,SEEK_H},L"TEMPO",Muted,Font::Small);
+    c.TextAt({12,SEEK_Y,34,SEEK_H},I18n::Text("player.time").c_str(),Muted,Font::Small);
     c.Slider(PlayerControlRect(8),s.seek,s.loaded,s.focus==8);
     c.TextAt({412,SEEK_Y,40,SEEK_H},s.duration,Text,Font::Small,true);
     c.Line(12,116,448,116,Border);
@@ -88,13 +91,13 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
         if(id==1 || id==2) {Triangle(c,x,y,id==1?-1:1,color);c.Line(x+(id==1?-8:8),y-6,x+(id==1?-8:8),y+6,color,2);}
     }
     c.Line(12,160,448,160,Border);
-    c.TextAt({12,VOLPAN_Y,52,VOLPAN_H},L"Volume",Text,Font::Small);
+    c.TextAt({12,VOLPAN_Y,52,VOLPAN_H},I18n::Text("player.volume").c_str(),Text,Font::Small);
     c.Slider(PlayerControlRect(9),s.volume,true,s.focus==9);
     c.TextAt({202,VOLPAN_Y,40,VOLPAN_H},std::to_wstring(static_cast<int>(std::lround(s.volume*100)))+L"%",Text,Font::Small);
-    c.TextAt({250,VOLPAN_Y,55,VOLPAN_H},L"Balanço",Text,Font::Small);
-    c.TextAt({306,VOLPAN_Y,12,VOLPAN_H},L"L",Muted,Font::Small);
+    c.TextAt({250,VOLPAN_Y,55,VOLPAN_H},I18n::Text("player.balance").c_str(),Text,Font::Small);
+    c.TextAt({306,VOLPAN_Y,12,VOLPAN_H},I18n::Text("player.left").c_str(),Muted,Font::Small);
     c.Slider(PlayerControlRect(10),s.pan,true,s.focus==10);
-    c.TextAt({440,VOLPAN_Y,12,VOLPAN_H},L"R",Muted,Font::Small);
+    c.TextAt({440,VOLPAN_Y,12,VOLPAN_H},I18n::Text("player.right").c_str(),Muted,Font::Small);
     if(s.visualizerVisible) {
         DrawVisualizerD2D(c,{VIZ_X,VIZ_Y,VIZ_W,VIZ_H},s.visualization);
         c.Button(PlayerControlRect(13),L"FFT",s.visualization==VIZ_MODE_SPECTRUM,s.hover==13,false,true,s.focus==13);
@@ -106,7 +109,14 @@ bool PaintPlayer(Ui::Canvas& c,HDC dc,const RECT& pixels,float scale,const Playe
         bool active=(id==11 && s.playlistVisible) || (id==16 && s.visualizerVisible) || (id==12 && s.equalizerVisible);
         c.Fill(r,active?SelectedButtonFill():s.pressed==id?Border:s.hover==id?Hover:Surface,3);
         c.Stroke(r,s.focus==id?Accent:active?Green:Bronze,3);
-        c.TextAt(r,id==16?L"VIZ":id==11?L"LISTA":L"EQ",active?SelectedButtonText:Text,Font::Small,true);
+        c.TextAt(r,id==16?L"VIZ":id==11?I18n::Text("player.list_short").c_str():L"EQ",active?SelectedButtonText:Text,Font::Small,true);
     }
     return c.End();
+}
+
+std::wstring PlayerControlName(int id) {
+    static const char* ids[]={"","player.previous","player.next","player.shuffle","player.repeat",
+        "player.play","player.pause","player.stop","player.position","player.volume","player.balance_help",
+        "player.toggle_playlist","player.toggle_equalizer","player.spectrum","player.oscilloscope","","player.toggle_visualizer"};
+    return id>0&&id<=16&&id!=15?I18n::Text(ids[id]):std::wstring{};
 }

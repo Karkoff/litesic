@@ -1,0 +1,11 @@
+.tools/gui-venv/Scripts/python.exe : .............................
+No linha:2 caractere:38
++ ... x_audit.py; .tools/gui-venv/Scripts/python.exe -m unittest discover - ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (.............................:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+----------------------------------------------------------------------
+Ran 29 tests in 0.026s
+
+OK

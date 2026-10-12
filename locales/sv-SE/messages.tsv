@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Automatisk (rekommenderas)
+appearance.scale_menu	Utseende > Gränssnittsskala
+appearance.themes_menu	Utseende > Teman...
+audio.mono	Mono
+audio.multichannel	Flerkanaligt
+audio.stereo	Stereo
+common.close	Stäng
+common.no	Nej
+common.yes	Ja
+equalizer.custom	Anpassat
+equalizer.help	±12 dB · ↑/↓ justera · Tab navigera · Blanksteg nollställ
+equalizer.off	EQ AV
+equalizer.on	EQ PÅ
+equalizer.preamp	FÖR
+equalizer.preset	Förval: {name}
+equalizer.reset	Återställ
+equalizer.title	Equalizer
+equalizer.unavailable	E/T
+errors.audio_read	Det gick inte att läsa ljudfilen.
+errors.data_folder	Det gick inte att komma åt datamappen. Spellistan bevaras inte under denna session.
+errors.eq_render	Equalizer: rendering inte tillgänglig
+errors.m3u_invalid	Ogiltig spellista eller större än 16 MiB.
+errors.m3u_open	Det gick inte att öppna spellistan.
+errors.m3u_save	Det gick inte att spara spellistan.
+errors.m3u_start	Det gick inte att starta M3U-åtgärden.
+errors.metadata_unavailable	Läsning av metadata är inte tillgänglig.
+errors.play_file	Det gick inte att spela filen.
+errors.play_selected	Det gick inte att spela det valda spåret.
+errors.play_track	Det gick inte att spela spåret
+errors.preserve_playlist	Det gick inte att bevara spellistan.\n{error}
+errors.preserve_position	Det gick inte att bevara spellistans position.
+errors.preserve_selection	Det gick inte att bevara spellistans markering.
+errors.scan	Det gick inte att starta sökningen.
+errors.selection_large	För stort urval; lägg till en mapp.
+errors.temporary	Det gick inte att skapa den tillfälliga filen.
+errors.theme_save	Temat tillämpades, men inställningen kunde inte sparas.
+errors.track_limit	Gränsen på 100 000 spår har nåtts.
+errors.translation	Text inte tillgänglig
+errors.worker	Det gick inte att starta bakgrundsläsningen.
+info.album	Album
+info.artist	Artist
+info.bitrate	Ungefärlig genomsnittlig bithastighet (fil)
+info.caption	Spårinformation
+info.channels	Kanaler
+info.duration	Längd
+info.favorite	Favorit
+info.field	{label}: {value}
+info.file	Fil
+info.format	Format
+info.genre	Genre
+info.reading	Läser metadata...
+info.sample_rate	Samplingsfrekvens
+info.size	Storlek
+info.title	Titel
+info.track	Spår
+info.unknown	Ej angivet
+info.year	År/datum
+player.add_hint	Lägg till filer via spellistan
+player.balance	Balans
+player.balance_help	Balans: vänster / höger
+player.left	V
+player.list_short	LISTA
+player.native	LiteSic   ·   Inbyggd ljudspelare
+player.next	Nästa
+player.oscilloscope	Oscilloskop
+player.pause	Pausa
+player.paused	Pausad
+player.play	Spela
+player.playing	Spelar
+player.position	Spårposition
+player.previous	Föregående
+player.ready	Redo att spela
+player.repeat	Upprepa: av → lista → spår
+player.repeat_one	UPPR 1
+player.repeat_short	UPPR
+player.right	H
+player.shuffle	Blanda
+player.shuffle_short	BLANDA
+player.spectrum	FFT-spektrum
+player.stop	Stoppa
+player.time	TID
+player.toggle_equalizer	Visa / dölj equalizer
+player.toggle_playlist	Visa / dölj spellista
+player.toggle_visualizer	Visa / dölj visualisering
+player.volume	Volym
+player.welcome	Din musik, nära dig
+playlist.add_short	LÄGG ▾
+playlist.added	Spellistan tillagd.
+playlist.audio_filter	Ljud
+playlist.clear	Töm spellistan
+playlist.duration_asc	Längd: kortast → längst
+playlist.duration_desc	Längd: längst → kortast
+playlist.empty	Lägg till filer eller en mapp
+playlist.favorite_hint	Stjärnmärk ett spår under Alla
+playlist.favorites	Favoriter
+playlist.files	Filer...
+playlist.folder_dialog	Lägg till ljudmapp (inklusive undermappar)
+playlist.folders	Mapp och undermappar...
+playlist.general	Alla
+playlist.info_menu	Spårinformation...
+playlist.list_menu	LISTA ▾
+playlist.m3u_filter	UTF-8 M3U-spellistor
+playlist.mix	Blanda synlig ordning
+playlist.name_asc	Namn: A ? Z
+playlist.name_desc	Namn: Z ? A
+playlist.no_results	Inga spår hittades
+playlist.open_dialog	Öppna M3U-spellista
+playlist.open_menu	Öppna M3U (lägg till)...
+playlist.opening	Öppnar spellista...
+playlist.reading	läser...
+playlist.remove	TA BORT
+playlist.save_dialog	Spara M3U-spellista
+playlist.save_menu	Spara M3U...
+playlist.saved	Spellistan sparad.
+playlist.saving	Sparar spellista...
+playlist.search	Sök spår...
+playlist.selected.few	{count} markerade
+playlist.selected.many	{count} markerade
+playlist.selected.one	{count} markerat
+playlist.selected.other	{count} markerade
+playlist.selected.two	{count} markerade
+playlist.selected.zero	{count} markerade
+playlist.title	Spellista
+playlist.tracks.few	{count} spår
+playlist.tracks.many	{count} spår
+playlist.tracks.one	{count} spår
+playlist.tracks.other	{count} spår
+playlist.tracks.two	{count} spår
+playlist.tracks.zero	{count} spår
+playlist.visible.few	{count} synliga
+playlist.visible.many	{count} synliga
+playlist.visible.one	{count} synligt
+playlist.visible.other	{count} synliga
+playlist.visible.two	{count} synliga
+playlist.visible.zero	{count} synliga
+preset.bass	Bas
+preset.classical	Klassiskt
+preset.flat	Platt
+preset.jazz	Jazz
+preset.pop	Pop
+preset.rock	Rock
+preset.voice	Röst
+theme.aurora	Norrsken
+theme.autumn	Höst
+theme.carbon	Kol
+theme.carnival	Karneval
+theme.children	Barnens dag
+theme.christmas	Jul
+theme.cyberpunk	Cyberpunk
+theme.dark	Mörkt
+theme.desert	Öken
+theme.easter	Påsk
+theme.forest	Skog
+theme.halloween	Halloween
+theme.high-contrast	Hög kontrast
+theme.inverse	Omvänt
+theme.june-festival	Junifest
+theme.light	Ljust
+theme.matrix	Matrix
+theme.midnight	Midnatt
+theme.mono	Monokromt
+theme.mountain	Berg
+theme.neon-blue	Neonblått
+theme.neon-purple	Neonlila
+theme.new-year	Nyår
+theme.ocean	Hav
+theme.original	LiteSic Original
+theme.sakura	Sakura
+theme.spring	Vår
+theme.summer	Sommar
+theme.sunset	Solnedgång
+theme.synthwave	Synthwave
+theme.terminal	Retroterminal
+theme.tropical	Tropiskt
+theme.valentines	Alla hjärtans dag
+theme.vintage	Vintageljud
+theme.winamp	Winamp Classic
+theme.winter	Vinter
+themes.all	Alla
+themes.celebrations	Högtider
+themes.classic	Klassiska
+themes.essential	Grundläggande
+themes.nature	Natur
+themes.restore	Återställ Original
+themes.seasonal	Årstider
+themes.technology	Teknik
+themes.title	Teman
+window.caption	LiteSic — {title}
+appearance.language	Språk
+appearance.auto_language	Automatiskt (Windows): {language}
+errors.language_change	Språkinställningen kunde inte tillämpas eller sparas. Kontrollera resurserna och inställningsmappen.
+
+# M8-T8: control descriptions
+tooltip.previous	Spela föregående spår
+tooltip.next	Spela nästa spår
+tooltip.shuffle_on	Aktivera slumpmässig uppspelning
+tooltip.shuffle_off	Inaktivera slumpmässig uppspelning
+tooltip.repeat_off	Upprepning av
+tooltip.repeat_all	Upprepa hela spellistan
+tooltip.repeat_one	Upprepa aktuellt spår
+tooltip.play	Starta eller återuppta uppspelning
+tooltip.pause	Pausa uppspelningen
+tooltip.stop	Stoppa uppspelningen
+tooltip.seek	Gå till en position i spåret
+tooltip.volume	Volym: {value}%
+tooltip.balance	Balans: {value} (−100 vänster, +100 höger)
+tooltip.show_playlist	Visa spellistan
+tooltip.hide_playlist	Dölj spellistan
+tooltip.show_eq	Visa equalizern
+tooltip.hide_eq	Dölj equalizern
+tooltip.fft	Visa frekvensspektrum
+tooltip.osc	Visa ljudvågform
+tooltip.show_viz	Visa visualisering
+tooltip.hide_viz	Dölj visualisering
+tooltip.minimize	Minimera spelaren
+tooltip.close	Stäng det här fönstret
+tooltip.time	Växla förfluten / återstående tid
+tooltip.add	Lägg till filer eller mapp
+tooltip.remove	Ta bort markerade spår
+tooltip.list_menu	Öppna, spara, sortera eller töm spellistan
+tooltip.all	Visa alla spår
+tooltip.favorites	Visa favoritspår
+tooltip.clear_search	Rensa sökning
+tooltip.search	Sök titel, artist, album eller fil
+tooltip.row	Välj; dubbelklicka för att spela
+tooltip.favorite_on	Lägg till i favoriter
+tooltip.favorite_off	Ta bort från favoriter
+tooltip.scroll	Rulla listan
+tooltip.eq_on	Aktivera equalizern
+tooltip.eq_off	Inaktivera equalizern
+tooltip.presets	Välj en equalizerförinställning
+tooltip.reset	Nollställ alla förstärkningar
+tooltip.preamp	Förförstärkning: {gain} dB
+tooltip.band	{frequency} Hz — Förstärkning: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — Förstärkning: {gain} dB (inte tillgängligt vid denna samplingsfrekvens)
+tooltip.theme_list	Välj och använd ett tema
+tooltip.theme_reset	Återställ standardtemat
+tooltip.category	Filtrera teman efter kategori
+tooltip.info	Spårinformation; markera text för att kopiera

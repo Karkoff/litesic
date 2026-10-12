@@ -43,8 +43,8 @@ TEST_SRCS := $(wildcard tests/*.c)
 TEST_BINS := $(patsubst tests/%.c,$(BUILD_DIR)/test-%.exe,$(TEST_SRCS))
 CPP_TEST_SRCS := $(wildcard tests/*.cpp)
 TEST_BINS += $(patsubst tests/%.cpp,$(BUILD_DIR)/test-%.exe,$(CPP_TEST_SRCS))
-TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o)
-TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o)
+TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o)
+TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o ui_tooltip.o)
 $(BUILD_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_player_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
@@ -54,12 +54,27 @@ $(BUILD_DIR)/test-test_ui_draw.exe: $(BUILD_DIR)/ui_draw.o
 $(BUILD_DIR)/test-test_themes.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_themes.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_themes.exe: LDLIBS += -lpsapi
+$(BUILD_DIR)/test-test_i18n.exe: LDLIBS += -lpsapi
+$(BUILD_DIR)/test-test_language_selection.exe: LDLIBS += -lpsapi
+$(BUILD_DIR)/test-test_tooltip.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_tooltip.exe: $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_tooltip.exe: LDLIBS += -lpsapi
+$(BUILD_DIR)/test-test_language_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_language_window.exe: $(TEST_UI_OBJS) $(RC_OBJ)
+$(BUILD_DIR)/test-test_language_window.exe: TEST_EXTRA_OBJS += $(RC_OBJ)
+$(BUILD_DIR)/test-test_i18n_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+$(BUILD_DIR)/test-test_i18n_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_eq_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_eq_window.exe: $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_window_integration.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(BUILD_DIR)/test-test_window_integration.exe: $(TEST_UI_OBJS)
 
-all: $(TARGET)
+all: $(TARGET) locales
+
+# Development resource staging only; M10 owns distribution packaging.
+locales:
+	@mkdir -p $(BUILD_DIR)/locales
+	@cp -ru locales/. $(BUILD_DIR)/locales/
 
 $(BUILD_DIR)/eq-probe.exe: scripts/diagnostics/eq_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(LDLIBS) -lpsapi
@@ -100,7 +115,7 @@ $(BUILD_DIR)/test-%.exe: tests/%.cpp $(TEST_LOGIC_OBJS) Makefile
 	@mkdir -p $(@D)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_EXTRA_OBJS) $(LDLIBS)
 
-test: $(TEST_BINS)
+test: $(TEST_BINS) locales
 	@set -e; for t in $(TEST_BINS); do echo "==> $$t"; "$$t"; done
 	@echo "All tests passed."
 
@@ -111,4 +126,4 @@ clean:
 	rm -rf -- ./build/$(ARCH)/$(CONFIG)
 
 -include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(BUILD_DIR)/audio-test.d $(TEST_BINS:.exe=.d)
-.PHONY: all test run clean
+.PHONY: all test run clean locales

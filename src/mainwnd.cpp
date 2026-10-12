@@ -1,3 +1,6 @@
+#include "ui_tooltip.h"
+#include "i18n.h"
+#include "language_selection.h"
 /*
  * mainwnd.cpp — Janela principal sem borda (estilo Winamp)
  *
@@ -221,34 +224,9 @@ static RepeatMode g_repeatMode = RepeatMode::Off;
 static uint64_t g_displayTrack = 0;
 static Ui::Canvas g_canvas;
 static int g_controlHover=0, g_controlPressed=0, g_controlFocus=0;
-static HWND g_tooltip=nullptr;
-static std::wstring g_tooltipTitle;
 static bool g_playbackError=false;
-
-static void UpdateTooltipRects(HWND hwnd) {
-    if(!g_tooltip) return;
-    for(int id=1;id<=16;++id) {
-        auto r=id==15?Ui::Rect{TITLE_X,TITLE_Y,TITLE_W,TITLE_H}:PlayerControlRect(id,g_visualizerVisible);
-        TOOLINFOW tool{}; tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;
-        tool.rect={MainWnd_DPIScale(static_cast<int>(r.x)),MainWnd_DPIScale(static_cast<int>(r.y)),
-            MainWnd_DPIScale(static_cast<int>(r.x+r.w)),MainWnd_DPIScale(static_cast<int>(r.y+r.h))};
-        SendMessageW(g_tooltip,TTM_NEWTOOLRECTW,0,reinterpret_cast<LPARAM>(&tool));
-    }
-}
-static void CreatePlayerTooltips(HWND hwnd) {
-    INITCOMMONCONTROLSEX controls{sizeof(controls),ICC_WIN95_CLASSES}; InitCommonControlsEx(&controls);
-    g_tooltip=CreateWindowExW(WS_EX_TOPMOST,TOOLTIPS_CLASSW,nullptr,WS_POPUP|TTS_ALWAYSTIP|TTS_NOPREFIX,
-        CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,CW_USEDEFAULT,hwnd,nullptr,GetModuleHandleW(nullptr),nullptr);
-    const wchar_t* labels[]={L"",L"Anterior",L"Próximo",L"Aleatório",L"Repetir: desligado → lista → faixa",
-        L"Reproduzir",L"Pausar",L"Parar",L"Posição da faixa",L"Volume",L"Balanço: esquerda / direita",
-        L"Mostrar / ocultar playlist",L"Mostrar / ocultar equalizador",L"Espectro FFT",L"Osciloscópio",L"",L"Mostrar / ocultar visualizador"};
-    for(int id=1;id<=16;++id) {
-        TOOLINFOW tool{};tool.cbSize=sizeof(tool);tool.hwnd=hwnd;tool.uId=id;tool.uFlags=TTF_SUBCLASS;
-        tool.lpszText=id==15?LPSTR_TEXTCALLBACKW:const_cast<wchar_t*>(labels[id]);
-        SendMessageW(g_tooltip,TTM_ADDTOOLW,0,reinterpret_cast<LPARAM>(&tool));
-    }
-    UpdateTooltipRects(hwnd);
-}
+static void CreatePlayerTooltips(HWND hwnd);
+static void UpdateTooltipRects(HWND hwnd) { Ui::Tooltips::Hide(hwnd); }
 
 /* M4: Estado do visualizador (declarado em visualizer.h). */
 static VizMode g_vizMode = VIZ_MODE_OSCILLOSCOPE;
@@ -697,22 +675,56 @@ static PlayerViewState PlayerSnapshot() {
     s.time=time; s.duration=s.loaded?duration:L"--:--";
     Audio_GetTrackName(name,ARRAYSIZE(name)); s.title=name;
     if(const Track* track=PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex())) s.title=track->displayTitle;
-    if(!s.loaded) s.title=L"Sua música, por perto";
+    if(!s.loaded) s.title=I18n::Text("player.welcome").c_str();
     if(s.title!=g_scrollTitle){g_scrollTitle=s.title;g_scrollElapsedMs=0;}
     s.titleElapsedMs=g_scrollElapsedMs;
-    g_tooltipTitle=s.title;
-    s.subtitle=!s.loaded?L"Adicione arquivos pela playlist":s.playback==AUDIO_STATE_PLAYING?L"Reproduzindo":
-        s.playback==AUDIO_STATE_PAUSED?L"Pausado":L"Pronto para reproduzir";
-    if(g_playbackError) s.subtitle=L"Não foi possível reproduzir a faixa";
+    s.subtitle=!s.loaded?I18n::Text("player.add_hint").c_str():s.playback==AUDIO_STATE_PLAYING?I18n::Text("player.playing").c_str():
+        s.playback==AUDIO_STATE_PAUSED?I18n::Text("player.paused").c_str():I18n::Text("player.ready").c_str();
+    if(g_playbackError) s.subtitle=I18n::Text("errors.play_track").c_str();
     if(s.loaded) {
         wchar_t info[96]{};
         int rate=Audio_GetFileSampleRate(),bitrate=Audio_GetBitrateKbps(),channels=Audio_GetChannels();
         swprintf(info,ARRAYSIZE(info),L"%.1f kHz   ·   %ls",rate/1000.0,
-            channels==2?L"Estéreo":channels==1?L"Mono":L"Multicanal");
+            channels==2?I18n::Text("audio.stereo").c_str():channels==1?I18n::Text("audio.mono").c_str():I18n::Text("audio.multichannel").c_str());
         s.technical=info;
         if(bitrate>0) s.technical+=L"   ·   "+std::to_wstring(bitrate)+L" kbps";
-    } else s.technical=L"LiteSic   ·   Player de áudio nativo";
+    } else s.technical=I18n::Text("player.native").c_str();
     return s;
+}
+
+static std::wstring PlayerTooltip(int id) {
+    const char* key=nullptr;
+    switch(id){
+    case 1:key="tooltip.previous";break;case 2:key="tooltip.next";break;
+    case 3:key=g_shuffleOn?"tooltip.shuffle_off":"tooltip.shuffle_on";break;
+    case 4:key=g_repeatMode==RepeatMode::One?"tooltip.repeat_one":g_repeatMode==RepeatMode::All?"tooltip.repeat_all":"tooltip.repeat_off";break;
+    case 5:key="tooltip.play";break;case 6:key="tooltip.pause";break;case 7:key="tooltip.stop";break;
+    case 8:key="tooltip.seek";break;
+    case 9:return I18n::Format("tooltip.volume",{{"value",std::to_wstring(int(std::lround(g_volumeValue*100)))}});
+    case 10:return I18n::Format("tooltip.balance",{{"value",std::to_wstring(int(std::lround((g_panValue*2-1)*100)))}});
+    case 11:key=PlWnd_IsVisible()?"tooltip.hide_playlist":"tooltip.show_playlist";break;
+    case 12:key=EqWnd_IsVisible()?"tooltip.hide_eq":"tooltip.show_eq";break;
+    case 13:key="tooltip.fft";break;case 14:key="tooltip.osc";break;
+    case 15:return PlayerSnapshot().title;
+    case 16:key=g_visualizerVisible?"tooltip.hide_viz":"tooltip.show_viz";break;
+    case 17:key="tooltip.minimize";break;case 18:key="tooltip.close";break;case 19:key="tooltip.time";break;
+    }
+    return key?I18n::Text(key):std::wstring{};
+}
+static void CreatePlayerTooltips(HWND hwnd) {
+    Ui::Tooltips::Attach(hwnd,[](POINT point){
+        float x=point.x/MainWnd_DPIScaleFloat(1),y=point.y/MainWnd_DPIScaleFloat(1);
+        int id=PlayerControlAt(x,y,g_visualizerVisible);
+        Ui::Rect r=PlayerControlRect(id,g_visualizerVisible);
+        if(!id){
+            if((r={TITLE_X,TITLE_Y,TITLE_W,TITLE_H}).Contains(x,y))id=15;
+            else if((r={BTN_MINIMIZE_X,4,BTN_SIZE,24}).Contains(x,y))id=17;
+            else if((r={BTN_CLOSE_X,4,BTN_SIZE,24}).Contains(x,y))id=18;
+            else if((r={LCD_X,LCD_Y,LCD_W,LCD_H}).Contains(x,y))id=19;
+        }
+        float scale=MainWnd_DPIScaleFloat(1);
+        return Ui::Tooltips::Target{id,{int(r.x*scale),int(r.y*scale),int((r.x+r.w)*scale),int((r.y+r.h)*scale)}};
+    },PlayerTooltip,[]{return MainWnd_DPIScaleFloat(1);});
 }
 
 /* ------------------------------------------------------------------ */
@@ -816,14 +828,6 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         auto r=reinterpret_cast<RECT*>(lParam);
         SetWindowPos(hwnd,nullptr,r->left,r->top,MainWnd_DPIScale(MAINWND_WIDTH),MainWnd_DPIScale(PlayerLayoutHeight(g_visualizerVisible)),SWP_NOZORDER|SWP_NOACTIVATE);
         PlWnd_ScaleChanged(); EqWnd_ScaleChanged(); UpdateTooltipRects(hwnd); InvalidateRect(hwnd,nullptr,FALSE); return 0;
-    }
-    case WM_NOTIFY: {
-        auto header=reinterpret_cast<NMHDR*>(lParam);
-        if(header->hwndFrom==g_tooltip && header->code==TTN_GETDISPINFOW) {
-            auto info=reinterpret_cast<NMTTDISPINFOW*>(lParam);
-            info->lpszText=const_cast<wchar_t*>(g_tooltipTitle.c_str()); return 0;
-        }
-        break;
     }
     case WM_KEYDOWN: {
         const int order[]={1,5,6,7,2,8,9,10,3,4,16,11,12,13,14};
@@ -1261,14 +1265,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             RECT volLabelR = { volR.left, volR.top - 1, volR.left + MainWnd_DPIScale(20), volR.top + 1 };
             SetBkMode(memDC, TRANSPARENT);
             SetTextColor(memDC, AUDIO_INFO_COLOR);
-            DrawTextW(memDC, L"VOL", 3, &volLabelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
+            DrawTextW(memDC, I18n::Text("player.volume").c_str(), -1, &volLabelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
 
             RECT panR = { MainWnd_DPIScale(PAN_SLIDER_X), MainWnd_DPIScale(VOLPAN_Y),
                           MainWnd_DPIScale(PAN_SLIDER_X + PAN_SLIDER_W), MainWnd_DPIScale(VOLPAN_Y + VOLPAN_H) };
             DrawHSliderScaled(memDC, &panR, g_panValue);
 
             RECT panLabelR = { panR.left, panR.top - 1, panR.left + MainWnd_DPIScale(20), panR.top + 1 };
-            DrawTextW(memDC, L"BAL", 3, &panLabelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
+            DrawTextW(memDC, I18n::Text("player.balance").c_str(), -1, &panLabelR, DT_LEFT | DT_TOP | DT_SINGLELINE);
         }
 
         /* ------------------------------------------------------------------
@@ -1290,13 +1294,13 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                            MainWnd_DPIScale(BTN_SHUFFLE_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
             b = CreateSolidBrush(g_shuffleOn ? Ui::NativeColor(Ui::SelectedButtonFill()) : TOGGLE_OFF_BG); FillRect(memDC, &shufR, b); DeleteObject(b);
             SetTextColor(memDC, g_shuffleOn ? Ui::NativeColor(Ui::SelectedButtonText) : AUDIO_INFO_COLOR);
-            DrawTextW(memDC, L"SHUF", 4, &shufR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            DrawTextW(memDC, I18n::Text("player.shuffle_short").c_str(), -1, &shufR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
 
             RECT repR = { MainWnd_DPIScale(BTN_REPEAT_X), MainWnd_DPIScale(TOGGLE_Y),
                           MainWnd_DPIScale(BTN_REPEAT_X + TOGGLE_W), MainWnd_DPIScale(TOGGLE_Y + TOGGLE_H) };
             b = CreateSolidBrush(g_repeatMode != RepeatMode::Off ? Ui::NativeColor(Ui::SelectedButtonFill()) : TOGGLE_OFF_BG); FillRect(memDC, &repR, b); DeleteObject(b);
             SetTextColor(memDC, g_repeatMode != RepeatMode::Off ? Ui::NativeColor(Ui::SelectedButtonText) : AUDIO_INFO_COLOR);
-            DrawTextW(memDC, g_repeatMode == RepeatMode::One ? L"REP 1" : L"REP", -1, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
+            DrawTextW(memDC, g_repeatMode == RepeatMode::One ? I18n::Text("player.repeat_one").c_str() : I18n::Text("player.repeat_short").c_str(), -1, &repR, DT_CENTER | DT_VCENTER | DT_SINGLELINE);
         }
 
         /* ------------------------------------------------------------------
@@ -1350,7 +1354,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             HBRUSH brush=CreateSolidBrush(Ui::NativeColor(active?Ui::SelectedButtonFill():Ui::Surface));FillRect(memDC,&rect,brush);DeleteObject(brush);
             brush=CreateSolidBrush(Ui::NativeColor(active?Ui::Green:Ui::Bronze));FrameRect(memDC,&rect,brush);DeleteObject(brush);
             SetTextColor(memDC,Ui::NativeColor(active?Ui::SelectedButtonText:Ui::Text));
-            DrawTextW(memDC,id==16?L"VIZ":id==11?L"LISTA":L"EQ",-1,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
+            DrawTextW(memDC,id==16?L"VIZ":id==11?I18n::Text("player.list_short").c_str():L"EQ",-1,&rect,DT_CENTER|DT_VCENTER|DT_SINGLELINE);
         }
         /* Copiar buffer para a tela. */
         BitBlt(hdc, 0, 0, scaledW, scaledH, memDC, 0, 0, SRCCOPY);
@@ -1375,9 +1379,9 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
 
     case WM_CONTEXTMENU:
     {
-        struct ScaleMenuItem { int id; int percent; const wchar_t *label; };
-        static const ScaleMenuItem items[] = {
-            { IDM_SCALE_AUTO, 0,   L"Automática (recomendado)" },
+        struct ScaleMenuItem { int id; int percent; std::wstring label; };
+        const ScaleMenuItem items[] = {
+            { IDM_SCALE_AUTO, 0,   I18n::Text("appearance.auto_scale").c_str() },
             { IDM_SCALE_80,   80,  L"80%" },
             { IDM_SCALE_90,   90,  L"90%" },
             { IDM_SCALE_100,  100, L"100%" },
@@ -1391,13 +1395,14 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         {
             UINT flags = MF_STRING |
                 (items[i].percent == g_userScalePercent ? MF_CHECKED : MF_UNCHECKED);
-            AppendMenuW(hScale, flags, items[i].id, items[i].label);
+            AppendMenuW(hScale, flags, items[i].id, items[i].label.c_str());
         }
 
         HMENU hMenu = CreatePopupMenu();
-        AppendMenuW(hMenu, MF_STRING, 900, L"Lista de reprodução");
-        AppendMenuW(hMenu, MF_STRING, 901, L"Aparência > Temas...");
-        AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hScale, L"Aparência > Escala da interface");
+        AppendMenuW(hMenu, MF_STRING, 900, I18n::Text("playlist.title").c_str());
+        AppendMenuW(hMenu, MF_STRING, 901, I18n::Text("appearance.themes_menu").c_str());
+        AppendMenuW(hMenu, MF_POPUP, (UINT_PTR)hScale, I18n::Text("appearance.scale_menu").c_str());
+        AppendMenuW(hMenu,MF_POPUP,reinterpret_cast<UINT_PTR>(I18n::CreateLanguageMenu()),I18n::Text("appearance.language").c_str());
 
         int x = (int)(short)LOWORD(lParam);
         int y = (int)(short)HIWORD(lParam);
@@ -1417,6 +1422,12 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     case WM_COMMAND:
     {
         int cmdId = LOWORD(wParam);
+        if(I18n::IsLanguageCommand(cmdId)){
+            std::string diagnostic;
+            if(!I18n::ExecuteLanguageCommand(cmdId,diagnostic)||!diagnostic.empty())
+                MessageBoxW(hwnd,I18n::Text("errors.language_change").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);
+            break;
+        }
         if (cmdId == 900) { PlWnd_Show(); break; }
         if (cmdId == 901) { Ui::ShowThemes(hwnd); break; }
         static const struct { int id; int percent; } scaleCmds[] = {
@@ -1439,6 +1450,9 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         break;
     }
 
+    case I18n::WM_LANGUAGE_CHANGED:
+        Ui::Tooltips::Refresh();
+        InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case Ui::WM_THEME_CHANGED:
     case WM_PLAYER_CHANGED:
         InvalidateRect(hwnd, nullptr, FALSE);
@@ -1453,8 +1467,7 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
         PlWnd_Shutdown();
         EqWnd_Shutdown();
         Audio_Shutdown();
-        if(g_tooltip) DestroyWindow(g_tooltip);
-        g_tooltip=nullptr; g_canvas.Reset();
+        g_canvas.Reset();
         PostQuitMessage(0);
         break;
     }

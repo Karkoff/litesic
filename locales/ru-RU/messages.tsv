@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Автоматически (рекомендуется)
+appearance.scale_menu	Оформление > Масштаб интерфейса
+appearance.themes_menu	Оформление > Темы...
+audio.mono	Моно
+audio.multichannel	Многоканальный
+audio.stereo	Стерео
+common.close	Закрыть
+common.no	Нет
+common.yes	Да
+equalizer.custom	Свой
+equalizer.help	±12 dB · ↑/↓ настройка · Tab переход · Пробел сброс
+equalizer.off	EQ ВЫКЛ
+equalizer.on	EQ ВКЛ
+equalizer.preamp	ПРЕД
+equalizer.preset	Пресет: {name}
+equalizer.reset	Сбросить
+equalizer.title	Эквалайзер
+equalizer.unavailable	Н/Д
+errors.audio_read	Не удалось прочитать аудиофайл.
+errors.data_folder	Не удалось открыть папку данных. Плейлист не будет сохранён в этом сеансе.
+errors.eq_render	Эквалайзер: отрисовка недоступна
+errors.m3u_invalid	Неверный плейлист или размер больше 16 МиБ.
+errors.m3u_open	Не удалось открыть плейлист.
+errors.m3u_save	Не удалось сохранить плейлист.
+errors.m3u_start	Не удалось начать операцию M3U.
+errors.metadata_unavailable	Чтение метаданных недоступно.
+errors.play_file	Не удалось воспроизвести файл.
+errors.play_selected	Не удалось воспроизвести выбранный трек.
+errors.play_track	Не удалось воспроизвести трек
+errors.preserve_playlist	Не удалось сохранить состояние плейлиста.\n{error}
+errors.preserve_position	Не удалось сохранить положение плейлиста.
+errors.preserve_selection	Не удалось сохранить выделение в плейлисте.
+errors.scan	Не удалось начать сканирование.
+errors.selection_large	Слишком большой выбор; добавьте папку.
+errors.temporary	Не удалось создать временный файл.
+errors.theme_save	Тема применена, но не удалось сохранить настройку.
+errors.track_limit	Достигнут предел в 100 000 треков.
+errors.translation	Текст недоступен
+errors.worker	Не удалось начать фоновое чтение.
+info.album	Альбом
+info.artist	Исполнитель
+info.bitrate	Примерный средний битрейт (файл)
+info.caption	Информация о треке
+info.channels	Каналы
+info.duration	Длительность
+info.favorite	Избранное
+info.field	{label}: {value}
+info.file	Файл
+info.format	Формат
+info.genre	Жанр
+info.reading	Чтение метаданных...
+info.sample_rate	Частота дискретизации
+info.size	Размер
+info.title	Название
+info.track	Трек
+info.unknown	Не указано
+info.year	Год/дата
+player.add_hint	Добавьте файлы через плейлист
+player.balance	Баланс
+player.balance_help	Баланс: левый / правый
+player.left	Л
+player.list_short	СПИСОК
+player.native	LiteSic   ·   Нативный аудиоплеер
+player.next	Следующий
+player.oscilloscope	Осциллограф
+player.pause	Пауза
+player.paused	Приостановлено
+player.play	Воспроизвести
+player.playing	Воспроизведение
+player.position	Позиция трека
+player.previous	Предыдущий
+player.ready	Готово к воспроизведению
+player.repeat	Повтор: выкл. → список → трек
+player.repeat_one	ПОВТ 1
+player.repeat_short	ПОВТ
+player.right	П
+player.shuffle	Случайный порядок
+player.shuffle_short	СЛУЧ
+player.spectrum	Спектр FFT
+player.stop	Остановить
+player.time	ВРЕМЯ
+player.toggle_equalizer	Показать / скрыть эквалайзер
+player.toggle_playlist	Показать / скрыть плейлист
+player.toggle_visualizer	Показать / скрыть визуализацию
+player.volume	Громкость
+player.welcome	Ваша музыка рядом
+playlist.add_short	ДОБ ▾
+playlist.added	Плейлист добавлен.
+playlist.audio_filter	Аудио
+playlist.clear	Очистить плейлист
+playlist.duration_asc	Длительность: короче → длиннее
+playlist.duration_desc	Длительность: длиннее → короче
+playlist.empty	Добавьте файлы или папку
+playlist.favorite_hint	Отметьте трек звёздочкой во вкладке Все
+playlist.favorites	Избранное
+playlist.files	Файлы...
+playlist.folder_dialog	Добавить папку с аудио (включая подпапки)
+playlist.folders	Папка и подпапки...
+playlist.general	Все
+playlist.info_menu	Информация о треке...
+playlist.list_menu	СПИСОК ▾
+playlist.m3u_filter	Плейлисты M3U UTF-8
+playlist.mix	Перемешать видимый порядок
+playlist.name_asc	Имя: A ? Z
+playlist.name_desc	Имя: Z ? A
+playlist.no_results	Треки не найдены
+playlist.open_dialog	Открыть плейлист M3U
+playlist.open_menu	Открыть M3U (добавить)...
+playlist.opening	Открытие плейлиста...
+playlist.reading	чтение...
+playlist.remove	УДАЛИТЬ
+playlist.save_dialog	Сохранить плейлист M3U
+playlist.save_menu	Сохранить M3U...
+playlist.saved	Плейлист сохранён.
+playlist.saving	Сохранение плейлиста...
+playlist.search	Поиск треков...
+playlist.selected.few	{count} выбрано
+playlist.selected.many	{count} выбрано
+playlist.selected.one	{count} выбрано
+playlist.selected.other	{count} выбрано
+playlist.selected.two	{count} выбрано
+playlist.selected.zero	{count} выбрано
+playlist.title	Плейлист
+playlist.tracks.few	{count} трека
+playlist.tracks.many	{count} треков
+playlist.tracks.one	{count} трек
+playlist.tracks.other	{count} треков
+playlist.tracks.two	{count} трека
+playlist.tracks.zero	{count} треков
+playlist.visible.few	{count} видно
+playlist.visible.many	{count} видно
+playlist.visible.one	{count} видно
+playlist.visible.other	{count} видно
+playlist.visible.two	{count} видно
+playlist.visible.zero	{count} видно
+preset.bass	Басы
+preset.classical	Классика
+preset.flat	Ровный
+preset.jazz	Джаз
+preset.pop	Поп
+preset.rock	Рок
+preset.voice	Голос
+theme.aurora	Северное сияние
+theme.autumn	Осень
+theme.carbon	Углерод
+theme.carnival	Карнавал
+theme.children	День детей
+theme.christmas	Рождество
+theme.cyberpunk	Киберпанк
+theme.dark	Тёмная
+theme.desert	Пустыня
+theme.easter	Пасха
+theme.forest	Лес
+theme.halloween	Хэллоуин
+theme.high-contrast	Высокий контраст
+theme.inverse	Инверсия
+theme.june-festival	Июньский праздник
+theme.light	Светлая
+theme.matrix	Матрица
+theme.midnight	Полночь
+theme.mono	Монохромная
+theme.mountain	Гора
+theme.neon-blue	Синий неон
+theme.neon-purple	Фиолетовый неон
+theme.new-year	Новый год
+theme.ocean	Океан
+theme.original	LiteSic Original
+theme.sakura	Сакура
+theme.spring	Весна
+theme.summer	Лето
+theme.sunset	Закат
+theme.synthwave	Синтвейв
+theme.terminal	Ретротерминал
+theme.tropical	Тропики
+theme.valentines	День влюблённых
+theme.vintage	Винтажное аудио
+theme.winamp	Winamp Classic
+theme.winter	Зима
+themes.all	Все
+themes.celebrations	Праздники
+themes.classic	Классические
+themes.essential	Основные
+themes.nature	Природа
+themes.restore	Вернуть Original
+themes.seasonal	Сезонные
+themes.technology	Технологии
+themes.title	Темы
+window.caption	LiteSic — {title}
+appearance.language	Язык
+appearance.auto_language	Автоматически (Windows): {language}
+errors.language_change	Не удалось применить или сохранить настройку языка. Проверьте ресурсы и папку настроек.
+
+# M8-T8: control descriptions
+tooltip.previous	Воспроизвести предыдущий трек
+tooltip.next	Воспроизвести следующий трек
+tooltip.shuffle_on	Включить случайный порядок
+tooltip.shuffle_off	Выключить случайный порядок
+tooltip.repeat_off	Повтор выключен
+tooltip.repeat_all	Повторять весь плейлист
+tooltip.repeat_one	Повторять текущий трек
+tooltip.play	Начать или продолжить воспроизведение
+tooltip.pause	Приостановить воспроизведение
+tooltip.stop	Остановить воспроизведение
+tooltip.seek	Перейти к позиции в треке
+tooltip.volume	Громкость: {value}%
+tooltip.balance	Баланс: {value} (−100 влево, +100 вправо)
+tooltip.show_playlist	Показать плейлист
+tooltip.hide_playlist	Скрыть плейлист
+tooltip.show_eq	Показать эквалайзер
+tooltip.hide_eq	Скрыть эквалайзер
+tooltip.fft	Показать частотный спектр
+tooltip.osc	Показать форму волны
+tooltip.show_viz	Показать визуализацию
+tooltip.hide_viz	Скрыть визуализацию
+tooltip.minimize	Свернуть проигрыватель
+tooltip.close	Закрыть это окно
+tooltip.time	Переключить прошедшее / оставшееся время
+tooltip.add	Добавить файлы или папку
+tooltip.remove	Удалить выбранные треки
+tooltip.list_menu	Открыть, сохранить, отсортировать или очистить плейлист
+tooltip.all	Показать все треки
+tooltip.favorites	Показать избранные треки
+tooltip.clear_search	Очистить поиск
+tooltip.search	Поиск по названию, исполнителю, альбому или файлу
+tooltip.row	Выбор; двойной щелчок для воспроизведения
+tooltip.favorite_on	Добавить в избранное
+tooltip.favorite_off	Удалить из избранного
+tooltip.scroll	Прокрутить список
+tooltip.eq_on	Включить эквалайзер
+tooltip.eq_off	Выключить эквалайзер
+tooltip.presets	Выбрать настройку эквалайзера
+tooltip.reset	Сбросить все усиления до нуля
+tooltip.preamp	Предусиление: {gain} дБ
+tooltip.band	{frequency} Гц — Усиление: {gain} дБ
+tooltip.band_unavailable	{frequency} Гц — Усиление: {gain} дБ (недоступно при этой частоте дискретизации)
+tooltip.theme_list	Выбрать и применить тему
+tooltip.theme_reset	Восстановить стандартную тему
+tooltip.category	Фильтровать темы по категории
+tooltip.info	Сведения о треке; выделите текст для копирования

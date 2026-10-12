@@ -8,6 +8,37 @@ from unittest.mock import patch, Mock
 import litesic_gui as driver
 
 class DriverGuards(unittest.TestCase):
+    def test_hover_requires_isolated_session(self):
+        with patch.object(driver,'modules') as modules:
+            with self.assertRaises(ValueError): driver.hover({},Mock(),1,1,'test')
+            modules.assert_not_called()
+
+    def test_hover_requires_coordinates(self):
+        with patch.object(driver,'modules') as modules:
+            with self.assertRaises(ValueError): driver.hover({'validation':True},Mock(),None,None,'test')
+            modules.assert_not_called()
+
+    def test_hover_rejects_invalid_label_before_input(self):
+        with patch.object(driver,'modules') as modules:
+            with self.assertRaises(ValueError): driver.hover({'validation':True},Mock(),1,1,'../escape')
+            modules.assert_not_called()
+
+    def test_hover_consumes_observation_before_input(self):
+        with patch.object(driver,'modules',return_value=(None,None,Mock(),Mock(),None,Mock())),patch.object(driver,'observed',side_effect=RuntimeError('stale')),patch.object(driver,'foreground') as focus:
+            with self.assertRaises(RuntimeError): driver.hover({'validation':True},Mock(),1,1,'test')
+            focus.assert_not_called()
+
+    def test_language_fixture_requires_isolated_session(self):
+        args=SimpleNamespace(action='launch',language='ar-SA',validation=False)
+        with patch.object(driver,'require_desktop') as desktop:
+            with self.assertRaises(ValueError): driver.run(args)
+            desktop.assert_not_called()
+
+    def test_language_fixture_rejects_arbitrary_code(self):
+        args=SimpleNamespace(action='launch',language='../escape',validation=True)
+        with patch.object(driver,'require_desktop') as desktop:
+            with self.assertRaises(ValueError): driver.run(args)
+            desktop.assert_not_called()
     def test_theme_cannot_target_player(self):
         args=SimpleNamespace(action='theme',dialog=False,target='main',menu_index=None,query='Claro')
         with patch.object(driver,'connect',return_value=({},Mock())),patch.object(driver,'observed') as observed:
@@ -87,6 +118,21 @@ class DriverGuards(unittest.TestCase):
 
     def test_themes_with_unrelated_owner_rejected(self):
         self.check_panel_owner('themes')
+
+    def test_info_with_unrelated_owner_rejected(self):
+        self.check_panel_owner('info')
+
+    def test_language_rejects_unknown_code_before_mutation(self):
+        args=SimpleNamespace(action='language',dialog=False,target='main',menu_index=None,query='unknown')
+        with patch.object(driver,'connect',return_value=({'validation':True},Mock())),patch.object(driver,'observed') as observed:
+            with self.assertRaises(ValueError): driver.run(args)
+            observed.assert_not_called()
+
+    def test_language_rejects_personal_session_before_mutation(self):
+        args=SimpleNamespace(action='language',dialog=False,target='main',menu_index=None,query='en-US')
+        with patch.object(driver,'connect',return_value=({'validation':False},Mock())),patch.object(driver,'observed') as observed:
+            with self.assertRaises(ValueError): driver.run(args)
+            observed.assert_not_called()
 
     def test_arbitrary_executable_rejected(self):
         with self.assertRaises(ValueError): driver.validate_exe(driver.ROOT / 'build' / 'other.exe')

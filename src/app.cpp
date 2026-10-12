@@ -1,3 +1,5 @@
+#include "i18n.h"
+#include "language_selection.h"
 /*
  * app.cpp — Entry point (wWinMain) + loop de mensagens
  *
@@ -45,10 +47,14 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
 {
     /* Configurar Per-Monitor DPI Awareness V2 antes de criar janelas. */
     InitDpiAwareness();
+    std::string catalogError;
     HRESULT com = CoInitializeEx(nullptr, COINIT_APARTMENTTHREADED);
     std::wstring validationDirectory;
     // Fixed, executable-relative developer session. Never touches the personal INI/playlist.
-    if(!wcscmp(lpCmdLine,L"--validation")) {
+    constexpr wchar_t localePrefix[]=L"--validation --locale=";
+    constexpr size_t prefixLength=ARRAYSIZE(localePrefix)-1;
+    bool validation=!wcscmp(lpCmdLine,L"--validation") || !wcsncmp(lpCmdLine,localePrefix,prefixLength);
+    if(validation) {
         wchar_t executable[MAX_PATH]{};GetModuleFileNameW(nullptr,executable,MAX_PATH);
         validationDirectory=executable;
         for(int i=0;i<4;++i)validationDirectory=validationDirectory.substr(0,validationDirectory.find_last_of(L"\\/"));
@@ -56,6 +62,12 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
         validationDirectory+=L"\\m6-session";CreateDirectoryW(validationDirectory.c_str(),nullptr);
         Ui::ThemeConfigure((validationDirectory+L"\\settings.ini").c_str());
     } else Ui::ThemeInitializeUser();
+    I18n::InitializeLanguage(Ui::SettingsPath());
+    // Isolated visual fixture overrides only this process, never the saved preference.
+    if(validation&&wcslen(lpCmdLine)>prefixLength){
+        std::wstring locale=lpCmdLine+prefixLength;
+        if(!I18n::Select(std::string(locale.begin(),locale.end()),catalogError))OutputDebugStringA(catalogError.c_str());
+    }
 
     /* Registrar a classe da janela (uma vez). */
     if (!MainWnd_RegisterClass(hInstance))
@@ -80,7 +92,7 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
         if (CreateDirectoryW(directory.c_str(),nullptr) || GetLastError()==ERROR_ALREADY_EXISTS)
             session=directory+L"\\playlist.m3u8";
     }
-    if (session.empty()) MessageBoxW(hwnd,L"Não foi possível acessar a pasta de dados. A playlist não será preservada nesta sessão.",
+    if (session.empty()) MessageBoxW(hwnd,I18n::Text("errors.data_folder").c_str(),
                                    L"LiteSic",MB_OK|MB_ICONWARNING);
     if (!PlWnd_Create(hInstance, hwnd, session.c_str())) {
         DestroyWindow(hwnd);

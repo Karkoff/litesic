@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Automatyczna (zalecana)
+appearance.scale_menu	Wygląd > Skala interfejsu
+appearance.themes_menu	Wygląd > Motywy...
+audio.mono	Mono
+audio.multichannel	Wielokanałowy
+audio.stereo	Stereo
+common.close	Zamknij
+common.no	Nie
+common.yes	Tak
+equalizer.custom	Własne
+equalizer.help	±12 dB · ↑/↓ regulacja · Tab nawigacja · Spacja zerowanie
+equalizer.off	EQ WYŁ
+equalizer.on	EQ WŁ
+equalizer.preamp	WZM
+equalizer.preset	Ustawienie: {name}
+equalizer.reset	Resetuj
+equalizer.title	Korektor
+equalizer.unavailable	N/D
+errors.audio_read	Nie można odczytać pliku audio.
+errors.data_folder	Nie można uzyskać dostępu do folderu danych. Lista nie zostanie zachowana w tej sesji.
+errors.eq_render	Korektor: renderowanie niedostępne
+errors.m3u_invalid	Nieprawidłowa lista lub większa niż 16 MiB.
+errors.m3u_open	Nie można otworzyć listy.
+errors.m3u_save	Nie można zapisać listy.
+errors.m3u_start	Nie można rozpocząć operacji M3U.
+errors.metadata_unavailable	Odczyt metadanych jest niedostępny.
+errors.play_file	Nie można odtworzyć pliku.
+errors.play_selected	Nie można odtworzyć wybranego utworu.
+errors.play_track	Nie można odtworzyć utworu
+errors.preserve_playlist	Nie można zachować listy odtwarzania.\n{error}
+errors.preserve_position	Nie można zachować pozycji listy.
+errors.preserve_selection	Nie można zachować zaznaczenia listy.
+errors.scan	Nie można rozpocząć skanowania.
+errors.selection_large	Zbyt duży wybór; dodaj folder.
+errors.temporary	Nie można utworzyć pliku tymczasowego.
+errors.theme_save	Motyw zastosowano, ale nie można zapisać preferencji.
+errors.track_limit	Osiągnięto limit 100 000 utworów.
+errors.translation	Tekst niedostępny
+errors.worker	Nie można rozpocząć odczytu w tle.
+info.album	Album
+info.artist	Wykonawca
+info.bitrate	Przybliżona średnia przepływność (plik)
+info.caption	Informacje o utworze
+info.channels	Kanały
+info.duration	Czas trwania
+info.favorite	Ulubiony
+info.field	{label}: {value}
+info.file	Plik
+info.format	Format
+info.genre	Gatunek
+info.reading	Odczytywanie metadanych...
+info.sample_rate	Częstotliwość próbkowania
+info.size	Rozmiar
+info.title	Tytuł
+info.track	Utwór
+info.unknown	Nie podano
+info.year	Rok/data
+player.add_hint	Dodaj pliki przez listę odtwarzania
+player.balance	Balans
+player.balance_help	Balans: lewy / prawy
+player.left	L
+player.list_short	LISTA
+player.native	LiteSic   ·   Natywny odtwarzacz audio
+player.next	Następny
+player.oscilloscope	Oscyloskop
+player.pause	Wstrzymaj
+player.paused	Wstrzymano
+player.play	Odtwórz
+player.playing	Odtwarzanie
+player.position	Pozycja utworu
+player.previous	Poprzedni
+player.ready	Gotowy do odtwarzania
+player.repeat	Powtarzanie: wyłączone → lista → utwór
+player.repeat_one	POWT 1
+player.repeat_short	POWT
+player.right	P
+player.shuffle	Losowo
+player.shuffle_short	LOS
+player.spectrum	Widmo FFT
+player.stop	Zatrzymaj
+player.time	CZAS
+player.toggle_equalizer	Pokaż / ukryj korektor
+player.toggle_playlist	Pokaż / ukryj listę
+player.toggle_visualizer	Pokaż / ukryj wizualizację
+player.volume	Głośność
+player.welcome	Twoja muzyka, blisko Ciebie
+playlist.add_short	DODAJ ▾
+playlist.added	Lista dodana.
+playlist.audio_filter	Audio
+playlist.clear	Wyczyść listę
+playlist.duration_asc	Czas: krótszy → dłuższy
+playlist.duration_desc	Czas: dłuższy → krótszy
+playlist.empty	Dodaj pliki lub folder
+playlist.favorite_hint	Oznacz gwiazdką utwór we Wszystkich
+playlist.favorites	Ulubione
+playlist.files	Pliki...
+playlist.folder_dialog	Dodaj folder audio (z podfolderami)
+playlist.folders	Folder i podfoldery...
+playlist.general	Wszystkie
+playlist.info_menu	Informacje o utworze...
+playlist.list_menu	LISTA ▾
+playlist.m3u_filter	Listy M3U UTF-8
+playlist.mix	Wymieszaj widoczną kolejność
+playlist.name_asc	Nazwa: A → Z
+playlist.name_desc	Nazwa: Z → A
+playlist.no_results	Nie znaleziono utworów
+playlist.open_dialog	Otwórz listę M3U
+playlist.open_menu	Otwórz M3U (dodaj)...
+playlist.opening	Otwieranie listy...
+playlist.reading	odczytywanie...
+playlist.remove	USUŃ
+playlist.save_dialog	Zapisz listę M3U
+playlist.save_menu	Zapisz M3U...
+playlist.saved	Lista zapisana.
+playlist.saving	Zapisywanie listy...
+playlist.search	Szukaj utworów...
+playlist.selected.few	{count} zaznaczone
+playlist.selected.many	{count} zaznaczonych
+playlist.selected.one	{count} zaznaczony
+playlist.selected.other	{count} zaznaczonych
+playlist.selected.two	{count} zaznaczone
+playlist.selected.zero	{count} zaznaczonych
+playlist.title	Lista odtwarzania
+playlist.tracks.few	{count} utwory
+playlist.tracks.many	{count} utworów
+playlist.tracks.one	{count} utwór
+playlist.tracks.other	{count} utworów
+playlist.tracks.two	{count} utwory
+playlist.tracks.zero	{count} utworów
+playlist.visible.few	{count} widoczne
+playlist.visible.many	{count} widocznych
+playlist.visible.one	{count} widoczny
+playlist.visible.other	{count} widocznych
+playlist.visible.two	{count} widoczne
+playlist.visible.zero	{count} widocznych
+preset.bass	Basy
+preset.classical	Klasyczna
+preset.flat	Płaski
+preset.jazz	Jazz
+preset.pop	Pop
+preset.rock	Rock
+preset.voice	Głos
+theme.aurora	Zorza polarna
+theme.autumn	Jesień
+theme.carbon	Węgiel
+theme.carnival	Karnawał
+theme.children	Dzień Dziecka
+theme.christmas	Boże Narodzenie
+theme.cyberpunk	Cyberpunk
+theme.dark	Ciemny
+theme.desert	Pustynia
+theme.easter	Wielkanoc
+theme.forest	Las
+theme.halloween	Halloween
+theme.high-contrast	Wysoki kontrast
+theme.inverse	Odwrócony
+theme.june-festival	Święto czerwcowe
+theme.light	Jasny
+theme.matrix	Matrix
+theme.midnight	Północ
+theme.mono	Monochromatyczny
+theme.mountain	Góra
+theme.neon-blue	Niebieski neon
+theme.neon-purple	Fioletowy neon
+theme.new-year	Nowy Rok
+theme.ocean	Ocean
+theme.original	LiteSic Original
+theme.sakura	Sakura
+theme.spring	Wiosna
+theme.summer	Lato
+theme.sunset	Zachód słońca
+theme.synthwave	Synthwave
+theme.terminal	Terminal retro
+theme.tropical	Tropikalny
+theme.valentines	Walentynki
+theme.vintage	Audio vintage
+theme.winamp	Winamp Classic
+theme.winter	Zima
+themes.all	Wszystkie
+themes.celebrations	Święta
+themes.classic	Klasyczne
+themes.essential	Podstawowe
+themes.nature	Natura
+themes.restore	Przywróć Original
+themes.seasonal	Sezonowe
+themes.technology	Technologia
+themes.title	Motywy
+window.caption	LiteSic — {title}
+appearance.language	Język
+appearance.auto_language	Automatycznie (Windows): {language}
+errors.language_change	Nie można zastosować lub zapisać ustawienia języka. Sprawdź zasoby i folder ustawień.
+
+# M8-T8: control descriptions
+tooltip.previous	Odtwórz poprzedni utwór
+tooltip.next	Odtwórz następny utwór
+tooltip.shuffle_on	Włącz odtwarzanie losowe
+tooltip.shuffle_off	Wyłącz odtwarzanie losowe
+tooltip.repeat_off	Powtarzanie wyłączone
+tooltip.repeat_all	Powtarzaj całą listę
+tooltip.repeat_one	Powtarzaj bieżący utwór
+tooltip.play	Rozpocznij lub wznów odtwarzanie
+tooltip.pause	Wstrzymaj odtwarzanie
+tooltip.stop	Zatrzymaj odtwarzanie
+tooltip.seek	Przejdź do pozycji w utworze
+tooltip.volume	Głośność: {value}%
+tooltip.balance	Balans: {value} (−100 lewo, +100 prawo)
+tooltip.show_playlist	Pokaż listę odtwarzania
+tooltip.hide_playlist	Ukryj listę odtwarzania
+tooltip.show_eq	Pokaż korektor
+tooltip.hide_eq	Ukryj korektor
+tooltip.fft	Pokaż widmo częstotliwości
+tooltip.osc	Pokaż przebieg fali
+tooltip.show_viz	Pokaż wizualizację
+tooltip.hide_viz	Ukryj wizualizację
+tooltip.minimize	Minimalizuj odtwarzacz
+tooltip.close	Zamknij to okno
+tooltip.time	Przełącz czas odtworzony / pozostały
+tooltip.add	Dodaj pliki lub folder
+tooltip.remove	Usuń zaznaczone utwory
+tooltip.list_menu	Otwórz, zapisz, sortuj lub wyczyść listę
+tooltip.all	Pokaż wszystkie utwory
+tooltip.favorites	Pokaż ulubione utwory
+tooltip.clear_search	Wyczyść wyszukiwanie
+tooltip.search	Szukaj tytułu, wykonawcy, albumu lub pliku
+tooltip.row	Zaznacz; kliknij dwukrotnie, aby odtworzyć
+tooltip.favorite_on	Dodaj do ulubionych
+tooltip.favorite_off	Usuń z ulubionych
+tooltip.scroll	Przewiń listę
+tooltip.eq_on	Włącz korektor
+tooltip.eq_off	Wyłącz korektor
+tooltip.presets	Wybierz ustawienie korektora
+tooltip.reset	Wyzeruj wszystkie wzmocnienia
+tooltip.preamp	Przedwzmacniacz: {gain} dB
+tooltip.band	{frequency} Hz — Wzmocnienie: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — Wzmocnienie: {gain} dB (niedostępne przy tej częstotliwości próbkowania)
+tooltip.theme_list	Wybierz i zastosuj motyw
+tooltip.theme_reset	Przywróć domyślny motyw
+tooltip.category	Filtruj motywy według kategorii
+tooltip.info	Szczegóły utworu; zaznacz tekst do skopiowania

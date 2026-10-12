@@ -1,3 +1,6 @@
+#include "ui_tooltip.h"
+#include "i18n.h"
+#include "language_selection.h"
 #include "ui_draw.h"
 #include "mainwnd.h"
 #include <algorithm>
@@ -16,6 +19,9 @@ bool scrollDragging=false;
 int scrollGrab=0;
 std::vector<size_t> visible;
 const wchar_t* groups[]={L"Todos",L"Essenciais",L"Sazonais",L"Comemorativos",L"Tecnológicos",L"Naturais",L"Clássicos"};
+const char* groupIds[]={"themes.all","themes.essential","themes.seasonal","themes.celebrations","themes.technology","themes.nature","themes.classic"};
+std::wstring ThemeName(const Theme& theme){std::wstring id=theme.id;return I18n::Text("theme."+std::string(id.begin(),id.end()));}
+std::wstring GroupName(const wchar_t* group){for(int i=0;i<7;++i)if(!wcscmp(group,groups[i]))return I18n::Text(groupIds[i]);return {};}
 int S(int value) { return static_cast<int>(value*scale+.5f); }
 void RefreshRail(){RECT r{S(498),S(80),S(508),S(374)};InvalidateRect(window,&r,FALSE);}
 void Rebuild() {
@@ -24,7 +30,7 @@ void Rebuild() {
     background=CreateSolidBrush(NativeColor(Surface));
     HFONT oldFont=font,oldSmall=small;
     font=CreateFontW(-S(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,
-        CLEARTYPE_QUALITY,DEFAULT_PITCH,ActiveTheme().typography.body);
+        CLEARTYPE_QUALITY,DEFAULT_PITCH,I18n::ScriptFont()?I18n::ScriptFont():ActiveTheme().typography.body);
     small=CreateFontW(-S(10),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,
         CLEARTYPE_QUALITY,DEFAULT_PITCH,L"Segoe UI");
     for(int id : {701,702,703,704,705,706}) SendDlgItemMessageW(window,id,WM_SETFONT,reinterpret_cast<WPARAM>(font),TRUE);
@@ -36,18 +42,18 @@ void Rebuild() {
 }
 void Populate() {
     int group=static_cast<int>(SendMessageW(categories,CB_GETCURSEL,0,0));
-    SetWindowTextW(GetDlgItem(window,706),groups[std::max(0,group)]);
+    SetWindowTextW(GetDlgItem(window,706),I18n::Text(groupIds[std::max(0,group)]).c_str());
     visible.clear();SendMessageW(list,LB_RESETCONTENT,0,0);
     for(size_t i=0;i<ThemeCount();++i) if(group<=0 || !wcscmp(groups[group],ThemeAt(i).category)) {
         int row=static_cast<int>(visible.size());visible.push_back(i);
-        SendMessageW(list,LB_ADDSTRING,0,reinterpret_cast<LPARAM>(ThemeAt(i).name));
+        SendMessageW(list,LB_ADDSTRING,0,reinterpret_cast<LPARAM>(ThemeName(ThemeAt(i)).c_str()));
         if(!wcscmp(ActiveTheme().id,ThemeAt(i).id)) SendMessageW(list,LB_SETCURSEL,row,0);
     }
     InvalidateRect(window,nullptr,FALSE);
 }
 void Apply(size_t index) {
     if(!SelectTheme(ThemeAt(index).id))
-        MessageBoxW(window,L"Tema aplicado, mas não foi possível salvar a preferência.",L"LiteSic",MB_OK|MB_ICONWARNING);
+        MessageBoxW(window,I18n::Text("errors.theme_save").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);
 }
 int Rows() { return 7; }
 void ScrollTo(int y) {
@@ -81,21 +87,36 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         window=hwnd;
         categories=CreateWindowExW(0,L"COMBOBOX",L"",WS_CHILD|CBS_DROPDOWNLIST,
             S(12),S(12),S(260),S(220),hwnd,reinterpret_cast<HMENU>(701),GetModuleHandleW(nullptr),nullptr);
-        for(auto group:groups) SendMessageW(categories,CB_ADDSTRING,0,reinterpret_cast<LPARAM>(group));
+        for(auto id:groupIds) SendMessageW(categories,CB_ADDSTRING,0,reinterpret_cast<LPARAM>(I18n::Text(id).c_str()));
         SendMessageW(categories,CB_SETCURSEL,0,0);
         list=CreateWindowExW(0,L"LISTBOX",L"",WS_CHILD|WS_VISIBLE|WS_TABSTOP|LBS_NOTIFY|LBS_OWNERDRAWFIXED|LBS_HASSTRINGS,
             S(12),S(80),S(482),S(294),hwnd,reinterpret_cast<HMENU>(702),GetModuleHandleW(nullptr),nullptr);
-        CreateWindowExW(0,L"BUTTON",L"Restaurar Original",WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
+        CreateWindowExW(0,L"BUTTON",I18n::Text("themes.restore").c_str(),WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
             S(12),S(386),S(180),S(30),hwnd,reinterpret_cast<HMENU>(703),GetModuleHandleW(nullptr),nullptr);
-        CreateWindowExW(0,L"BUTTON",L"Fechar",WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
+        CreateWindowExW(0,L"BUTTON",I18n::Text("common.close").c_str(),WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
             S(398),S(386),S(110),S(30),hwnd,reinterpret_cast<HMENU>(704),GetModuleHandleW(nullptr),nullptr);
-        CreateWindowExW(0,L"BUTTON",L"Todos",WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
+        CreateWindowExW(0,L"BUTTON",I18n::Text("themes.all").c_str(),WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
             S(12),S(44),S(260),S(28),hwnd,reinterpret_cast<HMENU>(706),GetModuleHandleW(nullptr),nullptr);
         CreateWindowExW(0,L"BUTTON",L"×",WS_CHILD|WS_VISIBLE|WS_TABSTOP|BS_OWNERDRAW,
             S(488),S(4),S(28),S(24),hwnd,reinterpret_cast<HMENU>(705),GetModuleHandleW(nullptr),nullptr);
         SetWindowSubclass(list,ListProc,1,0);
         for(int id:{703,704,705,706}) SetWindowSubclass(GetDlgItem(hwnd,id),ButtonProc,1,0);
+        Ui::Tooltips::Attach(hwnd,[](POINT p){RECT r{S(498),S(80),S(508),S(374)};return Ui::Tooltips::Target{PtInRect(&r,p)?1:0,r};},[](int){return I18n::Text("tooltip.scroll");},[]{return scale;});
+        for(auto item:{std::pair<int,const char*>{702,"tooltip.theme_list"},{703,"tooltip.theme_reset"},{704,"tooltip.close"},{705,"tooltip.close"},{706,"tooltip.category"}})
+            Ui::Tooltips::AttachControl(GetDlgItem(hwnd,item.first),item.second,[]{return scale;});
         Rebuild();Populate();return 0;
+    case I18n::WM_LANGUAGE_CHANGED:{
+        int group=static_cast<int>(SendMessageW(categories,CB_GETCURSEL,0,0));
+        int top=static_cast<int>(SendMessageW(list,LB_GETTOPINDEX,0,0));
+        int row=static_cast<int>(SendMessageW(list,LB_GETCURSEL,0,0));
+        SendMessageW(categories,CB_RESETCONTENT,0,0);
+        for(auto id:groupIds)SendMessageW(categories,CB_ADDSTRING,0,reinterpret_cast<LPARAM>(I18n::Text(id).c_str()));
+        SendMessageW(categories,CB_SETCURSEL,std::max(0,group),0);
+        SetWindowTextW(hwnd,I18n::Text("themes.title").c_str());
+        SetDlgItemTextW(hwnd,703,I18n::Text("themes.restore").c_str());
+        SetDlgItemTextW(hwnd,704,I18n::Text("common.close").c_str());
+        Populate();SendMessageW(list,LB_SETCURSEL,row,0);SendMessageW(list,LB_SETTOPINDEX,top,0);
+        Rebuild();return 0;}
     case WM_THEME_CHANGED:
         Rebuild();return 0;
     case WM_COMMAND:
@@ -109,7 +130,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         if(LOWORD(wp)==706) {
             HMENU menu=CreatePopupMenu();
             int group=static_cast<int>(SendMessageW(categories,CB_GETCURSEL,0,0));
-            for(int i=0;i<7;++i) AppendMenuW(menu,MF_STRING|(group==i?MF_CHECKED:0),710+i,groups[i]);
+            for(int i=0;i<7;++i) AppendMenuW(menu,MF_STRING|(group==i?MF_CHECKED:0),710+i,I18n::Text(groupIds[i]).c_str());
             RECT r{};GetWindowRect(GetDlgItem(hwnd,706),&r);
             int result=TrackThemedMenu(menu,TPM_RETURNCMD|TPM_RIGHTBUTTON,r.left,r.bottom,hwnd,scale);
             DestroyMenu(menu);
@@ -128,7 +149,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
             auto old=SelectObject(dc,font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,NativeColor(Text));
             wchar_t text[128]{};GetWindowTextW(draw->hwndItem,text,128);
             std::wstring label=text;if(draw->CtlID==706) label+=L"  ▾";
-            DrawTextW(dc,label.c_str(),-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX);SelectObject(dc,old);
+            DrawTextW(dc,label.c_str(),-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE|DT_NOPREFIX|DT_END_ELLIPSIS|(I18n::IsRtl()?DT_RTLREADING:0));SelectObject(dc,old);
             return TRUE;
         }
         if(draw->CtlID!=702 || draw->itemID>=visible.size()) return TRUE;
@@ -139,11 +160,11 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         bool active=!wcscmp(theme.id,ActiveTheme().id);
         RECT title{r.left+S(10),r.top+S(2),r.right-S(180),r.top+S(24)};
         auto old=SelectObject(dc,font);SetTextColor(dc,NativeColor(p.text));
-        std::wstring caption=(active?L"✓ ":L"")+std::wstring(theme.name);
-        DrawTextW(dc,caption.c_str(),-1,&title,DT_SINGLELINE|DT_VCENTER|DT_END_ELLIPSIS|DT_NOPREFIX);
+        std::wstring caption=(active?L"✓ ":L"")+ThemeName(theme);
+        DrawTextW(dc,caption.c_str(),-1,&title,DT_SINGLELINE|DT_VCENTER|DT_END_ELLIPSIS|DT_NOPREFIX|(I18n::IsRtl()?DT_RTLREADING:0));
         SelectObject(dc,small);SetTextColor(dc,NativeColor(p.muted));
         title.top=r.top+S(23);title.bottom=r.bottom-S(2);
-        DrawTextW(dc,theme.category,-1,&title,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);
+        DrawTextW(dc,GroupName(theme.category).c_str(),-1,&title,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX|DT_END_ELLIPSIS|(I18n::IsRtl()?DT_RTLREADING:0));
         int x=r.right-S(164);
         for(auto color : {p.background,p.border,p.green,p.accent,p.text}) {
             fill({x,r.top+S(10),x+S(26),r.top+S(32)},color);x+=S(30);
@@ -164,7 +185,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         HBRUSH brush=CreateSolidBrush(NativeColor(Background));FillRect(dc,&r,brush);DeleteObject(brush);
         RECT title{0,0,r.right,S(32)};brush=CreateSolidBrush(NativeColor(Border));FillRect(dc,&title,brush);DeleteObject(brush);
         auto oldFont=SelectObject(dc,font);SetBkMode(dc,TRANSPARENT);SetTextColor(dc,NativeColor(Text));title.left=S(12);title.right-=S(40);
-        DrawTextW(dc,L"TEMAS",-1,&title,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);SelectObject(dc,oldFont);
+        DrawTextW(dc,I18n::Text("themes.title").c_str(),-1,&title,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX|DT_END_ELLIPSIS|(I18n::IsRtl()?DT_RTLREADING:0));SelectObject(dc,oldFont);
         RECT rail{S(498),S(80),S(508),S(374)};brush=CreateSolidBrush(NativeColor(palette.sliderTrack));FillRect(dc,&rail,brush);DeleteObject(brush);
         int count=static_cast<int>(visible.size()),top=static_cast<int>(SendMessageW(list,LB_GETTOPINDEX,0,0));
         if(count>Rows()) {int h=S(294)*Rows()/count;rail.top+=(S(294)-h)*top/(count-Rows());rail.bottom=rail.top+h;
@@ -172,7 +193,7 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp) {
         if(canvas.Begin(dc,r,scale)) {
             canvas.Fill({0,0,r.right/scale,r.bottom/scale},Background);
             canvas.Fill({0,0,r.right/scale,32},Border);
-            canvas.TextAt({12,0,460,32},L"TEMAS",Text,Font::Heading);
+            canvas.TextAt({12,0,460,32},I18n::Text("themes.title").c_str(),Text,Font::Heading);
             canvas.Fill({498,80,10,294},palette.sliderTrack,3);
             if(count>Rows()) {float h=294.f*Rows()/count;canvas.Fill({498,80+(294-h)*top/(count-Rows()),10,h},Bronze,3);}
             canvas.End();
@@ -213,7 +234,7 @@ void ShowThemes(HWND owner) {
     RECT parent{};GetWindowRect(owner,&parent);
     RECT r{0,0,S(520),S(430)};DWORD style=WS_POPUP|WS_CLIPCHILDREN;
     AdjustWindowRectEx(&r,style,FALSE,WS_EX_TOOLWINDOW);
-    CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,L"Temas",style|WS_VISIBLE,
+    CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,I18n::Text("themes.title").c_str(),style|WS_VISIBLE,
         parent.left,parent.top,r.right-r.left,r.bottom-r.top,owner,nullptr,cls.hInstance,nullptr);
 }
 bool ThemeDialogMessage(MSG* message) {

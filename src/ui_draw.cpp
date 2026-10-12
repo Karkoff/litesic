@@ -1,4 +1,5 @@
 #include "ui_draw.h"
+#include "i18n.h"
 #include "title_scroll.h"
 #include <algorithm>
 #include <cmath>
@@ -13,22 +14,27 @@ void Canvas::Reset() {
     for (auto& p : ellipsis_) Release(p);
     for (auto& p : fonts_) Release(p);
     Release(write_); Release(factory_);
-    themeGeneration_=0;
+    themeGeneration_=languageGeneration_=0;
 }
 bool Canvas::Initialize() {
     if (!factory_ && FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED,&factory_))) return false;
     if (!write_ && FAILED(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),
         reinterpret_cast<IUnknown**>(&write_)))) return false;
-    if(themeGeneration_!=ThemeGeneration()) {
+    if(themeGeneration_!=ThemeGeneration() || languageGeneration_!=I18n::Generation()) {
         Release(scrollLayout_);
         for(auto& p:ellipsis_) Release(p);
         for(auto& p:fonts_) Release(p);
         themeGeneration_=ThemeGeneration();
+        languageGeneration_=I18n::Generation();
     }
     const auto& typography=ActiveTheme().typography;
     for (int i=0;i<8;++i) if (!fonts_[i]) {
         int role=i%4;
         const wchar_t* family=role==3?typography.digital:typography.body;
+        // Theme families remain intact for Latin/Cyrillic and the digital clock.
+        // Native Win7 script families provide reliable CJK/Arabic/Devanagari shaping;
+        // DirectWrite's system fallback handles missing glyphs/families.
+        if(role!=3 && I18n::ScriptFont()) family=I18n::ScriptFont();
         IDWriteFontCollection* collection=nullptr;
         if(SUCCEEDED(write_->GetSystemFontCollection(&collection,FALSE))) {
             UINT32 index=0;BOOL exists=FALSE;collection->FindFamilyName(family,&index,&exists);
@@ -38,7 +44,7 @@ bool Canvas::Initialize() {
         if (FAILED(write_->CreateTextFormat(family,nullptr,
             static_cast<DWRITE_FONT_WEIGHT>(i>=4?700:typography.weights[role]),
             role==2 && typography.italicHeading?DWRITE_FONT_STYLE_ITALIC:DWRITE_FONT_STYLE_NORMAL,
-            DWRITE_FONT_STRETCH_NORMAL,typography.sizes[role],L"pt-BR",&fonts_[i]))) return false;
+            DWRITE_FONT_STRETCH_NORMAL,typography.sizes[role],I18n::LocaleName().c_str(),&fonts_[i]))) return false;
         fonts_[i]->SetWordWrapping(DWRITE_WORD_WRAPPING_NO_WRAP);
         fonts_[i]->SetParagraphAlignment(DWRITE_PARAGRAPH_ALIGNMENT_CENTER);
         DWRITE_TRIMMING trim{DWRITE_TRIMMING_GRANULARITY_CHARACTER,0,0};
@@ -88,14 +94,25 @@ void Canvas::Circle(float x,float y,float radius,uint32_t fill,uint32_t border) 
 void Canvas::TextAt(Rect r,const std::wstring& text,uint32_t color,Font font,bool center,bool bold) {
     if (r.w<=0 || r.h<=0) return;
     auto format=fonts_[static_cast<int>(font)+(bold?4:0)];
+    const bool arabic=std::any_of(text.begin(),text.end(),[](wchar_t c){
+        return (c>=0x0600&&c<=0x08ff)||(c>=0xfb50&&c<=0xfdff)||(c>=0xfe70&&c<=0xfeff);
+    });
+    // Pure technical values/transport symbols keep their sign/order even in Arabic.
+    format->SetReadingDirection(I18n::IsRtl() && arabic && font!=Font::Digital?
+        DWRITE_READING_DIRECTION_RIGHT_TO_LEFT:DWRITE_READING_DIRECTION_LEFT_TO_RIGHT);
     format->SetTextAlignment(center?DWRITE_TEXT_ALIGNMENT_CENTER:DWRITE_TEXT_ALIGNMENT_LEADING);
     Color(color); target_->DrawText(text.c_str(),static_cast<UINT32>(text.size()),format,Native(r),brush_,D2D1_DRAW_TEXT_OPTIONS_CLIP);
+}
+void Canvas::TextLayout(float x,float y,IDWriteTextLayout* layout,uint32_t color) {
+    Color(color);target_->DrawTextLayout(D2D1::Point2F(x,y),layout,brush_,D2D1_DRAW_TEXT_OPTIONS_CLIP);
 }
 bool Canvas::ScrollingText(Rect r,const std::wstring& text,double elapsedMs,uint32_t color,Font font) {
     if(r.w<=0 || r.h<=0)return false;
     if(!scrollLayout_ || text!=scrollText_ || r.w!=scrollWidth_ || r.h!=scrollHeight_ || font!=scrollFont_) {
         Release(scrollLayout_);
         auto format=fonts_[static_cast<int>(font)];
+        // Metadata is user content. DirectWrite still shapes bidi runs within LTR titles.
+        format->SetReadingDirection(DWRITE_READING_DIRECTION_LEFT_TO_RIGHT);
         if(FAILED(write_->CreateTextLayout(text.c_str(),static_cast<UINT32>(text.size()),format,r.w,r.h,&scrollLayout_))) {
             TextAt(r,text,color,font);return false;
         }
@@ -148,7 +165,8 @@ struct MenuSkin {
     int S(int n) const { return static_cast<int>(std::lround(n*scale)); }
     explicit MenuSkin(float value):scale(value) {
         font=CreateFontW(-S(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
-            OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,ActiveTheme().typography.body);
+            OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,
+            I18n::ScriptFont()?I18n::ScriptFont():ActiveTheme().typography.body);
         background=CreateSolidBrush(NativeColor(Surface));
     }
     void Prepare(HMENU menu) {
@@ -210,7 +228,8 @@ bool ThemeMenuMessage(UINT message,WPARAM,LPARAM lp,LRESULT& result) {
     } else {
         SetTextColor(dc,NativeColor(item->itemState&ODS_DISABLED?Muted:Text));
         RECT text=r;text.left+=skin.S(28);text.right-=skin.S(24);
-        DrawTextW(dc,entry->text.c_str(),-1,&text,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX);
+        DrawTextW(dc,entry->text.c_str(),-1,&text,DT_SINGLELINE|DT_VCENTER|DT_NOPREFIX|DT_END_ELLIPSIS|
+            (I18n::IsRtl()?DT_RTLREADING|DT_RIGHT:0));
         if(item->itemState&ODS_CHECKED) {text=r;text.left+=skin.S(6);text.right=text.left+skin.S(20);DrawTextW(dc,L"✓",1,&text,DT_SINGLELINE|DT_VCENTER);}
         RestoreDC(dc,saved);
     }

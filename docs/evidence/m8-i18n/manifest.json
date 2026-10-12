@@ -1,0 +1,691 @@
+{
+  "variants": [
+    {
+      "variant": "64-release",
+      "cases": 161,
+      "build": "PASS",
+      "tests": "PASS",
+      "metrics": "arch=64 init_ms=0.093 mean_select_ms=0.162 fallback_private_delta=61440 warm_private=1830912 final_private=1900544 max_payload_bytes=17640 switches=1980\r",
+      "exe": "build/64/release/LiteSic.exe",
+      "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+    },
+    {
+      "variant": "64-debug",
+      "cases": 161,
+      "build": "PASS",
+      "tests": "PASS",
+      "metrics": "arch=64 init_ms=0.553 mean_select_ms=0.897 fallback_private_delta=204800 warm_private=1691648 final_private=1945600 max_payload_bytes=17640 switches=1980\r",
+      "exe": "build/64/debug/LiteSic.exe",
+      "sha256": "9126f37b45a182476bb56aa1016c86b4a9526de70b92719119091566d94ea2dc"
+    },
+    {
+      "variant": "32-release",
+      "cases": 161,
+      "build": "PASS",
+      "tests": "PASS",
+      "metrics": "arch=32 init_ms=0.129 mean_select_ms=0.222 fallback_private_delta=24576 warm_private=2449408 final_private=2613248 max_payload_bytes=17640 switches=1980\r",
+      "exe": "build/32/release/LiteSic.exe",
+      "sha256": "1f2e7594b80a8d592569979942a5e10faff73e4cfff7d079007c088147898f0b"
+    },
+    {
+      "variant": "32-debug",
+      "cases": 161,
+      "build": "PASS",
+      "tests": "PASS",
+      "metrics": "arch=32 init_ms=0.595 mean_select_ms=1.015 fallback_private_delta=20480 warm_private=2445312 final_private=2473984 max_payload_bytes=17640 switches=1980\r",
+      "exe": "build/32/debug/LiteSic.exe",
+      "sha256": "f47c9c24d5cd0b41c5f5d140a8c9da34b5d28cb89e89bda670a4e0d1f1c7f777"
+    }
+  ],
+  "cases_total": 644,
+  "images": [
+    {
+      "file": "i18n-pt-BR-main.png",
+      "sha256": "f746273f9fecd130ba236ec69b52ef0f7d55d0e39f850755f155a8528c3697dc",
+      "utc": "2026-10-12T00:39:14.870654+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53080,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:15.148000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pt-BR-playlist.png",
+      "sha256": "7b6acab447690d85a0413b43987a6e32fcbf8d39302ee14ceaf59bf27f9a5d6a",
+      "utc": "2026-10-12T00:39:15.903259+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53080,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:15.148000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pt-BR-eq.png",
+      "sha256": "97fe7eae04b6e6adaa2df798cf7c8567cafddf8ca9b2345640c232d06a84566e",
+      "utc": "2026-10-12T00:39:16.284777+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53080,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:15.148000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-en-US-main.png",
+      "sha256": "39b213f8ec868a285b993214d8984efd39d112369fa2f0320102c5dd9ad364b8",
+      "utc": "2026-10-12T00:39:17.086860+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 30364,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:17.275000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-en-US-playlist.png",
+      "sha256": "6eda682717f2c5bd3af9360b054a24be405bcff9442d5a9afeada04404bbbc87",
+      "utc": "2026-10-12T00:39:17.889339+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 30364,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:17.275000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-en-US-eq.png",
+      "sha256": "f19ccf8433a825dada6a666ec125ed2f845a5334f0ca7900b6f9b77a0d01b7ad",
+      "utc": "2026-10-12T00:39:18.269648+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 30364,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:17.275000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-es-ES-main.png",
+      "sha256": "6e70e8ee58b32e2f4947c0c65f661182b3f01808abf9b95423276c88f10063f6",
+      "utc": "2026-10-12T00:39:19.073365+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 4956,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:19.277000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-es-ES-playlist.png",
+      "sha256": "8e7fde8a586955f172e0de373e10aac16c35b7a405506aad26b465dcfd4792bd",
+      "utc": "2026-10-12T00:39:19.934194+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 4956,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:19.277000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-es-ES-eq.png",
+      "sha256": "947346bf7701f0f499dcd15d60676882b6345bdfd066e252b68384e1d451f260",
+      "utc": "2026-10-12T00:39:20.312376+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 4956,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:19.277000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-fr-FR-main.png",
+      "sha256": "9b524974431ef9ef6619052a329127bca46cd64e611dbea4ff0a5d4cda8532b3",
+      "utc": "2026-10-12T00:39:21.099256+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 7436,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:21.309000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-fr-FR-playlist.png",
+      "sha256": "1be7050999c5e4253cafe3dd4f61b7b941b4c21140e00017a4799be181ab337f",
+      "utc": "2026-10-12T00:39:22.106472+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 7436,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:21.309000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-fr-FR-eq.png",
+      "sha256": "a23b845459f71ca66279918d5c2e17682bd64aa6e9c7f8a2d564c12a8cd52d4a",
+      "utc": "2026-10-12T00:39:22.487171+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 7436,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:21.309000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-de-DE-main.png",
+      "sha256": "0f20c7b92c48a7e36836a414dcddf6817494eb97517bd278c00ac9c766f1ef3c",
+      "utc": "2026-10-12T00:39:23.296297+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 41772,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:23.503000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-de-DE-playlist.png",
+      "sha256": "c36e51f6bd1522263703486ae2651ad6ece996942cb8d3a79057ab0ba5f6881a",
+      "utc": "2026-10-12T00:39:24.124459+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 41772,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:23.503000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-de-DE-eq.png",
+      "sha256": "45388424e74f2f8309b5a9345d41d1b877ecf163f128e5aa73c0c48012cd1f80",
+      "utc": "2026-10-12T00:39:24.506038+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 41772,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:23.503000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-it-IT-main.png",
+      "sha256": "954ea76ac2c8efef3d58ac80a9af8e6844683cc9d0303de84588afd87fd7d5e5",
+      "utc": "2026-10-12T00:39:25.296266+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 14908,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:25.495000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-it-IT-playlist.png",
+      "sha256": "00d44d302a6ef224d007d389baff4a9b5311d42a3831a124361ee17eed02b1eb",
+      "utc": "2026-10-12T00:39:26.175183+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 14908,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:25.495000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-it-IT-eq.png",
+      "sha256": "f577c385f04c1ff05bafafe430e776514857b68eae7e607accbf9a1fa0a69cac",
+      "utc": "2026-10-12T00:39:26.560209+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 14908,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:25.495000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pt-PT-main.png",
+      "sha256": "5dae13bb97f6d859d39f3a3a9d10254bb0f896d448b2d6809a59a225152b2fa7",
+      "utc": "2026-10-12T00:39:27.368379+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53212,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:27.557000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pt-PT-playlist.png",
+      "sha256": "ddfe549ffd0094bd54da6a5c5439128ee110acbde73488aa057418f4d50f5680",
+      "utc": "2026-10-12T00:39:28.179146+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53212,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:27.557000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pt-PT-eq.png",
+      "sha256": "78c108a510e68769f699afbd4e2c63bc3d98be27de3c8dc0b89662fce26f12ba",
+      "utc": "2026-10-12T00:39:28.569485+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53212,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:27.557000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-nl-NL-main.png",
+      "sha256": "b860809a4f0823d61a8b2fd2921c09e015a1dea4288abb1e967175538da0cebf",
+      "utc": "2026-10-12T00:39:29.414933+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 14036,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:29.621000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-nl-NL-playlist.png",
+      "sha256": "8124006ed73f20d03ffec05199c63fe1626b8b75ddb7fa6a1f65c74201e42dd5",
+      "utc": "2026-10-12T00:39:30.288377+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 14036,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:29.621000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-nl-NL-eq.png",
+      "sha256": "96e9777ff6457533963841da994b5bf018e94d8df00c11e97b6858590b86e2ef",
+      "utc": "2026-10-12T00:39:30.646658+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 14036,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:29.621000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pl-PL-main.png",
+      "sha256": "8dcbcd4c1485cc3d32455cfe6df5b086306809eda122a2e9a20d662eecce9ad3",
+      "utc": "2026-10-12T00:39:31.451101+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 31328,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:31.652000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pl-PL-playlist.png",
+      "sha256": "cdc27491ec4f19536af44cd40f2a777649f19c371cfafe6e8f7a62b92b805196",
+      "utc": "2026-10-12T00:39:32.531419+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 31328,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:31.652000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-pl-PL-eq.png",
+      "sha256": "2eccff4376f4cd9112b930c84c4cafc5755eb867bed9dafc3340245718865b42",
+      "utc": "2026-10-12T00:39:32.898945+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 31328,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:31.652000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ru-RU-main.png",
+      "sha256": "d5fe72e5d44def3fad53864731366d6c0eaf1b10d8df38e80e0862906b53483f",
+      "utc": "2026-10-12T00:39:33.721887+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 19108,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:33.924000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ru-RU-playlist.png",
+      "sha256": "2a9678ac41b537d4addc3150086b767e363997d2c2b556b8dbfefd806df360dd",
+      "utc": "2026-10-12T00:39:34.659832+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 19108,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:33.924000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ru-RU-eq.png",
+      "sha256": "bfb84232f925b09e60817cd71934f850875bf5b71bc8ac5f2a8c1aff67130a72",
+      "utc": "2026-10-12T00:39:35.035739+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 19108,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:33.924000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ja-JP-main.png",
+      "sha256": "96d21bb2f83d27748b03e2df8e55475e77bd2b4305537eb7e3d03ce443d3a4b1",
+      "utc": "2026-10-12T00:39:35.860640+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 24948,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:36.064000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ja-JP-playlist.png",
+      "sha256": "d2be68e035bfafb1976f4b64ad91b0bad2aca95b16129e40bd9516cdf30d8988",
+      "utc": "2026-10-12T00:39:36.790031+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 24948,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:36.064000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ja-JP-eq.png",
+      "sha256": "144da14b8d4648c8e32206d1c51b4fea6f350853314d831b75e1188f2a676933",
+      "utc": "2026-10-12T00:39:37.182836+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 24948,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:36.064000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-zh-CN-main.png",
+      "sha256": "946dab86df2cfb70e6053c4335dede7bfafbcdb2a7e351efeda90c3de1bd9ab3",
+      "utc": "2026-10-12T00:39:38.022646+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 31944,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:38.232000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-zh-CN-playlist.png",
+      "sha256": "b423dd95439be81bbc0c4eb9c0c141605a4b793335c1ec56d3aefbc06e7388fd",
+      "utc": "2026-10-12T00:39:38.867141+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 31944,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:38.232000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-zh-CN-eq.png",
+      "sha256": "95e23eb0cc54520adf50e4c1374764dd4b2e85415ea41fa03d2e616c0d27c6e1",
+      "utc": "2026-10-12T00:39:39.280789+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 31944,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:38.232000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-zh-TW-main.png",
+      "sha256": "0519f04acd98e2197ef5ce294175b23848aea9a159f583158662da05895c83d1",
+      "utc": "2026-10-12T00:39:40.141142+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 50908,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:40.349000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-zh-TW-playlist.png",
+      "sha256": "ced665de5f22f585bd47c09ed0efc4fc5dabba8393e1d20b2540805197629e50",
+      "utc": "2026-10-12T00:39:41.039850+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 50908,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:40.349000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-zh-TW-eq.png",
+      "sha256": "0d85c518fd07703038e203f9a8d87bd9d4c4533d73af17501a43866af921b7af",
+      "utc": "2026-10-12T00:39:41.435943+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 50908,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:40.349000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ko-KR-main.png",
+      "sha256": "fe27edf39cb9485a2240db3283ba07dc1f326d08583049090191c3e6af495686",
+      "utc": "2026-10-12T00:39:42.271372+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53048,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:42.486000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ko-KR-playlist.png",
+      "sha256": "ebe6e46b9de51c4a3ca66c0a5066784eba7a5e4ca5b32bd34d00b85cb32c4021",
+      "utc": "2026-10-12T00:39:43.417016+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53048,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:42.486000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ko-KR-eq.png",
+      "sha256": "1e3bdfdaff1afa6e9a0b42e1aca6a67e20a82e738e97e3322fbc0a0573b9d50f",
+      "utc": "2026-10-12T00:39:43.815915+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 53048,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:42.486000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-tr-TR-main.png",
+      "sha256": "4ed9c5bb9be5619015fc99c18f3ca88403e35c0ea164fb401b3c9a47960a4119",
+      "utc": "2026-10-12T00:39:44.612082+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 26480,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:44.805000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-tr-TR-playlist.png",
+      "sha256": "5a7504f2a7e728d3b57a0f251ac91daddffd2cbbea75cc1dc5ede91b78411c02",
+      "utc": "2026-10-12T00:39:45.506564+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 26480,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:44.805000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-tr-TR-eq.png",
+      "sha256": "1f481e09a7a80e398b517abea4a8cb56eb8bcca4e6d0efcb5edbe557602b3df3",
+      "utc": "2026-10-12T00:39:45.878551+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 26480,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:44.805000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ar-SA-main.png",
+      "sha256": "186d5dbcd5d1f1f3af5ccb293f2b189df0eef44e89c7a8612b0a180a694f233d",
+      "utc": "2026-10-12T00:39:46.684876+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 44224,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:46.879000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ar-SA-playlist.png",
+      "sha256": "a39b5fcf797ece3cc41159ba688ef5628958dd8a10b2b67f98c63f8a9164a173",
+      "utc": "2026-10-12T00:39:47.565106+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 44224,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:46.879000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-ar-SA-eq.png",
+      "sha256": "ac8273888e272d1da551e73c4d04a0f2d26fd1fa488e1b0e147c8609c0d544cf",
+      "utc": "2026-10-12T00:39:47.939608+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 44224,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:46.879000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-hi-IN-main.png",
+      "sha256": "2b69641409f58d344004d804349a6670bd2d56f66154f63ece1cc1b42fa920fa",
+      "utc": "2026-10-12T00:39:48.740715+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 44244,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:48.930000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-hi-IN-playlist.png",
+      "sha256": "693b96d3d624e5ef497f2e584712b5bd9c489a9d174a5a1009d290c2dad2ebce",
+      "utc": "2026-10-12T00:39:49.615929+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 44244,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:48.930000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-hi-IN-eq.png",
+      "sha256": "9d624e0eaf8802161a046e4e7f16dbb9c8c6bc6ce1c67a6e9e3bd11e5b4a942c",
+      "utc": "2026-10-12T00:39:49.989736+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 44244,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:48.930000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-sv-SE-main.png",
+      "sha256": "b09111c1ce1a65d025e0943a1688f6105d390b5a2bed0fdfcea6d90029416cea",
+      "utc": "2026-10-12T00:39:50.756053+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 45460,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:50.954000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-sv-SE-playlist.png",
+      "sha256": "1c822a3c39fcdbeade92f22f390469e505b6a38a3bcc792277efe81950d08dea",
+      "utc": "2026-10-12T00:39:51.600834+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 45460,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:50.954000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    },
+    {
+      "file": "i18n-sv-SE-eq.png",
+      "sha256": "bcf3a648fa7e7a6e5a4e3b0ea5922447215b4ad79c79dbe9b564b900c8eb2dd6",
+      "utc": "2026-10-12T00:39:51.975995+00:00",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 45460,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T00:39:50.954000+00:00",
+        "sha256": "b08a9b66204c267517077e896fd8d631251ab3d5883c74b1ed78fcccfc945fe7"
+      }
+    }
+  ]
+}

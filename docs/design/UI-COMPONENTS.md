@@ -22,3 +22,15 @@ Aleatório e repetição usam ícones vetoriais em botões circulares na linha d
 transporte; repetição de uma faixa acrescenta o indicador `1`. LISTA e EQ ficam
 à direita do rodapé técnico em controles de 52 × 18 DIP. A área do visualizador
 mede 436 × 68 DIP, começando em Y=196, aproveitando a antiga linha de toggles.
+
+Internacionalização M8-T6: textos próprios usam IDs de `I18n`; dados de mídia
+e identificadores persistidos são preservados. Canvas invalida formatos pela
+geração de idioma e tema, usa fontes nativas por script, shaping/reticências
+DirectWrite e direção RTL para prosa árabe. Números técnicos mantêm LTR;
+transportes e controles não são espelhados. Geometria e 36 paletas preservadas.
+Atualização global de janelas/menus/tooltips existentes entregue na
+[M8-T7](../M8-T7-LANGUAGE-SELECTION.md), com default Windows, seleção no contexto
+e preferência no INI existente. [T8](../M8-T8-TOOLTIPS.md) entregue e aceita:
+tooltips explicativos, hover, tema e ciclo de vida. Nomes localizados separados
+não constituem uma árvore UIA/MSAA dos controles Canvas; essa limitação permanece.
+Ver [contratos e evidências](../M8-T6-I18N.md).

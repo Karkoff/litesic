@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Automatisch (aanbevolen)
+appearance.scale_menu	Uiterlijk > Interfaceschaal
+appearance.themes_menu	Uiterlijk > Thema’s...
+audio.mono	Mono
+audio.multichannel	Meerkanaals
+audio.stereo	Stereo
+common.close	Sluiten
+common.no	Nee
+common.yes	Ja
+equalizer.custom	Aangepast
+equalizer.help	±12 dB · ↑/↓ aanpassen · Tab navigeren · Spatie resetten
+equalizer.off	EQ UIT
+equalizer.on	EQ AAN
+equalizer.preamp	VOOR
+equalizer.preset	Voorinstelling: {name}
+equalizer.reset	Herstellen
+equalizer.title	Equalizer
+equalizer.unavailable	N/B
+errors.audio_read	Het audiobestand kon niet worden gelezen.
+errors.data_folder	De gegevensmap kon niet worden geopend. De afspeellijst wordt deze sessie niet bewaard.
+errors.eq_render	Equalizer: weergave niet beschikbaar
+errors.m3u_invalid	Ongeldige afspeellijst of groter dan 16 MiB.
+errors.m3u_open	De afspeellijst kon niet worden geopend.
+errors.m3u_save	De afspeellijst kon niet worden opgeslagen.
+errors.m3u_start	De M3U-bewerking kon niet worden gestart.
+errors.metadata_unavailable	Metadata lezen is niet beschikbaar.
+errors.play_file	Het bestand kon niet worden afgespeeld.
+errors.play_selected	Het geselecteerde nummer kon niet worden afgespeeld.
+errors.play_track	Het nummer kon niet worden afgespeeld
+errors.preserve_playlist	De afspeellijst kon niet worden bewaard.\n{error}
+errors.preserve_position	De positie van de afspeellijst kon niet worden bewaard.
+errors.preserve_selection	De selectie van de afspeellijst kon niet worden bewaard.
+errors.scan	De scan kon niet worden gestart.
+errors.selection_large	Selectie te groot; voeg een map toe.
+errors.temporary	Het tijdelijke bestand kon niet worden gemaakt.
+errors.theme_save	Thema toegepast, maar de voorkeur kon niet worden opgeslagen.
+errors.track_limit	De limiet van 100.000 nummers is bereikt.
+errors.translation	Tekst niet beschikbaar
+errors.worker	Lezen op de achtergrond kon niet worden gestart.
+info.album	Album
+info.artist	Artiest
+info.bitrate	Geschatte gemiddelde bitrate (bestand)
+info.caption	Nummerinformatie
+info.channels	Kanalen
+info.duration	Duur
+info.favorite	Favoriet
+info.field	{label}: {value}
+info.file	Bestand
+info.format	Formaat
+info.genre	Genre
+info.reading	Metadata lezen...
+info.sample_rate	Samplefrequentie
+info.size	Grootte
+info.title	Titel
+info.track	Nummer
+info.unknown	Niet opgegeven
+info.year	Jaar/datum
+player.add_hint	Voeg bestanden toe via de afspeellijst
+player.balance	Balans
+player.balance_help	Balans: links / rechts
+player.left	L
+player.list_short	LIJST
+player.native	LiteSic   ·   Native audiospeler
+player.next	Volgende
+player.oscilloscope	Oscilloscoop
+player.pause	Pauzeren
+player.paused	Gepauzeerd
+player.play	Afspelen
+player.playing	Wordt afgespeeld
+player.position	Positie in nummer
+player.previous	Vorige
+player.ready	Klaar om af te spelen
+player.repeat	Herhalen: uit → lijst → nummer
+player.repeat_one	HERH 1
+player.repeat_short	HERH
+player.right	R
+player.shuffle	Willekeurig
+player.shuffle_short	WILL
+player.spectrum	FFT-spectrum
+player.stop	Stoppen
+player.time	TIJD
+player.toggle_equalizer	Equalizer tonen / verbergen
+player.toggle_playlist	Afspeellijst tonen / verbergen
+player.toggle_visualizer	Visualisatie tonen / verbergen
+player.volume	Volume
+player.welcome	Je muziek, dichtbij
+playlist.add_short	TOEV ▾
+playlist.added	Afspeellijst toegevoegd.
+playlist.audio_filter	Audio
+playlist.clear	Lijst leegmaken
+playlist.duration_asc	Duur: kort → lang
+playlist.duration_desc	Duur: lang → kort
+playlist.empty	Voeg bestanden of een map toe
+playlist.favorite_hint	Geef een nummer onder Alle een ster
+playlist.favorites	Favorieten
+playlist.files	Bestanden...
+playlist.folder_dialog	Audiomap toevoegen (inclusief submappen)
+playlist.folders	Map en submappen...
+playlist.general	Alle
+playlist.info_menu	Nummerinformatie...
+playlist.list_menu	LIJST ▾
+playlist.m3u_filter	UTF-8 M3U-afspeellijsten
+playlist.mix	Zichtbare volgorde mengen
+playlist.name_asc	Naam: A → Z
+playlist.name_desc	Naam: Z → A
+playlist.no_results	Geen nummers gevonden
+playlist.open_dialog	M3U-afspeellijst openen
+playlist.open_menu	M3U openen (toevoegen)...
+playlist.opening	Afspeellijst openen...
+playlist.reading	lezen...
+playlist.remove	VERWIJDER
+playlist.save_dialog	M3U-afspeellijst opslaan
+playlist.save_menu	M3U opslaan...
+playlist.saved	Afspeellijst opgeslagen.
+playlist.saving	Afspeellijst opslaan...
+playlist.search	Nummers zoeken...
+playlist.selected.few	{count} geselecteerd
+playlist.selected.many	{count} geselecteerd
+playlist.selected.one	{count} geselecteerd
+playlist.selected.other	{count} geselecteerd
+playlist.selected.two	{count} geselecteerd
+playlist.selected.zero	{count} geselecteerd
+playlist.title	Afspeellijst
+playlist.tracks.few	{count} nummers
+playlist.tracks.many	{count} nummers
+playlist.tracks.one	{count} nummer
+playlist.tracks.other	{count} nummers
+playlist.tracks.two	{count} nummers
+playlist.tracks.zero	{count} nummers
+playlist.visible.few	{count} zichtbaar
+playlist.visible.many	{count} zichtbaar
+playlist.visible.one	{count} zichtbaar
+playlist.visible.other	{count} zichtbaar
+playlist.visible.two	{count} zichtbaar
+playlist.visible.zero	{count} zichtbaar
+preset.bass	Bas
+preset.classical	Klassiek
+preset.flat	Vlak
+preset.jazz	Jazz
+preset.pop	Pop
+preset.rock	Rock
+preset.voice	Stem
+theme.aurora	Noorderlicht
+theme.autumn	Herfst
+theme.carbon	Koolstof
+theme.carnival	Carnaval
+theme.children	Kinderdag
+theme.christmas	Kerstmis
+theme.cyberpunk	Cyberpunk
+theme.dark	Donker
+theme.desert	Woestijn
+theme.easter	Pasen
+theme.forest	Bos
+theme.halloween	Halloween
+theme.high-contrast	Hoog contrast
+theme.inverse	Omgekeerd
+theme.june-festival	Junifeest
+theme.light	Licht
+theme.matrix	Matrix
+theme.midnight	Middernacht
+theme.mono	Monochroom
+theme.mountain	Berg
+theme.neon-blue	Neonblauw
+theme.neon-purple	Neonpaars
+theme.new-year	Nieuwjaar
+theme.ocean	Oceaan
+theme.original	LiteSic Original
+theme.sakura	Sakura
+theme.spring	Lente
+theme.summer	Zomer
+theme.sunset	Zonsondergang
+theme.synthwave	Synthwave
+theme.terminal	Retroterminal
+theme.tropical	Tropisch
+theme.valentines	Valentijnsdag
+theme.vintage	Vintage audio
+theme.winamp	Winamp Classic
+theme.winter	Winter
+themes.all	Alle
+themes.celebrations	Feestdagen
+themes.classic	Klassiekers
+themes.essential	Basis
+themes.nature	Natuur
+themes.restore	Original herstellen
+themes.seasonal	Seizoenen
+themes.technology	Technologie
+themes.title	Thema’s
+window.caption	LiteSic — {title}
+appearance.language	Taal
+appearance.auto_language	Automatisch (Windows): {language}
+errors.language_change	De taalvoorkeur kon niet worden toegepast of opgeslagen. Controleer de bronnen en de instellingenmap.
+
+# M8-T8: control descriptions
+tooltip.previous	Vorige nummer afspelen
+tooltip.next	Volgende nummer afspelen
+tooltip.shuffle_on	Willekeurig afspelen inschakelen
+tooltip.shuffle_off	Willekeurig afspelen uitschakelen
+tooltip.repeat_off	Herhalen uit
+tooltip.repeat_all	Hele afspeellijst herhalen
+tooltip.repeat_one	Huidige nummer herhalen
+tooltip.play	Afspelen starten of hervatten
+tooltip.pause	Afspelen pauzeren
+tooltip.stop	Afspelen stoppen
+tooltip.seek	Naar een positie in het nummer gaan
+tooltip.volume	Volume: {value}%
+tooltip.balance	Balans: {value} (−100 links, +100 rechts)
+tooltip.show_playlist	Afspeellijst tonen
+tooltip.hide_playlist	Afspeellijst verbergen
+tooltip.show_eq	Equalizer tonen
+tooltip.hide_eq	Equalizer verbergen
+tooltip.fft	Frequentiespectrum tonen
+tooltip.osc	Golfvorm tonen
+tooltip.show_viz	Visualisatie tonen
+tooltip.hide_viz	Visualisatie verbergen
+tooltip.minimize	Speler minimaliseren
+tooltip.close	Dit venster sluiten
+tooltip.time	Verstreken / resterende tijd wisselen
+tooltip.add	Bestanden of map toevoegen
+tooltip.remove	Geselecteerde nummers verwijderen
+tooltip.list_menu	Afspeellijst openen, opslaan, sorteren of wissen
+tooltip.all	Alle nummers tonen
+tooltip.favorites	Favoriete nummers tonen
+tooltip.clear_search	Zoekopdracht wissen
+tooltip.search	Titel, artiest, album of bestand zoeken
+tooltip.row	Selecteren; dubbelklik om af te spelen
+tooltip.favorite_on	Aan favorieten toevoegen
+tooltip.favorite_off	Uit favorieten verwijderen
+tooltip.scroll	Door de lijst bladeren
+tooltip.eq_on	Equalizer inschakelen
+tooltip.eq_off	Equalizer uitschakelen
+tooltip.presets	Equalizer-voorinstelling kiezen
+tooltip.reset	Alle versterkingen op nul zetten
+tooltip.preamp	Voorversterking: {gain} dB
+tooltip.band	{frequency} Hz — Versterking: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — Versterking: {gain} dB (niet beschikbaar bij deze samplefrequentie)
+tooltip.theme_list	Een thema kiezen en toepassen
+tooltip.theme_reset	Standaardthema herstellen
+tooltip.category	Thema’s op categorie filteren
+tooltip.info	Nummergegevens; selecteer tekst om te kopiëren

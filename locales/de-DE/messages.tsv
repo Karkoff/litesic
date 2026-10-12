@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Automatisch (empfohlen)
+appearance.scale_menu	Darstellung > Oberflächenskalierung
+appearance.themes_menu	Darstellung > Designs...
+audio.mono	Mono
+audio.multichannel	Mehrkanal
+audio.stereo	Stereo
+common.close	Schließen
+common.no	Nein
+common.yes	Ja
+equalizer.custom	Benutzerdefiniert
+equalizer.help	±12 dB · ↑/↓ anpassen · Tab navigieren · Leertaste zurücksetzen
+equalizer.off	EQ AUS
+equalizer.on	EQ EIN
+equalizer.preamp	VOR
+equalizer.preset	Vorgabe: {name}
+equalizer.reset	Zurücksetzen
+equalizer.title	Equalizer
+equalizer.unavailable	N/V
+errors.audio_read	Die Audiodatei konnte nicht gelesen werden.
+errors.data_folder	Auf den Datenordner konnte nicht zugegriffen werden. Die Liste wird in dieser Sitzung nicht erhalten.
+errors.eq_render	Equalizer: Darstellung nicht verfügbar
+errors.m3u_invalid	Ungültige Liste oder größer als 16 MiB.
+errors.m3u_open	Die Liste konnte nicht geöffnet werden.
+errors.m3u_save	Die Liste konnte nicht gespeichert werden.
+errors.m3u_start	Der M3U-Vorgang konnte nicht gestartet werden.
+errors.metadata_unavailable	Das Lesen von Metadaten ist nicht verfügbar.
+errors.play_file	Die Datei konnte nicht wiedergegeben werden.
+errors.play_selected	Der ausgewählte Titel konnte nicht wiedergegeben werden.
+errors.play_track	Der Titel konnte nicht wiedergegeben werden
+errors.preserve_playlist	Die Wiedergabeliste konnte nicht erhalten werden.\n{error}
+errors.preserve_position	Die Position der Wiedergabeliste konnte nicht erhalten werden.
+errors.preserve_selection	Die Auswahl der Wiedergabeliste konnte nicht erhalten werden.
+errors.scan	Der Suchlauf konnte nicht gestartet werden.
+errors.selection_large	Auswahl zu groß; einen Ordner hinzufügen.
+errors.temporary	Die temporäre Datei konnte nicht erstellt werden.
+errors.theme_save	Design angewendet, aber die Einstellung konnte nicht gespeichert werden.
+errors.track_limit	Das Limit von 100.000 Titeln wurde erreicht.
+errors.translation	Text nicht verfügbar
+errors.worker	Das Lesen im Hintergrund konnte nicht gestartet werden.
+info.album	Album
+info.artist	Interpret
+info.bitrate	Ungefähre mittlere Bitrate (Datei)
+info.caption	Titelinformationen
+info.channels	Kanäle
+info.duration	Dauer
+info.favorite	Favorit
+info.field	{label}: {value}
+info.file	Datei
+info.format	Format
+info.genre	Genre
+info.reading	Metadaten werden gelesen...
+info.sample_rate	Abtastrate
+info.size	Größe
+info.title	Titel
+info.track	Titelnummer
+info.unknown	Nicht angegeben
+info.year	Jahr/Datum
+player.add_hint	Dateien über die Wiedergabeliste hinzufügen
+player.balance	Balance
+player.balance_help	Balance: links / rechts
+player.left	L
+player.list_short	LISTE
+player.native	LiteSic   ·   Nativer Audioplayer
+player.next	Weiter
+player.oscilloscope	Oszilloskop
+player.pause	Pause
+player.paused	Pausiert
+player.play	Wiedergeben
+player.playing	Wiedergabe läuft
+player.position	Titelposition
+player.previous	Zurück
+player.ready	Bereit zur Wiedergabe
+player.repeat	Wiederholen: aus → Liste → Titel
+player.repeat_one	WDH 1
+player.repeat_short	WDH
+player.right	R
+player.shuffle	Zufallswiedergabe
+player.shuffle_short	ZUFALL
+player.spectrum	FFT-Spektrum
+player.stop	Stoppen
+player.time	ZEIT
+player.toggle_equalizer	Equalizer ein- / ausblenden
+player.toggle_playlist	Wiedergabeliste ein- / ausblenden
+player.toggle_visualizer	Visualisierung ein- / ausblenden
+player.volume	Lautstärke
+player.welcome	Deine Musik, ganz nah
+playlist.add_short	HINZU ▾
+playlist.added	Liste hinzugefügt.
+playlist.audio_filter	Audio
+playlist.clear	Liste leeren
+playlist.duration_asc	Dauer: kurz → lang
+playlist.duration_desc	Dauer: lang → kurz
+playlist.empty	Dateien oder einen Ordner hinzufügen
+playlist.favorite_hint	Einen Titel unter Alle mit einem Stern markieren
+playlist.favorites	Favoriten
+playlist.files	Dateien...
+playlist.folder_dialog	Audioordner hinzufügen (mit Unterordnern)
+playlist.folders	Ordner und Unterordner...
+playlist.general	Alle
+playlist.info_menu	Titelinformationen...
+playlist.list_menu	LISTE ▾
+playlist.m3u_filter	UTF-8-M3U-Wiedergabelisten
+playlist.mix	Sichtbare Reihenfolge mischen
+playlist.name_asc	Name: A → Z
+playlist.name_desc	Name: Z → A
+playlist.no_results	Keine Titel gefunden
+playlist.open_dialog	M3U-Wiedergabeliste öffnen
+playlist.open_menu	M3U öffnen (hinzufügen)...
+playlist.opening	Liste wird geöffnet...
+playlist.reading	wird gelesen...
+playlist.remove	ENTFERNEN
+playlist.save_dialog	M3U-Wiedergabeliste speichern
+playlist.save_menu	M3U speichern...
+playlist.saved	Liste gespeichert.
+playlist.saving	Liste wird gespeichert...
+playlist.search	Titel suchen...
+playlist.selected.few	{count} ausgewählt
+playlist.selected.many	{count} ausgewählt
+playlist.selected.one	{count} ausgewählt
+playlist.selected.other	{count} ausgewählt
+playlist.selected.two	{count} ausgewählt
+playlist.selected.zero	{count} ausgewählt
+playlist.title	Wiedergabeliste
+playlist.tracks.few	{count} Titel
+playlist.tracks.many	{count} Titel
+playlist.tracks.one	{count} Titel
+playlist.tracks.other	{count} Titel
+playlist.tracks.two	{count} Titel
+playlist.tracks.zero	{count} Titel
+playlist.visible.few	{count} sichtbar
+playlist.visible.many	{count} sichtbar
+playlist.visible.one	{count} sichtbar
+playlist.visible.other	{count} sichtbar
+playlist.visible.two	{count} sichtbar
+playlist.visible.zero	{count} sichtbar
+preset.bass	Bässe
+preset.classical	Klassik
+preset.flat	Neutral
+preset.jazz	Jazz
+preset.pop	Pop
+preset.rock	Rock
+preset.voice	Stimme
+theme.aurora	Polarlicht
+theme.autumn	Herbst
+theme.carbon	Kohle
+theme.carnival	Karneval
+theme.children	Kindertag
+theme.christmas	Weihnachten
+theme.cyberpunk	Cyberpunk
+theme.dark	Dunkel
+theme.desert	Wüste
+theme.easter	Ostern
+theme.forest	Wald
+theme.halloween	Halloween
+theme.high-contrast	Hoher Kontrast
+theme.inverse	Invertiert
+theme.june-festival	Junifest
+theme.light	Hell
+theme.matrix	Matrix
+theme.midnight	Mitternacht
+theme.mono	Monochrom
+theme.mountain	Berg
+theme.neon-blue	Neonblau
+theme.neon-purple	Neonviolett
+theme.new-year	Neujahr
+theme.ocean	Ozean
+theme.original	LiteSic Original
+theme.sakura	Sakura
+theme.spring	Frühling
+theme.summer	Sommer
+theme.sunset	Sonnenuntergang
+theme.synthwave	Synthwave
+theme.terminal	Retroterminal
+theme.tropical	Tropisch
+theme.valentines	Valentinstag
+theme.vintage	Vintage-Audio
+theme.winamp	Winamp Classic
+theme.winter	Winter
+themes.all	Alle
+themes.celebrations	Feiertage
+themes.classic	Klassiker
+themes.essential	Grunddesigns
+themes.nature	Natur
+themes.restore	Original wiederherstellen
+themes.seasonal	Jahreszeiten
+themes.technology	Technologie
+themes.title	Designs
+window.caption	LiteSic — {title}
+appearance.language	Sprache
+appearance.auto_language	Automatisch (Windows): {language}
+errors.language_change	Die Spracheinstellung konnte nicht angewendet oder gespeichert werden. Prüfe die Ressourcen und den Einstellungsordner.
+
+# M8-T8: control descriptions
+tooltip.previous	Vorherigen Titel abspielen
+tooltip.next	Nächsten Titel abspielen
+tooltip.shuffle_on	Zufallswiedergabe einschalten
+tooltip.shuffle_off	Zufallswiedergabe ausschalten
+tooltip.repeat_off	Wiederholung ausgeschaltet
+tooltip.repeat_all	Gesamte Wiedergabeliste wiederholen
+tooltip.repeat_one	Aktuellen Titel wiederholen
+tooltip.play	Wiedergabe starten oder fortsetzen
+tooltip.pause	Wiedergabe pausieren
+tooltip.stop	Wiedergabe stoppen
+tooltip.seek	Zu einer Position im Titel springen
+tooltip.volume	Lautstärke: {value}%
+tooltip.balance	Balance: {value} (−100 links, +100 rechts)
+tooltip.show_playlist	Wiedergabeliste anzeigen
+tooltip.hide_playlist	Wiedergabeliste ausblenden
+tooltip.show_eq	Equalizer anzeigen
+tooltip.hide_eq	Equalizer ausblenden
+tooltip.fft	Frequenzspektrum anzeigen
+tooltip.osc	Wellenform anzeigen
+tooltip.show_viz	Visualisierung anzeigen
+tooltip.hide_viz	Visualisierung ausblenden
+tooltip.minimize	Player minimieren
+tooltip.close	Dieses Fenster schließen
+tooltip.time	Verstrichene / verbleibende Zeit umschalten
+tooltip.add	Dateien oder Ordner hinzufügen
+tooltip.remove	Ausgewählte Titel entfernen
+tooltip.list_menu	Wiedergabeliste öffnen, speichern, sortieren oder leeren
+tooltip.all	Alle Titel anzeigen
+tooltip.favorites	Favoriten anzeigen
+tooltip.clear_search	Suche löschen
+tooltip.search	Titel, Interpret, Album oder Datei suchen
+tooltip.row	Auswählen; Doppelklick zum Abspielen
+tooltip.favorite_on	Zu Favoriten hinzufügen
+tooltip.favorite_off	Aus Favoriten entfernen
+tooltip.scroll	Liste scrollen
+tooltip.eq_on	Equalizer einschalten
+tooltip.eq_off	Equalizer ausschalten
+tooltip.presets	Equalizer-Voreinstellung wählen
+tooltip.reset	Alle Verstärkungen auf null setzen
+tooltip.preamp	Vorverstärkung: {gain} dB
+tooltip.band	{frequency} Hz — Verstärkung: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — Verstärkung: {gain} dB (bei dieser Abtastrate nicht verfügbar)
+tooltip.theme_list	Thema auswählen und anwenden
+tooltip.theme_reset	Standardthema wiederherstellen
+tooltip.category	Themen nach Kategorie filtern
+tooltip.info	Titeldetails; Text zum Kopieren auswählen

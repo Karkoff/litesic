@@ -1,6 +1,14 @@
 # M8 — internacionalização integral e tooltips
 
-Planejamento aprovado em 11/10/2026. **PENDING; nenhuma implementação neste ciclo.**
+Planejamento aprovado em 11/10/2026. **M8-T6 COMPLETE em 11/10/2026;
+M8-T7 COMPLETE em 11/10/2026; T8 COMPLETE, com aceite visual humano TUDO PASS; M8 aberta.
+[T8: arquitetura, testes e limites](M8-T8-TOOLTIPS.md). Aceite visual dos tooltips
+não equivale a revisão linguística profissional dos 18 idiomas.
+T7 recebeu PASS humano explícito informado pelo usuário.**
+[Detecção, menu, persistência e atualização global](M8-T7-LANGUAGE-SELECTION.md).
+[Implementação e limites T6](M8-T6-I18N.md),
+[testes e capturas](evidence/m8-i18n/README.md). Este documento preserva o
+contrato de produto; detecção automática, seletor e atualização global entregues na T7.
 Complementa M8-T1…T5, preservando atalhos, mídia, sempre no topo, instância
 única, persistência, DPI, escalonamento e refinamento visual/acessibilidade.
 
@@ -27,11 +35,11 @@ esta proposta não afirma reproduzir sua lista histórica.
 | pl-PL | Polski |
 | ru-RU | Русский |
 | ja-JP | 日本語 |
-| zh-Hans | 简体中文 |
-| zh-Hant | 繁體中文 |
+| zh-CN (alias zh-Hans) | 简体中文 |
+| zh-TW (alias zh-Hant) | 繁體中文 |
 | ko-KR | 한국어 |
 | tr-TR | Türkçe |
-| ar | العربية |
+| ar-SA (alias ar) | العربية |
 | hi-IN | हिन्दी |
 | sv-SE | Svenska |
 

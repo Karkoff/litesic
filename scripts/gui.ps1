@@ -1,7 +1,7 @@
 [CmdletBinding()]
 param(
     [Parameter(Mandatory = $true)]
-    [ValidateSet('setup','doctor','fixture','m5-fixtures','launch','inspect','capture','click','key','open-fixture','close','test','drag','resize','search','theme')]
+    [ValidateSet('setup','doctor','fixture','m5-fixtures','launch','inspect','capture','click','key','open-fixture','close','test','drag','resize','search','theme','language','hover')]
     [string]$Action,
     [ValidateSet('32','64')][string]$Architecture = '64',
     [ValidateSet('debug','release')][string]$Configuration = 'debug',
@@ -11,7 +11,7 @@ param(
     [int]$Y = -1,
     [ValidateSet('left','right')][string]$Button = 'left',
     [ValidateSet('escape','enter','tab','space','left','right','home','end','up','down','delete','ctrl-a')][string]$Key,
-    [ValidateSet('main','playlist','eq','menu','themes')][string]$Target = 'main',
+    [ValidateSet('main','playlist','eq','menu','themes','info')][string]$Target = 'main',
     [ValidateSet('','ctrl','shift')][string]$Modifier = '',
     [switch]$Double,
     [string]$Fixture = 'silence',
@@ -21,7 +21,8 @@ param(
     [int]$EndY,
     [int]$MenuIndex = -1,
     [switch]$Dialog,
-    [switch]$Validation
+    [switch]$Validation,
+    [ValidateSet('pt-BR','en-US','es-ES','fr-FR','de-DE','it-IT','pt-PT','nl-NL','pl-PL','ru-RU','ja-JP','zh-CN','zh-TW','ko-KR','tr-TR','ar-SA','hi-IN','sv-SE')][string]$Language
 )
 $ErrorActionPreference = 'Stop'
 $projectRoot = Split-Path -Parent $PSScriptRoot
@@ -46,11 +47,12 @@ if ($Action -eq 'test') {
 $driverArgs = @((Join-Path $PSScriptRoot 'gui\litesic_gui.py'), $Action,
     '--arch', $Architecture, '--config', $Configuration, '--target', $Target, '--fixture', $Fixture)
 if ($Label) { $driverArgs += @('--label', $Label) }
-if ($Action -in @('search','theme')) { $driverArgs += @('--query', $Query) }
+if ($Action -in @('search','theme','language')) { $driverArgs += @('--query', $Query) }
 if ($Dialog) { $driverArgs += '--dialog' }
 if ($Validation) { $driverArgs += '--validation' }
+if ($Language) { $driverArgs += @('--language', $Language) }
 if ($MenuIndex -ge 0) { $driverArgs += @('--menu-index',$MenuIndex) }
-if ($Action -in @('click','drag')) { $driverArgs += @('--x', $X, '--y', $Y, '--button', $Button) }
+if ($Action -in @('click','drag','hover')) { $driverArgs += @('--x', $X, '--y', $Y, '--button', $Button) }
 if ($Action -eq 'click' -and $Modifier) { $driverArgs += @('--modifier', $Modifier) }
 if ($Double) { $driverArgs += '--double' }
 if ($Action -eq 'drag') { $driverArgs += @('--end-x', $EndX, '--end-y', $EndY) }

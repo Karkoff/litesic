@@ -58,7 +58,16 @@ suas medições e pendências históricas, sem atribuir medições ao aceite hum
 [Encerramento formal e testes atuais](M7-CLOSEOUT-2026-10-11.md).
 Ver [validação M7](M7-INTEGRATED-VALIDATION.md) e
 [matriz de requisitos, com baseline histórico de 48 tarefas](ROADMAP-IMPLEMENTATION-AUDIT.md).
-M8 é a próxima milestone com trabalho residual; não foi implementada neste ciclo.
+M8 permanece aberta. M8-T6 COMPLETE: [18 catálogos e tipografia](M8-T6-I18N.md),
+quatro builds e 644 casos PASS no baseline T6. **M8-T7 COMPLETE:**
+[seleção Windows/manual e atualização ao vivo](M8-T7-LANGUAGE-SELECTION.md),
+191 IDs por catálogo, quatro builds, 684 casos e 32 guardas PASS.
+**M8-T8 COMPLETE, aceite visual humano TUDO PASS:** [tooltips](M8-T8-TOOLTIPS.md),
+46 chaves novas, 237 IDs × 18 idiomas, 36 temas, quatro builds, 716 casos,
+36 guardas e dois casos gráficos adicionais PASS (3.092 frames). Aceite visual
+humano T8 concedido pelo usuário; T7 tem PASS humano explícito. M8-T1…T5 e checkpoint
+continuam pendentes; revisão linguística humana necessária. O aceite visual
+não substitui a revisão profissional dos 18 idiomas. [Consolidação](M8-CONSOLIDATION.md).
 
 As fases UI-00..08 mantêm as milestones acima. Player/playlist já usam
 Direct2D/DirectWrite; pesquisa preserva índices canônicos e docking da M5.

@@ -1,0 +1,1516 @@
+[
+  {
+    "utc": "2026-10-12T01:54:31.833547+00:00",
+    "action": "launch",
+    "args": {
+      "action": "launch",
+      "validation": true,
+      "language": "pt-BR",
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "release",
+      "dialog": false,
+      "label": "t8-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": false,
+    "error": "RuntimeError: Desktop não interativo: {\"session\": 1, \"station\": \"WinSta0\", \"desktop\": \"CodexSandboxDesktop-cc33c39fc3520157c8a135346bf25c3b\", \"input_desktop\": \"Default\", \"input_error\": null, \"interactive\": false, \"python\": \"3.11.9\", \"packages\": {\"pywinauto\": \"0.6.9\", \"Pillow\": \"12.3.0\", \"pywin32\": \"312\", \"comtypes\": \"1.4.17\", \"six\": \"1.17.0\"}}. Execute scripts/gui.ps1 no terminal local do usuário, com a tela desbloqueada."
+  },
+  {
+    "utc": "2026-10-12T01:54:40.444071+00:00",
+    "action": "launch",
+    "args": {
+      "action": "launch",
+      "validation": true,
+      "language": "pt-BR",
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "release",
+      "dialog": false,
+      "label": "t8-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 267384,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-initial.png",
+      "sha256": "9806d7888d6202901d0963345ae98ec7eecb68e7c56c28a9bfc2922462ede725",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 50076,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T01:54:40.657000+00:00",
+        "sha256": "22240f96c06723ac8de0ed62fc0fdc1597ac65f1942c056b7b4087e0ac1698ba"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T01:54:55.672664+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": null,
+      "x": 53,
+      "y": 207,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 267384,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\tooltip-context.png",
+        "sha256": "dce9984b70459db504d93ef9c72e70dfd7606f28f38838067d8e542cfa5e110d",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 50076,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T01:54:40.657000+00:00",
+          "sha256": "22240f96c06723ac8de0ed62fc0fdc1597ac65f1942c056b7b4087e0ac1698ba"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 5378306,
+        "class": "LiteSic.TooltipWnd",
+        "title": "Ativar reprodução aleatória",
+        "rect": [
+          1483,
+          1003,
+          1731,
+          1048
+        ],
+        "client": [
+          248,
+          45
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\tooltip-popup.png",
+        "sha256": "29fa9c58effbc62c0c4604924fd40ddbf84a9f977d1867f93b185e8cfbe2aad1",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 50076,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T01:54:40.657000+00:00",
+          "sha256": "22240f96c06723ac8de0ed62fc0fdc1597ac65f1942c056b7b4087e0ac1698ba"
+        }
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T01:55:56.182253+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-main-before-click",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 267384,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-main-before-click.png",
+      "sha256": "dce9984b70459db504d93ef9c72e70dfd7606f28f38838067d8e542cfa5e110d",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 50076,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T01:54:40.657000+00:00",
+        "sha256": "22240f96c06723ac8de0ed62fc0fdc1597ac65f1942c056b7b4087e0ac1698ba"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:05:40.383441+00:00",
+    "action": "launch",
+    "args": {
+      "action": "launch",
+      "validation": true,
+      "language": "ar-SA",
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "release",
+      "dialog": false,
+      "label": "t8-arabic-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": false,
+    "error": "RuntimeError: Desktop não interativo: {\"session\": 1, \"station\": \"WinSta0\", \"desktop\": \"CodexSandboxDesktop-cc33c39fc3520157c8a135346bf25c3b\", \"input_desktop\": \"Default\", \"input_error\": null, \"interactive\": false, \"python\": \"3.11.9\", \"packages\": {\"pywinauto\": \"0.6.9\", \"Pillow\": \"12.3.0\", \"pywin32\": \"312\", \"comtypes\": \"1.4.17\", \"six\": \"1.17.0\"}}. Execute scripts/gui.ps1 no terminal local do usuário, com a tela desbloqueada."
+  },
+  {
+    "utc": "2026-10-12T02:12:31.024757+00:00",
+    "action": "launch",
+    "args": {
+      "action": "launch",
+      "validation": true,
+      "language": "ar-SA",
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "release",
+      "dialog": false,
+      "label": "t8-ar-initial",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-initial.png",
+      "sha256": "091edcacaff1e2f9ff02bce8cc4eb0205414ae96d8155ec5daf7da91b8497562",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:12:43.722798+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ar-shuffle",
+      "x": 53,
+      "y": 207,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4920426,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-shuffle-context.png",
+        "sha256": "97e9c65c3ed2db20d148fa57cf8db46a899a8be42c58167f801ae754692b257b",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 5312790,
+        "class": "LiteSic.TooltipWnd",
+        "title": "تفعيل التشغيل العشوائي",
+        "rect": [
+          1483,
+          1003,
+          1702,
+          1047
+        ],
+        "client": [
+          219,
+          44
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-shuffle-popup.png",
+        "sha256": "4cfa2cdf3d242661eacfa8dc4e1f6b345c4ece1db23f55f328c6cb5cc9ad6f49",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:12:52.472151+00:00",
+    "action": "click",
+    "args": {
+      "action": "click",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ar-shuffle-enabled",
+      "x": 53,
+      "y": 207,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-shuffle-enabled.png",
+      "sha256": "173ed1ad679bb53e7acc3372252c3a254e2b682ec1bb313f5454acfb702e4ee5",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:13:02.730724+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ar-shuffle-off",
+      "x": 53,
+      "y": 207,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4920426,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-shuffle-off-context.png",
+        "sha256": "173ed1ad679bb53e7acc3372252c3a254e2b682ec1bb313f5454acfb702e4ee5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 0
+    }
+  },
+  {
+    "utc": "2026-10-12T02:13:15.950661+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ar-leave",
+      "x": 15,
+      "y": 280,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4920426,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-leave-context.png",
+        "sha256": "173ed1ad679bb53e7acc3372252c3a254e2b682ec1bb313f5454acfb702e4ee5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 0
+    }
+  },
+  {
+    "utc": "2026-10-12T02:13:30.056830+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ar-disable-shuffle",
+      "x": 53,
+      "y": 207,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4920426,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-disable-shuffle-context.png",
+        "sha256": "173ed1ad679bb53e7acc3372252c3a254e2b682ec1bb313f5454acfb702e4ee5",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 5312790,
+        "class": "LiteSic.TooltipWnd",
+        "title": "تعطيل التشغيل العشوائي",
+        "rect": [
+          1483,
+          1003,
+          1707,
+          1047
+        ],
+        "client": [
+          224,
+          44
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ar-disable-shuffle-popup.png",
+        "sha256": "6e563883201e11c864248d71357d9bc7128b7884efbbfe51ef6e88e2cecd7cf9",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:13:39.624356+00:00",
+    "action": "language",
+    "args": {
+      "action": "language",
+      "validation": false,
+      "language": null,
+      "query": "de-DE",
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-main",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-main.png",
+      "sha256": "cca92e4770a06bb2b978f5819255da2e25cc081415e9ce9c6421ca7f3a3e54d8",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:13:49.233457+00:00",
+    "action": "click",
+    "args": {
+      "action": "click",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-eq-open",
+      "x": 635,
+      "y": 416,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-eq-open.png",
+      "sha256": "840eddca52f6c8aaa94d82c4b1a7e0e9326d6aeca25d776f3a0e305f630660b2",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:13:58.216852+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-eq",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": false,
+    "error": "RuntimeError: Esperado um painel pertencente ao player lançado."
+  },
+  {
+    "utc": "2026-10-12T02:14:12.068717+00:00",
+    "action": "click",
+    "args": {
+      "action": "click",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-eq-show",
+      "x": 635,
+      "y": 416,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-eq-show.png",
+      "sha256": "a689a055913bd9810379dca2a7b3bb9a0402260f00bc14be27c600675d7470a9",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:14:19.791028+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-eq",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4068472,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizer",
+      "rect": [
+        1465,
+        1195,
+        2155,
+        1516
+      ],
+      "client": [
+        690,
+        321
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-eq.png",
+      "sha256": "45388424e74f2f8309b5a9345d41d1b877ecf163f128e5aa73c0c48012cd1f80",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:14:27.782716+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-band",
+      "x": 367,
+      "y": 150,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4068472,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizer",
+        "rect": [
+          1465,
+          1195,
+          2155,
+          1516
+        ],
+        "client": [
+          690,
+          321
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-band-context.png",
+        "sha256": "46db50d9e80b50614d00be0febac719bca1f18e6b4151863d88304d99210415b",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 6427816,
+        "class": "LiteSic.TooltipWnd",
+        "title": "1000 Hz — Verstärkung: +0.0 dB",
+        "rect": [
+          1809,
+          1417,
+          2097,
+          1462
+        ],
+        "client": [
+          288,
+          45
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-band-popup.png",
+        "sha256": "5afe96695579514baedbd3e73a193b8494681625162911acbce76abb680d6995",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:14:40.108411+00:00",
+    "action": "drag",
+    "args": {
+      "action": "drag",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": 367,
+      "end_y": 139,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-band-drag",
+      "x": 367,
+      "y": 150,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4068472,
+      "class": "LiteSic.EqualizerWnd",
+      "title": "LiteSic — Equalizer",
+      "rect": [
+        1465,
+        1195,
+        2155,
+        1516
+      ],
+      "client": [
+        690,
+        321
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-band-drag.png",
+      "sha256": "bfe7085be242b0176186dc02079f149cf2b8fe8b08ffd5cf65a976de5a998096",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:14:50.014825+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-band-gain",
+      "x": 367,
+      "y": 140,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4068472,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizer",
+        "rect": [
+          1465,
+          1195,
+          2155,
+          1516
+        ],
+        "client": [
+          690,
+          321
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-band-gain-context.png",
+        "sha256": "bfe7085be242b0176186dc02079f149cf2b8fe8b08ffd5cf65a976de5a998096",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 0
+    }
+  },
+  {
+    "utc": "2026-10-12T02:15:06.487254+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-eq-leave",
+      "x": 22,
+      "y": 238,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4068472,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizer",
+        "rect": [
+          1465,
+          1195,
+          2155,
+          1516
+        ],
+        "client": [
+          690,
+          321
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-eq-leave-context.png",
+        "sha256": "7167505067c6cffbe60ced196b411463d224a2efffd36843ea499860d5886d08",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 0
+    }
+  },
+  {
+    "utc": "2026-10-12T02:15:16.321855+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "eq",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-de-current-gain",
+      "x": 367,
+      "y": 140,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4068472,
+        "class": "LiteSic.EqualizerWnd",
+        "title": "LiteSic — Equalizer",
+        "rect": [
+          1465,
+          1195,
+          2155,
+          1516
+        ],
+        "client": [
+          690,
+          321
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-current-gain-context.png",
+        "sha256": "bfe7085be242b0176186dc02079f149cf2b8fe8b08ffd5cf65a976de5a998096",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 6427816,
+        "class": "LiteSic.TooltipWnd",
+        "title": "1000 Hz — Verstärkung: +2.9 dB",
+        "rect": [
+          1809,
+          1417,
+          2097,
+          1462
+        ],
+        "client": [
+          288,
+          45
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-de-current-gain-popup.png",
+        "sha256": "5e96c658e217ee009947b47c26a490a95c54a20b93f501fa10db24596db04c90",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:15:30.072184+00:00",
+    "action": "capture",
+    "args": {
+      "action": "capture",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-main-before-ja",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-main-before-ja.png",
+      "sha256": "f0c6bdab448d7f62af4654e622e1f32f56a023bfe7c387a124bc08f943cb654f",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:15:41.411987+00:00",
+    "action": "language",
+    "args": {
+      "action": "language",
+      "validation": false,
+      "language": null,
+      "query": "ja-JP",
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ja-main",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ja-main.png",
+      "sha256": "6c9c7725576c98b8e6296a8094fb6cb3e28124a0de48b84d62bea6fde044a6c6",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:15:51.291767+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-ja-balance",
+      "x": 530,
+      "y": 264,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4920426,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ja-balance-context.png",
+        "sha256": "6c9c7725576c98b8e6296a8094fb6cb3e28124a0de48b84d62bea6fde044a6c6",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 5312790,
+        "class": "LiteSic.TooltipWnd",
+        "title": "バランス: 0 (−100 左、+100 右)",
+        "rect": [
+          1942,
+          1051,
+          2208,
+          1096
+        ],
+        "client": [
+          266,
+          45
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-ja-balance-popup.png",
+        "sha256": "a156c22a6ed56d7388b68cf0a3709983cf4a9daaf709a5022a2877652ff61a83",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:16:01.594735+00:00",
+    "action": "language",
+    "args": {
+      "action": "language",
+      "validation": false,
+      "language": null,
+      "query": "hi-IN",
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-hi-main",
+      "x": null,
+      "y": null,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "hwnd": 4920426,
+      "class": "LiteSic.MainWnd",
+      "title": "LiteSic",
+      "rect": [
+        1465,
+        760,
+        2155,
+        1195
+      ],
+      "client": [
+        690,
+        435
+      ],
+      "child_count": 0,
+      "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-hi-main.png",
+      "sha256": "f26d27b5ae795380dea98a3a747d59e27e895cba61bffb6549a371b9a4747eff",
+      "method": "PrintWindow/GDI",
+      "process": {
+        "pid": 52256,
+        "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+        "created": "2026-10-12T02:12:31.297000+00:00",
+        "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+      }
+    }
+  },
+  {
+    "utc": "2026-10-12T02:16:16.017170+00:00",
+    "action": "hover",
+    "args": {
+      "action": "hover",
+      "validation": false,
+      "language": null,
+      "query": null,
+      "target": "main",
+      "fixture": "silence",
+      "menu_index": null,
+      "modifier": "",
+      "double": false,
+      "width": null,
+      "height": null,
+      "end_x": null,
+      "end_y": null,
+      "arch": "64",
+      "config": "debug",
+      "dialog": false,
+      "label": "t8-hi-shuffle",
+      "x": 53,
+      "y": 207,
+      "button": "left",
+      "key": null
+    },
+    "ok": true,
+    "result": {
+      "window": {
+        "hwnd": 4920426,
+        "class": "LiteSic.MainWnd",
+        "title": "LiteSic",
+        "rect": [
+          1465,
+          760,
+          2155,
+          1195
+        ],
+        "client": [
+          690,
+          435
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-hi-shuffle-context.png",
+        "sha256": "f26d27b5ae795380dea98a3a747d59e27e895cba61bffb6549a371b9a4747eff",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      },
+      "visible_tooltips": 1,
+      "tooltip": {
+        "hwnd": 5312790,
+        "class": "LiteSic.TooltipWnd",
+        "title": "यादृच्छिक प्लेबैक बंद करें",
+        "rect": [
+          1483,
+          1003,
+          1687,
+          1048
+        ],
+        "client": [
+          204,
+          45
+        ],
+        "child_count": 0,
+        "image": "D:\\Projetos\\IA\\litesic\\build\\gui\\t8-hi-shuffle-popup.png",
+        "sha256": "43f79cabaf37b5f05fe8411eafd9737d6ea8d5aace3011401202b67e4646b2e1",
+        "method": "PrintWindow/GDI",
+        "process": {
+          "pid": 52256,
+          "exe": "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe",
+          "created": "2026-10-12T02:12:31.297000+00:00",
+          "sha256": "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+        }
+      }
+    }
+  }
+]

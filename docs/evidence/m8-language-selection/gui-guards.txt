@@ -1,0 +1,58 @@
+.tools/gui-venv/Scripts/python.exe : test_arbitrary_executable_rejected 
+(__main__.DriverGuards.test_arbitrary_executable_rejected) ... ok
+No linha:2 caractere:86
++ ... dation.txt; .tools/gui-venv/Scripts/python.exe scripts/gui/test_drive ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (test_arbitrary_...ejected) ... ok:String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+test_capture_filename_cannot_escape_output_directory 
+(__main__.DriverGuards.test_capture_filename_cannot_escape_output_directory) ... ok
+test_closeout_m3u_paths_remain_confined (__main__.DriverGuards.test_closeout_m3u_paths_remain_confined) ... ok
+test_closeout_m3u_wrong_dialog_rejected (__main__.DriverGuards.test_closeout_m3u_wrong_dialog_rejected) ... ok
+test_control_modifier_translated_for_pywinauto (__main__.DriverGuards.test_control_modifier_translated_for_pywinauto) 
+... ok
+test_eq_with_unrelated_owner_rejected (__main__.DriverGuards.test_eq_with_unrelated_owner_rejected) ... ok
+test_external_executable_rejected (__main__.DriverGuards.test_external_executable_rejected) ... ok
+test_fixture_cannot_be_used_in_wrong_dialog (__main__.DriverGuards.test_fixture_cannot_be_used_in_wrong_dialog) ... ok
+test_future_observation_rejected (__main__.DriverGuards.test_future_observation_rejected) ... ok
+test_info_with_unrelated_owner_rejected (__main__.DriverGuards.test_info_with_unrelated_owner_rejected) ... ok
+test_input_after_window_moved_rejected (__main__.DriverGuards.test_input_after_window_moved_rejected) ... ok
+test_input_to_different_window_rejected (__main__.DriverGuards.test_input_to_different_window_rejected) ... ok
+test_input_with_stale_observation_rejected (__main__.DriverGuards.test_input_with_stale_observation_rejected) ... ok
+test_input_without_observation_rejected (__main__.DriverGuards.test_input_without_observation_rejected) ... ok
+test_language_fixture_rejects_arbitrary_code (__main__.DriverGuards.test_language_fixture_rejects_arbitrary_code) ... 
+ok
+test_language_fixture_requires_isolated_session 
+(__main__.DriverGuards.test_language_fixture_requires_isolated_session) ... ok
+test_language_rejects_personal_session_before_mutation 
+(__main__.DriverGuards.test_language_rejects_personal_session_before_mutation) ... ok
+test_language_rejects_unknown_code_before_mutation 
+(__main__.DriverGuards.test_language_rejects_unknown_code_before_mutation) ... ok
+test_outside_click_rejected_before_foreground_or_mouse 
+(__main__.DriverGuards.test_outside_click_rejected_before_foreground_or_mouse) ... ok
+test_pid_reuse_rejected_before_window_connection 
+(__main__.DriverGuards.test_pid_reuse_rejected_before_window_connection) ... ok
+test_playlist_with_unrelated_owner_rejected (__main__.DriverGuards.test_playlist_with_unrelated_owner_rejected) ... ok
+test_rebuilt_binary_rejected_before_window_connection 
+(__main__.DriverGuards.test_rebuilt_binary_rejected_before_window_connection) ... ok
+test_sandbox_desktop_rejected_before_input (__main__.DriverGuards.test_sandbox_desktop_rejected_before_input) ... ok
+test_save_fixture_is_confined_to_evidence_directory 
+(__main__.DriverGuards.test_save_fixture_is_confined_to_evidence_directory) ... ok
+test_search_cannot_target_main_window (__main__.DriverGuards.test_search_cannot_target_main_window) ... ok
+test_search_rejects_arbitrary_text_before_input 
+(__main__.DriverGuards.test_search_rejects_arbitrary_text_before_input) ... ok
+test_successful_guard_consumes_observation_before_input 
+(__main__.DriverGuards.test_successful_guard_consumes_observation_before_input) ... ok
+test_theme_cannot_target_player (__main__.DriverGuards.test_theme_cannot_target_player) ... ok
+test_theme_rejects_unknown_name_before_input (__main__.DriverGuards.test_theme_rejects_unknown_name_before_input) ... 
+ok
+test_themes_with_unrelated_owner_rejected (__main__.DriverGuards.test_themes_with_unrelated_owner_rejected) ... ok
+test_unknown_fixture_rejected (__main__.DriverGuards.test_unknown_fixture_rejected) ... ok
+test_wrong_process_path_rejected_before_window_connection 
+(__main__.DriverGuards.test_wrong_process_path_rejected_before_window_connection) ... ok
+
+----------------------------------------------------------------------
+Ran 32 tests in 0.030s
+
+OK

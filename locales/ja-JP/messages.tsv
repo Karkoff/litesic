@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	自動（推奨）
+appearance.scale_menu	外観 > 表示倍率
+appearance.themes_menu	外観 > テーマ...
+audio.mono	モノラル
+audio.multichannel	マルチチャンネル
+audio.stereo	ステレオ
+common.close	閉じる
+common.no	いいえ
+common.yes	はい
+equalizer.custom	カスタム
+equalizer.help	±12 dB · ↑/↓ 調整 · Tab 移動 · スペース リセット
+equalizer.off	EQ オフ
+equalizer.on	EQ オン
+equalizer.preamp	プリ
+equalizer.preset	プリセット：{name}
+equalizer.reset	リセット
+equalizer.title	イコライザー
+equalizer.unavailable	対象外
+errors.audio_read	音声ファイルを読み取れませんでした。
+errors.data_folder	データフォルダーにアクセスできませんでした。このセッションではプレイリストを保持できません。
+errors.eq_render	イコライザー：描画を利用できません
+errors.m3u_invalid	プレイリストが無効か、16 MiBを超えています。
+errors.m3u_open	プレイリストを開けませんでした。
+errors.m3u_save	プレイリストを保存できませんでした。
+errors.m3u_start	M3U操作を開始できませんでした。
+errors.metadata_unavailable	メタデータの読み取りを利用できません。
+errors.play_file	ファイルを再生できませんでした。
+errors.play_selected	選択した曲を再生できませんでした。
+errors.play_track	曲を再生できませんでした
+errors.preserve_playlist	プレイリストを保持できませんでした。\n{error}
+errors.preserve_position	プレイリストの位置を保持できませんでした。
+errors.preserve_selection	プレイリストの選択を保持できませんでした。
+errors.scan	スキャンを開始できませんでした。
+errors.selection_large	選択が多すぎます。フォルダーを追加してください。
+errors.temporary	一時ファイルを作成できませんでした。
+errors.theme_save	テーマを適用しましたが、設定を保存できませんでした。
+errors.track_limit	曲数の上限（100,000曲）に達しました。
+errors.translation	テキストを利用できません
+errors.worker	バックグラウンドでの読み取りを開始できませんでした。
+info.album	アルバム
+info.artist	アーティスト
+info.bitrate	おおよその平均ビットレート（ファイル）
+info.caption	曲の情報
+info.channels	チャンネル
+info.duration	長さ
+info.favorite	お気に入り
+info.field	{label}：{value}
+info.file	ファイル
+info.format	形式
+info.genre	ジャンル
+info.reading	メタデータを読み取り中...
+info.sample_rate	サンプルレート
+info.size	サイズ
+info.title	タイトル
+info.track	トラック
+info.unknown	未設定
+info.year	年/日付
+player.add_hint	プレイリストからファイルを追加してください
+player.balance	バランス
+player.balance_help	バランス：左 / 右
+player.left	左
+player.list_short	リスト
+player.native	LiteSic   ·   ネイティブ音楽プレーヤー
+player.next	次へ
+player.oscilloscope	オシロスコープ
+player.pause	一時停止
+player.paused	一時停止中
+player.play	再生
+player.playing	再生中
+player.position	曲の再生位置
+player.previous	前へ
+player.ready	再生できます
+player.repeat	リピート：オフ → リスト → 曲
+player.repeat_one	反復 1
+player.repeat_short	反復
+player.right	右
+player.shuffle	シャッフル
+player.shuffle_short	ランダム
+player.spectrum	FFTスペクトラム
+player.stop	停止
+player.time	時間
+player.toggle_equalizer	イコライザーを表示 / 非表示
+player.toggle_playlist	プレイリストを表示 / 非表示
+player.toggle_visualizer	ビジュアライザーを表示 / 非表示
+player.volume	音量
+player.welcome	音楽を、もっと身近に
+playlist.add_short	追加 ▾
+playlist.added	プレイリストを追加しました。
+playlist.audio_filter	音声
+playlist.clear	プレイリストを空にする
+playlist.duration_asc	長さ：短い → 長い
+playlist.duration_desc	長さ：長い → 短い
+playlist.empty	ファイルまたはフォルダーを追加してください
+playlist.favorite_hint	「すべて」で曲に星を付けてください
+playlist.favorites	お気に入り
+playlist.files	ファイル...
+playlist.folder_dialog	音楽フォルダーを追加（サブフォルダーを含む）
+playlist.folders	フォルダーとサブフォルダー...
+playlist.general	すべて
+playlist.info_menu	曲の情報...
+playlist.list_menu	リスト ▾
+playlist.m3u_filter	UTF-8 M3Uプレイリスト
+playlist.mix	表示中の順序をシャッフル
+playlist.name_asc	名前：A → Z
+playlist.name_desc	名前：Z → A
+playlist.no_results	曲が見つかりません
+playlist.open_dialog	M3Uプレイリストを開く
+playlist.open_menu	M3Uを開く（追加）...
+playlist.opening	プレイリストを開いています...
+playlist.reading	読み取り中...
+playlist.remove	削除
+playlist.save_dialog	M3Uプレイリストを保存
+playlist.save_menu	M3Uを保存...
+playlist.saved	プレイリストを保存しました。
+playlist.saving	プレイリストを保存中...
+playlist.search	曲を検索...
+playlist.selected.few	{count}曲選択
+playlist.selected.many	{count}曲選択
+playlist.selected.one	{count}曲選択
+playlist.selected.other	{count}曲選択
+playlist.selected.two	{count}曲選択
+playlist.selected.zero	{count}曲選択
+playlist.title	プレイリスト
+playlist.tracks.few	{count}曲
+playlist.tracks.many	{count}曲
+playlist.tracks.one	{count}曲
+playlist.tracks.other	{count}曲
+playlist.tracks.two	{count}曲
+playlist.tracks.zero	{count}曲
+playlist.visible.few	{count}曲表示
+playlist.visible.many	{count}曲表示
+playlist.visible.one	{count}曲表示
+playlist.visible.other	{count}曲表示
+playlist.visible.two	{count}曲表示
+playlist.visible.zero	{count}曲表示
+preset.bass	低音
+preset.classical	クラシック
+preset.flat	フラット
+preset.jazz	ジャズ
+preset.pop	ポップ
+preset.rock	ロック
+preset.voice	ボーカル
+theme.aurora	オーロラ
+theme.autumn	秋
+theme.carbon	カーボン
+theme.carnival	カーニバル
+theme.children	子供の日
+theme.christmas	クリスマス
+theme.cyberpunk	サイバーパンク
+theme.dark	ダーク
+theme.desert	砂漠
+theme.easter	イースター
+theme.forest	森
+theme.halloween	ハロウィン
+theme.high-contrast	ハイコントラスト
+theme.inverse	反転
+theme.june-festival	六月祭
+theme.light	ライト
+theme.matrix	マトリックス
+theme.midnight	真夜中
+theme.mono	モノクロ
+theme.mountain	山
+theme.neon-blue	ネオンブルー
+theme.neon-purple	ネオンパープル
+theme.new-year	新年
+theme.ocean	海
+theme.original	LiteSic Original
+theme.sakura	桜
+theme.spring	春
+theme.summer	夏
+theme.sunset	夕日
+theme.synthwave	シンセウェーブ
+theme.terminal	レトロ端末
+theme.tropical	トロピカル
+theme.valentines	バレンタインデー
+theme.vintage	ビンテージオーディオ
+theme.winamp	Winamp Classic
+theme.winter	冬
+themes.all	すべて
+themes.celebrations	お祝い
+themes.classic	クラシック
+themes.essential	基本
+themes.nature	自然
+themes.restore	Originalに戻す
+themes.seasonal	季節
+themes.technology	テクノロジー
+themes.title	テーマ
+window.caption	LiteSic — {title}
+appearance.language	言語
+appearance.auto_language	自動（Windows）：{language}
+errors.language_change	言語設定を適用または保存できませんでした。リソースと設定フォルダーを確認してください。
+
+# M8-T8: control descriptions
+tooltip.previous	前の曲を再生
+tooltip.next	次の曲を再生
+tooltip.shuffle_on	シャッフル再生を有効にする
+tooltip.shuffle_off	シャッフル再生を無効にする
+tooltip.repeat_off	リピートなし
+tooltip.repeat_all	プレイリスト全体を繰り返す
+tooltip.repeat_one	現在の曲を繰り返す
+tooltip.play	再生を開始または再開
+tooltip.pause	再生を一時停止
+tooltip.stop	再生を停止
+tooltip.seek	曲内の位置を移動
+tooltip.volume	音量: {value}%
+tooltip.balance	バランス: {value} (−100 左、+100 右)
+tooltip.show_playlist	プレイリストを表示
+tooltip.hide_playlist	プレイリストを非表示
+tooltip.show_eq	イコライザーを表示
+tooltip.hide_eq	イコライザーを非表示
+tooltip.fft	周波数スペクトルを表示
+tooltip.osc	音声波形を表示
+tooltip.show_viz	ビジュアライザーを表示
+tooltip.hide_viz	ビジュアライザーを非表示
+tooltip.minimize	プレーヤーを最小化
+tooltip.close	このウィンドウを閉じる
+tooltip.time	経過時間と残り時間を切り替え
+tooltip.add	ファイルまたはフォルダーを追加
+tooltip.remove	選択した曲を削除
+tooltip.list_menu	プレイリストを開く、保存、並べ替え、消去
+tooltip.all	すべての曲を表示
+tooltip.favorites	お気に入りの曲を表示
+tooltip.clear_search	検索を消去
+tooltip.search	曲名、アーティスト、アルバム、ファイルを検索
+tooltip.row	クリックで選択、ダブルクリックで再生
+tooltip.favorite_on	お気に入りに追加
+tooltip.favorite_off	お気に入りから削除
+tooltip.scroll	リストをスクロール
+tooltip.eq_on	イコライザーを有効にする
+tooltip.eq_off	イコライザーを無効にする
+tooltip.presets	イコライザーのプリセットを選択
+tooltip.reset	すべてのゲインをゼロに戻す
+tooltip.preamp	プリアンプ: {gain} dB
+tooltip.band	{frequency} Hz — ゲイン: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — ゲイン: {gain} dB (このサンプルレートでは使用不可)
+tooltip.theme_list	テーマを選択して適用
+tooltip.theme_reset	既定のテーマに戻す
+tooltip.category	カテゴリーでテーマを絞り込む
+tooltip.info	曲の詳細。テキストを選択してコピー

@@ -1,3 +1,6 @@
+#include "ui_tooltip.h"
+#include "i18n.h"
+#include "language_selection.h"
 #include "eqwnd.h"
 #include "skin.h"
 #include "mainwnd.h"
@@ -50,9 +53,10 @@ int Hit(float x,float y){
     if(y>=56&&y<142)for(int i=0;i<11;++i)if(std::abs(x-(60+i*37))<16)return i+3;
     return -1;
 }
+const char* presetIds[]={"preset.flat","preset.rock","preset.pop","preset.jazz","preset.classical","preset.bass","preset.voice"};
 void PresetMenu(HWND hwnd){
     HMENU menu=CreatePopupMenu();for(unsigned i=0;i<Eq::PresetCount();++i)
-        AppendMenuW(menu,MF_STRING|(Eq::State().preset==int(i)?MF_CHECKED:0),100+i,Eq::PresetAt(i).name);
+        AppendMenuW(menu,MF_STRING|(Eq::State().preset==int(i)?MF_CHECKED:0),100+i,I18n::Text(presetIds[i]).c_str());
     POINT p{S(204),S(210)};ClientToScreen(hwnd,&p);
     int id=Ui::TrackThemedMenu(menu,TPM_RETURNCMD|TPM_NONOTIFY,p.x,p.y,hwnd,scale);DestroyMenu(menu);
     if(id>=100 && id<100+int(Eq::PresetCount())){Eq::ApplyPreset(id-100);Eq::Save();}
@@ -63,9 +67,29 @@ void Activate(HWND hwnd,int id){
     if(id==2){Eq::ApplyPreset(0);Eq::Save();}
     InvalidateRect(hwnd,nullptr,FALSE);
 }
+std::wstring Tooltip(int id){
+    if(id==0)return I18n::Text(Eq::State().enabled?"tooltip.eq_off":"tooltip.eq_on");
+    if(id==1)return I18n::Text("tooltip.presets");
+    if(id==2)return I18n::Text("tooltip.reset");
+    if(id==14)return I18n::Text("tooltip.hide_eq");
+    if(id<3||id>13)return {};
+    wchar_t gain[32]{};swprintf(gain,32,L"%+.1f",double(Gain(id)));
+    if(id==3)return I18n::Format("tooltip.preamp",{{"gain",gain}});
+    return I18n::Format(Enabled(id)?"tooltip.band":"tooltip.band_unavailable",{{"frequency",std::to_wstring(int(Eq::Frequencies[id-4]))},{"gain",gain}});
+}
+void AttachTooltips(HWND hwnd){
+    Ui::Tooltips::Attach(hwnd,[](POINT p){
+        float x=p.x/scale,y=p.y/scale;int id=Hit(x,y);Ui::Rect r{};
+        if(id>=0&&id<3)r=Button(id);
+        else if(id>=3)r={44.f+(id-3)*37,56,32,86};
+        else if((r={428,0,32,32}).Contains(x,y))id=14;
+        return Ui::Tooltips::Target{id<0?0:id+1,{S(r.x),S(r.y),S(r.x+r.w),S(r.y+r.h)}};
+    },[](int id){return Tooltip(id-1);},[]{return scale;});
+}
 LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
     LRESULT result=0;if(Ui::ThemeMenuMessage(message,wp,lp,result))return result;
     switch(message){
+    case WM_CREATE:AttachTooltips(hwnd);return 0;
     case WM_ENTERSIZEMOVE:Skin::BeginMove(Skin::Equalizer);return 0;
     case WM_MOVING:Skin::Moving(Skin::Equalizer,*reinterpret_cast<RECT*>(lp),S(24));return TRUE;
     case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Equalizer,S(24));SavePosition();return 0;
@@ -73,6 +97,9 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
     case WM_WINDOWPOSCHANGED:Skin::Changed(Skin::Equalizer);break;
     case WM_DISPLAYCHANGE:Skin::Recover();return 0;
     case WM_ERASEBKGND:return 1;
+    case I18n::WM_LANGUAGE_CHANGED:
+        SetWindowTextW(hwnd,I18n::Format("window.caption",{{"title",I18n::Text("equalizer.title")}}).c_str());
+        InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case Ui::WM_THEME_CHANGED:InvalidateRect(hwnd,nullptr,FALSE);return 0;
     case WM_NCHITTEST:{POINT p{GET_X_LPARAM(lp),GET_Y_LPARAM(lp)};ScreenToClient(hwnd,&p);
         if(p.y<S(32)&&p.x<S(428))return HTCAPTION;
@@ -108,29 +135,29 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
         SetWindowPos(hwnd,nullptr,r->left,r->top,S(460),S(Ui::EqHeight),SWP_NOZORDER|SWP_NOACTIVATE);EqWnd_MainMoved();return 0;}
     case WM_PAINT:{using namespace Ui;PAINTSTRUCT ps{};HDC dc=BeginPaint(hwnd,&ps);RECT r{};GetClientRect(hwnd,&r);
         if(canvas.Begin(dc,r,scale)){
-            canvas.Fill({0,0,460,EqHeight},Background);canvas.TitleBar(460,L"EQUALIZADOR",false);
+            canvas.Fill({0,0,460,EqHeight},Background);canvas.TitleBar(460,I18n::Text("equalizer.title").c_str(),false);
             const auto& state=Eq::State();bool hasFocus=GetFocus()==hwnd;
             canvas.Fill(Button(0),state.enabled?SelectedButtonFill():pressed==0?Border:hover==0?Hover:Surface,3);
             canvas.Stroke(Button(0),hasFocus&&focus==0?Accent:Bronze,3);
-            canvas.TextAt(Button(0),state.enabled?L"EQ ON":L"EQ OFF",state.enabled?SelectedButtonText:Text,Font::Small,true);
-            std::wstring name=L"Preset: ";name+=state.preset<0?L"Custom":Eq::PresetAt(state.preset).name;
-            for(int id:{1,2}){auto b=Button(id);canvas.Fill(b,pressed==id?Border:hover==id?Hover:Surface,3);canvas.Stroke(b,hasFocus&&focus==id?Accent:Bronze,3);canvas.TextAt(b,id==1?name:L"Redefinir",Text,Font::Small,true);}
+            canvas.TextAt(Button(0),state.enabled?I18n::Text("equalizer.on").c_str():I18n::Text("equalizer.off").c_str(),state.enabled?SelectedButtonText:Text,Font::Small,true);
+            std::wstring name=I18n::Format("equalizer.preset",{{"name",I18n::Text(state.preset<0?"equalizer.custom":presetIds[state.preset])}});
+            for(int id:{1,2}){auto b=Button(id);canvas.Fill(b,pressed==id?Border:hover==id?Hover:Surface,3);canvas.Stroke(b,hasFocus&&focus==id?Accent:Bronze,3);canvas.TextAt(b,id==1?name:I18n::Text("equalizer.reset").c_str(),Text,Font::Small,true);}
             canvas.TextAt({8,190,60,22},L"EQ",Muted,Font::Small);
-            canvas.TextAt({12,164,436,20},L"±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera",Muted,Font::Small,true);
+            canvas.TextAt({12,164,436,20},I18n::Text("equalizer.help").c_str(),Muted,Font::Small,true);
             canvas.Fill({8,40,444,104},Surface,3);
             for(int j=0;j<3;++j){float y=70+j*30;canvas.Line(44,y,446,y,Border);canvas.TextAt({9,y-8,36,16},j==0?L"+12":j==1?L"0":L"−12",Muted,Font::Small);}
-            const wchar_t* labels[]={L"PRE",L"60",L"170",L"310",L"600",L"1k",L"3k",L"6k",L"12k",L"14k",L"16k"};
+            const std::wstring labels[]={I18n::Text("equalizer.preamp").c_str(),L"60",L"170",L"310",L"600",L"1k",L"3k",L"6k",L"12k",L"14k",L"16k"};
             for(int i=0;i<11;++i){int id=i+3;float x=60+i*37,y=100-Gain(id)*60/24;bool enabled=Enabled(id);
                 if(i>1)canvas.Line(x-37,100-Gain(id-1)*60/24,x,y,Accent,1.5f);
                 canvas.Line(x,70,x,130,enabled?palette.sliderTrack:Border,3);
                 canvas.Circle(x,y,pressed==id?6:5,enabled?(hover==id?Accent:palette.sliderFill):Muted,Border);
                 if(hasFocus&&focus==id)canvas.Stroke({x-13,60,26,77},Accent,3);
                 wchar_t gain[32];swprintf(gain,32,L"%+.1f",double(Gain(id)));
-                canvas.TextAt({x-18,42,36,18},enabled?gain:L"N/A",enabled?Text:Muted,Font::Small,true);
+                canvas.TextAt({x-18,42,36,18},enabled?gain:I18n::Text("equalizer.unavailable").c_str(),enabled?Text:Muted,Font::Small,true);
                 canvas.TextAt({x-18,145,36,18},labels[i],enabled?Text:Muted,Font::Small,true);
             }
             if(!canvas.End())InvalidateRect(hwnd,nullptr,FALSE);
-        }else{SetBkColor(dc,NativeColor(Surface));SetTextColor(dc,NativeColor(Text));DrawTextW(dc,L"Equalizador: renderização indisponível",-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE);}
+        }else{SetBkColor(dc,NativeColor(Surface));SetTextColor(dc,NativeColor(Text));DrawTextW(dc,I18n::Text("errors.eq_render").c_str(),-1,&r,DT_CENTER|DT_VCENTER|DT_SINGLELINE);}
         EndPaint(hwnd,&ps);return 0;}
     case WM_DESTROY:SavePosition();Eq::Save();Skin::Unbind(Skin::Equalizer);window=nullptr;canvas.Reset();return 0;
     }return DefWindowProcW(hwnd,message,wp,lp);
@@ -156,7 +183,7 @@ void EqWnd_Toggle(HWND main){
             x=std::max<int>(monitor.rcWork.left,std::min<int>(parent.right,monitor.rcWork.right-S(460)));
             y=std::max<int>(monitor.rcWork.top,std::min<int>(parent.top,monitor.rcWork.bottom-S(Ui::EqHeight)));
         }
-        window=CreateWindowExW(0,cls.lpszClassName,L"LiteSic — Equalizador",WS_POPUP,x,y,S(460),S(Ui::EqHeight),main,nullptr,cls.hInstance,nullptr);
+        window=CreateWindowExW(0,cls.lpszClassName,I18n::Format("window.caption",{{"title",I18n::Text("equalizer.title")}}).c_str(),WS_POPUP,x,y,S(460),S(Ui::EqHeight),main,nullptr,cls.hInstance,nullptr);
     }if(window){Skin::Bind(Skin::Equalizer,window);SavePosition();ShowWindow(window,IsWindowVisible(window)?SW_HIDE:SW_SHOWNOACTIVATE);EqWnd_MainMoved(restored);Ui::SaveAppearanceValue(L"EqualizerVisible",IsWindowVisible(window)!=FALSE);InvalidateRect(window,nullptr,FALSE);InvalidateRect(mainWindow,nullptr,FALSE);}
 }
 bool EqWnd_IsVisible(){return window&&IsWindowVisible(window);}

@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	자동 (권장)
+appearance.scale_menu	모양 > 인터페이스 배율
+appearance.themes_menu	모양 > 테마...
+audio.mono	모노
+audio.multichannel	다중 채널
+audio.stereo	스테레오
+common.close	닫기
+common.no	아니요
+common.yes	예
+equalizer.custom	사용자 지정
+equalizer.help	±12 dB · ↑/↓ 조정 · Tab 이동 · 스페이스 초기화
+equalizer.off	EQ 꺼짐
+equalizer.on	EQ 켜짐
+equalizer.preamp	프리
+equalizer.preset	프리셋: {name}
+equalizer.reset	초기화
+equalizer.title	이퀄라이저
+equalizer.unavailable	없음
+errors.audio_read	오디오 파일을 읽을 수 없습니다.
+errors.data_folder	데이터 폴더에 접근할 수 없습니다. 이번 세션에서는 재생 목록이 유지되지 않습니다.
+errors.eq_render	이퀄라이저: 렌더링을 사용할 수 없음
+errors.m3u_invalid	목록이 잘못되었거나 16 MiB보다 큽니다.
+errors.m3u_open	재생 목록을 열 수 없습니다.
+errors.m3u_save	재생 목록을 저장할 수 없습니다.
+errors.m3u_start	M3U 작업을 시작할 수 없습니다.
+errors.metadata_unavailable	메타데이터 읽기를 사용할 수 없습니다.
+errors.play_file	파일을 재생할 수 없습니다.
+errors.play_selected	선택한 곡을 재생할 수 없습니다.
+errors.play_track	곡을 재생할 수 없습니다
+errors.preserve_playlist	재생 목록을 유지할 수 없습니다.\n{error}
+errors.preserve_position	재생 목록 위치를 유지할 수 없습니다.
+errors.preserve_selection	재생 목록 선택을 유지할 수 없습니다.
+errors.scan	검색을 시작할 수 없습니다.
+errors.selection_large	선택한 항목이 너무 많습니다. 폴더를 추가하세요.
+errors.temporary	임시 파일을 만들 수 없습니다.
+errors.theme_save	테마가 적용되었지만 설정을 저장할 수 없습니다.
+errors.track_limit	최대 곡 수인 100,000곡에 도달했습니다.
+errors.translation	텍스트를 사용할 수 없음
+errors.worker	백그라운드 읽기를 시작할 수 없습니다.
+info.album	앨범
+info.artist	아티스트
+info.bitrate	대략적인 평균 비트레이트 (파일)
+info.caption	곡 정보
+info.channels	채널
+info.duration	길이
+info.favorite	즐겨찾기
+info.field	{label}: {value}
+info.file	파일
+info.format	형식
+info.genre	장르
+info.reading	메타데이터 읽는 중...
+info.sample_rate	샘플 레이트
+info.size	크기
+info.title	제목
+info.track	트랙
+info.unknown	정보 없음
+info.year	연도/날짜
+player.add_hint	재생 목록에서 파일을 추가하세요
+player.balance	밸런스
+player.balance_help	밸런스: 왼쪽 / 오른쪽
+player.left	좌
+player.list_short	목록
+player.native	LiteSic   ·   네이티브 오디오 플레이어
+player.next	다음
+player.oscilloscope	오실로스코프
+player.pause	일시 정지
+player.paused	일시 정지됨
+player.play	재생
+player.playing	재생 중
+player.position	곡 재생 위치
+player.previous	이전
+player.ready	재생 준비 완료
+player.repeat	반복: 끄기 → 목록 → 곡
+player.repeat_one	반복 1
+player.repeat_short	반복
+player.right	우
+player.shuffle	셔플
+player.shuffle_short	셔플
+player.spectrum	FFT 스펙트럼
+player.stop	정지
+player.time	시간
+player.toggle_equalizer	이퀄라이저 표시 / 숨기기
+player.toggle_playlist	재생 목록 표시 / 숨기기
+player.toggle_visualizer	시각화 표시 / 숨기기
+player.volume	음량
+player.welcome	내 음악을 가까이
+playlist.add_short	추가 ▾
+playlist.added	목록이 추가되었습니다.
+playlist.audio_filter	오디오
+playlist.clear	목록 비우기
+playlist.duration_asc	길이: 짧은 순
+playlist.duration_desc	길이: 긴 순
+playlist.empty	파일이나 폴더를 추가하세요
+playlist.favorite_hint	전체에서 곡에 별표를 표시하세요
+playlist.favorites	즐겨찾기
+playlist.files	파일...
+playlist.folder_dialog	오디오 폴더 추가 (하위 폴더 포함)
+playlist.folders	폴더 및 하위 폴더...
+playlist.general	전체
+playlist.info_menu	곡 정보...
+playlist.list_menu	목록 ▾
+playlist.m3u_filter	UTF-8 M3U 재생 목록
+playlist.mix	표시된 순서 섞기
+playlist.name_asc	이름: A → Z
+playlist.name_desc	이름: Z → A
+playlist.no_results	곡을 찾을 수 없습니다
+playlist.open_dialog	M3U 재생 목록 열기
+playlist.open_menu	M3U 열기 (추가)...
+playlist.opening	목록 여는 중...
+playlist.reading	읽는 중...
+playlist.remove	제거
+playlist.save_dialog	M3U 재생 목록 저장
+playlist.save_menu	M3U 저장...
+playlist.saved	목록이 저장되었습니다.
+playlist.saving	목록 저장 중...
+playlist.search	곡 검색...
+playlist.selected.few	{count}곡 선택
+playlist.selected.many	{count}곡 선택
+playlist.selected.one	{count}곡 선택
+playlist.selected.other	{count}곡 선택
+playlist.selected.two	{count}곡 선택
+playlist.selected.zero	{count}곡 선택
+playlist.title	재생 목록
+playlist.tracks.few	{count}곡
+playlist.tracks.many	{count}곡
+playlist.tracks.one	{count}곡
+playlist.tracks.other	{count}곡
+playlist.tracks.two	{count}곡
+playlist.tracks.zero	{count}곡
+playlist.visible.few	{count}곡 표시
+playlist.visible.many	{count}곡 표시
+playlist.visible.one	{count}곡 표시
+playlist.visible.other	{count}곡 표시
+playlist.visible.two	{count}곡 표시
+playlist.visible.zero	{count}곡 표시
+preset.bass	저음
+preset.classical	클래식
+preset.flat	평탄
+preset.jazz	재즈
+preset.pop	팝
+preset.rock	록
+preset.voice	음성
+theme.aurora	오로라
+theme.autumn	가을
+theme.carbon	카본
+theme.carnival	카니발
+theme.children	어린이날
+theme.christmas	크리스마스
+theme.cyberpunk	사이버펑크
+theme.dark	어두움
+theme.desert	사막
+theme.easter	부활절
+theme.forest	숲
+theme.halloween	할로윈
+theme.high-contrast	고대비
+theme.inverse	반전
+theme.june-festival	6월 축제
+theme.light	밝음
+theme.matrix	매트릭스
+theme.midnight	자정
+theme.mono	단색
+theme.mountain	산
+theme.neon-blue	네온 블루
+theme.neon-purple	네온 퍼플
+theme.new-year	새해
+theme.ocean	바다
+theme.original	LiteSic Original
+theme.sakura	벚꽃
+theme.spring	봄
+theme.summer	여름
+theme.sunset	일몰
+theme.synthwave	신스웨이브
+theme.terminal	레트로 터미널
+theme.tropical	열대
+theme.valentines	밸런타인데이
+theme.vintage	빈티지 오디오
+theme.winamp	Winamp Classic
+theme.winter	겨울
+themes.all	전체
+themes.celebrations	기념일
+themes.classic	클래식
+themes.essential	기본
+themes.nature	자연
+themes.restore	Original 복원
+themes.seasonal	계절
+themes.technology	기술
+themes.title	테마
+window.caption	LiteSic — {title}
+appearance.language	언어
+appearance.auto_language	자동 (Windows): {language}
+errors.language_change	언어 설정을 적용하거나 저장할 수 없습니다. 리소스와 설정 폴더를 확인하세요.
+
+# M8-T8: control descriptions
+tooltip.previous	이전 곡 재생
+tooltip.next	다음 곡 재생
+tooltip.shuffle_on	무작위 재생 켜기
+tooltip.shuffle_off	무작위 재생 끄기
+tooltip.repeat_off	반복 끄기
+tooltip.repeat_all	재생 목록 전체 반복
+tooltip.repeat_one	현재 곡 반복
+tooltip.play	재생 시작 또는 다시 시작
+tooltip.pause	재생 일시 정지
+tooltip.stop	재생 정지
+tooltip.seek	곡 안의 위치로 이동
+tooltip.volume	음량: {value}%
+tooltip.balance	밸런스: {value} (−100 왼쪽, +100 오른쪽)
+tooltip.show_playlist	재생 목록 표시
+tooltip.hide_playlist	재생 목록 숨기기
+tooltip.show_eq	이퀄라이저 표시
+tooltip.hide_eq	이퀄라이저 숨기기
+tooltip.fft	주파수 스펙트럼 표시
+tooltip.osc	오디오 파형 표시
+tooltip.show_viz	시각화 표시
+tooltip.hide_viz	시각화 숨기기
+tooltip.minimize	플레이어 최소화
+tooltip.close	이 창 닫기
+tooltip.time	경과 시간 / 남은 시간 전환
+tooltip.add	파일 또는 폴더 추가
+tooltip.remove	선택한 곡 제거
+tooltip.list_menu	재생 목록 열기, 저장, 정렬 또는 비우기
+tooltip.all	모든 곡 표시
+tooltip.favorites	즐겨찾는 곡 표시
+tooltip.clear_search	검색 지우기
+tooltip.search	제목, 아티스트, 앨범 또는 파일 검색
+tooltip.row	클릭하여 선택; 두 번 클릭하여 재생
+tooltip.favorite_on	즐겨찾기에 추가
+tooltip.favorite_off	즐겨찾기에서 제거
+tooltip.scroll	목록 스크롤
+tooltip.eq_on	이퀄라이저 켜기
+tooltip.eq_off	이퀄라이저 끄기
+tooltip.presets	이퀄라이저 프리셋 선택
+tooltip.reset	모든 게인을 0으로 초기화
+tooltip.preamp	프리앰프: {gain} dB
+tooltip.band	{frequency} Hz — 게인: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — 게인: {gain} dB (현재 샘플 레이트에서 사용 불가)
+tooltip.theme_list	테마 선택 및 적용
+tooltip.theme_reset	기본 테마 복원
+tooltip.category	카테고리별 테마 필터
+tooltip.info	곡 세부 정보; 텍스트를 선택하여 복사

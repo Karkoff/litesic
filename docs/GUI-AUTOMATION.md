@@ -1,4 +1,30 @@
+## M8-T8 — hover e popup temático
+
+`-Action hover -Target main|playlist|eq|themes|info -X <px> -Y <px>` exige
+sessão isolada, observação recente inspecionada, PID/hash/ownership e ponto
+não coberto. Move apenas o cursor, espera 850 ms e captura a superfície e
+um único `LiteSic.TooltipWnd` owned, se visível. `-Label` cria arquivos
+`<label>-context.png` e `<label>-popup.png`. Nenhuma entrada é enviada ao
+popup. A observação válida permanece associada à superfície.
+
+`test-test_tooltip.exe --gui` executa testes de popup real em janelas próprias
+no desktop interativo; sem esse argumento, a suíte usa consultas estruturais,
+reprodução offline, recursos e geometria. `--matrix` restringe o adicional
+gráfico à matriz. Os requisitos de autorização da plataforma continuam
+aplicáveis; não se contorna o sandbox ou as guardas do driver.
+
 # Automação gráfica de desenvolvimento
+
+## M8-T6 — amostras de idioma
+
+Nesta tarefa o usuário autorizou verificações gráficas. A fixture
+`scripts/gui.ps1 -Action launch -Architecture 64 -Configuration release
+-Validation -Language ar-SA` seleciona um dos 18 catálogos somente no perfil
+isolado. `-Language` sem `-Validation`, ou código fora da lista, é rejeitado
+antes de acessar o desktop. O parâmetro não implementa preferência de produto.
+`scripts/gui/capture_i18n.ps1` reproduz a sequência launch/capture/close,
+sem entrada; requer playlist e EQ visíveis no perfil isolado. Executar com
+as guardas e revisão de aprovação existentes. [54 capturas e hashes](evidence/m8-i18n/README.md).
 
 ## M7 — sessão isolada e autorização de capturas
 
@@ -300,7 +326,28 @@ usuário durante os poucos instantes de uma ação. As restrições do driver li
 suas operações; não são uma fronteira de segurança contra alguém que possa
 editar os próprios scripts/arquivos do projeto.
 
-## Computer Use nativo
+## Seleção de idioma e informações (M8-T7)
+
+`-Action language -Query <código|automatic>` executa o comando real do submenu
+Idioma, exclusivamente em sessão lançada com `-Validation`; exige observação
+recente do player principal. Diferentemente de `-Language` na inicialização
+(fixture T6), aplica e persiste a preferência no perfil isolado. Nunca usa INI
+pessoal nem altera preferências Windows. Exemplos:
+
+```powershell
+powershell -NoProfile -File scripts/gui.ps1 -Action capture -Target main -Label language-before
+powershell -NoProfile -File scripts/gui.ps1 -Action language -Query ar-SA -Label language-ar
+powershell -NoProfile -File scripts/gui.ps1 -Action capture -Target info -Label language-info
+```
+
+`-Target info` aceita apenas `LiteSic.TrackInfoWnd` do mesmo PID, com owner
+principal ou playlist pertencente ao principal. Janelas alheias são recusadas.
+`scripts/gui/capture_language_selection.ps1` captura os 18 idiomas nas cinco
+janelas já abertas em uma sessão isolada. Não abre diálogos por comandos
+arbitrários. Inspecionar resultados, não apenas retorno de execução.
+32 guardas atuais; [evidências e limites T7](M8-T7-LANGUAGE-SELECTION.md).
+
+## Computer Use nativo — disponibilidade
 
 Prefira a integração nativa quando estiver disponível. Nesta instalação, os
 plugins Computer Use estão habilitados e `@oai/sky` importa, mas `list_windows`

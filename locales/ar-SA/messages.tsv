@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	تلقائي (موصى به)
+appearance.scale_menu	المظهر > مقياس الواجهة
+appearance.themes_menu	المظهر > السمات...
+audio.mono	أحادي
+audio.multichannel	متعدد القنوات
+audio.stereo	ستيريو
+common.close	إغلاق
+common.no	لا
+common.yes	نعم
+equalizer.custom	مخصص
+equalizer.help	‪±12 dB‬ · ↑/↓ ضبط · Tab تنقل · مسافة تصفير
+equalizer.off	EQ إيقاف
+equalizer.on	EQ تشغيل
+equalizer.preamp	تمهيد
+equalizer.preset	إعداد: {name}
+equalizer.reset	إعادة ضبط
+equalizer.title	المعادل
+equalizer.unavailable	غير متاح
+errors.audio_read	تعذرت قراءة ملف الصوت.
+errors.data_folder	تعذر الوصول إلى مجلد البيانات. لن يتم الاحتفاظ بقائمة التشغيل في هذه الجلسة.
+errors.eq_render	المعادل: العرض غير متاح
+errors.m3u_invalid	قائمة غير صالحة أو أكبر من 16 MiB.
+errors.m3u_open	تعذر فتح قائمة التشغيل.
+errors.m3u_save	تعذر حفظ قائمة التشغيل.
+errors.m3u_start	تعذر بدء عملية M3U.
+errors.metadata_unavailable	قراءة البيانات الوصفية غير متاحة.
+errors.play_file	تعذر تشغيل الملف.
+errors.play_selected	تعذر تشغيل المقطع المحدد.
+errors.play_track	تعذر تشغيل المقطع
+errors.preserve_playlist	تعذر الاحتفاظ بقائمة التشغيل.\n{error}
+errors.preserve_position	تعذر الاحتفاظ بموضع قائمة التشغيل.
+errors.preserve_selection	تعذر الاحتفاظ بتحديد قائمة التشغيل.
+errors.scan	تعذر بدء الفحص.
+errors.selection_large	التحديد كبير جدًا؛ أضف مجلدًا.
+errors.temporary	تعذر إنشاء الملف المؤقت.
+errors.theme_save	تم تطبيق السمة، لكن تعذر حفظ التفضيل.
+errors.track_limit	تم بلوغ الحد الأقصى البالغ 100,000 مقطع.
+errors.translation	النص غير متاح
+errors.worker	تعذر بدء القراءة في الخلفية.
+info.album	الألبوم
+info.artist	الفنان
+info.bitrate	متوسط معدل البت التقريبي (الملف)
+info.caption	معلومات المقطع
+info.channels	القنوات
+info.duration	المدة
+info.favorite	مفضل
+info.field	{label}: {value}
+info.file	الملف
+info.format	التنسيق
+info.genre	النوع
+info.reading	جارٍ قراءة البيانات الوصفية...
+info.sample_rate	معدل أخذ العينات
+info.size	الحجم
+info.title	العنوان
+info.track	المقطع
+info.unknown	غير محدد
+info.year	السنة/التاريخ
+player.add_hint	أضف ملفات من قائمة التشغيل
+player.balance	توازن
+player.balance_help	التوازن: يسار / يمين
+player.left	L
+player.list_short	قائمة
+player.native	LiteSic   ·   مشغل صوت أصلي
+player.next	التالي
+player.oscilloscope	راسم الذبذبات
+player.pause	إيقاف مؤقت
+player.paused	متوقف مؤقتًا
+player.play	تشغيل
+player.playing	قيد التشغيل
+player.position	موضع المقطع
+player.previous	السابق
+player.ready	جاهز للتشغيل
+player.repeat	التكرار: إيقاف → القائمة → المقطع
+player.repeat_one	تكرار 1
+player.repeat_short	تكرار
+player.right	R
+player.shuffle	تشغيل عشوائي
+player.shuffle_short	عشوائي
+player.spectrum	طيف FFT
+player.stop	إيقاف
+player.time	الوقت
+player.toggle_equalizer	إظهار / إخفاء المعادل
+player.toggle_playlist	إظهار / إخفاء قائمة التشغيل
+player.toggle_visualizer	إظهار / إخفاء المؤثرات المرئية
+player.volume	الصوت
+player.welcome	موسيقاك قريبة منك
+playlist.add_short	إضافة ▾
+playlist.added	تمت إضافة القائمة.
+playlist.audio_filter	الصوت
+playlist.clear	إفراغ القائمة
+playlist.duration_asc	المدة: الأقصر → الأطول
+playlist.duration_desc	المدة: الأطول → الأقصر
+playlist.empty	أضف ملفات أو مجلدًا
+playlist.favorite_hint	ضع نجمة على مقطع في قسم الكل
+playlist.favorites	المفضلة
+playlist.files	ملفات...
+playlist.folder_dialog	إضافة مجلد صوت (بما في ذلك المجلدات الفرعية)
+playlist.folders	مجلد ومجلداته الفرعية...
+playlist.general	الكل
+playlist.info_menu	معلومات المقطع...
+playlist.list_menu	القائمة ▾
+playlist.m3u_filter	قوائم تشغيل M3U بترميز UTF-8
+playlist.mix	خلط الترتيب الظاهر
+playlist.name_asc	الاسم: A ? Z
+playlist.name_desc	الاسم: Z ? A
+playlist.no_results	لم يتم العثور على مقاطع
+playlist.open_dialog	فتح قائمة M3U
+playlist.open_menu	فتح M3U (إضافة)...
+playlist.opening	جارٍ فتح القائمة...
+playlist.reading	جارٍ القراءة...
+playlist.remove	إزالة
+playlist.save_dialog	حفظ قائمة M3U
+playlist.save_menu	حفظ M3U...
+playlist.saved	تم حفظ القائمة.
+playlist.saving	جارٍ حفظ القائمة...
+playlist.search	البحث عن مقاطع...
+playlist.selected.few	{count} محددة
+playlist.selected.many	{count} محددًا
+playlist.selected.one	{count} محدد
+playlist.selected.other	{count} محدد
+playlist.selected.two	{count} محددان
+playlist.selected.zero	{count} محدد
+playlist.title	قائمة التشغيل
+playlist.tracks.few	{count} مقاطع
+playlist.tracks.many	{count} مقطعًا
+playlist.tracks.one	مقطع واحد ({count})
+playlist.tracks.other	{count} مقطع
+playlist.tracks.two	مقطعان ({count})
+playlist.tracks.zero	{count} مقاطع
+playlist.visible.few	{count} ظاهرة
+playlist.visible.many	{count} ظاهرًا
+playlist.visible.one	{count} ظاهر
+playlist.visible.other	{count} ظاهر
+playlist.visible.two	{count} ظاهران
+playlist.visible.zero	{count} ظاهر
+preset.bass	جهير
+preset.classical	كلاسيكية
+preset.flat	مسطح
+preset.jazz	جاز
+preset.pop	بوب
+preset.rock	روك
+preset.voice	صوت بشري
+theme.aurora	الشفق القطبي
+theme.autumn	الخريف
+theme.carbon	الكربون
+theme.carnival	الكرنفال
+theme.children	يوم الطفل
+theme.christmas	عيد الميلاد
+theme.cyberpunk	سايبربانك
+theme.dark	داكن
+theme.desert	الصحراء
+theme.easter	عيد الفصح
+theme.forest	الغابة
+theme.halloween	الهالوين
+theme.high-contrast	تباين عالٍ
+theme.inverse	معكوس
+theme.june-festival	مهرجان يونيو
+theme.light	فاتح
+theme.matrix	ماتريكس
+theme.midnight	منتصف الليل
+theme.mono	أحادي اللون
+theme.mountain	الجبل
+theme.neon-blue	نيون أزرق
+theme.neon-purple	نيون أرجواني
+theme.new-year	رأس السنة
+theme.ocean	المحيط
+theme.original	LiteSic Original
+theme.sakura	ساكورا
+theme.spring	الربيع
+theme.summer	الصيف
+theme.sunset	الغروب
+theme.synthwave	سينث ويف
+theme.terminal	طرفية قديمة
+theme.tropical	استوائي
+theme.valentines	عيد الحب
+theme.vintage	صوت عتيق
+theme.winamp	Winamp Classic
+theme.winter	الشتاء
+themes.all	الكل
+themes.celebrations	مناسبات
+themes.classic	كلاسيكية
+themes.essential	أساسية
+themes.nature	طبيعة
+themes.restore	استعادة Original
+themes.seasonal	موسمية
+themes.technology	تقنية
+themes.title	السمات
+window.caption	LiteSic — {title}
+appearance.language	اللغة
+appearance.auto_language	تلقائي (Windows): {language}
+errors.language_change	تعذر تطبيق تفضيل اللغة أو حفظه. تحقق من الموارد ومجلد الإعدادات.
+
+# M8-T8: control descriptions
+tooltip.previous	تشغيل المقطع السابق
+tooltip.next	تشغيل المقطع التالي
+tooltip.shuffle_on	تفعيل التشغيل العشوائي
+tooltip.shuffle_off	تعطيل التشغيل العشوائي
+tooltip.repeat_off	التكرار معطل
+tooltip.repeat_all	تكرار قائمة التشغيل كاملة
+tooltip.repeat_one	تكرار المقطع الحالي
+tooltip.play	بدء التشغيل أو استئنافه
+tooltip.pause	إيقاف التشغيل مؤقتًا
+tooltip.stop	إيقاف التشغيل
+tooltip.seek	الانتقال إلى موضع في المقطع
+tooltip.volume	مستوى الصوت: {value}%
+tooltip.balance	التوازن: {value} (−100 يسار، +100 يمين)
+tooltip.show_playlist	إظهار قائمة التشغيل
+tooltip.hide_playlist	إخفاء قائمة التشغيل
+tooltip.show_eq	إظهار المعادل
+tooltip.hide_eq	إخفاء المعادل
+tooltip.fft	إظهار طيف الترددات
+tooltip.osc	إظهار شكل الموجة الصوتية
+tooltip.show_viz	إظهار المؤثرات المرئية
+tooltip.hide_viz	إخفاء المؤثرات المرئية
+tooltip.minimize	تصغير المشغل
+tooltip.close	إغلاق هذه النافذة
+tooltip.time	تبديل الوقت المنقضي / المتبقي
+tooltip.add	إضافة ملفات أو مجلد
+tooltip.remove	إزالة المقاطع المحددة
+tooltip.list_menu	فتح القائمة أو حفظها أو ترتيبها أو مسحها
+tooltip.all	إظهار جميع المقاطع
+tooltip.favorites	إظهار المقاطع المفضلة
+tooltip.clear_search	مسح البحث
+tooltip.search	البحث بالعنوان أو الفنان أو الألبوم أو الملف
+tooltip.row	تحديد؛ نقر مزدوج للتشغيل
+tooltip.favorite_on	إضافة إلى المفضلة
+tooltip.favorite_off	إزالة من المفضلة
+tooltip.scroll	تمرير القائمة
+tooltip.eq_on	تفعيل المعادل
+tooltip.eq_off	تعطيل المعادل
+tooltip.presets	اختيار إعداد مسبق للمعادل
+tooltip.reset	إعادة جميع قيم الكسب إلى الصفر
+tooltip.preamp	التضخيم المسبق: {gain} ديسيبل
+tooltip.band	{frequency} هرتز — الكسب: {gain} ديسيبل
+tooltip.band_unavailable	{frequency} هرتز — الكسب: {gain} ديسيبل (غير متاح بمعدل العينات هذا)
+tooltip.theme_list	اختيار سمة وتطبيقها
+tooltip.theme_reset	استعادة السمة الافتراضية
+tooltip.category	تصفية السمات حسب الفئة
+tooltip.info	تفاصيل المقطع؛ حدد النص لنسخه

@@ -39,6 +39,7 @@ const Theme& ActiveTheme();
 unsigned ThemeGeneration();
 // nullptr disables persistence for isolated tests; paths must be absolute.
 void ThemeConfigure(const wchar_t* iniPath);
+const wchar_t* SettingsPath();
 bool SelectTheme(const wchar_t* id, bool save = true);
 bool RestoreTheme();
 bool ThemeInitializeUser();

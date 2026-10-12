@@ -1,0 +1,1557 @@
+[
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"--validation\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"LiteSic\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"\\\\/\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"\\\\LiteSic\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"\\\\build\\\\gui\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"\\\\m6-session\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"\\\\playlist.m3u8\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"\\\\settings.ini\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"user32.dll\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"0\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"1\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"=\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Band\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Clássica\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Custom\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Enabled\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Equalizer\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Flat\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Graves\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Jazz\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Pop\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Preamp\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Preset\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Rock\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eq_state.cpp",
+    "literal": "L\"Voz\"",
+    "reason": "Legacy preset registry name; persisted values stay stable; UI display uses semantic preset IDs."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"%+.1f\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"+12\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"0\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"12k\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"14k\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"16k\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"170\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"1k\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"310\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"3k\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"60\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"600\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"6k\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"EQ\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"EqualizerVisible\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"LiteSic.EqualizerWnd\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/eqwnd.cpp",
+    "literal": "L\"−12\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\" \\r\\n\\t\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Deutsch\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"English\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Español\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Français\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Italiano\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Malgun Gothic\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Mangal\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Meiryo\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Microsoft JhengHei\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Microsoft YaHei\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Nederlands\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Polski\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Português (Brasil)\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Português (Portugal)\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Svenska\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Tahoma\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Türkçe\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"\\\\\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"\\\\/\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"\\\\locales\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"\\\\messages.tsv\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"Русский\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"العربية\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"हिन्दी\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"日本語\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"简体中文\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"繁體中文\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/i18n.cpp",
+    "literal": "L\"한국어\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\" \\t\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"#EXTINF:\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"#EXTM3U\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"#LITESIC-FAVORITE:1\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"#LITESIC-FAVORITE:1\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\",\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"/\\\\\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"://\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"LSC\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/m3u.cpp",
+    "literal": "L\"\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"   ·   \"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\" kbps\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\" mono\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\" st\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"%.1f kHz   ·   %ls\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"%d kHz\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"%d kbps  %s%s\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"%d kbps\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"%d.%d kHz\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"%s%s\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"--:--\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"100%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"110%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"125%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"150%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"80%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"90%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"<<\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\">\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\">>\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"EQ\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"LiteSic\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"LiteSic.MainWnd\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"ScalePercent\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"Spectrum\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"VIZ\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"VisualizerVisible\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"VolumePermille\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"[]\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"user32.dll\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/mainwnd.cpp",
+    "literal": "L\"||\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/playlist.cpp",
+    "literal": "L\".flac\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/playlist.cpp",
+    "literal": "L\".mp3\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/playlist.cpp",
+    "literal": "L\".ogg\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/playlist.cpp",
+    "literal": "L\".wav\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/playlist.cpp",
+    "literal": "L\"/\\\\\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/playlist_worker.cpp",
+    "literal": "L\"*\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"  \"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\" Hz\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\" bytes\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\" kbps\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\" · \"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\" · %u:%02u\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\" — \"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"#\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"%u:%02u\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"*.m3u;*.m3u8\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"*.mp3;*.wav;*.flac;*.ogg\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"--:--\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\".ini\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"=\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"> \"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Anchor\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"BUTTON\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Dock\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"EDIT\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Geometry\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Height\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Index\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Index=\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Left\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"LiteSic\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"LiteSic.PlaylistWnd\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"LiteSic.TrackInfoWnd\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"MainLeft\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"MainTop\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Parent\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Path\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Path=\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"PlaylistFavoritesOnly\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"PlaylistVisible\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Selection\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Top\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Version\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"Width\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"\\\\\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"\\r\\n\\r\\n\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"m3u8\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"×\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"▶\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"★\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/plwnd.cpp",
+    "literal": "L\"☆\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"  ▾\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"BUTTON\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"COMBOBOX\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Clássicos\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Comemorativos\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Essenciais\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"LISTBOX\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"LiteSic\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"LiteSic.ThemesWnd\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Naturais\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Sazonais\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Segoe UI\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Tecnológicos\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"Todos\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"×\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/theme_window.cpp",
+    "literal": "L\"✓ \"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_draw.cpp",
+    "literal": "L\"Segoe UI\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_draw.cpp",
+    "literal": "L\"×\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_draw.cpp",
+    "literal": "L\"−\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_draw.cpp",
+    "literal": "L\"✓\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"%\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"1\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"EQ\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"FFT\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"OSC\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"VIZ\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_player.cpp",
+    "literal": "L\"♫  LITESIC\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"=\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Alto Contraste\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Anchor\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Ano Novo\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Appearance\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Aurora Boreal\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Carbon\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Carnaval\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Claro\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Clássicos\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Comemorativos\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Consolas\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Cyberpunk\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Deserto\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Dia das Crianças\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Dia dos Namorados\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Dock\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"EqualizerVisible\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"EqualizerWindow\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Escuro\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Essenciais\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Festa Junina\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Floresta\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Halloween\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Inverno\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Inverso\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Left\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"LiteSic Original\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"LiteSic.\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Matrix\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Midnight\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Monocromático\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Montanha\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Natal\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Naturais\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Neon Blue\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Neon Purple\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Oceano\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Outono\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Parent\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"PlaylistFavoritesOnly\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"PlaylistVisible\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Primavera\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Páscoa\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Pôr do Sol\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Sakura\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Sazonais\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"ScalePercent\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Segoe UI\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Spectrum\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Synthwave\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Tahoma\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Tecnológicos\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Terminal Retro\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Theme\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Top\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Tropical\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Version\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Verão\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Vintage Audio\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"VisualizerVisible\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"VolumePermille\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"Winamp Classic\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"\\\\LiteSic\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"\\\\settings.ini\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"aurora\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"autumn\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"carbon\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"carnival\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"children\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"christmas\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"cyberpunk\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"dark\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"desert\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"easter\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"forest\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"halloween\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"high-contrast\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"inverse\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"june-festival\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"light\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"matrix\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"midnight\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"mono\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"mountain\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"neon-blue\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"neon-purple\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"new-year\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"ocean\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"original\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"sakura\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"spring\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"summer\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"sunset\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"synthwave\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"terminal\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"tropical\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"valentines\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"vintage\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"winamp\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/ui_theme.cpp",
+    "literal": "L\"winter\"",
+    "reason": "Canonical theme registry metadata; UI display uses semantic theme IDs; persisted names and filters stay stable."
+  },
+  {
+    "file": "src/util.cpp",
+    "literal": "L\"%02d:%02d\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/util.cpp",
+    "literal": "L\"-%02d:%02d\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/app.cpp",
+    "literal": "L\"--validation --locale=\"",
+    "reason": "Technical symbol, value, unit, product name, Win32 class, path, font or persistence key; not translatable prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"Language\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"LiteSic.\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"Mode\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"Mode=\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"Selected\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"Selected=\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"automatic\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/language_selection.cpp",
+    "literal": "L\"manual\"",
+    "reason": "Language preference INI section/key/mode, empty value or LiteSic Win32 class prefix; not visible prose."
+  },
+  {
+    "file": "src/ui_tooltip.cpp",
+    "literal": "L\"LiteSic.TooltipWnd\"",
+    "reason": "Win32 class identifier; not user-facing prose"
+  }
+]

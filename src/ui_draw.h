@@ -32,6 +32,7 @@ public:
     void Circle(float x, float y, float radius, uint32_t fill, uint32_t border);
     void TextAt(Rect r, const std::wstring& text, uint32_t color = Text,
                 Font font = Font::Body, bool center = false, bool bold = false);
+    void TextLayout(float x,float y,IDWriteTextLayout* layout,uint32_t color = Text);
     bool ScrollingText(Rect r,const std::wstring& text,double elapsedMs,
                        uint32_t color = Text,Font font = Font::Heading);
     void Button(Rect r, const std::wstring& text, bool active = false,
@@ -51,6 +52,7 @@ private:
     IDWriteTextFormat* fonts_[8]{};
     IDWriteInlineObject* ellipsis_[8]{};
     unsigned themeGeneration_ = 0;
+    unsigned languageGeneration_ = 0;
     IDWriteTextLayout* scrollLayout_ = nullptr;
     std::wstring scrollText_;
     float scrollWidth_ = 0,scrollHeight_ = 0,scrollExtent_ = 0;

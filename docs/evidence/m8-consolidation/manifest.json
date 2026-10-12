@@ -1,0 +1,233 @@
+{
+  "baseline_head": "266270aa9caa2469144f9af30d9609877941f7b4",
+  "runs": [
+    {
+      "architecture": "64",
+      "configuration": "release",
+      "action": "build",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "64"
+      ],
+      "started_utc": "2026-10-12T02:31:19.781636+00:00",
+      "ended_utc": "2026-10-12T02:31:20.542141+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "64",
+      "configuration": "release",
+      "action": "test",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "64"
+      ],
+      "started_utc": "2026-10-12T02:31:20.543141+00:00",
+      "ended_utc": "2026-10-12T02:32:01.462021+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "32",
+      "configuration": "release",
+      "action": "build",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "32"
+      ],
+      "started_utc": "2026-10-12T02:32:01.462021+00:00",
+      "ended_utc": "2026-10-12T02:32:02.162801+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "32",
+      "configuration": "release",
+      "action": "test",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "32"
+      ],
+      "started_utc": "2026-10-12T02:32:02.163801+00:00",
+      "ended_utc": "2026-10-12T02:32:48.123071+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "64",
+      "configuration": "debug",
+      "action": "build",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "64",
+        "-DebugBuild"
+      ],
+      "started_utc": "2026-10-12T02:32:48.123071+00:00",
+      "ended_utc": "2026-10-12T02:32:48.874191+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "64",
+      "configuration": "debug",
+      "action": "test",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "64",
+        "-DebugBuild"
+      ],
+      "started_utc": "2026-10-12T02:32:48.874191+00:00",
+      "ended_utc": "2026-10-12T02:33:44.529523+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "32",
+      "configuration": "debug",
+      "action": "build",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "build",
+        "-Architecture",
+        "32",
+        "-DebugBuild"
+      ],
+      "started_utc": "2026-10-12T02:33:44.530523+00:00",
+      "ended_utc": "2026-10-12T02:33:45.313335+00:00",
+      "exit_code": 0
+    },
+    {
+      "architecture": "32",
+      "configuration": "debug",
+      "action": "test",
+      "command": [
+        "powershell",
+        "-NoProfile",
+        "-ExecutionPolicy",
+        "Bypass",
+        "-File",
+        "scripts/dev.ps1",
+        "-Action",
+        "test",
+        "-Architecture",
+        "32",
+        "-DebugBuild"
+      ],
+      "started_utc": "2026-10-12T02:33:45.313335+00:00",
+      "ended_utc": "2026-10-12T02:34:54.033556+00:00",
+      "exit_code": 0
+    }
+  ],
+  "cases": {
+    "64-release": {
+      "cpp": 152,
+      "c": 16,
+      "format_time": 10,
+      "smoke": 1,
+      "total": 179
+    },
+    "32-release": {
+      "cpp": 152,
+      "c": 16,
+      "format_time": 10,
+      "smoke": 1,
+      "total": 179
+    },
+    "64-debug": {
+      "cpp": 152,
+      "c": 16,
+      "format_time": 10,
+      "smoke": 1,
+      "total": 179
+    },
+    "32-debug": {
+      "cpp": 152,
+      "c": 16,
+      "format_time": 10,
+      "smoke": 1,
+      "total": 179
+    }
+  },
+  "total_cases": 716,
+  "driver_guards": 36,
+  "additional_graphical_cases": 2,
+  "tooltip_frames": 3092,
+  "hover_cycles": 500,
+  "human_tooltip_acceptance": "TUDO PASS",
+  "linguistic_review": "PENDING",
+  "hashes": {
+    "build/64/release/LiteSic.exe": "2191d8f983bb60c3b61ae292e4714f3888db7ec214e88233eb6cb0f9e83a85aa",
+    "build/64/debug/LiteSic.exe": "2a667b83097c222b0c8c0bfef2d8f4c9fdb4863b06e14fcd84f196dee4dd9526",
+    "build/32/release/LiteSic.exe": "937deabd3578e76d4e7174f089e5ea28d1dcc15e12f00dda2938cfe35352096e",
+    "build/32/debug/LiteSic.exe": "12c33aeb59c5d73108cf52e9a749b5980879a4933c96cd4a61189eee79b825e1",
+    "docs/evidence/m8-consolidation/build-32-debug.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/m8-consolidation/build-32-release.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/m8-consolidation/build-64-debug.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/m8-consolidation/build-64-release.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "docs/evidence/m8-consolidation/catalog-validation.txt": "9b35c6b814b8f53aa94d368fb24e8b04af51a9162edd7cb9faa2b09a332e1662",
+    "docs/evidence/m8-consolidation/gui-guards.txt": "4f3029e80e951d8f9b4193d492252173bb235a31522dbab7104cd7b2626fe405",
+    "docs/evidence/m8-consolidation/paused-later.jpg": "0176fc87758555593cfa1edda299bffc2ad68fa61a8b9e655da1ccd44eba6d07",
+    "docs/evidence/m8-consolidation/paused-start.jpg": "31b95dfddd9a5210897775311267b7bdc3cd8b78efc551908797397cc920ec8a",
+    "docs/evidence/m8-consolidation/playing-later-0.jpg": "e1ccd59ffc6168bb2bde8747ab100a3cc17c301c6dc7ecb5ce9b3ad83ebbe828",
+    "docs/evidence/m8-consolidation/playing-later-1.jpg": "0bddba199e1fb6d9c676b40b0f7ab8ba60f14c75cf1ddc98944992cafbc97db7",
+    "docs/evidence/m8-consolidation/playing-later-2.jpg": "f0368e862060f850871857499613a52bd03a0e4a65028316d1b6c96a42606db1",
+    "docs/evidence/m8-consolidation/playing-start-0.jpg": "19460915b446eea1996911d0ac6d5dd3f5be73c30a7470fd4847148dc9858f43",
+    "docs/evidence/m8-consolidation/playing-start-1.jpg": "0bddba199e1fb6d9c676b40b0f7ab8ba60f14c75cf1ddc98944992cafbc97db7",
+    "docs/evidence/m8-consolidation/playing-start-2.jpg": "f0368e862060f850871857499613a52bd03a0e4a65028316d1b6c96a42606db1",
+    "docs/evidence/m8-consolidation/startup.json": "634328563a7ed3b3ebd7e9ab115c52a4cc273f67dc6745e02866a96db2539735",
+    "docs/evidence/m8-consolidation/stopped.jpg": "d7c4b7b8ee20d65c0920439c36bf5deb0cd9296e1625ac0eed1c9a82e8441495",
+    "docs/evidence/m8-consolidation/test-32-debug.txt": "dd3ea5072d9a96de069366a848c81488b111255289cd1706b27313d094fe4193",
+    "docs/evidence/m8-consolidation/test-32-release.txt": "50febb1ca937b749e94ed1e6d2466b22cb5e9f6be16e549a04b9bebd109ce526",
+    "docs/evidence/m8-consolidation/test-64-debug.txt": "6d2836e6121f77272a22733613508a0100f318cc83204ca56c7ea7afde9562ac",
+    "docs/evidence/m8-consolidation/test-64-release.txt": "ae27cb80f97d85408bdc6242dd30270624dccef411fae6e3dc26f63debf0f129",
+    "docs/evidence/m8-consolidation/tooltip-gui-64-release.txt": "31eb642083f673ab30fc30dfcd6cc6daabc0c56f99e43701a4394f735f774aa9"
+  }
+}

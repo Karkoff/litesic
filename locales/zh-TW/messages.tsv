@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	自動（建議）
+appearance.scale_menu	外觀 > 介面縮放
+appearance.themes_menu	外觀 > 主題...
+audio.mono	單聲道
+audio.multichannel	多聲道
+audio.stereo	立體聲
+common.close	關閉
+common.no	否
+common.yes	是
+equalizer.custom	自訂
+equalizer.help	±12 dB · ↑/↓ 調整 · Tab 切換 · 空白鍵歸零
+equalizer.off	EQ 關
+equalizer.on	EQ 開
+equalizer.preamp	前級
+equalizer.preset	預設：{name}
+equalizer.reset	重設
+equalizer.title	等化器
+equalizer.unavailable	不適用
+errors.audio_read	無法讀取音訊檔案。
+errors.data_folder	無法存取資料資料夾。本次工作階段將無法保留播放清單。
+errors.eq_render	等化器：無法繪製
+errors.m3u_invalid	播放清單無效或大於16 MiB。
+errors.m3u_open	無法開啟播放清單。
+errors.m3u_save	無法儲存播放清單。
+errors.m3u_start	無法開始M3U操作。
+errors.metadata_unavailable	無法讀取中繼資料。
+errors.play_file	無法播放檔案。
+errors.play_selected	無法播放所選曲目。
+errors.play_track	無法播放此曲目
+errors.preserve_playlist	無法保留播放清單。\n{error}
+errors.preserve_position	無法保留播放清單的位置。
+errors.preserve_selection	無法保留播放清單的選取項目。
+errors.scan	無法開始掃描。
+errors.selection_large	選取項目過多，請新增資料夾。
+errors.temporary	無法建立暫存檔。
+errors.theme_save	已套用主題，但無法儲存偏好設定。
+errors.track_limit	已達到100,000首曲目的上限。
+errors.translation	文字無法使用
+errors.worker	無法開始背景讀取。
+info.album	專輯
+info.artist	演出者
+info.bitrate	估計平均位元速率（檔案）
+info.caption	曲目資訊
+info.channels	聲道
+info.duration	長度
+info.favorite	我的最愛
+info.field	{label}：{value}
+info.file	檔案
+info.format	格式
+info.genre	曲風
+info.reading	正在讀取中繼資料...
+info.sample_rate	取樣率
+info.size	大小
+info.title	標題
+info.track	曲目
+info.unknown	未提供
+info.year	年份/日期
+player.add_hint	請透過播放清單新增檔案
+player.balance	平衡
+player.balance_help	聲道平衡：左 / 右
+player.left	左
+player.list_short	清單
+player.native	LiteSic   ·   原生音訊播放器
+player.next	下一首
+player.oscilloscope	示波器
+player.pause	暫停
+player.paused	已暫停
+player.play	播放
+player.playing	正在播放
+player.position	播放位置
+player.previous	上一首
+player.ready	準備播放
+player.repeat	循環：關閉 → 清單 → 單曲
+player.repeat_one	單曲循環
+player.repeat_short	循環
+player.right	右
+player.shuffle	隨機播放
+player.shuffle_short	隨機
+player.spectrum	FFT頻譜
+player.stop	停止
+player.time	時間
+player.toggle_equalizer	顯示 / 隱藏等化器
+player.toggle_playlist	顯示 / 隱藏播放清單
+player.toggle_visualizer	顯示 / 隱藏視覺效果
+player.volume	音量
+player.welcome	讓音樂近在身邊
+playlist.add_short	新增 ▾
+playlist.added	清單已新增。
+playlist.audio_filter	音訊
+playlist.clear	清空清單
+playlist.duration_asc	長度：短 → 長
+playlist.duration_desc	長度：長 → 短
+playlist.empty	請新增檔案或資料夾
+playlist.favorite_hint	請在「全部」中為曲目加上星號
+playlist.favorites	我的最愛
+playlist.files	檔案...
+playlist.folder_dialog	新增音訊資料夾（包含子資料夾）
+playlist.folders	資料夾及子資料夾...
+playlist.general	全部
+playlist.info_menu	曲目資訊...
+playlist.list_menu	清單 ▾
+playlist.m3u_filter	UTF-8 M3U播放清單
+playlist.mix	打亂目前顯示的順序
+playlist.name_asc	名稱：A → Z
+playlist.name_desc	名稱：Z → A
+playlist.no_results	找不到曲目
+playlist.open_dialog	開啟M3U播放清單
+playlist.open_menu	開啟M3U（新增）...
+playlist.opening	正在開啟清單...
+playlist.reading	正在讀取...
+playlist.remove	移除
+playlist.save_dialog	儲存M3U播放清單
+playlist.save_menu	儲存M3U...
+playlist.saved	清單已儲存。
+playlist.saving	正在儲存清單...
+playlist.search	搜尋曲目...
+playlist.selected.few	已選取{count}首
+playlist.selected.many	已選取{count}首
+playlist.selected.one	已選取{count}首
+playlist.selected.other	已選取{count}首
+playlist.selected.two	已選取{count}首
+playlist.selected.zero	已選取{count}首
+playlist.title	播放清單
+playlist.tracks.few	{count}首曲目
+playlist.tracks.many	{count}首曲目
+playlist.tracks.one	{count}首曲目
+playlist.tracks.other	{count}首曲目
+playlist.tracks.two	{count}首曲目
+playlist.tracks.zero	{count}首曲目
+playlist.visible.few	顯示{count}首
+playlist.visible.many	顯示{count}首
+playlist.visible.one	顯示{count}首
+playlist.visible.other	顯示{count}首
+playlist.visible.two	顯示{count}首
+playlist.visible.zero	顯示{count}首
+preset.bass	低音
+preset.classical	古典
+preset.flat	平坦
+preset.jazz	爵士
+preset.pop	流行
+preset.rock	搖滾
+preset.voice	人聲
+theme.aurora	北極光
+theme.autumn	秋日
+theme.carbon	碳色
+theme.carnival	嘉年華
+theme.children	兒童節
+theme.christmas	聖誕節
+theme.cyberpunk	賽博龐克
+theme.dark	深色
+theme.desert	沙漠
+theme.easter	復活節
+theme.forest	森林
+theme.halloween	萬聖節
+theme.high-contrast	高對比
+theme.inverse	反色
+theme.june-festival	六月節
+theme.light	淺色
+theme.matrix	矩陣
+theme.midnight	午夜
+theme.mono	單色
+theme.mountain	山岳
+theme.neon-blue	藍色霓虹
+theme.neon-purple	紫色霓虹
+theme.new-year	新年
+theme.ocean	海洋
+theme.original	LiteSic Original
+theme.sakura	櫻花
+theme.spring	春天
+theme.summer	夏日
+theme.sunset	日落
+theme.synthwave	合成波
+theme.terminal	復古終端機
+theme.tropical	熱帶
+theme.valentines	情人節
+theme.vintage	復古音響
+theme.winamp	Winamp Classic
+theme.winter	冬季
+themes.all	全部
+themes.celebrations	節慶
+themes.classic	經典
+themes.essential	基本
+themes.nature	自然
+themes.restore	還原Original
+themes.seasonal	季節
+themes.technology	科技
+themes.title	主題
+window.caption	LiteSic — {title}
+appearance.language	語言
+appearance.auto_language	自動（Windows）：{language}
+errors.language_change	無法套用或儲存語言偏好設定。請檢查資源和設定資料夾。
+
+# M8-T8: control descriptions
+tooltip.previous	播放上一首
+tooltip.next	播放下一首
+tooltip.shuffle_on	開啟隨機播放
+tooltip.shuffle_off	關閉隨機播放
+tooltip.repeat_off	不重複播放
+tooltip.repeat_all	重複整個播放清單
+tooltip.repeat_one	重複目前歌曲
+tooltip.play	開始或繼續播放
+tooltip.pause	暫停播放
+tooltip.stop	停止播放
+tooltip.seek	跳至歌曲中的位置
+tooltip.volume	音量：{value}%
+tooltip.balance	平衡：{value}（−100 左，+100 右）
+tooltip.show_playlist	顯示播放清單
+tooltip.hide_playlist	隱藏播放清單
+tooltip.show_eq	顯示等化器
+tooltip.hide_eq	隱藏等化器
+tooltip.fft	顯示頻譜
+tooltip.osc	顯示音訊波形
+tooltip.show_viz	顯示視覺效果
+tooltip.hide_viz	隱藏視覺效果
+tooltip.minimize	最小化播放器
+tooltip.close	關閉此視窗
+tooltip.time	切換已播放 / 剩餘時間
+tooltip.add	新增檔案或資料夾
+tooltip.remove	移除選取的歌曲
+tooltip.list_menu	開啟、儲存、排序或清空播放清單
+tooltip.all	顯示所有歌曲
+tooltip.favorites	顯示收藏歌曲
+tooltip.clear_search	清除搜尋
+tooltip.search	搜尋標題、歌手、專輯或檔案
+tooltip.row	點選選取；按兩下播放
+tooltip.favorite_on	加入收藏
+tooltip.favorite_off	從收藏中移除
+tooltip.scroll	捲動清單
+tooltip.eq_on	啟用等化器
+tooltip.eq_off	停用等化器
+tooltip.presets	選擇等化器預設
+tooltip.reset	將所有增益重設為零
+tooltip.preamp	前置放大：{gain} dB
+tooltip.band	{frequency} Hz — 增益：{gain} dB
+tooltip.band_unavailable	{frequency} Hz — 增益：{gain} dB（目前取樣率下無法使用）
+tooltip.theme_list	選擇並套用佈景主題
+tooltip.theme_reset	還原預設佈景主題
+tooltip.category	依類別篩選佈景主題
+tooltip.info	歌曲詳細資料；選取文字以複製

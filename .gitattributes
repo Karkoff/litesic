@@ -1,0 +1,2 @@
+# Official M8 evidence is raw output. Preserve bytes/hashes and console whitespace.
+docs/evidence/m8-*/* -text whitespace=-blank-at-eol

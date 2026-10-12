@@ -13,6 +13,28 @@ Complemento aprovado: [compactação de painéis ocultos](docs/M7-VISIBILITY-COM
 com restauração da formação ao reabrir e prioridade ao arraste manual.
 Próxima milestone: **M8 — Acabamento**, aberta, incluindo internacionalização
 integral em 18 idiomas, seleção automática/manual e tooltips multilíngues.
+**M8-T6 — COMPLETE (11/10/2026):** serviço central, 18 catálogos com 188 IDs,
+fallback inglês, Unicode, fontes nativas e preparação RTL/troca programática.
+Quatro builds, 644 casos e 29 guardas PASS; 54 capturas reais inspecionadas.
+[Relatório e limites](docs/M8-T6-I18N.md). Revisão linguística humana pendente;
+tooltips explicativos T8 entregues abaixo.
+**M8-T7 — COMPLETE (11/10/2026):** padrão Automático (Windows), submenu Idioma
+com 18 nomes nativos, preferência no INI existente e atualização das cinco janelas
+sem reinício, preservando áudio/EQ/playlist/geometria. Baseline T7: 191 IDs.
+Quatro builds, 684 casos funcionais e 32 guardas PASS; 90 capturas ao vivo,
+50 inspecionadas em folhas representativas, além de menus/restarts.
+[Relatório e limitações](docs/M8-T7-LANGUAGE-SELECTION.md). Aceite humano T7: **PASS**,
+explicitamente informado pelo usuário.
+**M8-T8 — COMPLETE (11/10/2026), aceite visual humano TUDO PASS:** mecanismo central de tooltips
+Direct2D/DirectWrite nas cinco janelas, estados atuais, 46 novas chaves,
+237 IDs × 18 idiomas e tokens dos 36 temas. Quatro builds, 716 casos,
+36 guardas e dois casos gráficos adicionais PASS; 3.092 frames, 500 ciclos.
+[Relatório](docs/M8-T8-TOOLTIPS.md) e [evidências](docs/evidence/m8-tooltips/README.md).
+Aceite visual humano T8 concedido pelo usuário na solicitação de consolidação.
+Não equivale a revisão linguística profissional dos 18 idiomas; limitações
+de acessibilidade Canvas preservadas. M8-T1…T5 e checkpoint continuam abertos.
+[Consolidação, nova regressão e publicação](docs/M8-CONSOLIDATION.md).
+M8 segue aberta. Ordem aprovada: conclusão M8 → auditoria geral de desempenho → M10.
 M10 continua aberta, com distribuição limpa e reproduzível planejada.
 A auditoria e suas evidências anteriores permanecem como histórico.
 

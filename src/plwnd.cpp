@@ -1,3 +1,6 @@
+#include "ui_tooltip.h"
+#include "i18n.h"
+#include "language_selection.h"
 #include "plwnd.h"
 #include "skin.h"
 #include "mainwnd.h"
@@ -45,7 +48,13 @@ float scale = 1;
 using Dock = WindowSnap::Side;
 auto& dock=Skin::Attachment(Skin::Playlist).side;
 auto& dockAnchor=Skin::Attachment(Skin::Playlist).anchor;
-std::wstring status;
+// Keep semantic messages until painting, including worker errors queued before a language change.
+struct StatusMessage {
+    std::string id;
+    void clear(){id.clear();}
+    void Set(const std::string& value){id=value;}
+    operator std::wstring() const{return id.empty()?L"":I18n::Text(id);}
+} status;
 std::wstring sessionPath;
 int S(int n) { return static_cast<int>(std::lround(n * scale)); }
 RECT Client() { RECT r{}; GetClientRect(window, &r); return r; }
@@ -116,14 +125,14 @@ void LayoutSearch() {
     MoveWindow(search,S(176),S(40),std::max<int>(S(24),r.right-S(216)),S(24),TRUE);
     if(searchFont) DeleteObject(searchFont);
     searchFont=CreateFontW(-S(12),0,0,0,FW_NORMAL,FALSE,FALSE,FALSE,DEFAULT_CHARSET,
-        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,Ui::ActiveTheme().typography.body);
+        OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,I18n::ScriptFont()?I18n::ScriptFont():Ui::ActiveTheme().typography.body);
     SendMessageW(search,WM_SETFONT,reinterpret_cast<WPARAM>(searchFont),TRUE);
 }
 void Fill(HDC dc, RECT r, COLORREF color) { HBRUSH brush = CreateSolidBrush(color); FillRect(dc, &r, brush); DeleteObject(brush); }
 void Text(HDC dc, RECT r, const std::wstring& text, COLORREF color, UINT flags = DT_LEFT) {
     SetTextColor(dc, color);
     DrawTextW(dc, text.c_str(), static_cast<int>(text.size()), &r,
-        flags | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS | DT_NOPREFIX);
+        flags | DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS | DT_NOPREFIX | (I18n::IsRtl()?DT_RTLREADING:0));
 }
 RECT Button(int id) {
     RECT r = Client();
@@ -165,9 +174,9 @@ void RestoreSelection(const std::vector<uint64_t>& ids) {
     std::sort(selected.begin(), selected.end());
     anchor = selected.empty() ? -1 : selected.front();
 }
-void Error(const std::wstring& text) { status = text; PlWnd_Refresh(); }
+void Error(const char* id) { status.Set(id); PlWnd_Refresh(); }
 void AddTrack(const Track& incoming) {
-    if (PlayerPlaylist().Count() >= 100000) { status = L"Limite de 100.000 faixas atingido."; return; }
+    if (PlayerPlaylist().Count() >= 100000) { status.Set("errors.track_limit"); return; }
     uint64_t id = PlayerPlaylist().Add(FullPath(incoming.path));
     Track* track = PlayerPlaylist().At(PlayerPlaylist().Count() - 1);
     if (!incoming.displayTitle.empty()) track->displayTitle = incoming.displayTitle;
@@ -175,7 +184,7 @@ void AddTrack(const Track& incoming) {
     track->favorite = incoming.favorite;
     PlaylistJob job; job.id = id; job.path = track->path;
     if (!worker.Submit(std::move(job))) {
-        track->metadataPending = false; status = L"Leitura de metadados indisponível.";
+        track->metadataPending = false; status.Set("errors.metadata_unavailable");
     }
 }
 void AddPath(const std::wstring& path) {
@@ -183,14 +192,14 @@ void AddPath(const std::wstring& path) {
     DWORD attributes = GetFileAttributesW(path.c_str());
     if (attributes != INVALID_FILE_ATTRIBUTES && (attributes & FILE_ATTRIBUTE_DIRECTORY)) {
         PlaylistJob job; job.kind = PlaylistJob::Scan; job.path = FullPath(path);
-        if (!worker.Submit(std::move(job))) Error(L"Não foi possível iniciar a varredura.");
+        if (!worker.Submit(std::move(job))) Error("errors.scan");
     } else if (IsSupportedAudioFile(path.c_str())) {
         Track track; track.path = path; AddTrack(track);
     }
 }
 void FolderDialog() {
     BROWSEINFOW info{}; info.hwndOwner = window;
-    info.lpszTitle = L"Adicionar pasta de áudio (inclui subpastas)";
+    auto caption=I18n::Text("playlist.folder_dialog");info.lpszTitle=caption.c_str();
     info.ulFlags = BIF_RETURNONLYFSDIRS | BIF_USENEWUI | BIF_EDITBOX;
     PIDLIST_ABSOLUTE pidl = SHBrowseForFolderW(&info);
     if (pidl) {
@@ -204,16 +213,17 @@ void ListDialog(bool save) {
     wchar_t path[32768] = {};
     OPENFILENAMEW info{}; info.lStructSize = sizeof(info); info.hwndOwner = window;
     info.lpstrFile = path; info.nMaxFile = ARRAYSIZE(path);
-    info.lpstrFilter = L"Listas M3U UTF-8\0*.m3u;*.m3u8\0\0";
-    info.lpstrDefExt = L"m3u8"; info.lpstrTitle = save ? L"Salvar lista M3U" : L"Abrir lista M3U";
+    std::wstring filter=I18n::Text("playlist.m3u_filter")+L'\0'+L"*.m3u;*.m3u8"+L'\0'+L'\0';
+    info.lpstrFilter=filter.c_str();
+    info.lpstrDefExt = L"m3u8"; auto caption=I18n::Text(save?"playlist.save_dialog":"playlist.open_dialog");info.lpstrTitle=caption.c_str();
     info.Flags = OFN_EXPLORER | OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST |
         (save ? OFN_OVERWRITEPROMPT : OFN_FILEMUSTEXIST);
     if (!(save ? GetSaveFileNameW(&info) : GetOpenFileNameW(&info))) return;
     PlaylistJob job; job.kind = save ? PlaylistJob::Save : PlaylistJob::Open; job.path = path;
     if (save) job.tracks = PlayerPlaylist().Tracks();
     // Opening appends; a failed open never destroys the current playlist.
-    if (!worker.Submit(std::move(job))) Error(L"Não foi possível iniciar a operação M3U.");
-    else { status = save ? L"Salvando lista..." : L"Abrindo lista..."; PlWnd_Refresh(); }
+    if (!worker.Submit(std::move(job))) Error("errors.m3u_start");
+    else { status.Set(save?"playlist.saving":"playlist.opening"); PlWnd_Refresh(); }
 }
 void RemoveSelected() {
     for (auto it = selected.rbegin(); it != selected.rend(); ++it) PlayerPlayback().RemoveAt(*it);
@@ -222,20 +232,20 @@ void RemoveSelected() {
 void Menu(bool add, POINT point, bool upwards=false, int trackIndex=-1) {
     HMENU menu = CreatePopupMenu();
     if (add) {
-        AppendMenuW(menu, MF_STRING, AddFiles, L"Arquivos...");
-        AppendMenuW(menu, MF_STRING, AddFolder, L"Pasta e subpastas...");
+        AppendMenuW(menu, MF_STRING, AddFiles, I18n::Text("playlist.files").c_str());
+        AppendMenuW(menu, MF_STRING, AddFolder, I18n::Text("playlist.folders").c_str());
     } else {
-        if(auto track=PlayerPlaylist().At(trackIndex)){contextId=track->id;AppendMenuW(menu,MF_STRING,TrackInfo,L"Informações da música...");AppendMenuW(menu,MF_SEPARATOR,0,nullptr);}
-        AppendMenuW(menu, MF_STRING, OpenList, L"Abrir M3U (adicionar)...");
-        AppendMenuW(menu, MF_STRING, SaveList, L"Salvar M3U...");
+        if(auto track=PlayerPlaylist().At(trackIndex)){contextId=track->id;AppendMenuW(menu,MF_STRING,TrackInfo,I18n::Text("playlist.info_menu").c_str());AppendMenuW(menu,MF_SEPARATOR,0,nullptr);}
+        AppendMenuW(menu, MF_STRING, OpenList, I18n::Text("playlist.open_menu").c_str());
+        AppendMenuW(menu, MF_STRING, SaveList, I18n::Text("playlist.save_menu").c_str());
         AppendMenuW(menu, MF_SEPARATOR, 0, nullptr);
-        AppendMenuW(menu, MF_STRING, NameAsc, L"Nome: A → Z");
-        AppendMenuW(menu, MF_STRING, NameDesc, L"Nome: Z → A");
-        AppendMenuW(menu, MF_STRING, DurationAsc, L"Duração: menor → maior");
-        AppendMenuW(menu, MF_STRING, DurationDesc, L"Duração: maior → menor");
-        AppendMenuW(menu, MF_STRING, Mix, L"Embaralhar ordem visível");
+        AppendMenuW(menu, MF_STRING, NameAsc, I18n::Text("playlist.name_asc").c_str());
+        AppendMenuW(menu, MF_STRING, NameDesc, I18n::Text("playlist.name_desc").c_str());
+        AppendMenuW(menu, MF_STRING, DurationAsc, I18n::Text("playlist.duration_asc").c_str());
+        AppendMenuW(menu, MF_STRING, DurationDesc, I18n::Text("playlist.duration_desc").c_str());
+        AppendMenuW(menu, MF_STRING, Mix, I18n::Text("playlist.mix").c_str());
         AppendMenuW(menu, MF_SEPARATOR, 0, nullptr);
-        AppendMenuW(menu, MF_STRING, Clear, L"Limpar lista");
+        AppendMenuW(menu, MF_STRING, Clear, I18n::Text("playlist.clear").c_str());
     }
     ClientToScreen(window, &point);
     Ui::TrackThemedMenu(menu, TPM_LEFTALIGN | TPM_RIGHTBUTTON | (upwards?TPM_BOTTOMALIGN:0), point.x, point.y, window, scale);
@@ -246,21 +256,27 @@ void Star(Ui::Canvas& target,float x,float y,bool favorite){
 }
 std::wstring InformationText(const Track& track){
     const auto& m=track.metadata;
-    auto value=[](const std::wstring& s){return s.empty()?std::wstring(L"Não informado"):s;};
+    auto value=[](const std::wstring& s){return s.empty()?I18n::Text("info.unknown"):s;};
     std::wstring format=track.path.substr(track.path.find_last_of(L'.')+1);
     for(auto& c:format)c=std::towupper(c);
-    std::wstring result=L"Título: "+value(m.title.empty()?track.displayTitle:m.title)+
-        L"\r\nArtista: "+value(m.artist)+L"\r\nÁlbum: "+value(m.album)+L"\r\nGênero: "+value(m.genre)+
-        L"\r\nAno/data: "+value(m.year)+L"\r\nFaixa: "+value(m.trackNumber)+L"\r\nFormato: "+format;
-    wchar_t duration[48]=L"Não informada";
+    std::wstring result;
+    auto field=[&](const char* id,const std::wstring& data){
+        if(!result.empty())result+=L"\r\n";
+        result+=I18n::Format("info.field",{{"label",I18n::Text(id)},{"value",value(data)}});
+    };
+    field("info.title",m.title.empty()?track.displayTitle:m.title);
+    field("info.artist",m.artist);field("info.album",m.album);field("info.genre",m.genre);
+    field("info.year",m.year);field("info.track",m.trackNumber);field("info.format",format);
+    wchar_t duration[48]{};
     if(track.duration>=0){unsigned seconds=static_cast<unsigned>(std::min(track.duration,359999.));swprintf(duration,48,L"%u:%02u",seconds/60,seconds%60);}
-    result+=L"\r\nDuração: "+std::wstring(duration)+L"\r\nAmostragem: "+(m.sampleRate?std::to_wstring(m.sampleRate)+L" Hz":L"Não informada")+
-        L"\r\nCanais: "+(m.channels?std::to_wstring(m.channels):L"Não informados")+
-        L"\r\nTamanho: "+std::to_wstring(m.fileBytes)+L" bytes";
-    if(m.fileBytes&&track.duration>0)result+=L"\r\nTaxa média aproximada (arquivo): "+std::to_wstring(static_cast<unsigned long long>(m.fileBytes*8./track.duration/1000))+L" kbps";
-    result+=L"\r\nFavorita: "+std::wstring(track.favorite?L"Sim":L"Não")+L"\r\nArquivo: "+track.path;
-    if(track.metadataPending)result+=L"\r\n\r\nLendo metadados...";
-    else if(track.failed)result+=L"\r\n\r\nNão foi possível ler o arquivo de áudio.";
+    field("info.duration",duration);
+    field("info.sample_rate",m.sampleRate?std::to_wstring(m.sampleRate)+L" Hz":L"");
+    field("info.channels",m.channels?std::to_wstring(m.channels):L"");
+    field("info.size",std::to_wstring(m.fileBytes)+L" bytes");
+    if(m.fileBytes&&track.duration>0)field("info.bitrate",std::to_wstring(static_cast<unsigned long long>(m.fileBytes*8./track.duration/1000))+L" kbps");
+    field("info.favorite",I18n::Text(track.favorite?"common.yes":"common.no"));field("info.file",track.path);
+    if(track.metadataPending)result+=L"\r\n\r\n"+I18n::Text("info.reading");
+    else if(track.failed)result+=L"\r\n\r\n"+I18n::Text("errors.audio_read");
     return result;
 }
 void RefreshInformation(){
@@ -278,13 +294,25 @@ LRESULT CALLBACK InformationProc(HWND hwnd,UINT msg,WPARAM wp,LPARAM lp){
     switch(msg){
     case WM_CREATE:
         information=hwnd;informationText.clear();
-        informationEdit=CreateWindowExW(0,L"EDIT",L"",WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_VSCROLL|ES_MULTILINE|ES_READONLY|ES_AUTOVSCROLL,
+        informationEdit=CreateWindowExW(I18n::IsRtl()?WS_EX_RTLREADING:0,L"EDIT",L"",WS_CHILD|WS_VISIBLE|WS_TABSTOP|WS_VSCROLL|ES_MULTILINE|ES_READONLY|ES_AUTOVSCROLL|(I18n::IsRtl()?ES_RIGHT:0),
             S(12),S(12),S(536),S(328),hwnd,reinterpret_cast<HMENU>(801),GetModuleHandleW(nullptr),nullptr);
         SetWindowSubclass(informationEdit,InformationEditProc,1,0);
-        CreateWindowExW(0,L"BUTTON",L"Fechar",WS_CHILD|WS_VISIBLE|WS_TABSTOP,S(448),S(348),S(100),S(28),hwnd,reinterpret_cast<HMENU>(802),GetModuleHandleW(nullptr),nullptr);
+        CreateWindowExW(0,L"BUTTON",I18n::Text("common.close").c_str(),WS_CHILD|WS_VISIBLE|WS_TABSTOP,S(448),S(348),S(100),S(28),hwnd,reinterpret_cast<HMENU>(802),GetModuleHandleW(nullptr),nullptr);
+        Ui::Tooltips::Attach(hwnd,[](POINT){return Ui::Tooltips::Target{};},[](int){return std::wstring{};},[]{return scale;});
+        Ui::Tooltips::AttachControl(informationEdit,"tooltip.info",[]{return scale;});
+        Ui::Tooltips::AttachControl(GetDlgItem(hwnd,802),"tooltip.close",[]{return scale;});
         SendMessageW(hwnd,Ui::WM_THEME_CHANGED,0,0);RefreshInformation();return 0;
+    case I18n::WM_LANGUAGE_CHANGED:{
+        SetWindowTextW(hwnd,I18n::Text("info.caption").c_str());
+        SetDlgItemTextW(hwnd,802,I18n::Text("common.close").c_str());
+        auto top=SendMessageW(informationEdit,EM_GETFIRSTVISIBLELINE,0,0);
+        DWORD start=0,end=0;SendMessageW(informationEdit,EM_GETSEL,reinterpret_cast<WPARAM>(&start),reinterpret_cast<LPARAM>(&end));
+        I18n::UpdateEditDirection(informationEdit);RefreshInformation();
+        SendMessageW(informationEdit,EM_SETSEL,start,end);
+        SendMessageW(informationEdit,EM_LINESCROLL,0,top-SendMessageW(informationEdit,EM_GETFIRSTVISIBLELINE,0,0));
+        SendMessageW(hwnd,Ui::WM_THEME_CHANGED,0,0);return 0;}
     case Ui::WM_THEME_CHANGED:{
-        HFONT old=informationFont;informationFont=CreateFontW(-S(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,Ui::ActiveTheme().typography.body);
+        HFONT old=informationFont;informationFont=CreateFontW(-S(12),0,0,0,400,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,CLEARTYPE_QUALITY,DEFAULT_PITCH,I18n::ScriptFont()?I18n::ScriptFont():Ui::ActiveTheme().typography.body);
         SendMessageW(informationEdit,WM_SETFONT,reinterpret_cast<WPARAM>(informationFont),TRUE);
         SendDlgItemMessageW(hwnd,802,WM_SETFONT,reinterpret_cast<WPARAM>(informationFont),TRUE);if(old)DeleteObject(old);
         if(informationBackground)DeleteObject(informationBackground);
@@ -307,7 +335,7 @@ void ShowInformation(const Track& track){
     if(!RegisterClassW(&cls)&&GetLastError()!=ERROR_CLASS_ALREADY_EXISTS)return;
     RECT parent{};GetWindowRect(window,&parent);RECT r{0,0,S(560),S(388)};
     DWORD style=WS_OVERLAPPEDWINDOW|WS_CLIPCHILDREN;AdjustWindowRectEx(&r,style,FALSE,WS_EX_TOOLWINDOW);
-    HWND h=CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,L"Informações da música",style,parent.left,parent.top,r.right-r.left,r.bottom-r.top,window,nullptr,cls.hInstance,nullptr);
+    HWND h=CreateWindowExW(WS_EX_TOOLWINDOW,cls.lpszClassName,I18n::Text("info.caption").c_str(),style,parent.left,parent.top,r.right-r.left,r.bottom-r.top,window,nullptr,cls.hInstance,nullptr);
     if(h){ShowWindow(h,SW_SHOWNOACTIVATE);SetFocus(informationEdit);}
 }
 void Paint(HWND hwnd) {
@@ -316,24 +344,24 @@ void Paint(HWND hwnd) {
         using namespace Ui;
         const float width=r.right/scale,height=r.bottom/scale;
         canvas.Fill({0,0,width,height},Background);
-        canvas.TitleBar(width,L"PLAYLIST",false,hover==-1?2:0,pressed==-1?2:0);
+        canvas.TitleBar(width,I18n::Text("playlist.title").c_str(),false,hover==-1?2:0,pressed==-1?2:0);
         for(int id : {static_cast<int>(AddMenu),static_cast<int>(Remove),static_cast<int>(ListMenu)}) {
             RECT b=Button(id);
             Rect button{b.left/scale,b.top/scale,(b.right-b.left)/scale,(b.bottom-b.top)/scale};
             canvas.Fill(button,pressed==id?Border:hover==id?Hover:Surface,3);
             canvas.Stroke(button,Bronze,3);
-            canvas.TextAt(button,id==AddMenu?L"ADIC ▾":id==Remove?L"REMOVER":L"LISTA ▾",
+            canvas.TextAt(button,id==AddMenu?I18n::Text("playlist.add_short").c_str():id==Remove?I18n::Text("playlist.remove").c_str():I18n::Text("playlist.list_menu").c_str(),
                 id==Remove && selected.empty()?Muted:Ui::Text,Font::Small,true);
         }
-        for(int id:{GeneralTab,FavoritesTab}){RECT b=Button(id);canvas.Button({b.left/scale,b.top/scale,(b.right-b.left)/scale,(b.bottom-b.top)/scale},id==GeneralTab?L"Geral":L"Favoritas",favoritesOnly==(id==FavoritesTab),hover==id,pressed==id);}
+        for(int id:{GeneralTab,FavoritesTab}){RECT b=Button(id);canvas.Button({b.left/scale,b.top/scale,(b.right-b.left)/scale,(b.bottom-b.top)/scale},id==GeneralTab?I18n::Text("playlist.general").c_str():I18n::Text("playlist.favorites").c_str(),favoritesOnly==(id==FavoritesTab),hover==id,pressed==id);}
         canvas.Fill({172,36,width-180,32},Surface,3); canvas.Stroke({172,36,width-180,32},Border,3);
-        if(query.empty() && GetFocus()!=search) canvas.TextAt({176,38,width-220,28},L"Pesquisar músicas...",Muted);
+        if(query.empty() && GetFocus()!=search) canvas.TextAt({176,38,width-220,28},I18n::Text("playlist.search").c_str(),Muted);
         canvas.Button({width-36,38,28,28},L"",false,hover==ClearSearch,pressed==ClearSearch);
         EraserIcon(width-22,51,[&](float x1,float y1,float x2,float y2) {canvas.Line(x1,y1,x2,y2,Ui::Text,1.5f);});
         canvas.Fill({8,72,width-28,12},Surface);
         canvas.TextAt({12,70,24,14},L"#",Muted,Font::Small);
-        canvas.TextAt({42,70,width-130,14},L"Título",Muted,Font::Small);
-        canvas.TextAt({width-80,70,56,14},L"Duração",Muted,Font::Small,true);
+        canvas.TextAt({42,70,width-130,14},I18n::Text("info.title").c_str(),Muted,Font::Small);
+        canvas.TextAt({width-80,70,56,14},I18n::Text("info.duration").c_str(),Muted,Font::Small,true);
         RECT list=List();
         Rect area{list.left/scale,list.top/scale,(list.right-list.left)/scale,(list.bottom-list.top)/scale};
         canvas.Fill(area,Surface); canvas.Clip(area);
@@ -352,7 +380,7 @@ void Paint(HWND hwnd) {
                 swprintf(duration,ARRAYSIZE(duration),L"%u:%02u",seconds/60,seconds%60); }
             canvas.TextAt({width-80,y,56,24},duration,chosen?Ui::Text:Muted,Font::Small,true);
         }
-        if(!view.Count()) canvas.TextAt(area,!query.empty()?L"Nenhuma música encontrada":favoritesOnly?L"Marque a estrela de uma música em Geral":L"Adicione arquivos ou uma pasta",Muted,Font::Body,true);
+        if(!view.Count()) canvas.TextAt(area,!query.empty()?I18n::Text("playlist.no_results").c_str():favoritesOnly?I18n::Text("playlist.favorite_hint").c_str():I18n::Text("playlist.empty").c_str(),Muted,Font::Body,true);
         if(dragging && insertion>=0) canvas.Line(area.x,area.y+(insertion-top)*24,area.x+area.w,area.y+(insertion-top)*24,Green,2);
         canvas.Unclip();
         canvas.Fill({width-16,area.y,8,area.h},Surface,3);
@@ -362,9 +390,9 @@ void Paint(HWND hwnd) {
         }
         std::wstring footer=status;
         if(footer.empty()) {
-            footer=std::to_wstring(PlayerPlaylist().Count())+L" faixas · "+std::to_wstring(selected.size())+L" selecionadas";
-            if(!query.empty()) footer+=L" · "+std::to_wstring(view.Count())+L" visíveis";
-            if(worker.Busy()) footer+=L" · lendo...";
+            footer=I18n::Count("playlist.tracks",PlayerPlaylist().Count())+L" · "+I18n::Count("playlist.selected",selected.size());
+            if(!query.empty()) footer+=L" · "+I18n::Count("playlist.visible",view.Count());
+            if(worker.Busy()) footer+=(L" · "+I18n::Text("playlist.reading"));
             else if(PlayerPlaylist().Count()) {
                 double seconds=0;bool known=true;
                 for(const auto& track:PlayerPlaylist().Tracks()) {if(track.duration<0) known=false;else seconds+=track.duration;}
@@ -378,20 +406,20 @@ void Paint(HWND hwnd) {
     HDC dc = CreateCompatibleDC(target); HBITMAP bitmap = CreateCompatibleBitmap(target, r.right, r.bottom);
     HGDIOBJ oldBitmap = SelectObject(dc, bitmap);
     HFONT font = CreateFontW(-S(11), 0, 0, 0, FW_NORMAL, FALSE, FALSE, FALSE,
-        DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, Ui::ActiveTheme().typography.body);
+        DEFAULT_CHARSET, OUT_DEFAULT_PRECIS, CLIP_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, I18n::ScriptFont()?I18n::ScriptFont():Ui::ActiveTheme().typography.body);
     HGDIOBJ oldFont = SelectObject(dc, font); SetBkMode(dc, TRANSPARENT);
     Fill(dc, r, Ui::NativeColor(Ui::Background)); Fill(dc, {0,0,r.right,S(24)}, Ui::NativeColor(Ui::Border));
-    Text(dc, {S(6),0,r.right-S(25),S(24)}, L"PLAYLIST", Ui::NativeColor(Ui::Text));
+    Text(dc, {S(6),0,r.right-S(25),S(24)}, I18n::Text("playlist.title").c_str(), Ui::NativeColor(Ui::Text));
     for (int id : {-1, static_cast<int>(AddMenu), static_cast<int>(Remove), static_cast<int>(ListMenu)}) {
         RECT b = Button(id);
         Fill(dc, b, pressed == id ? Ui::NativeColor(Ui::palette.pressed) : hover == id ? Ui::NativeColor(Ui::Hover) : Ui::NativeColor(Ui::Surface));
         if(id!=-1) {HBRUSH outline=CreateSolidBrush(Ui::NativeColor(Ui::Bronze));FrameRect(dc,&b,outline);DeleteObject(outline);}
-        Text(dc, b, id == -1 ? L"×" : id == AddMenu ? L"ADIC ▾" : id == Remove ? L"REMOVER" : L"LISTA ▾",
+        Text(dc, b, id == -1 ? L"×" : id == AddMenu ? I18n::Text("playlist.add_short").c_str() : id == Remove ? I18n::Text("playlist.remove").c_str() : I18n::Text("playlist.list_menu").c_str(),
             id == -1 ? Ui::NativeColor(Ui::Danger) : Ui::NativeColor(Ui::Text), DT_CENTER);
     }
     for(int id:{GeneralTab,FavoritesTab}){RECT b=Button(id);bool active=favoritesOnly==(id==FavoritesTab);
         Fill(dc,b,Ui::NativeColor(active?Ui::SelectedButtonFill():Ui::Surface));
-        Text(dc,b,id==GeneralTab?L"Geral":L"Favoritas",Ui::NativeColor(active?Ui::SelectedButtonText:Ui::Text),DT_CENTER);}
+        Text(dc,b,id==GeneralTab?I18n::Text("playlist.general").c_str():I18n::Text("playlist.favorites").c_str(),Ui::NativeColor(active?Ui::SelectedButtonText:Ui::Text),DT_CENTER);}
     RECT clear=Button(ClearSearch);
     Fill(dc,clear,pressed==ClearSearch?Ui::NativeColor(Ui::Border):hover==ClearSearch?Ui::NativeColor(Ui::Hover):Ui::NativeColor(Ui::Surface));
     HPEN eraser=CreatePen(PS_SOLID,std::max(1,S(1)),Ui::NativeColor(Ui::Text));auto oldPen=SelectObject(dc,eraser);
@@ -401,7 +429,7 @@ void Paint(HWND hwnd) {
     });SelectObject(dc,oldPen);DeleteObject(eraser);
     RECT list = List(); Fill(dc, list, Ui::NativeColor(Ui::Surface));
     int saved = SaveDC(dc); IntersectClipRect(dc, list.left, list.top, list.right, list.bottom);
-    HFONT boldFont=CreateFontW(-S(11),0,0,0,FW_BOLD,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,Ui::ActiveTheme().typography.body);
+    HFONT boldFont=CreateFontW(-S(11),0,0,0,FW_BOLD,FALSE,FALSE,FALSE,DEFAULT_CHARSET,OUT_DEFAULT_PRECIS,CLIP_DEFAULT_PRECIS,DEFAULT_QUALITY,DEFAULT_PITCH,I18n::ScriptFont()?I18n::ScriptFont():Ui::ActiveTheme().typography.body);
     for (int visibleRow = top; visibleRow < view.Count(); ++visibleRow) {
         int index=view.Canonical(visibleRow);
         RECT row = {list.left, list.top + (visibleRow-top)*S(24), list.right, list.top + (visibleRow-top+1)*S(24)};
@@ -424,7 +452,7 @@ void Paint(HWND hwnd) {
         }
         Text(dc, duration, time, Ui::NativeColor(Ui::Muted), DT_RIGHT);
     }
-    if (!view.Count()) Text(dc, list, favoritesOnly?L"Marque a estrela de uma música em Geral":L"Nenhuma música encontrada", Ui::NativeColor(Ui::Muted), DT_CENTER);
+    if (!view.Count()) Text(dc, list, favoritesOnly?I18n::Text("playlist.favorite_hint").c_str():I18n::Text("playlist.no_results").c_str(), Ui::NativeColor(Ui::Muted), DT_CENTER);
     if (dragging && insertion >= 0) {
         int y = list.top + (insertion-top)*S(24);
         Fill(dc, {list.left,y-S(1),list.right,y+S(1)}, Ui::NativeColor(Ui::Green));
@@ -438,12 +466,35 @@ void Paint(HWND hwnd) {
         Fill(dc, {rail.left,y,rail.right,y+thumb}, Ui::NativeColor(Ui::Bronze));
     }
     std::wstring footer = status;
-    if (footer.empty()) footer = std::to_wstring(count) + L" faixas · " + std::to_wstring(selected.size()) +
-        L" selecionadas" + (worker.Busy() ? L" · lendo..." : L"");
+    if (footer.empty()) footer = I18n::Count("playlist.tracks",count) + L" · " + I18n::Count("playlist.selected",selected.size()) + (worker.Busy() ? (L" · "+I18n::Text("playlist.reading")) : L"");
     Text(dc, {S(8),r.bottom-S(26),Button(AddMenu).left-S(8),r.bottom-S(2)}, footer, Ui::NativeColor(Ui::Muted));
     BitBlt(target,0,0,r.right,r.bottom,dc,0,0,SRCCOPY);
     SelectObject(dc,oldFont); DeleteObject(font); DeleteObject(boldFont); SelectObject(dc,oldBitmap); DeleteObject(bitmap); DeleteDC(dc);
     EndPaint(hwnd,&ps);
+}
+Ui::Tooltips::Target TooltipHit(POINT p){
+    int id=HitButton(p);RECT r{};
+    if(id){r=Button(id);return {id==-1?1:id,r};}
+    RECT client=Client();
+    r={S(176),S(40),client.right-S(40),S(64)};if(PtInRect(&r,p))return {520,r};
+    r=List();
+    if(p.x>=client.right-S(18)&&p.x<client.right-S(8)&&p.y>=r.top&&p.y<r.bottom)return {530,{client.right-S(18),r.top,client.right-S(8),r.bottom}};
+    int index=HitRow(p);if(index<0)return {};
+    int y=r.top+(view.Row(index)-top)*S(24);
+    if(p.x>=client.right-S(110)&&p.x<client.right-S(84))return {1000+index,{client.right-S(110),y,client.right-S(84),y+S(24)}};
+    return {531,{r.left,y,r.right,y+S(24)}};
+}
+std::wstring TooltipText(int id){
+    const char* key=nullptr;
+    if(id>=1000){auto t=PlayerPlaylist().At(id-1000);return t?I18n::Text(t->favorite?"tooltip.favorite_off":"tooltip.favorite_on"):std::wstring{};}
+    switch(id){
+    case 1:key="tooltip.hide_playlist";break;case AddMenu:key="tooltip.add";break;
+    case Remove:key="tooltip.remove";break;case ListMenu:key="tooltip.list_menu";break;
+    case GeneralTab:key="tooltip.all";break;case FavoritesTab:key="tooltip.favorites";break;
+    case ClearSearch:key="tooltip.clear_search";break;case SearchId:key="tooltip.search";break;
+    case 530:key="tooltip.scroll";break;case 531:key="tooltip.row";break;
+    }
+    return key?I18n::Text(key):std::wstring{};
 }
 LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     POINT point{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
@@ -456,13 +507,21 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         searchBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
         search=CreateWindowExW(0,L"EDIT",L"",WS_CHILD|WS_TABSTOP|ES_AUTOHSCROLL,
             0,0,1,1,hwnd,reinterpret_cast<HMENU>(SearchId),GetModuleHandleW(nullptr),nullptr);
+        I18n::UpdateEditDirection(search);
         SendMessageW(search,EM_SETLIMITTEXT,512,0); LayoutSearch();
-        SendMessageW(search,EM_SETCUEBANNER,FALSE,reinterpret_cast<LPARAM>(L"Pesquisar músicas..."));
-        if (!worker.Start(hwnd)) status = L"Falha ao iniciar leitura em segundo plano.";
+        SendMessageW(search,EM_SETCUEBANNER,FALSE,reinterpret_cast<LPARAM>(I18n::Text("playlist.search").c_str()));
+        Ui::Tooltips::Attach(hwnd,TooltipHit,TooltipText,[]{return scale;});
+        Ui::Tooltips::AttachControl(search,"tooltip.search",[]{return scale;});
+        if (!worker.Start(hwnd)) status.Set("errors.worker");
         return 0;
     case WM_ERASEBKGND: return 1;
     case WM_PAINT: Paint(hwnd); return 0;
     case WM_SIZE: LayoutSearch(); ClampTop(); InvalidateRect(hwnd,nullptr,FALSE); return 0;
+    case I18n::WM_LANGUAGE_CHANGED:
+        SetWindowTextW(hwnd,I18n::Format("window.caption",{{"title",I18n::Text("playlist.title")}}).c_str());
+        SendMessageW(search,EM_SETCUEBANNER,FALSE,reinterpret_cast<LPARAM>(I18n::Text("playlist.search").c_str()));
+        I18n::UpdateEditDirection(search);LayoutSearch();
+        InvalidateRect(hwnd,nullptr,FALSE);InvalidateRect(search,nullptr,TRUE);return 0;
     case Ui::WM_THEME_CHANGED:
         DeleteObject(searchBackground);searchBackground=CreateSolidBrush(Ui::NativeColor(Ui::Surface));
         LayoutSearch();InvalidateRect(hwnd,nullptr,FALSE);InvalidateRect(search,nullptr,TRUE);return 0;
@@ -569,7 +628,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     case WM_LBUTTONDBLCLK: {
         RECT client=Client();if(point.x>=client.right-S(110)&&point.x<client.right-S(84))return 0;
         int row=HitRow(point);
-        if (row>=0 && !PlayerPlayback().PlayIndex(row,favoritesOnly)) Error(L"Não foi possível tocar a faixa selecionada.");
+        if (row>=0 && !PlayerPlayback().PlayIndex(row,favoritesOnly)) Error("errors.play_selected");
         PlWnd_Refresh(true); return 0;
     }
     case WM_MOUSEWHEEL: top-=GET_WHEEL_DELTA_WPARAM(wp)/WHEEL_DELTA*3; ClampTop(); PlWnd_Refresh(); return 0;
@@ -643,7 +702,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         if(results.empty()){InvalidateRect(hwnd,nullptr,FALSE);return 0;}
         for(auto& result:results) {
             if (result.generation!=worker.Generation()) continue;
-            if (!result.error.empty()) { status=result.error; continue; }
+            if (!result.error.empty()) { status.Set(result.errorId); continue; }
             if (result.kind==PlaylistJob::Metadata) {
                 if (auto track=PlayerPlaylist().At(PlayerPlaylist().Find(result.id))) {
                     track->metadata=result.metadata;
@@ -652,9 +711,9 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
                     if (!result.metadata.title.empty()) track->displayTitle=result.metadata.artist.empty() ? result.metadata.title :
                         result.metadata.artist+L" — "+result.metadata.title;
                 }
-            } else if (result.kind==PlaylistJob::Save) status=L"Lista salva.";
+            } else if (result.kind==PlaylistJob::Save) status.Set("playlist.saved");
             else {
-                if (result.kind==PlaylistJob::Open) status=L"Lista adicionada.";
+                if (result.kind==PlaylistJob::Open) status.Set("playlist.added");
                 for(const auto& track:result.tracks) AddTrack(track);
             }
         }
@@ -667,7 +726,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         if (!sessionPath.empty()) {
             std::wstring error;
             if (!SaveM3U(sessionPath,PlayerPlaylist().Tracks(),error))
-                MessageBoxW(mainWindow,(L"Não foi possível preservar a playlist.\n"+error).c_str(),L"LiteSic",MB_OK|MB_ICONERROR);
+                MessageBoxW(mainWindow,I18n::Format("errors.preserve_playlist",{{"error",error}}).c_str(),L"LiteSic",MB_OK|MB_ICONERROR);
             else {
                 const int index=selected.empty()?-1:selected.front();
                 const Track* track=PlayerPlaylist().At(index);
@@ -681,9 +740,9 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
                 bool saved=file!=INVALID_HANDLE_VALUE && WriteFile(file,&bom,sizeof(bom),&written,nullptr) && written==sizeof(bom);
                 if(file!=INVALID_HANDLE_VALUE) CloseHandle(file);
                 if(!saved || !WritePrivateProfileSectionW(L"Selection",state.c_str(),ini.c_str()))
-                    MessageBoxW(mainWindow,L"Não foi possível preservar a seleção da playlist.",L"LiteSic",MB_OK|MB_ICONWARNING);
+                    MessageBoxW(mainWindow,I18n::Text("errors.preserve_selection").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);
                 else if(!SaveGeometry(ini))
-                    MessageBoxW(mainWindow,L"Não foi possível preservar a posição da playlist.",L"LiteSic",MB_OK|MB_ICONWARNING);
+                    MessageBoxW(mainWindow,I18n::Text("errors.preserve_position").c_str(),L"LiteSic",MB_OK|MB_ICONWARNING);
             }
         }
         sessionPath.clear(); search=nullptr; DeleteObject(searchFont); searchFont=nullptr;
@@ -721,15 +780,15 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
             GetWindowRect(main,&parent); y=parent.bottom;
         }
     }
-    window=CreateWindowExW(WS_EX_ACCEPTFILES,kClass,L"LiteSic — Lista de reprodução",WS_POPUP,
+    window=CreateWindowExW(WS_EX_ACCEPTFILES,kClass,I18n::Format("window.caption",{{"title",I18n::Text("playlist.title")}}).c_str(),WS_POPUP,
         x,y,width,height,main,nullptr,instance,nullptr);
     if (window) {
         Skin::Bind(Skin::Playlist,window);
         if (!sessionPath.empty()) {
             DWORD attributes=GetFileAttributesW(sessionPath.c_str());
             if (attributes!=INVALID_FILE_ATTRIBUTES || GetLastError()!=ERROR_FILE_NOT_FOUND) {
-                std::vector<Track> tracks; std::wstring error;
-                if (LoadM3U(sessionPath,tracks,error)) {
+                std::vector<Track> tracks; std::wstring error;std::string errorId;
+                if (LoadM3U(sessionPath,tracks,error,&errorId)) {
                     for (const auto& track:tracks) AddTrack(track);
                     std::wstring ini=sessionPath+L".ini";
                     int index=static_cast<int>(GetPrivateProfileIntW(L"Selection",L"Index",-1,ini.c_str()));
@@ -740,7 +799,7 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
                         top=view.Row(index)-Visible()/2;
                     }
                 } else {
-                    status=error;
+                    status.Set(errorId);
                     // Do not replace an unreadable session with an empty list.
                     sessionPath.clear();
                 }
@@ -801,10 +860,11 @@ void PlWnd_AddFiles(HWND owner, bool playFirst) {
     std::vector<wchar_t> buffer(32768);
     OPENFILENAMEW info{}; info.lStructSize=sizeof(info); info.hwndOwner=owner;
     info.lpstrFile=buffer.data(); info.nMaxFile=static_cast<DWORD>(buffer.size());
-    info.lpstrFilter=L"Áudio\0*.mp3;*.wav;*.flac;*.ogg\0\0";
+    std::wstring filter=I18n::Text("playlist.audio_filter")+L'\0'+L"*.mp3;*.wav;*.flac;*.ogg"+L'\0'+L'\0';
+    info.lpstrFilter=filter.c_str();
     info.Flags=OFN_EXPLORER|OFN_ALLOWMULTISELECT|OFN_FILEMUSTEXIST|OFN_HIDEREADONLY|OFN_NOCHANGEDIR;
     if (!GetOpenFileNameW(&info)) {
-        if (CommDlgExtendedError()==FNERR_BUFFERTOOSMALL) Error(L"Seleção muito grande; adicione uma pasta.");
+        if (CommDlgExtendedError()==FNERR_BUFFERTOOSMALL) Error("errors.selection_large");
         return;
     }
     int first=PlayerPlaylist().Count();
@@ -812,6 +872,6 @@ void PlWnd_AddFiles(HWND owner, bool playFirst) {
     if (!*next) AddPath(base);
     else while(*next) { AddPath(base+L"\\"+next); next+=wcslen(next)+1; }
     status.clear();
-    if (playFirst && first<PlayerPlaylist().Count() && !PlayerPlayback().PlayIndex(first)) Error(L"Não foi possível tocar o arquivo.");
+    if (playFirst && first<PlayerPlaylist().Count() && !PlayerPlayback().PlayIndex(first)) Error("errors.play_file");
     PlWnd_Refresh();
 }

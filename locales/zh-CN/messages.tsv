@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	自动（推荐）
+appearance.scale_menu	外观 > 界面缩放
+appearance.themes_menu	外观 > 主题...
+audio.mono	单声道
+audio.multichannel	多声道
+audio.stereo	立体声
+common.close	关闭
+common.no	否
+common.yes	是
+equalizer.custom	自定义
+equalizer.help	±12 dB · ↑/↓ 调整 · Tab 切换 · 空格归零
+equalizer.off	EQ 关
+equalizer.on	EQ 开
+equalizer.preamp	前级
+equalizer.preset	预设：{name}
+equalizer.reset	重置
+equalizer.title	均衡器
+equalizer.unavailable	不适用
+errors.audio_read	无法读取音频文件。
+errors.data_folder	无法访问数据文件夹。本次会话的播放列表将无法保留。
+errors.eq_render	均衡器：无法渲染
+errors.m3u_invalid	播放列表无效或大于16 MiB。
+errors.m3u_open	无法打开播放列表。
+errors.m3u_save	无法保存播放列表。
+errors.m3u_start	无法开始M3U操作。
+errors.metadata_unavailable	无法读取元数据。
+errors.play_file	无法播放文件。
+errors.play_selected	无法播放所选曲目。
+errors.play_track	无法播放该曲目
+errors.preserve_playlist	无法保留播放列表。\n{error}
+errors.preserve_position	无法保留播放列表的位置。
+errors.preserve_selection	无法保留播放列表的选择。
+errors.scan	无法开始扫描。
+errors.selection_large	所选内容过多，请添加文件夹。
+errors.temporary	无法创建临时文件。
+errors.theme_save	已应用主题，但无法保存偏好设置。
+errors.track_limit	已达到100,000首曲目的上限。
+errors.translation	文本不可用
+errors.worker	无法开始后台读取。
+info.album	专辑
+info.artist	艺术家
+info.bitrate	估算平均比特率（文件）
+info.caption	曲目信息
+info.channels	声道
+info.duration	时长
+info.favorite	收藏
+info.field	{label}：{value}
+info.file	文件
+info.format	格式
+info.genre	流派
+info.reading	正在读取元数据...
+info.sample_rate	采样率
+info.size	大小
+info.title	标题
+info.track	曲目
+info.unknown	未提供
+info.year	年份/日期
+player.add_hint	请通过播放列表添加文件
+player.balance	平衡
+player.balance_help	声道平衡：左 / 右
+player.left	左
+player.list_short	列表
+player.native	LiteSic   ·   原生音频播放器
+player.next	下一首
+player.oscilloscope	示波器
+player.pause	暂停
+player.paused	已暂停
+player.play	播放
+player.playing	正在播放
+player.position	播放位置
+player.previous	上一首
+player.ready	准备播放
+player.repeat	循环：关闭 → 列表 → 单曲
+player.repeat_one	单曲循环
+player.repeat_short	循环
+player.right	右
+player.shuffle	随机播放
+player.shuffle_short	随机
+player.spectrum	FFT频谱
+player.stop	停止
+player.time	时间
+player.toggle_equalizer	显示 / 隐藏均衡器
+player.toggle_playlist	显示 / 隐藏播放列表
+player.toggle_visualizer	显示 / 隐藏可视化
+player.volume	音量
+player.welcome	让音乐近在身边
+playlist.add_short	添加 ▾
+playlist.added	列表已添加。
+playlist.audio_filter	音频
+playlist.clear	清空列表
+playlist.duration_asc	时长：短 → 长
+playlist.duration_desc	时长：长 → 短
+playlist.empty	请添加文件或文件夹
+playlist.favorite_hint	请在“全部”中为曲目标记星号
+playlist.favorites	收藏
+playlist.files	文件...
+playlist.folder_dialog	添加音频文件夹（包含子文件夹）
+playlist.folders	文件夹及子文件夹...
+playlist.general	全部
+playlist.info_menu	曲目信息...
+playlist.list_menu	列表 ▾
+playlist.m3u_filter	UTF-8 M3U播放列表
+playlist.mix	打乱当前显示顺序
+playlist.name_asc	名称：A → Z
+playlist.name_desc	名称：Z → A
+playlist.no_results	未找到曲目
+playlist.open_dialog	打开M3U播放列表
+playlist.open_menu	打开M3U（添加）...
+playlist.opening	正在打开列表...
+playlist.reading	正在读取...
+playlist.remove	移除
+playlist.save_dialog	保存M3U播放列表
+playlist.save_menu	保存M3U...
+playlist.saved	列表已保存。
+playlist.saving	正在保存列表...
+playlist.search	搜索曲目...
+playlist.selected.few	已选择{count}首
+playlist.selected.many	已选择{count}首
+playlist.selected.one	已选择{count}首
+playlist.selected.other	已选择{count}首
+playlist.selected.two	已选择{count}首
+playlist.selected.zero	已选择{count}首
+playlist.title	播放列表
+playlist.tracks.few	{count}首曲目
+playlist.tracks.many	{count}首曲目
+playlist.tracks.one	{count}首曲目
+playlist.tracks.other	{count}首曲目
+playlist.tracks.two	{count}首曲目
+playlist.tracks.zero	{count}首曲目
+playlist.visible.few	显示{count}首
+playlist.visible.many	显示{count}首
+playlist.visible.one	显示{count}首
+playlist.visible.other	显示{count}首
+playlist.visible.two	显示{count}首
+playlist.visible.zero	显示{count}首
+preset.bass	低音
+preset.classical	古典
+preset.flat	平直
+preset.jazz	爵士
+preset.pop	流行
+preset.rock	摇滚
+preset.voice	人声
+theme.aurora	北极光
+theme.autumn	秋日
+theme.carbon	碳色
+theme.carnival	狂欢节
+theme.children	儿童节
+theme.christmas	圣诞节
+theme.cyberpunk	赛博朋克
+theme.dark	深色
+theme.desert	沙漠
+theme.easter	复活节
+theme.forest	森林
+theme.halloween	万圣节
+theme.high-contrast	高对比度
+theme.inverse	反色
+theme.june-festival	六月节
+theme.light	浅色
+theme.matrix	矩阵
+theme.midnight	午夜
+theme.mono	单色
+theme.mountain	山岳
+theme.neon-blue	蓝色霓虹
+theme.neon-purple	紫色霓虹
+theme.new-year	新年
+theme.ocean	海洋
+theme.original	LiteSic Original
+theme.sakura	樱花
+theme.spring	春天
+theme.summer	夏日
+theme.sunset	日落
+theme.synthwave	合成波
+theme.terminal	复古终端
+theme.tropical	热带
+theme.valentines	情人节
+theme.vintage	复古音响
+theme.winamp	Winamp Classic
+theme.winter	冬季
+themes.all	全部
+themes.celebrations	节庆
+themes.classic	经典
+themes.essential	基础
+themes.nature	自然
+themes.restore	恢复Original
+themes.seasonal	季节
+themes.technology	科技
+themes.title	主题
+window.caption	LiteSic — {title}
+appearance.language	语言
+appearance.auto_language	自动（Windows）：{language}
+errors.language_change	无法应用或保存语言首选项。请检查资源和设置文件夹。
+
+# M8-T8: control descriptions
+tooltip.previous	播放上一首
+tooltip.next	播放下一首
+tooltip.shuffle_on	开启随机播放
+tooltip.shuffle_off	关闭随机播放
+tooltip.repeat_off	不重复播放
+tooltip.repeat_all	重复整个播放列表
+tooltip.repeat_one	重复当前歌曲
+tooltip.play	开始或继续播放
+tooltip.pause	暂停播放
+tooltip.stop	停止播放
+tooltip.seek	跳转到歌曲中的位置
+tooltip.volume	音量：{value}%
+tooltip.balance	平衡：{value}（−100 左，+100 右）
+tooltip.show_playlist	显示播放列表
+tooltip.hide_playlist	隐藏播放列表
+tooltip.show_eq	显示均衡器
+tooltip.hide_eq	隐藏均衡器
+tooltip.fft	显示频谱
+tooltip.osc	显示音频波形
+tooltip.show_viz	显示可视化
+tooltip.hide_viz	隐藏可视化
+tooltip.minimize	最小化播放器
+tooltip.close	关闭此窗口
+tooltip.time	切换已播放 / 剩余时间
+tooltip.add	添加文件或文件夹
+tooltip.remove	移除所选歌曲
+tooltip.list_menu	打开、保存、排序或清空播放列表
+tooltip.all	显示所有歌曲
+tooltip.favorites	显示收藏歌曲
+tooltip.clear_search	清除搜索
+tooltip.search	搜索标题、歌手、专辑或文件
+tooltip.row	单击选择；双击播放
+tooltip.favorite_on	添加到收藏
+tooltip.favorite_off	从收藏中移除
+tooltip.scroll	滚动列表
+tooltip.eq_on	启用均衡器
+tooltip.eq_off	禁用均衡器
+tooltip.presets	选择均衡器预设
+tooltip.reset	将所有增益重置为零
+tooltip.preamp	前置放大：{gain} dB
+tooltip.band	{frequency} Hz — 增益：{gain} dB
+tooltip.band_unavailable	{frequency} Hz — 增益：{gain} dB（当前采样率下不可用）
+tooltip.theme_list	选择并应用主题
+tooltip.theme_reset	恢复默认主题
+tooltip.category	按类别筛选主题
+tooltip.info	歌曲详情；选择文本以复制

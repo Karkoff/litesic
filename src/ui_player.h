@@ -21,3 +21,6 @@ bool PaintPlayer(Ui::Canvas& canvas,HDC dc,const RECT& pixels,float scale,const 
 int PlayerLayoutHeight(bool visualizerVisible);
 Ui::Rect PlayerControlRect(int id, bool visualizerVisible = true);
 int PlayerControlAt(float x,float y, bool visualizerVisible = true);
+
+// Stable localized control names, separate from explanatory tooltip descriptions.
+std::wstring PlayerControlName(int id);

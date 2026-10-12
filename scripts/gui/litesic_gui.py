@@ -21,6 +21,7 @@ ROOT = Path(__file__).resolve().parents[2]
 OUT = ROOT / 'build' / 'gui'
 STATE = OUT / 'session.json'
 CLASS = 'LiteSic.MainWnd'
+LANGUAGE_CODES = 'pt-BR en-US es-ES fr-FR de-DE it-IT pt-PT nl-NL pl-PL ru-RU ja-JP zh-CN zh-TW ko-KR tr-TR ar-SA hi-IN sv-SE'.split()
 user = c.WinDLL('user32', use_last_error=True)
 kernel = c.WinDLL('kernel32', use_last_error=True)
 user.GetProcessWindowStation.restype = w.HANDLE
@@ -133,10 +134,14 @@ def connect(dialog=False, target='main', menu_index=None):
         window = owned[0]
     else:
         window = main
-        if target in ('playlist', 'eq', 'themes'):
-            class_name = {'playlist':'LiteSic.PlaylistWnd','eq':'LiteSic.EqualizerWnd','themes':'LiteSic.ThemesWnd'}[target]
+        if target in ('playlist', 'eq', 'themes', 'info'):
+            class_name = {'playlist':'LiteSic.PlaylistWnd','eq':'LiteSic.EqualizerWnd','themes':'LiteSic.ThemesWnd','info':'LiteSic.TrackInfoWnd'}[target]
             candidates = app.windows(class_name=class_name, visible_only=True)
-            candidates = [p for p in candidates if gui.GetWindow(p.handle, 4) == main.handle]
+            def owned_panel(panel):
+                owner = gui.GetWindow(panel.handle, 4)
+                if owner == main.handle: return True
+                return target == 'info' and gui.GetClassName(owner) == 'LiteSic.PlaylistWnd' and gui.GetWindow(owner,4) == main.handle
+            candidates = [p for p in candidates if owned_panel(p)]
             if len(candidates) != 1: raise RuntimeError('Esperado um painel pertencente ao player lançado.')
             window = candidates[0]
         elif target == 'menu':
@@ -228,6 +233,33 @@ def click(state, window, x, y, button, modifier='', double=False):
     else: window.click_input(coords=point, absolute=True, button=button,
                              pressed='control' if modifier == 'ctrl' else modifier, double=double)
 
+def hover(state, window, x, y, label):
+    if not state.get('validation'): raise ValueError('Hover exige sessão isolada.')
+    if x is None or y is None: raise ValueError('Hover exige coordenadas.')
+    if not re.fullmatch(r'[a-zA-Z0-9_-]{1,56}',label): raise ValueError('Nome de captura inválido.')
+    _, _, gui, process, _, Application = modules()
+    observed(state, window)
+    client = window.client_rect()
+    if not (0 <= x < client.width() and 0 <= y < client.height()): raise ValueError('Ponto fora da janela.')
+    foreground(window)
+    point = gui.ClientToScreen(window.handle, (x, y))
+    under = gui.WindowFromPoint(point)
+    if process.GetWindowThreadProcessId(under)[1] != state['pid'] or gui.GetAncestor(under, 2) != window.handle:
+        raise RuntimeError('Ponto coberto por outra janela. Nenhum movimento enviado.')
+    from pywinauto import mouse
+    mouse.move(coords=point)
+    time.sleep(0.85)
+    app = Application(backend='win32').connect(process=state['pid'], timeout=5)
+    tips = [p for p in app.windows(class_name='LiteSic.TooltipWnd', visible_only=True)
+            if gui.GetWindow(p.handle,4) == window.handle]
+    result = {'window': capture(state, window, label+'-context'), 'visible_tooltips': len(tips)}
+    if tips:
+        if len(tips) != 1: raise RuntimeError('Mais de um tooltip visível.')
+        result['tooltip'] = capture(state,tips[0],label+'-popup')
+        # Inputs remain bound to the observed control surface, never to the passive popup.
+        capture(state,window,label+'-context')
+    return result
+
 def fixture():
     OUT.mkdir(parents=True, exist_ok=True)
     path = OUT / 'gui-silence.wav'
@@ -266,6 +298,9 @@ def run(args):
         fixture()
         return prepare()
     if args.action == 'launch':
+        language = getattr(args, 'language', None)
+        if language and (not args.validation or language not in LANGUAGE_CODES):
+            raise ValueError('Idioma de teste exige --validation e um catálogo conhecido.')
         require_desktop()
         if STATE.exists():
             prior = json.loads(STATE.read_text(encoding='utf-8'))
@@ -275,9 +310,11 @@ def run(args):
                 raise RuntimeError('A sessão anterior ainda está ativa. Use close antes de launch.')
         path = validate_exe(ROOT / 'build' / args.arch / args.config / 'LiteSic.exe')
         *_, Application = modules()
-        app = Application(backend='win32').start('"' + str(path) + '"' + (' --validation' if args.validation else ''), work_dir=str(ROOT), timeout=15)
+        command = '"' + str(path) + '"' + (' --validation' if args.validation else '')
+        if language: command += ' --locale=' + language
+        app = Application(backend='win32').start(command, work_dir=str(ROOT), timeout=15)
         try:
-            state = {**identity(app.process), 'sha256': digest(path)}
+            state = {**identity(app.process), 'sha256': digest(path), 'validation': bool(args.validation)}
         except Exception:
             app.kill()
             raise
@@ -288,7 +325,16 @@ def run(args):
     state, window = connect(args.dialog, args.target, args.menu_index)
     if args.action == 'inspect': return window_info(window)
     if args.action == 'capture': return capture(state, window, args.label or 'capture')
-    if args.action == 'click':
+    if args.action == 'language':
+        if args.target != 'main' or args.dialog or args.query not in (*LANGUAGE_CODES, 'automatic'):
+            raise ValueError('Idioma exige player e um código conhecido ou automatic.')
+        if not state.get('validation'): raise ValueError('Troca de idioma automatizada exige sessão isolada.')
+        observed(state,window)
+        command = 920 if args.query == 'automatic' else 921 + LANGUAGE_CODES.index(args.query)
+        window.send_message(0x0111, command, 0) # Production WM_COMMAND menu path; fixed scalar IDs only.
+    elif args.action == 'hover':
+        return hover(state,window,args.x,args.y,args.label or "tooltip")
+    elif args.action == 'click':
         if args.x is None or args.y is None: raise ValueError('click requer --x e --y em pixels do cliente.')
         click(state, window, args.x, args.y, args.button, args.modifier, args.double)
     elif args.action == 'theme':
@@ -404,10 +450,11 @@ def run(args):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag', 'search', 'theme'])
+    parser.add_argument('action', choices=['doctor', 'fixture', 'm5-fixtures', 'launch', 'inspect', 'capture', 'click', 'key', 'open-fixture', 'close', 'resize', 'drag', 'search', 'theme','language','hover'])
     parser.add_argument('--validation',action='store_true',help='Fixed isolated build/gui/m6-session configuration')
+    parser.add_argument('--language', choices=LANGUAGE_CODES, help='Catalog fixture; requires --validation')
     parser.add_argument('--query')
-    parser.add_argument('--target', choices=['main','playlist','eq','menu','themes'], default='main')
+    parser.add_argument('--target', choices=['main','playlist','eq','menu','themes','info'], default='main')
     parser.add_argument('--fixture', default='silence')
     parser.add_argument('--menu-index',type=int,choices=range(4))
     parser.add_argument('--modifier', choices=['','ctrl','shift'], default='')

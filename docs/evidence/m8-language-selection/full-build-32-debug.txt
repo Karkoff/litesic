@@ -1,0 +1,54 @@
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/app.o src/app.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/audio.o src/audio.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/eq_dsp.o src/eq_dsp.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/eq_state.o src/eq_state.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/eqwnd.o src/eqwnd.cpp
+powershell.exe : src/app.cpp: In function 'void InitDpiAwareness()':
+No linha:2 caractere:332
++ ... bugBuild'}; & powershell @params *> "build/m8-t7-work/$action-$arch-$ ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (src/app.cpp: In...piAwareness()'::String) [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+src/app.cpp:30:13: warning: cast between incompatible function types from 'FARPROC' {aka 'int 
+(__attribute__((stdcall)) *)()'} to 'PFN_SetProcessDpiAwarenessContext' {aka 'int (__attribute__((stdcall)) 
+*)(void*)'} [-Wcast-function-type]
+   30 |             (PFN_SetProcessDpiAwarenessContext)GetProcAddress(
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   31 |                 hUser32, "SetProcessDpiAwarenessContext");
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/i18n.o src/i18n.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/language_selection.o src/language_selection.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/m3u.o src/m3u.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/mainwnd.o src/mainwnd.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/playback.o src/playback.cpp
+src/mainwnd.cpp: In function 'float GetDpiScaleFactor(HWND)':
+src/mainwnd.cpp:61:23: warning: cast between incompatible function types from 'FARPROC' {aka 'int 
+(__attribute__((stdcall)) *)()'} to 'PFN_GetDpiForWindow' {aka 'unsigned int (__attribute__((stdcall)) *)(HWND__*)'} 
+[-Wcast-function-type]
+   61 |             pGetDpi = (PFN_GetDpiForWindow)GetProcAddress(
+      |                       ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   62 |                 hUser32, "GetDpiForWindow");
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/playlist.o src/playlist.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/playlist_view.o src/playlist_view.cpp
+src/mainwnd.cpp: At global scope:
+src/mainwnd.cpp:434:13: warning: 'void DrawLcdDisplay(HWND, HDC, LPCWSTR)' defined but not used [-Wunused-function]
+  434 | static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
+      |             ^~~~~~~~~~~~~~
+src/mainwnd.cpp:305:13: warning: 'void DrawTitleButton(HDC, TitleBarButton)' defined but not used [-Wunused-function]
+  305 | static void DrawTitleButton(HDC hdc, TitleBarButton btn)
+      |             ^~~~~~~~~~~~~~~
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/playlist_worker.o src/playlist_worker.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/plwnd.o src/plwnd.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/skin.o src/skin.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/tags.o src/tags.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/theme_window.o src/theme_window.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/ui_draw.o src/ui_draw.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/ui_player.o src/ui_player.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/ui_theme.o src/ui_theme.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/util.o src/util.cpp
+/mingw32/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/visualizer.o src/visualizer.cpp
+/mingw32/bin/gcc.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c17 -Wall -Wextra -g -O0 -DDEBUG -MMD -MP -c -o build/32/debug/miniaudio_impl.o src/miniaudio_impl.c
+/mingw32/bin/windres.exe -Ires -i res/app.rc -o build/32/debug/app.res.o
+/mingw32/bin/g++.exe -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -mwindows -municode -o build/32/debug/LiteSic.exe build/32/debug/app.o build/32/debug/audio.o build/32/debug/eq_dsp.o build/32/debug/eq_state.o build/32/debug/eqwnd.o build/32/debug/i18n.o build/32/debug/language_selection.o build/32/debug/m3u.o build/32/debug/mainwnd.o build/32/debug/playback.o build/32/debug/playlist.o build/32/debug/playlist_view.o build/32/debug/playlist_worker.o build/32/debug/plwnd.o build/32/debug/skin.o build/32/debug/tags.o build/32/debug/theme_window.o build/32/debug/ui_draw.o build/32/debug/ui_player.o build/32/debug/ui_theme.o build/32/debug/util.o build/32/debug/visualizer.o build/32/debug/miniaudio_impl.o build/32/debug/app.res.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -lm

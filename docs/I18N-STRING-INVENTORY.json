@@ -1,0 +1,4276 @@
+[
+  {
+    "id": "player.previous",
+    "pt-BR": "Anterior",
+    "en-US": "Previous",
+    "original_locations": [
+      "src/mainwnd.cpp:242"
+    ]
+  },
+  {
+    "id": "player.next",
+    "pt-BR": "Próximo",
+    "en-US": "Next",
+    "original_locations": [
+      "src/mainwnd.cpp:242"
+    ]
+  },
+  {
+    "id": "player.shuffle",
+    "pt-BR": "Aleatório",
+    "en-US": "Shuffle",
+    "original_locations": [
+      "src/mainwnd.cpp:242"
+    ]
+  },
+  {
+    "id": "player.repeat",
+    "pt-BR": "Repetir: desligado → lista → faixa",
+    "en-US": "Repeat: off → list → track",
+    "original_locations": [
+      "src/mainwnd.cpp:242"
+    ]
+  },
+  {
+    "id": "player.play",
+    "pt-BR": "Reproduzir",
+    "en-US": "Play",
+    "original_locations": [
+      "src/mainwnd.cpp:243"
+    ]
+  },
+  {
+    "id": "player.pause",
+    "pt-BR": "Pausar",
+    "en-US": "Pause",
+    "original_locations": [
+      "src/mainwnd.cpp:243"
+    ]
+  },
+  {
+    "id": "player.stop",
+    "pt-BR": "Parar",
+    "en-US": "Stop",
+    "original_locations": [
+      "src/audio.cpp:295",
+      "src/audio.cpp:338",
+      "src/mainwnd.cpp:243"
+    ]
+  },
+  {
+    "id": "player.position",
+    "pt-BR": "Posição da faixa",
+    "en-US": "Track position",
+    "original_locations": [
+      "src/mainwnd.cpp:243"
+    ]
+  },
+  {
+    "id": "player.volume",
+    "pt-BR": "Volume",
+    "en-US": "Volume",
+    "original_locations": [
+      "src/audio.cpp:568",
+      "src/audio.cpp:571",
+      "src/mainwnd.cpp:243",
+      "src/mainwnd.cpp:734",
+      "src/mainwnd.cpp:786",
+      "src/mainwnd.cpp:845",
+      "src/mainwnd.cpp:951",
+      "src/mainwnd.cpp:954",
+      "src/mainwnd.cpp:1030",
+      "src/mainwnd.cpp:1449",
+      "src/ui_player.cpp:91",
+      "src/ui_theme.cpp:124"
+    ]
+  },
+  {
+    "id": "player.balance_help",
+    "pt-BR": "Balanço: esquerda / direita",
+    "en-US": "Balance: left / right",
+    "original_locations": [
+      "src/mainwnd.cpp:243"
+    ]
+  },
+  {
+    "id": "player.toggle_playlist",
+    "pt-BR": "Mostrar / ocultar playlist",
+    "en-US": "Show / hide playlist",
+    "original_locations": [
+      "src/mainwnd.cpp:244"
+    ]
+  },
+  {
+    "id": "player.toggle_equalizer",
+    "pt-BR": "Mostrar / ocultar equalizador",
+    "en-US": "Show / hide equalizer",
+    "original_locations": [
+      "src/mainwnd.cpp:244"
+    ]
+  },
+  {
+    "id": "player.spectrum",
+    "pt-BR": "Espectro FFT",
+    "en-US": "FFT spectrum",
+    "original_locations": [
+      "src/mainwnd.cpp:244"
+    ]
+  },
+  {
+    "id": "player.oscilloscope",
+    "pt-BR": "Osciloscópio",
+    "en-US": "Oscilloscope",
+    "original_locations": [
+      "src/mainwnd.cpp:244",
+      "src/visualizer.cpp:151"
+    ]
+  },
+  {
+    "id": "player.toggle_visualizer",
+    "pt-BR": "Mostrar / ocultar visualizador",
+    "en-US": "Show / hide visualizer",
+    "original_locations": [
+      "src/mainwnd.cpp:244"
+    ]
+  },
+  {
+    "id": "player.welcome",
+    "pt-BR": "Sua música, por perto",
+    "en-US": "Your music, close by",
+    "original_locations": [
+      "src/mainwnd.cpp:700"
+    ]
+  },
+  {
+    "id": "player.add_hint",
+    "pt-BR": "Adicione arquivos pela playlist",
+    "en-US": "Add files through the playlist",
+    "original_locations": [
+      "src/mainwnd.cpp:704"
+    ]
+  },
+  {
+    "id": "player.playing",
+    "pt-BR": "Reproduzindo",
+    "en-US": "Playing",
+    "original_locations": [
+      "src/mainwnd.cpp:704"
+    ]
+  },
+  {
+    "id": "player.paused",
+    "pt-BR": "Pausado",
+    "en-US": "Paused",
+    "original_locations": [
+      "src/mainwnd.cpp:705"
+    ]
+  },
+  {
+    "id": "player.ready",
+    "pt-BR": "Pronto para reproduzir",
+    "en-US": "Ready to play",
+    "original_locations": [
+      "src/mainwnd.cpp:705"
+    ]
+  },
+  {
+    "id": "errors.play_track",
+    "pt-BR": "Não foi possível reproduzir a faixa",
+    "en-US": "Could not play the track",
+    "original_locations": [
+      "src/mainwnd.cpp:706"
+    ]
+  },
+  {
+    "id": "audio.stereo",
+    "pt-BR": "Estéreo",
+    "en-US": "Stereo",
+    "original_locations": [
+      "src/mainwnd.cpp:711"
+    ]
+  },
+  {
+    "id": "audio.mono",
+    "pt-BR": "Mono",
+    "en-US": "Mono",
+    "original_locations": [
+      "src/mainwnd.cpp:711",
+      "src/ui_theme.cpp:49"
+    ]
+  },
+  {
+    "id": "audio.multichannel",
+    "pt-BR": "Multicanal",
+    "en-US": "Multichannel",
+    "original_locations": [
+      "src/mainwnd.cpp:711"
+    ]
+  },
+  {
+    "id": "player.native",
+    "pt-BR": "LiteSic   ·   Player de áudio nativo",
+    "en-US": "LiteSic   ·   Native audio player",
+    "original_locations": [
+      "src/mainwnd.cpp:714"
+    ]
+  },
+  {
+    "id": "player.time",
+    "pt-BR": "TEMPO",
+    "en-US": "TIME",
+    "original_locations": [
+      "src/ui_player.cpp:72"
+    ]
+  },
+  {
+    "id": "player.balance",
+    "pt-BR": "Balanço",
+    "en-US": "Balance",
+    "original_locations": [
+      "src/mainwnd.cpp:243",
+      "src/ui_player.cpp:94"
+    ]
+  },
+  {
+    "id": "player.left",
+    "pt-BR": "L",
+    "en-US": "L",
+    "original_locations": [
+      "src/app.cpp:20",
+      "src/app.cpp:24",
+      "src/app.cpp:25",
+      "src/app.cpp:30",
+      "src/app.cpp:33",
+      "src/app.cpp:35",
+      "src/app.cpp:44",
+      "src/app.cpp:48",
+      "src/app.cpp:51",
+      "src/app.cpp:54",
+      "src/app.cpp:55",
+      "src/app.cpp:56",
+      "src/app.cpp:57",
+      "src/app.cpp:69",
+      "src/app.cpp:76",
+      "src/app.cpp:77",
+      "src/app.cpp:79",
+      "src/app.cpp:80",
+      "src/app.cpp:81",
+      "src/app.cpp:83",
+      "src/app.cpp:84",
+      "src/app.cpp:93",
+      "src/app.cpp:95",
+      "src/audio.cpp:28",
+      "src/audio.cpp:34",
+      "src/audio.cpp:36",
+      "src/audio.cpp:40",
+      "src/audio.cpp:42",
+      "src/audio.cpp:59",
+      "src/audio.cpp:60",
+      "src/audio.cpp:70",
+      "src/audio.cpp:73",
+      "src/audio.cpp:74",
+      "src/audio.cpp:81",
+      "src/audio.cpp:94",
+      "src/audio.cpp:95",
+      "src/audio.cpp:98",
+      "src/audio.cpp:102",
+      "src/audio.cpp:103",
+      "src/audio.cpp:108",
+      "src/audio.cpp:109",
+      "src/audio.cpp:110",
+      "src/audio.cpp:117",
+      "src/audio.cpp:122",
+      "src/audio.cpp:125",
+      "src/audio.cpp:126",
+      "src/audio.cpp:144",
+      "src/audio.cpp:145",
+      "src/audio.cpp:146",
+      "src/audio.cpp:147",
+      "src/audio.cpp:156",
+      "src/audio.cpp:161",
+      "src/audio.cpp:164",
+      "src/audio.cpp:165",
+      "src/audio.cpp:167",
+      "src/audio.cpp:212",
+      "src/audio.cpp:218",
+      "src/audio.cpp:226",
+      "src/audio.cpp:236",
+      "src/audio.cpp:253",
+      "src/audio.cpp:254",
+      "src/audio.cpp:259",
+      "src/audio.cpp:260",
+      "src/audio.cpp:267",
+      "src/audio.cpp:270",
+      "src/audio.cpp:271",
+      "src/audio.cpp:273",
+      "src/audio.cpp:280",
+      "src/audio.cpp:281",
+      "src/audio.cpp:285",
+      "src/audio.cpp:296",
+      "src/audio.cpp:297",
+      "src/audio.cpp:304",
+      "src/audio.cpp:307",
+      "src/audio.cpp:311",
+      "src/audio.cpp:318",
+      "src/audio.cpp:319",
+      "src/audio.cpp:331",
+      "src/audio.cpp:335",
+      "src/audio.cpp:336",
+      "src/audio.cpp:339",
+      "src/audio.cpp:340",
+      "src/audio.cpp:348",
+      "src/audio.cpp:349",
+      "src/audio.cpp:353",
+      "src/audio.cpp:356",
+      "src/audio.cpp:359",
+      "src/audio.cpp:393",
+      "src/audio.cpp:396",
+      "src/audio.cpp:397",
+      "src/audio.cpp:412",
+      "src/audio.cpp:421",
+      "src/audio.cpp:424",
+      "src/audio.cpp:429",
+      "src/audio.cpp:441",
+      "src/audio.cpp:455",
+      "src/audio.cpp:456",
+      "src/audio.cpp:461",
+      "src/audio.cpp:482",
+      "src/audio.cpp:484",
+      "src/audio.cpp:492",
+      "src/audio.cpp:494",
+      "src/audio.cpp:496",
+      "src/audio.cpp:502",
+      "src/audio.cpp:505",
+      "src/audio.cpp:507",
+      "src/audio.cpp:508",
+      "src/audio.cpp:514",
+      "src/audio.cpp:521",
+      "src/audio.cpp:546",
+      "src/audio.cpp:549",
+      "src/audio.cpp:593",
+      "src/eqwnd.cpp:28",
+      "src/eqwnd.cpp:34",
+      "src/eqwnd.cpp:46",
+      "src/eqwnd.cpp:64",
+      "src/eqwnd.cpp:66",
+      "src/eqwnd.cpp:67",
+      "src/eqwnd.cpp:74",
+      "src/eqwnd.cpp:76",
+      "src/eqwnd.cpp:77",
+      "src/eqwnd.cpp:79",
+      "src/eqwnd.cpp:80",
+      "src/eqwnd.cpp:83",
+      "src/eqwnd.cpp:84",
+      "src/eqwnd.cpp:85",
+      "src/eqwnd.cpp:87",
+      "src/eqwnd.cpp:88",
+      "src/eqwnd.cpp:89",
+      "src/eqwnd.cpp:90",
+      "src/eqwnd.cpp:91",
+      "src/eqwnd.cpp:93",
+      "src/eqwnd.cpp:94",
+      "src/eqwnd.cpp:101",
+      "src/eqwnd.cpp:104",
+      "src/eqwnd.cpp:105",
+      "src/eqwnd.cpp:106",
+      "src/eqwnd.cpp:107",
+      "src/eqwnd.cpp:111",
+      "src/eqwnd.cpp:115",
+      "src/eqwnd.cpp:116",
+      "src/eqwnd.cpp:117",
+      "src/eqwnd.cpp:118",
+      "src/eqwnd.cpp:119",
+      "src/eqwnd.cpp:121",
+      "src/eqwnd.cpp:122",
+      "src/eqwnd.cpp:124",
+      "src/eqwnd.cpp:125",
+      "src/eqwnd.cpp:128",
+      "src/eqwnd.cpp:129",
+      "src/eqwnd.cpp:132",
+      "src/eqwnd.cpp:133",
+      "src/eqwnd.cpp:141",
+      "src/eqwnd.cpp:142",
+      "src/eqwnd.cpp:143",
+      "src/eqwnd.cpp:145",
+      "src/eqwnd.cpp:149",
+      "src/eqwnd.cpp:159",
+      "src/eqwnd.cpp:160",
+      "src/eqwnd.cpp:168",
+      "src/eq_state.cpp:12",
+      "src/eq_state.cpp:13",
+      "src/eq_state.cpp:14",
+      "src/eq_state.cpp:15",
+      "src/eq_state.cpp:16",
+      "src/eq_state.cpp:17",
+      "src/eq_state.cpp:18",
+      "src/eq_state.cpp:22",
+      "src/eq_state.cpp:31",
+      "src/eq_state.cpp:33",
+      "src/eq_state.cpp:34",
+      "src/eq_state.cpp:35",
+      "src/eq_state.cpp:49",
+      "src/eq_state.cpp:50",
+      "src/eq_state.cpp:51",
+      "src/eq_state.cpp:52",
+      "src/eq_state.cpp:53",
+      "src/m3u.cpp:19",
+      "src/m3u.cpp:28",
+      "src/m3u.cpp:43",
+      "src/m3u.cpp:45",
+      "src/m3u.cpp:50",
+      "src/m3u.cpp:60",
+      "src/m3u.cpp:61",
+      "src/m3u.cpp:62",
+      "src/m3u.cpp:73",
+      "src/m3u.cpp:74",
+      "src/m3u.cpp:77",
+      "src/m3u.cpp:78",
+      "src/m3u.cpp:79",
+      "src/m3u.cpp:80",
+      "src/m3u.cpp:97",
+      "src/m3u.cpp:100",
+      "src/m3u.cpp:101",
+      "src/m3u.cpp:102",
+      "src/m3u.cpp:103",
+      "src/m3u.cpp:104",
+      "src/m3u.cpp:108",
+      "src/m3u.cpp:110",
+      "src/m3u.cpp:111",
+      "src/m3u.cpp:112",
+      "src/m3u.cpp:113",
+      "src/m3u.cpp:125",
+      "src/m3u.cpp:131",
+      "src/m3u.cpp:133",
+      "src/m3u.cpp:134",
+      "src/m3u.cpp:136",
+      "src/m3u.cpp:137",
+      "src/m3u.cpp:146",
+      "src/m3u.cpp:147",
+      "src/mainwnd.cpp:52",
+      "src/mainwnd.cpp:54",
+      "src/mainwnd.cpp:56",
+      "src/mainwnd.cpp:57",
+      "src/mainwnd.cpp:61",
+      "src/mainwnd.cpp:65",
+      "src/mainwnd.cpp:73",
+      "src/mainwnd.cpp:88",
+      "src/mainwnd.cpp:116",
+      "src/mainwnd.cpp:127",
+      "src/mainwnd.cpp:128",
+      "src/mainwnd.cpp:136",
+      "src/mainwnd.cpp:139",
+      "src/mainwnd.cpp:142",
+      "src/mainwnd.cpp:145",
+      "src/mainwnd.cpp:150",
+      "src/mainwnd.cpp:153",
+      "src/mainwnd.cpp:154",
+      "src/mainwnd.cpp:156",
+      "src/mainwnd.cpp:157",
+      "src/mainwnd.cpp:158",
+      "src/mainwnd.cpp:159",
+      "src/mainwnd.cpp:162",
+      "src/mainwnd.cpp:165",
+      "src/mainwnd.cpp:169",
+      "src/mainwnd.cpp:173",
+      "src/mainwnd.cpp:174",
+      "src/mainwnd.cpp:175",
+      "src/mainwnd.cpp:178",
+      "src/mainwnd.cpp:182",
+      "src/mainwnd.cpp:183",
+      "src/mainwnd.cpp:195",
+      "src/mainwnd.cpp:196",
+      "src/mainwnd.cpp:207",
+      "src/mainwnd.cpp:208",
+      "src/mainwnd.cpp:212",
+      "src/mainwnd.cpp:218",
+      "src/mainwnd.cpp:231",
+      "src/mainwnd.cpp:232",
+      "src/mainwnd.cpp:235",
+      "src/mainwnd.cpp:239",
+      "src/mainwnd.cpp:240",
+      "src/mainwnd.cpp:241",
+      "src/mainwnd.cpp:242",
+      "src/mainwnd.cpp:243",
+      "src/mainwnd.cpp:244",
+      "src/mainwnd.cpp:246",
+      "src/mainwnd.cpp:247",
+      "src/mainwnd.cpp:248",
+      "src/mainwnd.cpp:254",
+      "src/mainwnd.cpp:261",
+      "src/mainwnd.cpp:269",
+      "src/mainwnd.cpp:270",
+      "src/mainwnd.cpp:273",
+      "src/mainwnd.cpp:279",
+      "src/mainwnd.cpp:285",
+      "src/mainwnd.cpp:297",
+      "src/mainwnd.cpp:298",
+      "src/mainwnd.cpp:311",
+      "src/mainwnd.cpp:313",
+      "src/mainwnd.cpp:314",
+      "src/mainwnd.cpp:318",
+      "src/mainwnd.cpp:320",
+      "src/mainwnd.cpp:322",
+      "src/mainwnd.cpp:323",
+      "src/mainwnd.cpp:324",
+      "src/mainwnd.cpp:325",
+      "src/mainwnd.cpp:336",
+      "src/mainwnd.cpp:339",
+      "src/mainwnd.cpp:343",
+      "src/mainwnd.cpp:373",
+      "src/mainwnd.cpp:378",
+      "src/mainwnd.cpp:381",
+      "src/mainwnd.cpp:409",
+      "src/mainwnd.cpp:417",
+      "src/mainwnd.cpp:418",
+      "src/mainwnd.cpp:420",
+      "src/mainwnd.cpp:421",
+      "src/mainwnd.cpp:422",
+      "src/mainwnd.cpp:427",
+      "src/mainwnd.cpp:429",
+      "src/mainwnd.cpp:435",
+      "src/mainwnd.cpp:438",
+      "src/mainwnd.cpp:439",
+      "src/mainwnd.cpp:442",
+      "src/mainwnd.cpp:443",
+      "src/mainwnd.cpp:450",
+      "src/mainwnd.cpp:451",
+      "src/mainwnd.cpp:452",
+      "src/mainwnd.cpp:454",
+      "src/mainwnd.cpp:458",
+      "src/mainwnd.cpp:481",
+      "src/mainwnd.cpp:482",
+      "src/mainwnd.cpp:483",
+      "src/mainwnd.cpp:493",
+      "src/mainwnd.cpp:494",
+      "src/mainwnd.cpp:499",
+      "src/mainwnd.cpp:500",
+      "src/mainwnd.cpp:501",
+      "src/mainwnd.cpp:503",
+      "src/mainwnd.cpp:506",
+      "src/mainwnd.cpp:507",
+      "src/mainwnd.cpp:508",
+      "src/mainwnd.cpp:509",
+      "src/mainwnd.cpp:516",
+      "src/mainwnd.cpp:517",
+      "src/mainwnd.cpp:519",
+      "src/mainwnd.cpp:520",
+      "src/mainwnd.cpp:521",
+      "src/mainwnd.cpp:522",
+      "src/mainwnd.cpp:524",
+      "src/mainwnd.cpp:526",
+      "src/mainwnd.cpp:531",
+      "src/mainwnd.cpp:533",
+      "src/mainwnd.cpp:539",
+      "src/mainwnd.cpp:559",
+      "src/mainwnd.cpp:560",
+      "src/mainwnd.cpp:561",
+      "src/mainwnd.cpp:588",
+      "src/mainwnd.cpp:611",
+      "src/mainwnd.cpp:634",
+      "src/mainwnd.cpp:645",
+      "src/mainwnd.cpp:649",
+      "src/mainwnd.cpp:652",
+      "src/mainwnd.cpp:654",
+      "src/mainwnd.cpp:656",
+      "src/mainwnd.cpp:659",
+      "src/mainwnd.cpp:673",
+      "src/mainwnd.cpp:674",
+      "src/mainwnd.cpp:677",
+      "src/mainwnd.cpp:679",
+      "src/mainwnd.cpp:696",
+      "src/mainwnd.cpp:697",
+      "src/mainwnd.cpp:700",
+      "src/mainwnd.cpp:704",
+      "src/mainwnd.cpp:705",
+      "src/mainwnd.cpp:706",
+      "src/mainwnd.cpp:710",
+      "src/mainwnd.cpp:711",
+      "src/mainwnd.cpp:713",
+      "src/mainwnd.cpp:714",
+      "src/mainwnd.cpp:719",
+      "src/mainwnd.cpp:722",
+      "src/mainwnd.cpp:724",
+      "src/mainwnd.cpp:728",
+      "src/mainwnd.cpp:734",
+      "src/mainwnd.cpp:736",
+      "src/mainwnd.cpp:737",
+      "src/mainwnd.cpp:741",
+      "src/mainwnd.cpp:743",
+      "src/mainwnd.cpp:744",
+      "src/mainwnd.cpp:749",
+      "src/mainwnd.cpp:759",
+      "src/mainwnd.cpp:774",
+      "src/mainwnd.cpp:775",
+      "src/mainwnd.cpp:778",
+      "src/mainwnd.cpp:780",
+      "src/mainwnd.cpp:781",
+      "src/mainwnd.cpp:792",
+      "src/mainwnd.cpp:800",
+      "src/mainwnd.cpp:812",
+      "src/mainwnd.cpp:815",
+      "src/mainwnd.cpp:817",
+      "src/mainwnd.cpp:818",
+      "src/mainwnd.cpp:834",
+      "src/mainwnd.cpp:837",
+      "src/mainwnd.cpp:838",
+      "src/mainwnd.cpp:840",
+      "src/mainwnd.cpp:843",
+      "src/mainwnd.cpp:847",
+      "src/mainwnd.cpp:851",
+      "src/mainwnd.cpp:852",
+      "src/mainwnd.cpp:853",
+      "src/mainwnd.cpp:864",
+      "src/mainwnd.cpp:869",
+      "src/mainwnd.cpp:873",
+      "src/mainwnd.cpp:874",
+      "src/mainwnd.cpp:878",
+      "src/mainwnd.cpp:884",
+      "src/mainwnd.cpp:887",
+      "src/mainwnd.cpp:892",
+      "src/mainwnd.cpp:893",
+      "src/mainwnd.cpp:894",
+      "src/mainwnd.cpp:905",
+      "src/mainwnd.cpp:907",
+      "src/mainwnd.cpp:916",
+      "src/mainwnd.cpp:924",
+      "src/mainwnd.cpp:926",
+      "src/mainwnd.cpp:928",
+      "src/mainwnd.cpp:942",
+      "src/mainwnd.cpp:945",
+      "src/mainwnd.cpp:948",
+      "src/mainwnd.cpp:952",
+      "src/mainwnd.cpp:953",
+      "src/mainwnd.cpp:956",
+      "src/mainwnd.cpp:957",
+      "src/mainwnd.cpp:960",
+      "src/mainwnd.cpp:961",
+      "src/mainwnd.cpp:962",
+      "src/mainwnd.cpp:979",
+      "src/mainwnd.cpp:988",
+      "src/mainwnd.cpp:993",
+      "src/mainwnd.cpp:994",
+      "src/mainwnd.cpp:998",
+      "src/mainwnd.cpp:1000",
+      "src/mainwnd.cpp:1001",
+      "src/mainwnd.cpp:1013",
+      "src/mainwnd.cpp:1017",
+      "src/mainwnd.cpp:1023",
+      "src/mainwnd.cpp:1026",
+      "src/mainwnd.cpp:1028",
+      "src/mainwnd.cpp:1029",
+      "src/mainwnd.cpp:1031",
+      "src/mainwnd.cpp:1034",
+      "src/mainwnd.cpp:1036",
+      "src/mainwnd.cpp:1037",
+      "src/mainwnd.cpp:1040",
+      "src/mainwnd.cpp:1054",
+      "src/mainwnd.cpp:1056",
+      "src/mainwnd.cpp:1063",
+      "src/mainwnd.cpp:1067",
+      "src/mainwnd.cpp:1073",
+      "src/mainwnd.cpp:1090",
+      "src/mainwnd.cpp:1092",
+      "src/mainwnd.cpp:1113",
+      "src/mainwnd.cpp:1118",
+      "src/mainwnd.cpp:1127",
+      "src/mainwnd.cpp:1128",
+      "src/mainwnd.cpp:1132",
+      "src/mainwnd.cpp:1143",
+      "src/mainwnd.cpp:1150",
+      "src/mainwnd.cpp:1156",
+      "src/mainwnd.cpp:1157",
+      "src/mainwnd.cpp:1158",
+      "src/mainwnd.cpp:1159",
+      "src/mainwnd.cpp:1162",
+      "src/mainwnd.cpp:1170",
+      "src/mainwnd.cpp:1172",
+      "src/mainwnd.cpp:1174",
+      "src/mainwnd.cpp:1176",
+      "src/mainwnd.cpp:1178",
+      "src/mainwnd.cpp:1180",
+      "src/mainwnd.cpp:1182",
+      "src/mainwnd.cpp:1183",
+      "src/mainwnd.cpp:1200",
+      "src/mainwnd.cpp:1201",
+      "src/mainwnd.cpp:1211",
+      "src/mainwnd.cpp:1223",
+      "src/mainwnd.cpp:1225",
+      "src/mainwnd.cpp:1238",
+      "src/mainwnd.cpp:1239",
+      "src/mainwnd.cpp:1243",
+      "src/mainwnd.cpp:1244",
+      "src/mainwnd.cpp:1246",
+      "src/mainwnd.cpp:1247",
+      "src/mainwnd.cpp:1250",
+      "src/mainwnd.cpp:1257",
+      "src/mainwnd.cpp:1258",
+      "src/mainwnd.cpp:1261",
+      "src/mainwnd.cpp:1263",
+      "src/mainwnd.cpp:1264",
+      "src/mainwnd.cpp:1266",
+      "src/mainwnd.cpp:1267",
+      "src/mainwnd.cpp:1270",
+      "src/mainwnd.cpp:1271",
+      "src/mainwnd.cpp:1280",
+      "src/mainwnd.cpp:1282",
+      "src/mainwnd.cpp:1286",
+      "src/mainwnd.cpp:1287",
+      "src/mainwnd.cpp:1289",
+      "src/mainwnd.cpp:1290",
+      "src/mainwnd.cpp:1291",
+      "src/mainwnd.cpp:1292",
+      "src/mainwnd.cpp:1293",
+      "src/mainwnd.cpp:1295",
+      "src/mainwnd.cpp:1296",
+      "src/mainwnd.cpp:1297",
+      "src/mainwnd.cpp:1298",
+      "src/mainwnd.cpp:1299",
+      "src/mainwnd.cpp:1308",
+      "src/mainwnd.cpp:1309",
+      "src/mainwnd.cpp:1310",
+      "src/mainwnd.cpp:1311",
+      "src/mainwnd.cpp:1314",
+      "src/mainwnd.cpp:1315",
+      "src/mainwnd.cpp:1316",
+      "src/mainwnd.cpp:1319",
+      "src/mainwnd.cpp:1320",
+      "src/mainwnd.cpp:1321",
+      "src/mainwnd.cpp:1333",
+      "src/mainwnd.cpp:1353",
+      "src/mainwnd.cpp:1371",
+      "src/mainwnd.cpp:1380",
+      "src/mainwnd.cpp:1381",
+      "src/mainwnd.cpp:1382",
+      "src/mainwnd.cpp:1383",
+      "src/mainwnd.cpp:1384",
+      "src/mainwnd.cpp:1385",
+      "src/mainwnd.cpp:1386",
+      "src/mainwnd.cpp:1398",
+      "src/mainwnd.cpp:1399",
+      "src/mainwnd.cpp:1400",
+      "src/mainwnd.cpp:1402",
+      "src/mainwnd.cpp:1419",
+      "src/mainwnd.cpp:1423",
+      "src/mainwnd.cpp:1424",
+      "src/mainwnd.cpp:1425",
+      "src/mainwnd.cpp:1432",
+      "src/mainwnd.cpp:1443",
+      "src/mainwnd.cpp:1444",
+      "src/mainwnd.cpp:1449",
+      "src/mainwnd.cpp:1451",
+      "src/mainwnd.cpp:1473",
+      "src/mainwnd.cpp:1475",
+      "src/mainwnd.cpp:1480",
+      "src/mainwnd.cpp:1481",
+      "src/mainwnd.cpp:1482",
+      "src/mainwnd.cpp:1483",
+      "src/mainwnd.cpp:1484",
+      "src/mainwnd.cpp:1495",
+      "src/mainwnd.cpp:1499",
+      "src/mainwnd.cpp:1514",
+      "src/mainwnd.cpp:1515",
+      "src/mainwnd.cpp:1516",
+      "src/mainwnd.cpp:1521",
+      "src/mainwnd.cpp:1522",
+      "src/mainwnd.cpp:1524",
+      "src/mainwnd.cpp:1527",
+      "src/playback.cpp:3",
+      "src/playback.cpp:13",
+      "src/playback.cpp:21",
+      "src/playback.cpp:31",
+      "src/playback.cpp:34",
+      "src/playback.cpp:42",
+      "src/playback.cpp:52",
+      "src/playback.cpp:57",
+      "src/playback.cpp:80",
+      "src/playlist.cpp:6",
+      "src/playlist.cpp:8",
+      "src/playlist.cpp:15",
+      "src/playlist.cpp:19",
+      "src/playlist_view.cpp:5",
+      "src/playlist_view.cpp:6",
+      "src/playlist_view.cpp:11",
+      "src/playlist_view.cpp:15",
+      "src/playlist_view.cpp:16",
+      "src/playlist_worker.cpp:8",
+      "src/playlist_worker.cpp:9",
+      "src/playlist_worker.cpp:33",
+      "src/playlist_worker.cpp:36",
+      "src/playlist_worker.cpp:37",
+      "src/playlist_worker.cpp:40",
+      "src/playlist_worker.cpp:42",
+      "src/playlist_worker.cpp:46",
+      "src/playlist_worker.cpp:51",
+      "src/playlist_worker.cpp:52",
+      "src/playlist_worker.cpp:56",
+      "src/playlist_worker.cpp:62",
+      "src/playlist_worker.cpp:65",
+      "src/playlist_worker.cpp:66",
+      "src/playlist_worker.cpp:77",
+      "src/playlist_worker.cpp:78",
+      "src/playlist_worker.cpp:89",
+      "src/playlist_worker.cpp:91",
+      "src/playlist_worker.cpp:92",
+      "src/playlist_worker.cpp:95",
+      "src/playlist_worker.cpp:96",
+      "src/playlist_worker.cpp:98",
+      "src/playlist_worker.cpp:100",
+      "src/playlist_worker.cpp:115",
+      "src/playlist_worker.cpp:116",
+      "src/playlist_worker.cpp:122",
+      "src/playlist_worker.cpp:130",
+      "src/plwnd.cpp:19",
+      "src/plwnd.cpp:20",
+      "src/plwnd.cpp:21",
+      "src/plwnd.cpp:54",
+      "src/plwnd.cpp:60",
+      "src/plwnd.cpp:61",
+      "src/plwnd.cpp:62",
+      "src/plwnd.cpp:63",
+      "src/plwnd.cpp:64",
+      "src/plwnd.cpp:70",
+      "src/plwnd.cpp:73",
+      "src/plwnd.cpp:81",
+      "src/plwnd.cpp:89",
+      "src/plwnd.cpp:92",
+      "src/plwnd.cpp:93",
+      "src/plwnd.cpp:94",
+      "src/plwnd.cpp:95",
+      "src/plwnd.cpp:96",
+      "src/plwnd.cpp:97",
+      "src/plwnd.cpp:98",
+      "src/plwnd.cpp:110",
+      "src/plwnd.cpp:111",
+      "src/plwnd.cpp:113",
+      "src/plwnd.cpp:118",
+      "src/plwnd.cpp:119",
+      "src/plwnd.cpp:122",
+      "src/plwnd.cpp:123",
+      "src/plwnd.cpp:126",
+      "src/plwnd.cpp:140",
+      "src/plwnd.cpp:146",
+      "src/plwnd.cpp:152",
+      "src/plwnd.cpp:170",
+      "src/plwnd.cpp:178",
+      "src/plwnd.cpp:184",
+      "src/plwnd.cpp:186",
+      "src/plwnd.cpp:193",
+      "src/plwnd.cpp:194",
+      "src/plwnd.cpp:195",
+      "src/plwnd.cpp:198",
+      "src/plwnd.cpp:203",
+      "src/plwnd.cpp:205",
+      "src/plwnd.cpp:207",
+      "src/plwnd.cpp:208",
+      "src/plwnd.cpp:209",
+      "src/plwnd.cpp:210",
+      "src/plwnd.cpp:215",
+      "src/plwnd.cpp:216",
+      "src/plwnd.cpp:225",
+      "src/plwnd.cpp:226",
+      "src/plwnd.cpp:228",
+      "src/plwnd.cpp:229",
+      "src/plwnd.cpp:230",
+      "src/plwnd.cpp:232",
+      "src/plwnd.cpp:233",
+      "src/plwnd.cpp:234",
+      "src/plwnd.cpp:235",
+      "src/plwnd.cpp:236",
+      "src/plwnd.cpp:238",
+      "src/plwnd.cpp:241",
+      "src/plwnd.cpp:245",
+      "src/plwnd.cpp:249",
+      "src/plwnd.cpp:250",
+      "src/plwnd.cpp:252",
+      "src/plwnd.cpp:253",
+      "src/plwnd.cpp:254",
+      "src/plwnd.cpp:255",
+      "src/plwnd.cpp:256",
+      "src/plwnd.cpp:257",
+      "src/plwnd.cpp:258",
+      "src/plwnd.cpp:259",
+      "src/plwnd.cpp:260",
+      "src/plwnd.cpp:261",
+      "src/plwnd.cpp:262",
+      "src/plwnd.cpp:263",
+      "src/plwnd.cpp:272",
+      "src/plwnd.cpp:273",
+      "src/plwnd.cpp:277",
+      "src/plwnd.cpp:281",
+      "src/plwnd.cpp:284",
+      "src/plwnd.cpp:287",
+      "src/plwnd.cpp:295",
+      "src/plwnd.cpp:296",
+      "src/plwnd.cpp:298",
+      "src/plwnd.cpp:299",
+      "src/plwnd.cpp:306",
+      "src/plwnd.cpp:307",
+      "src/plwnd.cpp:309",
+      "src/plwnd.cpp:310",
+      "src/plwnd.cpp:319",
+      "src/plwnd.cpp:320",
+      "src/plwnd.cpp:325",
+      "src/plwnd.cpp:328",
+      "src/plwnd.cpp:330",
+      "src/plwnd.cpp:331",
+      "src/plwnd.cpp:332",
+      "src/plwnd.cpp:334",
+      "src/plwnd.cpp:335",
+      "src/plwnd.cpp:336",
+      "src/plwnd.cpp:337",
+      "src/plwnd.cpp:346",
+      "src/plwnd.cpp:347",
+      "src/plwnd.cpp:350",
+      "src/plwnd.cpp:352",
+      "src/plwnd.cpp:355",
+      "src/plwnd.cpp:356",
+      "src/plwnd.cpp:365",
+      "src/plwnd.cpp:366",
+      "src/plwnd.cpp:367",
+      "src/plwnd.cpp:372",
+      "src/plwnd.cpp:380",
+      "src/plwnd.cpp:381",
+      "src/plwnd.cpp:384",
+      "src/plwnd.cpp:385",
+      "src/plwnd.cpp:389",
+      "src/plwnd.cpp:394",
+      "src/plwnd.cpp:397",
+      "src/plwnd.cpp:400",
+      "src/plwnd.cpp:402",
+      "src/plwnd.cpp:404",
+      "src/plwnd.cpp:412",
+      "src/plwnd.cpp:418",
+      "src/plwnd.cpp:420",
+      "src/plwnd.cpp:423",
+      "src/plwnd.cpp:427",
+      "src/plwnd.cpp:441",
+      "src/plwnd.cpp:442",
+      "src/plwnd.cpp:448",
+      "src/plwnd.cpp:449",
+      "src/plwnd.cpp:450",
+      "src/plwnd.cpp:455",
+      "src/plwnd.cpp:457",
+      "src/plwnd.cpp:459",
+      "src/plwnd.cpp:460",
+      "src/plwnd.cpp:461",
+      "src/plwnd.cpp:465",
+      "src/plwnd.cpp:468",
+      "src/plwnd.cpp:469",
+      "src/plwnd.cpp:470",
+      "src/plwnd.cpp:476",
+      "src/plwnd.cpp:482",
+      "src/plwnd.cpp:491",
+      "src/plwnd.cpp:493",
+      "src/plwnd.cpp:495",
+      "src/plwnd.cpp:500",
+      "src/plwnd.cpp:502",
+      "src/plwnd.cpp:504",
+      "src/plwnd.cpp:506",
+      "src/plwnd.cpp:518",
+      "src/plwnd.cpp:534",
+      "src/plwnd.cpp:536",
+      "src/plwnd.cpp:549",
+      "src/plwnd.cpp:555",
+      "src/plwnd.cpp:560",
+      "src/plwnd.cpp:561",
+      "src/plwnd.cpp:568",
+      "src/plwnd.cpp:569",
+      "src/plwnd.cpp:572",
+      "src/plwnd.cpp:575",
+      "src/plwnd.cpp:578",
+      "src/plwnd.cpp:579",
+      "src/plwnd.cpp:593",
+      "src/plwnd.cpp:599",
+      "src/plwnd.cpp:600",
+      "src/plwnd.cpp:602",
+      "src/plwnd.cpp:609",
+      "src/plwnd.cpp:612",
+      "src/plwnd.cpp:613",
+      "src/plwnd.cpp:623",
+      "src/plwnd.cpp:626",
+      "src/plwnd.cpp:635",
+      "src/plwnd.cpp:643",
+      "src/plwnd.cpp:650",
+      "src/plwnd.cpp:653",
+      "src/plwnd.cpp:655",
+      "src/plwnd.cpp:657",
+      "src/plwnd.cpp:662",
+      "src/plwnd.cpp:670",
+      "src/plwnd.cpp:674",
+      "src/plwnd.cpp:675",
+      "src/plwnd.cpp:678",
+      "src/plwnd.cpp:679",
+      "src/plwnd.cpp:681",
+      "src/plwnd.cpp:682",
+      "src/plwnd.cpp:683",
+      "src/plwnd.cpp:684",
+      "src/plwnd.cpp:686",
+      "src/plwnd.cpp:696",
+      "src/plwnd.cpp:698",
+      "src/plwnd.cpp:701",
+      "src/plwnd.cpp:702",
+      "src/plwnd.cpp:703",
+      "src/plwnd.cpp:714",
+      "src/plwnd.cpp:724",
+      "src/plwnd.cpp:730",
+      "src/plwnd.cpp:732",
+      "src/plwnd.cpp:734",
+      "src/plwnd.cpp:735",
+      "src/plwnd.cpp:737",
+      "src/plwnd.cpp:751",
+      "src/plwnd.cpp:758",
+      "src/plwnd.cpp:759",
+      "src/plwnd.cpp:764",
+      "src/plwnd.cpp:770",
+      "src/plwnd.cpp:773",
+      "src/plwnd.cpp:782",
+      "src/plwnd.cpp:783",
+      "src/plwnd.cpp:802",
+      "src/plwnd.cpp:804",
+      "src/plwnd.cpp:805",
+      "src/plwnd.cpp:807",
+      "src/plwnd.cpp:813",
+      "src/plwnd.cpp:815",
+      "src/skin.cpp:8",
+      "src/skin.cpp:14",
+      "src/skin.cpp:15",
+      "src/skin.cpp:20",
+      "src/skin.cpp:21",
+      "src/skin.cpp:37",
+      "src/skin.cpp:44",
+      "src/skin.cpp:51",
+      "src/skin.cpp:69",
+      "src/skin.cpp:72",
+      "src/skin.cpp:81",
+      "src/skin.cpp:84",
+      "src/skin.cpp:89",
+      "src/skin.cpp:98",
+      "src/skin.cpp:110",
+      "src/skin.cpp:115",
+      "src/skin.cpp:141",
+      "src/tags.cpp:10",
+      "src/tags.cpp:14",
+      "src/tags.cpp:19",
+      "src/tags.cpp:20",
+      "src/tags.cpp:21",
+      "src/tags.cpp:24",
+      "src/tags.cpp:38",
+      "src/tags.cpp:82",
+      "src/tags.cpp:91",
+      "src/tags.cpp:102",
+      "src/tags.cpp:105",
+      "src/tags.cpp:107",
+      "src/tags.cpp:116",
+      "src/tags.cpp:118",
+      "src/tags.cpp:128",
+      "src/tags.cpp:150",
+      "src/tags.cpp:157",
+      "src/tags.cpp:177",
+      "src/tags.cpp:178",
+      "src/tags.cpp:186",
+      "src/tags.cpp:187",
+      "src/tags.cpp:188",
+      "src/tags.cpp:189",
+      "src/tags.cpp:193",
+      "src/tags.cpp:199",
+      "src/tags.cpp:200",
+      "src/tags.cpp:201",
+      "src/tags.cpp:218",
+      "src/tags.cpp:221",
+      "src/tags.cpp:226",
+      "src/theme_window.cpp:18",
+      "src/theme_window.cpp:20",
+      "src/theme_window.cpp:22",
+      "src/theme_window.cpp:26",
+      "src/theme_window.cpp:27",
+      "src/theme_window.cpp:28",
+      "src/theme_window.cpp:29",
+      "src/theme_window.cpp:33",
+      "src/theme_window.cpp:34",
+      "src/theme_window.cpp:35",
+      "src/theme_window.cpp:38",
+      "src/theme_window.cpp:40",
+      "src/theme_window.cpp:43",
+      "src/theme_window.cpp:44",
+      "src/theme_window.cpp:46",
+      "src/theme_window.cpp:50",
+      "src/theme_window.cpp:57",
+      "src/theme_window.cpp:60",
+      "src/theme_window.cpp:62",
+      "src/theme_window.cpp:64",
+      "src/theme_window.cpp:68",
+      "src/theme_window.cpp:70",
+      "src/theme_window.cpp:72",
+      "src/theme_window.cpp:73",
+      "src/theme_window.cpp:74",
+      "src/theme_window.cpp:77",
+      "src/theme_window.cpp:78",
+      "src/theme_window.cpp:82",
+      "src/theme_window.cpp:84",
+      "src/theme_window.cpp:85",
+      "src/theme_window.cpp:86",
+      "src/theme_window.cpp:88",
+      "src/theme_window.cpp:90",
+      "src/theme_window.cpp:92",
+      "src/theme_window.cpp:94",
+      "src/theme_window.cpp:96",
+      "src/theme_window.cpp:102",
+      "src/theme_window.cpp:103",
+      "src/theme_window.cpp:104",
+      "src/theme_window.cpp:107",
+      "src/theme_window.cpp:108",
+      "src/theme_window.cpp:109",
+      "src/theme_window.cpp:111",
+      "src/theme_window.cpp:116",
+      "src/theme_window.cpp:125",
+      "src/theme_window.cpp:130",
+      "src/theme_window.cpp:131",
+      "src/theme_window.cpp:142",
+      "src/theme_window.cpp:143",
+      "src/theme_window.cpp:146",
+      "src/theme_window.cpp:157",
+      "src/theme_window.cpp:159",
+      "src/theme_window.cpp:167",
+      "src/theme_window.cpp:169",
+      "src/theme_window.cpp:175",
+      "src/theme_window.cpp:183",
+      "src/theme_window.cpp:185",
+      "src/theme_window.cpp:187",
+      "src/theme_window.cpp:188",
+      "src/theme_window.cpp:190",
+      "src/theme_window.cpp:192",
+      "src/theme_window.cpp:195",
+      "src/theme_window.cpp:196",
+      "src/theme_window.cpp:199",
+      "src/theme_window.cpp:210",
+      "src/theme_window.cpp:211",
+      "src/theme_window.cpp:212",
+      "src/theme_window.cpp:214",
+      "src/theme_window.cpp:215",
+      "src/theme_window.cpp:216",
+      "src/theme_window.cpp:223",
+      "src/ui_draw.cpp:11",
+      "src/ui_draw.cpp:19",
+      "src/ui_draw.cpp:20",
+      "src/ui_draw.cpp:23",
+      "src/ui_draw.cpp:33",
+      "src/ui_draw.cpp:34",
+      "src/ui_draw.cpp:35",
+      "src/ui_draw.cpp:38",
+      "src/ui_draw.cpp:40",
+      "src/ui_draw.cpp:41",
+      "src/ui_draw.cpp:43",
+      "src/ui_draw.cpp:44",
+      "src/ui_draw.cpp:49",
+      "src/ui_draw.cpp:50",
+      "src/ui_draw.cpp:51",
+      "src/ui_draw.cpp:52",
+      "src/ui_draw.cpp:59",
+      "src/ui_draw.cpp:62",
+      "src/ui_draw.cpp:66",
+      "src/ui_draw.cpp:67",
+      "src/ui_draw.cpp:81",
+      "src/ui_draw.cpp:82",
+      "src/ui_draw.cpp:91",
+      "src/ui_draw.cpp:92",
+      "src/ui_draw.cpp:96",
+      "src/ui_draw.cpp:97",
+      "src/ui_draw.cpp:99",
+      "src/ui_draw.cpp:102",
+      "src/ui_draw.cpp:103",
+      "src/ui_draw.cpp:104",
+      "src/ui_draw.cpp:106",
+      "src/ui_draw.cpp:107",
+      "src/ui_draw.cpp:112",
+      "src/ui_draw.cpp:123",
+      "src/ui_draw.cpp:124",
+      "src/ui_draw.cpp:131",
+      "src/ui_draw.cpp:132",
+      "src/ui_draw.cpp:134",
+      "src/ui_draw.cpp:150",
+      "src/ui_draw.cpp:151",
+      "src/ui_draw.cpp:163",
+      "src/ui_draw.cpp:175",
+      "src/ui_draw.cpp:176",
+      "src/ui_draw.cpp:182",
+      "src/ui_draw.cpp:184",
+      "src/ui_draw.cpp:186",
+      "src/ui_draw.cpp:203",
+      "src/ui_draw.cpp:207",
+      "src/ui_draw.cpp:208",
+      "src/ui_draw.cpp:211",
+      "src/ui_draw.cpp:213",
+      "src/ui_draw.cpp:214",
+      "src/ui_player.cpp:4",
+      "src/ui_player.cpp:10",
+      "src/ui_player.cpp:11",
+      "src/ui_player.cpp:12",
+      "src/ui_player.cpp:16",
+      "src/ui_player.cpp:17",
+      "src/ui_player.cpp:18",
+      "src/ui_player.cpp:31",
+      "src/ui_player.cpp:32",
+      "src/ui_player.cpp:33",
+      "src/ui_player.cpp:37",
+      "src/ui_player.cpp:38",
+      "src/ui_player.cpp:39",
+      "src/ui_player.cpp:40",
+      "src/ui_player.cpp:41",
+      "src/ui_player.cpp:42",
+      "src/ui_player.cpp:44",
+      "src/ui_player.cpp:45",
+      "src/ui_player.cpp:48",
+      "src/ui_player.cpp:49",
+      "src/ui_player.cpp:50",
+      "src/ui_player.cpp:51",
+      "src/ui_player.cpp:52",
+      "src/ui_player.cpp:53",
+      "src/ui_player.cpp:54",
+      "src/ui_player.cpp:55",
+      "src/ui_player.cpp:56",
+      "src/ui_player.cpp:62",
+      "src/ui_player.cpp:65",
+      "src/ui_player.cpp:67",
+      "src/ui_player.cpp:68",
+      "src/ui_player.cpp:69",
+      "src/ui_player.cpp:71",
+      "src/ui_player.cpp:72",
+      "src/ui_player.cpp:75",
+      "src/ui_player.cpp:80",
+      "src/ui_player.cpp:86",
+      "src/ui_player.cpp:88",
+      "src/ui_player.cpp:90",
+      "src/ui_player.cpp:91",
+      "src/ui_player.cpp:93",
+      "src/ui_player.cpp:94",
+      "src/ui_player.cpp:95",
+      "src/ui_player.cpp:97",
+      "src/ui_player.cpp:100",
+      "src/ui_player.cpp:101",
+      "src/ui_player.cpp:109",
+      "src/ui_theme.cpp:13",
+      "src/ui_theme.cpp:25",
+      "src/ui_theme.cpp:31",
+      "src/ui_theme.cpp:40",
+      "src/ui_theme.cpp:44",
+      "src/ui_theme.cpp:45",
+      "src/ui_theme.cpp:46",
+      "src/ui_theme.cpp:47",
+      "src/ui_theme.cpp:48",
+      "src/ui_theme.cpp:49",
+      "src/ui_theme.cpp:50",
+      "src/ui_theme.cpp:51",
+      "src/ui_theme.cpp:52",
+      "src/ui_theme.cpp:53",
+      "src/ui_theme.cpp:54",
+      "src/ui_theme.cpp:55",
+      "src/ui_theme.cpp:56",
+      "src/ui_theme.cpp:57",
+      "src/ui_theme.cpp:58",
+      "src/ui_theme.cpp:59",
+      "src/ui_theme.cpp:60",
+      "src/ui_theme.cpp:61",
+      "src/ui_theme.cpp:62",
+      "src/ui_theme.cpp:63",
+      "src/ui_theme.cpp:64",
+      "src/ui_theme.cpp:65",
+      "src/ui_theme.cpp:66",
+      "src/ui_theme.cpp:67",
+      "src/ui_theme.cpp:68",
+      "src/ui_theme.cpp:69",
+      "src/ui_theme.cpp:70",
+      "src/ui_theme.cpp:71",
+      "src/ui_theme.cpp:72",
+      "src/ui_theme.cpp:73",
+      "src/ui_theme.cpp:74",
+      "src/ui_theme.cpp:75",
+      "src/ui_theme.cpp:76",
+      "src/ui_theme.cpp:77",
+      "src/ui_theme.cpp:78",
+      "src/ui_theme.cpp:79",
+      "src/ui_theme.cpp:86",
+      "src/ui_theme.cpp:88",
+      "src/ui_theme.cpp:92",
+      "src/ui_theme.cpp:104",
+      "src/ui_theme.cpp:106",
+      "src/ui_theme.cpp:107",
+      "src/ui_theme.cpp:112",
+      "src/ui_theme.cpp:116",
+      "src/ui_theme.cpp:117",
+      "src/ui_theme.cpp:118",
+      "src/ui_theme.cpp:119",
+      "src/ui_theme.cpp:120",
+      "src/ui_theme.cpp:121",
+      "src/ui_theme.cpp:124",
+      "src/ui_theme.cpp:126",
+      "src/ui_theme.cpp:132",
+      "src/ui_theme.cpp:134",
+      "src/ui_theme.cpp:138",
+      "src/ui_theme.cpp:144",
+      "src/ui_theme.cpp:145",
+      "src/ui_theme.cpp:146",
+      "src/ui_theme.cpp:147",
+      "src/ui_theme.cpp:154",
+      "src/ui_theme.cpp:155",
+      "src/ui_theme.cpp:156",
+      "src/ui_theme.cpp:157",
+      "src/ui_theme.cpp:160",
+      "src/ui_theme.cpp:162",
+      "src/ui_theme.cpp:163",
+      "src/ui_theme.cpp:168",
+      "src/ui_theme.cpp:169",
+      "src/ui_theme.cpp:170",
+      "src/ui_theme.cpp:171",
+      "src/util.cpp:15",
+      "src/util.cpp:18",
+      "src/util.cpp:19",
+      "src/util.cpp:33",
+      "src/util.cpp:48",
+      "src/util.cpp:53",
+      "src/util.cpp:61",
+      "src/util.cpp:68",
+      "src/util.cpp:76",
+      "src/visualizer.cpp:23",
+      "src/visualizer.cpp:24",
+      "src/visualizer.cpp:25",
+      "src/visualizer.cpp:26",
+      "src/visualizer.cpp:123",
+      "src/visualizer.cpp:171",
+      "src/visualizer.cpp:176",
+      "src/visualizer.cpp:178",
+      "src/visualizer.cpp:190",
+      "src/visualizer.cpp:192",
+      "src/visualizer.cpp:193",
+      "src/visualizer.cpp:200",
+      "src/visualizer.cpp:211",
+      "src/visualizer.cpp:213",
+      "src/visualizer.cpp:235",
+      "src/visualizer.cpp:240",
+      "src/visualizer.cpp:242",
+      "src/visualizer.cpp:271",
+      "src/visualizer.cpp:296",
+      "src/visualizer.cpp:325",
+      "src/visualizer.cpp:328",
+      "src/visualizer.cpp:329",
+      "src/visualizer.cpp:331",
+      "src/visualizer.cpp:344"
+    ]
+  },
+  {
+    "id": "player.right",
+    "pt-BR": "R",
+    "en-US": "R",
+    "original_locations": [
+      "src/app.cpp:18",
+      "src/app.cpp:32",
+      "src/app.cpp:44",
+      "src/app.cpp:48",
+      "src/app.cpp:60",
+      "src/app.cpp:61",
+      "src/app.cpp:77",
+      "src/app.cpp:78",
+      "src/app.cpp:80",
+      "src/app.cpp:84",
+      "src/app.cpp:91",
+      "src/audio.cpp:44",
+      "src/audio.cpp:59",
+      "src/audio.cpp:65",
+      "src/audio.cpp:66",
+      "src/audio.cpp:69",
+      "src/audio.cpp:70",
+      "src/audio.cpp:73",
+      "src/audio.cpp:74",
+      "src/audio.cpp:86",
+      "src/audio.cpp:99",
+      "src/audio.cpp:105",
+      "src/audio.cpp:112",
+      "src/audio.cpp:114",
+      "src/audio.cpp:117",
+      "src/audio.cpp:161",
+      "src/audio.cpp:164",
+      "src/audio.cpp:165",
+      "src/audio.cpp:170",
+      "src/audio.cpp:221",
+      "src/audio.cpp:227",
+      "src/audio.cpp:241",
+      "src/audio.cpp:245",
+      "src/audio.cpp:270",
+      "src/audio.cpp:271",
+      "src/audio.cpp:280",
+      "src/audio.cpp:281",
+      "src/audio.cpp:317",
+      "src/audio.cpp:322",
+      "src/audio.cpp:342",
+      "src/audio.cpp:343",
+      "src/audio.cpp:354",
+      "src/audio.cpp:359",
+      "src/audio.cpp:362",
+      "src/audio.cpp:363",
+      "src/audio.cpp:364",
+      "src/audio.cpp:365",
+      "src/audio.cpp:368",
+      "src/audio.cpp:369",
+      "src/audio.cpp:373",
+      "src/audio.cpp:374",
+      "src/audio.cpp:380",
+      "src/audio.cpp:382",
+      "src/audio.cpp:387",
+      "src/audio.cpp:388",
+      "src/audio.cpp:393",
+      "src/audio.cpp:396",
+      "src/audio.cpp:403",
+      "src/audio.cpp:407",
+      "src/audio.cpp:416",
+      "src/audio.cpp:447",
+      "src/audio.cpp:461",
+      "src/audio.cpp:466",
+      "src/audio.cpp:474",
+      "src/audio.cpp:487",
+      "src/audio.cpp:489",
+      "src/audio.cpp:505",
+      "src/audio.cpp:520",
+      "src/audio.cpp:521",
+      "src/audio.cpp:558",
+      "src/audio.cpp:559",
+      "src/audio.cpp:562",
+      "src/audio.cpp:564",
+      "src/eqwnd.cpp:21",
+      "src/eqwnd.cpp:24",
+      "src/eqwnd.cpp:27",
+      "src/eqwnd.cpp:30",
+      "src/eqwnd.cpp:33",
+      "src/eqwnd.cpp:34",
+      "src/eqwnd.cpp:37",
+      "src/eqwnd.cpp:38",
+      "src/eqwnd.cpp:40",
+      "src/eqwnd.cpp:41",
+      "src/eqwnd.cpp:42",
+      "src/eqwnd.cpp:46",
+      "src/eqwnd.cpp:47",
+      "src/eqwnd.cpp:55",
+      "src/eqwnd.cpp:57",
+      "src/eqwnd.cpp:64",
+      "src/eqwnd.cpp:66",
+      "src/eqwnd.cpp:67",
+      "src/eqwnd.cpp:69",
+      "src/eqwnd.cpp:70",
+      "src/eqwnd.cpp:74",
+      "src/eqwnd.cpp:75",
+      "src/eqwnd.cpp:76",
+      "src/eqwnd.cpp:77",
+      "src/eqwnd.cpp:80",
+      "src/eqwnd.cpp:83",
+      "src/eqwnd.cpp:84",
+      "src/eqwnd.cpp:85",
+      "src/eqwnd.cpp:87",
+      "src/eqwnd.cpp:88",
+      "src/eqwnd.cpp:89",
+      "src/eqwnd.cpp:90",
+      "src/eqwnd.cpp:91",
+      "src/eqwnd.cpp:93",
+      "src/eqwnd.cpp:94",
+      "src/eqwnd.cpp:98",
+      "src/eqwnd.cpp:100",
+      "src/eqwnd.cpp:104",
+      "src/eqwnd.cpp:105",
+      "src/eqwnd.cpp:107",
+      "src/eqwnd.cpp:108",
+      "src/eqwnd.cpp:109",
+      "src/eqwnd.cpp:111",
+      "src/eqwnd.cpp:117",
+      "src/eqwnd.cpp:122",
+      "src/eqwnd.cpp:132",
+      "src/eqwnd.cpp:133",
+      "src/eqwnd.cpp:135",
+      "src/eqwnd.cpp:141",
+      "src/eqwnd.cpp:142",
+      "src/eqwnd.cpp:143",
+      "src/eqwnd.cpp:144",
+      "src/eqwnd.cpp:145",
+      "src/eqwnd.cpp:146",
+      "src/eqwnd.cpp:147",
+      "src/eqwnd.cpp:149",
+      "src/eqwnd.cpp:160",
+      "src/eqwnd.cpp:163",
+      "src/eqwnd.cpp:164",
+      "src/eqwnd.cpp:165",
+      "src/eqwnd.cpp:167",
+      "src/eqwnd.cpp:172",
+      "src/eq_dsp.cpp:27",
+      "src/eq_dsp.cpp:51",
+      "src/eq_state.cpp:13",
+      "src/eq_state.cpp:21",
+      "src/eq_state.cpp:33",
+      "src/eq_state.cpp:34",
+      "src/m3u.cpp:10",
+      "src/m3u.cpp:13",
+      "src/m3u.cpp:19",
+      "src/m3u.cpp:28",
+      "src/m3u.cpp:60",
+      "src/m3u.cpp:102",
+      "src/m3u.cpp:110",
+      "src/m3u.cpp:111",
+      "src/m3u.cpp:113",
+      "src/m3u.cpp:118",
+      "src/m3u.cpp:119",
+      "src/m3u.cpp:136",
+      "src/m3u.cpp:141",
+      "src/m3u.cpp:142",
+      "src/m3u.cpp:146",
+      "src/mainwnd.cpp:32",
+      "src/mainwnd.cpp:34",
+      "src/mainwnd.cpp:74",
+      "src/mainwnd.cpp:107",
+      "src/mainwnd.cpp:118",
+      "src/mainwnd.cpp:119",
+      "src/mainwnd.cpp:127",
+      "src/mainwnd.cpp:128",
+      "src/mainwnd.cpp:129",
+      "src/mainwnd.cpp:139",
+      "src/mainwnd.cpp:142",
+      "src/mainwnd.cpp:145",
+      "src/mainwnd.cpp:146",
+      "src/mainwnd.cpp:147",
+      "src/mainwnd.cpp:150",
+      "src/mainwnd.cpp:153",
+      "src/mainwnd.cpp:154",
+      "src/mainwnd.cpp:157",
+      "src/mainwnd.cpp:158",
+      "src/mainwnd.cpp:159",
+      "src/mainwnd.cpp:162",
+      "src/mainwnd.cpp:165",
+      "src/mainwnd.cpp:168",
+      "src/mainwnd.cpp:169",
+      "src/mainwnd.cpp:170",
+      "src/mainwnd.cpp:173",
+      "src/mainwnd.cpp:174",
+      "src/mainwnd.cpp:175",
+      "src/mainwnd.cpp:178",
+      "src/mainwnd.cpp:179",
+      "src/mainwnd.cpp:195",
+      "src/mainwnd.cpp:196",
+      "src/mainwnd.cpp:199",
+      "src/mainwnd.cpp:200",
+      "src/mainwnd.cpp:207",
+      "src/mainwnd.cpp:208",
+      "src/mainwnd.cpp:212",
+      "src/mainwnd.cpp:215",
+      "src/mainwnd.cpp:219",
+      "src/mainwnd.cpp:228",
+      "src/mainwnd.cpp:231",
+      "src/mainwnd.cpp:235",
+      "src/mainwnd.cpp:239",
+      "src/mainwnd.cpp:240",
+      "src/mainwnd.cpp:242",
+      "src/mainwnd.cpp:243",
+      "src/mainwnd.cpp:247",
+      "src/mainwnd.cpp:248",
+      "src/mainwnd.cpp:250",
+      "src/mainwnd.cpp:263",
+      "src/mainwnd.cpp:275",
+      "src/mainwnd.cpp:279",
+      "src/mainwnd.cpp:282",
+      "src/mainwnd.cpp:284",
+      "src/mainwnd.cpp:285",
+      "src/mainwnd.cpp:291",
+      "src/mainwnd.cpp:304",
+      "src/mainwnd.cpp:305",
+      "src/mainwnd.cpp:320",
+      "src/mainwnd.cpp:331",
+      "src/mainwnd.cpp:334",
+      "src/mainwnd.cpp:339",
+      "src/mainwnd.cpp:374",
+      "src/mainwnd.cpp:376",
+      "src/mainwnd.cpp:404",
+      "src/mainwnd.cpp:405",
+      "src/mainwnd.cpp:406",
+      "src/mainwnd.cpp:407",
+      "src/mainwnd.cpp:409",
+      "src/mainwnd.cpp:410",
+      "src/mainwnd.cpp:418",
+      "src/mainwnd.cpp:421",
+      "src/mainwnd.cpp:422",
+      "src/mainwnd.cpp:423",
+      "src/mainwnd.cpp:429",
+      "src/mainwnd.cpp:430",
+      "src/mainwnd.cpp:437",
+      "src/mainwnd.cpp:439",
+      "src/mainwnd.cpp:458",
+      "src/mainwnd.cpp:474",
+      "src/mainwnd.cpp:489",
+      "src/mainwnd.cpp:490",
+      "src/mainwnd.cpp:525",
+      "src/mainwnd.cpp:526",
+      "src/mainwnd.cpp:527",
+      "src/mainwnd.cpp:533",
+      "src/mainwnd.cpp:534",
+      "src/mainwnd.cpp:543",
+      "src/mainwnd.cpp:546",
+      "src/mainwnd.cpp:547",
+      "src/mainwnd.cpp:571",
+      "src/mainwnd.cpp:572",
+      "src/mainwnd.cpp:583",
+      "src/mainwnd.cpp:588",
+      "src/mainwnd.cpp:589",
+      "src/mainwnd.cpp:598",
+      "src/mainwnd.cpp:599",
+      "src/mainwnd.cpp:602",
+      "src/mainwnd.cpp:603",
+      "src/mainwnd.cpp:610",
+      "src/mainwnd.cpp:611",
+      "src/mainwnd.cpp:612",
+      "src/mainwnd.cpp:621",
+      "src/mainwnd.cpp:623",
+      "src/mainwnd.cpp:624",
+      "src/mainwnd.cpp:625",
+      "src/mainwnd.cpp:626",
+      "src/mainwnd.cpp:637",
+      "src/mainwnd.cpp:638",
+      "src/mainwnd.cpp:642",
+      "src/mainwnd.cpp:646",
+      "src/mainwnd.cpp:648",
+      "src/mainwnd.cpp:649",
+      "src/mainwnd.cpp:650",
+      "src/mainwnd.cpp:652",
+      "src/mainwnd.cpp:653",
+      "src/mainwnd.cpp:654",
+      "src/mainwnd.cpp:655",
+      "src/mainwnd.cpp:656",
+      "src/mainwnd.cpp:657",
+      "src/mainwnd.cpp:664",
+      "src/mainwnd.cpp:665",
+      "src/mainwnd.cpp:667",
+      "src/mainwnd.cpp:673",
+      "src/mainwnd.cpp:679",
+      "src/mainwnd.cpp:680",
+      "src/mainwnd.cpp:695",
+      "src/mainwnd.cpp:696",
+      "src/mainwnd.cpp:698",
+      "src/mainwnd.cpp:704",
+      "src/mainwnd.cpp:709",
+      "src/mainwnd.cpp:710",
+      "src/mainwnd.cpp:724",
+      "src/mainwnd.cpp:725",
+      "src/mainwnd.cpp:730",
+      "src/mainwnd.cpp:731",
+      "src/mainwnd.cpp:736",
+      "src/mainwnd.cpp:737",
+      "src/mainwnd.cpp:738",
+      "src/mainwnd.cpp:743",
+      "src/mainwnd.cpp:744",
+      "src/mainwnd.cpp:745",
+      "src/mainwnd.cpp:751",
+      "src/mainwnd.cpp:752",
+      "src/mainwnd.cpp:759",
+      "src/mainwnd.cpp:763",
+      "src/mainwnd.cpp:776",
+      "src/mainwnd.cpp:780",
+      "src/mainwnd.cpp:781",
+      "src/mainwnd.cpp:792",
+      "src/mainwnd.cpp:800",
+      "src/mainwnd.cpp:805",
+      "src/mainwnd.cpp:806",
+      "src/mainwnd.cpp:812",
+      "src/mainwnd.cpp:813",
+      "src/mainwnd.cpp:815",
+      "src/mainwnd.cpp:816",
+      "src/mainwnd.cpp:817",
+      "src/mainwnd.cpp:818",
+      "src/mainwnd.cpp:821",
+      "src/mainwnd.cpp:834",
+      "src/mainwnd.cpp:836",
+      "src/mainwnd.cpp:838",
+      "src/mainwnd.cpp:840",
+      "src/mainwnd.cpp:847",
+      "src/mainwnd.cpp:851",
+      "src/mainwnd.cpp:852",
+      "src/mainwnd.cpp:853",
+      "src/mainwnd.cpp:855",
+      "src/mainwnd.cpp:857",
+      "src/mainwnd.cpp:859",
+      "src/mainwnd.cpp:864",
+      "src/mainwnd.cpp:869",
+      "src/mainwnd.cpp:874",
+      "src/mainwnd.cpp:876",
+      "src/mainwnd.cpp:880",
+      "src/mainwnd.cpp:884",
+      "src/mainwnd.cpp:887",
+      "src/mainwnd.cpp:889",
+      "src/mainwnd.cpp:892",
+      "src/mainwnd.cpp:894",
+      "src/mainwnd.cpp:907",
+      "src/mainwnd.cpp:908",
+      "src/mainwnd.cpp:916",
+      "src/mainwnd.cpp:924",
+      "src/mainwnd.cpp:941",
+      "src/mainwnd.cpp:946",
+      "src/mainwnd.cpp:948",
+      "src/mainwnd.cpp:952",
+      "src/mainwnd.cpp:953",
+      "src/mainwnd.cpp:956",
+      "src/mainwnd.cpp:957",
+      "src/mainwnd.cpp:960",
+      "src/mainwnd.cpp:961",
+      "src/mainwnd.cpp:966",
+      "src/mainwnd.cpp:967",
+      "src/mainwnd.cpp:969",
+      "src/mainwnd.cpp:979",
+      "src/mainwnd.cpp:988",
+      "src/mainwnd.cpp:989",
+      "src/mainwnd.cpp:993",
+      "src/mainwnd.cpp:994",
+      "src/mainwnd.cpp:998",
+      "src/mainwnd.cpp:1013",
+      "src/mainwnd.cpp:1017",
+      "src/mainwnd.cpp:1023",
+      "src/mainwnd.cpp:1026",
+      "src/mainwnd.cpp:1028",
+      "src/mainwnd.cpp:1029",
+      "src/mainwnd.cpp:1031",
+      "src/mainwnd.cpp:1034",
+      "src/mainwnd.cpp:1036",
+      "src/mainwnd.cpp:1037",
+      "src/mainwnd.cpp:1038",
+      "src/mainwnd.cpp:1039",
+      "src/mainwnd.cpp:1040",
+      "src/mainwnd.cpp:1056",
+      "src/mainwnd.cpp:1057",
+      "src/mainwnd.cpp:1061",
+      "src/mainwnd.cpp:1063",
+      "src/mainwnd.cpp:1067",
+      "src/mainwnd.cpp:1090",
+      "src/mainwnd.cpp:1092",
+      "src/mainwnd.cpp:1100",
+      "src/mainwnd.cpp:1103",
+      "src/mainwnd.cpp:1118",
+      "src/mainwnd.cpp:1119",
+      "src/mainwnd.cpp:1120",
+      "src/mainwnd.cpp:1127",
+      "src/mainwnd.cpp:1128",
+      "src/mainwnd.cpp:1129",
+      "src/mainwnd.cpp:1142",
+      "src/mainwnd.cpp:1151",
+      "src/mainwnd.cpp:1155",
+      "src/mainwnd.cpp:1161",
+      "src/mainwnd.cpp:1162",
+      "src/mainwnd.cpp:1166",
+      "src/mainwnd.cpp:1168",
+      "src/mainwnd.cpp:1175",
+      "src/mainwnd.cpp:1179",
+      "src/mainwnd.cpp:1183",
+      "src/mainwnd.cpp:1191",
+      "src/mainwnd.cpp:1193",
+      "src/mainwnd.cpp:1199",
+      "src/mainwnd.cpp:1211",
+      "src/mainwnd.cpp:1213",
+      "src/mainwnd.cpp:1215",
+      "src/mainwnd.cpp:1217",
+      "src/mainwnd.cpp:1218",
+      "src/mainwnd.cpp:1221",
+      "src/mainwnd.cpp:1222",
+      "src/mainwnd.cpp:1223",
+      "src/mainwnd.cpp:1224",
+      "src/mainwnd.cpp:1225",
+      "src/mainwnd.cpp:1226",
+      "src/mainwnd.cpp:1234",
+      "src/mainwnd.cpp:1236",
+      "src/mainwnd.cpp:1239",
+      "src/mainwnd.cpp:1240",
+      "src/mainwnd.cpp:1241",
+      "src/mainwnd.cpp:1242",
+      "src/mainwnd.cpp:1243",
+      "src/mainwnd.cpp:1244",
+      "src/mainwnd.cpp:1247",
+      "src/mainwnd.cpp:1248",
+      "src/mainwnd.cpp:1249",
+      "src/mainwnd.cpp:1250",
+      "src/mainwnd.cpp:1257",
+      "src/mainwnd.cpp:1258",
+      "src/mainwnd.cpp:1259",
+      "src/mainwnd.cpp:1261",
+      "src/mainwnd.cpp:1262",
+      "src/mainwnd.cpp:1263",
+      "src/mainwnd.cpp:1264",
+      "src/mainwnd.cpp:1266",
+      "src/mainwnd.cpp:1267",
+      "src/mainwnd.cpp:1268",
+      "src/mainwnd.cpp:1270",
+      "src/mainwnd.cpp:1271",
+      "src/mainwnd.cpp:1278",
+      "src/mainwnd.cpp:1279",
+      "src/mainwnd.cpp:1280",
+      "src/mainwnd.cpp:1281",
+      "src/mainwnd.cpp:1282",
+      "src/mainwnd.cpp:1284",
+      "src/mainwnd.cpp:1286",
+      "src/mainwnd.cpp:1287",
+      "src/mainwnd.cpp:1289",
+      "src/mainwnd.cpp:1291",
+      "src/mainwnd.cpp:1292",
+      "src/mainwnd.cpp:1293",
+      "src/mainwnd.cpp:1295",
+      "src/mainwnd.cpp:1296",
+      "src/mainwnd.cpp:1297",
+      "src/mainwnd.cpp:1298",
+      "src/mainwnd.cpp:1299",
+      "src/mainwnd.cpp:1306",
+      "src/mainwnd.cpp:1307",
+      "src/mainwnd.cpp:1308",
+      "src/mainwnd.cpp:1309",
+      "src/mainwnd.cpp:1310",
+      "src/mainwnd.cpp:1311",
+      "src/mainwnd.cpp:1313",
+      "src/mainwnd.cpp:1314",
+      "src/mainwnd.cpp:1315",
+      "src/mainwnd.cpp:1316",
+      "src/mainwnd.cpp:1318",
+      "src/mainwnd.cpp:1319",
+      "src/mainwnd.cpp:1320",
+      "src/mainwnd.cpp:1321",
+      "src/mainwnd.cpp:1344",
+      "src/mainwnd.cpp:1346",
+      "src/mainwnd.cpp:1347",
+      "src/mainwnd.cpp:1350",
+      "src/mainwnd.cpp:1351",
+      "src/mainwnd.cpp:1353",
+      "src/mainwnd.cpp:1356",
+      "src/mainwnd.cpp:1370",
+      "src/mainwnd.cpp:1371",
+      "src/mainwnd.cpp:1390",
+      "src/mainwnd.cpp:1392",
+      "src/mainwnd.cpp:1398",
+      "src/mainwnd.cpp:1399",
+      "src/mainwnd.cpp:1400",
+      "src/mainwnd.cpp:1402",
+      "src/mainwnd.cpp:1403",
+      "src/mainwnd.cpp:1406",
+      "src/mainwnd.cpp:1407",
+      "src/mainwnd.cpp:1412",
+      "src/mainwnd.cpp:1419",
+      "src/mainwnd.cpp:1427",
+      "src/mainwnd.cpp:1443",
+      "src/mainwnd.cpp:1444",
+      "src/mainwnd.cpp:1447",
+      "src/mainwnd.cpp:1450",
+      "src/mainwnd.cpp:1451",
+      "src/mainwnd.cpp:1452",
+      "src/mainwnd.cpp:1457",
+      "src/mainwnd.cpp:1470",
+      "src/mainwnd.cpp:1473",
+      "src/mainwnd.cpp:1477",
+      "src/mainwnd.cpp:1480",
+      "src/mainwnd.cpp:1481",
+      "src/mainwnd.cpp:1482",
+      "src/mainwnd.cpp:1483",
+      "src/mainwnd.cpp:1486",
+      "src/mainwnd.cpp:1499",
+      "src/mainwnd.cpp:1501",
+      "src/mainwnd.cpp:1502",
+      "src/mainwnd.cpp:1516",
+      "src/playback.cpp:56",
+      "src/playback.cpp:61",
+      "src/playback.cpp:67",
+      "src/playback.cpp:70",
+      "src/playback.cpp:73",
+      "src/playlist.cpp:21",
+      "src/playlist.cpp:48",
+      "src/playlist.cpp:52",
+      "src/playlist.cpp:63",
+      "src/playlist.cpp:66",
+      "src/playlist.cpp:107",
+      "src/playlist.cpp:109",
+      "src/playlist.cpp:131",
+      "src/playlist_view.cpp:6",
+      "src/playlist_view.cpp:19",
+      "src/playlist_worker.cpp:8",
+      "src/playlist_worker.cpp:9",
+      "src/playlist_worker.cpp:41",
+      "src/playlist_worker.cpp:49",
+      "src/playlist_worker.cpp:53",
+      "src/playlist_worker.cpp:65",
+      "src/playlist_worker.cpp:69",
+      "src/playlist_worker.cpp:70",
+      "src/playlist_worker.cpp:78",
+      "src/playlist_worker.cpp:81",
+      "src/playlist_worker.cpp:82",
+      "src/playlist_worker.cpp:86",
+      "src/playlist_worker.cpp:98",
+      "src/playlist_worker.cpp:100",
+      "src/playlist_worker.cpp:114",
+      "src/playlist_worker.cpp:121",
+      "src/playlist_worker.cpp:127",
+      "src/playlist_worker.cpp:129",
+      "src/plwnd.cpp:20",
+      "src/plwnd.cpp:21",
+      "src/plwnd.cpp:25",
+      "src/plwnd.cpp:30",
+      "src/plwnd.cpp:35",
+      "src/plwnd.cpp:51",
+      "src/plwnd.cpp:52",
+      "src/plwnd.cpp:53",
+      "src/plwnd.cpp:54",
+      "src/plwnd.cpp:55",
+      "src/plwnd.cpp:57",
+      "src/plwnd.cpp:58",
+      "src/plwnd.cpp:67",
+      "src/plwnd.cpp:69",
+      "src/plwnd.cpp:70",
+      "src/plwnd.cpp:73",
+      "src/plwnd.cpp:76",
+      "src/plwnd.cpp:78",
+      "src/plwnd.cpp:79",
+      "src/plwnd.cpp:81",
+      "src/plwnd.cpp:84",
+      "src/plwnd.cpp:88",
+      "src/plwnd.cpp:101",
+      "src/plwnd.cpp:102",
+      "src/plwnd.cpp:103",
+      "src/plwnd.cpp:104",
+      "src/plwnd.cpp:108",
+      "src/plwnd.cpp:110",
+      "src/plwnd.cpp:111",
+      "src/plwnd.cpp:115",
+      "src/plwnd.cpp:116",
+      "src/plwnd.cpp:118",
+      "src/plwnd.cpp:119",
+      "src/plwnd.cpp:120",
+      "src/plwnd.cpp:122",
+      "src/plwnd.cpp:123",
+      "src/plwnd.cpp:126",
+      "src/plwnd.cpp:128",
+      "src/plwnd.cpp:129",
+      "src/plwnd.cpp:134",
+      "src/plwnd.cpp:135",
+      "src/plwnd.cpp:137",
+      "src/plwnd.cpp:146",
+      "src/plwnd.cpp:147",
+      "src/plwnd.cpp:151",
+      "src/plwnd.cpp:152",
+      "src/plwnd.cpp:153",
+      "src/plwnd.cpp:162",
+      "src/plwnd.cpp:168",
+      "src/plwnd.cpp:183",
+      "src/plwnd.cpp:184",
+      "src/plwnd.cpp:192",
+      "src/plwnd.cpp:194",
+      "src/plwnd.cpp:201",
+      "src/plwnd.cpp:206",
+      "src/plwnd.cpp:209",
+      "src/plwnd.cpp:210",
+      "src/plwnd.cpp:216",
+      "src/plwnd.cpp:218",
+      "src/plwnd.cpp:219",
+      "src/plwnd.cpp:220",
+      "src/plwnd.cpp:225",
+      "src/plwnd.cpp:226",
+      "src/plwnd.cpp:228",
+      "src/plwnd.cpp:229",
+      "src/plwnd.cpp:230",
+      "src/plwnd.cpp:231",
+      "src/plwnd.cpp:232",
+      "src/plwnd.cpp:233",
+      "src/plwnd.cpp:234",
+      "src/plwnd.cpp:235",
+      "src/plwnd.cpp:236",
+      "src/plwnd.cpp:237",
+      "src/plwnd.cpp:238",
+      "src/plwnd.cpp:241",
+      "src/plwnd.cpp:257",
+      "src/plwnd.cpp:266",
+      "src/plwnd.cpp:272",
+      "src/plwnd.cpp:274",
+      "src/plwnd.cpp:277",
+      "src/plwnd.cpp:279",
+      "src/plwnd.cpp:281",
+      "src/plwnd.cpp:285",
+      "src/plwnd.cpp:287",
+      "src/plwnd.cpp:288",
+      "src/plwnd.cpp:289",
+      "src/plwnd.cpp:292",
+      "src/plwnd.cpp:293",
+      "src/plwnd.cpp:294",
+      "src/plwnd.cpp:295",
+      "src/plwnd.cpp:296",
+      "src/plwnd.cpp:297",
+      "src/plwnd.cpp:298",
+      "src/plwnd.cpp:300",
+      "src/plwnd.cpp:305",
+      "src/plwnd.cpp:306",
+      "src/plwnd.cpp:307",
+      "src/plwnd.cpp:308",
+      "src/plwnd.cpp:309",
+      "src/plwnd.cpp:314",
+      "src/plwnd.cpp:320",
+      "src/plwnd.cpp:321",
+      "src/plwnd.cpp:322",
+      "src/plwnd.cpp:325",
+      "src/plwnd.cpp:326",
+      "src/plwnd.cpp:328",
+      "src/plwnd.cpp:337",
+      "src/plwnd.cpp:338",
+      "src/plwnd.cpp:352",
+      "src/plwnd.cpp:372",
+      "src/plwnd.cpp:380",
+      "src/plwnd.cpp:381",
+      "src/plwnd.cpp:382",
+      "src/plwnd.cpp:385",
+      "src/plwnd.cpp:386",
+      "src/plwnd.cpp:388",
+      "src/plwnd.cpp:389",
+      "src/plwnd.cpp:390",
+      "src/plwnd.cpp:392",
+      "src/plwnd.cpp:394",
+      "src/plwnd.cpp:395",
+      "src/plwnd.cpp:402",
+      "src/plwnd.cpp:403",
+      "src/plwnd.cpp:404",
+      "src/plwnd.cpp:405",
+      "src/plwnd.cpp:406",
+      "src/plwnd.cpp:407",
+      "src/plwnd.cpp:413",
+      "src/plwnd.cpp:417",
+      "src/plwnd.cpp:418",
+      "src/plwnd.cpp:419",
+      "src/plwnd.cpp:423",
+      "src/plwnd.cpp:425",
+      "src/plwnd.cpp:427",
+      "src/plwnd.cpp:432",
+      "src/plwnd.cpp:433",
+      "src/plwnd.cpp:444",
+      "src/plwnd.cpp:448",
+      "src/plwnd.cpp:449",
+      "src/plwnd.cpp:450",
+      "src/plwnd.cpp:451",
+      "src/plwnd.cpp:453",
+      "src/plwnd.cpp:457",
+      "src/plwnd.cpp:460",
+      "src/plwnd.cpp:463",
+      "src/plwnd.cpp:465",
+      "src/plwnd.cpp:468",
+      "src/plwnd.cpp:469",
+      "src/plwnd.cpp:470",
+      "src/plwnd.cpp:471",
+      "src/plwnd.cpp:472",
+      "src/plwnd.cpp:476",
+      "src/plwnd.cpp:482",
+      "src/plwnd.cpp:483",
+      "src/plwnd.cpp:485",
+      "src/plwnd.cpp:489",
+      "src/plwnd.cpp:492",
+      "src/plwnd.cpp:494",
+      "src/plwnd.cpp:496",
+      "src/plwnd.cpp:504",
+      "src/plwnd.cpp:506",
+      "src/plwnd.cpp:510",
+      "src/plwnd.cpp:512",
+      "src/plwnd.cpp:513",
+      "src/plwnd.cpp:515",
+      "src/plwnd.cpp:516",
+      "src/plwnd.cpp:518",
+      "src/plwnd.cpp:521",
+      "src/plwnd.cpp:524",
+      "src/plwnd.cpp:525",
+      "src/plwnd.cpp:531",
+      "src/plwnd.cpp:534",
+      "src/plwnd.cpp:536",
+      "src/plwnd.cpp:539",
+      "src/plwnd.cpp:545",
+      "src/plwnd.cpp:550",
+      "src/plwnd.cpp:553",
+      "src/plwnd.cpp:556",
+      "src/plwnd.cpp:564",
+      "src/plwnd.cpp:565",
+      "src/plwnd.cpp:566",
+      "src/plwnd.cpp:568",
+      "src/plwnd.cpp:570",
+      "src/plwnd.cpp:571",
+      "src/plwnd.cpp:573",
+      "src/plwnd.cpp:575",
+      "src/plwnd.cpp:578",
+      "src/plwnd.cpp:579",
+      "src/plwnd.cpp:581",
+      "src/plwnd.cpp:582",
+      "src/plwnd.cpp:584",
+      "src/plwnd.cpp:588",
+      "src/plwnd.cpp:593",
+      "src/plwnd.cpp:594",
+      "src/plwnd.cpp:595",
+      "src/plwnd.cpp:599",
+      "src/plwnd.cpp:600",
+      "src/plwnd.cpp:602",
+      "src/plwnd.cpp:603",
+      "src/plwnd.cpp:606",
+      "src/plwnd.cpp:609",
+      "src/plwnd.cpp:614",
+      "src/plwnd.cpp:623",
+      "src/plwnd.cpp:624",
+      "src/plwnd.cpp:626",
+      "src/plwnd.cpp:627",
+      "src/plwnd.cpp:633",
+      "src/plwnd.cpp:635",
+      "src/plwnd.cpp:636",
+      "src/plwnd.cpp:639",
+      "src/plwnd.cpp:640",
+      "src/plwnd.cpp:641",
+      "src/plwnd.cpp:643",
+      "src/plwnd.cpp:661",
+      "src/plwnd.cpp:662",
+      "src/plwnd.cpp:663",
+      "src/plwnd.cpp:664",
+      "src/plwnd.cpp:670",
+      "src/plwnd.cpp:679",
+      "src/plwnd.cpp:680",
+      "src/plwnd.cpp:684",
+      "src/plwnd.cpp:686",
+      "src/plwnd.cpp:690",
+      "src/plwnd.cpp:700",
+      "src/plwnd.cpp:701",
+      "src/plwnd.cpp:702",
+      "src/plwnd.cpp:703",
+      "src/plwnd.cpp:705",
+      "src/plwnd.cpp:709",
+      "src/plwnd.cpp:713",
+      "src/plwnd.cpp:720",
+      "src/plwnd.cpp:721",
+      "src/plwnd.cpp:729",
+      "src/plwnd.cpp:730",
+      "src/plwnd.cpp:737",
+      "src/plwnd.cpp:740",
+      "src/plwnd.cpp:749",
+      "src/plwnd.cpp:750",
+      "src/plwnd.cpp:756",
+      "src/plwnd.cpp:757",
+      "src/plwnd.cpp:759",
+      "src/plwnd.cpp:766",
+      "src/plwnd.cpp:770",
+      "src/plwnd.cpp:771",
+      "src/plwnd.cpp:772",
+      "src/plwnd.cpp:773",
+      "src/plwnd.cpp:780",
+      "src/plwnd.cpp:781",
+      "src/plwnd.cpp:782",
+      "src/plwnd.cpp:783",
+      "src/plwnd.cpp:789",
+      "src/plwnd.cpp:794",
+      "src/plwnd.cpp:796",
+      "src/plwnd.cpp:798",
+      "src/plwnd.cpp:803",
+      "src/plwnd.cpp:805",
+      "src/plwnd.cpp:807",
+      "src/plwnd.cpp:816",
+      "src/skin.cpp:10",
+      "src/skin.cpp:13",
+      "src/skin.cpp:14",
+      "src/skin.cpp:15",
+      "src/skin.cpp:16",
+      "src/skin.cpp:17",
+      "src/skin.cpp:18",
+      "src/skin.cpp:20",
+      "src/skin.cpp:21",
+      "src/skin.cpp:26",
+      "src/skin.cpp:30",
+      "src/skin.cpp:32",
+      "src/skin.cpp:36",
+      "src/skin.cpp:37",
+      "src/skin.cpp:40",
+      "src/skin.cpp:42",
+      "src/skin.cpp:44",
+      "src/skin.cpp:46",
+      "src/skin.cpp:51",
+      "src/skin.cpp:63",
+      "src/skin.cpp:75",
+      "src/skin.cpp:80",
+      "src/skin.cpp:81",
+      "src/skin.cpp:82",
+      "src/skin.cpp:85",
+      "src/skin.cpp:90",
+      "src/skin.cpp:91",
+      "src/skin.cpp:92",
+      "src/skin.cpp:96",
+      "src/skin.cpp:98",
+      "src/skin.cpp:101",
+      "src/skin.cpp:104",
+      "src/skin.cpp:110",
+      "src/skin.cpp:112",
+      "src/skin.cpp:114",
+      "src/skin.cpp:116",
+      "src/skin.cpp:119",
+      "src/skin.cpp:123",
+      "src/skin.cpp:127",
+      "src/skin.cpp:129",
+      "src/skin.cpp:131",
+      "src/skin.cpp:139",
+      "src/skin.cpp:141",
+      "src/tags.cpp:82",
+      "src/tags.cpp:93",
+      "src/tags.cpp:117",
+      "src/tags.cpp:119",
+      "src/tags.cpp:121",
+      "src/tags.cpp:185",
+      "src/tags.cpp:186",
+      "src/tags.cpp:187",
+      "src/tags.cpp:189",
+      "src/tags.cpp:191",
+      "src/tags.cpp:194",
+      "src/tags.cpp:199",
+      "src/tags.cpp:200",
+      "src/tags.cpp:203",
+      "src/tags.cpp:231",
+      "src/theme_window.cpp:12",
+      "src/theme_window.cpp:20",
+      "src/theme_window.cpp:21",
+      "src/theme_window.cpp:26",
+      "src/theme_window.cpp:27",
+      "src/theme_window.cpp:28",
+      "src/theme_window.cpp:29",
+      "src/theme_window.cpp:30",
+      "src/theme_window.cpp:35",
+      "src/theme_window.cpp:38",
+      "src/theme_window.cpp:40",
+      "src/theme_window.cpp:43",
+      "src/theme_window.cpp:44",
+      "src/theme_window.cpp:46",
+      "src/theme_window.cpp:50",
+      "src/theme_window.cpp:52",
+      "src/theme_window.cpp:55",
+      "src/theme_window.cpp:56",
+      "src/theme_window.cpp:58",
+      "src/theme_window.cpp:60",
+      "src/theme_window.cpp:62",
+      "src/theme_window.cpp:64",
+      "src/theme_window.cpp:65",
+      "src/theme_window.cpp:68",
+      "src/theme_window.cpp:69",
+      "src/theme_window.cpp:71",
+      "src/theme_window.cpp:72",
+      "src/theme_window.cpp:73",
+      "src/theme_window.cpp:74",
+      "src/theme_window.cpp:77",
+      "src/theme_window.cpp:78",
+      "src/theme_window.cpp:80",
+      "src/theme_window.cpp:82",
+      "src/theme_window.cpp:84",
+      "src/theme_window.cpp:85",
+      "src/theme_window.cpp:86",
+      "src/theme_window.cpp:88",
+      "src/theme_window.cpp:90",
+      "src/theme_window.cpp:92",
+      "src/theme_window.cpp:94",
+      "src/theme_window.cpp:98",
+      "src/theme_window.cpp:100",
+      "src/theme_window.cpp:102",
+      "src/theme_window.cpp:103",
+      "src/theme_window.cpp:104",
+      "src/theme_window.cpp:107",
+      "src/theme_window.cpp:108",
+      "src/theme_window.cpp:109",
+      "src/theme_window.cpp:111",
+      "src/theme_window.cpp:112",
+      "src/theme_window.cpp:113",
+      "src/theme_window.cpp:114",
+      "src/theme_window.cpp:116",
+      "src/theme_window.cpp:119",
+      "src/theme_window.cpp:120",
+      "src/theme_window.cpp:121",
+      "src/theme_window.cpp:123",
+      "src/theme_window.cpp:125",
+      "src/theme_window.cpp:126",
+      "src/theme_window.cpp:127",
+      "src/theme_window.cpp:128",
+      "src/theme_window.cpp:131",
+      "src/theme_window.cpp:132",
+      "src/theme_window.cpp:134",
+      "src/theme_window.cpp:136",
+      "src/theme_window.cpp:137",
+      "src/theme_window.cpp:138",
+      "src/theme_window.cpp:140",
+      "src/theme_window.cpp:143",
+      "src/theme_window.cpp:146",
+      "src/theme_window.cpp:153",
+      "src/theme_window.cpp:155",
+      "src/theme_window.cpp:157",
+      "src/theme_window.cpp:159",
+      "src/theme_window.cpp:160",
+      "src/theme_window.cpp:162",
+      "src/theme_window.cpp:164",
+      "src/theme_window.cpp:165",
+      "src/theme_window.cpp:166",
+      "src/theme_window.cpp:167",
+      "src/theme_window.cpp:168",
+      "src/theme_window.cpp:170",
+      "src/theme_window.cpp:171",
+      "src/theme_window.cpp:177",
+      "src/theme_window.cpp:183",
+      "src/theme_window.cpp:188",
+      "src/theme_window.cpp:189",
+      "src/theme_window.cpp:191",
+      "src/theme_window.cpp:192",
+      "src/theme_window.cpp:195",
+      "src/theme_window.cpp:196",
+      "src/theme_window.cpp:197",
+      "src/theme_window.cpp:200",
+      "src/theme_window.cpp:201",
+      "src/theme_window.cpp:211",
+      "src/theme_window.cpp:212",
+      "src/theme_window.cpp:213",
+      "src/theme_window.cpp:214",
+      "src/theme_window.cpp:215",
+      "src/ui_draw.cpp:7",
+      "src/ui_draw.cpp:8",
+      "src/ui_draw.cpp:9",
+      "src/ui_draw.cpp:10",
+      "src/ui_draw.cpp:11",
+      "src/ui_draw.cpp:13",
+      "src/ui_draw.cpp:14",
+      "src/ui_draw.cpp:15",
+      "src/ui_draw.cpp:19",
+      "src/ui_draw.cpp:20",
+      "src/ui_draw.cpp:23",
+      "src/ui_draw.cpp:24",
+      "src/ui_draw.cpp:25",
+      "src/ui_draw.cpp:36",
+      "src/ui_draw.cpp:39",
+      "src/ui_draw.cpp:40",
+      "src/ui_draw.cpp:41",
+      "src/ui_draw.cpp:42",
+      "src/ui_draw.cpp:43",
+      "src/ui_draw.cpp:44",
+      "src/ui_draw.cpp:49",
+      "src/ui_draw.cpp:50",
+      "src/ui_draw.cpp:51",
+      "src/ui_draw.cpp:56",
+      "src/ui_draw.cpp:57",
+      "src/ui_draw.cpp:62",
+      "src/ui_draw.cpp:66",
+      "src/ui_draw.cpp:71",
+      "src/ui_draw.cpp:73",
+      "src/ui_draw.cpp:74",
+      "src/ui_draw.cpp:76",
+      "src/ui_draw.cpp:78",
+      "src/ui_draw.cpp:79",
+      "src/ui_draw.cpp:88",
+      "src/ui_draw.cpp:91",
+      "src/ui_draw.cpp:92",
+      "src/ui_draw.cpp:94",
+      "src/ui_draw.cpp:97",
+      "src/ui_draw.cpp:102",
+      "src/ui_draw.cpp:104",
+      "src/ui_draw.cpp:105",
+      "src/ui_draw.cpp:115",
+      "src/ui_draw.cpp:120",
+      "src/ui_draw.cpp:134",
+      "src/ui_draw.cpp:147",
+      "src/ui_draw.cpp:150",
+      "src/ui_draw.cpp:151",
+      "src/ui_draw.cpp:155",
+      "src/ui_draw.cpp:158",
+      "src/ui_draw.cpp:159",
+      "src/ui_draw.cpp:162",
+      "src/ui_draw.cpp:163",
+      "src/ui_draw.cpp:170",
+      "src/ui_draw.cpp:171",
+      "src/ui_draw.cpp:175",
+      "src/ui_draw.cpp:176",
+      "src/ui_draw.cpp:186",
+      "src/ui_draw.cpp:189",
+      "src/ui_draw.cpp:190",
+      "src/ui_draw.cpp:195",
+      "src/ui_draw.cpp:196",
+      "src/ui_draw.cpp:197",
+      "src/ui_draw.cpp:199",
+      "src/ui_draw.cpp:200",
+      "src/ui_draw.cpp:202",
+      "src/ui_draw.cpp:204",
+      "src/ui_draw.cpp:205",
+      "src/ui_draw.cpp:206",
+      "src/ui_draw.cpp:209",
+      "src/ui_draw.cpp:212",
+      "src/ui_draw.cpp:213",
+      "src/ui_draw.cpp:214",
+      "src/ui_draw.cpp:215",
+      "src/ui_draw.cpp:217",
+      "src/ui_player.cpp:5",
+      "src/ui_player.cpp:6",
+      "src/ui_player.cpp:8",
+      "src/ui_player.cpp:11",
+      "src/ui_player.cpp:16",
+      "src/ui_player.cpp:17",
+      "src/ui_player.cpp:18",
+      "src/ui_player.cpp:19",
+      "src/ui_player.cpp:20",
+      "src/ui_player.cpp:21",
+      "src/ui_player.cpp:22",
+      "src/ui_player.cpp:27",
+      "src/ui_player.cpp:59",
+      "src/ui_player.cpp:73",
+      "src/ui_player.cpp:77",
+      "src/ui_player.cpp:79",
+      "src/ui_player.cpp:84",
+      "src/ui_player.cpp:92",
+      "src/ui_player.cpp:96",
+      "src/ui_player.cpp:97",
+      "src/ui_player.cpp:100",
+      "src/ui_player.cpp:101",
+      "src/ui_player.cpp:105",
+      "src/ui_theme.cpp:22",
+      "src/ui_theme.cpp:35",
+      "src/ui_theme.cpp:36",
+      "src/ui_theme.cpp:37",
+      "src/ui_theme.cpp:39",
+      "src/ui_theme.cpp:68",
+      "src/ui_theme.cpp:86",
+      "src/ui_theme.cpp:89",
+      "src/ui_theme.cpp:106",
+      "src/ui_theme.cpp:168",
+      "src/ui_theme.cpp:170",
+      "src/util.cpp:18",
+      "src/util.cpp:19",
+      "src/util.cpp:26",
+      "src/util.cpp:43",
+      "src/util.cpp:62",
+      "src/util.cpp:71",
+      "src/util.cpp:72",
+      "src/util.cpp:80",
+      "src/util.cpp:88",
+      "src/visualizer.cpp:23",
+      "src/visualizer.cpp:24",
+      "src/visualizer.cpp:25",
+      "src/visualizer.cpp:26",
+      "src/visualizer.cpp:124",
+      "src/visualizer.cpp:126",
+      "src/visualizer.cpp:130",
+      "src/visualizer.cpp:136",
+      "src/visualizer.cpp:137",
+      "src/visualizer.cpp:170",
+      "src/visualizer.cpp:171",
+      "src/visualizer.cpp:172",
+      "src/visualizer.cpp:176",
+      "src/visualizer.cpp:178",
+      "src/visualizer.cpp:179",
+      "src/visualizer.cpp:190",
+      "src/visualizer.cpp:200",
+      "src/visualizer.cpp:203",
+      "src/visualizer.cpp:231",
+      "src/visualizer.cpp:234",
+      "src/visualizer.cpp:235",
+      "src/visualizer.cpp:236",
+      "src/visualizer.cpp:240",
+      "src/visualizer.cpp:242",
+      "src/visualizer.cpp:243",
+      "src/visualizer.cpp:250",
+      "src/visualizer.cpp:251",
+      "src/visualizer.cpp:253",
+      "src/visualizer.cpp:269",
+      "src/visualizer.cpp:270",
+      "src/visualizer.cpp:271",
+      "src/visualizer.cpp:273",
+      "src/visualizer.cpp:276",
+      "src/visualizer.cpp:292",
+      "src/visualizer.cpp:296",
+      "src/visualizer.cpp:297",
+      "src/visualizer.cpp:300",
+      "src/visualizer.cpp:308",
+      "src/visualizer.cpp:312",
+      "src/visualizer.cpp:322",
+      "src/visualizer.cpp:334",
+      "src/visualizer.cpp:335",
+      "src/visualizer.cpp:342",
+      "src/visualizer.cpp:343",
+      "src/visualizer.cpp:344",
+      "src/visualizer.cpp:345",
+      "src/visualizer.cpp:352",
+      "src/visualizer.cpp:355"
+    ]
+  },
+  {
+    "id": "player.list_short",
+    "pt-BR": "LISTA",
+    "en-US": "LIST",
+    "original_locations": [
+      "src/mainwnd.cpp:1353",
+      "src/plwnd.cpp:325",
+      "src/plwnd.cpp:389",
+      "src/ui_player.cpp:109"
+    ]
+  },
+  {
+    "id": "player.shuffle_short",
+    "pt-BR": "SHUF",
+    "en-US": "SHUF",
+    "original_locations": [
+      "src/mainwnd.cpp:645",
+      "src/mainwnd.cpp:1289",
+      "src/mainwnd.cpp:1290",
+      "src/mainwnd.cpp:1293",
+      "src/ui_player.cpp:10"
+    ]
+  },
+  {
+    "id": "player.repeat_short",
+    "pt-BR": "REP",
+    "en-US": "REP",
+    "original_locations": [
+      "src/m3u.cpp:146",
+      "src/mainwnd.cpp:649",
+      "src/mainwnd.cpp:1295",
+      "src/mainwnd.cpp:1296",
+      "src/mainwnd.cpp:1299",
+      "src/playlist_worker.cpp:100",
+      "src/ui_player.cpp:11"
+    ]
+  },
+  {
+    "id": "player.repeat_one",
+    "pt-BR": "REP 1",
+    "en-US": "REP 1",
+    "original_locations": [
+      "src/mainwnd.cpp:1299"
+    ]
+  },
+  {
+    "id": "appearance.auto_scale",
+    "pt-BR": "Automática (recomendado)",
+    "en-US": "Automatic (recommended)",
+    "original_locations": [
+      "src/mainwnd.cpp:1380"
+    ]
+  },
+  {
+    "id": "playlist.title",
+    "pt-BR": "Lista de reprodução",
+    "en-US": "Playlist",
+    "original_locations": [
+      "src/mainwnd.cpp:1398",
+      "src/plwnd.cpp:724"
+    ]
+  },
+  {
+    "id": "appearance.themes_menu",
+    "pt-BR": "Aparência > Temas...",
+    "en-US": "Appearance > Themes...",
+    "original_locations": [
+      "src/mainwnd.cpp:1399"
+    ]
+  },
+  {
+    "id": "appearance.scale_menu",
+    "pt-BR": "Aparência > Escala da interface",
+    "en-US": "Appearance > Interface scale",
+    "original_locations": [
+      "src/mainwnd.cpp:1400"
+    ]
+  },
+  {
+    "id": "errors.track_limit",
+    "pt-BR": "Limite de 100.000 faixas atingido.",
+    "en-US": "The 100,000 track limit has been reached.",
+    "original_locations": [
+      "src/plwnd.cpp:170"
+    ]
+  },
+  {
+    "id": "errors.metadata_unavailable",
+    "pt-BR": "Leitura de metadados indisponível.",
+    "en-US": "Metadata reading is unavailable.",
+    "original_locations": [
+      "src/plwnd.cpp:178"
+    ]
+  },
+  {
+    "id": "errors.scan",
+    "pt-BR": "Não foi possível iniciar a varredura.",
+    "en-US": "Could not start the scan.",
+    "original_locations": [
+      "src/plwnd.cpp:186"
+    ]
+  },
+  {
+    "id": "playlist.folder_dialog",
+    "pt-BR": "Adicionar pasta de áudio (inclui subpastas)",
+    "en-US": "Add audio folder (including subfolders)",
+    "original_locations": [
+      "src/plwnd.cpp:193"
+    ]
+  },
+  {
+    "id": "playlist.m3u_filter",
+    "pt-BR": "Listas M3U UTF-8",
+    "en-US": "UTF-8 M3U playlists",
+    "original_locations": [
+      "src/plwnd.cpp:207"
+    ]
+  },
+  {
+    "id": "playlist.save_dialog",
+    "pt-BR": "Salvar lista M3U",
+    "en-US": "Save M3U playlist",
+    "original_locations": [
+      "src/plwnd.cpp:208"
+    ]
+  },
+  {
+    "id": "playlist.open_dialog",
+    "pt-BR": "Abrir lista M3U",
+    "en-US": "Open M3U playlist",
+    "original_locations": [
+      "src/plwnd.cpp:208"
+    ]
+  },
+  {
+    "id": "errors.m3u_start",
+    "pt-BR": "Não foi possível iniciar a operação M3U.",
+    "en-US": "Could not start the M3U operation.",
+    "original_locations": [
+      "src/plwnd.cpp:215"
+    ]
+  },
+  {
+    "id": "playlist.saving",
+    "pt-BR": "Salvando lista...",
+    "en-US": "Saving playlist...",
+    "original_locations": [
+      "src/plwnd.cpp:216"
+    ]
+  },
+  {
+    "id": "playlist.opening",
+    "pt-BR": "Abrindo lista...",
+    "en-US": "Opening playlist...",
+    "original_locations": [
+      "src/plwnd.cpp:216"
+    ]
+  },
+  {
+    "id": "playlist.files",
+    "pt-BR": "Arquivos...",
+    "en-US": "Files...",
+    "original_locations": [
+      "src/plwnd.cpp:225"
+    ]
+  },
+  {
+    "id": "playlist.folders",
+    "pt-BR": "Pasta e subpastas...",
+    "en-US": "Folder and subfolders...",
+    "original_locations": [
+      "src/plwnd.cpp:226"
+    ]
+  },
+  {
+    "id": "playlist.info_menu",
+    "pt-BR": "Informações da música...",
+    "en-US": "Track information...",
+    "original_locations": [
+      "src/plwnd.cpp:228"
+    ]
+  },
+  {
+    "id": "playlist.open_menu",
+    "pt-BR": "Abrir M3U (adicionar)...",
+    "en-US": "Open M3U (add)...",
+    "original_locations": [
+      "src/plwnd.cpp:229"
+    ]
+  },
+  {
+    "id": "playlist.save_menu",
+    "pt-BR": "Salvar M3U...",
+    "en-US": "Save M3U...",
+    "original_locations": [
+      "src/plwnd.cpp:230"
+    ]
+  },
+  {
+    "id": "playlist.name_asc",
+    "pt-BR": "Nome: A → Z",
+    "en-US": "Name: A → Z",
+    "original_locations": [
+      "src/plwnd.cpp:232"
+    ]
+  },
+  {
+    "id": "playlist.name_desc",
+    "pt-BR": "Nome: Z → A",
+    "en-US": "Name: Z → A",
+    "original_locations": [
+      "src/plwnd.cpp:233"
+    ]
+  },
+  {
+    "id": "playlist.duration_asc",
+    "pt-BR": "Duração: menor → maior",
+    "en-US": "Duration: shortest → longest",
+    "original_locations": [
+      "src/plwnd.cpp:234"
+    ]
+  },
+  {
+    "id": "playlist.duration_desc",
+    "pt-BR": "Duração: maior → menor",
+    "en-US": "Duration: longest → shortest",
+    "original_locations": [
+      "src/plwnd.cpp:235"
+    ]
+  },
+  {
+    "id": "playlist.mix",
+    "pt-BR": "Embaralhar ordem visível",
+    "en-US": "Shuffle visible order",
+    "original_locations": [
+      "src/plwnd.cpp:236"
+    ]
+  },
+  {
+    "id": "playlist.clear",
+    "pt-BR": "Limpar lista",
+    "en-US": "Clear playlist",
+    "original_locations": [
+      "src/plwnd.cpp:238"
+    ]
+  },
+  {
+    "id": "info.unknown",
+    "pt-BR": "Não informado",
+    "en-US": "Not provided",
+    "original_locations": [
+      "src/plwnd.cpp:249",
+      "src/plwnd.cpp:258"
+    ]
+  },
+  {
+    "id": "info.title",
+    "pt-BR": "Título",
+    "en-US": "Title",
+    "original_locations": [
+      "src/plwnd.cpp:252",
+      "src/plwnd.cpp:335",
+      "src/util.cpp:58"
+    ]
+  },
+  {
+    "id": "info.artist",
+    "pt-BR": "Artista",
+    "en-US": "Artist",
+    "original_locations": [
+      "src/plwnd.cpp:253"
+    ]
+  },
+  {
+    "id": "info.album",
+    "pt-BR": "Álbum",
+    "en-US": "Album",
+    "original_locations": [
+      "src/plwnd.cpp:253"
+    ]
+  },
+  {
+    "id": "info.genre",
+    "pt-BR": "Gênero",
+    "en-US": "Genre",
+    "original_locations": [
+      "src/plwnd.cpp:253"
+    ]
+  },
+  {
+    "id": "info.year",
+    "pt-BR": "Ano/data",
+    "en-US": "Year/date",
+    "original_locations": [
+      "src/plwnd.cpp:254"
+    ]
+  },
+  {
+    "id": "info.track",
+    "pt-BR": "Faixa",
+    "en-US": "Track",
+    "original_locations": [
+      "src/plwnd.cpp:254"
+    ]
+  },
+  {
+    "id": "info.format",
+    "pt-BR": "Formato",
+    "en-US": "Format",
+    "original_locations": [
+      "src/plwnd.cpp:254"
+    ]
+  },
+  {
+    "id": "info.duration",
+    "pt-BR": "Duração",
+    "en-US": "Duration",
+    "original_locations": [
+      "src/plwnd.cpp:234",
+      "src/plwnd.cpp:235",
+      "src/plwnd.cpp:257",
+      "src/plwnd.cpp:336"
+    ]
+  },
+  {
+    "id": "info.sample_rate",
+    "pt-BR": "Amostragem",
+    "en-US": "Sample rate",
+    "original_locations": [
+      "src/plwnd.cpp:257"
+    ]
+  },
+  {
+    "id": "info.channels",
+    "pt-BR": "Canais",
+    "en-US": "Channels",
+    "original_locations": [
+      "src/plwnd.cpp:258"
+    ]
+  },
+  {
+    "id": "info.size",
+    "pt-BR": "Tamanho",
+    "en-US": "Size",
+    "original_locations": [
+      "src/audio.cpp:64",
+      "src/plwnd.cpp:259"
+    ]
+  },
+  {
+    "id": "info.bitrate",
+    "pt-BR": "Taxa média aproximada (arquivo)",
+    "en-US": "Approximate average bitrate (file)",
+    "original_locations": [
+      "src/plwnd.cpp:260"
+    ]
+  },
+  {
+    "id": "info.favorite",
+    "pt-BR": "Favorita",
+    "en-US": "Favorite",
+    "original_locations": [
+      "src/plwnd.cpp:261",
+      "src/plwnd.cpp:328",
+      "src/plwnd.cpp:394"
+    ]
+  },
+  {
+    "id": "info.file",
+    "pt-BR": "Arquivo",
+    "en-US": "File",
+    "original_locations": [
+      "src/plwnd.cpp:225",
+      "src/plwnd.cpp:261"
+    ]
+  },
+  {
+    "id": "common.yes",
+    "pt-BR": "Sim",
+    "en-US": "Yes",
+    "original_locations": [
+      "src/plwnd.cpp:261"
+    ]
+  },
+  {
+    "id": "common.no",
+    "pt-BR": "Não",
+    "en-US": "No",
+    "original_locations": [
+      "src/app.cpp:83",
+      "src/m3u.cpp:112",
+      "src/m3u.cpp:134",
+      "src/m3u.cpp:147",
+      "src/mainwnd.cpp:706",
+      "src/plwnd.cpp:186",
+      "src/plwnd.cpp:215",
+      "src/plwnd.cpp:249",
+      "src/plwnd.cpp:255",
+      "src/plwnd.cpp:257",
+      "src/plwnd.cpp:258",
+      "src/plwnd.cpp:261",
+      "src/plwnd.cpp:263",
+      "src/plwnd.cpp:572",
+      "src/plwnd.cpp:670",
+      "src/plwnd.cpp:684",
+      "src/plwnd.cpp:686",
+      "src/plwnd.cpp:815"
+    ]
+  },
+  {
+    "id": "info.reading",
+    "pt-BR": "Lendo metadados...",
+    "en-US": "Reading metadata...",
+    "original_locations": [
+      "src/plwnd.cpp:262"
+    ]
+  },
+  {
+    "id": "errors.audio_read",
+    "pt-BR": "Não foi possível ler o arquivo de áudio.",
+    "en-US": "Could not read the audio file.",
+    "original_locations": [
+      "src/plwnd.cpp:263"
+    ]
+  },
+  {
+    "id": "common.close",
+    "pt-BR": "Fechar",
+    "en-US": "Close",
+    "original_locations": [
+      "src/plwnd.cpp:284",
+      "src/theme_window.cpp:90"
+    ]
+  },
+  {
+    "id": "info.caption",
+    "pt-BR": "Informações da música",
+    "en-US": "Track information",
+    "original_locations": [
+      "src/plwnd.cpp:228",
+      "src/plwnd.cpp:310"
+    ]
+  },
+  {
+    "id": "playlist.add_short",
+    "pt-BR": "ADIC ▾",
+    "en-US": "ADD ▾",
+    "original_locations": [
+      "src/plwnd.cpp:325",
+      "src/plwnd.cpp:389"
+    ]
+  },
+  {
+    "id": "playlist.remove",
+    "pt-BR": "REMOVER",
+    "en-US": "REMOVE",
+    "original_locations": [
+      "src/plwnd.cpp:325",
+      "src/plwnd.cpp:389"
+    ]
+  },
+  {
+    "id": "playlist.list_menu",
+    "pt-BR": "LISTA ▾",
+    "en-US": "LIST ▾",
+    "original_locations": [
+      "src/plwnd.cpp:325",
+      "src/plwnd.cpp:389"
+    ]
+  },
+  {
+    "id": "playlist.general",
+    "pt-BR": "Geral",
+    "en-US": "All tracks",
+    "original_locations": [
+      "src/plwnd.cpp:328",
+      "src/plwnd.cpp:355",
+      "src/plwnd.cpp:394",
+      "src/plwnd.cpp:427"
+    ]
+  },
+  {
+    "id": "playlist.favorites",
+    "pt-BR": "Favoritas",
+    "en-US": "Favorites",
+    "original_locations": [
+      "src/plwnd.cpp:328",
+      "src/plwnd.cpp:394"
+    ]
+  },
+  {
+    "id": "playlist.search",
+    "pt-BR": "Pesquisar músicas...",
+    "en-US": "Search tracks...",
+    "original_locations": [
+      "src/plwnd.cpp:330",
+      "src/plwnd.cpp:460"
+    ]
+  },
+  {
+    "id": "playlist.no_results",
+    "pt-BR": "Nenhuma música encontrada",
+    "en-US": "No tracks found",
+    "original_locations": [
+      "src/plwnd.cpp:355",
+      "src/plwnd.cpp:427"
+    ]
+  },
+  {
+    "id": "playlist.favorite_hint",
+    "pt-BR": "Marque a estrela de uma música em Geral",
+    "en-US": "Star a track in All tracks",
+    "original_locations": [
+      "src/plwnd.cpp:355",
+      "src/plwnd.cpp:427"
+    ]
+  },
+  {
+    "id": "playlist.empty",
+    "pt-BR": "Adicione arquivos ou uma pasta",
+    "en-US": "Add files or a folder",
+    "original_locations": [
+      "src/plwnd.cpp:355"
+    ]
+  },
+  {
+    "id": "playlist.reading",
+    "pt-BR": "lendo...",
+    "en-US": "reading...",
+    "original_locations": [
+      "src/plwnd.cpp:367",
+      "src/plwnd.cpp:442"
+    ]
+  },
+  {
+    "id": "errors.worker",
+    "pt-BR": "Falha ao iniciar leitura em segundo plano.",
+    "en-US": "Could not start background reading.",
+    "original_locations": [
+      "src/plwnd.cpp:461"
+    ]
+  },
+  {
+    "id": "errors.play_selected",
+    "pt-BR": "Não foi possível tocar a faixa selecionada.",
+    "en-US": "Could not play the selected track.",
+    "original_locations": [
+      "src/plwnd.cpp:572"
+    ]
+  },
+  {
+    "id": "playlist.saved",
+    "pt-BR": "Lista salva.",
+    "en-US": "Playlist saved.",
+    "original_locations": [
+      "src/plwnd.cpp:655"
+    ]
+  },
+  {
+    "id": "playlist.added",
+    "pt-BR": "Lista adicionada.",
+    "en-US": "Playlist added.",
+    "original_locations": [
+      "src/plwnd.cpp:657"
+    ]
+  },
+  {
+    "id": "errors.preserve_playlist",
+    "pt-BR": "Não foi possível preservar a playlist.\\n{error}",
+    "en-US": "Could not preserve the playlist.\\n{error}",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "errors.preserve_selection",
+    "pt-BR": "Não foi possível preservar a seleção da playlist.",
+    "en-US": "Could not preserve the playlist selection.",
+    "original_locations": [
+      "src/plwnd.cpp:684"
+    ]
+  },
+  {
+    "id": "errors.preserve_position",
+    "pt-BR": "Não foi possível preservar a posição da playlist.",
+    "en-US": "Could not preserve the playlist position.",
+    "original_locations": [
+      "src/plwnd.cpp:686"
+    ]
+  },
+  {
+    "id": "playlist.audio_filter",
+    "pt-BR": "Áudio",
+    "en-US": "Audio",
+    "original_locations": [
+      "src/plwnd.cpp:804"
+    ]
+  },
+  {
+    "id": "errors.selection_large",
+    "pt-BR": "Seleção muito grande; adicione uma pasta.",
+    "en-US": "Selection too large; add a folder.",
+    "original_locations": [
+      "src/plwnd.cpp:807"
+    ]
+  },
+  {
+    "id": "errors.play_file",
+    "pt-BR": "Não foi possível tocar o arquivo.",
+    "en-US": "Could not play the file.",
+    "original_locations": [
+      "src/plwnd.cpp:815"
+    ]
+  },
+  {
+    "id": "equalizer.title",
+    "pt-BR": "Equalizador",
+    "en-US": "Equalizer",
+    "original_locations": [
+      "src/eqwnd.cpp:133",
+      "src/eqwnd.cpp:159"
+    ]
+  },
+  {
+    "id": "equalizer.on",
+    "pt-BR": "EQ ON",
+    "en-US": "EQ ON",
+    "original_locations": [
+      "src/eqwnd.cpp:115"
+    ]
+  },
+  {
+    "id": "equalizer.off",
+    "pt-BR": "EQ OFF",
+    "en-US": "EQ OFF",
+    "original_locations": [
+      "src/eqwnd.cpp:115"
+    ]
+  },
+  {
+    "id": "equalizer.preset",
+    "pt-BR": "Preset: {name}",
+    "en-US": "Preset: {name}",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "equalizer.custom",
+    "pt-BR": "Personalizado",
+    "en-US": "Custom",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "equalizer.reset",
+    "pt-BR": "Redefinir",
+    "en-US": "Reset",
+    "original_locations": [
+      "src/eqwnd.cpp:117"
+    ]
+  },
+  {
+    "id": "equalizer.help",
+    "pt-BR": "±12 dB · ↑/↓ ajusta · Tab navega · Espaço zera",
+    "en-US": "±12 dB · ↑/↓ adjust · Tab navigate · Space reset",
+    "original_locations": [
+      "src/eqwnd.cpp:119"
+    ]
+  },
+  {
+    "id": "equalizer.unavailable",
+    "pt-BR": "N/D",
+    "en-US": "N/A",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "equalizer.preamp",
+    "pt-BR": "PRE",
+    "en-US": "PRE",
+    "original_locations": [
+      "src/eqwnd.cpp:122",
+      "src/mainwnd.cpp:147",
+      "src/mainwnd.cpp:240",
+      "src/mainwnd.cpp:282",
+      "src/mainwnd.cpp:637",
+      "src/mainwnd.cpp:1225",
+      "src/mainwnd.cpp:1278",
+      "src/mainwnd.cpp:1279",
+      "src/plwnd.cpp:119",
+      "src/plwnd.cpp:126",
+      "src/plwnd.cpp:287",
+      "src/plwnd.cpp:381",
+      "src/plwnd.cpp:404",
+      "src/skin.cpp:15",
+      "src/theme_window.cpp:26",
+      "src/theme_window.cpp:28",
+      "src/theme_window.cpp:131",
+      "src/theme_window.cpp:143",
+      "src/theme_window.cpp:146",
+      "src/theme_window.cpp:167",
+      "src/ui_draw.cpp:151",
+      "src/ui_draw.cpp:213",
+      "src/ui_player.cpp:8"
+    ]
+  },
+  {
+    "id": "errors.eq_render",
+    "pt-BR": "Equalizador: renderização indisponível",
+    "en-US": "Equalizer: rendering unavailable",
+    "original_locations": [
+      "src/eqwnd.cpp:133"
+    ]
+  },
+  {
+    "id": "preset.flat",
+    "pt-BR": "Plano",
+    "en-US": "Flat",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "preset.rock",
+    "pt-BR": "Rock",
+    "en-US": "Rock",
+    "original_locations": [
+      "src/eq_state.cpp:13"
+    ]
+  },
+  {
+    "id": "preset.pop",
+    "pt-BR": "Pop",
+    "en-US": "Pop",
+    "original_locations": [
+      "src/eqwnd.cpp:54",
+      "src/eq_state.cpp:14",
+      "src/mainwnd.cpp:1389",
+      "src/mainwnd.cpp:1397",
+      "src/plwnd.cpp:223",
+      "src/theme_window.cpp:37",
+      "src/theme_window.cpp:98",
+      "src/theme_window.cpp:102",
+      "src/theme_window.cpp:110",
+      "src/theme_window.cpp:116",
+      "src/ui_draw.cpp:135",
+      "src/ui_draw.cpp:184"
+    ]
+  },
+  {
+    "id": "preset.jazz",
+    "pt-BR": "Jazz",
+    "en-US": "Jazz",
+    "original_locations": [
+      "src/eq_state.cpp:15"
+    ]
+  },
+  {
+    "id": "preset.classical",
+    "pt-BR": "Clássica",
+    "en-US": "Classical",
+    "original_locations": [
+      "src/eq_state.cpp:16"
+    ]
+  },
+  {
+    "id": "preset.bass",
+    "pt-BR": "Graves",
+    "en-US": "Bass",
+    "original_locations": [
+      "src/eq_state.cpp:17"
+    ]
+  },
+  {
+    "id": "preset.voice",
+    "pt-BR": "Voz",
+    "en-US": "Voice",
+    "original_locations": [
+      "src/eq_state.cpp:18"
+    ]
+  },
+  {
+    "id": "themes.all",
+    "pt-BR": "Todos",
+    "en-US": "All",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/theme_window.cpp:92"
+    ]
+  },
+  {
+    "id": "themes.essential",
+    "pt-BR": "Essenciais",
+    "en-US": "Essential",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/ui_theme.cpp:44",
+      "src/ui_theme.cpp:45",
+      "src/ui_theme.cpp:46",
+      "src/ui_theme.cpp:47",
+      "src/ui_theme.cpp:48",
+      "src/ui_theme.cpp:49"
+    ]
+  },
+  {
+    "id": "themes.seasonal",
+    "pt-BR": "Sazonais",
+    "en-US": "Seasonal",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/ui_theme.cpp:50",
+      "src/ui_theme.cpp:51",
+      "src/ui_theme.cpp:52",
+      "src/ui_theme.cpp:53",
+      "src/ui_theme.cpp:54",
+      "src/ui_theme.cpp:55"
+    ]
+  },
+  {
+    "id": "themes.celebrations",
+    "pt-BR": "Comemorativos",
+    "en-US": "Celebrations",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/ui_theme.cpp:56",
+      "src/ui_theme.cpp:57",
+      "src/ui_theme.cpp:58",
+      "src/ui_theme.cpp:59",
+      "src/ui_theme.cpp:60",
+      "src/ui_theme.cpp:61",
+      "src/ui_theme.cpp:62",
+      "src/ui_theme.cpp:63"
+    ]
+  },
+  {
+    "id": "themes.technology",
+    "pt-BR": "Tecnológicos",
+    "en-US": "Technology",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/ui_theme.cpp:64",
+      "src/ui_theme.cpp:65",
+      "src/ui_theme.cpp:66",
+      "src/ui_theme.cpp:67",
+      "src/ui_theme.cpp:68",
+      "src/ui_theme.cpp:69",
+      "src/ui_theme.cpp:70",
+      "src/ui_theme.cpp:71"
+    ]
+  },
+  {
+    "id": "themes.nature",
+    "pt-BR": "Naturais",
+    "en-US": "Nature",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/ui_theme.cpp:72",
+      "src/ui_theme.cpp:73",
+      "src/ui_theme.cpp:74",
+      "src/ui_theme.cpp:75",
+      "src/ui_theme.cpp:76",
+      "src/ui_theme.cpp:77"
+    ]
+  },
+  {
+    "id": "themes.classic",
+    "pt-BR": "Clássicos",
+    "en-US": "Classic",
+    "original_locations": [
+      "src/theme_window.cpp:18",
+      "src/ui_theme.cpp:78",
+      "src/ui_theme.cpp:79"
+    ]
+  },
+  {
+    "id": "errors.theme_save",
+    "pt-BR": "Tema aplicado, mas não foi possível salvar a preferência.",
+    "en-US": "Theme applied, but the preference could not be saved.",
+    "original_locations": [
+      "src/theme_window.cpp:50"
+    ]
+  },
+  {
+    "id": "themes.restore",
+    "pt-BR": "Restaurar Original",
+    "en-US": "Restore Original",
+    "original_locations": [
+      "src/theme_window.cpp:88"
+    ]
+  },
+  {
+    "id": "themes.title",
+    "pt-BR": "Temas",
+    "en-US": "Themes",
+    "original_locations": [
+      "src/mainwnd.cpp:1399",
+      "src/theme_window.cpp:216"
+    ]
+  },
+  {
+    "id": "errors.data_folder",
+    "pt-BR": "Não foi possível acessar a pasta de dados. A playlist não será preservada nesta sessão.",
+    "en-US": "Could not access the data folder. The playlist will not be preserved in this session.",
+    "original_locations": [
+      "src/app.cpp:83"
+    ]
+  },
+  {
+    "id": "errors.m3u_open",
+    "pt-BR": "Não foi possível abrir a lista.",
+    "en-US": "Could not open the playlist.",
+    "original_locations": [
+      "src/m3u.cpp:112"
+    ]
+  },
+  {
+    "id": "errors.m3u_invalid",
+    "pt-BR": "Lista inválida ou maior que 16 MiB.",
+    "en-US": "Invalid playlist or larger than 16 MiB.",
+    "original_locations": [
+      "src/m3u.cpp:125"
+    ]
+  },
+  {
+    "id": "errors.temporary",
+    "pt-BR": "Não foi possível criar o arquivo temporário.",
+    "en-US": "Could not create the temporary file.",
+    "original_locations": [
+      "src/m3u.cpp:134"
+    ]
+  },
+  {
+    "id": "errors.m3u_save",
+    "pt-BR": "Não foi possível salvar a lista.",
+    "en-US": "Could not save the playlist.",
+    "original_locations": [
+      "src/m3u.cpp:147"
+    ]
+  },
+  {
+    "id": "errors.translation",
+    "pt-BR": "Texto indisponível",
+    "en-US": "Text unavailable",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "info.field",
+    "pt-BR": "{label}: {value}",
+    "en-US": "{label}: {value}",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "window.caption",
+    "pt-BR": "LiteSic — {title}",
+    "en-US": "LiteSic — {title}",
+    "original_locations": [
+      "Composição dinâmica ou ID semântico extraído; ver M8-T6-I18N.md"
+    ]
+  },
+  {
+    "id": "playlist.selected.few",
+    "en-US": "{count} selected",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} selecionadas"
+  },
+  {
+    "id": "playlist.selected.many",
+    "en-US": "{count} selected",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} selecionadas"
+  },
+  {
+    "id": "playlist.selected.one",
+    "en-US": "{count} selected",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} selecionada"
+  },
+  {
+    "id": "playlist.selected.other",
+    "en-US": "{count} selected",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} selecionadas"
+  },
+  {
+    "id": "playlist.selected.two",
+    "en-US": "{count} selected",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} selecionadas"
+  },
+  {
+    "id": "playlist.selected.zero",
+    "en-US": "{count} selected",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} selecionadas"
+  },
+  {
+    "id": "playlist.tracks.few",
+    "en-US": "{count} tracks",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} faixas"
+  },
+  {
+    "id": "playlist.tracks.many",
+    "en-US": "{count} tracks",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} faixas"
+  },
+  {
+    "id": "playlist.tracks.one",
+    "en-US": "{count} track",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} faixa"
+  },
+  {
+    "id": "playlist.tracks.other",
+    "en-US": "{count} tracks",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} faixas"
+  },
+  {
+    "id": "playlist.tracks.two",
+    "en-US": "{count} tracks",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} faixas"
+  },
+  {
+    "id": "playlist.tracks.zero",
+    "en-US": "{count} tracks",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} faixas"
+  },
+  {
+    "id": "playlist.visible.few",
+    "en-US": "{count} visible",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} visíveis"
+  },
+  {
+    "id": "playlist.visible.many",
+    "en-US": "{count} visible",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} visíveis"
+  },
+  {
+    "id": "playlist.visible.one",
+    "en-US": "{count} visible",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} visível"
+  },
+  {
+    "id": "playlist.visible.other",
+    "en-US": "{count} visible",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} visíveis"
+  },
+  {
+    "id": "playlist.visible.two",
+    "en-US": "{count} visible",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} visíveis"
+  },
+  {
+    "id": "playlist.visible.zero",
+    "en-US": "{count} visible",
+    "original_locations": [
+      "src/plwnd.cpp (dynamic count)"
+    ],
+    "pt-BR": "{count} visíveis"
+  },
+  {
+    "id": "theme.aurora",
+    "en-US": "Northern Lights",
+    "original_locations": [
+      "src/ui_theme.cpp:55"
+    ],
+    "pt-BR": "Aurora Boreal"
+  },
+  {
+    "id": "theme.autumn",
+    "en-US": "Autumn",
+    "original_locations": [
+      "src/ui_theme.cpp:53"
+    ],
+    "pt-BR": "Outono"
+  },
+  {
+    "id": "theme.carbon",
+    "en-US": "Carbon",
+    "original_locations": [
+      "src/ui_theme.cpp:71"
+    ],
+    "pt-BR": "Carbono"
+  },
+  {
+    "id": "theme.carnival",
+    "en-US": "Carnival",
+    "original_locations": [
+      "src/ui_theme.cpp:58"
+    ],
+    "pt-BR": "Carnaval"
+  },
+  {
+    "id": "theme.children",
+    "en-US": "Children’s Day",
+    "original_locations": [
+      "src/ui_theme.cpp:63"
+    ],
+    "pt-BR": "Dia das Crianças"
+  },
+  {
+    "id": "theme.christmas",
+    "en-US": "Christmas",
+    "original_locations": [
+      "src/ui_theme.cpp:56"
+    ],
+    "pt-BR": "Natal"
+  },
+  {
+    "id": "theme.cyberpunk",
+    "en-US": "Cyberpunk",
+    "original_locations": [
+      "src/ui_theme.cpp:64"
+    ],
+    "pt-BR": "Cyberpunk"
+  },
+  {
+    "id": "theme.dark",
+    "en-US": "Dark",
+    "original_locations": [
+      "src/ui_theme.cpp:45"
+    ],
+    "pt-BR": "Escuro"
+  },
+  {
+    "id": "theme.desert",
+    "en-US": "Desert",
+    "original_locations": [
+      "src/ui_theme.cpp:74"
+    ],
+    "pt-BR": "Deserto"
+  },
+  {
+    "id": "theme.easter",
+    "en-US": "Easter",
+    "original_locations": [
+      "src/ui_theme.cpp:59"
+    ],
+    "pt-BR": "Páscoa"
+  },
+  {
+    "id": "theme.forest",
+    "en-US": "Forest",
+    "original_locations": [
+      "src/ui_theme.cpp:73"
+    ],
+    "pt-BR": "Floresta"
+  },
+  {
+    "id": "theme.halloween",
+    "en-US": "Halloween",
+    "original_locations": [
+      "src/ui_theme.cpp:60"
+    ],
+    "pt-BR": "Halloween"
+  },
+  {
+    "id": "theme.high-contrast",
+    "en-US": "High Contrast",
+    "original_locations": [
+      "src/ui_theme.cpp:48"
+    ],
+    "pt-BR": "Alto Contraste"
+  },
+  {
+    "id": "theme.inverse",
+    "en-US": "Inverse",
+    "original_locations": [
+      "src/ui_theme.cpp:47"
+    ],
+    "pt-BR": "Inverso"
+  },
+  {
+    "id": "theme.june-festival",
+    "en-US": "June Festival",
+    "original_locations": [
+      "src/ui_theme.cpp:61"
+    ],
+    "pt-BR": "Festa Junina"
+  },
+  {
+    "id": "theme.light",
+    "en-US": "Light",
+    "original_locations": [
+      "src/ui_theme.cpp:46"
+    ],
+    "pt-BR": "Claro"
+  },
+  {
+    "id": "theme.matrix",
+    "en-US": "Matrix",
+    "original_locations": [
+      "src/ui_theme.cpp:65"
+    ],
+    "pt-BR": "Matrix"
+  },
+  {
+    "id": "theme.midnight",
+    "en-US": "Midnight",
+    "original_locations": [
+      "src/ui_theme.cpp:70"
+    ],
+    "pt-BR": "Meia-noite"
+  },
+  {
+    "id": "theme.mono",
+    "en-US": "Monochrome",
+    "original_locations": [
+      "src/ui_theme.cpp:49"
+    ],
+    "pt-BR": "Monocromático"
+  },
+  {
+    "id": "theme.mountain",
+    "en-US": "Mountain",
+    "original_locations": [
+      "src/ui_theme.cpp:75"
+    ],
+    "pt-BR": "Montanha"
+  },
+  {
+    "id": "theme.neon-blue",
+    "en-US": "Neon Blue",
+    "original_locations": [
+      "src/ui_theme.cpp:66"
+    ],
+    "pt-BR": "Neon Azul"
+  },
+  {
+    "id": "theme.neon-purple",
+    "en-US": "Neon Purple",
+    "original_locations": [
+      "src/ui_theme.cpp:67"
+    ],
+    "pt-BR": "Neon Roxo"
+  },
+  {
+    "id": "theme.new-year",
+    "en-US": "New Year",
+    "original_locations": [
+      "src/ui_theme.cpp:57"
+    ],
+    "pt-BR": "Ano Novo"
+  },
+  {
+    "id": "theme.ocean",
+    "en-US": "Ocean",
+    "original_locations": [
+      "src/ui_theme.cpp:72"
+    ],
+    "pt-BR": "Oceano"
+  },
+  {
+    "id": "theme.original",
+    "en-US": "LiteSic Original",
+    "original_locations": [
+      "src/ui_theme.cpp:44",
+      "src/ui_theme.cpp:163"
+    ],
+    "pt-BR": "LiteSic Original"
+  },
+  {
+    "id": "theme.sakura",
+    "en-US": "Sakura",
+    "original_locations": [
+      "src/ui_theme.cpp:77"
+    ],
+    "pt-BR": "Sakura"
+  },
+  {
+    "id": "theme.spring",
+    "en-US": "Spring",
+    "original_locations": [
+      "src/ui_theme.cpp:52"
+    ],
+    "pt-BR": "Primavera"
+  },
+  {
+    "id": "theme.summer",
+    "en-US": "Summer",
+    "original_locations": [
+      "src/ui_theme.cpp:50"
+    ],
+    "pt-BR": "Verão"
+  },
+  {
+    "id": "theme.sunset",
+    "en-US": "Sunset",
+    "original_locations": [
+      "src/ui_theme.cpp:76"
+    ],
+    "pt-BR": "Pôr do Sol"
+  },
+  {
+    "id": "theme.synthwave",
+    "en-US": "Synthwave",
+    "original_locations": [
+      "src/ui_theme.cpp:69"
+    ],
+    "pt-BR": "Synthwave"
+  },
+  {
+    "id": "theme.terminal",
+    "en-US": "Retro Terminal",
+    "original_locations": [
+      "src/ui_theme.cpp:68"
+    ],
+    "pt-BR": "Terminal Retrô"
+  },
+  {
+    "id": "theme.tropical",
+    "en-US": "Tropical",
+    "original_locations": [
+      "src/ui_theme.cpp:54"
+    ],
+    "pt-BR": "Tropical"
+  },
+  {
+    "id": "theme.valentines",
+    "en-US": "Valentine’s Day",
+    "original_locations": [
+      "src/ui_theme.cpp:62"
+    ],
+    "pt-BR": "Dia dos Namorados"
+  },
+  {
+    "id": "theme.vintage",
+    "en-US": "Vintage Audio",
+    "original_locations": [
+      "src/ui_theme.cpp:79"
+    ],
+    "pt-BR": "Áudio Vintage"
+  },
+  {
+    "id": "theme.winamp",
+    "en-US": "Winamp Classic",
+    "original_locations": [
+      "src/ui_theme.cpp:78"
+    ],
+    "pt-BR": "Winamp Classic"
+  },
+  {
+    "id": "theme.winter",
+    "en-US": "Winter",
+    "original_locations": [
+      "src/ui_theme.cpp:51"
+    ],
+    "pt-BR": "Inverno"
+  },
+  {
+    "id": "appearance.language",
+    "pt-BR": "Idioma",
+    "en-US": "Language",
+    "original_locations": [
+      "M8-T7: src/language_selection.cpp; src/mainwnd.cpp"
+    ]
+  },
+  {
+    "id": "appearance.auto_language",
+    "pt-BR": "Automático (Windows): {language}",
+    "en-US": "Automatic (Windows): {language}",
+    "original_locations": [
+      "M8-T7: src/language_selection.cpp; src/mainwnd.cpp"
+    ]
+  },
+  {
+    "id": "errors.language_change",
+    "pt-BR": "Não foi possível aplicar ou salvar a preferência de idioma. Verifique os recursos e a pasta de configurações.",
+    "en-US": "The language preference could not be applied or saved. Check the resources and settings folder.",
+    "original_locations": [
+      "M8-T7: src/language_selection.cpp; src/mainwnd.cpp"
+    ]
+  },
+  {
+    "id": "tooltip.previous",
+    "pt-BR": "Reproduzir a faixa anterior",
+    "en-US": "Play the previous track",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.next",
+    "pt-BR": "Reproduzir a próxima faixa",
+    "en-US": "Play the next track",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.shuffle_on",
+    "pt-BR": "Ativar reprodução aleatória",
+    "en-US": "Enable shuffle",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.shuffle_off",
+    "pt-BR": "Desativar reprodução aleatória",
+    "en-US": "Disable shuffle",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.repeat_off",
+    "pt-BR": "Repetição desativada",
+    "en-US": "Repeat: off",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.repeat_all",
+    "pt-BR": "Repetir toda a playlist",
+    "en-US": "Repeat the entire playlist",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.repeat_one",
+    "pt-BR": "Repetir a faixa atual",
+    "en-US": "Repeat the current track",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.play",
+    "pt-BR": "Iniciar ou retomar a reprodução",
+    "en-US": "Play or resume playback",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.pause",
+    "pt-BR": "Pausar a reprodução",
+    "en-US": "Pause playback",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.stop",
+    "pt-BR": "Parar a reprodução",
+    "en-US": "Stop playback",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.seek",
+    "pt-BR": "Ir para uma posição da faixa",
+    "en-US": "Seek within the current track",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.volume",
+    "pt-BR": "Volume: {value}%",
+    "en-US": "Volume: {value}%",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.balance",
+    "pt-BR": "Balanço: {value} (−100 esquerda, +100 direita)",
+    "en-US": "Balance: {value} (−100 left, +100 right)",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.show_playlist",
+    "pt-BR": "Mostrar playlist",
+    "en-US": "Show playlist",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.hide_playlist",
+    "pt-BR": "Ocultar playlist",
+    "en-US": "Hide playlist",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.show_eq",
+    "pt-BR": "Mostrar equalizador",
+    "en-US": "Show equalizer",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.hide_eq",
+    "pt-BR": "Ocultar equalizador",
+    "en-US": "Hide equalizer",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.fft",
+    "pt-BR": "Mostrar espectro de frequências",
+    "en-US": "Show frequency spectrum",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.osc",
+    "pt-BR": "Mostrar forma de onda do áudio",
+    "en-US": "Show audio waveform",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.show_viz",
+    "pt-BR": "Mostrar visualizador",
+    "en-US": "Show visualizer",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.hide_viz",
+    "pt-BR": "Ocultar visualizador",
+    "en-US": "Hide visualizer",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.minimize",
+    "pt-BR": "Minimizar o player",
+    "en-US": "Minimize the player",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.close",
+    "pt-BR": "Fechar esta janela",
+    "en-US": "Close this window",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.time",
+    "pt-BR": "Alternar tempo decorrido / restante",
+    "en-US": "Switch elapsed / remaining time",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.add",
+    "pt-BR": "Adicionar arquivos ou pasta",
+    "en-US": "Add files or a folder",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.remove",
+    "pt-BR": "Remover as faixas selecionadas",
+    "en-US": "Remove selected tracks",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.list_menu",
+    "pt-BR": "Abrir, salvar, ordenar ou limpar a playlist",
+    "en-US": "Open, save, sort or clear the playlist",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.all",
+    "pt-BR": "Mostrar todas as faixas",
+    "en-US": "Show all tracks",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.favorites",
+    "pt-BR": "Mostrar faixas favoritas",
+    "en-US": "Show favorite tracks",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.clear_search",
+    "pt-BR": "Limpar pesquisa",
+    "en-US": "Clear search",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.search",
+    "pt-BR": "Pesquisar título, artista, álbum ou arquivo",
+    "en-US": "Search title, artist, album or file",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.row",
+    "pt-BR": "Selecionar; clique duplo para reproduzir",
+    "en-US": "Select; double-click to play",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.favorite_on",
+    "pt-BR": "Adicionar aos favoritos",
+    "en-US": "Add to favorites",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.favorite_off",
+    "pt-BR": "Remover dos favoritos",
+    "en-US": "Remove from favorites",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.scroll",
+    "pt-BR": "Rolar a lista",
+    "en-US": "Scroll the list",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.eq_on",
+    "pt-BR": "Ativar o equalizador",
+    "en-US": "Enable equalizer",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.eq_off",
+    "pt-BR": "Desativar o equalizador",
+    "en-US": "Disable equalizer",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.presets",
+    "pt-BR": "Escolher um preset do equalizador",
+    "en-US": "Choose an equalizer preset",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.reset",
+    "pt-BR": "Redefinir todos os ganhos para zero",
+    "en-US": "Reset all gains to zero",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.preamp",
+    "pt-BR": "Pré-amplificação: {gain} dB",
+    "en-US": "Preamp: {gain} dB",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.band",
+    "pt-BR": "{frequency} Hz — Ganho: {gain} dB",
+    "en-US": "{frequency} Hz — Gain: {gain} dB",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.band_unavailable",
+    "pt-BR": "{frequency} Hz — Ganho: {gain} dB (indisponível nesta taxa de amostragem)",
+    "en-US": "{frequency} Hz — Gain: {gain} dB (unavailable at this sample rate)",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.theme_list",
+    "pt-BR": "Selecionar e aplicar um tema",
+    "en-US": "Select and apply a theme",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.theme_reset",
+    "pt-BR": "Restaurar o tema padrão",
+    "en-US": "Restore the default theme",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.category",
+    "pt-BR": "Filtrar temas por categoria",
+    "en-US": "Filter themes by category",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  },
+  {
+    "id": "tooltip.info",
+    "pt-BR": "Detalhes da faixa; selecione texto para copiar",
+    "en-US": "Track details; select text to copy",
+    "original_locations": [
+      "docs/M8-T8-CONTROL-INVENTORY.md"
+    ]
+  }
+]

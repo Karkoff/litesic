@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Automatica (consigliata)
+appearance.scale_menu	Aspetto > Scala dell’interfaccia
+appearance.themes_menu	Aspetto > Temi...
+audio.mono	Mono
+audio.multichannel	Multicanale
+audio.stereo	Stereo
+common.close	Chiudi
+common.no	No
+common.yes	Sì
+equalizer.custom	Personalizzato
+equalizer.help	±12 dB · ↑/↓ regola · Tab naviga · Spazio azzera
+equalizer.off	EQ NO
+equalizer.on	EQ SÌ
+equalizer.preamp	PRE
+equalizer.preset	Preset: {name}
+equalizer.reset	Ripristina
+equalizer.title	Equalizzatore
+equalizer.unavailable	N/D
+errors.audio_read	Impossibile leggere il file audio.
+errors.data_folder	Impossibile accedere alla cartella dati. La playlist non verrà conservata in questa sessione.
+errors.eq_render	Equalizzatore: rendering non disponibile
+errors.m3u_invalid	Playlist non valida o superiore a 16 MiB.
+errors.m3u_open	Impossibile aprire la playlist.
+errors.m3u_save	Impossibile salvare la playlist.
+errors.m3u_start	Impossibile avviare l’operazione M3U.
+errors.metadata_unavailable	Lettura dei metadati non disponibile.
+errors.play_file	Impossibile riprodurre il file.
+errors.play_selected	Impossibile riprodurre il brano selezionato.
+errors.play_track	Impossibile riprodurre il brano
+errors.preserve_playlist	Impossibile conservare la playlist.\n{error}
+errors.preserve_position	Impossibile conservare la posizione della playlist.
+errors.preserve_selection	Impossibile conservare la selezione della playlist.
+errors.scan	Impossibile avviare la scansione.
+errors.selection_large	Selezione troppo grande; aggiungi una cartella.
+errors.temporary	Impossibile creare il file temporaneo.
+errors.theme_save	Tema applicato, ma impossibile salvare la preferenza.
+errors.track_limit	Raggiunto il limite di 100.000 brani.
+errors.translation	Testo non disponibile
+errors.worker	Impossibile avviare la lettura in background.
+info.album	Album
+info.artist	Artista
+info.bitrate	Bitrate medio approssimativo (file)
+info.caption	Informazioni sul brano
+info.channels	Canali
+info.duration	Durata
+info.favorite	Preferito
+info.field	{label}: {value}
+info.file	File
+info.format	Formato
+info.genre	Genere
+info.reading	Lettura metadati...
+info.sample_rate	Frequenza di campionamento
+info.size	Dimensione
+info.title	Titolo
+info.track	Brano
+info.unknown	Non specificato
+info.year	Anno/data
+player.add_hint	Aggiungi file dalla playlist
+player.balance	Bilanc.
+player.balance_help	Bilanciamento: sinistra / destra
+player.left	S
+player.list_short	ELENCO
+player.native	LiteSic   ·   Lettore audio nativo
+player.next	Successivo
+player.oscilloscope	Oscilloscopio
+player.pause	Pausa
+player.paused	In pausa
+player.play	Riproduci
+player.playing	In riproduzione
+player.position	Posizione del brano
+player.previous	Precedente
+player.ready	Pronto per la riproduzione
+player.repeat	Ripeti: no → elenco → brano
+player.repeat_one	RIP 1
+player.repeat_short	RIP
+player.right	D
+player.shuffle	Casuale
+player.shuffle_short	CASUALE
+player.spectrum	Spettro FFT
+player.stop	Ferma
+player.time	TEMPO
+player.toggle_equalizer	Mostra / nascondi equalizzatore
+player.toggle_playlist	Mostra / nascondi playlist
+player.toggle_visualizer	Mostra / nascondi visualizzazione
+player.volume	Volume
+player.welcome	La tua musica, vicina
+playlist.add_short	AGG ▾
+playlist.added	Playlist aggiunta.
+playlist.audio_filter	Audio
+playlist.clear	Svuota playlist
+playlist.duration_asc	Durata: breve → lunga
+playlist.duration_desc	Durata: lunga → breve
+playlist.empty	Aggiungi file o una cartella
+playlist.favorite_hint	Contrassegna un brano con una stella in Tutti
+playlist.favorites	Preferiti
+playlist.files	File...
+playlist.folder_dialog	Aggiungi cartella audio (incluse sottocartelle)
+playlist.folders	Cartella e sottocartelle...
+playlist.general	Tutti
+playlist.info_menu	Informazioni sul brano...
+playlist.list_menu	ELENCO ▾
+playlist.m3u_filter	Playlist M3U UTF-8
+playlist.mix	Mescola l’ordine visibile
+playlist.name_asc	Nome: A → Z
+playlist.name_desc	Nome: Z → A
+playlist.no_results	Nessun brano trovato
+playlist.open_dialog	Apri playlist M3U
+playlist.open_menu	Apri M3U (aggiungi)...
+playlist.opening	Apertura playlist...
+playlist.reading	lettura...
+playlist.remove	RIMUOVI
+playlist.save_dialog	Salva playlist M3U
+playlist.save_menu	Salva M3U...
+playlist.saved	Playlist salvata.
+playlist.saving	Salvataggio playlist...
+playlist.search	Cerca brani...
+playlist.selected.few	{count} selezionati
+playlist.selected.many	{count} selezionati
+playlist.selected.one	{count} selezionato
+playlist.selected.other	{count} selezionati
+playlist.selected.two	{count} selezionati
+playlist.selected.zero	{count} selezionati
+playlist.title	Playlist
+playlist.tracks.few	{count} brani
+playlist.tracks.many	{count} brani
+playlist.tracks.one	{count} brano
+playlist.tracks.other	{count} brani
+playlist.tracks.two	{count} brani
+playlist.tracks.zero	{count} brani
+playlist.visible.few	{count} visibili
+playlist.visible.many	{count} visibili
+playlist.visible.one	{count} visibile
+playlist.visible.other	{count} visibili
+playlist.visible.two	{count} visibili
+playlist.visible.zero	{count} visibili
+preset.bass	Bassi
+preset.classical	Classica
+preset.flat	Piatto
+preset.jazz	Jazz
+preset.pop	Pop
+preset.rock	Rock
+preset.voice	Voce
+theme.aurora	Aurora boreale
+theme.autumn	Autunno
+theme.carbon	Carbonio
+theme.carnival	Carnevale
+theme.children	Festa dei bambini
+theme.christmas	Natale
+theme.cyberpunk	Cyberpunk
+theme.dark	Scuro
+theme.desert	Deserto
+theme.easter	Pasqua
+theme.forest	Foresta
+theme.halloween	Halloween
+theme.high-contrast	Contrasto elevato
+theme.inverse	Inverso
+theme.june-festival	Festa di giugno
+theme.light	Chiaro
+theme.matrix	Matrix
+theme.midnight	Mezzanotte
+theme.mono	Monocromatico
+theme.mountain	Montagna
+theme.neon-blue	Neon blu
+theme.neon-purple	Neon viola
+theme.new-year	Capodanno
+theme.ocean	Oceano
+theme.original	LiteSic Original
+theme.sakura	Sakura
+theme.spring	Primavera
+theme.summer	Estate
+theme.sunset	Tramonto
+theme.synthwave	Synthwave
+theme.terminal	Terminale retrò
+theme.tropical	Tropicale
+theme.valentines	San Valentino
+theme.vintage	Audio vintage
+theme.winamp	Winamp Classic
+theme.winter	Inverno
+themes.all	Tutti
+themes.celebrations	Festività
+themes.classic	Classici
+themes.essential	Essenziali
+themes.nature	Natura
+themes.restore	Ripristina Original
+themes.seasonal	Stagionali
+themes.technology	Tecnologici
+themes.title	Temi
+window.caption	LiteSic — {title}
+appearance.language	Lingua
+appearance.auto_language	Automatico (Windows): {language}
+errors.language_change	Impossibile applicare o salvare la preferenza della lingua. Controlla le risorse e la cartella delle impostazioni.
+
+# M8-T8: control descriptions
+tooltip.previous	Riprodurre la traccia precedente
+tooltip.next	Riprodurre la traccia successiva
+tooltip.shuffle_on	Attivare la riproduzione casuale
+tooltip.shuffle_off	Disattivare la riproduzione casuale
+tooltip.repeat_off	Ripetizione disattivata
+tooltip.repeat_all	Ripetere tutta la playlist
+tooltip.repeat_one	Ripetere la traccia attuale
+tooltip.play	Avviare o riprendere la riproduzione
+tooltip.pause	Mettere in pausa
+tooltip.stop	Fermare la riproduzione
+tooltip.seek	Andare a una posizione della traccia
+tooltip.volume	Volume: {value}%
+tooltip.balance	Bilanciamento: {value} (−100 sinistra, +100 destra)
+tooltip.show_playlist	Mostrare la playlist
+tooltip.hide_playlist	Nascondere la playlist
+tooltip.show_eq	Mostrare l’equalizzatore
+tooltip.hide_eq	Nascondere l’equalizzatore
+tooltip.fft	Mostrare lo spettro di frequenza
+tooltip.osc	Mostrare la forma d’onda
+tooltip.show_viz	Mostrare il visualizzatore
+tooltip.hide_viz	Nascondere il visualizzatore
+tooltip.minimize	Ridurre a icona il lettore
+tooltip.close	Chiudere questa finestra
+tooltip.time	Alternare tempo trascorso / rimanente
+tooltip.add	Aggiungere file o cartella
+tooltip.remove	Rimuovere le tracce selezionate
+tooltip.list_menu	Aprire, salvare, ordinare o svuotare la playlist
+tooltip.all	Mostrare tutte le tracce
+tooltip.favorites	Mostrare i preferiti
+tooltip.clear_search	Cancellare la ricerca
+tooltip.search	Cercare titolo, artista, album o file
+tooltip.row	Selezionare; doppio clic per riprodurre
+tooltip.favorite_on	Aggiungere ai preferiti
+tooltip.favorite_off	Rimuovere dai preferiti
+tooltip.scroll	Scorrere la lista
+tooltip.eq_on	Attivare l’equalizzatore
+tooltip.eq_off	Disattivare l’equalizzatore
+tooltip.presets	Scegliere un preset dell’equalizzatore
+tooltip.reset	Azzerare tutti i guadagni
+tooltip.preamp	Preamplificazione: {gain} dB
+tooltip.band	{frequency} Hz — Guadagno: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — Guadagno: {gain} dB (non disponibile a questa frequenza di campionamento)
+tooltip.theme_list	Selezionare e applicare un tema
+tooltip.theme_reset	Ripristinare il tema predefinito
+tooltip.category	Filtrare i temi per categoria
+tooltip.info	Dettagli della traccia; selezionare il testo da copiare

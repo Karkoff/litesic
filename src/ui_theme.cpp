@@ -163,6 +163,7 @@ void ThemeConfigure(const wchar_t* iniPath) {
     if(!path.empty()) GetPrivateProfileStringW(L"Appearance",L"Theme",L"original",id,128,path.c_str());
     SelectTheme(id,false);
 }
+const wchar_t* SettingsPath(){return path.empty()?nullptr:path.c_str();}
 bool ThemeInitializeUser() {
     wchar_t folder[MAX_PATH]{};
     if(FAILED(SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA|CSIDL_FLAG_CREATE,nullptr,SHGFP_TYPE_CURRENT,folder))) return false;

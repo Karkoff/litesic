@@ -1,0 +1,135 @@
+{
+  "date_local": "2026-10-11",
+  "branch": "master",
+  "head": "266270aa9caa2469144f9af30d9609877941f7b4",
+  "variants": [
+    {
+      "architecture": "64",
+      "configuration": "release",
+      "cases": 179,
+      "exe": "build/64/release/LiteSic.exe",
+      "sha256": "2191d8f983bb60c3b61ae292e4714f3888db7ec214e88233eb6cb0f9e83a85aa",
+      "bytes": 4158771,
+      "tooltip_metrics": [
+        "TOOLTIP_METRICS descriptions=27000 elapsed_ms=16.678 private_delta=0 GDI=12 USER=16"
+      ]
+    },
+    {
+      "architecture": "64",
+      "configuration": "debug",
+      "cases": 179,
+      "exe": "build/64/debug/LiteSic.exe",
+      "sha256": "2a667b83097c222b0c8c0bfef2d8f4c9fdb4863b06e14fcd84f196dee4dd9526",
+      "bytes": 11119760,
+      "tooltip_metrics": [
+        "TOOLTIP_METRICS descriptions=27000 elapsed_ms=139.833 private_delta=0 GDI=12 USER=16"
+      ]
+    },
+    {
+      "architecture": "32",
+      "configuration": "release",
+      "cases": 179,
+      "exe": "build/32/release/LiteSic.exe",
+      "sha256": "937deabd3578e76d4e7174f089e5ea28d1dcc15e12f00dda2938cfe35352096e",
+      "bytes": 4088573,
+      "tooltip_metrics": [
+        "TOOLTIP_METRICS descriptions=27000 elapsed_ms=25.461 private_delta=0 GDI=12 USER=16"
+      ]
+    },
+    {
+      "architecture": "32",
+      "configuration": "debug",
+      "cases": 179,
+      "exe": "build/32/debug/LiteSic.exe",
+      "sha256": "12c33aeb59c5d73108cf52e9a749b5980879a4933c96cd4a61189eee79b825e1",
+      "bytes": 10047328,
+      "tooltip_metrics": [
+        "TOOLTIP_METRICS descriptions=27000 elapsed_ms=166.084 private_delta=0 GDI=12 USER=16"
+      ]
+    }
+  ],
+  "cases_total": 716,
+  "catalogs": 18,
+  "ids_per_catalog": 237,
+  "new_tooltip_keys": 46,
+  "themes": 36,
+  "gui_guards": 36,
+  "images": [
+    {
+      "path": "t8-initial.png",
+      "sha256": "9806d7888d6202901d0963345ae98ec7eecb68e7c56c28a9bfc2922462ede725",
+      "inspected": true
+    },
+    {
+      "path": "tooltip-popup.png",
+      "sha256": "29fa9c58effbc62c0c4604924fd40ddbf84a9f977d1867f93b185e8cfbe2aad1",
+      "inspected": true
+    },
+    {
+      "path": "t8-ar-shuffle-popup.png",
+      "sha256": "4cfa2cdf3d242661eacfa8dc4e1f6b345c4ece1db23f55f328c6cb5cc9ad6f49",
+      "inspected": true
+    },
+    {
+      "path": "t8-ar-disable-shuffle-popup.png",
+      "sha256": "6e563883201e11c864248d71357d9bc7128b7884efbbfe51ef6e88e2cecd7cf9",
+      "inspected": true
+    },
+    {
+      "path": "t8-de-band-context.png",
+      "sha256": "46db50d9e80b50614d00be0febac719bca1f18e6b4151863d88304d99210415b",
+      "inspected": true
+    },
+    {
+      "path": "t8-de-band-popup.png",
+      "sha256": "5afe96695579514baedbd3e73a193b8494681625162911acbce76abb680d6995",
+      "inspected": true
+    },
+    {
+      "path": "t8-de-band-drag.png",
+      "sha256": "bfe7085be242b0176186dc02079f149cf2b8fe8b08ffd5cf65a976de5a998096",
+      "inspected": true
+    },
+    {
+      "path": "t8-de-current-gain-popup.png",
+      "sha256": "5e96c658e217ee009947b47c26a490a95c54a20b93f501fa10db24596db04c90",
+      "inspected": true
+    },
+    {
+      "path": "t8-ja-balance-popup.png",
+      "sha256": "a156c22a6ed56d7388b68cf0a3709983cf4a9daaf709a5022a2877652ff61a83",
+      "inspected": true
+    },
+    {
+      "path": "t8-hi-shuffle-popup.png",
+      "sha256": "43f79cabaf37b5f05fe8411eafd9737d6ea8d5aace3011401202b67e4646b2e1",
+      "inspected": true
+    }
+  ],
+  "captures_executable_hashes": [
+    "22240f96c06723ac8de0ed62fc0fdc1597ac65f1942c056b7b4087e0ac1698ba",
+    "bf1920dfcb5a4eb37f0c0fa2a1c9c6d752db1c1237f37b2feee9d7f0c2c5cc51"
+  ],
+  "human_t7": "PASS (user instruction)",
+  "human_t8": "PENDING",
+  "no_commit_push": true,
+  "gui": {
+    "architecture": "64",
+    "configuration": "release",
+    "additional_cases": 2,
+    "frames": 3092,
+    "hover_cycles": 500,
+    "metrics": [
+      "TOOLTIP_METRICS descriptions=27000 elapsed_ms=20.465 private_delta=0 GDI=12 USER=20",
+      "TOOLTIP_GUI frames=3092 hover_cycles=500 private_delta=0 GDI=24 USER=30"
+    ],
+    "test_exe_sha256": "99e5480bdd167eb01f8e6255e5d3549d37da757bf181f2d980d5b518fe3a2994"
+  },
+  "source_sha256": {
+    "src/ui_tooltip.cpp": "0247d5994880f1a0a6320efa1a112c67f7243c1d068970da3712db1bd0a3e605",
+    "src/ui_tooltip.h": "cbbc2baf0324ae0f3582ec77f7fdb036dcb30241f1a05ad28edc0b58c006d104",
+    "tests/test_tooltip.cpp": "cda2678a012730d472be1971ff29d7d68be86530683f681f942b57f4251edf76",
+    "src/ui_draw.cpp": "5379c18e02fa39ab8aafe054848ad5021acd4a682f526a00fcc03e8f842e216d",
+    "src/ui_draw.h": "fcdfbf715578370ba131a7d30990505f182f95f2fee9c3ffce68a04c3354ecff"
+  }
+}

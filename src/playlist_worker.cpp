@@ -127,8 +127,8 @@ void PlaylistWorker::Run() {
                 PlaylistResult result; result.kind = job.kind;
                 result.id = job.id; result.generation = job.generation;
                 if (job.kind == PlaylistJob::Metadata) result.metadata = ReadTrackMetadata(job.path);
-                else if (job.kind == PlaylistJob::Open) LoadM3U(job.path, result.tracks, result.error);
-                else SaveM3U(job.path, job.tracks, result.error);
+                else if (job.kind == PlaylistJob::Open) LoadM3U(job.path, result.tracks, result.error,&result.errorId);
+                else SaveM3U(job.path, job.tracks, result.error,&result.errorId);
                 Publish(std::move(result));
             }
         }

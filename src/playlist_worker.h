@@ -19,6 +19,7 @@ struct PlaylistResult {
     std::vector<Track> tracks;
     TrackMetadata metadata;
     std::wstring error;
+    std::string errorId;
 };
 // A single worker owns disk I/O and decoder probes. Only the UI owns Playlist.
 // Bounded result queue prevents unlimited messages/memory if the UI is busy.

@@ -1,0 +1,240 @@
+# LiteSic UTF-8 catalog v1; human linguistic review pending
+appearance.auto_scale	Otomatik (önerilen)
+appearance.scale_menu	Görünüm > Arayüz ölçeği
+appearance.themes_menu	Görünüm > Temalar...
+audio.mono	Mono
+audio.multichannel	Çok kanallı
+audio.stereo	Stereo
+common.close	Kapat
+common.no	Hayır
+common.yes	Evet
+equalizer.custom	Özel
+equalizer.help	±12 dB · ↑/↓ ayarla · Tab gezin · Boşluk sıfırla
+equalizer.off	EQ KAPALI
+equalizer.on	EQ AÇIK
+equalizer.preamp	ÖN
+equalizer.preset	Önayar: {name}
+equalizer.reset	Sıfırla
+equalizer.title	Ekolayzır
+equalizer.unavailable	YOK
+errors.audio_read	Ses dosyası okunamadı.
+errors.data_folder	Veri klasörüne erişilemedi. Çalma listesi bu oturumda korunmayacak.
+errors.eq_render	Ekolayzır: görüntüleme kullanılamıyor
+errors.m3u_invalid	Geçersiz veya 16 MiB’den büyük çalma listesi.
+errors.m3u_open	Çalma listesi açılamadı.
+errors.m3u_save	Çalma listesi kaydedilemedi.
+errors.m3u_start	M3U işlemi başlatılamadı.
+errors.metadata_unavailable	Meta veri okuma kullanılamıyor.
+errors.play_file	Dosya oynatılamadı.
+errors.play_selected	Seçili parça oynatılamadı.
+errors.play_track	Parça oynatılamadı
+errors.preserve_playlist	Çalma listesi korunamadı.\n{error}
+errors.preserve_position	Çalma listesi konumu korunamadı.
+errors.preserve_selection	Çalma listesi seçimi korunamadı.
+errors.scan	Tarama başlatılamadı.
+errors.selection_large	Seçim çok büyük; bir klasör ekleyin.
+errors.temporary	Geçici dosya oluşturulamadı.
+errors.theme_save	Tema uygulandı ancak tercih kaydedilemedi.
+errors.track_limit	100.000 parça sınırına ulaşıldı.
+errors.translation	Metin kullanılamıyor
+errors.worker	Arka planda okuma başlatılamadı.
+info.album	Albüm
+info.artist	Sanatçı
+info.bitrate	Yaklaşık ortalama bit hızı (dosya)
+info.caption	Parça bilgileri
+info.channels	Kanallar
+info.duration	Süre
+info.favorite	Favori
+info.field	{label}: {value}
+info.file	Dosya
+info.format	Biçim
+info.genre	Tür
+info.reading	Meta veriler okunuyor...
+info.sample_rate	Örnekleme hızı
+info.size	Boyut
+info.title	Başlık
+info.track	Parça
+info.unknown	Belirtilmemiş
+info.year	Yıl/tarih
+player.add_hint	Çalma listesinden dosya ekleyin
+player.balance	Denge
+player.balance_help	Denge: sol / sağ
+player.left	S
+player.list_short	LİSTE
+player.native	LiteSic   ·   Yerel ses oynatıcı
+player.next	Sonraki
+player.oscilloscope	Osiloskop
+player.pause	Duraklat
+player.paused	Duraklatıldı
+player.play	Oynat
+player.playing	Oynatılıyor
+player.position	Parça konumu
+player.previous	Önceki
+player.ready	Oynatmaya hazır
+player.repeat	Tekrar: kapalı → liste → parça
+player.repeat_one	TEK 1
+player.repeat_short	TEK
+player.right	Ğ
+player.shuffle	Karıştır
+player.shuffle_short	KARIŞ
+player.spectrum	FFT spektrumu
+player.stop	Durdur
+player.time	SÜRE
+player.toggle_equalizer	Ekolayzırı göster / gizle
+player.toggle_playlist	Çalma listesini göster / gizle
+player.toggle_visualizer	Görselleştirmeyi göster / gizle
+player.volume	Ses düzeyi
+player.welcome	Müziğiniz yanı başınızda
+playlist.add_short	EKLE ▾
+playlist.added	Liste eklendi.
+playlist.audio_filter	Ses
+playlist.clear	Listeyi temizle
+playlist.duration_asc	Süre: kısa → uzun
+playlist.duration_desc	Süre: uzun → kısa
+playlist.empty	Dosya veya klasör ekleyin
+playlist.favorite_hint	Tümü bölümünde bir parçayı yıldızlayın
+playlist.favorites	Favoriler
+playlist.files	Dosyalar...
+playlist.folder_dialog	Ses klasörü ekle (alt klasörler dahil)
+playlist.folders	Klasör ve alt klasörler...
+playlist.general	Tümü
+playlist.info_menu	Parça bilgileri...
+playlist.list_menu	LİSTE ▾
+playlist.m3u_filter	UTF-8 M3U çalma listeleri
+playlist.mix	Görünür sırayı karıştır
+playlist.name_asc	Ad: A → Z
+playlist.name_desc	Ad: Z → A
+playlist.no_results	Parça bulunamadı
+playlist.open_dialog	M3U çalma listesini aç
+playlist.open_menu	M3U aç (ekle)...
+playlist.opening	Liste açılıyor...
+playlist.reading	okunuyor...
+playlist.remove	KALDIR
+playlist.save_dialog	M3U çalma listesini kaydet
+playlist.save_menu	M3U kaydet...
+playlist.saved	Liste kaydedildi.
+playlist.saving	Liste kaydediliyor...
+playlist.search	Parça ara...
+playlist.selected.few	{count} seçili
+playlist.selected.many	{count} seçili
+playlist.selected.one	{count} seçili
+playlist.selected.other	{count} seçili
+playlist.selected.two	{count} seçili
+playlist.selected.zero	{count} seçili
+playlist.title	Çalma listesi
+playlist.tracks.few	{count} parça
+playlist.tracks.many	{count} parça
+playlist.tracks.one	{count} parça
+playlist.tracks.other	{count} parça
+playlist.tracks.two	{count} parça
+playlist.tracks.zero	{count} parça
+playlist.visible.few	{count} görünür
+playlist.visible.many	{count} görünür
+playlist.visible.one	{count} görünür
+playlist.visible.other	{count} görünür
+playlist.visible.two	{count} görünür
+playlist.visible.zero	{count} görünür
+preset.bass	Bas
+preset.classical	Klasik
+preset.flat	Düz
+preset.jazz	Caz
+preset.pop	Pop
+preset.rock	Rock
+preset.voice	Vokal
+theme.aurora	Kuzey ışıkları
+theme.autumn	Sonbahar
+theme.carbon	Karbon
+theme.carnival	Karnaval
+theme.children	Çocuk Bayramı
+theme.christmas	Noel
+theme.cyberpunk	Cyberpunk
+theme.dark	Koyu
+theme.desert	Çöl
+theme.easter	Paskalya
+theme.forest	Orman
+theme.halloween	Cadılar Bayramı
+theme.high-contrast	Yüksek kontrast
+theme.inverse	Ters
+theme.june-festival	Haziran şenliği
+theme.light	Açık
+theme.matrix	Matrix
+theme.midnight	Gece yarısı
+theme.mono	Tek renk
+theme.mountain	Dağ
+theme.neon-blue	Neon mavi
+theme.neon-purple	Neon mor
+theme.new-year	Yılbaşı
+theme.ocean	Okyanus
+theme.original	LiteSic Original
+theme.sakura	Sakura
+theme.spring	İlkbahar
+theme.summer	Yaz
+theme.sunset	Gün batımı
+theme.synthwave	Synthwave
+theme.terminal	Retro terminal
+theme.tropical	Tropik
+theme.valentines	Sevgililer Günü
+theme.vintage	Vintage ses
+theme.winamp	Winamp Classic
+theme.winter	Kış
+themes.all	Tümü
+themes.celebrations	Kutlamalar
+themes.classic	Klasikler
+themes.essential	Temel
+themes.nature	Doğa
+themes.restore	Original temasını geri yükle
+themes.seasonal	Mevsimler
+themes.technology	Teknoloji
+themes.title	Temalar
+window.caption	LiteSic — {title}
+appearance.language	Dil
+appearance.auto_language	Otomatik (Windows): {language}
+errors.language_change	Dil tercihi uygulanamadı veya kaydedilemedi. Kaynakları ve ayarlar klasörünü kontrol edin.
+
+# M8-T8: control descriptions
+tooltip.previous	Önceki parçayı çal
+tooltip.next	Sonraki parçayı çal
+tooltip.shuffle_on	Rastgele çalmayı aç
+tooltip.shuffle_off	Rastgele çalmayı kapat
+tooltip.repeat_off	Tekrar kapalı
+tooltip.repeat_all	Tüm çalma listesini tekrarla
+tooltip.repeat_one	Geçerli parçayı tekrarla
+tooltip.play	Çalmayı başlat veya sürdür
+tooltip.pause	Çalmayı duraklat
+tooltip.stop	Çalmayı durdur
+tooltip.seek	Parçada bir konuma git
+tooltip.volume	Ses düzeyi: {value}%
+tooltip.balance	Denge: {value} (−100 sol, +100 sağ)
+tooltip.show_playlist	Çalma listesini göster
+tooltip.hide_playlist	Çalma listesini gizle
+tooltip.show_eq	Ekolayzırı göster
+tooltip.hide_eq	Ekolayzırı gizle
+tooltip.fft	Frekans spektrumunu göster
+tooltip.osc	Ses dalgasını göster
+tooltip.show_viz	Görselleştiriciyi göster
+tooltip.hide_viz	Görselleştiriciyi gizle
+tooltip.minimize	Oynatıcıyı küçült
+tooltip.close	Bu pencereyi kapat
+tooltip.time	Geçen / kalan süreyi değiştir
+tooltip.add	Dosya veya klasör ekle
+tooltip.remove	Seçili parçaları kaldır
+tooltip.list_menu	Listeyi aç, kaydet, sırala veya temizle
+tooltip.all	Tüm parçaları göster
+tooltip.favorites	Favori parçaları göster
+tooltip.clear_search	Aramayı temizle
+tooltip.search	Başlık, sanatçı, albüm veya dosya ara
+tooltip.row	Seç; çalmak için çift tıkla
+tooltip.favorite_on	Favorilere ekle
+tooltip.favorite_off	Favorilerden kaldır
+tooltip.scroll	Listeyi kaydır
+tooltip.eq_on	Ekolayzırı aç
+tooltip.eq_off	Ekolayzırı kapat
+tooltip.presets	Ekolayzır ön ayarı seç
+tooltip.reset	Tüm kazançları sıfırla
+tooltip.preamp	Ön amplifikasyon: {gain} dB
+tooltip.band	{frequency} Hz — Kazanç: {gain} dB
+tooltip.band_unavailable	{frequency} Hz — Kazanç: {gain} dB (bu örnekleme hızında kullanılamaz)
+tooltip.theme_list	Tema seç ve uygula
+tooltip.theme_reset	Varsayılan temayı geri yükle
+tooltip.category	Temaları kategoriye göre filtrele
+tooltip.info	Parça ayrıntıları; kopyalamak için metni seç
