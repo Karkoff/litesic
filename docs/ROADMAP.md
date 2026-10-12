@@ -10,8 +10,10 @@ Decisão expressa do usuário: **M8-DEC-2026-10-12**, solicitação
 originais e aceites anteriores preservados. Validações físicas, assistivas e
 linguísticas não realizadas são observações futuras não bloqueantes e não
 reabrem automaticamente a milestone; não são convertidas em PASS técnico.
-M0–M7 e M9 permanecem COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho**,
-antes da **M10 — Distribuição**; ambas ainda não iniciadas.
+M0–M7 e M9 permanecem COMPLETE. **Auditoria Geral de Desempenho:
+COMPLETE_WITH_CAVEATS** (12/10/2026, PERF-DEC-2026-10-12;
+[relatório](PERFORMANCE-AUDIT.md)). Próxima atividade: **M10 — Distribuição**,
+não iniciada; será autorizada separadamente.
 Neste encerramento não foram repetidos testes ou auditorias nem implementadas
 funcionalidades. Consolidação, commit e push para `origin/master` autorizados.
 

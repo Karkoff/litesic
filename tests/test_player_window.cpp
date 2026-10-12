@@ -141,12 +141,36 @@ static void lcd_timer_only_runs_for_visible_overflow(){
     track->displayTitle=L"Nova faixa";InvalidateRect(window,nullptr,FALSE);UpdateWindow(window);ScrollMessages(40);CHECK(ScrollMessages(120)==0);
     PlayerPlayback().Clear();Audio_Shutdown();
 }
+static unsigned long long TitlePixels() {
+    RECT r{};GetClientRect(window,&r);HDC screen=GetDC(window),dc=CreateCompatibleDC(screen);
+    HBITMAP bitmap=CreateCompatibleBitmap(screen,r.right,r.bottom);auto old=SelectObject(dc,bitmap);
+    CHECK(PrintWindow(window,dc,0));unsigned long long hash=1469598103934665603ull;
+    for(int y=MainWnd_DPIScale(TITLE_Y);y<MainWnd_DPIScale(TITLE_Y+23);y+=2)
+        for(int x=MainWnd_DPIScale(TITLE_X);x<MainWnd_DPIScale(TITLE_X+TITLE_W);x+=2){hash^=GetPixel(dc,x,y);hash*=1099511628211ull;}
+    SelectObject(dc,old);DeleteObject(bitmap);DeleteDC(dc);ReleaseDC(window,screen);return hash;
+}
+// While the visualizer animates, its frame advances the long title. A second
+// timer stream doubled full-window repaints (docs/PERFORMANCE-AUDIT.md).
+static void visualizer_frame_drives_title_while_playing(){
+    CHECK(Audio_TestInit(48000));PlayerPlayback().Clear();PlayerPlaylist().Add(FullPath(L"tests\\fixtures\\native-44100.wav"));
+    PlayerPlaylist().At(0)->displayTitle=L"Título longo com acentuação e Unicode 音楽 — uma faixa que ultrapassa bastante o espaço disponível no LCD";
+    ShowWindow(window,SW_SHOWNOACTIVATE);
+    RECT r{};GetClientRect(window,&r);if(r.bottom!=MainWnd_DPIScale(PlayerLayoutHeight(true)))Click(16,false);
+    GetClientRect(window,&r);CHECK(r.bottom==MainWnd_DPIScale(PlayerLayoutHeight(true)));
+    CHECK(PlayerPlayback().PlayIndex(0));InvalidateRect(window,nullptr,FALSE);UpdateWindow(window);
+    ScrollMessages(40);CHECK(ScrollMessages(200)==0);
+    if(CaptureAllowed()){auto before=TitlePixels();ScrollMessages(2600);CHECK(TitlePixels()!=before);}
+    Click(16);UpdateWindow(window);CHECK(ScrollMessages(150)>0);
+    Click(16,false);UpdateWindow(window);ScrollMessages(40);CHECK(ScrollMessages(150)==0);
+    Audio_Pause();InvalidateRect(window,nullptr,FALSE);UpdateWindow(window);CHECK(ScrollMessages(150)>0);
+    PlayerPlayback().Clear();Audio_Shutdown();
+}
 int main() {
     HINSTANCE instance=GetModuleHandleW(nullptr);CHECK(MainWnd_RegisterClass(instance));
     window=MainWnd_Create(instance,SW_HIDE);CHECK(window);
     // Use the same offline production audio adapter as integration tests.
     Audio_Shutdown(); int cases=0;
     CASE(transport_and_seek_use_real_audio);CASE(capture_cancel_and_release_outside);CASE(geometry_dpi_and_keyboard_seek);CASE(appearance_persists_across_window_recreation);
-    CASE(lcd_timer_only_runs_for_visible_overflow);
+    CASE(lcd_timer_only_runs_for_visible_overflow);CASE(visualizer_frame_drives_title_while_playing);
     DestroyWindow(window);std::printf("%d player window cases\n",cases);
 }

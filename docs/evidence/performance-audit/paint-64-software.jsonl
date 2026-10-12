@@ -1,0 +1,12 @@
+{"mode":"paint","stage":"process","arch":64,"working_set":10883072,"private_bytes":56590336,"handles":168,"gdi":0,"user":2,"threads":4}
+{"mode":"paint","stage":"windows_created","arch":64,"working_set":44941312,"private_bytes":89366528,"handles":344,"gdi":15,"user":10,"threads":16}
+{"mode":"paint","arch":64,"case":"player_idle_no_track","ms_n":300,"ms_mean":2.6876,"ms_p50":2.7276,"ms_p95":3.0886,"ms_p99":3.4414,"ms_max":3.5332,"cpu_ms_per_frame":3.5938,"wall_ms":807.1}
+{"mode":"paint","arch":64,"case":"playlist_empty","ms_n":300,"ms_mean":2.5131,"ms_p50":2.4902,"ms_p95":2.8483,"ms_p99":3.1514,"ms_max":3.7876,"cpu_ms_per_frame":2.9167,"wall_ms":755.1}
+{"mode":"paint","arch":64,"case":"equalizer","ms_n":300,"ms_mean":2.4400,"ms_p50":2.3893,"ms_p95":2.8539,"ms_p99":3.0412,"ms_max":3.1799,"cpu_ms_per_frame":3.6979,"wall_ms":732.8}
+{"mode":"paint","arch":64,"case":"player_playing_osc_full","ms_n":300,"ms_mean":4.0982,"ms_p50":4.0624,"ms_p95":4.5766,"ms_p99":5.2132,"ms_max":6.5343,"cpu_ms_per_frame":5.1562,"wall_ms":1230.4}
+{"mode":"paint","arch":64,"case":"player_playing_osc_viz_rect","ms_n":300,"ms_mean":3.8165,"ms_p50":3.7130,"ms_p95":5.0090,"ms_p99":5.9087,"ms_max":6.4829,"cpu_ms_per_frame_incl_offline_audio":6.4062}
+{"mode":"paint","arch":64,"case":"player_playing_fft_full","ms_n":300,"ms_mean":3.2310,"ms_p50":3.0096,"ms_p95":4.7458,"ms_p99":11.3779,"ms_max":12.5715,"cpu_ms_per_frame":3.6458,"wall_ms":970.3}
+{"mode":"paint","arch":64,"case":"player_playing_fft_viz_rect","ms_n":300,"ms_mean":2.5709,"ms_p50":2.5290,"ms_p95":3.0290,"ms_p99":3.2910,"ms_max":3.5198,"cpu_ms_per_frame_incl_offline_audio":4.2708}
+{"mode":"paint","arch":64,"case":"player_playing_viz_hidden_full","ms_n":300,"ms_mean":2.2019,"ms_p50":2.1574,"ms_p95":2.5614,"ms_p99":2.7613,"ms_max":2.7816,"cpu_ms_per_frame":1.7188,"wall_ms":661.5}
+{"mode":"paint","stage":"after_paint_cases","arch":64,"working_set":57384960,"private_bytes":97677312,"handles":375,"gdi":18,"user":18,"threads":25}
+{"mode":"paint","stage":"final","arch":64,"working_set":57384960,"private_bytes":97677312,"handles":375,"gdi":18,"user":18,"threads":25}

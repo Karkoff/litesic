@@ -65,6 +65,7 @@ static struct AudioEngine
     int        fileSampleRate;  /* Taxa nativa do arquivo carregado */
     int        sourceSampleRate; /* Resource manager may resample to engine rate. */
     double     durationSeconds; /* UI-owned cache; never scan the live decoder. */
+    BOOL       streamed;        /* Sound decoded by the resource manager job thread. */
 
     /* M4-T1: Ring buffer de visualização. */
     float        vizBuffer[VISUALIZATION_BUFFER_SIZE]; /* Buffer circular */
@@ -114,7 +115,26 @@ BOOL Audio_TestInit(unsigned rate) {
     config.sampleRate = rate;
     return InitEngine(&config);
 }
+// A device consumes in real time while the resource manager job thread finishes
+// stream seeks and refills pages. This offline device reads instantly, so it waits
+// for that thread instead of rendering the silence a real device would never see.
+// A pending sound seek is applied by the next read, which for a stream only posts
+// the seek job: a device renders that one period silent. Spend it on a scratch frame.
+static void WaitForStream() {
+    if (!g_audio.soundLoaded || !g_audio.streamed || !g_audio.sound.pResourceManagerDataSource) return;
+    auto& s = g_audio.sound.pResourceManagerDataSource->backend.stream;
+    auto load = [](const auto& value) { return __atomic_load_n(&value, __ATOMIC_ACQUIRE); };
+    if (load(g_audio.sound.seekTarget) != ~ma_uint64(0) && ma_sound_is_playing(&g_audio.sound)) {
+        float scratch[2 * Eq::MaxChannels];
+        ma_engine_read_pcm_frames(&g_audio.engine, scratch, 1, nullptr);
+    }
+    for (int i = 0; i < 5000; ++i) {
+        if (!load(s.seekCounter) && (load(s.isDecoderAtEnd) || (load(s.isPageValid[0]) && load(s.isPageValid[1])))) return;
+        Sleep(1);
+    }
+}
 BOOL Audio_TestRead(float* frames, unsigned count) {
+    WaitForStream();
     return ma_engine_read_pcm_frames(&g_audio.engine, frames, count, nullptr) == MA_SUCCESS;
 }
 unsigned long long Audio_TestCursor(void) {
@@ -345,8 +365,28 @@ BOOL Audio_Load(const wchar_t* path)
     /* Inicializar sound a partir do arquivo — miniaudio decodifica MP3/WAV/
      * FLAC nativamente. OGG/Vorbis é habilitado pelo stb_vorbis incluído
      * em miniaudio_impl.c antes da MINIAUDIO_IMPLEMENTATION. */
-    result = ma_sound_init_from_file_w(&g_audio.engine, path, 0, NULL,
-                                       NULL, &g_audio.sound);
+    __int64 fileSize = 0;
+    {
+        WIN32_FILE_ATTRIBUTE_DATA info{};
+        if (GetFileAttributesExW(path, GetFileExInfoStandard, &info))
+        {
+            ULARGE_INTEGER size;
+            size.LowPart  = info.nFileSizeLow;
+            size.HighPart = info.nFileSizeHigh;
+            fileSize = (int64_t)size.QuadPart;
+        }
+    }
+    /* Larger files are streamed: the resource manager job thread decodes short
+     * pages ahead of the device. Kept whole in memory, a 60-minute FLAC added
+     * 502 MiB, a 1.3 GB WAV failed to load on x86, and the UI thread read the
+     * entire file. Smaller files (every 4-minute track up to 96 kHz/24-bit FLAC,
+     * 56 MiB) stay in memory: seeks and slider scrubbing remain gapless, while
+     * each stream seek renders about 10 ms of silence. docs/PERFORMANCE-AUDIT.md */
+    const __int64 streamThreshold = 64ll * 1024 * 1024;
+    g_audio.streamed = fileSize > streamThreshold;
+    result = ma_sound_init_from_file_w(&g_audio.engine, path,
+                                       g_audio.streamed ? MA_SOUND_FLAG_STREAM : 0,
+                                       NULL, NULL, &g_audio.sound);
     if (result != MA_SUCCESS)
     {
         g_audio.state = AUDIO_STATE_STOPPED;
@@ -387,18 +427,8 @@ BOOL Audio_Load(const wchar_t* path)
     wcsncpy_s(g_audio.currentPath, ARRAYSIZE(g_audio.currentPath),
               path, _TRUNCATE);
 
-    /* Obter tamanho do arquivo para cálculo de bitrate. */
-    g_audio.fileSizeBytes = 0;
-    {
-        WIN32_FILE_ATTRIBUTE_DATA info{};
-        if (GetFileAttributesExW(path, GetFileExInfoStandard, &info))
-        {
-            ULARGE_INTEGER size;
-            size.LowPart  = info.nFileSizeLow;
-            size.HighPart = info.nFileSizeHigh;
-            g_audio.fileSizeBytes = (int64_t)size.QuadPart;
-        }
-    }
+    /* Tamanho do arquivo para cálculo de bitrate. */
+    g_audio.fileSizeBytes = fileSize;
 
     /* Resetar estado. */
     g_audio.state = AUDIO_STATE_STOPPED;

@@ -21,7 +21,8 @@ LiteSic é um player de áudio para Windows que recria a experiência clássica 
 atalhos, topo, instância única, persistência, DPI, MSAA e GUI verificados.
 Revisão linguística humana integral dos 18 idiomas e validações físicas/assistivas
 não realizadas são observações futuras não bloqueantes. Próxima atividade:
-**Auditoria Geral de Desempenho**, antes da **M10 — Distribuição**; ambas não iniciadas.
+**M10 — Distribuição**, não iniciada. Auditoria Geral de Desempenho:
+**COMPLETE_WITH_CAVEATS** em 12/10/2026 ([relatório](docs/PERFORMANCE-AUDIT.md)).
 A playlist está implementada e integrada,
 com testes, validação gráfica e PASS manual do usuário para o visual,
 arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
@@ -295,7 +296,7 @@ Este projeto está disponível sob a licença MIT. Veja o arquivo [`LICENSE`](LI
 T6, T7 e T8 COMPLETE; T7 tem aceite humano PASS e T8 **TUDO PASS**.
 O aceite visual dos tooltips não equivale a revisão linguística profissional
 dos 18 idiomas. [Nova regressão e publicação](docs/M8-CONSOLIDATION.md).
-Próxima atividade: **Auditoria Geral de Desempenho → M10 — Distribuição**.
+Auditoria Geral de Desempenho COMPLETE_WITH_CAVEATS; próxima atividade: **M10 — Distribuição**.
 
 [Auditoria integral restante da M8 e plano de conclusão](docs/M8-REMAINING-REQUIREMENTS-AUDIT.md):
 T1–T5 e refinamentos específicos DPI/acessibilidade tecnicamente verificados;

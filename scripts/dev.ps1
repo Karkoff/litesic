@@ -1,5 +1,5 @@
 param(
-    [ValidateSet('build', 'test', 'run', 'clean', 'eq-probe')][string]$Action = 'build',
+    [ValidateSet('build', 'test', 'run', 'clean', 'eq-probe', 'perf-probe')][string]$Action = 'build',
     [ValidateSet('32', '64')][string]$Architecture = '64',
     [switch]$DebugBuild,
     [string]$Msys2Root = $env:LITESIC_MSYS2_ROOT

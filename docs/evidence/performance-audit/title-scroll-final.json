@@ -1,0 +1,170 @@
+[
+ {
+  "rep": 0,
+  "label": "before",
+  "track": "track-4min.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 5.093383554891554
+ },
+ {
+  "rep": 0,
+  "label": "before",
+  "track": "track-4min.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 1.039453596043995
+ },
+ {
+  "rep": 0,
+  "label": "before",
+  "track": "track-4min.mp3",
+  "scenario": "paused",
+  "cpu_pct": 0.554251469589459
+ },
+ {
+  "rep": 0,
+  "label": "before",
+  "track": "long-title.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 9.667787445849847
+ },
+ {
+  "rep": 0,
+  "label": "before",
+  "track": "long-title.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 3.4982035066636366
+ },
+ {
+  "rep": 0,
+  "label": "before",
+  "track": "long-title.mp3",
+  "scenario": "paused",
+  "cpu_pct": 5.785851085130237
+ },
+ {
+  "rep": 0,
+  "label": "after",
+  "track": "track-4min.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 3.877335609206696
+ },
+ {
+  "rep": 0,
+  "label": "after",
+  "track": "track-4min.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 0.4847871530868137
+ },
+ {
+  "rep": 0,
+  "label": "after",
+  "track": "track-4min.mp3",
+  "scenario": "paused",
+  "cpu_pct": 0.20786477979014586
+ },
+ {
+  "rep": 0,
+  "label": "after",
+  "track": "long-title.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 4.777607981867034
+ },
+ {
+  "rep": 0,
+  "label": "after",
+  "track": "long-title.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 4.812997824085013
+ },
+ {
+  "rep": 0,
+  "label": "after",
+  "track": "long-title.mp3",
+  "scenario": "paused",
+  "cpu_pct": 5.123057457350091
+ },
+ {
+  "rep": 1,
+  "label": "before",
+  "track": "track-4min.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 5.162961161346038
+ },
+ {
+  "rep": 1,
+  "label": "before",
+  "track": "track-4min.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 1.2467734472896848
+ },
+ {
+  "rep": 1,
+  "label": "before",
+  "track": "track-4min.mp3",
+  "scenario": "paused",
+  "cpu_pct": 0.484801249239834
+ },
+ {
+  "rep": 1,
+  "label": "before",
+  "track": "long-title.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 8.797603845491636
+ },
+ {
+  "rep": 1,
+  "label": "before",
+  "track": "long-title.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 5.264146586042046
+ },
+ {
+  "rep": 1,
+  "label": "before",
+  "track": "long-title.mp3",
+  "scenario": "paused",
+  "cpu_pct": 5.9587430951250075
+ },
+ {
+  "rep": 1,
+  "label": "after",
+  "track": "track-4min.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 4.086072202875928
+ },
+ {
+  "rep": 1,
+  "label": "after",
+  "track": "track-4min.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 1.039045388359802
+ },
+ {
+  "rep": 1,
+  "label": "after",
+  "track": "track-4min.mp3",
+  "scenario": "paused",
+  "cpu_pct": 0.38091214628738596
+ },
+ {
+  "rep": 1,
+  "label": "after",
+  "track": "long-title.mp3",
+  "scenario": "playing_osc",
+  "cpu_pct": 4.570253187461925
+ },
+ {
+  "rep": 1,
+  "label": "after",
+  "track": "long-title.mp3",
+  "scenario": "playing_viz_hidden",
+  "cpu_pct": 5.193583671120337
+ },
+ {
+  "rep": 1,
+  "label": "after",
+  "track": "long-title.mp3",
+  "scenario": "paused",
+  "cpu_pct": 4.084567288772653
+ }
+]

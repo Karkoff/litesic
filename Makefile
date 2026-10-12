@@ -82,6 +82,12 @@ locales:
 $(BUILD_DIR)/eq-probe.exe: scripts/diagnostics/eq_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(LDLIBS) -lpsapi
 
+# Pre-distribution performance audit probe (docs/PERFORMANCE-AUDIT.md).
+$(BUILD_DIR)/perf-probe.exe: scripts/diagnostics/perf_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(RC_OBJ)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(RC_OBJ) $(LDLIBS) -lpsapi
+
+perf-probe: $(BUILD_DIR)/perf-probe.exe locales
+
 eq-probe: $(BUILD_DIR)/eq-probe.exe
 	@set -e; for mode in 6 0 1 2 3 4 5; do "$(BUILD_DIR)/eq-probe.exe" $$mode; done
 
@@ -129,4 +135,4 @@ clean:
 	rm -rf -- ./build/$(ARCH)/$(CONFIG)
 
 -include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(BUILD_DIR)/audio-test.d $(TEST_BINS:.exe=.d)
-.PHONY: all test run clean locales
+.PHONY: all test run clean locales perf-probe

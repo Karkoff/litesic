@@ -1,13 +1,28 @@
 # PROJECT_STATE — LiteSic
 
+**Auditoria Geral de Desempenho — COMPLETE_WITH_CAVEATS (12/10/2026).**
+Decisão expressa do usuário: **PERF-DEC-2026-10-12**, que aprovou as três
+correções e os resultados; status restrito ao escopo validado. Correções:
+fábrica Direct2D compartilhada (um dispositivo D3D em vez de um por janela:
+repouso x64 81 → 45 threads, WS 58,9 → 51,9 MiB), streaming de áudio acima de
+64 MiB (FLAC de 60 min +502 → +0,1 MiB; WAV de 1,31 GB volta a tocar no x86;
+~10 ms de silêncio por seek nesses arquivos) e um único relógio de repintura
+com título longo (CPU 9,2% → 4,7%). Quatro builds, 168 casos por build PASS;
+continuidade real sem quedas, inclusive com CPU saturada; sessão prolongada de
+34,8 min sem crescimento. Validações não executadas (sessão ≥ 60 min, playlist
+e estresse na build final, suítes com captura, Windows 7–10, HDD/rede) são
+observações futuras, não aprovadas; capturas exigem autorização prévia.
+[Relatório](docs/PERFORMANCE-AUDIT.md). Próxima atividade: **M10 — Distribuição**,
+não iniciada; será autorizada separadamente.
+
 **M8 — COMPLETE; aceite humano PASS (12/10/2026).**
 Decisão expressa do usuário: **M8-DEC-2026-10-12**, solicitação
 “LITESIC — ENCERRAMENTO DEFINITIVO DA M8”. Resultados técnicos, evidências
 originais e aceites anteriores preservados. Validações físicas, assistivas e
 linguísticas não realizadas são observações futuras não bloqueantes e não
 reabrem automaticamente a milestone; não são convertidas em PASS técnico.
-M0–M7 e M9 permanecem COMPLETE. Próxima atividade: **Auditoria Geral de Desempenho**,
-antes da **M10 — Distribuição**; ambas ainda não iniciadas.
+M0–M7 e M9 permanecem COMPLETE. A Auditoria Geral de Desempenho foi depois
+encerrada (ver registro acima); **M10 — Distribuição** não iniciada.
 Neste encerramento não foram repetidos testes ou auditorias nem implementadas
 funcionalidades. Consolidação, commit e push para `origin/master` autorizados.
 

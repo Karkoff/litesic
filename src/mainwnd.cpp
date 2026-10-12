@@ -182,11 +182,28 @@ static DWORD g_scrollTick = 0;
 static bool g_scrollTimerActive = false;
 static bool g_titleOverflow = false;
 static std::wstring g_scrollTitle;
+// While the visualizer animates, its frame also advances and repaints the title.
+// Two unsynchronized timers doubled full-window repaints: CPU 5% -> 10% playing
+// with a long title (docs/PERFORMANCE-AUDIT.md). Speed still uses elapsed time.
+static bool g_scrollByVisualizer = false;
 static void UpdateScrollTimer(HWND hwnd) {
-    bool needed=g_titleOverflow && IsWindowVisible(hwnd) && !IsIconic(hwnd);
+    bool scrolling=g_titleOverflow && IsWindowVisible(hwnd) && !IsIconic(hwnd);
+    bool byVisualizer=scrolling && g_visualizerVisible && Audio_GetState()==AUDIO_STATE_PLAYING;
+    if(byVisualizer && !g_scrollByVisualizer && !g_scrollTimerActive) g_scrollTick=GetTickCount();
+    g_scrollByVisualizer=byVisualizer;
+    bool needed=scrolling && !byVisualizer;
     if(needed==g_scrollTimerActive)return;
     if(needed){g_scrollTick=GetTickCount();g_scrollTimerActive=SetTimer(hwnd,SCROLL_TIMER_ID,30,nullptr)!=0;}
     else {KillTimer(hwnd,SCROLL_TIMER_ID);g_scrollTimerActive=false;}
+}
+static void AdvanceTitleScroll(HWND hwnd) {
+    DWORD now=GetTickCount(),delta=now-g_scrollTick;g_scrollTick=now;
+    if(g_titleOverflow && IsWindowVisible(hwnd) && !IsIconic(hwnd)) {
+        g_scrollElapsedMs+=delta;
+        RECT titleRect={MainWnd_DPIScale(TITLE_X),MainWnd_DPIScale(TITLE_Y),
+            MainWnd_DPIScale(TITLE_X+TITLE_W),MainWnd_DPIScale(TITLE_Y+23)};
+        InvalidateRect(hwnd,&titleRect,FALSE);
+    }
 }
 
 /* M3-T4/M3-T5: estado de arraste do slider. */
@@ -953,16 +970,11 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
                 };
                 InvalidateRect(hwnd, &vizRect, FALSE);
             }
+            if (g_scrollByVisualizer) AdvanceTitleScroll(hwnd);
         }
         else if (wParam == SCROLL_TIMER_ID)
         {
-            DWORD now=GetTickCount(),delta=now-g_scrollTick;g_scrollTick=now;
-            if(g_titleOverflow && IsWindowVisible(hwnd) && !IsIconic(hwnd)) {
-                g_scrollElapsedMs+=delta;
-                RECT titleRect={MainWnd_DPIScale(TITLE_X),MainWnd_DPIScale(TITLE_Y),
-                    MainWnd_DPIScale(TITLE_X+TITLE_W),MainWnd_DPIScale(TITLE_Y+23)};
-                InvalidateRect(hwnd,&titleRect,FALSE);
-            }
+            AdvanceTitleScroll(hwnd);
         }
         break;
     }

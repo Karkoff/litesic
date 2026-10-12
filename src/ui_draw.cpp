@@ -7,17 +7,27 @@
 namespace Ui {
 template<class T> static void Release(T*& p) { if (p) { p->Release(); p = nullptr; } }
 static D2D1_RECT_F Native(Rect r) { return D2D1::RectF(r.x,r.y,r.x+r.w,r.y+r.h); }
+// All canvases share one factory, so Direct2D shares one Direct3D device among
+// their hardware DC render targets. A factory per canvas created one device per
+// window: about 16 MiB private, 150 handles and 35 driver threads each
+// (docs/PERFORMANCE-AUDIT.md). Every Canvas lives on the UI thread.
+static ID2D1Factory* sharedFactory = nullptr;
+static unsigned sharedFactoryUsers = 0;
 Canvas::~Canvas() { Reset(); }
 void Canvas::Reset() {
     Release(scrollLayout_);
     DiscardTarget();
     for (auto& p : ellipsis_) Release(p);
     for (auto& p : fonts_) Release(p);
-    Release(write_); Release(factory_);
+    Release(write_);
+    if (factory_) { factory_=nullptr; if (!--sharedFactoryUsers) Release(sharedFactory); }
     themeGeneration_=languageGeneration_=0;
 }
 bool Canvas::Initialize() {
-    if (!factory_ && FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED,&factory_))) return false;
+    if (!factory_) {
+        if (!sharedFactory && FAILED(D2D1CreateFactory(D2D1_FACTORY_TYPE_SINGLE_THREADED,&sharedFactory))) return false;
+        factory_=sharedFactory; ++sharedFactoryUsers;
+    }
     if (!write_ && FAILED(DWriteCreateFactory(DWRITE_FACTORY_TYPE_SHARED,__uuidof(IDWriteFactory),
         reinterpret_cast<IUnknown**>(&write_)))) return false;
     if(themeGeneration_!=ThemeGeneration() || languageGeneration_!=I18n::Generation()) {
