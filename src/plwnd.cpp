@@ -592,7 +592,12 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     case WM_MOVING:Skin::Moving(Skin::Playlist,*reinterpret_cast<RECT*>(lp),S(24));return TRUE;
     case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Playlist,S(24));return 0;
     case WM_WINDOWPOSCHANGING:Skin::Constrain(Skin::Playlist,*reinterpret_cast<WINDOWPOS*>(lp));break;
-    case WM_WINDOWPOSCHANGED:Skin::Changed(Skin::Playlist);break;
+    case WM_WINDOWPOSCHANGED:
+        // Owned popups are shown/hidden separately while their owner restores.
+        // Rebuild from the player once visibility changes, including this panel.
+        if(reinterpret_cast<WINDOWPOS*>(lp)->flags&(SWP_SHOWWINDOW|SWP_HIDEWINDOW))Skin::Reconcile();
+        else Skin::Changed(Skin::Playlist);
+        break;
     case WM_DISPLAYCHANGE:Skin::Recover();return 0;
     case WM_GETMINMAXINFO: {
         auto info = reinterpret_cast<MINMAXINFO*>(lp);

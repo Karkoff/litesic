@@ -88,6 +88,27 @@ static void visibility_compacts_restores_and_manual_drag_redefines(){
         actual=Rect(leaf);CHECK(EqualRect(&manual,&actual));
     }
 }
+static void hidden_middle_stays_compact_after_minimize_restore(){
+    for(bool order:{false,true}){
+        Reset();auto p=Rect(player);
+        SetWindowPos(playlist,nullptr,0,0,460,180,SWP_NOMOVE|SWP_NOZORDER|SWP_NOACTIVATE);
+        HWND middle=order?playlist:eq,leaf=order?eq:playlist;
+        Move(leaf,p.right+250,p.top+300);Move(middle,p.left,p.bottom);
+        auto m=Rect(middle);Move(leaf,m.left,m.bottom);
+        CHECK(Rect(middle).top==Rect(player).bottom);CHECK(Rect(leaf).top==Rect(middle).bottom);
+        SendMessageW(middle,WM_CLOSE,0,0);CHECK(!IsWindowVisible(middle));
+        CHECK(Rect(leaf).top==Rect(player).bottom);
+        for(int cycle=0;cycle<3;++cycle){
+            ShowWindow(player,SW_MINIMIZE);CHECK(IsIconic(player));
+            ShowWindow(player,SW_RESTORE);
+            MSG msg{};while(PeekMessageW(&msg,nullptr,0,0,PM_REMOVE)){TranslateMessage(&msg);DispatchMessageW(&msg);}
+            CHECK(!IsWindowVisible(middle));CHECK(IsWindowVisible(leaf));
+            CHECK(Rect(leaf).top==Rect(player).bottom);
+        }
+        if(order)PlWnd_Toggle();else EqWnd_Toggle(player);
+        CHECK(Rect(middle).top==Rect(player).bottom);CHECK(Rect(leaf).top==Rect(middle).bottom);
+    }
+}
 static void chain_resize_dpi_and_display_recovery(){
     Chain(true);
     for(int dpi:{96,120,144,192}){
@@ -119,6 +140,6 @@ int main(){
     player=MainWnd_Create(GetModuleHandleW(nullptr),SW_HIDE);CHECK(player);Audio_Shutdown();
     CHECK(PlWnd_Create(GetModuleHandleW(nullptr),player));EqWnd_Toggle(player);EnumThreadWindows(GetCurrentThreadId(),Find,0);CHECK(playlist&&eq);
     int cases=0;CASE(transitive_move_in_both_orders);CASE(detached_component_moves_and_reattaches);CASE(player_snaps_to_independent_panel);
-    CASE(hidden_bridge_and_minimize_restore_preserve_audio);CASE(visibility_compacts_restores_and_manual_drag_redefines);CASE(chain_resize_dpi_and_display_recovery);CASE(peer_attachment_persists_and_invalid_cycle_falls_back);
+    CASE(hidden_bridge_and_minimize_restore_preserve_audio);CASE(visibility_compacts_restores_and_manual_drag_redefines);CASE(hidden_middle_stays_compact_after_minimize_restore);CASE(chain_resize_dpi_and_display_recovery);CASE(peer_attachment_persists_and_invalid_cycle_falls_back);
     DestroyWindow(player);CoUninitialize();std::printf("%d window integration cases\n",cases);
 }

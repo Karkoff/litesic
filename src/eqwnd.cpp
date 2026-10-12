@@ -108,7 +108,12 @@ LRESULT CALLBACK Proc(HWND hwnd,UINT message,WPARAM wp,LPARAM lp){
     case WM_MOVING:Skin::Moving(Skin::Equalizer,*reinterpret_cast<RECT*>(lp),S(24));return TRUE;
     case WM_EXITSIZEMOVE:Skin::EndMove(Skin::Equalizer,S(24));SavePosition();return 0;
     case WM_WINDOWPOSCHANGING:Skin::Constrain(Skin::Equalizer,*reinterpret_cast<WINDOWPOS*>(lp));break;
-    case WM_WINDOWPOSCHANGED:Skin::Changed(Skin::Equalizer);break;
+    case WM_WINDOWPOSCHANGED:
+        // Owned popups are shown/hidden separately while their owner restores.
+        // Rebuild from the player once visibility changes, including this panel.
+        if(reinterpret_cast<WINDOWPOS*>(lp)->flags&(SWP_SHOWWINDOW|SWP_HIDEWINDOW))Skin::Reconcile();
+        else Skin::Changed(Skin::Equalizer);
+        break;
     case WM_DISPLAYCHANGE:Skin::Recover();return 0;
     case WM_ERASEBKGND:return 1;
     case I18n::WM_LANGUAGE_CHANGED:
