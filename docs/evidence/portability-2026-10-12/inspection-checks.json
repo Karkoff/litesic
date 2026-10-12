@@ -1,0 +1,21 @@
+{
+  "first_harness_exit": 1,
+  "first_harness_cause": "Exact string comparison of floating-point INI fields: -3.000000/2.000000 are valid -3/2 values. Changed the verifier to numeric comparison; no application changes.",
+  "initial_graph_exit": 1,
+  "initial_graph_cause": "Exact API-set revision lookup omitted the namespace hashed prefix. Resolved from the host schema; inspected 174 native default mappings and two importer-specific overrides.",
+  "runtime_launches_after_numeric_correction": 21,
+  "runtime_failures": 0,
+  "runtime_retries": 0,
+  "repeated_runtime_after_graph_correction": 0,
+  "static_normal_dlls": 24,
+  "direct_imports_objdump_match": true,
+  "normal_graph_dlls_all_observed": true,
+  "api_set_default_native_matches": 174,
+  "api_set_importer_overrides": 2,
+  "distinct_runtime_dlls": 72,
+  "windows_runtime_dlls": 70,
+  "environmental_runtime_dlls": [
+    "C:\\Program Files (x86)\\RivaTuner Statistics Server\\RTSSHooks64.dll",
+    "C:\\Program Files\\Topaz OFD\\Warsaw\\wslbscr64.dll"
+  ]
+}

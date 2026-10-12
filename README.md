@@ -273,7 +273,14 @@ player para mover a playlist encaixada; arraste a barra da própria playlist
 para soltá-la e aproxime uma borda do player para encaixar novamente.
 Os controles ficam na ordem Anterior, Play, Pause, Stop, Próximo. Adicione
 arquivos por **+ Arquivos** ou **+ Pasta** na playlist modernizada.
-Ao fechar o programa, a playlist é salva em `%LOCALAPPDATA%\LiteSic\playlist.m3u8`
+
+Modo portátil: execute `LiteSic.exe --portable` em uma pasta gravável contendo
+`LiteSic.exe` e `locales/`. Configurações e playlist ficam em `data/` junto ao
+executável. Sem essa flag, o perfil continua em `%LOCALAPPDATA%\LiteSic`.
+A playlist ainda salva caminhos absolutos das músicas; mover também a mídia
+pode exigir reabrir os arquivos. Ver [verificação de portabilidade](docs/PORTABILITY-2026-10-12.md).
+
+No modo normal, ao fechar o programa, a playlist é salva em `%LOCALAPPDATA%\LiteSic\playlist.m3u8`
 e recuperada na próxima abertura, preservando a ordem e as entradas repetidas.
 Play toca a faixa selecionada e a destaca no centro da lista (limitado pelas
 extremidades); um filtro que esconda a faixa é limpo para mostrá-la.

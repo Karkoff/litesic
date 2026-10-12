@@ -1,0 +1,52 @@
+{
+  "releases": {
+    "64": {
+      "LiteSic.exe": "e9c3963b0cc2d294e8ab9512e5a53aa1166b617d3147809707fd4a5c508fc4b1",
+      "locales\\ar-SA\\messages.tsv": "1d27e1f5e6005ba74b777fc297711c73f356800b7c62281d5bf964ce5343a935",
+      "locales\\de-DE\\messages.tsv": "1379d1b5fc4b3241aefa3305fed678b6f443932abfd895f270b75629e1e1ae7c",
+      "locales\\en-US\\messages.tsv": "4b51913103158dcc2a46bfa5ca20a59da0933ae36acae48c9ef630a2a13ad411",
+      "locales\\es-ES\\messages.tsv": "f300e44592f820b48b3ed9c6a947805df6ea40c05bdbf6cde99c018f3d81f490",
+      "locales\\fr-FR\\messages.tsv": "681e95dc4f248b1bef5494f2d758d800cfe33d4d8c3891f117259f56ee1a5562",
+      "locales\\hi-IN\\messages.tsv": "81cb028cfafc2bc7ab491bcb53b4c73817e2df46d5fd0ce7ac77ae12734a3bf8",
+      "locales\\it-IT\\messages.tsv": "a47b8395a5820f7cf9fad8d7707e316e3a279b0e3dd7d5a074199a5f77b2d5be",
+      "locales\\ja-JP\\messages.tsv": "92b9a0978ae113328bdc22de341000e656f6375517885049a2571031474c1dce",
+      "locales\\ko-KR\\messages.tsv": "bff5b5489466905137756d298d5a729bd9e735431b608861d236988f41ba639f",
+      "locales\\nl-NL\\messages.tsv": "f1b4bbad09ace29eb1a7d8f4507ada93044641478d7fe2909451d9e43ea55179",
+      "locales\\pl-PL\\messages.tsv": "a59ea8bbc61e2f863dbdc15c58780bbd40cf60983c24b9b2f639f915bac2d7aa",
+      "locales\\pt-BR\\messages.tsv": "009cb613bef09f14e854fc9688b0d125bc64d12c918dd80f7629f685b46332c4",
+      "locales\\pt-PT\\messages.tsv": "03a5e517810e6aa9c8fc00aaf0e61e90a2f9eb1189910a2162160f90a5d5f1a9",
+      "locales\\ru-RU\\messages.tsv": "1f5d6b418c979efba97321892ae37a4898d2d0aba76e767206bbecef6544df03",
+      "locales\\sv-SE\\messages.tsv": "f3d4a15b4b0049b42e9c2df68b003a40769a1ce104988d79f7e637f1ca0aee46",
+      "locales\\tr-TR\\messages.tsv": "45e070de505411b69f5bb6794b099d70d097256334de35823eb57307a8340614",
+      "locales\\zh-CN\\messages.tsv": "eb668cbc9520ef442bb82686dfd93f38b7e87dba852578fe940edc908ffe04ae",
+      "locales\\zh-TW\\messages.tsv": "2fb7f6474b8edebe3c46d64fc33e6d7cd1186841c9dc3186f1737f830d250018"
+    },
+    "32": {
+      "LiteSic.exe": "93908a174f9b0f9fa5aa35a9f06f9a7da2d04c07ba460ec44993065edd82c899",
+      "locales\\ar-SA\\messages.tsv": "1d27e1f5e6005ba74b777fc297711c73f356800b7c62281d5bf964ce5343a935",
+      "locales\\de-DE\\messages.tsv": "1379d1b5fc4b3241aefa3305fed678b6f443932abfd895f270b75629e1e1ae7c",
+      "locales\\en-US\\messages.tsv": "4b51913103158dcc2a46bfa5ca20a59da0933ae36acae48c9ef630a2a13ad411",
+      "locales\\es-ES\\messages.tsv": "f300e44592f820b48b3ed9c6a947805df6ea40c05bdbf6cde99c018f3d81f490",
+      "locales\\fr-FR\\messages.tsv": "681e95dc4f248b1bef5494f2d758d800cfe33d4d8c3891f117259f56ee1a5562",
+      "locales\\hi-IN\\messages.tsv": "81cb028cfafc2bc7ab491bcb53b4c73817e2df46d5fd0ce7ac77ae12734a3bf8",
+      "locales\\it-IT\\messages.tsv": "a47b8395a5820f7cf9fad8d7707e316e3a279b0e3dd7d5a074199a5f77b2d5be",
+      "locales\\ja-JP\\messages.tsv": "92b9a0978ae113328bdc22de341000e656f6375517885049a2571031474c1dce",
+      "locales\\ko-KR\\messages.tsv": "bff5b5489466905137756d298d5a729bd9e735431b608861d236988f41ba639f",
+      "locales\\nl-NL\\messages.tsv": "f1b4bbad09ace29eb1a7d8f4507ada93044641478d7fe2909451d9e43ea55179",
+      "locales\\pl-PL\\messages.tsv": "a59ea8bbc61e2f863dbdc15c58780bbd40cf60983c24b9b2f639f915bac2d7aa",
+      "locales\\pt-BR\\messages.tsv": "009cb613bef09f14e854fc9688b0d125bc64d12c918dd80f7629f685b46332c4",
+      "locales\\pt-PT\\messages.tsv": "03a5e517810e6aa9c8fc00aaf0e61e90a2f9eb1189910a2162160f90a5d5f1a9",
+      "locales\\ru-RU\\messages.tsv": "1f5d6b418c979efba97321892ae37a4898d2d0aba76e767206bbecef6544df03",
+      "locales\\sv-SE\\messages.tsv": "f3d4a15b4b0049b42e9c2df68b003a40769a1ce104988d79f7e637f1ca0aee46",
+      "locales\\tr-TR\\messages.tsv": "45e070de505411b69f5bb6794b099d70d097256334de35823eb57307a8340614",
+      "locales\\zh-CN\\messages.tsv": "eb668cbc9520ef442bb82686dfd93f38b7e87dba852578fe940edc908ffe04ae",
+      "locales\\zh-TW\\messages.tsv": "2fb7f6474b8edebe3c46d64fc33e6d7cd1186841c9dc3186f1737f830d250018"
+    }
+  },
+  "personal_hashes": {
+    "playlist.m3u8": "64973d903eef43e6ff539f5bd87efeed453caace3c3a564db1e09806b0c1dae2",
+    "playlist.m3u8.ini": "8091ef2556aa71d20b7042a7c8817391911896501dab72f621dabb31ce5d0bc0",
+    "settings.ini": "2ff3bac1039d82fe72d0af2f020d0c8dd0130742e723198b5138b757f27c0b58"
+  },
+  "unchanged": true
+}
