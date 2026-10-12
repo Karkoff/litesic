@@ -1,0 +1,13 @@
+﻿## master...origin/master
+ M Makefile
+ M docs/DEVELOPMENT.md
+ M scripts/dev.ps1
+ M scripts/diagnostics/loopback_probe.cpp
+ M scripts/diagnostics/package_m6.py
+ M scripts/diagnostics/run_eq_probe.ps1
+ M scripts/diagnostics/run_m8_remaining_probe.ps1
+ M scripts/diagnostics/run_memory_probe.ps1
+?? docs/CLEAN-RUNTIME-2026-10-12.md
+?? docs/evidence/clean-runtime/
+?? scripts/clean-runtime.ps1
+?? scripts/diagnostics/validate_release.py

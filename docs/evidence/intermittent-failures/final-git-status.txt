@@ -1,0 +1,21 @@
+ M Makefile
+ M docs/DEVELOPMENT.md
+ M scripts/dev.ps1
+ M scripts/diagnostics/loopback_probe.cpp
+ M scripts/diagnostics/package_m6.py
+ M scripts/diagnostics/run_eq_probe.ps1
+ M scripts/diagnostics/run_m8_remaining_probe.ps1
+ M scripts/diagnostics/run_memory_probe.ps1
+ M tests/test_i18n.cpp
+ M tests/test_language_selection.cpp
+ M tests/test_m8_remaining.cpp
+ M tests/test_tooltip.cpp
+?? docs/CLEAN-RUNTIME-2026-10-12.md
+?? docs/INTERMITTENT-FAILURES-2026-10-12.md
+?? docs/evidence/clean-runtime/
+?? docs/evidence/intermittent-failures/
+?? scripts/clean-runtime.ps1
+?? scripts/diagnostics/intermittent_failures.py
+?? scripts/diagnostics/validate_release.py
+?? tests/heap_usage.h
+?? tests/isolated_desktop.h

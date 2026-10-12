@@ -1,0 +1,13 @@
+I18N_HEAP private_delta=634880 busy=404433->431999 blocks=2899->3081 committed=872448->1183744
+I18N_GUI GDI=0->0 USER=1->1
+FAIL docs/evidence/intermittent-failures/i18n-services-diagnostic.cpp:131: final<=warm+512*1024
+PASS catalogs_are_complete_and_unicode
+PASS utf8_rejects_invalid_and_preserves_supplementary
+PASS parser_rejects_structural_errors_transactionally
+PASS fallback_and_partial_catalog
+PASS placeholders_are_checked_and_not_recursively_expanded
+PASS ordered_resolution_and_regional_variants
+PASS integer_plural_boundaries
+PASS arabic_composition_embeds_external_values
+PASS io_errors_preserve_active_catalog_and_unload
+PASS executable_relative_loading_ignores_working_directory

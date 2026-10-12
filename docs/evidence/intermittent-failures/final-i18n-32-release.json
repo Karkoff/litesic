@@ -1,0 +1,67 @@
+[
+  {
+    "label": "final-i18n-32-release",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "BD5BDC5B09D0B47706E33C8AC8BBE7E3092007949155B7A47D2A515F01BA597C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:18.665553+00:00",
+    "finished_utc": "2026-10-12T18:05:19.479428+00:00",
+    "pid": 38020,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-32-release-01.txt"
+  },
+  {
+    "label": "final-i18n-32-release",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "BD5BDC5B09D0B47706E33C8AC8BBE7E3092007949155B7A47D2A515F01BA597C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:19.479428+00:00",
+    "finished_utc": "2026-10-12T18:05:20.233441+00:00",
+    "pid": 71644,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-32-release-02.txt"
+  },
+  {
+    "label": "final-i18n-32-release",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "BD5BDC5B09D0B47706E33C8AC8BBE7E3092007949155B7A47D2A515F01BA597C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:20.234444+00:00",
+    "finished_utc": "2026-10-12T18:05:20.975070+00:00",
+    "pid": 43448,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-32-release-03.txt"
+  },
+  {
+    "label": "final-i18n-32-release",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "BD5BDC5B09D0B47706E33C8AC8BBE7E3092007949155B7A47D2A515F01BA597C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:20.975070+00:00",
+    "finished_utc": "2026-10-12T18:05:21.722658+00:00",
+    "pid": 10064,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-32-release-04.txt"
+  },
+  {
+    "label": "final-i18n-32-release",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "BD5BDC5B09D0B47706E33C8AC8BBE7E3092007949155B7A47D2A515F01BA597C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:21.722658+00:00",
+    "finished_utc": "2026-10-12T18:05:22.487869+00:00",
+    "pid": 9416,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-32-release-05.txt"
+  }
+]

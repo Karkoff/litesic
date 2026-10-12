@@ -1,0 +1,12 @@
+PASS add_remove_identity
+PASS invalid_operations
+PASS reorder_current
+PASS multiple_reorder
+PASS sequential_limits
+PASS sequential_repeat
+PASS shuffled_cycle
+PASS shuffled_history_and_add
+PASS sort_and_visible_shuffle
+PASS selection_range_toggle
+PASS extensions_and_titles
+11 playlist cases

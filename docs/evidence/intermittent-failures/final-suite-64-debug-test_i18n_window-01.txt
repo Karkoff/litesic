@@ -1,0 +1,3 @@
+PASS all_scripts_themes_and_scales_render
+PASS programmatic_catalog_changes_preserve_functional_state
+2 i18n window tests passed.

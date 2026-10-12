@@ -1,0 +1,15 @@
+{
+  "python": "3.10.8 (tags/v3.10.8:aaaf517, Oct 11 2022, 16:50:30) [MSC v.1933 64 bit (AMD64)]",
+  "python_executable": "C:\\Users\\Ander\\AppData\\Local\\Programs\\Python\\Python310\\python.exe",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "windows": [
+    "10",
+    "10.0.26200",
+    "SP0",
+    "Multiprocessor Free"
+  ],
+  "head": "609cb38a2f6fa73cde22e56354b51ead08ee5da0",
+  "branch": "master",
+  "captures": "LITESIC_NO_CAPTURE=1",
+  "suite_policy": "binaries in Makefile order; no retry; final suites sequential"
+}

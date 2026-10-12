@@ -6,7 +6,7 @@
 // Usage: loopback-probe <seconds>  -> JSON summary on stdout.
 // Build (MINGW64, after the release build):
 //   g++ -std=c++17 -O2 -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party
-//       scripts/diagnostics/loopback_probe.cpp build/64/release/miniaudio_impl.o
+//       scripts/diagnostics/loopback_probe.cpp build/internal/64/release/obj/miniaudio_impl.o
 //       -static -lole32 -lwinmm -o build/perf/loopback-probe.exe
 #include "ma_config.h"
 #include "miniaudio.h"

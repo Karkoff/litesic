@@ -9,7 +9,9 @@
 #include "audio.h"
 #include "playback.h"
 #include "check.h"
+#include "isolated_desktop.h"
 #include <psapi.h>
+#include <imm.h>
 #include <chrono>
 #include <cmath>
 using namespace Ui::Tooltips;
@@ -84,8 +86,10 @@ static void audio_and_incremental_resources(){
     auto gdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS),user=GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS);auto cursor=Audio_TestCursor();auto start=std::chrono::steady_clock::now();
     for(int i=0;i<1800;++i){for(int id=1;id<=15;++id)CHECK(!Description(eq,id).empty());render();}
     double ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
-    CHECK(GetProcessMemoryInfo(GetCurrentProcess(),reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&b),sizeof(b)));CHECK(b.PrivateUsage<=a.PrivateUsage+512*1024);
-    CHECK(GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS)==gdi);CHECK(GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS)==user);
+    CHECK(GetProcessMemoryInfo(GetCurrentProcess(),reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&b),sizeof(b)));
+    auto afterGdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS),afterUser=GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS);
+    printf("TOOLTIP_RESOURCES private_delta=%lld GDI=%lu->%lu USER=%lu->%lu\n",static_cast<long long>(b.PrivateUsage)-a.PrivateUsage,gdi,afterGdi,user,afterUser);
+    CHECK(b.PrivateUsage<=a.PrivateUsage+512*1024);CHECK(afterGdi==gdi);CHECK(afterUser==user);
     CHECK(Audio_TestCursor()>cursor);CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);CHECK(Eq::State().enabled&&Eq::State().gains[4]==3);
     printf("TOOLTIP_METRICS descriptions=27000 elapsed_ms=%.3f private_delta=%lld GDI=%lu USER=%lu\n",ms,static_cast<long long>(b.PrivateUsage)-a.PrivateUsage,static_cast<unsigned long>(gdi),static_cast<unsigned long>(user));Audio_Shutdown();
 }
@@ -147,10 +151,21 @@ static void popup_render_matrix_and_resource_reuse(){
     printf("TOOLTIP_GUI frames=%d hover_cycles=500 private_delta=%lld GDI=%lu USER=%lu\n",frames,static_cast<long long>(b.PrivateUsage)-a.PrivateUsage,static_cast<unsigned long>(gdi),static_cast<unsigned long>(user));
     DestroyWindow(surface);CHECK(!IsWindow(tip));
 }
-int main(int argc,char** argv){SetProcessDPIAware();CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED);Ui::ThemeConfigure(nullptr);I18n::InitializeLanguage(nullptr,English);CHECK(MainWnd_RegisterClass(GetModuleHandleW(nullptr)));
+static int RunTests(int argc,char** argv){
+    // This fixture queries translated descriptions; it does not test IME input.
+    // Prevent asynchronous Windows text-service UI from entering process-wide
+    // memory/GDI/USER measurements. Must run before the first native window.
+    CHECK(ImmDisableIME(GetCurrentThreadId()));
+    SetProcessDPIAware();CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED);Ui::ThemeConfigure(nullptr);I18n::InitializeLanguage(nullptr,English);CHECK(MainWnd_RegisterClass(GetModuleHandleW(nullptr)));
     mainWindow=MainWnd_Create(GetModuleHandleW(nullptr),SW_HIDE);CHECK(mainWindow);Audio_Shutdown();CHECK(PlWnd_Create(GetModuleHandleW(nullptr),mainWindow,nullptr));EqWnd_Toggle(mainWindow);EnumThreadWindows(GetCurrentThreadId(),Find,0);CHECK(playlist&&eq);int cases=0;
     CASE(names_and_regions);CASE(dynamic_transport_and_visibility);CASE(dsp_values_and_unavailable_bands);CASE(all_catalogs_and_themes);CASE(edge_placement_and_dpi);CASE(native_controls_and_lifecycle);CASE(favorites_use_real_track);CASE(audio_and_incremental_resources);
     if(argc==2&&std::string(argv[1])=="--gui"){CASE(popup_delay_dismissal_live_update_and_expiry);CASE(popup_render_matrix_and_resource_reuse);}
     if(argc==2&&std::string(argv[1])=="--matrix"){CASE(popup_render_matrix_and_resource_reuse);}
     DestroyWindow(mainWindow);CHECK(AttachedCount()==0);CoUninitialize();printf("%d tooltip cases\n",cases);return 0;
+}
+
+int main(int argc,char** argv){
+    // Explicit hover/capture modes still need the real interactive input desktop.
+    if(argc==2&&(std::string(argv[1])=="--gui"||std::string(argv[1])=="--matrix"))return RunTests(argc,argv);
+    return OnIsolatedDesktop(RunTests,argc,argv);
 }

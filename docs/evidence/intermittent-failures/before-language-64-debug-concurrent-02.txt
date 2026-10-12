@@ -1,0 +1,4 @@
+FAIL tests/test_language_selection.cpp:38: Active()=="pt-PT"
+PASS ordered_multisz_and_bounds
+PASS automatic_supported_regional_and_unknown
+PASS native_windows_provider_is_callable

@@ -1,5 +1,6 @@
 #include "i18n.h"
 #include "check.h"
+#include "heap_usage.h"
 #include <windows.h>
 #include <psapi.h>
 #include <chrono>
@@ -113,9 +114,11 @@ static void repeated_switches_release_catalogs_and_measure_cost() {
         maxUnits=std::max(maxUnits,s.RetainedUnits());
     }
     for(int i=0;i<180;++i)CHECK(s.Select(Languages()[i%18].code,root,error));
-    SIZE_T warm=PrivateBytes();
+    SIZE_T warm=PrivateBytes(),warmLive=LiveHeapBytes();
     for(int i=0;i<1800;++i){CHECK(s.Select(Languages()[i%18].code,root,error));CHECK(s.RetainedUnits()<=maxUnits);}
-    SIZE_T final=PrivateBytes();CHECK(final<=warm+512*1024);s.Unload();CHECK(s.RetainedUnits()<maxUnits);
+    SIZE_T final=PrivateBytes(),finalLive=LiveHeapBytes();
+    std::printf("I18N_LIVE_HEAP warm=%zu final=%zu limit=524288\n",size_t(warmLive),size_t(finalLive));
+    CHECK(finalLive<=warmLive+512*1024);s.Unload();CHECK(s.RetainedUnits()<maxUnits);
     std::printf("I18N_METRICS arch=%zu init_ms=%.3f mean_select_ms=%.3f fallback_private_delta=%lld warm_private=%zu final_private=%zu max_payload_bytes=%zu switches=1980\n",
         sizeof(void*)*8,std::chrono::duration<double,std::milli>(initialized-start).count(),totalMs/18,
         static_cast<long long>(fallbackMemory)-static_cast<long long>(baseline),size_t(warm),size_t(final),maxUnits);
@@ -126,6 +129,6 @@ int main(){int cases=0;
     CASE(placeholders_are_checked_and_not_recursively_expanded);CASE(ordered_resolution_and_regional_variants);
     CASE(integer_plural_boundaries);CASE(arabic_composition_embeds_external_values);
     CASE(io_errors_preserve_active_catalog_and_unload);CASE(executable_relative_loading_ignores_working_directory);
-    CASE(repeated_switches_release_catalogs_and_measure_cost);
+    CASE(heap_accounting_detects_retention);CASE(repeated_switches_release_catalogs_and_measure_cost);
     std::printf("%d i18n tests passed.\n",cases);return 0;
 }

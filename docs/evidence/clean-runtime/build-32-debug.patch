@@ -1,0 +1,335 @@
+﻿diff --git a/Makefile b/Makefile
+index b61ca0f..b46d714 100644
+--- a/Makefile
++++ b/Makefile
+@@ -26,6 +26,10 @@ endif
+ 
+ # Caminhos fixos por variante impedem mistura de objetos e limpeza arbitraria.
+ BUILD_DIR := build/$(ARCH)/$(CONFIG)
++INTERNAL_DIR := build/internal/$(ARCH)/$(CONFIG)
++OBJ_DIR := $(INTERNAL_DIR)/obj
++TEST_DIR := $(INTERNAL_DIR)/tests
++DIAG_DIR := $(INTERNAL_DIR)/diagnostics
+ TARGET := $(BUILD_DIR)/LiteSic.exe
+ CPPFLAGS := -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party
+ CFLAGS := -std=c17 -Wall -Wextra $(OPTFLAGS)
+@@ -35,70 +39,82 @@ LDFLAGS := -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp
+ LDLIBS := -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm
+ 
+ CPP_SRCS := $(wildcard src/*.cpp)
+-CPP_OBJS := $(patsubst src/%.cpp,$(BUILD_DIR)/%.o,$(CPP_SRCS))
+-MA_OBJ := $(BUILD_DIR)/miniaudio_impl.o
+-RC_OBJ := $(BUILD_DIR)/app.res.o
++CPP_OBJS := $(patsubst src/%.cpp,$(OBJ_DIR)/%.o,$(CPP_SRCS))
++MA_OBJ := $(OBJ_DIR)/miniaudio_impl.o
++RC_OBJ := $(OBJ_DIR)/app.res.o
+ OBJS := $(CPP_OBJS) $(MA_OBJ) $(RC_OBJ)
+ TEST_SRCS := $(wildcard tests/*.c)
+-TEST_BINS := $(patsubst tests/%.c,$(BUILD_DIR)/test-%.exe,$(TEST_SRCS))
++TEST_BINS := $(patsubst tests/%.c,$(TEST_DIR)/test-%.exe,$(TEST_SRCS))
+ CPP_TEST_SRCS := $(wildcard tests/*.cpp)
+-TEST_BINS += $(patsubst tests/%.cpp,$(BUILD_DIR)/test-%.exe,$(CPP_TEST_SRCS))
+-TEST_LOGIC_OBJS := $(addprefix $(BUILD_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o runtime.o)
+-TEST_UI_OBJS := $(addprefix $(BUILD_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o ui_tooltip.o ui_accessibility.o)
+-$(BUILD_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_player_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_player_window.exe: $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_ui_draw.exe: TEST_EXTRA_OBJS := $(BUILD_DIR)/ui_draw.o
+-$(BUILD_DIR)/test-test_ui_draw.exe: $(BUILD_DIR)/ui_draw.o
+-$(BUILD_DIR)/test-test_themes.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_themes.exe: $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_themes.exe: LDLIBS += -lpsapi
+-$(BUILD_DIR)/test-test_i18n.exe: LDLIBS += -lpsapi
+-$(BUILD_DIR)/test-test_language_selection.exe: LDLIBS += -lpsapi
+-$(BUILD_DIR)/test-test_tooltip.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_tooltip.exe: $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_tooltip.exe: LDLIBS += -lpsapi
+-$(BUILD_DIR)/test-test_language_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_language_window.exe: $(TEST_UI_OBJS) $(RC_OBJ)
+-$(BUILD_DIR)/test-test_language_window.exe: TEST_EXTRA_OBJS += $(RC_OBJ)
+-$(BUILD_DIR)/test-test_i18n_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_i18n_window.exe: $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_eq_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_eq_window.exe: $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_window_integration.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_window_integration.exe: $(TEST_UI_OBJS)
+-
+-$(BUILD_DIR)/test-test_m8_remaining.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
+-$(BUILD_DIR)/test-test_m8_remaining.exe: $(TEST_UI_OBJS)
++TEST_BINS += $(patsubst tests/%.cpp,$(TEST_DIR)/test-%.exe,$(CPP_TEST_SRCS))
++TEST_LOGIC_OBJS := $(addprefix $(OBJ_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o runtime.o)
++TEST_UI_OBJS := $(addprefix $(OBJ_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o ui_tooltip.o ui_accessibility.o)
++$(TEST_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_player_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_player_window.exe: $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_ui_draw.exe: TEST_EXTRA_OBJS := $(OBJ_DIR)/ui_draw.o
++$(TEST_DIR)/test-test_ui_draw.exe: $(OBJ_DIR)/ui_draw.o
++$(TEST_DIR)/test-test_themes.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_themes.exe: $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_themes.exe: LDLIBS += -lpsapi
++$(TEST_DIR)/test-test_i18n.exe: LDLIBS += -lpsapi
++$(TEST_DIR)/test-test_language_selection.exe: LDLIBS += -lpsapi
++$(TEST_DIR)/test-test_tooltip.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_tooltip.exe: $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_tooltip.exe: LDLIBS += -lpsapi
++$(TEST_DIR)/test-test_language_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_language_window.exe: $(TEST_UI_OBJS) $(RC_OBJ)
++$(TEST_DIR)/test-test_language_window.exe: TEST_EXTRA_OBJS += $(RC_OBJ)
++$(TEST_DIR)/test-test_i18n_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_i18n_window.exe: $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_eq_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_eq_window.exe: $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_window_integration.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_window_integration.exe: $(TEST_UI_OBJS)
++
++$(TEST_DIR)/test-test_m8_remaining.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
++$(TEST_DIR)/test-test_m8_remaining.exe: $(TEST_UI_OBJS)
+ 
+ all: $(TARGET) locales
+ 
+-# Development resource staging only; M10 owns distribution packaging.
++# Runtime and developer executables each resolve locales beside themselves.
++# Copy every catalog (also when a source is restored with an older timestamp).
+ locales:
+ 	@mkdir -p $(BUILD_DIR)/locales
+-	@cp -ru locales/. $(BUILD_DIR)/locales/
++	@cp -r locales/. $(BUILD_DIR)/locales/
+ 
+-$(BUILD_DIR)/eq-probe.exe: scripts/diagnostics/eq_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS)
++test-locales:
++	@mkdir -p $(TEST_DIR)/locales
++	@cp -r locales/. $(TEST_DIR)/locales/
++
++diagnostic-locales:
++	@mkdir -p $(DIAG_DIR)/locales
++	@cp -r locales/. $(DIAG_DIR)/locales/
++
++$(DIAG_DIR)/eq-probe.exe: scripts/diagnostics/eq_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS)
++	@mkdir -p $(@D)
+ 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(LDLIBS) -lpsapi
+ 
+ # Pre-distribution performance audit probe (docs/PERFORMANCE-AUDIT.md).
+-$(BUILD_DIR)/perf-probe.exe: scripts/diagnostics/perf_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(RC_OBJ)
++$(DIAG_DIR)/perf-probe.exe: scripts/diagnostics/perf_probe.cpp $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(RC_OBJ)
++	@mkdir -p $(@D)
+ 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_UI_OBJS) $(RC_OBJ) $(LDLIBS) -lpsapi
+ 
+-perf-probe: $(BUILD_DIR)/perf-probe.exe locales
++perf-probe: $(DIAG_DIR)/perf-probe.exe diagnostic-locales
+ 
+-eq-probe: $(BUILD_DIR)/eq-probe.exe
+-	@set -e; for mode in 6 0 1 2 3 4 5; do "$(BUILD_DIR)/eq-probe.exe" $$mode; done
++eq-probe: $(DIAG_DIR)/eq-probe.exe diagnostic-locales
++	@set -e; for mode in 6 0 1 2 3 4 5; do "$(DIAG_DIR)/eq-probe.exe" $$mode; done
+ 
+ $(TARGET): $(OBJS) Makefile
++	@mkdir -p $(@D)
+ 	$(CXX) $(LDFLAGS) -mwindows -municode -o $@ $(OBJS) $(LDLIBS)
+ 
+-$(BUILD_DIR)/%.o: src/%.cpp Makefile
++$(OBJ_DIR)/%.o: src/%.cpp Makefile
+ 	@mkdir -p $(@D)
+ 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(DEPFLAGS) -c -o $@ $<
+ 
+-$(BUILD_DIR)/%.o: src/%.c Makefile
++$(OBJ_DIR)/%.o: src/%.c Makefile
+ 	@mkdir -p $(@D)
+ 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -c -o $@ $<
+ 
+@@ -106,33 +122,33 @@ $(RC_OBJ): res/app.rc res/app.manifest res/icon.ico Makefile
+ 	@mkdir -p $(@D)
+ 	$(WINDRES) -Ires -i $< -o $@
+ 
+-$(BUILD_DIR)/test-%.exe: tests/%.c $(BUILD_DIR)/util.o Makefile
++$(TEST_DIR)/test-%.exe: tests/%.c $(OBJ_DIR)/util.o Makefile
+ 	@mkdir -p $(@D)
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(BUILD_DIR)/util.o $(LDLIBS)
++	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(OBJ_DIR)/util.o $(LDLIBS)
+ 
+ # O smoke test usa a implementacao real e a mesma configuracao do aplicativo.
+-$(BUILD_DIR)/test-build_third_party_smoke.exe: tests/build_third_party_smoke.c $(MA_OBJ) Makefile
++$(TEST_DIR)/test-build_third_party_smoke.exe: tests/build_third_party_smoke.c $(MA_OBJ) Makefile
+ 	@mkdir -p $(@D)
+ 	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(MA_OBJ) $(LDLIBS)
+ 
+ # Audio offline usa a mesma unidade de producao, com acesso de teste ao engine.
+-$(BUILD_DIR)/audio-test.o: src/audio.cpp Makefile
++$(OBJ_DIR)/audio-test.o: src/audio.cpp Makefile
+ 	@mkdir -p $(@D)
+ 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -c -o $@ $<
+ 
+-$(BUILD_DIR)/test-%.exe: tests/%.cpp $(TEST_LOGIC_OBJS) Makefile
++$(TEST_DIR)/test-%.exe: tests/%.cpp $(TEST_LOGIC_OBJS) Makefile
+ 	@mkdir -p $(@D)
+ 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_EXTRA_OBJS) $(LDLIBS)
+ 
+-test: $(TEST_BINS) locales
++test: $(TEST_BINS) test-locales
+ 	@set -e; for t in $(TEST_BINS); do echo "==> $$t"; "$$t"; done
+ 	@echo "All tests passed."
+ 
+-run: $(TARGET)
++run: all
+ 	./$(TARGET)
+ 
+ clean:
+-	rm -rf -- ./build/$(ARCH)/$(CONFIG)
++	rm -f -- $(OBJS) $(OBJS:.o=.d) $(OBJ_DIR)/audio-test.o $(OBJ_DIR)/audio-test.d $(TEST_BINS) $(TEST_BINS:.exe=.d) $(DIAG_DIR)/eq-probe.exe $(DIAG_DIR)/perf-probe.exe $(TARGET)
+ 
+--include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(BUILD_DIR)/audio-test.d $(TEST_BINS:.exe=.d)
+-.PHONY: all test run clean locales perf-probe
++-include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(OBJ_DIR)/audio-test.d $(TEST_BINS:.exe=.d)
++.PHONY: all test run clean locales test-locales diagnostic-locales perf-probe eq-probe
+diff --git a/scripts/dev.ps1 b/scripts/dev.ps1
+index a5a20bd..022e6cb 100644
+--- a/scripts/dev.ps1
++++ b/scripts/dev.ps1
+@@ -2,6 +2,7 @@ param(
+     [ValidateSet('build', 'test', 'run', 'clean', 'eq-probe', 'perf-probe')][string]$Action = 'build',
+     [ValidateSet('32', '64')][string]$Architecture = '64',
+     [switch]$DebugBuild,
++    [ValidateRange(1,32)][int]$Jobs = 4,
+     [string]$Msys2Root = $env:LITESIC_MSYS2_ROOT
+ )
+ 
+@@ -30,8 +31,37 @@ try {
+     $env:TMPDIR = $tempPath
+     $debugValue = if ($DebugBuild) { '1' } else { '0' }
+     $target = if ($Action -eq 'build') { 'all' } else { $Action }
+-    & $bashPath -lc "exec make ARCH=$Architecture DEBUG=$debugValue $target"
++    $configuration = if ($DebugBuild) { 'debug' } else { 'release' }
++    $logDir = "build/internal/$Architecture/$configuration/logs"
++    New-Item -ItemType Directory -Force (Join-Path $repoRoot $logDir) | Out-Null
++    $started = [DateTimeOffset]::Now
++    if ($Action -eq 'build') {
++        $inputFiles = @(Get-ChildItem -LiteralPath 'src','res','third_party','locales' -Recurse -File) + @(Get-Item -LiteralPath 'Makefile')
++        $inputs = @($inputFiles | Sort-Object FullName | ForEach-Object {
++            @{Path=$_.FullName.Substring($repoRoot.Length+1);SHA256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash}
++        })
++    }
++    # pipefail preserves make's exit code; logs never enter runtime directories.
++    & $bashPath -lc "set -o pipefail; make -j$Jobs ARCH=$Architecture DEBUG=$debugValue $target 2>&1 | tee $logDir/$Action.log"
+     $result = $LASTEXITCODE
++    if ($Action -eq 'build' -and $result -eq 0) {
++        $executable = Get-Item -LiteralPath "build/$Architecture/$configuration/LiteSic.exe"
++        $manifestDir = Join-Path $repoRoot "build/internal/$Architecture/$configuration/identity"
++        New-Item -ItemType Directory -Force $manifestDir | Out-Null
++        & git diff --binary HEAD | Set-Content -Encoding UTF8 (Join-Path $manifestDir 'working-tree.patch')
++        $status = @(& git status --short)
++        $metadata = [ordered]@{
++            Commit=(& git rev-parse HEAD); WorkingTreeStatus=$status
++            IncludesUncommittedChanges=($status.Count -gt 0)
++            Started=$started.ToString('o'); Finished=[DateTimeOffset]::Now.ToString('o')
++            Architecture=$Architecture; Configuration=$configuration
++            Path=$executable.FullName; Bytes=$executable.Length
++            SHA256=(Get-FileHash -LiteralPath $executable.FullName -Algorithm SHA256).Hash
++            Compiler=(& (Join-Path $Msys2Root "$prefix/bin/g++.exe") --version | Select-Object -First 1)
++            Inputs=$inputs
++        }
++        $metadata | ConvertTo-Json -Depth 6 | Set-Content -Encoding UTF8 (Join-Path $manifestDir 'build.json')
++    }
+ }
+ finally {
+     Pop-Location
+diff --git a/scripts/diagnostics/loopback_probe.cpp b/scripts/diagnostics/loopback_probe.cpp
+index 23ce6f5..94f4c66 100644
+--- a/scripts/diagnostics/loopback_probe.cpp
++++ b/scripts/diagnostics/loopback_probe.cpp
+@@ -6,7 +6,7 @@
+ // Usage: loopback-probe <seconds>  -> JSON summary on stdout.
+ // Build (MINGW64, after the release build):
+ //   g++ -std=c++17 -O2 -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party
+-//       scripts/diagnostics/loopback_probe.cpp build/64/release/miniaudio_impl.o
++//       scripts/diagnostics/loopback_probe.cpp build/internal/64/release/obj/miniaudio_impl.o
+ //       -static -lole32 -lwinmm -o build/perf/loopback-probe.exe
+ #include "ma_config.h"
+ #include "miniaudio.h"
+diff --git a/scripts/diagnostics/package_m6.py b/scripts/diagnostics/package_m6.py
+index 6cb75fc..fa71ff2 100644
+--- a/scripts/diagnostics/package_m6.py
++++ b/scripts/diagnostics/package_m6.py
+@@ -18,7 +18,7 @@ for arch in (32,64):
+         assert not re.search(r'\berror:',read(build)),variant
+         checks=sum(map(int,re.findall(r'^(\d+) [^\r\n]*cases\r?$',text,re.M)))+sum(map(int,re.findall(r'Results: (\d+)/',text)))+sum(map(int,re.findall(r'Results: (\d+) tests, 0 failures',text)))+1
+         manifest['tests'][variant]={'checks':checks,'pass_labels':len(re.findall(r'\bPASS\b',text)),'executables':len(re.findall(r'^==>',text,re.M)),
+-            'test_binary_sha256':digest(root/f'build/{arch}/{config}/test-test_eq_window.exe'),
++            'test_binary_sha256':digest(root/f'build/internal/{arch}/{config}/tests/test-test_eq_window.exe'),
+             'application_sha256':digest(root/f'build/{arch}/{config}/LiteSic.exe')}
+         for p in (build,test):shutil.copy2(p,out/p.name)
+     data=json.loads((root/f'build/m6/performance-{arch}-release.json').read_text(encoding='utf-8-sig'))
+diff --git a/scripts/diagnostics/run_eq_probe.ps1 b/scripts/diagnostics/run_eq_probe.ps1
+index 5f421b5..3f3c9f6 100644
+--- a/scripts/diagnostics/run_eq_probe.ps1
++++ b/scripts/diagnostics/run_eq_probe.ps1
+@@ -6,7 +6,7 @@ $savedPath=$env:PATH
+ try {
+     & powershell -NoProfile -ExecutionPolicy Bypass -File scripts/dev.ps1 -Action eq-probe -Architecture $Architecture
+     if($LASTEXITCODE) {throw 'EQ probe build/run failed'}
+-    $variant="build/$Architecture/release"
++    $variant="build/internal/$Architecture/release"
+     $prefix=if($Architecture -eq '32'){'mingw32'}else{'mingw64'}
+     $env:PATH=(Join-Path $root ".tools/msys64/$prefix/bin")+';'+$savedPath
+     # Compile the starting commit's audio unit; shims only satisfy new control symbols.
+@@ -19,20 +19,20 @@ void Audio_TestSkipEq(BOOL) {}
+ '@ | Add-Content -Encoding UTF8 build/audio-before-m6.cpp
+     $compiler=Join-Path $root ".tools/msys64/$prefix/bin/g++.exe"
+     $flags=@('-std=c++17','-O2','-D_WIN32_WINNT=0x0601','-DUNICODE','-D_UNICODE','-DLITESIC_TEST','-Isrc','-Ithird_party')
+-    & $compiler @flags '-c' 'build/audio-before-m6.cpp' '-o' "$variant/audio-before-m6.o"
++    & $compiler @flags '-c' 'build/audio-before-m6.cpp' '-o' "$variant/obj/audio-before-m6.o"
+     if($LASTEXITCODE) {throw 'Baseline audio compilation failed'}
+-    $objects=@('playlist','playlist_view','m3u','tags','playback','playlist_worker','audio-before-m6','util','miniaudio_impl','ui_theme','eq_dsp','eq_state','plwnd','mainwnd','visualizer','ui_draw','ui_player','eqwnd','theme_window') | ForEach-Object {"$variant/$_.o"}
++    $objects=@('playlist','playlist_view','m3u','tags','playback','playlist_worker','audio-before-m6','util','miniaudio_impl','ui_theme','eq_dsp','eq_state','plwnd','mainwnd','visualizer','ui_draw','ui_player','eqwnd','theme_window') | ForEach-Object {"$variant/obj/$_.o"}
+     $libraries=@('-lcomdlg32','-lcomctl32','-luser32','-lkernel32','-lgdi32','-lole32','-lshell32','-lwinmm','-ld2d1','-ldwrite','-lm','-lpsapi')
+-    & $compiler @flags '-static' '-static-libgcc' '-static-libstdc++' '-o' "$variant/eq-before-m6.exe" 'scripts/diagnostics/eq_probe.cpp' @objects @libraries
++    & $compiler @flags '-static' '-static-libgcc' '-static-libstdc++' '-o' "$variant/diagnostics/eq-before-m6.exe" 'scripts/diagnostics/eq_probe.cpp' @objects @libraries
+     if($LASTEXITCODE) {throw 'Baseline link failed'}
+     New-Item -ItemType Directory -Force build/m6 | Out-Null
+     $results=@()
+     for($trial=1;$trial -le $Trials;$trial++) {
+-        $before=& "$variant/eq-before-m6.exe" 6
++        $before=& "$variant/diagnostics/eq-before-m6.exe" 6
+         if($LASTEXITCODE) {throw 'Baseline run failed'}
+         $results+=@{trial=$trial;baseline=$true;sample=($before|ConvertFrom-Json)}
+         foreach($mode in @(6,0,1,2,3,4,5)) {
+-            $after=& "$variant/eq-probe.exe" $mode
++            $after=& "$variant/diagnostics/eq-probe.exe" $mode
+             if($LASTEXITCODE) {throw "Probe mode $mode failed"}
+             $results+=@{trial=$trial;baseline=$false;sample=($after|ConvertFrom-Json)}
+         }
+diff --git a/scripts/diagnostics/run_m8_remaining_probe.ps1 b/scripts/diagnostics/run_m8_remaining_probe.ps1
+index 86b66a2..cdd5159 100644
+--- a/scripts/diagnostics/run_m8_remaining_probe.ps1
++++ b/scripts/diagnostics/run_m8_remaining_probe.ps1
+@@ -10,7 +10,7 @@ $env:CHERE_INVOKING='1'
+ Push-Location $repoRoot
+ try {
+     New-Item -ItemType Directory -Force 'build/m8-completion' | Out-Null
+-    $objects='playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl ui_theme eq_dsp eq_state i18n language_selection skin plwnd mainwnd visualizer ui_draw ui_player eqwnd theme_window ui_tooltip runtime ui_accessibility'.Split(' ') | ForEach-Object { "build/$Architecture/release/$_.o" }
++    $objects='playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl ui_theme eq_dsp eq_state i18n language_selection skin plwnd mainwnd visualizer ui_draw ui_player eqwnd theme_window ui_tooltip runtime ui_accessibility'.Split(' ') | ForEach-Object { "build/internal/$Architecture/release/obj/$_.o" }
+     $command="/$prefix/bin/g++.exe -std=c++17 -Wall -Wextra -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -DLITESIC_TEST -Isrc -Itests -Ithird_party -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -o build/m8-completion/audit-$Architecture.exe scripts/diagnostics/m8_remaining_probe.cpp $($objects -join ' ') -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm"
+     & $bashPath -lc $command
+     if($LASTEXITCODE -ne 0){exit $LASTEXITCODE}
+diff --git a/scripts/diagnostics/run_memory_probe.ps1 b/scripts/diagnostics/run_memory_probe.ps1
+index 339762d..1d4f2bb 100644
+--- a/scripts/diagnostics/run_memory_probe.ps1
++++ b/scripts/diagnostics/run_memory_probe.ps1
+@@ -17,7 +17,7 @@ try {
+     $flags = @('-std=c++17','-Wall','-Wextra','-g','-O0','-DDEBUG','-D_WIN32_WINNT=0x0601','-DUNICODE','-D_UNICODE','-DLITESIC_TEST','-DPSAPI_VERSION=1','-Isrc','-Ithird_party')
+     & $compiler @flags -c "$outDir/ui_draw-gdi.cpp" -o "$outDir/ui_draw-gdi.o"
+     if($LASTEXITCODE -ne 0) { throw 'Compilação GDI falhou' }
+-    $objects = 'playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl plwnd mainwnd visualizer ui_player eqwnd ui_theme theme_window'.Split(' ') | ForEach-Object { "build/64/debug/$_.o" }
++    $objects = 'playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl plwnd mainwnd visualizer ui_player eqwnd ui_theme theme_window'.Split(' ') | ForEach-Object { "build/internal/64/debug/obj/$_.o" }
+     $libs = @('-static','-static-libgcc','-static-libstdc++','-lcomdlg32','-lcomctl32','-luser32','-lkernel32','-lgdi32','-lole32','-lshell32','-lwinmm','-ld2d1','-ldwrite','-lpsapi','-lm')
+     $backends=if($Isolation){@('fonts','software')}else{@('gdi','d2d')}
+     if($Isolation) {
+@@ -33,7 +33,7 @@ try {
+         }
+     }
+     foreach($backend in $backends) {
+-        $renderer = if($backend -eq 'd2d'){'build/64/debug/ui_draw.o'}else{"$outDir/ui_draw-$backend.o"}
++        $renderer = if($backend -eq 'd2d'){'build/internal/64/debug/obj/ui_draw.o'}else{"$outDir/ui_draw-$backend.o"}
+         & $compiler @flags scripts/diagnostics/memory_probe.cpp @objects $renderer @libs -o "$outDir/probe-$backend.exe"
+         if($LASTEXITCODE -ne 0) { throw "Link $backend falhou" }
+     }

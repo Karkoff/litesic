@@ -1,0 +1,2 @@
+FAIL tests/test_m8_remaining.cpp:43: GetWindowLongPtrW(hwnd,GWL_EXSTYLE)&WS_EX_TOPMOST
+PASS shortcuts_and_media_on_three_panels

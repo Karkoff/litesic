@@ -1,12 +1,14 @@
 #include "language_selection.h"
 #include "check.h"
+#include "heap_usage.h"
 #include "m3u.h"
 #include <psapi.h>
 #include <chrono>
 using namespace I18n;
 static std::vector<std::string> preferences;
 static std::vector<std::string> FakeWindows(){return preferences;}
-static const auto ini=FullPath(L"build\\language-selection-test.ini");
+// Parallel variants must not overwrite or delete another test process's INI.
+static const auto ini=FullPath(L"build\\language-selection-test-"+std::to_wstring(GetCurrentProcessId())+L".ini");
 static void ordered_multisz_and_bounds(){
     const wchar_t list[]=L"es-MX\0ja-JP\0\0";
     CHECK(ParseWindowsLanguages(list,ARRAYSIZE(list))==std::vector<std::string>({"es-MX","ja-JP"}));
@@ -78,9 +80,11 @@ static SIZE_T PrivateBytes(){PROCESS_MEMORY_COUNTERS_EX m{};m.cb=sizeof(m);CHECK
 static void repeated_live_changes_cost_and_memory(){
     preferences={"en-US"};InitializeLanguage(nullptr,FakeWindows);std::string error;
     for(int i=0;i<180;++i)CHECK(ChangeLanguage(false,Languages()[i%18].code,error));
-    auto warm=PrivateBytes();auto start=std::chrono::steady_clock::now();
+    auto warm=PrivateBytes(),warmLive=LiveHeapBytes();auto start=std::chrono::steady_clock::now();
     for(int i=0;i<1800;++i)CHECK(ChangeLanguage(false,Languages()[i%18].code,error));
-    auto end=std::chrono::steady_clock::now();auto final=PrivateBytes();CHECK(final<=warm+512*1024);
+    auto end=std::chrono::steady_clock::now();auto final=PrivateBytes(),finalLive=LiveHeapBytes();
+    std::printf("LANGUAGE_LIVE_HEAP warm=%zu final=%zu limit=524288\n",size_t(warmLive),size_t(finalLive));
+    CHECK(finalLive<=warmLive+512*1024);
     auto generation=Generation();CHECK(ChangeLanguage(false,Active(),error));CHECK(Generation()==generation);
     std::printf("LANGUAGE_METRICS arch=%zu mean_change_ms=%.3f warm_private=%zu final_private=%zu switches=1980 catalogs_resident=2\n",sizeof(void*)*8,
         std::chrono::duration<double,std::milli>(end-start).count()/1800,size_t(warm),size_t(final));
@@ -88,6 +92,7 @@ static void repeated_live_changes_cost_and_memory(){
 int main(){int cases=0;
     CASE(ordered_multisz_and_bounds);CASE(automatic_supported_regional_and_unknown);CASE(native_windows_provider_is_callable);
     CASE(manual_auto_and_restart_share_existing_ini);CASE(invalid_preferences_and_commands_are_safe);
-    CASE(failed_persistence_keeps_selection_and_catalog);CASE(menu_has_native_names_and_correct_checks);CASE(repeated_live_changes_cost_and_memory);
+    CASE(failed_persistence_keeps_selection_and_catalog);CASE(menu_has_native_names_and_correct_checks);
+    CASE(heap_accounting_detects_retention);CASE(repeated_live_changes_cost_and_memory);
     std::printf("%d language selection cases\n",cases);return 0;
 }

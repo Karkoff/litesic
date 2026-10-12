@@ -1,0 +1,9 @@
+PASS all_centers_and_rates
+PASS octave_half_gain
+PASS flat_bypass_and_preamp
+PASS nyquist_invalid_and_channel_isolation
+PASS extremes_and_sweep
+PASS transition_continuity
+PASS concurrent_updates
+PASS presets_and_persistence
+8 EQ DSP cases

@@ -1,0 +1,7 @@
+PASS relative_absolute_extinf
+PASS plain_and_unsupported
+PASS malformed_extinf
+PASS unicode_roundtrip
+PASS encoding_errors_and_legacy
+PASS actual_file_roundtrip_and_errors
+6 m3u cases

@@ -1,0 +1,67 @@
+[
+  {
+    "label": "private-desktop-m8",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:32.835258+00:00",
+    "finished_utc": "2026-10-12T17:47:33.419895+00:00",
+    "pid": 28528,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-m8-01.txt"
+  },
+  {
+    "label": "private-desktop-m8",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:33.420893+00:00",
+    "finished_utc": "2026-10-12T17:47:33.951292+00:00",
+    "pid": 68728,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-m8-02.txt"
+  },
+  {
+    "label": "private-desktop-m8",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:33.951292+00:00",
+    "finished_utc": "2026-10-12T17:47:34.497924+00:00",
+    "pid": 32688,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-m8-03.txt"
+  },
+  {
+    "label": "private-desktop-m8",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:34.497924+00:00",
+    "finished_utc": "2026-10-12T17:47:35.081266+00:00",
+    "pid": 68948,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-m8-04.txt"
+  },
+  {
+    "label": "private-desktop-m8",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:35.081266+00:00",
+    "finished_utc": "2026-10-12T17:47:35.631274+00:00",
+    "pid": 35412,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-m8-05.txt"
+  }
+]

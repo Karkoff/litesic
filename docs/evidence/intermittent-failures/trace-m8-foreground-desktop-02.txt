@@ -1,0 +1,49 @@
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=13 style=0
+TOPMOST hwnd=00000000000d08e6 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=13 style=0
+TOPMOST hwnd=00000000003108f0 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000008208ec class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=13 style=0
+TOPMOST hwnd=00000000000d08e6 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=57 style=0
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=3 style=0
+FOREGROUND result=1 before=00000000000201c4 player=00000000000d08e6
+WINDOWPOS_CHANGING after=00000000008208ec flags=13 style=0
+TOPMOST hwnd=00000000003108f0 class=LiteSic.EqualizerWnd value=1 result=1 error=0 style=8
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=13 style=0
+TOPMOST hwnd=00000000008208ec class=LiteSic.PlaylistWnd value=1 result=1 error=0 style=18
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=13 style=0
+TOPMOST hwnd=00000000000d08e6 class=LiteSic.MainWnd value=1 result=1 error=0 style=8
+TOPMOST_CHECK hwnd=00000000000d08e6 style=8
+TOPMOST_CHECK hwnd=00000000008208ec style=18
+TOPMOST_CHECK hwnd=00000000003108f0 style=8
+WINDOWPOS_CHANGING after=00000000008208ec flags=13 style=8
+TOPMOST hwnd=00000000008208ec class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+WINDOWPOS_CHANGING after=00000000008208ec flags=13 style=0
+TOPMOST hwnd=00000000003108f0 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+WINDOWPOS_CHANGING after=00000000008208ec flags=13 style=0
+TOPMOST hwnd=00000000000d08e6 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+WINDOWPOS_CHANGING after=00000000006c09b2 flags=13 style=0
+WINDOWPOS_CHANGING after=00000000003108f0 flags=13 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=00000000003108f0 flags=13 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=00000000003108f0 flags=13 style=0
+WINDOWPOS_CHANGING after=00000000003108f0 flags=13 style=0
+WINDOWPOS_CHANGING after=00000000003108f0 flags=3 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=14 style=0
+WINDOWPOS_CHANGING after=0000000000000000 flags=97 style=0
+PASS shortcuts_and_media_on_three_panels
+PASS topmost_owns_all_panels
+PASS hotkey_conflict_rolls_back_and_releases
+PASS playlist_keyboard_reaches_actions
+PASS information_dpi_and_zoom_keep_native_controls
+PASS independent_dpi_and_open_appearance
+PASS zoom_repaints_old_equalizer_pixels
+PASS ipc_is_bounded_and_preserves_files
+PASS accessible_names_roles_actions_and_lifetime
+9 remaining Windows integration cases

@@ -11,6 +11,7 @@
 #include "eq_state.h"
 #include "m3u.h"
 #include "check.h"
+#include "isolated_desktop.h"
 #include <oleacc.h>
 #include <cmath>
 static HWND player,playlist,eq,themes,information;
@@ -77,4 +78,6 @@ static void accessible_names_roles_actions_and_lifetime(){
     bool enabled=Eq::State().enabled;CHECK(provider->accDoDefaultAction(first)==S_OK);CHECK(Eq::State().enabled!=enabled);DestroyWindow(eq);LONG count=0;CHECK(provider->get_accChildCount(&count)==CO_E_OBJNOTCONNECTED);provider->Release();
 }
 static void ipc_is_bounded_and_preserves_files(){auto files=Runtime::Encode({FullPath(L"tests\\fixtures\\native-44100.wav")});COPYDATASTRUCT data{Runtime::Packet,DWORD(files.size()*2),files.data()};int before=PlayerPlaylist().Count();CHECK(SendMessageW(player,WM_COPYDATA,0,reinterpret_cast<LPARAM>(&data)));CHECK(PlayerPlaylist().Count()==before+1);data.cbData=3;CHECK(!SendMessageW(player,WM_COPYDATA,0,reinterpret_cast<LPARAM>(&data)));CHECK(PlayerPlaylist().Count()==before+1);}
-int main(){SetProcessDPIAware();CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED);Ui::ThemeConfigure(nullptr);I18n::InitializeLanguage(nullptr);auto instance=GetModuleHandleW(nullptr);CHECK(MainWnd_RegisterClass(instance));player=MainWnd_Create(instance,SW_HIDE);CHECK(player&&PlWnd_Create(instance,player));EqWnd_Toggle(player);EnumThreadWindows(GetCurrentThreadId(),Find,0);CHECK(playlist&&eq);int cases=0;CASE(shortcuts_and_media_on_three_panels);CASE(topmost_owns_all_panels);CASE(hotkey_conflict_rolls_back_and_releases);CASE(playlist_keyboard_reaches_actions);CASE(information_dpi_and_zoom_keep_native_controls);CASE(independent_dpi_and_open_appearance);CASE(zoom_repaints_old_equalizer_pixels);CASE(ipc_is_bounded_and_preserves_files);CASE(accessible_names_roles_actions_and_lifetime);DestroyWindow(player);CoUninitialize();printf("%d remaining Windows integration cases\n",cases);}
+static int RunTests(int,char**){SetProcessDPIAware();CoInitializeEx(nullptr,COINIT_APARTMENTTHREADED);Ui::ThemeConfigure(nullptr);I18n::InitializeLanguage(nullptr);auto instance=GetModuleHandleW(nullptr);CHECK(MainWnd_RegisterClass(instance));player=MainWnd_Create(instance,SW_HIDE);CHECK(player&&PlWnd_Create(instance,player));EqWnd_Toggle(player);EnumThreadWindows(GetCurrentThreadId(),Find,0);CHECK(playlist&&eq);int cases=0;CASE(shortcuts_and_media_on_three_panels);CASE(topmost_owns_all_panels);CASE(hotkey_conflict_rolls_back_and_releases);CASE(playlist_keyboard_reaches_actions);CASE(information_dpi_and_zoom_keep_native_controls);CASE(independent_dpi_and_open_appearance);CASE(zoom_repaints_old_equalizer_pixels);CASE(ipc_is_bounded_and_preserves_files);CASE(accessible_names_roles_actions_and_lifetime);DestroyWindow(player);CoUninitialize();printf("%d remaining Windows integration cases\n",cases);return 0;}
+
+int main(int argc,char** argv){return OnIsolatedDesktop(RunTests,argc,argv);}

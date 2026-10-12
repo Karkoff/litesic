@@ -1,0 +1,9 @@
+{
+  "a/docs/DEVELOPMENT.md b/docs/DEVELOPMENT.md": true,
+  "a/scripts/dev.ps1 b/scripts/dev.ps1": true,
+  "a/scripts/diagnostics/loopback_probe.cpp b/scripts/diagnostics/loopback_probe.cpp": true,
+  "a/scripts/diagnostics/package_m6.py b/scripts/diagnostics/package_m6.py": true,
+  "a/scripts/diagnostics/run_eq_probe.ps1 b/scripts/diagnostics/run_eq_probe.ps1": true,
+  "a/scripts/diagnostics/run_m8_remaining_probe.ps1 b/scripts/diagnostics/run_m8_remaining_probe.ps1": true,
+  "a/scripts/diagnostics/run_memory_probe.ps1 b/scripts/diagnostics/run_memory_probe.ps1": true
+}

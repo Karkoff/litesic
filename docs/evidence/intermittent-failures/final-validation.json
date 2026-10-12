@@ -1,0 +1,12 @@
+{
+  "directed_samples": 92,
+  "directed_failures": 0,
+  "full_suite_executables": 124,
+  "full_suite_failures": 0,
+  "builds_passed": 4,
+  "production_diff": "",
+  "original_production_input_hashes_verified": 79,
+  "report_links_valid": true,
+  "git_diff_check": "PASS",
+  "driver_py_compile": "PASS"
+}

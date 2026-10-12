@@ -1,0 +1,17 @@
+﻿[
+    {
+        "Architecture":  "64",
+        "Configuration":  "debug",
+        "ExitCode":  0
+    },
+    {
+        "Architecture":  "32",
+        "Configuration":  "release",
+        "ExitCode":  0
+    },
+    {
+        "Architecture":  "32",
+        "Configuration":  "debug",
+        "ExitCode":  2
+    }
+]

@@ -2,6 +2,8 @@ param(
     [ValidateSet('build', 'test', 'run', 'clean', 'eq-probe', 'perf-probe')][string]$Action = 'build',
     [ValidateSet('32', '64')][string]$Architecture = '64',
     [switch]$DebugBuild,
+    [switch]$Rebuild,
+    [ValidateRange(1,32)][int]$Jobs = 4,
     [string]$Msys2Root = $env:LITESIC_MSYS2_ROOT
 )
 
@@ -30,8 +32,38 @@ try {
     $env:TMPDIR = $tempPath
     $debugValue = if ($DebugBuild) { '1' } else { '0' }
     $target = if ($Action -eq 'build') { 'all' } else { $Action }
-    & $bashPath -lc "exec make ARCH=$Architecture DEBUG=$debugValue $target"
+    $configuration = if ($DebugBuild) { 'debug' } else { 'release' }
+    $logDir = "build/internal/$Architecture/$configuration/logs"
+    New-Item -ItemType Directory -Force (Join-Path $repoRoot $logDir) | Out-Null
+    $started = [DateTimeOffset]::Now
+    if ($Action -eq 'build') {
+        $inputFiles = @(Get-ChildItem -LiteralPath 'src','res','third_party','locales' -Recurse -File) + @(Get-Item -LiteralPath 'Makefile','scripts/dev.ps1')
+        $inputs = @($inputFiles | Sort-Object FullName | ForEach-Object {
+            @{Path=$_.FullName.Substring($repoRoot.Length+1);SHA256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash}
+        })
+    }
+    # pipefail preserves make's exit code; logs never enter runtime directories.
+    $force = if ($Rebuild) { '-B' } else { '' }
+    & $bashPath -lc "set -o pipefail; make $force -j$Jobs ARCH=$Architecture DEBUG=$debugValue $target 2>&1 | tee $logDir/$Action.log"
     $result = $LASTEXITCODE
+    if ($Action -eq 'build' -and $result -eq 0) {
+        $executable = Get-Item -LiteralPath "build/$Architecture/$configuration/LiteSic.exe"
+        $manifestDir = Join-Path $repoRoot "build/internal/$Architecture/$configuration/identity"
+        New-Item -ItemType Directory -Force $manifestDir | Out-Null
+        & git diff --binary HEAD | Set-Content -Encoding UTF8 (Join-Path $manifestDir 'working-tree.patch')
+        $status = @(& git status --short)
+        $metadata = [ordered]@{
+            Commit=(& git rev-parse HEAD); WorkingTreeStatus=$status
+            IncludesUncommittedChanges=($status.Count -gt 0)
+            Started=$started.ToString('o'); Finished=[DateTimeOffset]::Now.ToString('o')
+            Architecture=$Architecture; Configuration=$configuration
+            Path=$executable.FullName; Bytes=$executable.Length
+            SHA256=(Get-FileHash -LiteralPath $executable.FullName -Algorithm SHA256).Hash
+            Compiler=(& (Join-Path $Msys2Root "$prefix/bin/g++.exe") --version | Select-Object -First 1)
+            Inputs=$inputs
+        }
+        $metadata | ConvertTo-Json -Depth 6 | Set-Content -Encoding UTF8 (Join-Path $manifestDir 'build.json')
+    }
 }
 finally {
     Pop-Location

@@ -1,0 +1,5 @@
+LANGUAGE_RESOURCES arch=64 warm_gdi=18 final_gdi=18 warm_user=18 final_user=18
+LANGUAGE_UI_METRICS arch=64 mean_notify_ms=1.335 switches=36 windows=3
+PASS live_change_preserves_audio_selection_search_eq_and_docking
+PASS auxiliary_windows_tooltips_and_theme_interaction
+2 language window cases

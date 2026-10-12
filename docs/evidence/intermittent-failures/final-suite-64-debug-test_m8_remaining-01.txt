@@ -1,0 +1,10 @@
+PASS shortcuts_and_media_on_three_panels
+PASS topmost_owns_all_panels
+PASS hotkey_conflict_rolls_back_and_releases
+PASS playlist_keyboard_reaches_actions
+PASS information_dpi_and_zoom_keep_native_controls
+PASS independent_dpi_and_open_appearance
+PASS zoom_repaints_old_equalizer_pixels
+PASS ipc_is_bounded_and_preserves_files
+PASS accessible_names_roles_actions_and_lifetime
+9 remaining Windows integration cases

@@ -1,0 +1,166 @@
+{
+  "C:\\Users\\Ander\\AppData\\Local\\LiteSic\\playlist.m3u8": {
+    "bytes": 1522597,
+    "sha256": "64973D903EEF43E6FF539F5BD87EFEED453CAACE3C3A564DB1E09806B0C1DAE2"
+  },
+  "C:\\Users\\Ander\\AppData\\Local\\LiteSic\\playlist.m3u8.ini": {
+    "bytes": 530,
+    "sha256": "8091EF2556AA71D20B7042A7C8817391911896501DAB72F621DABB31CE5D0BC0"
+  },
+  "C:\\Users\\Ander\\AppData\\Local\\LiteSic\\settings.ini": {
+    "bytes": 615,
+    "sha256": "2FF3BAC1039D82FE72D0AF2F020D0C8DD0130742E723198B5138B757F27C0B58"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\LiteSic.exe": {
+    "bytes": 4694637,
+    "sha256": "93908A174F9B0F9FA5AA35A9F06F9A7DA2D04C07BA460EC44993065EDD82C899"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\ar-SA\\messages.tsv": {
+    "bytes": 11317,
+    "sha256": "1D27E1F5E6005BA74B777FC297711C73F356800B7C62281D5BF964CE5343A935"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\de-DE\\messages.tsv": {
+    "bytes": 9683,
+    "sha256": "1379D1B5FC4B3241AEFA3305FED678B6F443932ABFD895F270B75629E1E1AE7C"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\en-US\\messages.tsv": {
+    "bytes": 8639,
+    "sha256": "4B51913103158DCC2A46BFA5CA20A59DA0933AE36ACAE48C9EF630A2A13AD411"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\es-ES\\messages.tsv": {
+    "bytes": 9353,
+    "sha256": "F300E44592F820B48B3ED9C6A947805DF6EA40C05BDBF6CDE99C018F3D81F490"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\fr-FR\\messages.tsv": {
+    "bytes": 9604,
+    "sha256": "681E95DC4F248B1BEF5494F2D758D800CFE33D4D8C3891F117259F56EE1A5562"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\hi-IN\\messages.tsv": {
+    "bytes": 15030,
+    "sha256": "81CB028CFAFC2BC7AB491BCB53B4C73817E2DF46D5FD0CE7AC77AE12734A3BF8"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\it-IT\\messages.tsv": {
+    "bytes": 9447,
+    "sha256": "A47B8395A5820F7CF9FAD8D7707E316E3A279B0E3DD7D5A074199A5F77B2D5BE"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\ja-JP\\messages.tsv": {
+    "bytes": 10725,
+    "sha256": "92B9A0978AE113328BDC22DE341000E656F6375517885049A2571031474C1DCE"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\ko-KR\\messages.tsv": {
+    "bytes": 9565,
+    "sha256": "BFF5B5489466905137756D298D5A729BD9E735431B608861D236988F41BA639F"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\nl-NL\\messages.tsv": {
+    "bytes": 9359,
+    "sha256": "F1B4BBAD09ACE29EB1A7D8F4507ADA93044641478D7FE2909451D9E43EA55179"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\pl-PL\\messages.tsv": {
+    "bytes": 9206,
+    "sha256": "A59EA8BBC61E2F863DBDC15C58780BBD40CF60983C24B9B2F639F915BAC2D7AA"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\pt-BR\\messages.tsv": {
+    "bytes": 9361,
+    "sha256": "009CB613BEF09F14E854FC9688B0D125BC64D12C918DD80F7629F685B46332C4"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\pt-PT\\messages.tsv": {
+    "bytes": 9459,
+    "sha256": "03A5E517810E6AA9C8FC00AAF0E61E90A2F9EB1189910A2162160F90A5D5F1A9"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\ru-RU\\messages.tsv": {
+    "bytes": 12635,
+    "sha256": "1F5D6B418C979EFBA97321892AE37A4898D2D0ABA76E767206BBECEF6544DF03"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\sv-SE\\messages.tsv": {
+    "bytes": 9050,
+    "sha256": "F3D4A15B4B0049B42E9C2DF68B003A40769A1CE104988D79F7E637F1CA0AEE46"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\tr-TR\\messages.tsv": {
+    "bytes": 9011,
+    "sha256": "45E070DE505411B69F5BB6794B099D70D097256334DE35823EB57307A8340614"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\zh-CN\\messages.tsv": {
+    "bytes": 8603,
+    "sha256": "EB668CBC9520EF442BB82686DFD93F38B7E87DBA852578FE940EDC908FFE04AE"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\locales\\zh-TW\\messages.tsv": {
+    "bytes": 8690,
+    "sha256": "2FB7F6474B8EDEBE3C46D64FC33E6D7CD1186841C9DC3186F1737F830D250018"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\LiteSic.exe": {
+    "bytes": 4767936,
+    "sha256": "E9C3963B0CC2D294E8AB9512E5A53AA1166B617D3147809707FD4A5C508FC4B1"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\ar-SA\\messages.tsv": {
+    "bytes": 11317,
+    "sha256": "1D27E1F5E6005BA74B777FC297711C73F356800B7C62281D5BF964CE5343A935"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\de-DE\\messages.tsv": {
+    "bytes": 9683,
+    "sha256": "1379D1B5FC4B3241AEFA3305FED678B6F443932ABFD895F270B75629E1E1AE7C"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\en-US\\messages.tsv": {
+    "bytes": 8639,
+    "sha256": "4B51913103158DCC2A46BFA5CA20A59DA0933AE36ACAE48C9EF630A2A13AD411"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\es-ES\\messages.tsv": {
+    "bytes": 9353,
+    "sha256": "F300E44592F820B48B3ED9C6A947805DF6EA40C05BDBF6CDE99C018F3D81F490"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\fr-FR\\messages.tsv": {
+    "bytes": 9604,
+    "sha256": "681E95DC4F248B1BEF5494F2D758D800CFE33D4D8C3891F117259F56EE1A5562"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\hi-IN\\messages.tsv": {
+    "bytes": 15030,
+    "sha256": "81CB028CFAFC2BC7AB491BCB53B4C73817E2DF46D5FD0CE7AC77AE12734A3BF8"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\it-IT\\messages.tsv": {
+    "bytes": 9447,
+    "sha256": "A47B8395A5820F7CF9FAD8D7707E316E3A279B0E3DD7D5A074199A5F77B2D5BE"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\ja-JP\\messages.tsv": {
+    "bytes": 10725,
+    "sha256": "92B9A0978AE113328BDC22DE341000E656F6375517885049A2571031474C1DCE"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\ko-KR\\messages.tsv": {
+    "bytes": 9565,
+    "sha256": "BFF5B5489466905137756D298D5A729BD9E735431B608861D236988F41BA639F"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\nl-NL\\messages.tsv": {
+    "bytes": 9359,
+    "sha256": "F1B4BBAD09ACE29EB1A7D8F4507ADA93044641478D7FE2909451D9E43EA55179"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\pl-PL\\messages.tsv": {
+    "bytes": 9206,
+    "sha256": "A59EA8BBC61E2F863DBDC15C58780BBD40CF60983C24B9B2F639F915BAC2D7AA"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\pt-BR\\messages.tsv": {
+    "bytes": 9361,
+    "sha256": "009CB613BEF09F14E854FC9688B0D125BC64D12C918DD80F7629F685B46332C4"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\pt-PT\\messages.tsv": {
+    "bytes": 9459,
+    "sha256": "03A5E517810E6AA9C8FC00AAF0E61E90A2F9EB1189910A2162160F90A5D5F1A9"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\ru-RU\\messages.tsv": {
+    "bytes": 12635,
+    "sha256": "1F5D6B418C979EFBA97321892AE37A4898D2D0ABA76E767206BBECEF6544DF03"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\sv-SE\\messages.tsv": {
+    "bytes": 9050,
+    "sha256": "F3D4A15B4B0049B42E9C2DF68B003A40769A1CE104988D79F7E637F1CA0AEE46"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\tr-TR\\messages.tsv": {
+    "bytes": 9011,
+    "sha256": "45E070DE505411B69F5BB6794B099D70D097256334DE35823EB57307A8340614"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\zh-CN\\messages.tsv": {
+    "bytes": 8603,
+    "sha256": "EB668CBC9520EF442BB82686DFD93F38B7E87DBA852578FE940EDC908FFE04AE"
+  },
+  "D:\\Projetos\\IA\\litesic\\build\\64\\release\\locales\\zh-TW\\messages.tsv": {
+    "bytes": 8690,
+    "sha256": "2FB7F6474B8EDEBE3C46D64FC33E6D7CD1186841C9DC3186F1737F830D250018"
+  }
+}

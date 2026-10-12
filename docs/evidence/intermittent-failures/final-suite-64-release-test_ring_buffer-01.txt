@@ -1,0 +1,13 @@
+
+=== Ring Buffer Tests (M4-T1) ===
+
+  test_write_read_order... PASS
+  test_wraparound... (writePos=0 count=512) (writePos=8 count=512) [ 519 518 517 516 515 514 513 512 ]
+PASS
+  test_empty_read... PASS
+  test_partial_read... PASS
+  test_write_full_overwrite... PASS
+  test_large_read... PASS
+
+Results: 6/6 tests passed
+

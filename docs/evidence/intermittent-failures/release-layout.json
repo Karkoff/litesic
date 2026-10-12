@@ -1,0 +1,20 @@
+{
+  "64": {
+    "root_entries": [
+      "LiteSic.exe",
+      "locales"
+    ],
+    "catalogs": 18,
+    "user_sha256": "E9C3963B0CC2D294E8AB9512E5A53AA1166B617D3147809707FD4A5C508FC4B1",
+    "isolated_sha256": "E9C3963B0CC2D294E8AB9512E5A53AA1166B617D3147809707FD4A5C508FC4B1"
+  },
+  "32": {
+    "root_entries": [
+      "LiteSic.exe",
+      "locales"
+    ],
+    "catalogs": 18,
+    "user_sha256": "93908A174F9B0F9FA5AA35A9F06F9A7DA2D04C07BA460EC44993065EDD82C899",
+    "isolated_sha256": "93908A174F9B0F9FA5AA35A9F06F9A7DA2D04C07BA460EC44993065EDD82C899"
+  }
+}

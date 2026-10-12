@@ -1,0 +1,8 @@
+FAIL tests/test_language_selection.cpp:83: final<=warm+512*1024
+PASS ordered_multisz_and_bounds
+PASS automatic_supported_regional_and_unknown
+PASS native_windows_provider_is_callable
+PASS manual_auto_and_restart_share_existing_ini
+PASS invalid_preferences_and_commands_are_safe
+PASS failed_persistence_keeps_selection_and_catalog
+PASS menu_has_native_names_and_correct_checks

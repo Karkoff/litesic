@@ -1,0 +1,42 @@
+[
+  {
+    "path": "Makefile",
+    "sha256": "a370e603a74cd7ceaac0d8473dc84e7037d37af430177fdd937a3a4745d49706"
+  },
+  {
+    "path": "docs/DEVELOPMENT.md",
+    "sha256": "4f2a6242223b53259695eac9bd46f41e0f2adfa976c3e26a5ce2bff9f9f224eb"
+  },
+  {
+    "path": "scripts/dev.ps1",
+    "sha256": "76bcb44126593058af875e0581a2f844907e107f9f0997880fee67f1fe3d0777"
+  },
+  {
+    "path": "scripts/diagnostics/loopback_probe.cpp",
+    "sha256": "d23e142c7fafa817863ea32e62d75834cde8f2fb286debe6fd24ce6d148e4c3b"
+  },
+  {
+    "path": "scripts/diagnostics/package_m6.py",
+    "sha256": "9c134a8ed9013c26b7bd26bb789ed5945c5014489d5ff7527745d997d7e051ca"
+  },
+  {
+    "path": "scripts/diagnostics/run_eq_probe.ps1",
+    "sha256": "b96a53604157f9df3df632be0fa79238840300745264504bdf91713114a20042"
+  },
+  {
+    "path": "scripts/diagnostics/run_m8_remaining_probe.ps1",
+    "sha256": "c245e63e0307f784f7dc2ef4c89e7a8c3f2f5e43c0a8cc9dca38fa204f4aa6a3"
+  },
+  {
+    "path": "scripts/diagnostics/run_memory_probe.ps1",
+    "sha256": "b2df92d3c5bcf8399df59c47b6280f97843046e0713cd6c0ef2f3f76339eafd2"
+  },
+  {
+    "path": "scripts/clean-runtime.ps1",
+    "sha256": "5d37bf50e8056e3d1b904b5ec7ba499dbbffaafbf0403f4e35932f86270c75e8"
+  },
+  {
+    "path": "scripts/diagnostics/validate_release.py",
+    "sha256": "a61a0322764e5fa9b9283c8847ecc97c040a05e7d83924ff158d812023398fb6"
+  }
+]

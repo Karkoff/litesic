@@ -1,0 +1,8 @@
+PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE
+PASS transport_and_seek_use_real_audio
+PASS capture_cancel_and_release_outside
+PASS geometry_dpi_and_keyboard_seek
+PASS appearance_persists_across_window_recreation
+PASS lcd_timer_only_runs_for_visible_overflow
+PASS visualizer_frame_drives_title_while_playing
+6 player window cases

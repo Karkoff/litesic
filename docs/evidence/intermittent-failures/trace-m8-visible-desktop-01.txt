@@ -1,0 +1,10 @@
+TOPMOST hwnd=00000000007e1178 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006309b2 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000003a0d0e class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000007e1178 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006309b2 class=LiteSic.EqualizerWnd value=1 result=1 error=0 style=8
+TOPMOST hwnd=00000000003a0d0e class=LiteSic.PlaylistWnd value=1 result=1 error=0 style=18
+TOPMOST hwnd=00000000007e1178 class=LiteSic.MainWnd value=1 result=1 error=0 style=0
+TOPMOST_CHECK hwnd=00000000007e1178 style=0
+FAIL tests/test_m8_remaining.cpp:43: GetWindowLongPtrW(hwnd,GWL_EXSTYLE)&WS_EX_TOPMOST
+PASS shortcuts_and_media_on_three_panels

@@ -1,0 +1,67 @@
+[
+  {
+    "label": "final-m8_remaining-32-debug",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\debug\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "A870DEBC8DD539E6A7F5D9263B982ECE8E1DF61BDDD2607592026AA738F840AD",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:03.027716+00:00",
+    "finished_utc": "2026-10-12T18:06:04.418652+00:00",
+    "pid": 17488,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-m8_remaining-32-debug-01.txt"
+  },
+  {
+    "label": "final-m8_remaining-32-debug",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\debug\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "A870DEBC8DD539E6A7F5D9263B982ECE8E1DF61BDDD2607592026AA738F840AD",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:04.418652+00:00",
+    "finished_utc": "2026-10-12T18:06:05.047018+00:00",
+    "pid": 16624,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-m8_remaining-32-debug-02.txt"
+  },
+  {
+    "label": "final-m8_remaining-32-debug",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\debug\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "A870DEBC8DD539E6A7F5D9263B982ECE8E1DF61BDDD2607592026AA738F840AD",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:05.047018+00:00",
+    "finished_utc": "2026-10-12T18:06:05.842203+00:00",
+    "pid": 3784,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-m8_remaining-32-debug-03.txt"
+  },
+  {
+    "label": "final-m8_remaining-32-debug",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\debug\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "A870DEBC8DD539E6A7F5D9263B982ECE8E1DF61BDDD2607592026AA738F840AD",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:05.842203+00:00",
+    "finished_utc": "2026-10-12T18:06:06.751122+00:00",
+    "pid": 47684,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-m8_remaining-32-debug-04.txt"
+  },
+  {
+    "label": "final-m8_remaining-32-debug",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\debug\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "A870DEBC8DD539E6A7F5D9263B982ECE8E1DF61BDDD2607592026AA738F840AD",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:06.751122+00:00",
+    "finished_utc": "2026-10-12T18:06:07.647428+00:00",
+    "pid": 19228,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-m8_remaining-32-debug-05.txt"
+  }
+]

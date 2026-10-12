@@ -1,0 +1,67 @@
+[
+  {
+    "label": "final-tooltip-64-debug",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "159F34058B444D633EF65B7CDDE854CC154600328FB329C03C9784B062AAD8E5",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:30.092396+00:00",
+    "finished_utc": "2026-10-12T18:05:30.909532+00:00",
+    "pid": 35280,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-tooltip-64-debug-01.txt"
+  },
+  {
+    "label": "final-tooltip-64-debug",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "159F34058B444D633EF65B7CDDE854CC154600328FB329C03C9784B062AAD8E5",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:30.910542+00:00",
+    "finished_utc": "2026-10-12T18:05:31.726808+00:00",
+    "pid": 52548,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-tooltip-64-debug-02.txt"
+  },
+  {
+    "label": "final-tooltip-64-debug",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "159F34058B444D633EF65B7CDDE854CC154600328FB329C03C9784B062AAD8E5",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:31.726808+00:00",
+    "finished_utc": "2026-10-12T18:05:32.559898+00:00",
+    "pid": 7308,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-tooltip-64-debug-03.txt"
+  },
+  {
+    "label": "final-tooltip-64-debug",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "159F34058B444D633EF65B7CDDE854CC154600328FB329C03C9784B062AAD8E5",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:32.560898+00:00",
+    "finished_utc": "2026-10-12T18:05:33.373254+00:00",
+    "pid": 42104,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-tooltip-64-debug-04.txt"
+  },
+  {
+    "label": "final-tooltip-64-debug",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "159F34058B444D633EF65B7CDDE854CC154600328FB329C03C9784B062AAD8E5",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:33.374254+00:00",
+    "finished_utc": "2026-10-12T18:05:34.229428+00:00",
+    "pid": 66500,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-tooltip-64-debug-05.txt"
+  }
+]

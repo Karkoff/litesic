@@ -1,0 +1,67 @@
+[
+  {
+    "label": "final-language_selection-64-debug",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "F293CEDFA1EB8FE809CFB06D5622256754322B7B1C7CB533C5D162BCA1D240CA",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:49.010622+00:00",
+    "finished_utc": "2026-10-12T18:05:51.828177+00:00",
+    "pid": 42616,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-language_selection-64-debug-01.txt"
+  },
+  {
+    "label": "final-language_selection-64-debug",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "F293CEDFA1EB8FE809CFB06D5622256754322B7B1C7CB533C5D162BCA1D240CA",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:51.828177+00:00",
+    "finished_utc": "2026-10-12T18:05:54.584923+00:00",
+    "pid": 42948,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-language_selection-64-debug-02.txt"
+  },
+  {
+    "label": "final-language_selection-64-debug",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "F293CEDFA1EB8FE809CFB06D5622256754322B7B1C7CB533C5D162BCA1D240CA",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:54.585923+00:00",
+    "finished_utc": "2026-10-12T18:05:57.349460+00:00",
+    "pid": 69300,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-language_selection-64-debug-03.txt"
+  },
+  {
+    "label": "final-language_selection-64-debug",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "F293CEDFA1EB8FE809CFB06D5622256754322B7B1C7CB533C5D162BCA1D240CA",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:57.350470+00:00",
+    "finished_utc": "2026-10-12T18:06:00.129167+00:00",
+    "pid": 44680,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-language_selection-64-debug-04.txt"
+  },
+  {
+    "label": "final-language_selection-64-debug",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "F293CEDFA1EB8FE809CFB06D5622256754322B7B1C7CB533C5D162BCA1D240CA",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:00.130074+00:00",
+    "finished_utc": "2026-10-12T18:06:02.895862+00:00",
+    "pid": 70404,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-language_selection-64-debug-05.txt"
+  }
+]

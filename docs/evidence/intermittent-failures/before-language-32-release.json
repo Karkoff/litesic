@@ -1,0 +1,67 @@
+[
+  {
+    "label": "before-language-32-release",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "1967A04C195948DBB9C07F10E283DF54C45913E04F9CB34E7F03A835A5ED4474",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:00:29.229119+00:00",
+    "finished_utc": "2026-10-12T18:00:30.019330+00:00",
+    "pid": 67012,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-language-32-release-01.txt"
+  },
+  {
+    "label": "before-language-32-release",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "1967A04C195948DBB9C07F10E283DF54C45913E04F9CB34E7F03A835A5ED4474",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:00:30.019330+00:00",
+    "finished_utc": "2026-10-12T18:00:30.786888+00:00",
+    "pid": 70580,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-language-32-release-02.txt"
+  },
+  {
+    "label": "before-language-32-release",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "1967A04C195948DBB9C07F10E283DF54C45913E04F9CB34E7F03A835A5ED4474",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:00:30.786888+00:00",
+    "finished_utc": "2026-10-12T18:00:31.574551+00:00",
+    "pid": 24820,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-language-32-release-03.txt"
+  },
+  {
+    "label": "before-language-32-release",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "1967A04C195948DBB9C07F10E283DF54C45913E04F9CB34E7F03A835A5ED4474",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:00:31.574551+00:00",
+    "finished_utc": "2026-10-12T18:00:32.336291+00:00",
+    "pid": 47552,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-language-32-release-04.txt"
+  },
+  {
+    "label": "before-language-32-release",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\32\\release\\internal\\tests\\test-test_language_selection.exe",
+    "sha256": "1967A04C195948DBB9C07F10E283DF54C45913E04F9CB34E7F03A835A5ED4474",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:00:32.336291+00:00",
+    "finished_utc": "2026-10-12T18:00:33.121480+00:00",
+    "pid": 42608,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-language-32-release-05.txt"
+  }
+]

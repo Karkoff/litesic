@@ -1,0 +1,67 @@
+[
+  {
+    "label": "before-tooltip-32",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\32\\test-test_tooltip.exe",
+    "sha256": "CD743DCF289EC37642734341C13CC9BE98F47E4AAD463524AADEC9120197FD8B",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:19.441264+00:00",
+    "finished_utc": "2026-10-12T17:36:20.626840+00:00",
+    "pid": 62692,
+    "exit_code": 1,
+    "timeout": false,
+    "log": "before-tooltip-32-01.txt"
+  },
+  {
+    "label": "before-tooltip-32",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\32\\test-test_tooltip.exe",
+    "sha256": "CD743DCF289EC37642734341C13CC9BE98F47E4AAD463524AADEC9120197FD8B",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:20.626840+00:00",
+    "finished_utc": "2026-10-12T17:36:21.701371+00:00",
+    "pid": 66104,
+    "exit_code": 1,
+    "timeout": false,
+    "log": "before-tooltip-32-02.txt"
+  },
+  {
+    "label": "before-tooltip-32",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\32\\test-test_tooltip.exe",
+    "sha256": "CD743DCF289EC37642734341C13CC9BE98F47E4AAD463524AADEC9120197FD8B",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:21.701371+00:00",
+    "finished_utc": "2026-10-12T17:36:23.011018+00:00",
+    "pid": 68476,
+    "exit_code": 1,
+    "timeout": false,
+    "log": "before-tooltip-32-03.txt"
+  },
+  {
+    "label": "before-tooltip-32",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\32\\test-test_tooltip.exe",
+    "sha256": "CD743DCF289EC37642734341C13CC9BE98F47E4AAD463524AADEC9120197FD8B",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:23.011018+00:00",
+    "finished_utc": "2026-10-12T17:36:24.041195+00:00",
+    "pid": 42856,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-32-04.txt"
+  },
+  {
+    "label": "before-tooltip-32",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\32\\test-test_tooltip.exe",
+    "sha256": "CD743DCF289EC37642734341C13CC9BE98F47E4AAD463524AADEC9120197FD8B",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:24.041195+00:00",
+    "finished_utc": "2026-10-12T17:36:25.005924+00:00",
+    "pid": 20992,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-32-05.txt"
+  }
+]

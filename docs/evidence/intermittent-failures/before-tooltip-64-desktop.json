@@ -1,0 +1,67 @@
+[
+  {
+    "label": "before-tooltip-64-desktop",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_tooltip.exe",
+    "sha256": "18CE4D833AFDEC0C658D420878F05AF7B1001567176E5A093FB24246524D5F44",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:40.127510+00:00",
+    "finished_utc": "2026-10-12T17:36:40.917009+00:00",
+    "pid": 23260,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-64-desktop-01.txt"
+  },
+  {
+    "label": "before-tooltip-64-desktop",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_tooltip.exe",
+    "sha256": "18CE4D833AFDEC0C658D420878F05AF7B1001567176E5A093FB24246524D5F44",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:40.917009+00:00",
+    "finished_utc": "2026-10-12T17:36:41.785205+00:00",
+    "pid": 63944,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-64-desktop-02.txt"
+  },
+  {
+    "label": "before-tooltip-64-desktop",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_tooltip.exe",
+    "sha256": "18CE4D833AFDEC0C658D420878F05AF7B1001567176E5A093FB24246524D5F44",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:41.785205+00:00",
+    "finished_utc": "2026-10-12T17:36:42.596584+00:00",
+    "pid": 37344,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-64-desktop-03.txt"
+  },
+  {
+    "label": "before-tooltip-64-desktop",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_tooltip.exe",
+    "sha256": "18CE4D833AFDEC0C658D420878F05AF7B1001567176E5A093FB24246524D5F44",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:42.596584+00:00",
+    "finished_utc": "2026-10-12T17:36:43.440660+00:00",
+    "pid": 55760,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-64-desktop-04.txt"
+  },
+  {
+    "label": "before-tooltip-64-desktop",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_tooltip.exe",
+    "sha256": "18CE4D833AFDEC0C658D420878F05AF7B1001567176E5A093FB24246524D5F44",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:36:43.440660+00:00",
+    "finished_utc": "2026-10-12T17:36:44.265604+00:00",
+    "pid": 58100,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-tooltip-64-desktop-05.txt"
+  }
+]

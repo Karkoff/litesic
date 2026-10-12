@@ -1,0 +1,12 @@
+
+=== MapSampleToY Tests (M4-T2) ===
+
+  test_zero_amplitude... PASS
+  test_positive_amplitude... PASS
+  test_negative_amplitude... PASS
+  test_clamping... PASS
+  test_small_height... PASS
+  test_linear_interpolation... PASS
+
+Results: 6/6 tests passed
+

@@ -14,6 +14,47 @@ Executáveis: `build/64/release/LiteSic.exe` e
 `build/32/release/LiteSic.exe`. Builds Debug são adicionais e não substituem
 essas entregas. Ver a regra em [AGENT.md](../AGENT.md).
 
+## Saídas separadas de execução e desenvolvimento — 12/10/2026
+
+`build/<64|32>/<release|debug>/` contém somente `LiteSic.exe` e
+`locales/<idioma>/messages.tsv` (18 idiomas). Objetos e dependências ficam em
+`build/internal/<arquitetura>/<configuração>/obj/`; testes em `tests/`;
+probes em `diagnostics/`; logs do helper em `logs/`; identificação em
+`identity/build.json`, no mesmo diretório interno. Testes e probes recebem
+seus próprios catálogos, pois o runtime resolve recursos junto ao executável.
+Arquivos temporários das suítes continuam sob `build/`, fora das pastas de execução.
+O Makefile e os caminhos de execução/depuração do VS Code preservam as quatro variantes.
+
+```powershell
+# Recompilar cada unidade, sem reutilizar objetos:
+./scripts/dev.ps1 -Architecture 64 -Rebuild
+./scripts/dev.ps1 -Architecture 32 -Rebuild
+# A mesma opção funciona com -DebugBuild; -Jobs limita o paralelismo (padrão 4).
+./scripts/dev.ps1 -Action test -Architecture 64
+# Migrar apenas artefatos conhecidos do layout antigo; desconhecidos interrompem a limpeza:
+./scripts/clean-runtime.ps1 -WhatIf
+./scripts/clean-runtime.ps1
+# Validação de inicialização exige desktop interativo e usa perfis novos explícitos:
+./.tools/gui-venv/Scripts/python.exe scripts/diagnostics/validate_release.py
+```
+
+`make clean` remove somente saídas conhecidas da variante selecionada; preserva
+catálogos, dados e arquivos desconhecidos. `run` prepara também os catálogos.
+`scripts/dev.ps1` registra commit, alterações locais, hashes dos inputs,
+compilador, intervalo da build, caminho, tamanho e SHA-256 do executável.
+Os logs usam `pipefail` para conservar o erro real de compilação/teste.
+O comando direto `make` mantém a mesma separação, mas a identificação JSON e
+os logs automáticos são responsabilidade do helper PowerShell.
+
+Esta preparação é anterior à M10: não gera instalador ou pacote de distribuição.
+Resultado e identificação da preparação: [relatório](CLEAN-RUNTIME-2026-10-12.md).
+As cinco correções exclusivas dos testes, com 92/92 amostras dirigidas e quatro
+suítes 31/31, estão no [diagnóstico de intermitências](INTERMITTENT-FAILURES-2026-10-12.md).
+O verificador Release também observa avanço real da reprodução via MSAA,
+ícone embutido e bibliotecas D2D/DirectWrite, sem instrumentar o aplicativo.
+Ele requer o ambiente Python de automação já documentado e não certifica
+qualidade visual/auditiva ou uso contínuo de dias.
+
 ## Auditoria integrada M6 — 11/10/2026
 
 Estado atual: **M6 COMPLETE**, após aceite final informado pelo usuário.

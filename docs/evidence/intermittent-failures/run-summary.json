@@ -1,0 +1,374 @@
+{
+  "after-m8-64-release-concurrent": {
+    "samples": 6,
+    "passed": 6,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "after-m8-64-release-desktop": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "after-m8-64-release-sandbox": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "after-tooltip-64-release-concurrent": {
+    "samples": 8,
+    "passed": 8,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "after-tooltip-64-release-desktop": {
+    "samples": 8,
+    "passed": 8,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "after-tooltip-64-release-sandbox": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-i18n-64": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-language-32-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-language-64-debug-concurrent": {
+    "samples": 6,
+    "passed": 5,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "before-language-64-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-m8-32": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-m8-64-desktop": {
+    "samples": 5,
+    "passed": 0,
+    "failed": 5,
+    "timeouts": 0
+  },
+  "before-m8-64": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-tooltip-32": {
+    "samples": 5,
+    "passed": 2,
+    "failed": 3,
+    "timeouts": 0
+  },
+  "before-tooltip-64-concurrent": {
+    "samples": 8,
+    "passed": 6,
+    "failed": 2,
+    "timeouts": 0
+  },
+  "before-tooltip-64-desktop": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "before-tooltip-64": {
+    "samples": 8,
+    "passed": 1,
+    "failed": 7,
+    "timeouts": 0
+  },
+  "diagnostic-i18n-desktop": {
+    "samples": 8,
+    "passed": 7,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "diagnostic-i18n-services-desktop": {
+    "samples": 8,
+    "passed": 7,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "driver-negative-control": {
+    "samples": 1,
+    "passed": 0,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "driver-positive-control": {
+    "samples": 1,
+    "passed": 1,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-i18n-32-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-i18n-32-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-i18n-64-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-i18n-64-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-i18n-concurrent": {
+    "samples": 6,
+    "passed": 6,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-language-concurrent": {
+    "samples": 6,
+    "passed": 6,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-language_selection-32-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-language_selection-32-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-language_selection-64-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-language_selection-64-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-m8_remaining-32-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-m8_remaining-32-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-m8_remaining-64-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-m8_remaining-64-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-suite-32-debug": {
+    "samples": 31,
+    "passed": 31,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-suite-32-release": {
+    "samples": 31,
+    "passed": 31,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-suite-64-debug": {
+    "samples": 31,
+    "passed": 31,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-suite-64-release": {
+    "samples": 31,
+    "passed": 31,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-tooltip-32-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-tooltip-32-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-tooltip-64-debug": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "final-tooltip-64-release": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "foreground-m8-64-desktop": {
+    "samples": 5,
+    "passed": 0,
+    "failed": 5,
+    "timeouts": 0
+  },
+  "foreground-m8-64": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "isolated-ime-tooltip-64-desktop": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "isolated-ime-tooltip-64": {
+    "samples": 8,
+    "passed": 8,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "private-desktop-m8": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "private-desktop-tooltip": {
+    "samples": 5,
+    "passed": 5,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "shared-diagnostic-sandbox": {
+    "samples": 8,
+    "passed": 5,
+    "failed": 3,
+    "timeouts": 0
+  },
+  "suite-32-debug": {
+    "samples": 31,
+    "passed": 31,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "suite-32-release": {
+    "samples": 31,
+    "passed": 30,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "suite-64-debug": {
+    "samples": 31,
+    "passed": 29,
+    "failed": 2,
+    "timeouts": 0
+  },
+  "suite-64-release": {
+    "samples": 31,
+    "passed": 30,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "trace-m8-desktop": {
+    "samples": 2,
+    "passed": 0,
+    "failed": 2,
+    "timeouts": 0
+  },
+  "trace-m8-foreground-desktop": {
+    "samples": 2,
+    "passed": 2,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "trace-m8-owner-first-desktop": {
+    "samples": 2,
+    "passed": 0,
+    "failed": 2,
+    "timeouts": 0
+  },
+  "trace-m8-visible-desktop": {
+    "samples": 2,
+    "passed": 0,
+    "failed": 2,
+    "timeouts": 0
+  },
+  "trace-tooltip-desktop": {
+    "samples": 2,
+    "passed": 2,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "trace-tooltip-more": {
+    "samples": 8,
+    "passed": 7,
+    "failed": 1,
+    "timeouts": 0
+  },
+  "trace-tooltip": {
+    "samples": 3,
+    "passed": 3,
+    "failed": 0,
+    "timeouts": 0
+  },
+  "trace2-tooltip": {
+    "samples": 8,
+    "passed": 8,
+    "failed": 0,
+    "timeouts": 0
+  }
+}

@@ -1,0 +1,9 @@
+PASS fixed_anchors_and_follow
+PASS tolerance_and_detach
+PASS work_area_edges_and_oversized_panel
+PASS transitive_graph_and_cycle_rejection
+PASS graph_detachment_and_negative_topologies
+PASS monitor_coverage_preserves_legitimate_spanning
+PASS hidden_middle_compacts_all_edges_and_restores
+PASS hidden_corner_compacts_only_when_accessible
+8 window snap cases

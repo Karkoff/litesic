@@ -1,0 +1,61 @@
+﻿diff --git a/src/mainwnd.cpp b/src/mainwnd.cpp
+index 042e5ce..362087e 100644
+--- a/src/mainwnd.cpp
++++ b/src/mainwnd.cpp
+@@ -669,8 +669,10 @@ bool RegisterPlaybackHotkeys(HWND hwnd){
+ }
+ BOOL CALLBACK TopmostWindow(HWND hwnd,LPARAM value){
+     wchar_t name[80]{};GetClassNameW(hwnd,name,80);
+-    if(wcsncmp(name,L"LiteSic.",8)==0&&wcscmp(name,L"LiteSic.TooltipWnd"))
+-        SetWindowPos(hwnd,value?HWND_TOPMOST:HWND_NOTOPMOST,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
++    if(wcsncmp(name,L"LiteSic.",8)==0&&wcscmp(name,L"LiteSic.TooltipWnd")) {
++        SetLastError(0);auto result=SetWindowPos(hwnd,value?HWND_TOPMOST:HWND_NOTOPMOST,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE);
++        std::fprintf(stderr,"TOPMOST hwnd=%p class=%ls value=%lld result=%d error=%lu style=%llx\n",hwnd,name,static_cast<long long>(value),result,GetLastError(),static_cast<unsigned long long>(GetWindowLongPtrW(hwnd,GWL_EXSTYLE)));
++    }
+     return TRUE;
+ }
+ }
+diff --git a/tests/test_m8_remaining.cpp b/tests/test_m8_remaining.cpp
+index 9c45592..99b6460 100644
+--- a/tests/test_m8_remaining.cpp
++++ b/tests/test_m8_remaining.cpp
+@@ -40,7 +40,7 @@ static void playlist_keyboard_reaches_actions(){
+     IAccessible* provider=nullptr;CHECK(SUCCEEDED(AccessibleObjectFromWindow(playlist,OBJID_CLIENT,IID_IAccessible,reinterpret_cast<void**>(&provider))));VARIANT focus{};CHECK(provider->get_accFocus(&focus)==S_OK&&focus.lVal>=1000);bool favorite=PlayerPlaylist().At(focus.lVal-1000)->favorite;Key(playlist,VK_SPACE);CHECK(PlayerPlaylist().At(focus.lVal-1000)->favorite!=favorite);
+     VARIANT search{};search.vt=VT_I4;search.lVal=520;CHECK(provider->accSelect(SELFLAG_TAKEFOCUS,search)==S_OK&&GetFocus()==edit);Key(edit,VK_TAB);CHECK(GetFocus()==playlist);provider->Release();
+ }
+-static void topmost_owns_all_panels(){SendMessageW(player,WM_COMMAND,902,0);for(auto hwnd:{player,playlist,eq})CHECK(GetWindowLongPtrW(hwnd,GWL_EXSTYLE)&WS_EX_TOPMOST);SendMessageW(player,WM_COMMAND,902,0);for(auto hwnd:{player,playlist,eq})CHECK(!(GetWindowLongPtrW(hwnd,GWL_EXSTYLE)&WS_EX_TOPMOST));}
++static void topmost_owns_all_panels(){if(std::getenv("LITESIC_TRACE_VISIBLE"))ShowWindow(player,SW_SHOWNOACTIVATE);if(std::getenv("LITESIC_TRACE_OWNER_FIRST"))CHECK(SetWindowPos(player,HWND_TOPMOST,0,0,0,0,SWP_NOMOVE|SWP_NOSIZE|SWP_NOACTIVATE));SendMessageW(player,WM_COMMAND,902,0);for(auto hwnd:{player,playlist,eq}){std::fprintf(stderr,"TOPMOST_CHECK hwnd=%p style=%llx\n",hwnd,static_cast<unsigned long long>(GetWindowLongPtrW(hwnd,GWL_EXSTYLE)));CHECK(GetWindowLongPtrW(hwnd,GWL_EXSTYLE)&WS_EX_TOPMOST);}SendMessageW(player,WM_COMMAND,902,0);for(auto hwnd:{player,playlist,eq})CHECK(!(GetWindowLongPtrW(hwnd,GWL_EXSTYLE)&WS_EX_TOPMOST));}
+ static void CALLBACK OpenInformation(HWND,UINT,UINT_PTR id,DWORD){KillTimer(playlist,id);EndMenu();PostMessageW(playlist,WM_COMMAND,PL_COMMAND_INFORMATION,0);}
+ static void information_dpi_and_zoom_keep_native_controls(){
+     CHECK(PlayerPlayback().PlayIndex(0));PlWnd_Refresh(true);CHECK(SetTimer(playlist,888,20,OpenInformation));
+diff --git a/tests/test_tooltip.cpp b/tests/test_tooltip.cpp
+index 1d552ab..342f6e6 100644
+--- a/tests/test_tooltip.cpp
++++ b/tests/test_tooltip.cpp
+@@ -12,6 +12,13 @@
+ #include <psapi.h>
+ #include <chrono>
+ #include <cmath>
++#include <tlhelp32.h>
++static BOOL CALLBACK TraceWindow(HWND hwnd,LPARAM){DWORD pid=0;auto tid=GetWindowThreadProcessId(hwnd,&pid);if(pid==GetCurrentProcessId()){wchar_t cls[160]{};GetClassNameW(hwnd,cls,160);std::fprintf(stderr,"RESOURCE_WINDOW tid=%lu hwnd=%p class=%ls\n",tid,hwnd,cls);}return TRUE;}
++static void TraceResources(const char* phase){
++    std::fprintf(stderr,"RESOURCE_PHASE %s GDI=%lu USER=%lu\n",phase,GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS),GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS));
++    HANDLE snapshot=CreateToolhelp32Snapshot(TH32CS_SNAPTHREAD,0);THREADENTRY32 entry{};entry.dwSize=sizeof(entry);if(Thread32First(snapshot,&entry))do{if(entry.th32OwnerProcessID==GetCurrentProcessId())EnumThreadWindows(entry.th32ThreadID,TraceWindow,0);}while(Thread32Next(snapshot,&entry));CloseHandle(snapshot);
++    HWND hwnd=nullptr;while((hwnd=FindWindowExW(HWND_MESSAGE,hwnd,nullptr,nullptr)))TraceWindow(hwnd,0);
++}
+ using namespace Ui::Tooltips;
+ static HWND mainWindow,playlist,eq,themes;
+ static BOOL CALLBACK Find(HWND h,LPARAM){wchar_t name[80]{};GetClassNameW(h,name,80);
+@@ -84,8 +91,10 @@ static void audio_and_incremental_resources(){
+     auto gdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS),user=GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS);auto cursor=Audio_TestCursor();auto start=std::chrono::steady_clock::now();
+     for(int i=0;i<1800;++i){for(int id=1;id<=15;++id)CHECK(!Description(eq,id).empty());render();}
+     double ms=std::chrono::duration<double,std::milli>(std::chrono::steady_clock::now()-start).count();
+-    CHECK(GetProcessMemoryInfo(GetCurrentProcess(),reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&b),sizeof(b)));CHECK(b.PrivateUsage<=a.PrivateUsage+512*1024);
+-    CHECK(GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS)==gdi);CHECK(GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS)==user);
++    CHECK(GetProcessMemoryInfo(GetCurrentProcess(),reinterpret_cast<PROCESS_MEMORY_COUNTERS*>(&b),sizeof(b)));
++    auto afterGdi=GetGuiResources(GetCurrentProcess(),GR_GDIOBJECTS),afterUser=GetGuiResources(GetCurrentProcess(),GR_USEROBJECTS);
++    std::fprintf(stderr,"RESOURCE_MEASURE private=%llu->%llu GDI=%lu->%lu USER=%lu->%lu\n",static_cast<unsigned long long>(a.PrivateUsage),static_cast<unsigned long long>(b.PrivateUsage),gdi,afterGdi,user,afterUser);TraceResources("after-loop");
++    CHECK(b.PrivateUsage<=a.PrivateUsage+512*1024);CHECK(afterGdi==gdi);CHECK(afterUser==user);
+     CHECK(Audio_TestCursor()>cursor);CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);CHECK(Eq::State().enabled&&Eq::State().gains[4]==3);
+     printf("TOOLTIP_METRICS descriptions=27000 elapsed_ms=%.3f private_delta=%lld GDI=%lu USER=%lu\n",ms,static_cast<long long>(b.PrivateUsage)-a.PrivateUsage,static_cast<unsigned long>(gdi),static_cast<unsigned long>(user));Audio_Shutdown();
+ }

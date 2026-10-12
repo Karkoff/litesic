@@ -1,0 +1,10 @@
+PASS ordered_multisz_and_bounds
+PASS automatic_supported_regional_and_unknown
+PASS native_windows_provider_is_callable
+PASS manual_auto_and_restart_share_existing_ini
+PASS invalid_preferences_and_commands_are_safe
+PASS failed_persistence_keeps_selection_and_catalog
+PASS menu_has_native_names_and_correct_checks
+LANGUAGE_METRICS arch=64 mean_change_ms=1.416 warm_private=2957312 final_private=3121152 switches=1980 catalogs_resident=2
+PASS repeated_live_changes_cost_and_memory
+8 language selection cases

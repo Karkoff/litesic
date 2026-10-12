@@ -1,0 +1,80 @@
+[
+  {
+    "label": "final-i18n-concurrent",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "C26164D868D2DBAB19FED08D974020CA23AE9F5CD7A30C9DEF874E7E5C80917C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:55.393645+00:00",
+    "finished_utc": "2026-10-12T18:06:55.940153+00:00",
+    "pid": 56384,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-concurrent-01.txt"
+  },
+  {
+    "label": "final-i18n-concurrent",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "C26164D868D2DBAB19FED08D974020CA23AE9F5CD7A30C9DEF874E7E5C80917C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:55.393645+00:00",
+    "finished_utc": "2026-10-12T18:06:55.940153+00:00",
+    "pid": 8168,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-concurrent-02.txt"
+  },
+  {
+    "label": "final-i18n-concurrent",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "C26164D868D2DBAB19FED08D974020CA23AE9F5CD7A30C9DEF874E7E5C80917C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:55.940153+00:00",
+    "finished_utc": "2026-10-12T18:06:56.513947+00:00",
+    "pid": 11644,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-concurrent-03.txt"
+  },
+  {
+    "label": "final-i18n-concurrent",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "C26164D868D2DBAB19FED08D974020CA23AE9F5CD7A30C9DEF874E7E5C80917C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:55.940153+00:00",
+    "finished_utc": "2026-10-12T18:06:56.512932+00:00",
+    "pid": 63756,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-concurrent-04.txt"
+  },
+  {
+    "label": "final-i18n-concurrent",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "C26164D868D2DBAB19FED08D974020CA23AE9F5CD7A30C9DEF874E7E5C80917C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:56.512932+00:00",
+    "finished_utc": "2026-10-12T18:06:57.087977+00:00",
+    "pid": 20172,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-concurrent-05.txt"
+  },
+  {
+    "label": "final-i18n-concurrent",
+    "sample": 6,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "C26164D868D2DBAB19FED08D974020CA23AE9F5CD7A30C9DEF874E7E5C80917C",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:06:56.513947+00:00",
+    "finished_utc": "2026-10-12T18:06:57.087977+00:00",
+    "pid": 44112,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-concurrent-06.txt"
+  }
+]

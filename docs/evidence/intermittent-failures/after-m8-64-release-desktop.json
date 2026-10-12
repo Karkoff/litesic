@@ -1,0 +1,67 @@
+[
+  {
+    "label": "after-m8-64-release-desktop",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1B93920865E1AA6662E981155E774C4C092E0DF8EFEF3F1BF95F481D4A4F4FC2",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:52:57.149719+00:00",
+    "finished_utc": "2026-10-12T17:52:57.634493+00:00",
+    "pid": 53656,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-m8-64-release-desktop-01.txt"
+  },
+  {
+    "label": "after-m8-64-release-desktop",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1B93920865E1AA6662E981155E774C4C092E0DF8EFEF3F1BF95F481D4A4F4FC2",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:52:57.635001+00:00",
+    "finished_utc": "2026-10-12T17:52:58.233964+00:00",
+    "pid": 70668,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-m8-64-release-desktop-02.txt"
+  },
+  {
+    "label": "after-m8-64-release-desktop",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1B93920865E1AA6662E981155E774C4C092E0DF8EFEF3F1BF95F481D4A4F4FC2",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:52:58.233964+00:00",
+    "finished_utc": "2026-10-12T17:52:58.770705+00:00",
+    "pid": 42652,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-m8-64-release-desktop-03.txt"
+  },
+  {
+    "label": "after-m8-64-release-desktop",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1B93920865E1AA6662E981155E774C4C092E0DF8EFEF3F1BF95F481D4A4F4FC2",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:52:58.770705+00:00",
+    "finished_utc": "2026-10-12T17:52:59.350491+00:00",
+    "pid": 71656,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-m8-64-release-desktop-04.txt"
+  },
+  {
+    "label": "after-m8-64-release-desktop",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1B93920865E1AA6662E981155E774C4C092E0DF8EFEF3F1BF95F481D4A4F4FC2",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:52:59.350491+00:00",
+    "finished_utc": "2026-10-12T17:52:59.920880+00:00",
+    "pid": 71032,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-m8-64-release-desktop-05.txt"
+  }
+]

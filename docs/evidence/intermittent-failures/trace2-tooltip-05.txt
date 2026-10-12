@@ -1,0 +1,159 @@
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000460924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000460924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000460924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000470924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000480924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000490924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004a0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004b0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004c0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004d0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004e0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004f0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000500924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000510924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000520924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000530924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000540924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000550924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000560924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000570924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000580924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000590924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000005a0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000005b0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000005c0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000005d0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000005e0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000005f0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000600924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000610924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000620924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000630924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000640924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000650924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000660924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000670924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000680924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=0000000000690924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006a0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006b0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006c0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006d0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000006e0924 class=LiteSic.EqualizerWnd value=0 result=1 error=0 style=0
+TOPMOST hwnd=00000000004308f6 class=LiteSic.PlaylistWnd value=0 result=1 error=0 style=10
+TOPMOST hwnd=00000000001e0904 class=LiteSic.MainWnd value=0 result=1 error=0 style=0
+RESOURCE_MEASURE private=62423040->62423040 GDI=42->42 USER=50->50
+RESOURCE_PHASE after-loop GDI=42 USER=50
+RESOURCE_WINDOW tid=9012 hwnd=00000000006e0924 class=LiteSic.EqualizerWnd
+RESOURCE_WINDOW tid=9012 hwnd=00000000004308f6 class=LiteSic.PlaylistWnd
+RESOURCE_WINDOW tid=9012 hwnd=00000000001e0904 class=LiteSic.MainWnd
+RESOURCE_WINDOW tid=9012 hwnd=00000000005808ec class=MSCTFIME UI
+RESOURCE_WINDOW tid=9012 hwnd=0000000000360d0e class=IME
+RESOURCE_WINDOW tid=70644 hwnd=00000000007408e2 class=Touch Tooltip Window
+RESOURCE_WINDOW tid=70644 hwnd=00000000007c092c class=UAC_InputIndicatorOverlayWnd
+RESOURCE_WINDOW tid=70644 hwnd=00000000002b08f0 class=UAC Input Indicator
+RESOURCE_WINDOW tid=70644 hwnd=00000000006e0504 class=CicLoaderWndClass
+RESOURCE_WINDOW tid=70644 hwnd=00000000005e09b2 class=CiceroUIWndFrame
+RESOURCE_WINDOW tid=70644 hwnd=00000000007d08f2 class=CiceroUIWndFrame
+RESOURCE_WINDOW tid=70644 hwnd=0000000001bf1986 class=ANIMATION_TIMER_HWND
+RESOURCE_WINDOW tid=70644 hwnd=00000000006108ca class=Input Switch Message Worker Window
+RESOURCE_WINDOW tid=70644 hwnd=00000000003a1662 class=SystemUserAdapterWindowClass
+RESOURCE_WINDOW tid=70644 hwnd=0000000000b81796 class=CicMarshalWndClass
+RESOURCE_WINDOW tid=9012 hwnd=00000000001d090e class=CicMarshalWndClass
+RESOURCE_WINDOW tid=9012 hwnd=00000000007a1178 class=OleMainThreadWndClass
+PASS names_and_regions
+PASS dynamic_transport_and_visibility
+PASS dsp_values_and_unavailable_bands
+PASS all_catalogs_and_themes
+PASS edge_placement_and_dpi
+PASS native_controls_and_lifecycle
+PASS favorites_use_real_track
+TOOLTIP_METRICS descriptions=27000 elapsed_ms=17.558 private_delta=0 GDI=42 USER=50
+PASS audio_and_incremental_resources
+8 tooltip cases

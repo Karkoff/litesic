@@ -1,0 +1,204 @@
+"""Bounded Release smoke checks using only fresh explicit profiles.
+
+Run with the existing .tools/gui-venv/Scripts/python.exe. No desktop input,
+screenshots, personal media, or production instrumentation is used.
+"""
+import configparser
+import ctypes
+from ctypes import wintypes as W
+import hashlib
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import time
+import comtypes.client
+from comtypes.automation import VARIANT
+
+ROOT = Path(__file__).resolve().parents[2]
+WORK = ROOT / 'build/validation/clean-runtime' / (time.strftime('runtime-%Y%m%d-%H%M%S') + '-' + str(os.getpid()))
+WORK.mkdir(parents=True)
+user = ctypes.WinDLL('user32', use_last_error=True)
+kernel = ctypes.WinDLL('kernel32', use_last_error=True)
+psapi = ctypes.WinDLL('psapi', use_last_error=True)
+callback = ctypes.WINFUNCTYPE(W.BOOL, W.HWND, W.LPARAM)
+user.EnumWindows.argtypes = [callback, W.LPARAM]
+user.GetWindowThreadProcessId.argtypes = [W.HWND, ctypes.POINTER(W.DWORD)]
+user.GetClassNameW.argtypes = [W.HWND, W.LPWSTR, ctypes.c_int]
+user.GetWindowTextW.argtypes = [W.HWND, W.LPWSTR, ctypes.c_int]
+user.PostMessageW.argtypes = [W.HWND, W.UINT, W.WPARAM, W.LPARAM]
+user.SendMessageTimeoutW.argtypes = [W.HWND, W.UINT, W.WPARAM, W.LPARAM, W.UINT, W.UINT,
+                                    ctypes.POINTER(ctypes.c_size_t)]
+kernel.OpenProcess.argtypes = [W.DWORD, W.BOOL, W.DWORD]
+kernel.OpenProcess.restype = W.HANDLE
+kernel.CloseHandle.argtypes = [W.HANDLE]
+psapi.EnumProcessModulesEx.argtypes = [W.HANDLE, ctypes.POINTER(W.HMODULE), W.DWORD, ctypes.POINTER(W.DWORD), W.DWORD]
+psapi.GetModuleFileNameExW.argtypes = [W.HANDLE, W.HMODULE, W.LPWSTR, W.DWORD]
+accessibility = comtypes.client.GetModule('oleacc.dll')
+oleacc = ctypes.OleDLL('oleacc')
+oleacc.AccessibleObjectFromWindow.argtypes = [W.HWND, W.DWORD, ctypes.POINTER(comtypes.GUID),
+                                             ctypes.POINTER(ctypes.POINTER(accessibility.IAccessible))]
+
+
+def playback(hwnd, process):
+    """Observe real transport progress through the existing MSAA seek value."""
+    provider = ctypes.POINTER(accessibility.IAccessible)()
+    oleacc.AccessibleObjectFromWindow(hwnd, 0xFFFFFFFC,
+        ctypes.byref(accessibility.IAccessible._iid_), ctypes.byref(provider))
+    assert provider.accChildCount > 0
+    provider.accDoDefaultAction(VARIANT(5))
+    deadline = time.monotonic() + 5
+    first = int(provider.accValue[8])
+    while True:
+        assert process.poll() is None, ('playback premature exit', process.returncode)
+        final = int(provider.accValue[8])
+        if final > first:
+            break
+        assert time.monotonic() < deadline, ('seek did not advance', first, final)
+        time.sleep(.05)
+    provider.accDoDefaultAction(VARIANT(7))
+    return dict(result='PASS', observation='MSAA seek percentage advanced',
+                initial_percent=first, final_percent=final, volume_percent=provider.accValue[9])
+
+
+def digest(path):
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def snapshot(directory):
+    return {str(p.relative_to(directory)): digest(p) for p in directory.rglob('*') if p.is_file()}
+
+
+def windows(pid):
+    found = {}
+    @callback
+    def visit(hwnd, _):
+        owner = W.DWORD()
+        user.GetWindowThreadProcessId(hwnd, ctypes.byref(owner))
+        if owner.value == pid:
+            name = ctypes.create_unicode_buffer(256)
+            user.GetClassNameW(hwnd, name, 256)
+            found[name.value] = hwnd
+        return True
+    assert user.EnumWindows(visit, 0)
+    return found
+
+
+def modules(pid):
+    handle = kernel.OpenProcess(0x410, False, pid)
+    assert handle, ctypes.get_last_error()
+    try:
+        items = (W.HMODULE * 2048)()
+        needed = W.DWORD()
+        assert psapi.EnumProcessModulesEx(handle, items, ctypes.sizeof(items), ctypes.byref(needed), 3)
+        assert needed.value <= ctypes.sizeof(items)
+        result = []
+        for item in items[:needed.value // ctypes.sizeof(W.HMODULE)]:
+            path = ctypes.create_unicode_buffer(32768)
+            assert psapi.GetModuleFileNameExW(handle, item, path, len(path))
+            result.append(path.value)
+        return result
+    finally:
+        kernel.CloseHandle(handle)
+
+
+def smoke(exe, code, label, fixture):
+    profile = WORK / label
+    profile.mkdir()
+    (profile / 'settings.ini').write_text(
+        '[Appearance]\nEqualizerVisible=1\nPlaylistVisible=1\nVolumePermille=0\nGlobalHotkeys=0\n'
+        '[Language]\nMode=manual\nSelected=' + code + '\n'
+        '[Equalizer]\nEnabled=1\nPreamp=-3\nBand0=2\n', encoding='utf-8')
+    # No MSYS2, compiler, Python, or repository paths in the child's PATH.
+    env = os.environ.copy()
+    env['PATH'] = os.environ['SystemRoot'] + '\\System32;' + os.environ['SystemRoot']
+    env.pop('LITESIC_NO_CAPTURE', None)
+    catalog = dict(line.split('\t', 1) for line in (exe.parent/'locales'/code/'messages.tsv').read_text(encoding='utf-8-sig').splitlines() if line and not line.startswith('#'))
+    process = subprocess.Popen([str(exe), '--profile=' + str(profile), str(fixture)],
+                               cwd=exe.parent, env=env, creationflags=subprocess.CREATE_NO_WINDOW)
+    try:
+        deadline = time.monotonic() + 15
+        classes = ('LiteSic.MainWnd', 'LiteSic.PlaylistWnd', 'LiteSic.EqualizerWnd')
+        while True:
+            assert process.poll() is None, ('premature exit', label, process.returncode)
+            found = windows(process.pid)
+            if all(name in found for name in classes):
+                break
+            assert time.monotonic() < deadline, ('startup timeout', label, found)
+            time.sleep(.05)
+        captions = {}
+        for cls, key in [('LiteSic.PlaylistWnd', 'playlist.title'), ('LiteSic.EqualizerWnd', 'equalizer.title')]:
+            title = ctypes.create_unicode_buffer(1024)
+            user.GetWindowTextW(found[cls], title, len(title))
+            value = catalog[key]
+            if code == 'ar-SA':
+                value = '\u202a' + value + '\u202c'
+            expected = catalog['window.caption'].replace('{title}', value)
+            assert title.value == expected, (label, title.value, expected)
+            captions[cls] = title.value
+        loaded = modules(process.pid)
+        icon = ctypes.c_size_t()
+        assert user.SendMessageTimeoutW(found['LiteSic.MainWnd'], 0x7F, 1, 0, 2, 5000,
+                                        ctypes.byref(icon)), 'WM_GETICON timeout'
+        assert icon.value, 'Embedded application icon not loaded'
+        module_names = {Path(module).name.lower() for module in loaded}
+        assert {'d2d1.dll', 'dwrite.dll'} <= module_names, 'Rendering libraries not loaded'
+        repo = str(ROOT).lower() + os.sep
+        for module in loaded:
+            assert not module.lower().startswith(repo) or Path(module).resolve() == exe.resolve(), module
+            assert '.tools' not in module.lower(), module
+        transport = playback(found['LiteSic.MainWnd'], process) if code == 'en-US' else None
+        assert user.PostMessageW(found['LiteSic.MainWnd'], 0x10, 0, 0)
+        assert process.wait(timeout=15) == 0
+        session = (profile/'playlist.m3u8').read_text(encoding='utf-8-sig')
+        assert fixture.name in session
+        ini = configparser.ConfigParser()
+        ini.read(profile/'settings.ini', encoding='utf-8-sig')
+        assert ini['Language']['Selected'] == code
+        assert ini['Equalizer']['Enabled'] == '1'
+        assert float(ini['Equalizer']['Preamp']) == -3
+        assert float(ini['Equalizer']['Band0']) == 2
+        assert ini['Appearance']['VolumePermille'] == '0'
+        return dict(label=label, result='PASS', executable=str(exe), locale=code,
+                    captions=captions, modules=loaded, playback=transport, exit_code=process.returncode)
+    finally:
+        if process.poll() is None:
+            process.kill()
+            process.wait(timeout=10)
+
+
+def main():
+    personal = Path(os.environ['LOCALAPPDATA'])/'LiteSic'
+    personal_before = snapshot(personal)
+    before = {arch: snapshot(ROOT/f'build/{arch}/release') for arch in ('64','32')}
+    results = []
+    fixture = (ROOT/'tests/fixtures/native-44100.wav').resolve()
+    for arch in ('64','32'):
+        directory = ROOT/f'build/{arch}/release'
+        assert sorted(p.name for p in directory.iterdir()) == ['LiteSic.exe', 'locales']
+        catalogs = sorted((ROOT/'locales').glob('*/messages.tsv'))
+        assert len(catalogs) == 18
+        for source in catalogs:
+            assert digest(source) == digest(directory/'locales'/source.parent.name/source.name)
+        for source in catalogs:
+            result = smoke(directory/'LiteSic.exe', source.parent.name, arch+'-'+source.parent.name, fixture)
+            results.append(result)
+            print(result['label'], 'PASS', flush=True)
+        # Copy only runtime files; use local media and no repository cwd or PATH.
+        detached = WORK/('detached-'+arch)
+        detached.mkdir()
+        shutil.copy2(directory/'LiteSic.exe', detached/'LiteSic.exe')
+        shutil.copytree(directory/'locales', detached/'locales')
+        shutil.copy2(fixture, detached/fixture.name)
+        results.append(smoke(detached/'LiteSic.exe', 'en-US', arch+'-detached', detached/fixture.name))
+    for arch in ('64','32'):
+        assert snapshot(ROOT/f'build/{arch}/release') == before[arch], 'Release changed during checks'
+    assert snapshot(personal) == personal_before, 'Personal profile changed'
+    (WORK/'results.json').write_text(json.dumps(dict(checks=results, personal_profile_unchanged=True,
+        release_directories_unchanged=True, catalogs_per_architecture=18), ensure_ascii=False, indent=2), encoding='utf-8')
+    print('PASS: 38 launches, 4 playback progress checks, localized panels, embedded icon, D2D/DWrite, persistence, loaded modules, clean Release and personal profile integrity.', flush=True)
+
+
+if __name__ == '__main__':
+    main()

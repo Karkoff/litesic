@@ -1,0 +1,2 @@
+FAIL tests/test_m8_remaining.cpp:47: SetForegroundWindow(player)
+PASS shortcuts_and_media_on_three_panels

@@ -1,0 +1,15 @@
+[
+  {
+    "label": "driver-negative-control",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\.tools\\msys64\\usr\\bin\\false.exe",
+    "sha256": "71314347CF1355D1FD818D62FE11CF6B58373E70170A273335D38A8BACB987D6",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:17:41.756395+00:00",
+    "finished_utc": "2026-10-12T18:17:41.799074+00:00",
+    "pid": 66764,
+    "exit_code": 1,
+    "timeout": false,
+    "log": "driver-negative-control-01.txt"
+  }
+]

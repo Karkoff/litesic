@@ -1,0 +1,6 @@
+
+=== M3-T1: FormatTime unit tests ===
+
+  test 1: FormatTime(0s, elapsed) = "00:00"                    test 2: FormatTime(45s, elapsed) = "00:45"                   test 3: FormatTime(125s, elapsed) = "02:05"                  test 4: FormatTime(45s, remaining, dur=120s) = "-01:15"      test 5: FormatTime(0s, remaining) = "02:00" (no minus at start)   test 6: FormatTime(7200s, elapsed) = "99:59" (capped)        test 7: FormatTime(59.6s, elapsed) = "01:00" (rounded)       test 8: FormatTime with tiny buffer (cchMax < 6) — no crash   test 9: FormatTime(59s, elapsed) = "00:59"                   test 10: FormatTime(3600s, elapsed) = "60:00"               
+--- Results: 10 tests, 0 failures ---
+

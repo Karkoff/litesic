@@ -1,0 +1,348 @@
+﻿{
+    "Commit":  "609cb38a2f6fa73cde22e56354b51ead08ee5da0",
+    "WorkingTreeStatus":  [
+                              " M Makefile",
+                              " M scripts/dev.ps1",
+                              " M scripts/diagnostics/loopback_probe.cpp",
+                              " M scripts/diagnostics/package_m6.py",
+                              " M scripts/diagnostics/run_eq_probe.ps1",
+                              " M scripts/diagnostics/run_m8_remaining_probe.ps1",
+                              " M scripts/diagnostics/run_memory_probe.ps1",
+                              "?? scripts/clean-runtime.ps1"
+                          ],
+    "IncludesUncommittedChanges":  true,
+    "Started":  "2026-10-12T14:15:20.4406802-03:00",
+    "Finished":  "2026-10-12T14:15:47.6064249-03:00",
+    "Architecture":  "32",
+    "Configuration":  "release",
+    "Path":  "D:\\Projetos\\IA\\litesic\\build\\32\\release\\LiteSic.exe",
+    "Bytes":  4694637,
+    "SHA256":  "93908A174F9B0F9FA5AA35A9F06F9A7DA2D04C07BA460EC44993065EDD82C899",
+    "Compiler":  "g++.exe (Rev5, Built by MSYS2 project) 16.2.0",
+    "Inputs":  [
+                   {
+                       "SHA256":  "1D27E1F5E6005BA74B777FC297711C73F356800B7C62281D5BF964CE5343A935",
+                       "Path":  "locales\\ar-SA\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "1379D1B5FC4B3241AEFA3305FED678B6F443932ABFD895F270B75629E1E1AE7C",
+                       "Path":  "locales\\de-DE\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "4B51913103158DCC2A46BFA5CA20A59DA0933AE36ACAE48C9EF630A2A13AD411",
+                       "Path":  "locales\\en-US\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "F300E44592F820B48B3ED9C6A947805DF6EA40C05BDBF6CDE99C018F3D81F490",
+                       "Path":  "locales\\es-ES\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "681E95DC4F248B1BEF5494F2D758D800CFE33D4D8C3891F117259F56EE1A5562",
+                       "Path":  "locales\\fr-FR\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "81CB028CFAFC2BC7AB491BCB53B4C73817E2DF46D5FD0CE7AC77AE12734A3BF8",
+                       "Path":  "locales\\hi-IN\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "A47B8395A5820F7CF9FAD8D7707E316E3A279B0E3DD7D5A074199A5F77B2D5BE",
+                       "Path":  "locales\\it-IT\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "92B9A0978AE113328BDC22DE341000E656F6375517885049A2571031474C1DCE",
+                       "Path":  "locales\\ja-JP\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "BFF5B5489466905137756D298D5A729BD9E735431B608861D236988F41BA639F",
+                       "Path":  "locales\\ko-KR\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "F1B4BBAD09ACE29EB1A7D8F4507ADA93044641478D7FE2909451D9E43EA55179",
+                       "Path":  "locales\\nl-NL\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "A59EA8BBC61E2F863DBDC15C58780BBD40CF60983C24B9B2F639F915BAC2D7AA",
+                       "Path":  "locales\\pl-PL\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "009CB613BEF09F14E854FC9688B0D125BC64D12C918DD80F7629F685B46332C4",
+                       "Path":  "locales\\pt-BR\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "03A5E517810E6AA9C8FC00AAF0E61E90A2F9EB1189910A2162160F90A5D5F1A9",
+                       "Path":  "locales\\pt-PT\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "1F5D6B418C979EFBA97321892AE37A4898D2D0ABA76E767206BBECEF6544DF03",
+                       "Path":  "locales\\ru-RU\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "F3D4A15B4B0049B42E9C2DF68B003A40769A1CE104988D79F7E637F1CA0AEE46",
+                       "Path":  "locales\\sv-SE\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "45E070DE505411B69F5BB6794B099D70D097256334DE35823EB57307A8340614",
+                       "Path":  "locales\\tr-TR\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "EB668CBC9520EF442BB82686DFD93F38B7E87DBA852578FE940EDC908FFE04AE",
+                       "Path":  "locales\\zh-CN\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "2FB7F6474B8EDEBE3C46D64FC33E6D7CD1186841C9DC3186F1737F830D250018",
+                       "Path":  "locales\\zh-TW\\messages.tsv"
+                   },
+                   {
+                       "SHA256":  "A370E603A74CD7CEAAC0D8473DC84E7037D37AF430177FDD937A3A4745D49706",
+                       "Path":  "Makefile"
+                   },
+                   {
+                       "SHA256":  "B31A1C76B9D274630E01DC4461448F500E05E081716F57947504474003C780F1",
+                       "Path":  "res\\app.manifest"
+                   },
+                   {
+                       "SHA256":  "FF80D9691497589F6043FA826CF26FD3C2902B2CF65A539AC04AC38FF2C9A634",
+                       "Path":  "res\\app.rc"
+                   },
+                   {
+                       "SHA256":  "CD6E2C91A4328C75236C94C000C19B8940A955C45402A7FC18AD4B74A3FAFD76",
+                       "Path":  "res\\icon.ico"
+                   },
+                   {
+                       "SHA256":  "76BCB44126593058AF875E0581A2F844907E107F9F0997880FEE67F1FE3D0777",
+                       "Path":  "scripts\\dev.ps1"
+                   },
+                   {
+                       "SHA256":  "47F35D4C59A45DFD5FD87BF4A7131289869054E370939E25313BE313708F2528",
+                       "Path":  "src\\app.cpp"
+                   },
+                   {
+                       "SHA256":  "2D9922FB6A50D459F8436C282196174B28908B5D7BD93801878CC8427AB0663C",
+                       "Path":  "src\\audio.cpp"
+                   },
+                   {
+                       "SHA256":  "68BCE2A528A2E89B0634B268231769A96472A67A1980DE08279D8A78837B33A9",
+                       "Path":  "src\\audio.h"
+                   },
+                   {
+                       "SHA256":  "BC0AC25F7F6C3E9F1BFB47DCEBC21EF6327F642D3FD7AC6FB769B802655B94A8",
+                       "Path":  "src\\eq_dsp.cpp"
+                   },
+                   {
+                       "SHA256":  "570477F9A91A82A69ADB62B0597F3B2385583A8A10FD1D1ED2ADA8E3590CB2FF",
+                       "Path":  "src\\eq_dsp.h"
+                   },
+                   {
+                       "SHA256":  "01B5E1E3A934EC8A42609A567ABAEA26837AC5FA77CE1908AEFD7C4B3998A266",
+                       "Path":  "src\\eq_state.cpp"
+                   },
+                   {
+                       "SHA256":  "AD6371F3C0E294054D83014EAE583FB2E04200E0D2A7340E252949A1F716D01D",
+                       "Path":  "src\\eq_state.h"
+                   },
+                   {
+                       "SHA256":  "BFAA02CC6D4CD85C143D1C76366370BC8CFCC4926A74B8AFA2EC6F0DA4058206",
+                       "Path":  "src\\eqwnd.cpp"
+                   },
+                   {
+                       "SHA256":  "E4439AA804684C573180FB4E2E6DEF7603F496C20AAA4CCAD82FEC60A973DCF9",
+                       "Path":  "src\\eqwnd.h"
+                   },
+                   {
+                       "SHA256":  "0CDEB63C19126355FFC0EC5E8091357576823EA9E8A2CBB2E554B3DD102C3CE5",
+                       "Path":  "src\\i18n.cpp"
+                   },
+                   {
+                       "SHA256":  "C7C64534B60B87426D59B996258E351DE14F5F44026FD2C734EB5FF87A80E65C",
+                       "Path":  "src\\i18n.h"
+                   },
+                   {
+                       "SHA256":  "F9662F2C5998D771E80DC858113A0227A5883905153E1C198935C1D6B8F0CBB4",
+                       "Path":  "src\\i18n_english.h"
+                   },
+                   {
+                       "SHA256":  "437190D1EBB3FCDFD966900277EB4F403BD3BE57ED686247E4351B3090586E74",
+                       "Path":  "src\\language_selection.cpp"
+                   },
+                   {
+                       "SHA256":  "824DC1A43E467E7C63DAD219386D55E68F48075759D049CD76EC2CACF347E6EE",
+                       "Path":  "src\\language_selection.h"
+                   },
+                   {
+                       "SHA256":  "D6DA8397D63F18280E6BE01B70357372876BE3AD453CBE168CCFFED21F736686",
+                       "Path":  "src\\m3u.cpp"
+                   },
+                   {
+                       "SHA256":  "C32C10469227ADF3C5DE9B51BB7926D8C0681FC7555001B7C709B05631D90C6B",
+                       "Path":  "src\\m3u.h"
+                   },
+                   {
+                       "SHA256":  "BD799F400D6E64E96A919C659A827C389FC9B63DA30BAD07EB83E5B2E8B743D4",
+                       "Path":  "src\\ma_config.h"
+                   },
+                   {
+                       "SHA256":  "7865BB617D2DAC89CCE7B235BDA90441DC4C2D2E3220CA45346BC5293946D78C",
+                       "Path":  "src\\mainwnd.cpp"
+                   },
+                   {
+                       "SHA256":  "43A340FB6C8106F34E7A68091082249AEF72D63DB0D0A190B095244BF485AF6A",
+                       "Path":  "src\\mainwnd.h"
+                   },
+                   {
+                       "SHA256":  "F19C3B042D344432F7FC32B0A1F7E22F7D5365E44E5AE520D374611B11C50A7E",
+                       "Path":  "src\\miniaudio_impl.c"
+                   },
+                   {
+                       "SHA256":  "27CB51431D13152E7EA9A919C46D5373C752F859B01A6844B0BB7D6173AAE264",
+                       "Path":  "src\\playback.cpp"
+                   },
+                   {
+                       "SHA256":  "B6467A67CFF3EA032BBF861A1A964666A712FA8C8CC62CE6D106D6D9526A1C96",
+                       "Path":  "src\\playback.h"
+                   },
+                   {
+                       "SHA256":  "3FEB8BE66945526ACA44B44B246CF21ED9998D65BCF2FC592494F5EFE06C7FF0",
+                       "Path":  "src\\playlist.cpp"
+                   },
+                   {
+                       "SHA256":  "990CABAF4044475B92DDC4F297246584700A85637B08284DE9B3D158361A2C71",
+                       "Path":  "src\\playlist.h"
+                   },
+                   {
+                       "SHA256":  "87B861CB83F4AC4AFEC3C0D8CB7084783CAD2DB1AFACC616FE5BBB6B5DB9BFE8",
+                       "Path":  "src\\playlist_view.cpp"
+                   },
+                   {
+                       "SHA256":  "E9BAC27BA68F2BA5428B01AA58C90CF4AA7E2ECE92FFEBE2BEDDBA856D5EBCA8",
+                       "Path":  "src\\playlist_view.h"
+                   },
+                   {
+                       "SHA256":  "248A027BE117A5A7AC52E3F28FCA54C97162FB9AC87856FCBA54226A334A591B",
+                       "Path":  "src\\playlist_worker.cpp"
+                   },
+                   {
+                       "SHA256":  "45D5619BC29E3CB8F0DCA48F880BFA431970D8050DDDA42717E056638E82FB1F",
+                       "Path":  "src\\playlist_worker.h"
+                   },
+                   {
+                       "SHA256":  "930A06832251F747890111B729E3A71C6BC10568A4C2667B906636993A7CD661",
+                       "Path":  "src\\plwnd.cpp"
+                   },
+                   {
+                       "SHA256":  "4910A1D07E83C743005D61CA2BA605DE57A1640705E00F270887D9A175C67491",
+                       "Path":  "src\\plwnd.h"
+                   },
+                   {
+                       "SHA256":  "607651B6AD07184D41ACB1882292A88E367E6D972A73B5AC6933773CF93AF759",
+                       "Path":  "src\\runtime.cpp"
+                   },
+                   {
+                       "SHA256":  "48155BBE36B8FA90EC1757E0DD2EFCCF0A7924C30731696E6D275D64AA5C42B5",
+                       "Path":  "src\\runtime.h"
+                   },
+                   {
+                       "SHA256":  "475DEA6B28E679F51696ED3ADCC5B184E93AD3980BAAFD4AC826976C01668A30",
+                       "Path":  "src\\skin.cpp"
+                   },
+                   {
+                       "SHA256":  "22AFE74C80C7686203705257FAFDB3FED30585B71BAE008CC0771363CF9CDF68",
+                       "Path":  "src\\skin.h"
+                   },
+                   {
+                       "SHA256":  "A99E3F3FBE87CEC24487499A4B9220028F4C400C1A66FA7DCAF155CA89CBC634",
+                       "Path":  "src\\tags.cpp"
+                   },
+                   {
+                       "SHA256":  "536CE28630935D2E78BFBD7576C559B95DFC1CA3F966CC5571928A2211C5136E",
+                       "Path":  "src\\tags.h"
+                   },
+                   {
+                       "SHA256":  "E3387E3291387BB67FD24429C8BA52E77AF7ECFBE46211D06E9F9DFAB594AF88",
+                       "Path":  "src\\theme_window.cpp"
+                   },
+                   {
+                       "SHA256":  "441985F2DE32EED52E05B28009DB271BBDE46D87C36199F55A904BA15B8C8BF1",
+                       "Path":  "src\\title_scroll.h"
+                   },
+                   {
+                       "SHA256":  "C99F86D8A74812CDD2CB3493BAFBBF27861592DC67084CD102BB52F5CA14EF51",
+                       "Path":  "src\\ui_accessibility.cpp"
+                   },
+                   {
+                       "SHA256":  "C5B4605B1F627D0698B2AAF3B7AC0335E2DE36792CA2A91C90F3F6FA1864150F",
+                       "Path":  "src\\ui_accessibility.h"
+                   },
+                   {
+                       "SHA256":  "A60A8C47E8B8B4F5FDE06A001D91D57669E452464EAFFEF92BB79FA5D6B65EDA",
+                       "Path":  "src\\ui_draw.cpp"
+                   },
+                   {
+                       "SHA256":  "FCDFBF715578370BA131A7D30990505F182F95F2FEE9C3FFCE68A04C3354ECFF",
+                       "Path":  "src\\ui_draw.h"
+                   },
+                   {
+                       "SHA256":  "15AA3DC082DBF3420A2483E2459BF6F1B83EF04B174C14477038EF86545F3B3E",
+                       "Path":  "src\\ui_player.cpp"
+                   },
+                   {
+                       "SHA256":  "1388952C91322F8395A3F1EE4750DBFE4CD93B2D282FFC4B139723F947BAFD63",
+                       "Path":  "src\\ui_player.h"
+                   },
+                   {
+                       "SHA256":  "7D72D2F743AB8444661C5CE0D866B2E5F35101EE4DB1C5E44C6B69C04CAE6DB5",
+                       "Path":  "src\\ui_scale.h"
+                   },
+                   {
+                       "SHA256":  "63037885388D290EA10F955F994F88309CE290ADE81BFBAD2FE542CBA002BCAC",
+                       "Path":  "src\\ui_theme.cpp"
+                   },
+                   {
+                       "SHA256":  "C109DAC003A77BBEBD0539C656599DECCE216A9260D80CE33FEF7A56650AB37E",
+                       "Path":  "src\\ui_theme.h"
+                   },
+                   {
+                       "SHA256":  "0247D5994880F1A0A6320EFA1A112C67F7243C1D068970DA3712DB1BD0A3E605",
+                       "Path":  "src\\ui_tooltip.cpp"
+                   },
+                   {
+                       "SHA256":  "CBBC2BAF0324AE0F3582EC77F7FDB036DCB30241F1A05AD28EDC0B58C006D104",
+                       "Path":  "src\\ui_tooltip.h"
+                   },
+                   {
+                       "SHA256":  "7D783BA84871B40BF95FA9A3A9A582D1F6DCDAC436249182673C81A2451EB12B",
+                       "Path":  "src\\util.cpp"
+                   },
+                   {
+                       "SHA256":  "D5971E1BE0F3AA4D132C08E2209BC13294B699A3D1B7F64349DF6AD7FB2E81D3",
+                       "Path":  "src\\util.h"
+                   },
+                   {
+                       "SHA256":  "2BC6F55EC23D291E7A87B26A305CB07F7889F546B2BE91AFD67F3111D2FBBA9E",
+                       "Path":  "src\\visualizer.cpp"
+                   },
+                   {
+                       "SHA256":  "1C028FC823C08D3F4941CF0B78EE1177F15DEC6307D89768E8D52F799710B1C0",
+                       "Path":  "src\\visualizer.h"
+                   },
+                   {
+                       "SHA256":  "C6EF1F4628867D0411C0919FFE57EEC67BFE9192EB1013BA7ADD8A1B9CE860AC",
+                       "Path":  "src\\window_snap.h"
+                   },
+                   {
+                       "SHA256":  "E9E742F8C4D7CDD0FC81BA7F1C47B719D98D45E0138849AA0EC1E574D554A1EE",
+                       "Path":  "third_party\\miniaudio.h"
+                   },
+                   {
+                       "SHA256":  "71E168C99925B6CB0F05E06E6E822663EF955D5101CFC5F981ADF6E013495BB7",
+                       "Path":  "third_party\\README.md"
+                   },
+                   {
+                       "SHA256":  "EDA386F297B484F7948BD25B21219AF00370ED52E16FF77AB8A3951DE123F272",
+                       "Path":  "third_party\\stb_vorbis.c"
+                   },
+                   {
+                       "SHA256":  "47BC14533887439FAA32996747EE048CA89DA6B47DD1685D7F3FD1C817862846",
+                       "Path":  "third_party\\stb_vorbis.h"
+                   }
+               ]
+}

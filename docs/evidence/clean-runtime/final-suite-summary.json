@@ -1,0 +1,34 @@
+[
+  {
+    "architecture": "64",
+    "configuration": "release",
+    "binaries": 31,
+    "named_passes": 167,
+    "result": "PASS",
+    "failures": []
+  },
+  {
+    "architecture": "64",
+    "configuration": "debug",
+    "binaries": 31,
+    "named_passes": 167,
+    "result": "PASS",
+    "failures": []
+  },
+  {
+    "architecture": "32",
+    "configuration": "release",
+    "binaries": 31,
+    "named_passes": 167,
+    "result": "PASS",
+    "failures": []
+  },
+  {
+    "architecture": "32",
+    "configuration": "debug",
+    "binaries": 31,
+    "named_passes": 167,
+    "result": "PASS",
+    "failures": []
+  }
+]

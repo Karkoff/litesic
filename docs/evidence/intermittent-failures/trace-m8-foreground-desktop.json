@@ -1,0 +1,28 @@
+[
+  {
+    "label": "trace-m8-foreground-desktop",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1E8250172B7A0A319DC006BB6BD2C619E004007D34D4D422F84557F2040FB438",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:41:00.968621+00:00",
+    "finished_utc": "2026-10-12T17:41:01.934262+00:00",
+    "pid": 36008,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-m8-foreground-desktop-01.txt"
+  },
+  {
+    "label": "trace-m8-foreground-desktop",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "1E8250172B7A0A319DC006BB6BD2C619E004007D34D4D422F84557F2040FB438",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:41:01.934262+00:00",
+    "finished_utc": "2026-10-12T17:41:02.661263+00:00",
+    "pid": 65396,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-m8-foreground-desktop-02.txt"
+  }
+]

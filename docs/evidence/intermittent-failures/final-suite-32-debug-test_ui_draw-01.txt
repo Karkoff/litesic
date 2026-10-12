@@ -1,0 +1,2 @@
+PASS dc_render_resize_recreate
+1 UI render cases

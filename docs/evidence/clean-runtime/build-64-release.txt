@@ -1,0 +1,78 @@
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/app.o src/app.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/audio.o src/audio.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/eq_state.o src/eq_state.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/eq_dsp.o src/eq_dsp.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/eqwnd.o src/eqwnd.cpp
+src/app.cpp: In function 'void InitDpiAwareness()':
+src/app.cpp:32:13: warning: cast between incompatible function types from 'FARPROC' {aka 'long long int (*)()'} to 'PFN_SetProcessDpiAwarenessContext' {aka 'int (*)(void*)'} [-Wcast-function-type]
+   32 |             (PFN_SetProcessDpiAwarenessContext)GetProcAddress(
+      |             ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+   33 |                 hUser32, "SetProcessDpiAwarenessContext");
+      |                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/i18n.o src/i18n.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/language_selection.o src/language_selection.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/m3u.o src/m3u.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/mainwnd.o src/mainwnd.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/playback.o src/playback.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/playlist.o src/playlist.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/playlist_view.o src/playlist_view.cpp
+src/mainwnd.cpp:391:13: warning: 'void DrawLcdDisplay(HWND, HDC, LPCWSTR)' defined but not used [-Wunused-function]
+  391 | static void DrawLcdDisplay(HWND /*hwnd*/, HDC hdc, LPCWSTR timeStr)
+      |             ^~~~~~~~~~~~~~
+src/mainwnd.cpp:262:13: warning: 'void DrawTitleButton(HDC, TitleBarButton)' defined but not used [-Wunused-function]
+  262 | static void DrawTitleButton(HDC hdc, TitleBarButton btn)
+      |             ^~~~~~~~~~~~~~~
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/playlist_worker.o src/playlist_worker.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/plwnd.o src/plwnd.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/runtime.o src/runtime.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/skin.o src/skin.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/tags.o src/tags.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/theme_window.o src/theme_window.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/ui_accessibility.o src/ui_accessibility.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/ui_draw.o src/ui_draw.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/ui_player.o src/ui_player.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/ui_theme.o src/ui_theme.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/ui_tooltip.o src/ui_tooltip.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/util.o src/util.cpp
+/mingw64/bin/g++.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c++17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/visualizer.o src/visualizer.cpp
+/mingw64/bin/gcc.exe -D_WIN32_WINNT=0x0601 -DUNICODE -D_UNICODE -Isrc -Ithird_party -std=c17 -Wall -Wextra -O2 -MMD -MP -c -o build/internal/64/release/obj/miniaudio_impl.o src/miniaudio_impl.c
+/mingw64/bin/windres.exe -Ires -i res/app.rc -o build/internal/64/release/obj/app.res.o
+In file included from src/miniaudio_impl.c:28:
+In function 'ma_node_output_bus_set_is_attached',
+    inlined from 'ma_node_input_bus_detach__no_output_bus_lock' at src/../third_party/miniaudio.h:74003:5:
+src/../third_party/miniaudio.h:15811:69: warning: '__atomic_exchange_4' writing 4 bytes into a region of size 0 overflows the destination [-Wstringop-overflow=]
+15811 |     #define ma_atomic_exchange_explicit_32(dst, src, order)         __atomic_exchange_n(dst, src, order)
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/../third_party/miniaudio.h:17067:73: note: in expansion of macro 'ma_atomic_exchange_explicit_32'
+17067 | #define ma_atomic_exchange_32(dst, src)                                 ma_atomic_exchange_explicit_32(dst, src, ma_atomic_memory_order_seq_cst)
+      |                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/../third_party/miniaudio.h:73913:5: note: in expansion of macro 'ma_atomic_exchange_32'
+73913 |     ma_atomic_exchange_32(&pOutputBus->isAttached, isAttached);
+      |     ^~~~~~~~~~~~~~~~~~~~~
+In function 'ma_node_input_bus_detach__no_output_bus_lock':
+cc1.exe: note: destination object is likely at address zero
+In function 'ma_node_output_bus_set_is_attached',
+    inlined from 'ma_node_input_bus_detach__no_output_bus_lock' at src/../third_party/miniaudio.h:74003:5:
+src/../third_party/miniaudio.h:15811:69: warning: '__atomic_exchange_4' writing 4 bytes into a region of size 0 overflows the destination [-Wstringop-overflow=]
+15811 |     #define ma_atomic_exchange_explicit_32(dst, src, order)         __atomic_exchange_n(dst, src, order)
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/../third_party/miniaudio.h:17067:73: note: in expansion of macro 'ma_atomic_exchange_explicit_32'
+17067 | #define ma_atomic_exchange_32(dst, src)                                 ma_atomic_exchange_explicit_32(dst, src, ma_atomic_memory_order_seq_cst)
+      |                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/../third_party/miniaudio.h:73913:5: note: in expansion of macro 'ma_atomic_exchange_32'
+73913 |     ma_atomic_exchange_32(&pOutputBus->isAttached, isAttached);
+      |     ^~~~~~~~~~~~~~~~~~~~~
+In function 'ma_node_input_bus_detach__no_output_bus_lock':
+cc1.exe: note: destination object is likely at address zero
+src/../third_party/miniaudio.h: In function 'ma_job_process__resource_manager__page_data_buffer_node':
+src/../third_party/miniaudio.h:15807:69: warning: '__atomic_load_4' writing 4 bytes into a region of size 0 overflows the destination [-Wstringop-overflow=]
+15807 |     #define ma_atomic_load_explicit_32(dst, order)                  __atomic_load_n(dst, order)
+      |                                                                     ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+src/../third_party/miniaudio.h:17063:73: note: in expansion of macro 'ma_atomic_load_explicit_32'
+17063 | #define ma_atomic_load_32(ptr)                                          ma_atomic_load_explicit_32(ptr, ma_atomic_memory_order_seq_cst)
+      |                                                                         ^~~~~~~~~~~~~~~~~~~~~~~~~~
+src/../third_party/miniaudio.h:72990:24: note: in expansion of macro 'ma_atomic_load_32'
+72990 |     if (pJob->order != ma_atomic_load_32(&pDataBufferNode->executionPointer)) {
+      |                        ^~~~~~~~~~~~~~~~~
+cc1.exe: note: destination object is likely at address zero
+/mingw64/bin/g++.exe -static -static-libgcc -static-libstdc++ -Wl,--no-insert-timestamp -mwindows -municode -o build/64/release/LiteSic.exe build/internal/64/release/obj/app.o build/internal/64/release/obj/audio.o build/internal/64/release/obj/eq_dsp.o build/internal/64/release/obj/eq_state.o build/internal/64/release/obj/eqwnd.o build/internal/64/release/obj/i18n.o build/internal/64/release/obj/language_selection.o build/internal/64/release/obj/m3u.o build/internal/64/release/obj/mainwnd.o build/internal/64/release/obj/playback.o build/internal/64/release/obj/playlist.o build/internal/64/release/obj/playlist_view.o build/internal/64/release/obj/playlist_worker.o build/internal/64/release/obj/plwnd.o build/internal/64/release/obj/runtime.o build/internal/64/release/obj/skin.o build/internal/64/release/obj/tags.o build/internal/64/release/obj/theme_window.o build/internal/64/release/obj/ui_accessibility.o build/internal/64/release/obj/ui_draw.o build/internal/64/release/obj/ui_player.o build/internal/64/release/obj/ui_theme.o build/internal/64/release/obj/ui_tooltip.o build/internal/64/release/obj/util.o build/internal/64/release/obj/visualizer.o build/internal/64/release/obj/miniaudio_impl.o build/internal/64/release/obj/app.res.o -lcomdlg32 -lcomctl32 -luser32 -lkernel32 -lgdi32 -lole32 -lshell32 -lwinmm -ld2d1 -ldwrite -loleacc -loleaut32 -luuid -lm

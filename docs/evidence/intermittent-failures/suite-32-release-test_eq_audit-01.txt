@@ -1,0 +1,56 @@
+PASS impulse_fourier_centers
+MEASURE rate=32000 scenario=0 hz=60 db=13.56406 error=-0.000000
+MEASURE rate=32000 scenario=0 hz=1000 db=19.39934 error=0.000000
+MEASURE rate=32000 scenario=0 hz=8000 db=25.33957 error=0.000001
+MEASURE rate=32000 scenario=0 hz=14000 db=21.08415 error=0.000000
+MEASURE rate=32000 scenario=1 hz=60 db=-13.56406 error=0.000000
+MEASURE rate=32000 scenario=1 hz=1000 db=-19.39934 error=0.000000
+MEASURE rate=32000 scenario=1 hz=8000 db=-25.33957 error=0.000000
+MEASURE rate=32000 scenario=1 hz=14000 db=-21.08415 error=-0.000000
+MEASURE rate=32000 scenario=2 hz=60 db=-9.20264 error=-0.000000
+MEASURE rate=32000 scenario=2 hz=1000 db=3.52103 error=-0.000000
+MEASURE rate=32000 scenario=2 hz=8000 db=-2.41099 error=-0.000000
+MEASURE rate=32000 scenario=2 hz=14000 db=-0.05790 error=-0.000000
+MEASURE rate=44100 scenario=0 hz=60 db=13.56058 error=0.000000
+MEASURE rate=44100 scenario=0 hz=1000 db=18.63412 error=-0.000000
+MEASURE rate=44100 scenario=0 hz=8000 db=24.03819 error=0.000000
+MEASURE rate=44100 scenario=0 hz=14000 db=33.51189 error=-0.000000
+MEASURE rate=44100 scenario=1 hz=60 db=-13.56058 error=0.000000
+MEASURE rate=44100 scenario=1 hz=1000 db=-18.63412 error=0.000000
+MEASURE rate=44100 scenario=1 hz=8000 db=-24.03819 error=0.000000
+MEASURE rate=44100 scenario=1 hz=14000 db=-33.51189 error=0.000000
+MEASURE rate=44100 scenario=2 hz=60 db=-9.20300 error=-0.000000
+MEASURE rate=44100 scenario=2 hz=1000 db=3.44072 error=-0.000000
+MEASURE rate=44100 scenario=2 hz=8000 db=-1.53558 error=-0.000000
+MEASURE rate=44100 scenario=2 hz=14000 db=5.28355 error=-0.000000
+MEASURE rate=48000 scenario=0 hz=60 db=13.56031 error=-0.000000
+MEASURE rate=48000 scenario=0 hz=1000 db=18.57859 error=-0.000000
+MEASURE rate=48000 scenario=0 hz=8000 db=22.96706 error=-0.000001
+MEASURE rate=48000 scenario=0 hz=14000 db=33.54566 error=-0.000000
+MEASURE rate=48000 scenario=1 hz=60 db=-13.56031 error=0.000000
+MEASURE rate=48000 scenario=1 hz=1000 db=-18.57859 error=-0.000000
+MEASURE rate=48000 scenario=1 hz=8000 db=-22.96706 error=-0.000000
+MEASURE rate=48000 scenario=1 hz=14000 db=-33.54566 error=0.000000
+MEASURE rate=48000 scenario=2 hz=60 db=-9.20304 error=-0.000000
+MEASURE rate=48000 scenario=2 hz=1000 db=3.43123 error=-0.000001
+MEASURE rate=48000 scenario=2 hz=8000 db=-1.99296 error=-0.000000
+MEASURE rate=48000 scenario=2 hz=14000 db=5.15999 error=-0.000000
+MEASURE rate=96000 scenario=0 hz=60 db=13.55953 error=-0.000000
+MEASURE rate=96000 scenario=0 hz=1000 db=18.44452 error=0.000000
+MEASURE rate=96000 scenario=0 hz=8000 db=20.24915 error=0.000000
+MEASURE rate=96000 scenario=0 hz=14000 db=33.95786 error=-0.000000
+MEASURE rate=96000 scenario=1 hz=60 db=-13.55953 error=0.000000
+MEASURE rate=96000 scenario=1 hz=1000 db=-18.44452 error=0.000000
+MEASURE rate=96000 scenario=1 hz=8000 db=-20.24915 error=-0.000000
+MEASURE rate=96000 scenario=1 hz=14000 db=-33.95786 error=0.000000
+MEASURE rate=96000 scenario=2 hz=60 db=-9.20311 error=-0.000000
+MEASURE rate=96000 scenario=2 hz=1000 db=3.41976 error=-0.000000
+MEASURE rate=96000 scenario=2 hz=8000 db=-3.09621 error=0.000000
+MEASURE rate=96000 scenario=2 hz=14000 db=4.79664 error=-0.000000
+PASS cascade_matches_measured_individual_filters
+PASS preamp_positive_zero_negative_and_headroom
+PASS partition_inplace_reset_and_full_channel_isolation
+PASS preset_custom_roundtrip_before_engine_without_eq_window
+MEASURE transition_max_step=0.000519634
+PASS rapid_sine_transitions_are_bounded_and_settle_to_bypass
+6 EQ audit cases

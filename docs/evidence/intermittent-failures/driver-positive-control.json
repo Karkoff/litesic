@@ -1,0 +1,15 @@
+[
+  {
+    "label": "driver-positive-control",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\.tools\\msys64\\usr\\bin\\true.exe",
+    "sha256": "E3CE235425032CC3E1262F46B414B1B88F971724104916690F24E25C4663D474",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:17:41.924048+00:00",
+    "finished_utc": "2026-10-12T18:17:41.952976+00:00",
+    "pid": 59788,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "driver-positive-control-01.txt"
+  }
+]

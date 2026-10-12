@@ -1,0 +1,67 @@
+[
+  {
+    "label": "final-i18n-64-debug",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "EB775BC2C857897B7F450A0A1F50C05DA2F02873E443FDA3371203F4B1E0ED79",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:34.380516+00:00",
+    "finished_utc": "2026-10-12T18:05:37.388388+00:00",
+    "pid": 69352,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-64-debug-01.txt"
+  },
+  {
+    "label": "final-i18n-64-debug",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "EB775BC2C857897B7F450A0A1F50C05DA2F02873E443FDA3371203F4B1E0ED79",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:37.390394+00:00",
+    "finished_utc": "2026-10-12T18:05:40.326463+00:00",
+    "pid": 20424,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-64-debug-02.txt"
+  },
+  {
+    "label": "final-i18n-64-debug",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "EB775BC2C857897B7F450A0A1F50C05DA2F02873E443FDA3371203F4B1E0ED79",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:40.327471+00:00",
+    "finished_utc": "2026-10-12T18:05:43.227939+00:00",
+    "pid": 65180,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-64-debug-03.txt"
+  },
+  {
+    "label": "final-i18n-64-debug",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "EB775BC2C857897B7F450A0A1F50C05DA2F02873E443FDA3371203F4B1E0ED79",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:43.227939+00:00",
+    "finished_utc": "2026-10-12T18:05:46.132410+00:00",
+    "pid": 20284,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-64-debug-04.txt"
+  },
+  {
+    "label": "final-i18n-64-debug",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\debug\\internal\\tests\\test-test_i18n.exe",
+    "sha256": "EB775BC2C857897B7F450A0A1F50C05DA2F02873E443FDA3371203F4B1E0ED79",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:05:46.132410+00:00",
+    "finished_utc": "2026-10-12T18:05:48.895676+00:00",
+    "pid": 34264,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "final-i18n-64-debug-05.txt"
+  }
+]

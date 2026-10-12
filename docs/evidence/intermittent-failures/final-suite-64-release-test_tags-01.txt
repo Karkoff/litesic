@@ -1,0 +1,10 @@
+PASS mp3_v3
+PASS mp3_v4
+PASS flac_comments
+PASS ogg_spanning_pages
+PASS id3_v1
+PASS wav_native_duration
+PASS missing_invalid
+PASS truncation_bounds
+PASS extended_information_tags
+9 tags cases

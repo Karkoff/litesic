@@ -1,0 +1,41 @@
+[
+  {
+    "label": "trace-tooltip",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "B7C8FB375A6C50285279468C5F87F6D2BF186AFEE9E1B905A9082F1C991E7B0C",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:37:46.196638+00:00",
+    "finished_utc": "2026-10-12T17:37:47.356349+00:00",
+    "pid": 16924,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-tooltip-01.txt"
+  },
+  {
+    "label": "trace-tooltip",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "B7C8FB375A6C50285279468C5F87F6D2BF186AFEE9E1B905A9082F1C991E7B0C",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:37:47.356349+00:00",
+    "finished_utc": "2026-10-12T17:37:48.264154+00:00",
+    "pid": 67880,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-tooltip-02.txt"
+  },
+  {
+    "label": "trace-tooltip",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "B7C8FB375A6C50285279468C5F87F6D2BF186AFEE9E1B905A9082F1C991E7B0C",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:37:48.264154+00:00",
+    "finished_utc": "2026-10-12T17:37:49.202778+00:00",
+    "pid": 15356,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-tooltip-03.txt"
+  }
+]

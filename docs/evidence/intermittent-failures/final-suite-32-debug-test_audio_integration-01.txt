@@ -1,0 +1,9 @@
+PASS mismatched_rate_duration_seek_position
+PASS no_track_failure_and_reload
+PASS decoder_formats
+PASS real_controller_natural_end
+PASS real_repeat_one_restarts_loaded_sound
+PASS visualization_callback_does_not_wait
+PASS mp3_duration_queries_during_render
+PASS real_eof_skips_invalid_file
+8 real audio cases

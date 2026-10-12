@@ -1,0 +1,28 @@
+[
+  {
+    "label": "trace-tooltip-desktop",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "B7C8FB375A6C50285279468C5F87F6D2BF186AFEE9E1B905A9082F1C991E7B0C",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:38:00.555427+00:00",
+    "finished_utc": "2026-10-12T17:38:01.653152+00:00",
+    "pid": 27584,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-tooltip-desktop-01.txt"
+  },
+  {
+    "label": "trace-tooltip-desktop",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "B7C8FB375A6C50285279468C5F87F6D2BF186AFEE9E1B905A9082F1C991E7B0C",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:38:01.653152+00:00",
+    "finished_utc": "2026-10-12T17:38:02.717740+00:00",
+    "pid": 44624,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "trace-tooltip-desktop-02.txt"
+  }
+]

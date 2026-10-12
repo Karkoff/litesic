@@ -1,0 +1,6 @@
+PASS command_line_and_profile_contract
+PASS bounded_unicode_ipc
+PASS remaining_configuration_roundtrip
+PASS compact_display_preserves_geometry
+PASS explicit_profile_writability_and_readonly
+5 remaining configuration cases

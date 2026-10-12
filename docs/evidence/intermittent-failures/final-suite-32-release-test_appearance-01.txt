@@ -1,0 +1,5 @@
+PASS defaults_without_settings
+PASS preferences_roundtrip_preserves_theme
+PASS invalid_values_use_defaults
+PASS equalizer_position_roundtrip_and_validation
+4 appearance cases

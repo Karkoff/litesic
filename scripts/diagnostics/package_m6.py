@@ -18,7 +18,7 @@ for arch in (32,64):
         assert not re.search(r'\berror:',read(build)),variant
         checks=sum(map(int,re.findall(r'^(\d+) [^\r\n]*cases\r?$',text,re.M)))+sum(map(int,re.findall(r'Results: (\d+)/',text)))+sum(map(int,re.findall(r'Results: (\d+) tests, 0 failures',text)))+1
         manifest['tests'][variant]={'checks':checks,'pass_labels':len(re.findall(r'\bPASS\b',text)),'executables':len(re.findall(r'^==>',text,re.M)),
-            'test_binary_sha256':digest(root/f'build/{arch}/{config}/test-test_eq_window.exe'),
+            'test_binary_sha256':digest(root/f'build/internal/{arch}/{config}/tests/test-test_eq_window.exe'),
             'application_sha256':digest(root/f'build/{arch}/{config}/LiteSic.exe')}
         for p in (build,test):shutil.copy2(p,out/p.name)
     data=json.loads((root/f'build/m6/performance-{arch}-release.json').read_text(encoding='utf-8-sig'))

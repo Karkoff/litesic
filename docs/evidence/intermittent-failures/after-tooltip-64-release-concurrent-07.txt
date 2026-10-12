@@ -1,0 +1,11 @@
+PASS names_and_regions
+PASS dynamic_transport_and_visibility
+PASS dsp_values_and_unavailable_bands
+PASS all_catalogs_and_themes
+PASS edge_placement_and_dpi
+PASS native_controls_and_lifecycle
+PASS favorites_use_real_track
+TOOLTIP_RESOURCES private_delta=0 GDI=5->5 USER=11->11
+TOOLTIP_METRICS descriptions=27000 elapsed_ms=16.635 private_delta=0 GDI=5 USER=11
+PASS audio_and_incremental_resources
+8 tooltip cases

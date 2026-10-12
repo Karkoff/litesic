@@ -1,0 +1,67 @@
+[
+  {
+    "label": "isolated-ime-tooltip-64-desktop",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "CA2BDE63A1331C95502C61E3C0143E5538DF57A996C660BBCE2B1DECF59704E7",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:44:58.088614+00:00",
+    "finished_utc": "2026-10-12T17:44:59.267755+00:00",
+    "pid": 70060,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "isolated-ime-tooltip-64-desktop-01.txt"
+  },
+  {
+    "label": "isolated-ime-tooltip-64-desktop",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "CA2BDE63A1331C95502C61E3C0143E5538DF57A996C660BBCE2B1DECF59704E7",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:44:59.267755+00:00",
+    "finished_utc": "2026-10-12T17:45:00.422671+00:00",
+    "pid": 17748,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "isolated-ime-tooltip-64-desktop-02.txt"
+  },
+  {
+    "label": "isolated-ime-tooltip-64-desktop",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "CA2BDE63A1331C95502C61E3C0143E5538DF57A996C660BBCE2B1DECF59704E7",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:45:00.422671+00:00",
+    "finished_utc": "2026-10-12T17:45:01.367117+00:00",
+    "pid": 68624,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "isolated-ime-tooltip-64-desktop-03.txt"
+  },
+  {
+    "label": "isolated-ime-tooltip-64-desktop",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "CA2BDE63A1331C95502C61E3C0143E5538DF57A996C660BBCE2B1DECF59704E7",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:45:01.367117+00:00",
+    "finished_utc": "2026-10-12T17:45:02.744197+00:00",
+    "pid": 47140,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "isolated-ime-tooltip-64-desktop-04.txt"
+  },
+  {
+    "label": "isolated-ime-tooltip-64-desktop",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "CA2BDE63A1331C95502C61E3C0143E5538DF57A996C660BBCE2B1DECF59704E7",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:45:02.744197+00:00",
+    "finished_utc": "2026-10-12T17:45:03.539491+00:00",
+    "pid": 16548,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "isolated-ime-tooltip-64-desktop-05.txt"
+  }
+]

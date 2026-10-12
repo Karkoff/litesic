@@ -1,0 +1,67 @@
+[
+  {
+    "label": "before-m8-64",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_m8_remaining.exe",
+    "sha256": "D7202446C5127D1AD6A2F652ABFABDBAAB1DD21693A5511A6F5095A8D0C489D0",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:35:36.792569+00:00",
+    "finished_utc": "2026-10-12T17:35:37.672395+00:00",
+    "pid": 42152,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-m8-64-01.txt"
+  },
+  {
+    "label": "before-m8-64",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_m8_remaining.exe",
+    "sha256": "D7202446C5127D1AD6A2F652ABFABDBAAB1DD21693A5511A6F5095A8D0C489D0",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:35:37.672395+00:00",
+    "finished_utc": "2026-10-12T17:35:38.336505+00:00",
+    "pid": 14060,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-m8-64-02.txt"
+  },
+  {
+    "label": "before-m8-64",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_m8_remaining.exe",
+    "sha256": "D7202446C5127D1AD6A2F652ABFABDBAAB1DD21693A5511A6F5095A8D0C489D0",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:35:38.336505+00:00",
+    "finished_utc": "2026-10-12T17:35:38.972310+00:00",
+    "pid": 68660,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-m8-64-03.txt"
+  },
+  {
+    "label": "before-m8-64",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_m8_remaining.exe",
+    "sha256": "D7202446C5127D1AD6A2F652ABFABDBAAB1DD21693A5511A6F5095A8D0C489D0",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:35:38.972310+00:00",
+    "finished_utc": "2026-10-12T17:35:39.656040+00:00",
+    "pid": 66740,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-m8-64-04.txt"
+  },
+  {
+    "label": "before-m8-64",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\baseline\\64\\test-test_m8_remaining.exe",
+    "sha256": "D7202446C5127D1AD6A2F652ABFABDBAAB1DD21693A5511A6F5095A8D0C489D0",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:35:39.656040+00:00",
+    "finished_utc": "2026-10-12T17:35:40.299523+00:00",
+    "pid": 21544,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "before-m8-64-05.txt"
+  }
+]

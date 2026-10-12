@@ -1,0 +1,67 @@
+[
+  {
+    "label": "foreground-m8-64",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:46:58.470238+00:00",
+    "finished_utc": "2026-10-12T17:47:13.416653+00:00",
+    "pid": 46552,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "foreground-m8-64-01.txt"
+  },
+  {
+    "label": "foreground-m8-64",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:13.418158+00:00",
+    "finished_utc": "2026-10-12T17:47:28.283579+00:00",
+    "pid": 69368,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "foreground-m8-64-02.txt"
+  },
+  {
+    "label": "foreground-m8-64",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:28.283579+00:00",
+    "finished_utc": "2026-10-12T17:47:43.165490+00:00",
+    "pid": 66588,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "foreground-m8-64-03.txt"
+  },
+  {
+    "label": "foreground-m8-64",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:43.165490+00:00",
+    "finished_utc": "2026-10-12T17:47:57.975927+00:00",
+    "pid": 70040,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "foreground-m8-64-04.txt"
+  },
+  {
+    "label": "foreground-m8-64",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_m8_remaining.exe",
+    "sha256": "E2070A6FE9650CDCBD0F6FB8C21E74A3DE0D808D411B7720B450B9B2B30035BC",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:57.976561+00:00",
+    "finished_utc": "2026-10-12T17:48:12.951070+00:00",
+    "pid": 18960,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "foreground-m8-64-05.txt"
+  }
+]

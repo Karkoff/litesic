@@ -1,0 +1,12 @@
+PASS end_advances_stops
+PASS repeat_wrap_and_previous
+PASS missing_skip_and_all_bad_bound
+PASS paused_no_advance_and_remove
+PASS failed_explicit_and_clear
+PASS repeat_modes_cycle
+PASS repeat_one_eof_and_manual_navigation
+PASS repeat_one_preserves_shuffle_cycle
+PASS favorites_sequence_repeat_and_general_scope
+PASS favorites_shuffle_history_and_edits
+PASS favorites_skip_invalid_and_bound_repeat
+11 playback cases

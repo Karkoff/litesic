@@ -1,0 +1,9 @@
+PASS catalog_and_contrast
+PASS typography_fits_fixed_controls
+PASS selection_persistence_and_fallback
+PENDING window pixel/capture assertions: LITESIC_NO_CAPTURE
+PASS all_windows_and_state_survive_switches
+PASS resource_recovery_and_repeat_switching
+PASS selector_categories_restore_and_new_window
+PASS sustained_switch_memory
+7 theme cases

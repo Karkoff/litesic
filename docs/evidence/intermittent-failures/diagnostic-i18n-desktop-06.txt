@@ -1,0 +1,14 @@
+I18N_HEAP private_delta=143360 busy=432939->432939 blocks=3082->3082 committed=946176->995328
+PASS catalogs_are_complete_and_unicode
+PASS utf8_rejects_invalid_and_preserves_supplementary
+PASS parser_rejects_structural_errors_transactionally
+PASS fallback_and_partial_catalog
+PASS placeholders_are_checked_and_not_recursively_expanded
+PASS ordered_resolution_and_regional_variants
+PASS integer_plural_boundaries
+PASS arabic_composition_embeds_external_values
+PASS io_errors_preserve_active_catalog_and_unload
+PASS executable_relative_loading_ignores_working_directory
+I18N_METRICS arch=64 init_ms=0.132 mean_select_ms=0.253 fallback_private_delta=-69632 warm_private=3162112 final_private=3305472 max_payload_bytes=25614 switches=1980
+PASS repeated_switches_release_catalogs_and_measure_cost
+11 i18n tests passed.

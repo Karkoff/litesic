@@ -17,8 +17,8 @@ try {
     $flags = @('-std=c++17','-Wall','-Wextra','-g','-O0','-DDEBUG','-D_WIN32_WINNT=0x0601','-DUNICODE','-D_UNICODE','-DLITESIC_TEST','-DPSAPI_VERSION=1','-Isrc','-Ithird_party')
     & $compiler @flags -c "$outDir/ui_draw-gdi.cpp" -o "$outDir/ui_draw-gdi.o"
     if($LASTEXITCODE -ne 0) { throw 'Compilação GDI falhou' }
-    $objects = 'playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl plwnd mainwnd visualizer ui_player eqwnd ui_theme theme_window'.Split(' ') | ForEach-Object { "build/64/debug/$_.o" }
-    $libs = @('-static','-static-libgcc','-static-libstdc++','-lcomdlg32','-lcomctl32','-luser32','-lkernel32','-lgdi32','-lole32','-lshell32','-lwinmm','-ld2d1','-ldwrite','-lpsapi','-lm')
+    $objects = 'playlist playlist_view m3u tags playback playlist_worker audio-test util miniaudio_impl eq_dsp eq_state plwnd mainwnd visualizer ui_player eqwnd ui_theme theme_window skin i18n language_selection runtime ui_tooltip ui_accessibility'.Split(' ') | ForEach-Object { "build/internal/64/debug/obj/$_.o" }
+    $libs = @('-static','-static-libgcc','-static-libstdc++','-lcomdlg32','-lcomctl32','-luser32','-lkernel32','-lgdi32','-lole32','-lshell32','-lwinmm','-ld2d1','-ldwrite','-loleacc','-loleaut32','-luuid','-lpsapi','-lm')
     $backends=if($Isolation){@('fonts','software')}else{@('gdi','d2d')}
     if($Isolation) {
         $original=[IO.File]::ReadAllText((Join-Path $repoRoot 'src/ui_draw.cpp'))
@@ -33,7 +33,7 @@ try {
         }
     }
     foreach($backend in $backends) {
-        $renderer = if($backend -eq 'd2d'){'build/64/debug/ui_draw.o'}else{"$outDir/ui_draw-$backend.o"}
+        $renderer = if($backend -eq 'd2d'){'build/internal/64/debug/obj/ui_draw.o'}else{"$outDir/ui_draw-$backend.o"}
         & $compiler @flags scripts/diagnostics/memory_probe.cpp @objects $renderer @libs -o "$outDir/probe-$backend.exe"
         if($LASTEXITCODE -ne 0) { throw "Link $backend falhou" }
     }

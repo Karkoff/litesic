@@ -1,0 +1,22 @@
+﻿[
+    {
+        "Architecture":  "64",
+        "Debug":  false,
+        "ExitCode":  0
+    },
+    {
+        "Architecture":  "64",
+        "Debug":  true,
+        "ExitCode":  2
+    },
+    {
+        "Architecture":  "32",
+        "Debug":  false,
+        "ExitCode":  2
+    },
+    {
+        "Architecture":  "32",
+        "Debug":  true,
+        "ExitCode":  2
+    }
+]

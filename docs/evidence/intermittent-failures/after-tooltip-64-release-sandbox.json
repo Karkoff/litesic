@@ -1,0 +1,67 @@
+[
+  {
+    "label": "after-tooltip-64-release-sandbox",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "7FDACC3852BEA33D1BE325FE004462525B2657D1C4EB8CC7202D7CDF3DD65B05",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:59:00.455380+00:00",
+    "finished_utc": "2026-10-12T17:59:15.438729+00:00",
+    "pid": 48064,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-tooltip-64-release-sandbox-01.txt"
+  },
+  {
+    "label": "after-tooltip-64-release-sandbox",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "7FDACC3852BEA33D1BE325FE004462525B2657D1C4EB8CC7202D7CDF3DD65B05",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:59:15.438729+00:00",
+    "finished_utc": "2026-10-12T17:59:30.387674+00:00",
+    "pid": 20776,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-tooltip-64-release-sandbox-02.txt"
+  },
+  {
+    "label": "after-tooltip-64-release-sandbox",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "7FDACC3852BEA33D1BE325FE004462525B2657D1C4EB8CC7202D7CDF3DD65B05",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:59:30.387674+00:00",
+    "finished_utc": "2026-10-12T17:59:45.402523+00:00",
+    "pid": 68240,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-tooltip-64-release-sandbox-03.txt"
+  },
+  {
+    "label": "after-tooltip-64-release-sandbox",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "7FDACC3852BEA33D1BE325FE004462525B2657D1C4EB8CC7202D7CDF3DD65B05",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:59:45.402523+00:00",
+    "finished_utc": "2026-10-12T18:00:00.370027+00:00",
+    "pid": 70980,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-tooltip-64-release-sandbox-04.txt"
+  },
+  {
+    "label": "after-tooltip-64-release-sandbox",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "7FDACC3852BEA33D1BE325FE004462525B2657D1C4EB8CC7202D7CDF3DD65B05",
+    "arguments": [],
+    "started_utc": "2026-10-12T18:00:00.370027+00:00",
+    "finished_utc": "2026-10-12T18:00:15.348486+00:00",
+    "pid": 48476,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "after-tooltip-64-release-sandbox-05.txt"
+  }
+]

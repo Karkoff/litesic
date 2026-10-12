@@ -1,0 +1,67 @@
+[
+  {
+    "label": "private-desktop-tooltip",
+    "sample": 1,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "6490742153D8CC7CD7362EFADCFF97383126486D34657729E05A7D02EAE52D52",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:29.608043+00:00",
+    "finished_utc": "2026-10-12T17:47:30.299734+00:00",
+    "pid": 14300,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-tooltip-01.txt"
+  },
+  {
+    "label": "private-desktop-tooltip",
+    "sample": 2,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "6490742153D8CC7CD7362EFADCFF97383126486D34657729E05A7D02EAE52D52",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:30.299734+00:00",
+    "finished_utc": "2026-10-12T17:47:30.921166+00:00",
+    "pid": 40476,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-tooltip-02.txt"
+  },
+  {
+    "label": "private-desktop-tooltip",
+    "sample": 3,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "6490742153D8CC7CD7362EFADCFF97383126486D34657729E05A7D02EAE52D52",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:30.921166+00:00",
+    "finished_utc": "2026-10-12T17:47:31.550875+00:00",
+    "pid": 58448,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-tooltip-03.txt"
+  },
+  {
+    "label": "private-desktop-tooltip",
+    "sample": 4,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "6490742153D8CC7CD7362EFADCFF97383126486D34657729E05A7D02EAE52D52",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:31.551877+00:00",
+    "finished_utc": "2026-10-12T17:47:32.165802+00:00",
+    "pid": 35388,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-tooltip-04.txt"
+  },
+  {
+    "label": "private-desktop-tooltip",
+    "sample": 5,
+    "executable": "D:\\Projetos\\IA\\litesic\\build\\validation\\intermittent-failures\\64\\release\\internal\\tests\\test-test_tooltip.exe",
+    "sha256": "6490742153D8CC7CD7362EFADCFF97383126486D34657729E05A7D02EAE52D52",
+    "arguments": [],
+    "started_utc": "2026-10-12T17:47:32.165802+00:00",
+    "finished_utc": "2026-10-12T17:47:32.719447+00:00",
+    "pid": 42396,
+    "exit_code": 0,
+    "timeout": false,
+    "log": "private-desktop-tooltip-05.txt"
+  }
+]
