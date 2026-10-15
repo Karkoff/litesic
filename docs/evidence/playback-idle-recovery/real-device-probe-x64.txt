@@ -1,0 +1,8 @@
+﻿# Real default WASAPI device, x64 (2026-10-15T04:27:28.2796548-03:00)
+PASS init default device
+PASS play
+PASS play after stopped output (restart)
+PASS timer check while playing
+PASS play after repeated failure (recreate)
+0 failures
+exit=0

@@ -19,7 +19,9 @@
 /* Incluir miniaudio SOMENTE aqui (implementação em miniaudio_impl.c). */
 #include "../third_party/miniaudio.h"
 
+#include <cstdarg>
 #include <cstdint>
+#include <cwchar>
 #include "eq_state.h"
 #include "tags.h"
 
@@ -66,6 +68,16 @@ static struct AudioEngine
     int        sourceSampleRate; /* Resource manager may resample to engine rate. */
     double     durationSeconds; /* UI-owned cache; never scan the live decoder. */
     BOOL       streamed;        /* Sound decoded by the resource manager job thread. */
+    float      volume = 1.0f;
+
+    /* Output recovery: see RecoverOutput(). */
+    ma_engine_config config;    /* Recreates the engine on the current default device. */
+    BOOL       configured;
+    wchar_t    restorePath[MAX_PATH]; /* Track to reopen once an output exists again. */
+    ma_uint64  restoreFrame;
+    DWORD      lastRecovery;
+    int        stalledChecks;
+    int        autoRecoveries;
 
     /* M4-T1: Ring buffer de visualização. */
     float        vizBuffer[VISUALIZATION_BUFFER_SIZE]; /* Buffer circular */
@@ -74,6 +86,52 @@ static struct AudioEngine
     CRITICAL_SECTION vizLock;      /* Protege acesso concorrente     */
     BOOL         vizActive;        /* TRUE se viz buffer inicializado */
 } g_audio{};
+
+/* ------------------------------------------------------------------ */
+/* Diagnostics: output failures and recoveries only, never per period.  */
+/* ------------------------------------------------------------------ */
+
+static wchar_t g_logPath[MAX_PATH];
+
+void Audio_SetLogPath(const wchar_t* path)
+{
+    wcsncpy_s(g_logPath, ARRAYSIZE(g_logPath), path ? path : L"", _TRUNCATE);
+}
+
+static void AudioTrace(const wchar_t* format, ...)
+{
+    SYSTEMTIME t;
+    GetLocalTime(&t);
+    wchar_t line[640] = {};
+    const int room = (int)ARRAYSIZE(line) - 3; /* CR, LF, terminator */
+    int n = _snwprintf(line, room, L"%04u-%02u-%02u %02u:%02u:%02u.%03u audio: ",
+                       t.wYear, t.wMonth, t.wDay, t.wHour, t.wMinute, t.wSecond, t.wMilliseconds);
+    if (n < 0) return;
+    va_list args;
+    va_start(args, format);
+    int m = _vsnwprintf(line + n, room - n, format, args);
+    va_end(args);
+    n = m < 0 ? room : n + m;
+    line[n++] = L'\r'; line[n++] = L'\n'; line[n] = 0;
+    OutputDebugStringW(line);
+    if (!g_logPath[0]) return;
+
+    /* Created on the first event only; restarted beyond 256 KiB. */
+    HANDLE file = CreateFileW(g_logPath, FILE_APPEND_DATA, FILE_SHARE_READ, nullptr,
+                              OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    LARGE_INTEGER size{};
+    if (file != INVALID_HANDLE_VALUE && GetFileSizeEx(file, &size) && size.QuadPart > 256 * 1024) {
+        CloseHandle(file);
+        file = CreateFileW(g_logPath, GENERIC_WRITE, FILE_SHARE_READ, nullptr,
+                           CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, nullptr);
+    }
+    if (file == INVALID_HANDLE_VALUE) return;
+    char utf8[2048];
+    int bytes = WideCharToMultiByte(CP_UTF8, 0, line, n, utf8, sizeof(utf8), nullptr, nullptr);
+    DWORD written = 0;
+    if (bytes > 0) WriteFile(file, utf8, (DWORD)bytes, &written, nullptr);
+    CloseHandle(file);
+}
 
 /* ------------------------------------------------------------------ */
 /* Interface pública                                                    */
@@ -86,17 +144,23 @@ static BOOL InitEngine(const ma_engine_config* config)
     if (g_audio.active)
         return TRUE; /* Já inicializado. */
 
+    /* Kept so a lost output can be recreated with the same settings. */
+    if (config != &g_audio.config)
+        g_audio.config = config ? *config : ma_engine_config_init();
+    g_audio.configured = TRUE;
+
     /* Inicializar engine com configurações padrão — usa o dispositivo de
      * saída padrão do SO (WASAPI no Windows 7+, fallback automático para
      * DirectSound/WinMM se WASAPI não estiver disponível). */
-    result = ma_engine_init(config, &g_audio.engine);
+    result = ma_engine_init(&g_audio.config, &g_audio.engine);
     if (result != MA_SUCCESS)
     {
-        /* Log de erro — não crashar, apenas retornar FALSE. */
+        /* Não crashar: registrar e retornar FALSE; Play tenta de novo. */
+        AudioTrace(L"engine init failed: %d", (int)result);
         return FALSE;
     }
 
-    if(!InitEq(&g_audio.engine)) { ma_engine_uninit(&g_audio.engine);return FALSE; }
+    if(!InitEq(&g_audio.engine)) { AudioTrace(L"equalizer node init failed");ma_engine_uninit(&g_audio.engine);return FALSE; }
     g_audio.active   = TRUE;
     g_audio.state    = AUDIO_STATE_STOPPED;
     g_audio.fileSizeBytes = 0;
@@ -114,6 +178,17 @@ BOOL Audio_TestInit(unsigned rate) {
     config.channels = 2;
     config.sampleRate = rate;
     return InitEngine(&config);
+}
+BOOL Audio_TestInitContext(void* context) {
+    ma_engine_config config = ma_engine_config_init();
+    config.pContext = static_cast<ma_context*>(context);
+    config.channels = 2;
+    config.sampleRate = 48000;
+    return InitEngine(&config);
+}
+BOOL Audio_TestOutputStarted(void) {
+    ma_device* device = g_audio.active ? ma_engine_get_device(&g_audio.engine) : nullptr;
+    return device && ma_device_get_state(device) == ma_device_state_started;
 }
 // A device consumes in real time while the resource manager job thread finishes
 // stream seeks and refills pages. This offline device reads instantly, so it waits
@@ -235,16 +310,12 @@ static ma_node_vtable g_vizTapVtable =
     0
 };
 
-BOOL Audio_VizInit(void)
+/* The tap node belongs to the engine's graph; the ring buffer outlives
+ * an engine rebuilt by output recovery. */
+static void AttachVizTap(void)
 {
-    if (!g_audio.active || g_audio.vizActive)
-        return TRUE; /* Já inicializado ou engine não ativa. */
-
-    memset(g_audio.vizBuffer, 0, sizeof(g_audio.vizBuffer));
-    g_audio.vizWritePos = 0;
-    g_audio.vizCount    = 0;
-    InitializeCriticalSection(&g_audio.vizLock);
-    g_audio.vizActive   = TRUE;
+    if (!g_audio.active || !g_audio.vizActive || g_vizTapActive)
+        return;
 
     ma_uint32 channels = ma_engine_get_channels(&g_audio.engine);
     ma_node_config cfg = ma_node_config_init();
@@ -261,11 +332,9 @@ BOOL Audio_VizInit(void)
         g_vizTapActive = TRUE;
         ma_node_attach_output_bus(&g_eqNode.base,0,&g_vizTap.base,0);
     }
-
-    return TRUE;
 }
 
-void Audio_VizShutdown(void)
+static void DetachVizTap(void)
 {
     if (g_vizTapActive)
     {
@@ -273,6 +342,25 @@ void Audio_VizShutdown(void)
         ma_node_uninit(&g_vizTap.base, NULL);
         g_vizTapActive = FALSE;
     }
+}
+
+BOOL Audio_VizInit(void)
+{
+    if (!g_audio.vizActive)
+    {
+        memset(g_audio.vizBuffer, 0, sizeof(g_audio.vizBuffer));
+        g_audio.vizWritePos = 0;
+        g_audio.vizCount    = 0;
+        InitializeCriticalSection(&g_audio.vizLock);
+        g_audio.vizActive   = TRUE;
+    }
+    AttachVizTap();
+    return TRUE;
+}
+
+void Audio_VizShutdown(void)
+{
+    DetachVizTap();
 
     if (g_audio.vizActive)
     {
@@ -306,25 +394,41 @@ int Audio_GetVisualizationSamples(float* out, int count)
     return toCopy;
 }
 
-void Audio_Shutdown(void)
+/* Releases the sound, the graph nodes and the engine. Recovery calls it
+ * without ma_engine_stop: the device has already stopped, and miniaudio's
+ * uninit deliberately avoids stopping a backend that may no longer exist. */
+static void TeardownEngine(void)
 {
-    if (!g_audio.active)
-        return;
-
-    ma_engine_stop(&g_audio.engine);
     /* Parar e liberar o sound antes de desligar a engine. */
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
     g_audio.durationSeconds = 0;
     g_audio.currentPath[0] = 0;
 
-    /* Encerrar visualização. */
-    Audio_VizShutdown();
+    DetachVizTap();
 
     if(g_eqActive) {ma_node_uninit(&g_eqNode.base,nullptr);g_eqActive=FALSE;}
 
     ma_engine_uninit(&g_audio.engine);
     g_audio.active   = FALSE;
+}
+
+void Audio_Shutdown(void)
+{
+    if (g_audio.active)
+    {
+        ma_engine_stop(&g_audio.engine);
+        TeardownEngine();
+    }
+
+    /* Encerrar visualização. */
+    Audio_VizShutdown();
+
+    /* An intentional shutdown is not an output failure to recover from. */
+    g_audio.configured = FALSE;
+    g_audio.restorePath[0] = 0;
+    g_audio.lastRecovery = 0;
+    g_audio.stalledChecks = g_audio.autoRecoveries = 0;
     g_audio.state    = AUDIO_STATE_STOPPED;
 }
 
@@ -335,6 +439,7 @@ BOOL Audio_IsActive(void)
 
 void Audio_Unload(void) {
     g_eq.RequestReset();
+    g_audio.restorePath[0] = 0;
     if (g_audio.soundLoaded) ma_sound_uninit(&g_audio.sound);
     g_audio.soundLoaded = FALSE;
     g_audio.durationSeconds = 0;
@@ -344,6 +449,8 @@ void Audio_Unload(void) {
     g_audio.state = AUDIO_STATE_STOPPED;
 }
 
+static BOOL RecoverOutput(const wchar_t* reason);
+
 /* ------------------------------------------------------------------ */
 /* Carregar arquivo (M2-T2)                                             */
 /* ------------------------------------------------------------------ */
@@ -352,7 +459,12 @@ BOOL Audio_Load(const wchar_t* path)
 {
     ma_result result;
 
-    if (!g_audio.active || path == NULL)
+    if (path == NULL)
+        return FALSE;
+
+    /* A new track replaces whatever a failed recovery still had to reopen. */
+    g_audio.restorePath[0] = L'\0';
+    if (!g_audio.active && !RecoverOutput(L"load"))
         return FALSE;
 
     /* Parar e liberar o sound anterior se houver. */
@@ -443,15 +555,168 @@ double Audio_GetDurationSeconds(void)
 }
 
 /* ------------------------------------------------------------------ */
+/* Output recovery                                                      */
+/*                                                                      */
+/* The engine's device runs from startup to exit, even while nothing    */
+/* plays. When its WASAPI endpoint disappears (Bluetooth headset        */
+/* disconnected, driver reset, resume from sleep), the render call      */
+/* fails and miniaudio's device loop ends. If that error wins the race  */
+/* against the endpoint notifications, miniaudio never restarts the     */
+/* device: the engine stays stopped while ma_sound_start still succeeds,*/
+/* so the player reports PLAYING and renders nothing. Recovery runs     */
+/* only for that observed state, on a play request or while playing.    */
+/* ------------------------------------------------------------------ */
+
+static DWORD g_clockOffset; /* Simulated elapsed time (tests only). */
+static DWORD Now(void) { return GetTickCount() + g_clockOffset; }
+
+static BOOL OutputRunning(void)
+{
+    if (!g_audio.active)
+        return FALSE;
+    ma_device* device = ma_engine_get_device(&g_audio.engine);
+    /* No device: the offline engine of the tests reads frames directly. */
+    return !device || ma_device_get_state(device) == ma_device_state_started;
+}
+
+/* Reopens the track a recreated engine lost, at its previous position. */
+static BOOL ReopenTrack(void)
+{
+    if (!g_audio.restorePath[0])
+        return TRUE;
+    wchar_t path[MAX_PATH];
+    wcsncpy_s(path, ARRAYSIZE(path), g_audio.restorePath, _TRUNCATE);
+    const ma_uint64 frame = g_audio.restoreFrame;
+    if (!Audio_Load(path)) /* Clears restorePath. */
+    {
+        AudioTrace(L"track reopen failed after output recovery");
+        return FALSE;
+    }
+    ma_sound_seek_to_pcm_frame(&g_audio.sound, frame);
+    return TRUE;
+}
+
+/* First, restart the existing device: miniaudio may already have rerouted
+ * it to the new default endpoint. If it cannot start, or the output failed
+ * again within 30 s of the previous recovery, the endpoint itself is gone:
+ * recreate the engine on the current default device and reopen the track.
+ * Volume, pan, EQ, visualization, playlist and selection are preserved. */
+static BOOL RecoverOutput(const wchar_t* reason)
+{
+    if (!g_audio.configured)
+        return FALSE; /* Never initialized, or shut down on purpose. */
+
+    const DWORD now = Now();
+    const BOOL repeated = g_audio.lastRecovery && now - g_audio.lastRecovery < 30000;
+    g_audio.lastRecovery = now ? now : 1;
+
+    if (g_audio.active)
+    {
+        ma_device* device = ma_engine_get_device(&g_audio.engine);
+        AudioTrace(L"output not running (%ls): device state %d, transport %d, track %ls",
+                   reason, device ? (int)ma_device_get_state(device) : -1, (int)g_audio.state,
+                   g_audio.soundLoaded ? L"loaded" : L"none");
+        if (device && !repeated)
+        {
+            ma_result result = ma_device_start(device);
+            if (result == MA_SUCCESS)
+            {
+                AudioTrace(L"output restarted");
+                return TRUE;
+            }
+            AudioTrace(L"output restart failed: %d", (int)result);
+        }
+        if (g_audio.soundLoaded)
+        {
+            wcsncpy_s(g_audio.restorePath, ARRAYSIZE(g_audio.restorePath), g_audio.currentPath, _TRUNCATE);
+            g_audio.restoreFrame = 0;
+            ma_sound_get_cursor_in_pcm_frames(&g_audio.sound, &g_audio.restoreFrame);
+        }
+        TeardownEngine();
+    }
+    else
+        AudioTrace(L"no output engine (%ls)", reason);
+
+    if (!InitEngine(&g_audio.config))
+    {
+        AudioTrace(L"output recreation failed; playback stays unavailable until the next attempt");
+        return FALSE;
+    }
+    ma_engine_set_volume(&g_audio.engine, g_audio.volume);
+    AttachVizTap();
+    AudioTrace(L"output recreated: %u Hz, %u channels",
+               ma_engine_get_sample_rate(&g_audio.engine), ma_engine_get_channels(&g_audio.engine));
+    return ReopenTrack();
+}
+
+AudioOutputCheck Audio_CheckOutput(void)
+{
+    if (g_audio.state != AUDIO_STATE_PLAYING || OutputRunning())
+    {
+        g_audio.stalledChecks = 0;
+        return AUDIO_OUTPUT_OK;
+    }
+    /* miniaudio reroutes a default-device change on its notification thread
+     * by stopping, reinitializing and restarting the device: one stopped
+     * observation may be that window. Two consecutive ones are not. */
+    if (++g_audio.stalledChecks < 2)
+        return AUDIO_OUTPUT_OK;
+    g_audio.stalledChecks = 0;
+
+    /* Bounded: Audio_Play resets the budget, so only a user command or a new
+     * track can start another series of automatic attempts. */
+    if (g_audio.autoRecoveries < 3)
+    {
+        ++g_audio.autoRecoveries;
+        if (RecoverOutput(L"stalled while playing"))
+        {
+            /* A recreated engine reopens the track stopped. */
+            if (g_audio.state != AUDIO_STATE_PLAYING && g_audio.soundLoaded &&
+                ma_sound_start(&g_audio.sound) == MA_SUCCESS)
+                g_audio.state = AUDIO_STATE_PLAYING;
+            if (g_audio.state == AUDIO_STATE_PLAYING && OutputRunning())
+                return AUDIO_OUTPUT_RECOVERED;
+        }
+    }
+
+    /* The transport must not keep claiming playback; the next Play retries. */
+    if (g_audio.soundLoaded)
+        ma_sound_stop(&g_audio.sound);
+    g_audio.state = (g_audio.soundLoaded || g_audio.restorePath[0]) ? AUDIO_STATE_PAUSED : AUDIO_STATE_STOPPED;
+    AudioTrace(L"playback paused: no working output");
+    return AUDIO_OUTPUT_FAILED;
+}
+
+#ifdef LITESIC_TEST
+void Audio_TestAdvanceClock(unsigned ms) { g_clockOffset += ms; }
+void Audio_TestStopOutput(void) { if (g_audio.active) ma_engine_stop(&g_audio.engine); }
+#endif
+
+/* ------------------------------------------------------------------ */
 /* Reprodução (M2-T3)                                                   */
 /* ------------------------------------------------------------------ */
 
 void Audio_Play(void)
 {
+    /* A play request repairs an output that stopped while idle; nothing
+     * polls a silent player. A lost track is reopened at its position. */
+    if (!OutputRunning() || (!g_audio.soundLoaded && g_audio.restorePath[0]))
+    {
+        if (!RecoverOutput(L"play"))
+            return;
+    }
+
     if (!g_audio.soundLoaded || g_audio.state == AUDIO_STATE_PLAYING)
         return;
 
-    if (ma_sound_start(&g_audio.sound) == MA_SUCCESS) g_audio.state = AUDIO_STATE_PLAYING;
+    ma_result result = ma_sound_start(&g_audio.sound);
+    if (result == MA_SUCCESS)
+    {
+        g_audio.state = AUDIO_STATE_PLAYING;
+        g_audio.autoRecoveries = 0;
+    }
+    else
+        AudioTrace(L"sound start failed: %d", (int)result);
 }
 
 void Audio_Pause(void)
@@ -468,6 +733,7 @@ void Audio_Pause(void)
 void Audio_Stop(void)
 {
     g_audio.state = AUDIO_STATE_STOPPED;
+    g_audio.restoreFrame = 0; /* A lost track reopens from the start. */
     if (!g_audio.soundLoaded)
         return;
 
@@ -600,25 +866,24 @@ void Audio_SeekSeconds(double seconds)
 
 void Audio_SetVolume(float volume)
 {
-    if (!g_audio.active)
-        return;
-
     /* Clamp entre 0.0 e 1.0. */
     if (volume < 0.0f) volume = 0.0f;
     if (volume > 1.0f) volume = 1.0f;
+
+    /* Kept for an engine created later (recovery or a late first init). */
+    g_audio.volume = volume;
+    if (!g_audio.active)
+        return;
 
     ma_engine_set_volume(&g_audio.engine, volume);
 }
 
 void Audio_SetPan(float pan)
 {
-    if (!g_audio.active)
-        return;
-
     /* Clamp entre -1.0 e 1.0. */
     if (pan < -1.0f) pan = -1.0f;
     if (pan > 1.0f)  pan =  1.0f;
 
-    g_audio.pan = pan;
+    g_audio.pan = pan; /* Applied by Audio_Load, also after recovery. */
     if (g_audio.soundLoaded) ma_sound_set_pan(&g_audio.sound, pan);
 }

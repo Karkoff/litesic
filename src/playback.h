@@ -13,6 +13,7 @@ struct PlaybackBackend {
     double (*position)();
     AudioState (*state)();
     BOOL (*atEnd)();
+    BOOL (*outputAvailable)(); // A load failing without output is not the file's fault.
 };
 enum class RepeatMode { Off, All, One };
 constexpr RepeatMode NextRepeatMode(RepeatMode mode) {
@@ -31,7 +32,8 @@ public:
     void RemoveAt(int index);
     void Clear();
 private:
-    bool LoadIndex(int index, bool resetNavigation);
+    enum class LoadResult { Playing, BadFile, NoOutput };
+    LoadResult LoadIndex(int index, bool resetNavigation);
     void SetScope(bool favoritesOnly);
     Playlist& list_;
     PlaybackBackend backend_;

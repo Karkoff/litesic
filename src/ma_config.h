@@ -18,6 +18,11 @@
 #define MA_ENABLE_WASAPI
 #define MA_ENABLE_DSOUND
 #define MA_ENABLE_WINMM
+/* Test builds only: a scripted backend runs miniaudio's real device worker and
+ * injects output failures (tests/test_audio_recovery.cpp). */
+#ifdef LITESIC_TEST
+#define MA_ENABLE_CUSTOM
+#endif
 
 /* ------------------------------------------------------------------ */
 /* Decoders — habilitar apenas os formatos que o LiteSic suporta.       */

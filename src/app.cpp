@@ -18,6 +18,7 @@
 #include "plwnd.h"
 #include "eqwnd.h"
 #include "ui_theme.h"
+#include "audio.h"
 
 /* DPI_AWARENESS_CONTEXT_PER_MONITOR_AWARE_V2 requer Windows 10 1703+.
  * Verificar existência da função antes de chamar (fallback para o manifest). */
@@ -63,6 +64,8 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
     bool profileReady=election==1&&Runtime::PrepareProfile(directory);
     Ui::ThemeConfigure(profileReady?(directory+L"\\settings.ini").c_str():nullptr);
     I18n::InitializeLanguage(Ui::SettingsPath());
+    // Written only when the audio output fails or is recovered.
+    if(profileReady)Audio_SetLogPath((directory+L"\\audio.log").c_str());
     if(!profileReady){MessageBoxW(nullptr,I18n::Text(election<0?"errors.instance":"errors.data_folder").c_str(),L"LiteSic",MB_OK|MB_ICONERROR);if(SUCCEEDED(com))CoUninitialize();return 1;}
     if(options.validation&&!options.locale.empty()){
         if(!I18n::Select(std::string(options.locale.begin(),options.locale.end()),catalogError))OutputDebugStringA(catalogError.c_str());

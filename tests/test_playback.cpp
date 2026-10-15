@@ -1,12 +1,12 @@
 #include "playback.h"
 #include "check.h"
 #include <cwchar>
-static AudioState state;static bool ended;static double position;static int loads;static bool broken;
-static BOOL Load(const wchar_t* p){++loads;state=AUDIO_STATE_STOPPED;position=0;ended=false;return !broken && !wcsstr(p,L"bad");}
-static void Play(){state=AUDIO_STATE_PLAYING;}static void Stop(){state=AUDIO_STATE_STOPPED;position=0;}
+static AudioState state;static bool ended;static double position;static int loads;static bool broken;static bool noOutput,silent;
+static BOOL Load(const wchar_t* p){++loads;state=AUDIO_STATE_STOPPED;position=0;ended=false;return !noOutput && !broken && !wcsstr(p,L"bad");}
+static void Play(){if(!silent)state=AUDIO_STATE_PLAYING;}static void Stop(){state=AUDIO_STATE_STOPPED;position=0;}
 static void Unload(){Stop();}static void Seek(double p){position=p;ended=false;}static double Position(){return position;}
-static AudioState State(){return state;}static BOOL End(){return ended;}
-static PlaybackBackend Backend(){state=AUDIO_STATE_STOPPED;ended=false;position=0;loads=0;broken=false;return {Load,Play,Stop,Unload,Seek,Position,State,End};}
+static AudioState State(){return state;}static BOOL End(){return ended;}static BOOL Output(){return !noOutput;}
+static PlaybackBackend Backend(){state=AUDIO_STATE_STOPPED;ended=false;position=0;loads=0;broken=false;noOutput=silent=false;return {Load,Play,Stop,Unload,Seek,Position,State,End,Output};}
 static void end_advances_stops(){Playlist p;p.Add(L"a.wav");p.Add(L"b.wav");PlaybackController c(p,Backend());
     CHECK(c.Play());CHECK(p.GetCurrentIndex()==0);ended=true;CHECK(c.Update(false,RepeatMode::Off));CHECK(p.GetCurrentIndex()==1);
     ended=true;CHECK(c.Update(false,RepeatMode::Off));CHECK(state==AUDIO_STATE_STOPPED);CHECK(!c.Update(false,RepeatMode::Off));CHECK(loads==2);}
@@ -22,6 +22,18 @@ static void paused_no_advance_and_remove(){Playlist p;p.Add(L"a.wav");p.Add(L"b.
     c.RemoveAt(1);CHECK(state==AUDIO_STATE_PAUSED);c.RemoveAt(0);CHECK(state==AUDIO_STATE_STOPPED);CHECK(p.Count()==0);CHECK(!c.Play());}
 static void failed_explicit_and_clear(){Playlist p;p.Add(L"bad.wav");PlaybackController c(p,Backend());CHECK(!c.PlayIndex(0));CHECK(p.At(0)->failed);
     CHECK(!c.PlayIndex(-1));c.Clear();CHECK(p.Count()==0);CHECK(!c.Next(true,true));}
+// A missing output is not the files' fault: no track is marked failed, and
+// navigation stops at the first attempt instead of loading the whole list.
+static void missing_output_neither_marks_nor_scans(){
+    Playlist p;for(auto name:{L"a.wav",L"b.wav",L"c.wav",L"d.wav"})p.Add(name);PlaybackController c(p,Backend());
+    noOutput=true;CHECK(!c.PlayIndex(1));CHECK(!p.At(1)->failed);CHECK(loads==1);
+    loads=0;CHECK(!c.Next(false,true));CHECK(loads==1);CHECK(state==AUDIO_STATE_STOPPED);
+    loads=0;CHECK(!c.Previous(false,true));CHECK(loads==1);
+    for(int i=0;i<p.Count();++i)CHECK(!p.At(i)->failed);
+    noOutput=false;silent=true;loads=0;CHECK(!c.Next(false,true));CHECK(loads==1);
+    for(int i=0;i<p.Count();++i)CHECK(!p.At(i)->failed);
+    silent=false;CHECK(c.Play());CHECK(state==AUDIO_STATE_PLAYING); // Output back: same selection plays.
+}
 static void repeat_modes_cycle(){
     CHECK(NextRepeatMode(RepeatMode::Off)==RepeatMode::All);
     CHECK(NextRepeatMode(RepeatMode::All)==RepeatMode::One);
@@ -85,4 +97,5 @@ int main(){int cases=0;CASE(end_advances_stops);CASE(repeat_wrap_and_previous);C
     CASE(paused_no_advance_and_remove);CASE(failed_explicit_and_clear);CASE(repeat_modes_cycle);
     CASE(repeat_one_eof_and_manual_navigation);CASE(repeat_one_preserves_shuffle_cycle);
     CASE(favorites_sequence_repeat_and_general_scope);CASE(favorites_shuffle_history_and_edits);CASE(favorites_skip_invalid_and_bound_repeat);
+    CASE(missing_output_neither_marks_nor_scans);
     std::printf("%d playback cases\n",cases);}

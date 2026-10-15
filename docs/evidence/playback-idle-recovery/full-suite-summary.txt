@@ -1,0 +1,2 @@
+﻿x64 full suite: binaries=32 PASS=182 FAIL=0 All tests passed. (LITESIC_NO_CAPTURE=1)
+x32 full suite: binaries=32 PASS=182 FAIL=0 All tests passed. (LITESIC_NO_CAPTURE=1)

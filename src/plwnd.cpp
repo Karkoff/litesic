@@ -527,7 +527,7 @@ void ActivateControl(int id){
     if(id>=1000){if(auto t=PlayerPlaylist().At(id-1000)){t->favorite=!t->favorite;RefreshInformation();PlWnd_Refresh();}return;}
     if(id==SearchId){FocusControl(id);return;}
     if(id==1){SendMessageW(window,WM_CLOSE,0,0);return;}
-    if(id==531){if(!selected.empty())PlayerPlayback().PlayIndex(selected.front(),favoritesOnly);PlWnd_Refresh(true);return;}
+    if(id==531){if(!selected.empty()&&!PlayerPlayback().PlayIndex(selected.front(),favoritesOnly))Error("errors.play_selected");PlWnd_Refresh(true);return;}
     RECT r=Button(id==1?-1:id);LPARAM point=MAKELPARAM((r.left+r.right)/2,(r.top+r.bottom)/2);
     SendMessageW(window,WM_LBUTTONDOWN,0,point);SendMessageW(window,WM_LBUTTONUP,0,point);
 }
@@ -552,7 +552,7 @@ void AttachAccessibility(HWND hwnd){Ui::Accessibility::Attach(hwnd,[hwnd]{std::v
         LONG star=STATE_SYSTEM_FOCUSABLE|(t->favorite?STATE_SYSTEM_CHECKED:0);if(GetFocus()==hwnd&&keyboardFocus==1000+index)star|=STATE_SYSTEM_FOCUSED;
         auto text=TooltipText(1000+index);controls.push_back({1000+index,{client.right-S(110),y,client.right-S(84),y+S(24)},text,text,L"",ROLE_SYSTEM_CHECKBUTTON,star});
     }return controls;
-},[](int id){if(id>=200000){PlayerPlayback().PlayIndex(id-200000,favoritesOnly);PlWnd_Refresh(true);}else ActivateControl(id);},[](int id){if(id>=200000){selected={id-200000};anchor=selected.front();FocusControl(531);}else FocusControl(id);});}
+},[](int id){if(id>=200000){if(!PlayerPlayback().PlayIndex(id-200000,favoritesOnly))Error("errors.play_selected");PlWnd_Refresh(true);}else ActivateControl(id);},[](int id){if(id>=200000){selected={id-200000};anchor=selected.front();FocusControl(531);}else FocusControl(id);});}
 LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
     POINT point{GET_X_LPARAM(lp), GET_Y_LPARAM(lp)};
     LRESULT menuResult{};
@@ -710,7 +710,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         else if (wp=='A' && (GetKeyState(VK_CONTROL)&0x8000)) {
             status.clear();
             selected=view.Indices(); PlWnd_Refresh();
-        } else if (wp==VK_RETURN && !selected.empty()) { PlayerPlayback().PlayIndex(selected.front(),favoritesOnly); PlWnd_Refresh(true); }
+        } else if (wp==VK_RETURN && !selected.empty()) { if (!PlayerPlayback().PlayIndex(selected.front(),favoritesOnly)) Error("errors.play_selected"); PlWnd_Refresh(true); }
         else if((wp==VK_UP || wp==VK_DOWN || wp==VK_HOME || wp==VK_END) && view.Count()) {
             keyboardFocus=531;
             int row=view.Row(selected.empty()?-1:selected.back());

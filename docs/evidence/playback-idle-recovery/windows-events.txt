@@ -1,0 +1,14 @@
+﻿# Windows event logs (text), 2026-10-15 since 00:50; LiteSic x64 instance started 00:55:34
+## Microsoft-Windows-Kernel-PnP/Device Management
+2026-10-15T01:50:04 1010 A SWD\MMDEVAPI\{0.0.0.00000000}.{7554469f-e5a0-4259-ae2a-ce75e33fb249} do dispositivo foi removida, pois está informada como ausente no barramento.
+2026-10-15T01:50:04 1010 A SWD\MMDEVAPI\{0.0.1.00000000}.{aa80694e-7a2f-47b3-97bf-fee726187b76} do dispositivo foi removida, pois está informada como ausente no barramento.
+2026-10-15T01:50:04 1010 A SWD\MMDEVAPI\{0.0.0.00000000}.{1ce628d1-6c29-41c3-aea5-de2448997f79} do dispositivo foi removida, pois está informada como ausente no barramento.
+2026-10-15T02:28:56 1010 A SWD\MMDEVAPI\{0.0.0.00000000}.{7554469f-e5a0-4259-ae2a-ce75e33fb249} do dispositivo foi removida, pois está informada como ausente no barramento.
+2026-10-15T02:28:56 1010 A SWD\MMDEVAPI\{0.0.1.00000000}.{aa80694e-7a2f-47b3-97bf-fee726187b76} do dispositivo foi removida, pois está informada como ausente no barramento.
+2026-10-15T02:28:56 1010 A SWD\MMDEVAPI\{0.0.0.00000000}.{1ce628d1-6c29-41c3-aea5-de2448997f79} do dispositivo foi removida, pois está informada como ausente no barramento.
+## Endpoint identities (HKLM MMDevices, read-only)
+{1ce628d1-6c29-41c3-aea5-de2448997f79} Render 'Headset' = Fuxi-H4 Hands-Free (BTHHFENUM)
+{7554469f-e5a0-4259-ae2a-ce75e33fb249} Render 'Fones de ouvido' = Fuxi-H4 (A2DP, BTHENUM 0000110B)
+{aa80694e-7a2f-47b3-97bf-fee726187b76} Capture 'Headset' = Fuxi-H4 Hands-Free
+## System log: no Kernel-Power sleep/resume events in the window
+## Instance before termination (authorized by the user): PID 22428, 1 thread, 390 handles, WS 47.9 MB; CloseMainWindow did not finish within 5 s; terminated.

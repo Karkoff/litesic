@@ -1,16 +1,19 @@
 #include "playback.h"
 
-bool PlaybackController::LoadIndex(int index, bool resetNavigation) {
+PlaybackController::LoadResult PlaybackController::LoadIndex(int index, bool resetNavigation) {
     Track* track = list_.At(index);
-    if (!track) return false;
+    if (!track) return LoadResult::BadFile;
     if (resetNavigation) list_.SetCurrentIndex(index);
     if (!backend_.load(track->path.c_str())) {
-        track->failed = true; loaded_ = 0; return false;
+        loaded_ = 0;
+        if (!backend_.outputAvailable()) return LoadResult::NoOutput;
+        track->failed = true; return LoadResult::BadFile;
     }
     track->failed = false;
     loaded_ = track->id;
     backend_.play();
-    return backend_.state() == AUDIO_STATE_PLAYING;
+    // The file opened: not reaching PLAYING means the output failed.
+    return backend_.state() == AUDIO_STATE_PLAYING ? LoadResult::Playing : LoadResult::NoOutput;
 }
 void PlaybackController::SetScope(bool favoritesOnly){
     if(favoritesOnly_!=favoritesOnly){favoritesOnly_=favoritesOnly;list_.SetCurrentIndex(list_.GetCurrentIndex());}
@@ -18,7 +21,7 @@ void PlaybackController::SetScope(bool favoritesOnly){
 bool PlaybackController::PlayIndex(int index,bool favoritesOnly) {
     const Track* track=list_.At(index);
     if(!track||(favoritesOnly&&!track->favorite))return false;
-    SetScope(favoritesOnly);return LoadIndex(index,true);
+    SetScope(favoritesOnly);return LoadIndex(index,true)==LoadResult::Playing;
 }
 bool PlaybackController::Play(bool favoritesOnly){SetScope(favoritesOnly);return Play();}
 bool PlaybackController::Play() {
@@ -28,7 +31,7 @@ bool PlaybackController::Play() {
     }
     const Track* track = list_.At(index);
     if (!track) {backend_.stop();return false;}
-    if (loaded_ != track->id) return LoadIndex(index,true);
+    if (loaded_ != track->id) return LoadIndex(index,true)==LoadResult::Playing;
     if (backend_.atEnd()) { backend_.stop(); backend_.seek(0); }
     backend_.play();
     return backend_.state() == AUDIO_STATE_PLAYING;
@@ -36,10 +39,13 @@ bool PlaybackController::Play() {
 bool PlaybackController::Next(bool shuffle, bool repeat) {
     // Missing/corrupt entries are skipped, with a strict one-list bound even
     // under repeat. A list of broken files cannot spin the UI thread forever.
+    // Without an output no other track can play either: stop at the first.
     for (int attempts = 0; attempts < list_.Count(); ++attempts) {
         int index = list_.Next(shuffle, repeat, favoritesOnly_);
         if (index < 0) break;
-        if (LoadIndex(index, false)) return true;
+        LoadResult result = LoadIndex(index, false);
+        if (result == LoadResult::Playing) return true;
+        if (result == LoadResult::NoOutput) break;
     }
     backend_.stop();
     return false;
@@ -49,7 +55,9 @@ bool PlaybackController::Previous(bool shuffle, bool repeat) {
     for (int attempts = 0; attempts < list_.Count(); ++attempts) {
         int index = list_.Previous(shuffle, repeat, favoritesOnly_);
         if (index < 0) return false;
-        if (LoadIndex(index, false)) return true;
+        LoadResult result = LoadIndex(index, false);
+        if (result == LoadResult::Playing) return true;
+        if (result == LoadResult::NoOutput) break;
     }
     backend_.stop(); return false;
 }
@@ -78,6 +86,6 @@ Playlist& PlayerPlaylist() { static Playlist list(GetTickCount() | 1u); return l
 PlaybackController& PlayerPlayback() {
     static PlaybackController controller(PlayerPlaylist(), {
         Audio_Load, Audio_Play, Audio_Stop, Audio_Unload, Audio_SeekSeconds,
-        Audio_GetPositionSeconds, Audio_GetState, Audio_IsAtEnd});
+        Audio_GetPositionSeconds, Audio_GetState, Audio_IsAtEnd, Audio_IsActive});
     return controller;
 }

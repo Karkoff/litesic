@@ -1,0 +1,4 @@
+# Pre-fix run, commit 8207097 + test hooks only (2026-10-15T04:05:23-03:00)
+FAIL tests/test_audio_recovery.cpp:95: Advances()
+PASS idle_hour_then_select_plays
+exit=1

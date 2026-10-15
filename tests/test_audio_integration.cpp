@@ -25,14 +25,14 @@ static void decoder_formats(){CHECK(Audio_TestInit(48000));
         CHECK(Audio_Load(path));CHECK(Audio_GetDurationSeconds()>0.24);Audio_Play();Render(4800);CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
     }Audio_Shutdown();}
 static void real_controller_natural_end(){CHECK(Audio_TestInit(48000));Playlist p;p.Add(L"tests\\fixtures\\tagged.flac");p.Add(L"tests\\fixtures\\native-44100.wav");
-    PlaybackController c(p,{Audio_Load,Audio_Play,Audio_Stop,Audio_Unload,Audio_SeekSeconds,Audio_GetPositionSeconds,Audio_GetState,Audio_IsAtEnd});
+    PlaybackController c(p,{Audio_Load,Audio_Play,Audio_Stop,Audio_Unload,Audio_SeekSeconds,Audio_GetPositionSeconds,Audio_GetState,Audio_IsAtEnd,Audio_IsActive});
     CHECK(c.Play());Render(24000);CHECK(Audio_IsAtEnd());CHECK(c.Update(false,RepeatMode::Off));CHECK(p.GetCurrentIndex()==1);
     Render(120000);CHECK(c.Update(false,RepeatMode::Off));CHECK(Audio_GetState()==AUDIO_STATE_STOPPED);
     Render(1);CHECK(Audio_GetPositionSeconds()<0.001);c.Clear();Audio_Shutdown();}
 static DWORD WINAPI RenderThread(void*){Render(256);return 0;}
 static void real_repeat_one_restarts_loaded_sound(){
     CHECK(Audio_TestInit(48000));Playlist p;p.Add(L"tests\\fixtures\\native-44100.wav");p.Add(L"tests\\fixtures\\native-48000.wav");
-    PlaybackController c(p,{Audio_Load,Audio_Play,Audio_Stop,Audio_Unload,Audio_SeekSeconds,Audio_GetPositionSeconds,Audio_GetState,Audio_IsAtEnd});
+    PlaybackController c(p,{Audio_Load,Audio_Play,Audio_Stop,Audio_Unload,Audio_SeekSeconds,Audio_GetPositionSeconds,Audio_GetState,Audio_IsAtEnd,Audio_IsActive});
     CHECK(c.Play());
     for(int i=0;i<3;++i){Render(120000);CHECK(Audio_IsAtEnd());CHECK(c.Update(true,RepeatMode::One));
         CHECK(p.GetCurrentIndex()==0);CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);Render(4800);
@@ -59,7 +59,7 @@ static void mp3_duration_queries_during_render(){
 static void real_eof_skips_invalid_file(){
     CHECK(Audio_TestInit(48000));Playlist p;
     p.Add(L"tests\\fixtures\\tagged.mp3");p.Add(L"README.md");p.Add(L"tests\\fixtures\\native-44100.wav");
-    PlaybackController c(p,{Audio_Load,Audio_Play,Audio_Stop,Audio_Unload,Audio_SeekSeconds,Audio_GetPositionSeconds,Audio_GetState,Audio_IsAtEnd});
+    PlaybackController c(p,{Audio_Load,Audio_Play,Audio_Stop,Audio_Unload,Audio_SeekSeconds,Audio_GetPositionSeconds,Audio_GetState,Audio_IsAtEnd,Audio_IsActive});
     CHECK(c.Play());Render(24000);CHECK(Audio_IsAtEnd());CHECK(c.Update(false,RepeatMode::Off));
     CHECK(p.At(1)->failed);CHECK(p.GetCurrentIndex()==2);CHECK(Audio_GetState()==AUDIO_STATE_PLAYING);
     Render(4800);CHECK(Audio_GetPositionSeconds()>.09);c.Clear();Audio_Shutdown();

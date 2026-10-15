@@ -1,0 +1,43 @@
+﻿# Post-fix x64 Release, base 8207097 + working tree (2026-10-15T04:25:25.7080528-03:00)
+PASS idle_hour_then_select_plays
+PASS endpoint_lost_while_idle_then_select_plays
+PASS paused_track_resumes_after_engine_rebuild
+PASS stopped_track_plays_from_start_after_loss
+PASS lost_while_playing_recovers_from_timer_check
+PASS repeated_loss_escalates_to_rebuild
+PASS no_output_reported_bounded_and_retried
+PASS failed_rebuild_keeps_track_for_next_play
+PASS automatic_recovery_budget_is_bounded
+PASS load_and_decode_errors_keep_output
+  handles 203 -> 203, threads 3 -> 3, device inits 11
+PASS cycles_with_losses_do_not_leak
+2026-10-15 04:25:26.520 audio: output not running (play): device state 1, transport 0, track loaded
+
+2026-10-15 04:25:26.520 audio: output restarted
+
+2026-10-15 04:25:26.599 audio: output not running (play): device state 1, transport 2, track loaded
+
+2026-10-15 04:25:26.599 audio: output restart failed: -22
+
+2026-10-15 04:25:26.601 audio: output recreated: 48000 Hz, 2 channels
+
+2026-10-15 04:25:26.678 audio: output not running (play): device state 1, transport 0, track loaded
+
+2026-10-15 04:25:26.678 audio: output restart failed: -22
+
+2026-10-15 04:25:26.679 audio: output recreated: 48000 Hz, 2 channels
+
+2026-10-15 04:25:26.756 audio: output not running (stalled while playing): device state 1, transport 1, track loaded
+
+2026-10-15 04:25:26.756 audio: output restarted
+
+2026-10-15 04:25:26.833 audio: output not running (stalled while playing): device state 1, transport 1, track loaded
+
+2026-10-15 04:25:26.833 audio: output restarted
+
+2026-10-15 04:25:26.848 audio: output not running (stalled while playing): device state 1, transport 1, track loaded
+
+2026-10-15 04:25:26.850 audio: output recreated: 48000 Hz, 2 channels
+
+2026-10-15 04:25:26.894 audio: output not running (stalled while 11 recovery cases
+exit=0

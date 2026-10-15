@@ -47,7 +47,7 @@ TEST_SRCS := $(wildcard tests/*.c)
 TEST_BINS := $(patsubst tests/%.c,$(TEST_DIR)/test-%.exe,$(TEST_SRCS))
 CPP_TEST_SRCS := $(wildcard tests/*.cpp)
 TEST_BINS += $(patsubst tests/%.cpp,$(TEST_DIR)/test-%.exe,$(CPP_TEST_SRCS))
-TEST_LOGIC_OBJS := $(addprefix $(OBJ_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o runtime.o)
+TEST_LOGIC_OBJS := $(addprefix $(OBJ_DIR)/,playlist.o playlist_view.o m3u.o tags.o playback.o playlist_worker.o audio-test.o util.o miniaudio_impl-test.o ui_theme.o eq_dsp.o eq_state.o i18n.o language_selection.o runtime.o)
 TEST_UI_OBJS := $(addprefix $(OBJ_DIR)/,skin.o plwnd.o mainwnd.o visualizer.o ui_draw.o ui_player.o eqwnd.o theme_window.o ui_tooltip.o ui_accessibility.o)
 $(TEST_DIR)/test-test_playlist_window.exe: TEST_EXTRA_OBJS := $(TEST_UI_OBJS)
 $(TEST_DIR)/test-test_playlist_window.exe: $(TEST_UI_OBJS)
@@ -103,6 +103,14 @@ $(DIAG_DIR)/perf-probe.exe: scripts/diagnostics/perf_probe.cpp $(TEST_LOGIC_OBJS
 
 perf-probe: $(DIAG_DIR)/perf-probe.exe diagnostic-locales
 
+# Output recovery on the real default device (silent fixture).
+$(DIAG_DIR)/output-recovery-probe.exe: scripts/diagnostics/output_recovery_probe.cpp $(TEST_LOGIC_OBJS)
+	@mkdir -p $(@D)
+	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(LDLIBS)
+
+output-recovery-probe: $(DIAG_DIR)/output-recovery-probe.exe
+	"$(DIAG_DIR)/output-recovery-probe.exe"
+
 eq-probe: $(DIAG_DIR)/eq-probe.exe diagnostic-locales
 	@set -e; for mode in 6 0 1 2 3 4 5; do "$(DIAG_DIR)/eq-probe.exe" $$mode; done
 
@@ -136,6 +144,11 @@ $(OBJ_DIR)/audio-test.o: src/audio.cpp Makefile
 	@mkdir -p $(@D)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -c -o $@ $<
 
+# Same miniaudio unit, plus the scripted custom backend used by recovery tests.
+$(OBJ_DIR)/miniaudio_impl-test.o: src/miniaudio_impl.c Makefile
+	@mkdir -p $(@D)
+	$(CC) $(CPPFLAGS) $(CFLAGS) -DLITESIC_TEST $(DEPFLAGS) -c -o $@ $<
+
 $(TEST_DIR)/test-%.exe: tests/%.cpp $(TEST_LOGIC_OBJS) Makefile
 	@mkdir -p $(@D)
 	$(CXX) $(CPPFLAGS) $(CXXFLAGS) -DLITESIC_TEST $(DEPFLAGS) -MF $(@:.exe=.d) $(LDFLAGS) -o $@ $< $(TEST_LOGIC_OBJS) $(TEST_EXTRA_OBJS) $(LDLIBS)
@@ -148,7 +161,7 @@ run: all
 	./$(TARGET)
 
 clean:
-	rm -f -- $(OBJS) $(OBJS:.o=.d) $(OBJ_DIR)/audio-test.o $(OBJ_DIR)/audio-test.d $(TEST_BINS) $(TEST_BINS:.exe=.d) $(DIAG_DIR)/eq-probe.exe $(DIAG_DIR)/perf-probe.exe $(TARGET)
+	rm -f -- $(OBJS) $(OBJS:.o=.d) $(OBJ_DIR)/audio-test.o $(OBJ_DIR)/audio-test.d $(OBJ_DIR)/miniaudio_impl-test.o $(OBJ_DIR)/miniaudio_impl-test.d $(TEST_BINS) $(TEST_BINS:.exe=.d) $(DIAG_DIR)/eq-probe.exe $(DIAG_DIR)/perf-probe.exe $(DIAG_DIR)/output-recovery-probe.exe $(TARGET)
 
--include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(OBJ_DIR)/audio-test.d $(TEST_BINS:.exe=.d)
-.PHONY: all test run clean locales test-locales diagnostic-locales perf-probe eq-probe
+-include $(CPP_OBJS:.o=.d) $(MA_OBJ:.o=.d) $(OBJ_DIR)/audio-test.d $(OBJ_DIR)/miniaudio_impl-test.d $(TEST_BINS:.exe=.d)
+.PHONY: all test run clean locales test-locales diagnostic-locales perf-probe eq-probe output-recovery-probe

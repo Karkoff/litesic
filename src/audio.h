@@ -68,12 +68,37 @@ void Audio_Stop(void);
 AudioState Audio_GetState(void);
 BOOL Audio_IsAtEnd(void);
 
+/* ------------------------------------------------------------------ */
+/* Saída de áudio: recuperação e diagnóstico                            */
+/* ------------------------------------------------------------------ */
+
+/* Result of the periodic check made while playing. */
+typedef enum
+{
+    AUDIO_OUTPUT_OK = 0,    /* Output running, or nothing playing.        */
+    AUDIO_OUTPUT_RECOVERED, /* Output had stopped; playback resumed.      */
+    AUDIO_OUTPUT_FAILED     /* No working output: transport now PAUSED.   */
+} AudioOutputCheck;
+
+/* Call from the UI timer. While PLAYING, detects an output device that
+ * stopped on its own (lost endpoint) and recovers it with a bounded number
+ * of attempts. Audio_Play performs the same recovery on demand. */
+AudioOutputCheck Audio_CheckOutput(void);
+
+/* File for output failure/recovery records (created on the first event). */
+void Audio_SetLogPath(const wchar_t* path);
+
 #ifdef LITESIC_TEST
 BOOL Audio_TestInit(unsigned rate);
 BOOL Audio_TestRead(float* frames, unsigned count);
 unsigned long long Audio_TestCursor(void);
 void Audio_TestVizLock(BOOL lock);
 void Audio_TestSkipEq(BOOL skip);
+/* Real device on a caller-owned ma_context (scripted custom backend). */
+BOOL Audio_TestInitContext(void* context);
+BOOL Audio_TestOutputStarted(void);
+void Audio_TestAdvanceClock(unsigned ms);
+void Audio_TestStopOutput(void); /* Leaves the real device stopped, as a lost endpoint does. */
 #endif
 
 /* Retorna a posição atual em segundos. */

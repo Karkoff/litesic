@@ -1,5 +1,17 @@
 # PROJECT_STATE — LiteSic
 
+**Reprodução inoperante após inatividade — PASS por decisão expressa do usuário
+(15/10/2026); resultado técnico COMPLETE_WITH_CAVEATS.**
+Causa: perda do endpoint de áudio (fone Bluetooth desconectado) encerrava o
+loop do dispositivo do miniaudio sem religá-lo; o LiteSic reportava PLAYING
+sem renderizar. Correção: recuperação da saída motivada por estado observado
+(no Play e enquanto toca), limitada, preservando faixa/posição/configurações,
+com log `audio.log` só em eventos. Falha reproduzida antes da correção;
+182 casos por arquitetura PASS (x64/x86) e probe no WASAPI real PASS.
+Validação humana com desconexão física do fone e sessão de horas: a ser feita
+pelo usuário, ainda não executada.
+[Relatório](docs/PLAYBACK-IDLE-RECOVERY-2026-10-15.md).
+
 **Auditoria Geral de Desempenho — COMPLETE_WITH_CAVEATS (12/10/2026).**
 Decisão expressa do usuário: **PERF-DEC-2026-10-12**, que aprovou as três
 correções e os resultados; status restrito ao escopo validado. Correções:

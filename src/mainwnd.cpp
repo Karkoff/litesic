@@ -634,8 +634,9 @@ static BOOL PtInNavBtn(int x, int y, int *pBtnId)
 
 static void ExecutePlayerControl(HWND hwnd,int id) {
     switch(id) {
-    case 1: PlayerPlayback().Previous(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(true); break;
-    case 2: PlayerPlayback().Next(g_shuffleOn,g_repeatMode==RepeatMode::All); PlWnd_Refresh(true); break;
+    // Reaching the end of the list is not an error; having no output is.
+    case 1: g_playbackError=!PlayerPlayback().Previous(g_shuffleOn,g_repeatMode==RepeatMode::All)&&!Audio_IsActive(); PlWnd_Refresh(true); break;
+    case 2: g_playbackError=!PlayerPlayback().Next(g_shuffleOn,g_repeatMode==RepeatMode::All)&&!Audio_IsActive(); PlWnd_Refresh(true); break;
     case 3: g_shuffleOn=!g_shuffleOn; break;
     case 4: g_repeatMode=NextRepeatMode(g_repeatMode); break;
     case 5: g_playbackError=!PlWnd_PlaySelected(); break;
@@ -943,6 +944,13 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
     {
         if (wParam == POSITION_TIMER_ID)
         {
+            // An output that stopped on its own must not leave the player
+            // claiming playback; the check is two atomic reads while healthy.
+            switch (Audio_CheckOutput()) {
+            case AUDIO_OUTPUT_RECOVERED: g_playbackError = false; InvalidateRect(hwnd, nullptr, FALSE); break;
+            case AUDIO_OUTPUT_FAILED: g_playbackError = true; InvalidateRect(hwnd, nullptr, FALSE); PlWnd_Refresh(); break;
+            default: break;
+            }
             if (PlayerPlayback().Update(g_shuffleOn, g_repeatMode)) PlWnd_Refresh(true);
             const Track* current = PlayerPlaylist().At(PlayerPlaylist().GetCurrentIndex());
             uint64_t id = current ? current->id : 0;
@@ -1043,17 +1051,8 @@ static LRESULT CALLBACK WndProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lPara
             Ui::SaveAppearanceValue(L"Spectrum",g_vizMode==VIZ_MODE_SPECTRUM);
         } else if (my >= NAV_Y && my < TOGGLE_Y + TOGGLE_H) {
             int btnId = 0;
-            if (PtInNavBtn(mx, my, &btnId)) {
-                switch (btnId) {
-                case 1: PlayerPlayback().Previous(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(true); break;
-                case 2: PlayerPlayback().Next(g_shuffleOn, g_repeatMode == RepeatMode::All); PlWnd_Refresh(true); break;
-                case 3: g_shuffleOn = !g_shuffleOn; break;
-                case 4: g_repeatMode = NextRepeatMode(g_repeatMode); break;
-                case 5: PlWnd_PlaySelected(); break;
-                case 6: Audio_Pause(); break;
-                case 7: Audio_Stop(); g_seekValue = 0; g_scrollElapsedMs = 0; break;
-                }
-            }
+            if (PtInNavBtn(mx, my, &btnId) && btnId >= 1 && btnId <= 7)
+                ExecutePlayerControl(hwnd, btnId);
         } else
         {
             SetForegroundWindow(hwnd);
