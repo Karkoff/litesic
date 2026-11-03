@@ -1,5 +1,16 @@
 # PROJECT_STATE — LiteSic
 
+**Distribuição desktop 1.0.0 — 03/11/2026.** Quatro ZIPs: x64/x86 padrão
+e portátil, com 18 idiomas, ajuda e licenças; portátil ativa `data/` por duplo
+clique via `resources/portable.flag`. VERSIONINFO corrigido e atualizado para
+1.0.0.0. Suítes Release 184 casos por arquitetura PASS; quatro ZIPs extraídos,
+16 inicializações e reprodução real PASS, sem alterar o perfil pessoal.
+[Release](https://github.com/Karkoff/litesic/releases/tag/v1.0.0) e
+[procedimento/evidências](docs/DESKTOP-RELEASE-2026-11-03.md).
+M10 continua IN_PROGRESS; ensaio formal de reprodutibilidade T1 e validação
+humana dos ZIPs T2 mantêm seus critérios. A preparação da Store abaixo
+conserva sua identidade, fontes e pacotes anteriores.
+
 **Microsoft Store — IN_PROGRESS (03/11/2026).** Identidade oficial
 `Brasiliense.LiteSic`, publicador Brasiliense, Store ID `9NJ52QFN0LMX`.
 MSIX candidato 1.0.0.0 x86/x64 gerado; MakeAppx e integridade PASS;

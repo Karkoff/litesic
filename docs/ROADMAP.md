@@ -2,6 +2,8 @@
 
 **Atualização 03/11/2026:** M10 em andamento; pacote Microsoft Store validado
 localmente e Submission 1 em rascunho, sem envio ou publicação.
+Distribuição desktop 1.0.0: quatro ZIPs x64/x86 padrão/portátil preparados e
+verificados; [procedimento e limites](DESKTOP-RELEASE-2026-11-03.md).
 [Estado e procedimento](STORE-PUBLICATION.md). Os registros abaixo preservam
 os encerramentos e planejamentos anteriores.
 

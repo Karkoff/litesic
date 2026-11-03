@@ -24,11 +24,18 @@ Gratuito e de código aberto, sem anúncios, assinatura ou conta. Reproduz seus 
 
 ## Baixar e abrir
 
-1. Acesse a página de [downloads do LiteSic](https://github.com/Karkoff/litesic/releases).
-2. Escolha o executável **x64** para Windows de 64 bits ou **x86** para Windows de 32 bits.
-3. Salve em uma pasta de sua escolha e execute o arquivo baixado.
+1. Escolha um dos pacotes da **versão final 1.0 (v1.0.0)** abaixo.
+2. Extraia o ZIP inteiro para uma pasta de sua escolha.
+3. Abra **LiteSic.exe**. Mantenha as subpastas que acompanham o aplicativo.
 
-**O download v0.1.0 é uma prévia antiga:** ainda não reúne a interface e todos os recursos mostrados nesta página. As telas e as instruções abaixo apresentam a versão atual do repositório. Para executar essa versão enquanto não houver um download atualizado, consulte a seção de compilação no fim da página. Os executáveis prontos não exigem ferramentas de desenvolvimento para funcionar.
+| Download | Indicado para |
+| --- | --- |
+| [Windows x64](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-x64.zip) | Windows de 64 bits; preferências no perfil do Windows. |
+| [Windows x86 (32 bits)](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-x86.zip) | Windows de 32 bits; preferências no perfil do Windows. |
+| [Portátil x64](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-portable-x64.zip) | Windows de 64 bits; preferências junto ao aplicativo. |
+| [Portátil x86 (32 bits)](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-portable-x86.zip) | Windows de 32 bits; preferências junto ao aplicativo. |
+
+Todos os pacotes incluem **18 idiomas**, ajuda e licenças. Os executáveis prontos não exigem ferramentas de desenvolvimento ou instalação de runtimes adicionais. [Notas da versão e checksums SHA-256](https://github.com/Karkoff/litesic/releases/tag/v1.0.0).
 
 **Compatibilidade:** funcionamento verificado no Windows 11. A distribuição tradicional tem como alvo Windows 7 a 11, em x86 e x64; a validação prática nas versões anteriores do Windows ainda está pendente.
 
@@ -88,13 +95,15 @@ O player também responde às teclas multimídia do teclado. Para controlá-lo e
 
 ### Leve suas preferências com você
 
-Para usar o modo portátil, coloque o executável e a pasta `locales/` em uma pasta gravável e inicie com a opção `--portable`:
+Baixe uma das edições **Portátil**, extraia para uma pasta gravável e abra **LiteSic.exe** normalmente. As configurações e a sessão ficam em `data/`, junto ao executável. Mantenha o arquivo `resources/portable.flag`, que ativa esse comportamento automaticamente.
+
+Na edição padrão, também é possível ativar o modo portátil ao iniciar com a opção `--portable`:
 
 ```powershell
 .\LiteSic.exe --portable
 ```
 
-Se o arquivo baixado tiver outro nome, substitua `LiteSic.exe` pelo nome dele no comando. As configurações e a sessão ficam na pasta `data/`, junto ao executável. Sem essa opção, a distribuição tradicional usa `%LOCALAPPDATA%\LiteSic`.
+Na edição padrão, sem essa opção, as preferências ficam em `%LOCALAPPDATA%\LiteSic`.
 
 As playlists guardam caminhos absolutos das músicas. Se você mover os arquivos de áudio para outra pasta ou unidade, adicione-os novamente ou atualize a lista.
 
@@ -124,6 +133,8 @@ make test            # Testes da configuração selecionada
 ```
 
 As [regras de implementação](AGENT.md) cobrem Unicode, compatibilidade Windows, threads nativas e segurança do callback de áudio. Para verificar a interface, consulte o [guia de validação gráfica](docs/GUI-AUTOMATION.md).
+
+Para compilar, testar e gerar os quatro ZIPs com idiomas e licenças, execute `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/package-desktop.ps1`. O procedimento e a verificação dos pacotes estão no [guia da release desktop](docs/DESKTOP-RELEASE-2026-11-03.md).
 
 </details>
 

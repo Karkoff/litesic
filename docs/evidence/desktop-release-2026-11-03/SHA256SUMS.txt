@@ -1,0 +1,4 @@
+37b64818eb76d9cfdad9d8b32054beda4572faaeddc4906f11d23e66cab3d44e  LiteSic-v1.0.0-x64.zip
+1d00a8f411ec4d7aa40afac816b4397d86a5cfb4a8ca9688dd1918a7c8b6e50e  LiteSic-v1.0.0-portable-x64.zip
+f2e84a3be2ff6dac03063ee0ba75bd7e786806de7d3ffc6a790b9515974a2ff4  LiteSic-v1.0.0-x86.zip
+4df3698680e0ef57220e0b1b2b646d8262ad23a1854aab06936dc0a78564e69a  LiteSic-v1.0.0-portable-x86.zip

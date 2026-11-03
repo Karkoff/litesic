@@ -45,7 +45,11 @@ std::wstring ProfileDirectory(const std::wstring& executable,const std::wstring&
     if(!packageFamily.empty())return localData.empty()?std::wstring{}:localData+L"\\Packages\\"+packageFamily+L"\\LocalState\\LiteSic";
     auto parent=executable.substr(0,executable.find_last_of(L"\\/"));
     if(options.validation){for(int i=0;i<3;++i)parent=parent.substr(0,parent.find_last_of(L"\\/"));return parent+L"\\build\\gui\\m6-session";}
-    return options.portable?parent+L"\\data":localData.empty()?std::wstring{}:localData+L"\\LiteSic";
+    // Desktop portable archives opt in without requiring a command-line flag.
+    // Resolve the marker beside the executable, never in the working directory.
+    DWORD marker=GetFileAttributesW((parent+L"\\resources\\portable.flag").c_str());
+    bool portable=options.portable||(marker!=INVALID_FILE_ATTRIBUTES&&!(marker&FILE_ATTRIBUTE_DIRECTORY));
+    return portable?parent+L"\\data":localData.empty()?std::wstring{}:localData+L"\\LiteSic";
 }
 bool PrepareProfile(const std::wstring& directory){
     if(directory.empty())return false;

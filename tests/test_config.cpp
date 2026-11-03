@@ -39,6 +39,26 @@ static void bounded_unicode_ipc(){
     packet.back()=L'x';CHECK(!Runtime::Decode(&data,decoded));CHECK(!Runtime::Decode(nullptr,decoded));
     packet=Runtime::Encode({});data={Runtime::Packet,DWORD(packet.size()*2),packet.data()};CHECK(Runtime::Decode(&data,decoded)&&decoded.empty());
 }
+static void portable_marker_and_profile_precedence(){
+    auto directory=FullPath(L"build\\portable-marker-音楽-"+std::to_wstring(sizeof(void*)*8)+L"-"+std::to_wstring(GetCurrentProcessId()));
+    auto resources=directory+L"\\resources",marker=resources+L"\\portable.flag";
+    CHECK(Runtime::PrepareProfile(resources));
+    Runtime::Options options;auto exe=directory+L"\\LiteSic.exe";
+    CHECK(Runtime::ProfileDirectory(exe,L"C:\\Local",options)==L"C:\\Local\\LiteSic");
+    CHECK(CreateDirectoryW(marker.c_str(),nullptr));
+    CHECK(Runtime::ProfileDirectory(exe,L"C:\\Local",options)==L"C:\\Local\\LiteSic");
+    CHECK(RemoveDirectoryW(marker.c_str()));
+    HANDLE handle=CreateFileW(marker.c_str(),GENERIC_WRITE,0,nullptr,CREATE_NEW,FILE_ATTRIBUTE_NORMAL,nullptr);
+    CHECK(handle!=INVALID_HANDLE_VALUE);CloseHandle(handle);
+    CHECK(Runtime::ProfileDirectory(exe,L"C:\\Local",options)==directory+L"\\data");
+    CHECK(Runtime::ProfileDirectory(exe,L"",options)==directory+L"\\data");
+    CHECK(Runtime::ProfileDirectory(exe,L"C:\\Local",options,L"LiteSic_test")==L"C:\\Local\\Packages\\LiteSic_test\\LocalState\\LiteSic");
+    options.profile=L"build\\explicit-portable-override";
+    CHECK(Runtime::ProfileDirectory(exe,L"C:\\Local",options)==FullPath(options.profile));
+    options.profile.clear();options.validation=true;
+    CHECK(Runtime::ProfileDirectory(exe,L"C:\\Local",options)!=directory+L"\\data");
+    CHECK(DeleteFileW(marker.c_str()));CHECK(RemoveDirectoryW(resources.c_str()));CHECK(RemoveDirectoryW(directory.c_str()));
+}
 static void remaining_configuration_roundtrip(){
     DeleteFileW(ini.c_str());Ui::ThemeConfigure(ini.c_str());
     Ui::PanelPosition position;CHECK(!Ui::LoadPlayerPosition(position));CHECK(Ui::SavePlayerPosition({-900,-200}));CHECK(Ui::LoadPlayerPosition(position)&&position.left==-900&&position.top==-200);
@@ -58,4 +78,4 @@ static void explicit_profile_writability_and_readonly(){
     auto file=directory+L"\\settings.ini";HANDLE handle=CreateFileW(file.c_str(),GENERIC_WRITE,0,nullptr,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,nullptr);CHECK(handle!=INVALID_HANDLE_VALUE);CloseHandle(handle);
     CHECK(SetFileAttributesW(file.c_str(),FILE_ATTRIBUTE_READONLY));CHECK(!Runtime::PrepareProfile(directory));CHECK(SetFileAttributesW(file.c_str(),FILE_ATTRIBUTE_NORMAL));CHECK(DeleteFileW(file.c_str()));CHECK(RemoveDirectoryW(directory.c_str()));
 }
-int main(){ini=FullPath(L"build\\m8-config-"+std::to_wstring(sizeof(void*)*8)+L".ini");int cases=0;CASE(command_line_and_profile_contract);CASE(packaged_profile_is_separate_from_desktop_and_portable);CASE(bounded_unicode_ipc);CASE(remaining_configuration_roundtrip);CASE(compact_display_preserves_geometry);CASE(explicit_profile_writability_and_readonly);Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());printf("%d remaining configuration cases\n",cases);}
+int main(){ini=FullPath(L"build\\m8-config-"+std::to_wstring(sizeof(void*)*8)+L".ini");int cases=0;CASE(command_line_and_profile_contract);CASE(packaged_profile_is_separate_from_desktop_and_portable);CASE(portable_marker_and_profile_precedence);CASE(bounded_unicode_ipc);CASE(remaining_configuration_roundtrip);CASE(compact_display_preserves_geometry);CASE(explicit_profile_writability_and_readonly);Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());printf("%d remaining configuration cases\n",cases);}
