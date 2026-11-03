@@ -1,316 +1,132 @@
 # LiteSic
 
-**Microsoft Store (03/11/2026):** MSIX 1.0.0.0 x86/x64 preparado e validado;
-Submission 1 criada em rascunho, **ainda não enviada nem publicada**.
-[Procedimento, testes e pendências](docs/STORE-PUBLICATION.md).
+**Suas músicas, do seu jeito.** Um player de áudio para Windows inspirado na experiência clássica do Winamp, com playlist, equalizador e visualizador em painéis que você organiza na tela.
 
-<div align="center">
+[Baixar para Windows](https://github.com/Karkoff/litesic/releases) · [Como usar](#como-usar) · [Telas](#telas) · [Relatar um problema](https://github.com/Karkoff/litesic/issues)
 
-**Player de áudio estilo Winamp em C++ nativo com Win32 + Direct2D/DirectWrite**
+![LiteSic completo em português: player com espectro de áudio, equalizador de 10 bandas e playlist com favoritos](packaging/store/screenshots/final-pt-BR-spectrum.png)
 
-[![Platform](https://img.shields.io/badge/platform-Windows%207--11-blue)]()
-[![Language](https://img.shields.io/badge/language-C%2B%2B-17?color=659ad2&logo=c%2B%2B)]()
-[![License](https://img.shields.io/badge/license-MIT-green)](LICENSE)
+Gratuito e de código aberto, sem anúncios, assinatura ou conta. Reproduz seus arquivos locais e guarda suas preferências no computador.
 
-</div>
+## O que você pode fazer
 
----
+| Recurso | No dia a dia |
+| --- | --- |
+| Música local | Ouça arquivos **MP3, WAV, FLAC e OGG Vorbis**. |
+| Playlists | Adicione arquivos ou pastas, arraste do Explorer, reorganize faixas e importe ou exporte **M3U/M3U8**. |
+| Pesquisa e favoritos | Encontre músicas na lista e marque as preferidas com uma estrela. |
+| Equalizador | Ajuste **10 bandas**, pré-amplificação e presets enquanto a música toca. |
+| Reprodução | Controle volume e balanço, ative o modo aleatório e repita a lista ou uma faixa. |
+| Visualizador | Alterne entre **espectro de áudio (FFT)** e **osciloscópio (OSC)**. |
+| Aparência | Escolha entre **36 temas**, ajuste a escala e encaixe os três painéis entre si. |
+| Idiomas | Use a interface em **18 idiomas**, com seleção automática pelo Windows ou escolha manual. |
+| Sua sessão | Retome a playlist, os favoritos, o volume, o tema e a disposição dos painéis ao reabrir. |
 
-## 🎵 Visão Geral
+## Baixar e abrir
 
-LiteSic é um player de áudio para Windows que recria a experiência clássica do Winamp, construído em **C++17 nativo** com **Win32 API + Direct2D/DirectWrite**, mantendo GDI como fallback durante a migração. Alvo de compatibilidade Windows 7–11. Sem Qt, sem .NET, sem MFC.
+1. Acesse a página de [downloads do LiteSic](https://github.com/Karkoff/litesic/releases).
+2. Escolha o executável **x64** para Windows de 64 bits ou **x86** para Windows de 32 bits.
+3. Salve em uma pasta de sua escolha e execute o arquivo baixado.
 
-**Estado atual: M0–M9 COMPLETE; M8 com aceite humano PASS em 12/10/2026.**
-[Validação técnica final da M8](docs/M8-COMPLETION.md): quatro builds/suítes,
-atalhos, topo, instância única, persistência, DPI, MSAA e GUI verificados.
-Revisão linguística humana integral dos 18 idiomas e validações físicas/assistivas
-não realizadas são observações futuras não bloqueantes. Próxima atividade:
-**M10 — Distribuição**, em andamento com a preparação da Microsoft Store. Auditoria Geral de Desempenho:
-**COMPLETE_WITH_CAVEATS** em 12/10/2026 ([relatório](docs/PERFORMANCE-AUDIT.md)).
-A playlist está implementada e integrada,
-com testes, validação gráfica e PASS manual do usuário para o visual,
-arraste do Explorer e M3U externo. A sessão persiste após fechar/reabrir e
-Play destaca a faixa selecionada e só a centraliza quando ela está fora da
-área visível; faixas já visíveis mantêm sua posição. A seleção primária também
-volta destacada ao reabrir, pronta para Play. **ADIC ▾**, **REMOVER** e
-**LISTA ▾** ficam à direita da barra de status; Arquivos/Pasta estão agrupados
-em Adicionar. A pesquisa tem um ícone de borracha para limpar.
-Veja as [duas correções visuais recentes](docs/PLAYLIST-FOOTER-2026-10-11.md).
-**M6 COMPLETE:** aceite final visual, audível, funcional e de uso prolongado
-informado pelo usuário em 11/10/2026, após os ajustes integrados.
-[Encerramento, quatro builds e validação final](docs/M6-CLOSEOUT-2026-10-11.md).
-A [auditoria integrada anterior](docs/M6-INTEGRATED-VALIDATION-2026-10-11.md)
-permanece como histórico, com suas medições e limitações originais.
-[Ajustes visuais posteriores](docs/UI-BUTTON-STATES-2026-10-11.md): estados
-ativos com fundo claro, indicador EQ e comandos do equalizador no rodapé.
-[Atualização de volume e painéis](docs/VOLUME-DOCKING-2026-10-11.md): último
-volume persistido, EQ do tamanho do player compacto, formação mantida ao mover
-e posições da playlist e do equalizador preservadas ao reabrir.
-[Favoritos e informações das músicas](docs/PLAYLIST-FAVORITES-2026-10-11.md):
-estrelas persistentes, abas Geral/Favoritas, faixa em negrito e informações pelo
-menu de contexto. Temas mantém a posição da lista ao aplicar; botões do EQ
-têm largura uniforme.
-Play iniciado em Favoritas toca somente as músicas marcadas, respeitando
-shuffle e repetição; sem repetição, para no fim das favoritas.
-[Correção da pesquisa em playlists grandes](docs/SEARCH-FREEZE-2026-10-11.md):
-metadados são aplicados em lotes, sem acumular varreduras por notificações antigas.
-Equalizador real implementado, com dez bandas, PRE,
-ON/OFF suave, sete presets, curva, teclado e persistência. Continua funcionando
-com o painel oculto. Na entrega original, quatro builds e **420 verificações** passaram; o usuário confirmou o funcionamento em 11/10/2026. [Relatório, medições e capturas](docs/M6-EQUALIZER-2026-10-11.md).
-A integração M7 está **COMPLETE**, com aceite humano “TUDO PASS”:  encaixe entre quaisquer
-dos três painéis, movimento transitivo, persistência dos vínculos e recuperação
-de posições. [Validação M7](docs/M7-INTEGRATED-VALIDATION.md) e
-[auditoria do roadmap](docs/ROADMAP-IMPLEMENTATION-AUDIT.md).
-[Compactação por visibilidade](docs/M7-VISIBILITY-COMPACTION.md): ocultar um
-painel intermediário fecha o espaço; reabrir recompõe a formação, respeitando
-um novo posicionamento manual.
-EQ e playlist encaixam no player com captura de 24 DIP e alinhamento
-automático pelo início, centro ou fim de cada borda. Os painéis encaixados
-acompanham movimento e escala. [Verificação](docs/WINDOW-SNAP-2026-10-11.md).
-Títulos longos deslizam suavemente no LCD nos dois sentidos, com pausa nas
-extremidades; títulos que cabem permanecem parados.
-Corrigida a consulta concorrente de duração MP3 que podia travar e encerrar
-o player durante a reprodução/transição. [Auditoria](docs/AUDIO-TRANSITION-AUDIT-2026-10-11.md).
-**Aparência entre sessões:** visibilidade do visualizador (incluindo player
-compacto), playlist e painel EQ, modo FFT/OSC, escala da interface e tema
-são preservados. Veja [validação da persistência](docs/APPEARANCE-PERSISTENCE-2026-10-11.md).
-Veja o [encerramento técnico da M5](docs/M5-CLOSEOUT-2026-10-11.md).
-Modernização UI/UX **IN_PROGRESS**: player e playlist já usam Direct2D/DirectWrite,
-com pesquisa que preserva a fila e os cinco transportes separados. O painel EQ
-agora controla o DSP real. Histórico anterior à M6 — baseline repetida:
-292 aprovações; rodada anterior: **356 (89 por variante)**. Após persistir a
-aparência, a suíte x64 Debug tem **93 testes aprovados**. A investigação de memória
-reproduziu o custo de inicialização gráfica, sem crescimento contínuo na carga
-curta do backend atual. UI-00..08 ainda não estão concluídas; M6 teve o funcionamento confirmado pelo usuário.
-Veja [implementação, capturas e pendências](docs/design/UI-VALIDATION-2026-10-11.md)
-e [plano por fase](docs/design/LITESIC-UI-IMPLEMENTATION-PLAN.md).
+**O download v0.1.0 é uma prévia antiga:** ainda não reúne a interface e todos os recursos mostrados nesta página. As telas e as instruções abaixo apresentam a versão atual do repositório. Para executar essa versão enquanto não houver um download atualizado, consulte a seção de compilação no fim da página. Os executáveis prontos não exigem ferramentas de desenvolvimento para funcionar.
 
-**Temas visuais:** 36 opções em **botão direito no player → Aparência > Temas...**,
-com categorias, prévias, aplicação imediata e preferência persistente.
-LiteSic Original continua sendo o padrão; player, playlist e EQ compartilham a
-aparência sem interromper a reprodução. Validação técnica PASS e aceite visual
-final da M6 informado pelo usuário; não há registro de aprovação individual
-dos 36 temas. Seletor e menus próprios usam a paleta ativa.
-Veja [sistema de temas](docs/THEMES.md),
-[relatório atual de playlist, menus e temas](docs/PLAYLIST-UI-2026-10-11.md) e
-[galeria inicial dos oito temas representativos](docs/evidence/themes/index.html).
-O ambiente e os comandos atualizados estão em
-[`docs/DEVELOPMENT.md`](docs/DEVELOPMENT.md).
+**Compatibilidade:** funcionamento verificado no Windows 11. A distribuição tradicional tem como alvo Windows 7 a 11, em x86 e x64; a validação prática nas versões anteriores do Windows ainda está pendente.
 
-O produto prevê três janelas independentes:
-- 🎛️ **Player Principal** — LCD com tempo/duração, título rolando, controles de play/pause/stop, seek, volume, balanço, prev/next, shuffle/repeat e visualizador (osciloscópio/espectro FFT)
-- 🔊 **Equalizador** — 10 bandas com pré-amp, presets e ajuste em tempo real
-- 📋 **Lista de Reprodução** — drag & drop, reordenação, suporte a M3U
+## Como usar
 
-## ✨ Características
+### Comece a ouvir
 
-| Recurso | Detalhes |
-|---|---|
-| **Formatos** | MP3, WAV, FLAC, OGG Vorbis |
-| **Motor de áudio** | [miniaudio](https://miniaud.io) — single-header, multi-backend |
-| **Interface** | Player e playlist sem borda; playlist redimensionável e com encaixe magnético ao player |
-| **Repetição** | Desligada → lista (`REP`) → faixa atual (`REP 1`); Anterior/Próximo continuam navegando |
-| **Playlist** | Arquivos/pastas, seleção múltipla, arraste para reordenar, ordenação, M3U, tags em background e recuperação automática ao reabrir |
-| **Visualizador** | Osciloscópio em tempo real + espectro FFT com escala logarítmica; botão **VIZ** ao lado de LISTA/EQ para ocultar ou mostrar, reduzindo/restaurando a altura do player |
-| **Equalizador** | DSP real: 10 bandas ±12 dB, PRE ±12 dB, ON/OFF suave, presets, curva e persistência |
-| **Compatibilidade** | Alvo Windows 7–11, x86/x64; M9 COMPLETE por decisão do usuário. Windows 11 confirmado; testes práticos Windows 7/8/8.1/10 e validação específica x86/x64 pendentes |
-| **DPI** | Suporte a alta densidade de pixels |
-| **Runtime** | Runtime GCC/C++ estático; depende das DLLs de sistema Windows |
+1. Clique em **LISTA** para mostrar a lista de reprodução.
+2. No rodapé da playlist, abra **ADIC ▾** e escolha arquivos ou uma pasta. Você também pode arrastar músicas do Explorer para a lista.
+3. Selecione uma faixa e clique em **Play**, ou dê dois cliques na música.
+4. Use **Anterior**, **Pause**, **Stop** e **Próximo** para controlar a reprodução. Arraste a barra de tempo para avançar ou voltar na faixa.
 
-Encerramento M9 em 11/10/2026: os testes restantes serão realizados
-futuramente pelo usuário, sem bloquear o avanço nem reabrir automaticamente
-a milestone. Ver [PROJECT_STATE](PROJECT_STATE.md) e
-[decisão M9-DEC-2026-10-11](docs/M9-CLOSEOUT-2026-10-11.md).
+Os controles de **Volume** e **Balanço** ficam no player. O botão de repetição alterna entre desligada, lista inteira (**REP**) e faixa atual (**REP 1**). Ative o botão de reprodução aleatória para variar a ordem das músicas.
 
-## 🏗️ Arquitetura
+### Organize suas músicas
 
-```
-LiteSic/
-├── src/                  # Código-fonte principal
-│   ├── app.cpp           # Ponto de entrada (WinMain)
-│   ├── mainwnd.cpp       # Janela do player principal
-│   ├── plwnd.cpp         # Playlist Win32/Direct2D, busca e docking
-│   ├── ui_draw.cpp       # Primitivas Direct2D/DirectWrite e cache
-│   ├── ui_player.cpp     # Apresentação do player em DIPs
-│   ├── playlist.cpp      # Modelo, seleção e navegação
-│   ├── playback.cpp      # Integração da lista com o áudio
-│   ├── playlist_worker.cpp # Fila nativa de I/O/metadados
-│   ├── m3u.cpp           # Parser e gravação de M3U
-│   ├── tags.cpp          # ID3, FLAC e Vorbis Comment
-│   ├── audio.cpp         # Motor de áudio (miniaudio wrapper)
-│   ├── visualizer.cpp    # Osciloscópio + espectro FFT
-│   ├── util.cpp          # Tempo, scroll, bitrate e sliders
-│   └── *.h               # Cabeçalhos
-├── third_party/          # Bibliotecas de terceiros
-│   ├── miniaudio.h       # Motor de áudio single-header
-│   └── stb_vorbis.c      # Decodificador OGG Vorbis
-├── res/                  # Recursos Windows
-│   ├── app.rc            # Resource script (ícone, manifest)
-│   └── *.manifest        # Manifesto DPI + compatibilidade
-├── tests/                # Testes unitários
-├── docs/                 # Documentação
-│   ├── ROADMAP.md        # Roadmap de milestones
-│   └── milestones/       # Detalhamento de cada milestone (M0–M10)
-├── .vscode/              # Configurações VS Code
-├── Makefile              # Build system (MinGW-w64)
-└── AGENT.md              # Regras e convenções do projeto
+- Digite no campo **Pesquisar músicas...** para filtrar a lista; use a borracha ao lado para limpar a pesquisa.
+- Clique na **estrela** de uma faixa para marcá-la como favorita. A aba **Favoritas** reúne as músicas marcadas; iniciar a reprodução nessa aba toca somente as favoritas.
+- Arraste as faixas para mudar a ordem. Use **Ctrl** ou **Shift** para selecionar várias músicas e **REMOVER** para retirá-las da playlist.
+- Abra **LISTA ▾**, no rodapé da playlist, para acessar os comandos de listas, incluindo importação e exportação de M3U/M3U8.
+- Clique com o botão direito em uma música para consultar suas informações.
+
+A lista é salva automaticamente ao fechar o programa e recuperada na próxima abertura.
+
+### Ajuste o som e o visualizador
+
+Clique em **EQ** para mostrar o equalizador. Ative **EQ ON**, escolha um preset ou ajuste as dez bandas e o controle **PRE**. Os ajustes continuam valendo quando você oculta o painel; use o botão ON/OFF do próprio equalizador para ligar ou desligar o efeito.
+
+No player, **FFT** mostra o espectro de áudio e **OSC** mostra a forma de onda. O botão **VIZ** oculta o visualizador e deixa o player mais compacto; clique novamente para restaurá-lo.
+
+![LiteSic completo com osciloscópio ativo, equalizador e lista de reprodução](packaging/store/screenshots/final-pt-BR-osc.png)
+
+### Deixe a interface do seu jeito
+
+Clique com o botão direito no player para escolher **Temas...**, ajustar a **escala da interface**, mudar o **Idioma** ou ativar **Sempre no topo**. O tema é aplicado aos três painéis sem interromper a música.
+
+Na versão atual, mantenha a pasta [`locales/`](locales) ao lado do executável para ter os 18 idiomas. Sem os catálogos, o player usa o inglês incorporado.
+
+Arraste os painéis pelas barras de título. Ao aproximar suas bordas, eles se encaixam e passam a acompanhar o movimento do conjunto. Para separar um painel, arraste sua própria barra de título. Os botões **LISTA** e **EQ** mostram ou ocultam os painéis correspondentes.
+
+![Seletor de temas do LiteSic com prévias de cores e opções como Original, Escuro, Claro e Alto Contraste](docs/evidence/m8-language-selection/t7-pt-BR-themes.png)
+
+### Atalhos de teclado
+
+Com um dos painéis do LiteSic em foco e fora de campos de texto:
+
+| Tecla | Ação |
+| --- | --- |
+| **Z** / **B** | Faixa anterior / próxima |
+| **X** | Reproduzir a faixa selecionada |
+| **C** | Pausar (use **X** ou **Play** para retomar) |
+| **V** | Parar |
+| **L** | Mostrar ou ocultar a playlist |
+| **Ctrl+D** | Ativar ou desativar a reprodução aleatória |
+
+O player também responde às teclas multimídia do teclado. Para controlá-lo em segundo plano, ative os atalhos globais no menu do botão direito: **Ctrl+Alt+F9** reproduz/pausa, **Ctrl+Alt+F10** para, **Ctrl+Alt+F11** volta e **Ctrl+Alt+F12** avança.
+
+### Leve suas preferências com você
+
+Para usar o modo portátil, coloque o executável e a pasta `locales/` em uma pasta gravável e inicie com a opção `--portable`:
+
+```powershell
+.\LiteSic.exe --portable
 ```
 
-## 🛠️ Compilação
+Se o arquivo baixado tiver outro nome, substitua `LiteSic.exe` pelo nome dele no comando. As configurações e a sessão ficam na pasta `data/`, junto ao executável. Sem essa opção, a distribuição tradicional usa `%LOCALAPPDATA%\LiteSic`.
 
-### Pré-requisitos
+As playlists guardam caminhos absolutos das músicas. Se você mover os arquivos de áudio para outra pasta ou unidade, adicione-os novamente ou atualize a lista.
 
-Para preparar outro computador, consulte o
-[procedimento de instalação e validação](docs/DEVELOPMENT.md).
-As tarefas do VS Code usam `.tools/msys64` por padrão.
+## Telas
 
-- **MSYS2** com ambiente MinGW-w64 (MINGW64 ou MINGW32)
-  - ⚠️ Nunca use UCRT64 — quebra compatibilidade com Windows 7
-- **Make** disponível no PATH
+As capturas desta página mostram o aplicativo real, com player, equalizador e playlist completos. Clique em uma imagem para abri-la em tamanho original.
 
-### Comandos
+**Interface em inglês** — os mesmos controles e painéis também estão disponíveis nos outros idiomas:
+
+![Interface completa do LiteSic em inglês, com espectro de áudio, equalizador e playlist](packaging/store/screenshots/final-en-US-spectrum.png)
+
+## Ajuda e privacidade
+
+Encontrou um problema ou tem uma sugestão? [Abra uma issue no GitHub](https://github.com/Karkoff/litesic/issues) e informe sua versão do Windows, a versão do player e os passos para reproduzir o comportamento.
+
+O LiteSic funciona com arquivos locais e não envia suas músicas ou preferências ao publicador. Consulte a [política de privacidade](docs/PRIVACY.md). O aplicativo não inclui músicas nem oferece serviço de streaming.
+
+<details>
+<summary>Para contribuir: compilação, regras e testes</summary>
+
+O LiteSic usa C++17, Win32 e Direct2D/DirectWrite. Consulte o [guia de desenvolvimento](docs/DEVELOPMENT.md) para preparar o ambiente MSYS2 com MinGW-w64 (**MINGW64/MINGW32**).
 
 ```bash
-# Release 64 bits (padrão)
-make
-
-# Debug
-make DEBUG=1
-
-# Release 32 bits
-make ARCH=32
-
-# Limpar build
-make clean
-
-# Rodar testes unitários
-make test
+make ARCH=64 DEBUG=0  # Release x64
+make ARCH=32 DEBUG=0  # Release x86
+make test            # Testes da configuração selecionada
 ```
 
-### VS Code
+As [regras de implementação](AGENT.md) cobrem Unicode, compatibilidade Windows, threads nativas e segurança do callback de áudio. Para verificar a interface, consulte o [guia de validação gráfica](docs/GUI-AUTOMATION.md).
 
-Abra a pasta do projeto e use:
-- **`Ctrl+Shift+B`** — compilar Debug 64 bits
-- **`F5`** — depurar (selecione 32 ou 64 bits)
-- **Terminal > Executar Tarefa** — builds e testes Debug/Release, 32/64 bits
+</details>
 
-Executáveis em `build/<32|64>/<debug|release>/LiteSic.exe`.
+## Licença
 
-Internacionalização: 18 catálogos UTF-8 completos em `locales/`, copiados ao
-lado de cada executável pelo build; mantenha essa pasta para usar as traduções.
-Fallback inglês incorporado; 237 IDs por catálogo. O padrão é **Automático
-(Windows)**, seguindo a lista de idiomas de exibição. No menu de contexto do
-player, **Idioma** permite escolher qualquer um dos 18 idiomas, com aplicação
-imediata nas janelas abertas e preferência preservada entre execuções.
-[Catálogos e tipografia](docs/M8-T6-I18N.md),
-[seleção, testes e limites da T7](docs/M8-T7-LANGUAGE-SELECTION.md).
-Tooltips explicativos usam o mesmo catálogo, com estados atuais, valores do EQ,
-DirectWrite e os tokens do tema: [M8-T8](docs/M8-T8-TOOLTIPS.md).
-Para verificar catálogos e inventário: `python scripts/i18n_catalogs.py --source`.
-
-## 📋 Roadmap
-
-O projeto é dividido em milestones incrementais, cada uma com tarefas verificáveis:
-
-| Milestone | Descrição | Status |
-|---|---|---|
-| **M0** | Fundação — estrutura de pastas, Makefile, third_party | ✅ Concluída |
-| **M1** | Esqueleto — janela sem borda, arrastável, ícone | ✅ Concluída |
-| **M2** | Motor de áudio — abrir/tocar/pausar/parar, posição/duração | ✅ Concluída |
-| **M3** | Player principal — LCD, título rolando, seek, volume, shuffle/repeat | ✅ Concluída |
-| **M4** | Visualizador — osciloscópio + espectro FFT | ✅ Concluída |
-| **M5** | Lista de reprodução — add/drag&drop, reordenar, M3U | COMPLETE — implementação/testes e checkpoint manual PASS |
-| **M6** | Equalizador — DSP, interface e testes entregues | COMPLETE — funcionamento confirmado pelo usuário |
-| **M7** | Integração — snap/dock entre janelas, mostrar/ocultar EQ/PL | COMPLETE — implementação/testes e aceite humano TUDO PASS |
-| **M8** | Acabamento — atalhos, mídia, DPI, persistência, 18 idiomas e tooltips | COMPLETE; aceite humano PASS |
-| **M9** | Compatibilidade — encerrada por decisão explícita do usuário | COMPLETE — testes futuros não bloqueantes |
-| **M10** | Distribuição — builds 32/64, pacote limpo portátil e instalador opcional | 📝 Planejada |
-
-> 🖥️ Milestones com indicador visual terminam em algo executável para validação manual.
-
-## 🔧 Regras de Implementação
-
-O projeto segue convenções rigorosas documentadas no [`AGENT.md`](AGENT.md):
-
-- **Win32 Unicode**: sempre usar variantes `...W` das funções
-- **Threads nativas**: `CreateThread` + `CRITICAL_SECTION` (proibido `std::thread`/`std::mutex`)
-- **Callback de áudio seguro**: sem alocação, sem travamento, apenas `PostMessage` para UI
-- **Compatibilidade Windows 7**: `_WIN32_WINNT=0x0601`, nenhuma API exclusiva do Win8+
-
-## 📚 Documentação
-
-| Arquivo | Descrição |
-|---|---|
-| [`AGENT.md`](AGENT.md) | Regras e convenções obrigatórias para implementação |
-| [`PLANO-VSCODE.md`](PLANO-VSCODE.md) | Plano completo de arquitetura do projeto |
-| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Índice das milestones |
-| `docs/milestones/M*.md` | Detalhamento de cada milestone com tarefas e critérios de aceite |
-
-## 🧪 Testes
-
-Para inspecionar e operar a interface Windows real durante o desenvolvimento,
-use o [auxiliar de automação gráfica](docs/GUI-AUTOMATION.md). Ele usa Python
-isolado em `.tools/gui-venv`, captura a janela pelo DC Win32 e limita mouse/teclado à
-instância de teste do LiteSic. A
-[prova de conceito](docs/GUI-VALIDATION-2026-10-11.md) demonstrou Play, Pause,
-retomada, Stop e teclado. A execução requer o desktop interativo desbloqueado;
-o procedimento explica o isolamento do terminal Codex e a integração nativa.
-
-Testes unitários cobrem lógica pura sem dependência de janela:
-- Formatação de tempo
-- FFT e janela Hann
-- Mapeamento de amplitude
-- Buffer circular
-- Smoke de dependências com decodificação WAV real
-
-Os testes novos da M5 usam o modelo, parser M3U, tags, controlador, worker,
-áudio e mensagens de janela reais: 41 casos da M5 e cinco dos ajustes de
-repetição/encaixe, além dos 27 anteriores.
-Antes da modernização eram 73 casos por variante, 292 aprovações nas quatro variantes. A GUI foi
-exercitada nas quatro, com cobertura detalhada em x64 Debug.
-Parte dos testes antigos de DSP ainda usa cópias dos algoritmos. A M6 acrescentou
-testes do DSP de produção, grafo de áudio com sinais nos quatro codecs,
-INI e painel Win32: 20 executáveis, 105 verificações por variante.
-
-Uso dos ajustes: clique em repetir para alternar os três modos. Arraste o
-player para mover a playlist encaixada; arraste a barra da própria playlist
-para soltá-la e aproxime uma borda do player para encaixar novamente.
-Os controles ficam na ordem Anterior, Play, Pause, Stop, Próximo. Adicione
-arquivos por **+ Arquivos** ou **+ Pasta** na playlist modernizada.
-
-Modo portátil: execute `LiteSic.exe --portable` em uma pasta gravável contendo
-`LiteSic.exe` e `locales/`. Configurações e playlist ficam em `data/` junto ao
-executável. Sem essa flag, o perfil continua em `%LOCALAPPDATA%\LiteSic`.
-A playlist ainda salva caminhos absolutos das músicas; mover também a mídia
-pode exigir reabrir os arquivos. Ver [verificação de portabilidade](docs/PORTABILITY-2026-10-12.md).
-
-No modo normal, ao fechar o programa, a playlist é salva em `%LOCALAPPDATA%\LiteSic\playlist.m3u8`
-e recuperada na próxima abertura, preservando a ordem e as entradas repetidas.
-Play toca a faixa selecionada e a destaca no centro da lista (limitado pelas
-extremidades); um filtro que esconda a faixa é limpo para mostrá-la.
-Veja [validação dos ajustes](docs/PLAYER-ADJUSTMENTS-2026-10-11.md).
-
-```bash
-make test    # compila e roda todos os testes
-```
-
-## 📄 Licença
-
-Este projeto está disponível sob a licença MIT. Veja o arquivo [`LICENSE`](LICENSE) para detalhes.
-
----
-
-**LiteSic** — *Lightweight, native, Windows audio player.*
-
-## Consolidação M8-T6–T8
-
-T6, T7 e T8 COMPLETE; T7 tem aceite humano PASS e T8 **TUDO PASS**.
-O aceite visual dos tooltips não equivale a revisão linguística profissional
-dos 18 idiomas. [Nova regressão e publicação](docs/M8-CONSOLIDATION.md).
-Auditoria Geral de Desempenho COMPLETE_WITH_CAVEATS; próxima atividade: **M10 — Distribuição**.
-
-[Auditoria integral restante da M8 e plano de conclusão](docs/M8-REMAINING-REQUIREMENTS-AUDIT.md):
-T1–T5 e refinamentos específicos DPI/acessibilidade tecnicamente verificados;
-T1–T8 COMPLETE; aceite humano final M8 PASS por decisão expressa do usuário.
-Consolidação T6–T8 publicada em `1aa560f`; revisão linguística integral não
-realizada permanece observação futura não bloqueante.
+Código aberto sob a [licença MIT](LICENSE).
