@@ -1,0 +1,44 @@
+﻿{
+    "Release":  {
+                    "isDraft":  false,
+                    "isPrerelease":  false,
+                    "name":  "LiteSic 1.0 — versão final",
+                    "publishedAt":  "2026-11-03T19:26:48Z",
+                    "tagName":  "v1.0.0",
+                    "url":  "https://github.com/Karkoff/litesic/releases/tag/v1.0.0"
+                },
+    "TagCommit":  "3dcdfdab645e37f77ae0d957254f20a64fcf5aae",
+    "LatestTag":  "v1.0.0",
+    "PublicDownloads":  [
+                            {
+                                "Name":  "LiteSic-v1.0.0-portable-x64.zip",
+                                "Bytes":  1521526,
+                                "SHA256":  "1D00A8F411EC4D7AA40AFAC816B4397D86A5CFB4A8CA9688DD1918A7C8B6E50E",
+                                "Result":  "PASS"
+                            },
+                            {
+                                "Name":  "LiteSic-v1.0.0-portable-x86.zip",
+                                "Bytes":  1601052,
+                                "SHA256":  "4DF3698680E0EF57220E0B1B2B646D8262AD23A1854AAB06936DC0A78564E69A",
+                                "Result":  "PASS"
+                            },
+                            {
+                                "Name":  "LiteSic-v1.0.0-x64.zip",
+                                "Bytes":  1521368,
+                                "SHA256":  "37B64818EB76D9CFDAD9D8B32054BEDA4572FAAEDDC4906F11D23E66CAB3D44E",
+                                "Result":  "PASS"
+                            },
+                            {
+                                "Name":  "LiteSic-v1.0.0-x86.zip",
+                                "Bytes":  1600894,
+                                "SHA256":  "F2E84A3BE2FF6DAC03063EE0BA75BD7E786806DE7D3FFC6A790B9515974A2FF4",
+                                "Result":  "PASS"
+                            },
+                            {
+                                "Name":  "SHA256SUMS.txt",
+                                "Bytes":  374,
+                                "SHA256":  "B08F7B62D3C66774BFA426ABEC0016F860A0E3917A4911C0E8C6DF935EC87B54",
+                                "Result":  "PASS"
+                            }
+                        ]
+}

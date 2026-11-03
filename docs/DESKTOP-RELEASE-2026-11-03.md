@@ -98,6 +98,11 @@ nenhum aviso novo apareceu nos arquivos alterados.
 `SHA256SUMS.txt` acompanha a release. Logs integrais e resultados locais ficam
 em `build/desktop/v1.0.0-20261103-162108-091/`, fora dos artefatos públicos.
 
+Publicada em 03/11/2026 às **16:26:48 (Brasília)** como final estável e Latest,
+com tag `v1.0.0` no commit `3dcdfdab645e37f77ae0d957254f20a64fcf5aae`.
+Os cinco anexos foram baixados da release pública e seus hashes conferem com
+os arquivos locais validados. [Confirmação da publicação e dos downloads](evidence/desktop-release-2026-11-03/publication.json).
+
 O teste formal de duas builds limpas de M10-T1 e a validação humana dos ZIPs
 de M10-T2 continuam com seus critérios próprios. Esta entrega não declara
 concluída a M10 nem publica na Microsoft Store. Windows 7–10, instalação por

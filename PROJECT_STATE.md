@@ -1,12 +1,14 @@
 # PROJECT_STATE — LiteSic
 
-**Distribuição desktop 1.0.0 — 03/11/2026.** Quatro ZIPs: x64/x86 padrão
+**Distribuição desktop 1.0.0 — publicada em 03/11/2026, final estável/Latest.**
+Quatro ZIPs: x64/x86 padrão
 e portátil, com 18 idiomas, ajuda e licenças; portátil ativa `data/` por duplo
 clique via `resources/portable.flag`. VERSIONINFO corrigido e atualizado para
 1.0.0.0. Suítes Release 184 casos por arquitetura PASS; quatro ZIPs extraídos,
 16 inicializações e reprodução real PASS, sem alterar o perfil pessoal.
 [Release](https://github.com/Karkoff/litesic/releases/tag/v1.0.0) e
-[procedimento/evidências](docs/DESKTOP-RELEASE-2026-11-03.md).
+[procedimento/evidências](docs/DESKTOP-RELEASE-2026-11-03.md). Cinco anexos
+públicos baixados e conferidos por SHA-256; [confirmação](docs/evidence/desktop-release-2026-11-03/publication.json).
 M10 continua IN_PROGRESS; ensaio formal de reprodutibilidade T1 e validação
 humana dos ZIPs T2 mantêm seus critérios. A preparação da Store abaixo
 conserva sua identidade, fontes e pacotes anteriores.
