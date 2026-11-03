@@ -1,0 +1,45 @@
+{
+  "tag": "v1.0.1",
+  "commit": "664bca4",
+  "url": "https://github.com/Karkoff/litesic/releases/tag/v1.0.1",
+  "published_at_utc": "2026-11-03T19:56:16Z",
+  "stable": true,
+  "latest": true,
+  "unauthenticated_public_downloads": [
+    {
+      "name": "LiteSic-v1.0.1-portable-x64.zip",
+      "bytes": 1524877,
+      "sha256": "f5e0754b88398e8b564efbe2fae8eab8f947907699b23c6d5877a17863192a86",
+      "url": "https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-portable-x64.zip",
+      "result": "PASS"
+    },
+    {
+      "name": "LiteSic-v1.0.1-portable-x86.zip",
+      "bytes": 1603507,
+      "sha256": "a70feae358a60c4d278c1481bb6a18a963d439e40b15038f68500d7568a7c0a8",
+      "url": "https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-portable-x86.zip",
+      "result": "PASS"
+    },
+    {
+      "name": "LiteSic-v1.0.1-x64.zip",
+      "bytes": 1524719,
+      "sha256": "1038fcbaacdc246c4cc12d5bd96355fa4ea4b8720f475cdd919cc91baf5f86f3",
+      "url": "https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-x64.zip",
+      "result": "PASS"
+    },
+    {
+      "name": "LiteSic-v1.0.1-x86.zip",
+      "bytes": 1603349,
+      "sha256": "dcfcd8eb83d914873e5304104a5df4ea8ee10c4f4a1285b0e338bed91ad44ab5",
+      "url": "https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-x86.zip",
+      "result": "PASS"
+    },
+    {
+      "name": "SHA256SUMS.txt",
+      "bytes": 374,
+      "sha256": "f1244019870ac8f0fe63e6c428040e804e16b18304b9f6795ea93c4e0fafc0ec",
+      "url": "https://github.com/Karkoff/litesic/releases/download/v1.0.1/SHA256SUMS.txt",
+      "result": "PASS"
+    }
+  ]
+}

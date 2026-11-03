@@ -1,11 +1,14 @@
 # PROJECT_STATE — LiteSic
 
-**Correção desktop 1.0.1 — validada em 03/11/2026; preparada para GitHub.**
+**Correção desktop 1.0.1 — publicada em 03/11/2026, estável/Latest no GitHub.**
 Exportação M3U/M3U8 respeita Geral/Favoritas; exportações aceitas sobrevivem a
 Limpar e ao encerramento normal. VERSIONINFO 1.0.1.0. Release x64/x86: 186 casos
 por arquitetura PASS; quatro ZIPs padrão/portátil e 16 inicializações reais PASS,
 com reprodução e persistência, sem alterar o perfil pessoal. Seletor nativo de
 arquivos sem validação visual conclusiva nesta rodada. [Relatório e evidências](docs/PLAYLIST-EXPORT-1.0.1.md).
+Commit `664bca4`, tag [`v1.0.1`](https://github.com/Karkoff/litesic/releases/tag/v1.0.1).
+Os cinco anexos públicos foram baixados sem autenticação e seus hashes
+conferidos com os pacotes locais validados; [confirmação](docs/evidence/playlist-export-1.0.1/publication.json).
 A publicação 1.0.0 e o candidato Store abaixo são registros anteriores.
 
 **Distribuição desktop 1.0.0 — publicada em 03/11/2026, final estável/Latest.**

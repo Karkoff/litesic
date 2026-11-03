@@ -55,9 +55,11 @@ existentes no miniaudio vendorizado, sem novos avisos nos arquivos alterados.
 
 [Inventário, hashes e resultados verificáveis](evidence/playlist-export-1.0.1/summary.json).
 Logs integrais: `build/desktop/v1.0.1-20261103-165023-310/`.
-Os quatro ZIPs e SHA256SUMS.txt estão preparados para a release
-[`v1.0.1`](https://github.com/Karkoff/litesic/releases/tag/v1.0.1).
-A confirmação da publicação será registrada após o envio.
+Os quatro ZIPs e SHA256SUMS.txt foram publicados na release estável/Latest
+[`v1.0.1`](https://github.com/Karkoff/litesic/releases/tag/v1.0.1), tag no commit
+`664bca4`. Os cinco anexos foram baixados publicamente, sem autenticação;
+os hashes SHA-256 conferem com os arquivos locais validados.
+[Confirmação da publicação e dos downloads](evidence/playlist-export-1.0.1/publication.json).
 
 ## Reprodução da distribuição
 
