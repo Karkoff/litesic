@@ -1,6 +1,6 @@
 [CmdletBinding()]
 param(
-    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '1.0.0',
+    [ValidatePattern('^\d+\.\d+\.\d+$')][string]$Version = '1.0.1',
     [ValidateRange(1,16)][int]$Jobs = 4,
     [ValidatePattern('^\d{8}-\d{6}-\d{3}$')][string]$RunId = (Get-Date -Format 'yyyyMMdd-HHmmss-fff'),
     [string]$Msys2Root = $env:LITESIC_MSYS2_ROOT

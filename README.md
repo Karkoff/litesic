@@ -24,18 +24,18 @@ Gratuito e de código aberto, sem anúncios, assinatura ou conta. Reproduz seus 
 
 ## Baixar e abrir
 
-1. Escolha um dos pacotes da **versão final 1.0 (v1.0.0)** abaixo.
+1. Escolha um dos pacotes da **versão 1.0.1** abaixo.
 2. Extraia o ZIP inteiro para uma pasta de sua escolha.
 3. Abra **LiteSic.exe**. Mantenha as subpastas que acompanham o aplicativo.
 
 | Download | Indicado para |
 | --- | --- |
-| [Windows x64](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-x64.zip) | Windows de 64 bits; preferências no perfil do Windows. |
-| [Windows x86 (32 bits)](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-x86.zip) | Windows de 32 bits; preferências no perfil do Windows. |
-| [Portátil x64](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-portable-x64.zip) | Windows de 64 bits; preferências junto ao aplicativo. |
-| [Portátil x86 (32 bits)](https://github.com/Karkoff/litesic/releases/download/v1.0.0/LiteSic-v1.0.0-portable-x86.zip) | Windows de 32 bits; preferências junto ao aplicativo. |
+| [Windows x64](https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-x64.zip) | Windows de 64 bits; preferências no perfil do Windows. |
+| [Windows x86 (32 bits)](https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-x86.zip) | Windows de 32 bits; preferências no perfil do Windows. |
+| [Portátil x64](https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-portable-x64.zip) | Windows de 64 bits; preferências junto ao aplicativo. |
+| [Portátil x86 (32 bits)](https://github.com/Karkoff/litesic/releases/download/v1.0.1/LiteSic-v1.0.1-portable-x86.zip) | Windows de 32 bits; preferências junto ao aplicativo. |
 
-Todos os pacotes incluem **18 idiomas**, ajuda e licenças. Os executáveis prontos não exigem ferramentas de desenvolvimento ou instalação de runtimes adicionais. [Notas da versão e checksums SHA-256](https://github.com/Karkoff/litesic/releases/tag/v1.0.0).
+Todos os pacotes incluem **18 idiomas**, ajuda e licenças. Os executáveis prontos não exigem ferramentas de desenvolvimento ou instalação de runtimes adicionais. [Notas da versão e checksums SHA-256](https://github.com/Karkoff/litesic/releases/tag/v1.0.1).
 
 **Compatibilidade:** funcionamento verificado no Windows 11. A distribuição tradicional tem como alvo Windows 7 a 11, em x86 e x64; a validação prática nas versões anteriores do Windows ainda está pendente.
 
@@ -56,6 +56,7 @@ Os controles de **Volume** e **Balanço** ficam no player. O botão de repetiç�
 - Clique na **estrela** de uma faixa para marcá-la como favorita. A aba **Favoritas** reúne as músicas marcadas; iniciar a reprodução nessa aba toca somente as favoritas.
 - Arraste as faixas para mudar a ordem. Use **Ctrl** ou **Shift** para selecionar várias músicas e **REMOVER** para retirá-las da playlist.
 - Abra **LISTA ▾**, no rodapé da playlist, para acessar os comandos de listas, incluindo importação e exportação de M3U/M3U8.
+- Para exportar, escolha a aba **Geral** ou **Favoritas** e use **LISTA ▾ → Salvar playlist**. Geral salva todas as faixas; Favoritas salva apenas as marcadas com estrela. A pesquisa e a seleção de linhas não limitam o arquivo exportado.
 - Clique com o botão direito em uma música para consultar suas informações.
 
 A lista é salva automaticamente ao fechar o programa e recuperada na próxima abertura.

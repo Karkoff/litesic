@@ -218,17 +218,31 @@ void ListDialog(bool save) {
     wchar_t path[32768] = {};
     OPENFILENAMEW info{}; info.lStructSize = sizeof(info); info.hwndOwner = window;
     info.lpstrFile = path; info.nMaxFile = ARRAYSIZE(path);
-    std::wstring filter=I18n::Text("playlist.m3u_filter")+L'\0'+L"*.m3u;*.m3u8"+L'\0'+L'\0';
+    std::wstring filter;
+    auto addFilter=[&](const std::wstring& label,const wchar_t* pattern){filter+=label;filter+=L'\0';filter+=pattern;filter+=L'\0';};
+    if(save){addFilter(L"M3U (*.m3u)",L"*.m3u");addFilter(L"M3U8 (*.m3u8)",L"*.m3u8");}
+    else addFilter(I18n::Text("playlist.m3u_filter"),L"*.m3u;*.m3u8");
+    filter+=L'\0';
     info.lpstrFilter=filter.c_str();
-    info.lpstrDefExt = L"m3u8"; auto caption=I18n::Text(save?"playlist.save_dialog":"playlist.open_dialog");info.lpstrTitle=caption.c_str();
+    info.nFilterIndex=1;info.lpstrDefExt = L"m3u";
+    auto caption=I18n::Text(save?"playlist.save_dialog":"playlist.open_dialog");
+    if(save){
+        const auto tab=I18n::Text(favoritesOnly?"playlist.favorites":"playlist.general");
+        caption+=L" — "+tab;
+        lstrcpynW(path,(tab+L".m3u").c_str(),ARRAYSIZE(path));
+    }
+    info.lpstrTitle=caption.c_str();
     info.Flags = OFN_EXPLORER | OFN_NOCHANGEDIR | OFN_PATHMUSTEXIST |
         (save ? OFN_OVERWRITEPROMPT : OFN_FILEMUSTEXIST);
-    if (!(save ? GetSaveFileNameW(&info) : GetOpenFileNameW(&info))) return;
-    PlaylistJob job; job.kind = save ? PlaylistJob::Save : PlaylistJob::Open; job.path = path;
-    if (save) job.tracks = PlayerPlaylist().Tracks();
+    if (!(save ? GetSaveFileNameW(&info) : GetOpenFileNameW(&info))) {
+        if(CommDlgExtendedError())Error("errors.m3u_start");
+        return;
+    }
+    if(save){PlWnd_SavePlaylist(path);return;}
+    PlaylistJob job; job.kind = PlaylistJob::Open; job.path = path;
     // Opening appends; a failed open never destroys the current playlist.
     if (!worker.Submit(std::move(job))) Error("errors.m3u_start");
-    else { status.Set(save?"playlist.saving":"playlist.opening"); PlWnd_Refresh(); }
+    else { status.Set("playlist.opening"); PlWnd_Refresh(); }
 }
 void RemoveSelected() {
     for (auto it = selected.rbegin(); it != selected.rend(); ++it) PlayerPlayback().RemoveAt(*it);
@@ -774,7 +788,7 @@ LRESULT CALLBACK Proc(HWND hwnd, UINT message, WPARAM wp, LPARAM lp) {
         auto results=worker.Drain();
         if(results.empty()){InvalidateRect(hwnd,nullptr,FALSE);return 0;}
         for(auto& result:results) {
-            if (result.generation!=worker.Generation()) continue;
+            if (result.kind!=PlaylistJob::Save && result.generation!=worker.Generation()) continue;
             if (!result.error.empty()) { status.Set(result.errorId); continue; }
             if (result.kind==PlaylistJob::Metadata) {
                 if (auto track=PlayerPlaylist().At(PlayerPlaylist().Find(result.id))) {
@@ -885,6 +899,15 @@ BOOL PlWnd_Create(HINSTANCE instance, HWND main, const wchar_t* sessionFile) {
     return window!=nullptr;
 }
 void PlWnd_Shutdown() { if (window) DestroyWindow(window);Skin::Unbind(Skin::Playlist); mainWindow=nullptr; dock=Dock::None; }
+bool PlWnd_SavePlaylist(const std::wstring& path){
+    if(!window||path.empty())return false;
+    PlaylistJob job;job.kind=PlaylistJob::Save;job.path=FullPath(path);
+    // Snapshot the active collection, independently of search or row selection.
+    for(const auto& track:PlayerPlaylist().Tracks())
+        if(!favoritesOnly||track.favorite)job.tracks.push_back(track);
+    if(!worker.Submit(std::move(job))){Error("errors.m3u_start");return false;}
+    status.Set("playlist.saving");PlWnd_Refresh();return true;
+}
 bool PlWnd_DockedRect(const RECT& owner,RECT& panel){return Skin::DockedRect(Skin::Playlist,owner,panel);}
 void PlWnd_MainMoved(bool preserveDock){if(preserveDock)Skin::Reconcile();else Skin::Recover();}
 void PlWnd_Show() { if(window) { ShowWindow(window,SW_SHOW); PlWnd_MainMoved(); Ui::SaveAppearanceValue(L"PlaylistVisible",1); SetForegroundWindow(window); } }

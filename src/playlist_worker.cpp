@@ -16,6 +16,11 @@ void PlaylistWorker::Stop() {
     if (!initialized_) return;
     if (stop_) SetEvent(stop_);
     if (thread_) { WaitForSingleObject(thread_, INFINITE); CloseHandle(thread_); }
+    // Explicit exports are user writes, not disposable metadata work. Finish
+    // queued snapshots after the worker stops, in order, before releasing them.
+    for(const auto& job:jobs_)if(job.kind==PlaylistJob::Save){
+        std::wstring error;SaveM3U(job.path,job.tracks,error);
+    }
     if (stop_) CloseHandle(stop_);
     if (ready_) CloseHandle(ready_);
     if (space_) CloseHandle(space_);
@@ -37,8 +42,12 @@ LONG PlaylistWorker::NewGeneration() {
     LONG generation = InterlockedIncrement(&generation_);
     if (initialized_) {
         EnterCriticalSection(&lock_);
-        InterlockedExchangeAdd(&pending_, -static_cast<LONG>(jobs_.size()));
-        jobs_.clear(); ResetEvent(ready_);
+        const auto before=jobs_.size();
+        for(auto it=jobs_.begin();it!=jobs_.end();){
+            if(it->kind!=PlaylistJob::Save)it=jobs_.erase(it);else ++it;
+        }
+        InterlockedExchangeAdd(&pending_, -static_cast<LONG>(before-jobs_.size()));
+        if(jobs_.empty())ResetEvent(ready_);
         LeaveCriticalSection(&lock_);
     }
     return generation;
@@ -47,10 +56,12 @@ bool PlaylistWorker::Cancelled(LONG generation) const {
     return generation != Generation() || WaitForSingleObject(stop_, 0) == WAIT_OBJECT_0;
 }
 bool PlaylistWorker::Publish(PlaylistResult result) {
-    if (Cancelled(result.generation)) return false;
+    auto cancelled=[&](){return result.kind==PlaylistJob::Save
+        ? WaitForSingleObject(stop_,0)==WAIT_OBJECT_0 : Cancelled(result.generation);};
+    if (cancelled()) return false;
     HANDLE wait[] = {stop_, space_};
     if (WaitForMultipleObjects(2, wait, FALSE, INFINITE) != WAIT_OBJECT_0 + 1) return false;
-    if (Cancelled(result.generation)) { ReleaseSemaphore(space_, 1, nullptr); return false; }
+    if (cancelled()) { ReleaseSemaphore(space_, 1, nullptr); return false; }
     EnterCriticalSection(&lock_);
     results_.push_back(std::move(result));
     LeaveCriticalSection(&lock_);
@@ -121,7 +132,7 @@ void PlaylistWorker::Run() {
         if (jobs_.empty()) ResetEvent(ready_);
         LeaveCriticalSection(&lock_);
         if (!haveJob) continue;
-        if (!Cancelled(job.generation)) {
+        if (job.kind==PlaylistJob::Save || !Cancelled(job.generation)) {
             if (job.kind == PlaylistJob::Scan) ScanFolder(job);
             else {
                 PlaylistResult result; result.kind = job.kind;

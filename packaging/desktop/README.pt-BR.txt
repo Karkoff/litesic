@@ -16,6 +16,10 @@ VIZ mostra/oculta o visualizador. O botão direito no player abre temas,
 idiomas, escala e atalhos globais.
 
 MP3, WAV, FLAC e OGG Vorbis; playlists M3U/M3U8; favoritos; 18 idiomas.
+Para exportar, selecione Geral ou Favoritos e abra LISTA > Salvar playlist.
+Geral salva todas as faixas; Favoritos salva somente as marcadas com estrela.
+A busca e a seleção de linhas não limitam a exportação. Escolha M3U ou M3U8
+no diálogo Salvar; os dois formatos preservam os favoritos no LiteSic.
 Para voltar ao idioma automático, abra Idioma no menu do botão direito.
 
 As playlists guardam caminhos absolutos. Se mover suas músicas para outra

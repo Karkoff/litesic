@@ -1,0 +1,443 @@
+﻿{
+    "Version":  "1.0.1",
+    "NativeVersion":  "1.0.1.0",
+    "Date":  "2026-11-03",
+    "BuildDirectory":  "build/desktop/v1.0.1-20261103-165023-310",
+    "BaselineFailure":  "accepted_exports_survive_clear_and_shutdown: LoadM3U(path,loaded,error) failed before worker fix",
+    "Tests":  [
+                  {
+                      "Architecture":  "x64",
+                      "Executables":  32,
+                      "Cases":  186,
+                      "Passed":  true
+                  },
+                  {
+                      "Architecture":  "x86",
+                      "Executables":  32,
+                      "Cases":  186,
+                      "Passed":  true
+                  }
+              ],
+    "PackageValidation":  {
+                              "result":  "PASS",
+                              "checks":  [
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x64-fresh",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x64-play-pt",
+                                                 "result":  "PASS",
+                                                 "playback":  {
+                                                                  "result":  "PASS",
+                                                                  "observation":  "MSAA seek percentage advanced",
+                                                                  "initial_percent":  0,
+                                                                  "final_percent":  6,
+                                                                  "volume_percent":  "0"
+                                                              },
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x64-restart",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x64-embedded-english",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x64-fresh",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x64-play-pt",
+                                                 "result":  "PASS",
+                                                 "playback":  {
+                                                                  "result":  "PASS",
+                                                                  "observation":  "MSAA seek percentage advanced",
+                                                                  "initial_percent":  0,
+                                                                  "final_percent":  7,
+                                                                  "volume_percent":  "0"
+                                                              },
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x64-restart",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x64-moved",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks64.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x86-fresh",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x86-play-pt",
+                                                 "result":  "PASS",
+                                                 "playback":  {
+                                                                  "result":  "PASS",
+                                                                  "observation":  "MSAA seek percentage advanced",
+                                                                  "initial_percent":  0,
+                                                                  "final_percent":  10,
+                                                                  "volume_percent":  "0"
+                                                              },
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x86-restart",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-x86-embedded-english",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x86-fresh",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x86-play-pt",
+                                                 "result":  "PASS",
+                                                 "playback":  {
+                                                                  "result":  "PASS",
+                                                                  "observation":  "MSAA seek percentage advanced",
+                                                                  "initial_percent":  0,
+                                                                  "final_percent":  9,
+                                                                  "volume_percent":  "0"
+                                                              },
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x86-restart",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             },
+                                             {
+                                                 "label":  "LiteSic-v1.0.1-portable-x86-moved",
+                                                 "result":  "PASS",
+                                                 "external_host_modules":  [
+                                                                               "RTSSHooks.dll",
+                                                                               "klhkum.{113.0.16.0}.{C6124C5C-AF46-455A-AE80-B2E816F9D36C}.dll"
+                                                                           ]
+                                             }
+                                         ],
+                              "packages":  4,
+                              "launches":  16,
+                              "personal_profile_unchanged":  true,
+                              "unrelated_cwd_unchanged":  true,
+                              "os_version":  [
+                                                 10,
+                                                 0,
+                                                 26200,
+                                                 2,
+                                                 ""
+                                             ]
+                          },
+    "Inputs":  [
+                   {
+                       "Path":  "src/plwnd.cpp",
+                       "SHA256":  "0570EA6BA0477AB8C53FF47D0EBC5A711F8553601B8D5300EB3342E470A32A14"
+                   },
+                   {
+                       "Path":  "src/plwnd.h",
+                       "SHA256":  "128D4908E5B2F9FF209F7E6902FCDF50A5070E4886DD7602CE08D142ADBC7CD2"
+                   },
+                   {
+                       "Path":  "src/playlist_worker.cpp",
+                       "SHA256":  "2F262EF77D948CA892789E37EE35A5E209DFD9E626D44433177CB953E26AE9EF"
+                   },
+                   {
+                       "Path":  "res/app.rc",
+                       "SHA256":  "DDB6BF49F368AD0AD9FC3F51E8E71FF34C050E40295986EAA5C8053A0BA6D550"
+                   },
+                   {
+                       "Path":  "tests/test_playlist_window.cpp",
+                       "SHA256":  "9565B25636DD3491846AF43A79AFC8C394738CD0BA56DBBEB4A452AD6C7F86F1"
+                   },
+                   {
+                       "Path":  "tests/test_playlist_worker.cpp",
+                       "SHA256":  "92834C977CA86F1157986EFED6D3FF08DAC1FBB1DBAAFBAB0CE6D7F4CAA11E29"
+                   },
+                   {
+                       "Path":  "scripts/package-desktop.ps1",
+                       "SHA256":  "683DA5837C18D3F72CA862FE6680BF2C61B2639498CFFC29B7540422DB593B0F"
+                   },
+                   {
+                       "Path":  "packaging/desktop/README.pt-BR.txt",
+                       "SHA256":  "389AED83DF04D341CBE2C2F3F2FD56AF412944B66A1E6770162EAB2217D6C19A"
+                   },
+                   {
+                       "Path":  "packaging/desktop/README.en.txt",
+                       "SHA256":  "B796BB587B94011E3A6AAA34920D1D093CABFD29740493CFECED750B9D7E555F"
+                   }
+               ],
+    "Packages":  [
+                     {
+                         "Asset":  "LiteSic-v1.0.1-x64.zip",
+                         "Architecture":  "x64",
+                         "Portable":  false,
+                         "Bytes":  1524719,
+                         "SHA256":  "1038FCBAACDC246C4CC12D5BD96355FA4EA4B8720F475CDD919CC91BAF5F86F3",
+                         "ExecutableSHA256":  "700631FE341288F9F46485B08FBC7CA10DCE661B49B0FE291043B4CA1992C89A",
+                         "Imports":  [
+                                         "COMCTL32.dll",
+                                         "comdlg32.dll",
+                                         "d2d1.dll",
+                                         "DWrite.dll",
+                                         "GDI32.dll",
+                                         "KERNEL32.dll",
+                                         "msvcrt.dll",
+                                         "ole32.dll",
+                                         "OLEACC.dll",
+                                         "OLEAUT32.dll",
+                                         "SHELL32.dll",
+                                         "USER32.dll"
+                                     ],
+                         "Files":  [
+                                       "licenses/GCC-GPL-3.0.txt",
+                                       "licenses/GCC-Runtime-Exception.txt",
+                                       "licenses/LiteSic.txt",
+                                       "licenses/MinGW-COPYING.txt",
+                                       "licenses/MinGW-w64.txt",
+                                       "licenses/MinGW-w64-runtime.txt",
+                                       "licenses/miniaudio.txt",
+                                       "licenses/README.txt",
+                                       "licenses/stb_vorbis.txt",
+                                       "LiteSic.exe",
+                                       "locales/ar-SA/messages.tsv",
+                                       "locales/de-DE/messages.tsv",
+                                       "locales/en-US/messages.tsv",
+                                       "locales/es-ES/messages.tsv",
+                                       "locales/fr-FR/messages.tsv",
+                                       "locales/hi-IN/messages.tsv",
+                                       "locales/it-IT/messages.tsv",
+                                       "locales/ja-JP/messages.tsv",
+                                       "locales/ko-KR/messages.tsv",
+                                       "locales/nl-NL/messages.tsv",
+                                       "locales/pl-PL/messages.tsv",
+                                       "locales/pt-BR/messages.tsv",
+                                       "locales/pt-PT/messages.tsv",
+                                       "locales/ru-RU/messages.tsv",
+                                       "locales/sv-SE/messages.tsv",
+                                       "locales/tr-TR/messages.tsv",
+                                       "locales/zh-CN/messages.tsv",
+                                       "locales/zh-TW/messages.tsv",
+                                       "resources/README.en.txt",
+                                       "resources/README.pt-BR.txt"
+                                   ]
+                     },
+                     {
+                         "Asset":  "LiteSic-v1.0.1-portable-x64.zip",
+                         "Architecture":  "x64",
+                         "Portable":  true,
+                         "Bytes":  1524877,
+                         "SHA256":  "F5E0754B88398E8B564EFBE2FAE8EAB8F947907699B23C6D5877A17863192A86",
+                         "ExecutableSHA256":  "700631FE341288F9F46485B08FBC7CA10DCE661B49B0FE291043B4CA1992C89A",
+                         "Imports":  [
+                                         "COMCTL32.dll",
+                                         "comdlg32.dll",
+                                         "d2d1.dll",
+                                         "DWrite.dll",
+                                         "GDI32.dll",
+                                         "KERNEL32.dll",
+                                         "msvcrt.dll",
+                                         "ole32.dll",
+                                         "OLEACC.dll",
+                                         "OLEAUT32.dll",
+                                         "SHELL32.dll",
+                                         "USER32.dll"
+                                     ],
+                         "Files":  [
+                                       "licenses/GCC-GPL-3.0.txt",
+                                       "licenses/GCC-Runtime-Exception.txt",
+                                       "licenses/LiteSic.txt",
+                                       "licenses/MinGW-COPYING.txt",
+                                       "licenses/MinGW-w64.txt",
+                                       "licenses/MinGW-w64-runtime.txt",
+                                       "licenses/miniaudio.txt",
+                                       "licenses/README.txt",
+                                       "licenses/stb_vorbis.txt",
+                                       "LiteSic.exe",
+                                       "locales/ar-SA/messages.tsv",
+                                       "locales/de-DE/messages.tsv",
+                                       "locales/en-US/messages.tsv",
+                                       "locales/es-ES/messages.tsv",
+                                       "locales/fr-FR/messages.tsv",
+                                       "locales/hi-IN/messages.tsv",
+                                       "locales/it-IT/messages.tsv",
+                                       "locales/ja-JP/messages.tsv",
+                                       "locales/ko-KR/messages.tsv",
+                                       "locales/nl-NL/messages.tsv",
+                                       "locales/pl-PL/messages.tsv",
+                                       "locales/pt-BR/messages.tsv",
+                                       "locales/pt-PT/messages.tsv",
+                                       "locales/ru-RU/messages.tsv",
+                                       "locales/sv-SE/messages.tsv",
+                                       "locales/tr-TR/messages.tsv",
+                                       "locales/zh-CN/messages.tsv",
+                                       "locales/zh-TW/messages.tsv",
+                                       "resources/portable.flag",
+                                       "resources/README.en.txt",
+                                       "resources/README.pt-BR.txt"
+                                   ]
+                     },
+                     {
+                         "Asset":  "LiteSic-v1.0.1-x86.zip",
+                         "Architecture":  "x86",
+                         "Portable":  false,
+                         "Bytes":  1603349,
+                         "SHA256":  "DCFCD8EB83D914873E5304104A5DF4EA8EE10C4F4A1285B0E338BED91AD44AB5",
+                         "ExecutableSHA256":  "E2E9782A6451DAE4ECC083727EFAC79E6B8250655FF3364D83FE70434C1EE975",
+                         "Imports":  [
+                                         "COMCTL32.dll",
+                                         "COMDLG32.DLL",
+                                         "d2d1.dll",
+                                         "DWrite.dll",
+                                         "GDI32.dll",
+                                         "KERNEL32.dll",
+                                         "msvcrt.dll",
+                                         "ole32.dll",
+                                         "OLEACC.dll",
+                                         "OLEAUT32.dll",
+                                         "SHELL32.dll",
+                                         "USER32.dll"
+                                     ],
+                         "Files":  [
+                                       "licenses/GCC-GPL-3.0.txt",
+                                       "licenses/GCC-Runtime-Exception.txt",
+                                       "licenses/LiteSic.txt",
+                                       "licenses/MinGW-COPYING.txt",
+                                       "licenses/MinGW-w64.txt",
+                                       "licenses/MinGW-w64-runtime.txt",
+                                       "licenses/miniaudio.txt",
+                                       "licenses/README.txt",
+                                       "licenses/stb_vorbis.txt",
+                                       "LiteSic.exe",
+                                       "locales/ar-SA/messages.tsv",
+                                       "locales/de-DE/messages.tsv",
+                                       "locales/en-US/messages.tsv",
+                                       "locales/es-ES/messages.tsv",
+                                       "locales/fr-FR/messages.tsv",
+                                       "locales/hi-IN/messages.tsv",
+                                       "locales/it-IT/messages.tsv",
+                                       "locales/ja-JP/messages.tsv",
+                                       "locales/ko-KR/messages.tsv",
+                                       "locales/nl-NL/messages.tsv",
+                                       "locales/pl-PL/messages.tsv",
+                                       "locales/pt-BR/messages.tsv",
+                                       "locales/pt-PT/messages.tsv",
+                                       "locales/ru-RU/messages.tsv",
+                                       "locales/sv-SE/messages.tsv",
+                                       "locales/tr-TR/messages.tsv",
+                                       "locales/zh-CN/messages.tsv",
+                                       "locales/zh-TW/messages.tsv",
+                                       "resources/README.en.txt",
+                                       "resources/README.pt-BR.txt"
+                                   ]
+                     },
+                     {
+                         "Asset":  "LiteSic-v1.0.1-portable-x86.zip",
+                         "Architecture":  "x86",
+                         "Portable":  true,
+                         "Bytes":  1603507,
+                         "SHA256":  "A70FEAE358A60C4D278C1481BB6A18A963D439E40B15038F68500D7568A7C0A8",
+                         "ExecutableSHA256":  "E2E9782A6451DAE4ECC083727EFAC79E6B8250655FF3364D83FE70434C1EE975",
+                         "Imports":  [
+                                         "COMCTL32.dll",
+                                         "COMDLG32.DLL",
+                                         "d2d1.dll",
+                                         "DWrite.dll",
+                                         "GDI32.dll",
+                                         "KERNEL32.dll",
+                                         "msvcrt.dll",
+                                         "ole32.dll",
+                                         "OLEACC.dll",
+                                         "OLEAUT32.dll",
+                                         "SHELL32.dll",
+                                         "USER32.dll"
+                                     ],
+                         "Files":  [
+                                       "licenses/GCC-GPL-3.0.txt",
+                                       "licenses/GCC-Runtime-Exception.txt",
+                                       "licenses/LiteSic.txt",
+                                       "licenses/MinGW-COPYING.txt",
+                                       "licenses/MinGW-w64.txt",
+                                       "licenses/MinGW-w64-runtime.txt",
+                                       "licenses/miniaudio.txt",
+                                       "licenses/README.txt",
+                                       "licenses/stb_vorbis.txt",
+                                       "LiteSic.exe",
+                                       "locales/ar-SA/messages.tsv",
+                                       "locales/de-DE/messages.tsv",
+                                       "locales/en-US/messages.tsv",
+                                       "locales/es-ES/messages.tsv",
+                                       "locales/fr-FR/messages.tsv",
+                                       "locales/hi-IN/messages.tsv",
+                                       "locales/it-IT/messages.tsv",
+                                       "locales/ja-JP/messages.tsv",
+                                       "locales/ko-KR/messages.tsv",
+                                       "locales/nl-NL/messages.tsv",
+                                       "locales/pl-PL/messages.tsv",
+                                       "locales/pt-BR/messages.tsv",
+                                       "locales/pt-PT/messages.tsv",
+                                       "locales/ru-RU/messages.tsv",
+                                       "locales/sv-SE/messages.tsv",
+                                       "locales/tr-TR/messages.tsv",
+                                       "locales/zh-CN/messages.tsv",
+                                       "locales/zh-TW/messages.tsv",
+                                       "resources/portable.flag",
+                                       "resources/README.en.txt",
+                                       "resources/README.pt-BR.txt"
+                                   ]
+                     }
+                 ]
+}

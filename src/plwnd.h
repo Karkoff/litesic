@@ -19,3 +19,5 @@ void PlWnd_AddFiles(HWND owner, bool playFirst = false);
 #include <string>
 #include <vector>
 bool PlWnd_AppendPaths(const std::vector<std::wstring>& paths);
+// Queue an export of the active General/Favorites collection, ignoring search.
+bool PlWnd_SavePlaylist(const std::wstring& path);

@@ -14,6 +14,10 @@ Double-click a track to play. EQ opens the equalizer; VIZ toggles the
 visualizer. Right-click the player for themes, language, scale and hotkeys.
 
 MP3, WAV, FLAC and OGG Vorbis; M3U/M3U8 playlists; favorites; 18 languages.
+To export, select General or Favorites, then LIST > Save playlist.
+General saves all tracks; Favorites saves only starred tracks. Search and
+row selection do not limit exports. Choose M3U or M3U8 in the Save dialog;
+both formats preserve favorite flags when reopened in LiteSic.
 Playlists store absolute media paths. If you move your music to another
 folder or drive, add it again or update the playlist.
 Targets Windows 7-11, x86/x64. Tested on Windows 11; practical validation

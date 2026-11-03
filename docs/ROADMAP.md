@@ -1,5 +1,10 @@
 # ROADMAP — LiteSic
 
+**Correção 1.0.1 (03/11/2026):** exportação Geral/Favoritas corrigida e
+salvamentos aceitos preservados ao limpar/fechar. 372 casos e quatro pacotes
+x64/x86 padrão/portátil validados. [Relatório](PLAYLIST-EXPORT-1.0.1.md).
+Esta correção não reabre milestones encerradas.
+
 **Atualização 03/11/2026:** M10 em andamento; pacote Microsoft Store validado
 localmente e Submission 1 em rascunho, sem envio ou publicação.
 Distribuição desktop 1.0.0 final estável publicada no GitHub: quatro ZIPs x64/x86 padrão/portátil

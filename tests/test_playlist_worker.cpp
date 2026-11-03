@@ -1,5 +1,6 @@
 #include "playlist_worker.h"
 #include "check.h"
+#include "m3u.h"
 static HWND window;
 static std::vector<PlaylistResult> Await(PlaylistWorker& worker){
     std::vector<PlaylistResult> results;DWORD deadline=GetTickCount()+10000;
@@ -34,5 +35,25 @@ static void notifications_coalesce_until_drain(){
     }
     worker.Stop();
 }
+static void accepted_exports_survive_clear_and_shutdown(){
+    for(bool clear:{false,true}){
+        PlaylistWorker worker;CHECK(worker.Start(window));
+        const auto path=FullPath(clear?L"build\\export-after-clear.m3u":L"build\\export-at-shutdown.m3u8");
+        DeleteFileW(path.c_str());
+        for(int i=0;i<200;++i){PlaylistJob metadata;metadata.path=L"tests\\fixtures\\native-44100.wav";CHECK(worker.Submit(metadata));}
+        Track track;track.path=FullPath(L"tests\\fixtures\\tagged.mp3");track.favorite=true;
+        PlaylistJob save;save.kind=PlaylistJob::Save;save.path=path;save.tracks={track};CHECK(worker.Submit(save));
+        if(clear){
+            worker.NewGeneration();auto results=Await(worker);int saves=0;
+            for(const auto& result:results)if(result.kind==PlaylistJob::Save){++saves;CHECK(result.error.empty());}
+            CHECK(saves==1);
+        }
+        worker.Stop();
+        std::vector<Track> loaded;std::wstring error;
+        CHECK(LoadM3U(path,loaded,error));CHECK(loaded.size()==1);
+        CHECK(loaded[0].path==track.path&&loaded[0].favorite);
+        CHECK(DeleteFileW(path.c_str()));
+    }
+}
 int main(){window=CreateWindowExW(0,L"STATIC",L"worker-test",0,0,0,0,0,HWND_MESSAGE,nullptr,GetModuleHandleW(nullptr),nullptr);CHECK(window);
-    int cases=0;CASE(actual_metadata_job);CASE(recursive_filter);CASE(generation_cancel_and_shutdown);CASE(notifications_coalesce_until_drain);DestroyWindow(window);std::printf("%d worker cases\n",cases);}
+    int cases=0;CASE(actual_metadata_job);CASE(recursive_filter);CASE(generation_cancel_and_shutdown);CASE(notifications_coalesce_until_drain);CASE(accepted_exports_survive_clear_and_shutdown);DestroyWindow(window);std::printf("%d worker cases\n",cases);}

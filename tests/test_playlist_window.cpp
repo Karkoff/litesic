@@ -360,7 +360,45 @@ static void active_tab_survives_restart(){
     CHECK(PlayerPlaylist().Count()==1&&PlayerPlaylist().At(0)->path==L"Favorite.wav");
     PlWnd_Shutdown();PlayerPlayback().Clear();Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());DestroyWindow(owner);
 }
-int main() {
+static void export_general_and_favorites_m3u(){
+    HINSTANCE instance=GetModuleHandleW(nullptr);
+    HWND owner=CreateWindowExW(0,L"STATIC",L"export integration owner",WS_POPUP,0,0,1,1,nullptr,nullptr,instance,nullptr);CHECK(owner);
+    Ui::ThemeConfigure(nullptr);PlayerPlayback().Clear();
+    CHECK(PlWnd_Create(instance,owner));EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);
+    for(auto path:{L"tests\\fixtures\\native-44100.wav",L"tests\\fixtures\\tagged.mp3",L"tests\\fixtures\\tagged.flac"})PlayerPlaylist().Add(FullPath(path));
+    PlayerPlaylist().At(1)->favorite=true;PlayerPlaylist().At(2)->favorite=true;
+    auto expected=PlayerPlaylist().Tracks();
+    for(int scenario=0;scenario<4;++scenario){
+        const bool favorites=scenario!=0;
+        if(scenario==3)for(int i=0;i<PlayerPlaylist().Count();++i)PlayerPlaylist().At(i)->favorite=false;
+        // Commands and clicks target only windows created by this test.
+        SendMessageW(playlist,WM_LBUTTONDOWN,MK_LBUTTON,MAKELPARAM(favorites?112:38,52));
+        SendMessageW(playlist,WM_LBUTTONUP,0,MAKELPARAM(favorites?112:38,52));
+        // A search with no matches must not silently export an empty collection.
+        SetWindowTextW(GetDlgItem(playlist,520),L"no-matching-track");
+        const auto exportPath=FullPath(scenario==2?L"build\\export-favorites.m3u8":favorites?L"build\\export-favorites.m3u":L"build\\export-general.m3u");
+        DeleteFileW(exportPath.c_str());
+        // Exercise the same snapshot, worker and atomic writer as the Save dialog.
+        CHECK(PlWnd_SavePlaylist(exportPath));
+        DWORD deadline=GetTickCount()+10000;
+        while(GetFileAttributesW(exportPath.c_str())==INVALID_FILE_ATTRIBUTES){
+            MSG msg{};while(PeekMessageW(&msg,nullptr,0,0,PM_REMOVE)){TranslateMessage(&msg);DispatchMessageW(&msg);}
+            CHECK(static_cast<LONG>(GetTickCount()-deadline)<0);Sleep(10);
+        }
+        std::vector<Track> loaded;std::wstring error;CHECK(LoadM3U(exportPath,loaded,error));
+        CHECK(loaded.size()==(scenario==3?0u:favorites?2u:3u));
+        for(size_t i=0;i<loaded.size();++i){
+            const auto& track=expected[i+(favorites?1:0)];
+            CHECK(loaded[i].path==track.path);CHECK(loaded[i].favorite==track.favorite);
+        }
+        CHECK(PlayerPlaylist().Count()==3);CHECK(DeleteFileW(exportPath.c_str()));
+    }
+    PlWnd_Shutdown();PlayerPlayback().Clear();DestroyWindow(owner);
+    CHECK(!PlWnd_SavePlaylist(L"build\\export-without-window.m3u"));
+}
+int main(int argc,char**) {
+    setvbuf(stdout,nullptr,_IONBF,0);
+    if(argc>1){export_general_and_favorites_m3u();return 0;}
     HINSTANCE instance=GetModuleHandleW(nullptr);
     HWND owner=CreateWindowExW(0,L"STATIC",L"playlist integration owner",WS_POPUP,0,0,1,1,nullptr,nullptr,instance,nullptr);CHECK(owner);
     CHECK(PlWnd_Create(instance,owner)); EnumThreadWindows(GetCurrentThreadId(),FindPlaylist,0);CHECK(playlist);
@@ -376,5 +414,6 @@ int main() {
     CASE(session_survives_window_restart);
     CASE(geometry_survives_restart);
     CASE(active_tab_survives_restart);
+    CASE(export_general_and_favorites_m3u);
     PlWnd_Shutdown();DestroyWindow(owner);std::printf("%d playlist window integration cases\n",cases);
 }
