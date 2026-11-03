@@ -1,0 +1,417 @@
+﻿{
+    "Date":  "2026-11-03",
+    "ProductId":  "9NJ52QFN0LMX",
+    "Version":  "1.0.0.0",
+    "SourceBaseCommit":  "f02a1082403e82156c64d1c7553733b878badd16",
+    "Identity":  {
+                     "Name":  "Brasiliense.LiteSic",
+                     "Publisher":  "CN=90CC5C0C-B20C-4457-BDE7-D0126388DE3C",
+                     "PublisherDisplayName":  "Brasiliense",
+                     "StoreId":  "9NJ52QFN0LMX",
+                     "Source":  "Partner Center product identity supplied by the owner on 2026-11-03"
+                 },
+    "Bundle":  "build/store/store-1.0.0.0-20261103-094809-485/LiteSic-1.0.0.0-store.msixbundle",
+    "BundleSHA256":  "75A99E7F78AE9EA4343A77A8C077FCBD9E0301240451286D859F118858EAE713",
+    "MinimumWindows":  "10.0.17763.0",
+    "TestedWindows":  "10.0.26200.0",
+    "Regressions":  [
+                        {
+                            "Architecture":  "x64",
+                            "NamedPassLines":  183,
+                            "CLogicCases":  26,
+                            "DependencySmoke":  1,
+                            "AllPassed":  true,
+                            "SHA256":  "756A7E963ECE1FC8A85A9B1F8C798A23E451377BD4EEC62197ED110623FCFE51"
+                        },
+                        {
+                            "Architecture":  "x86",
+                            "NamedPassLines":  183,
+                            "CLogicCases":  26,
+                            "DependencySmoke":  1,
+                            "AllPassed":  true,
+                            "SHA256":  "25F08A4B59D0571E208930D3E07C2D36163471ACCB3F1F8897FDF5244FF79A6D"
+                        }
+                    ],
+    "NativeExecutables":  [
+                              {
+                                  "Architecture":  "x64",
+                                  "NativeSourceVersion":  "0.1.0.0",
+                                  "ExecutableSHA256":  "F6085D22D969ABC4F6F54C85157D4E34C2538712D291CFC20DE936DEB3F919DD",
+                                  "Imports":  [
+                                                  "COMCTL32.dll",
+                                                  "comdlg32.dll",
+                                                  "d2d1.dll",
+                                                  "DWrite.dll",
+                                                  "GDI32.dll",
+                                                  "KERNEL32.dll",
+                                                  "msvcrt.dll",
+                                                  "ole32.dll",
+                                                  "OLEACC.dll",
+                                                  "OLEAUT32.dll",
+                                                  "SHELL32.dll",
+                                                  "USER32.dll"
+                                              ],
+                                  "PackageSHA256":  "270C4F1BC94DA17981C666886FD25A9D8E061F0B385433A8E9F32BAC34341F44"
+                              },
+                              {
+                                  "Architecture":  "x86",
+                                  "NativeSourceVersion":  "0.1.0.0",
+                                  "ExecutableSHA256":  "58F0858E78DD5B40A10DC6437DDE7EA62132D688B9B3F26E5C8F8A29E5274DEE",
+                                  "Imports":  [
+                                                  "COMCTL32.dll",
+                                                  "COMDLG32.DLL",
+                                                  "d2d1.dll",
+                                                  "DWrite.dll",
+                                                  "GDI32.dll",
+                                                  "KERNEL32.dll",
+                                                  "msvcrt.dll",
+                                                  "ole32.dll",
+                                                  "OLEACC.dll",
+                                                  "OLEAUT32.dll",
+                                                  "SHELL32.dll",
+                                                  "USER32.dll"
+                                              ],
+                                  "PackageSHA256":  "C741A810089ACB673BD7FA9546FDCB47DBFEEF822FBAA9708F0AC0502B033A37"
+                              }
+                          ],
+    "Wack":  [
+                 {
+                     "Package":  "LiteSic-1.0.0.0-x64.msix",
+                     "PackageSHA256":  "270C4F1BC94DA17981C666886FD25A9D8E061F0B385433A8E9F32BAC34341F44",
+                     "ProcessExitCode":  0,
+                     "ReportedOverall":  "PASS",
+                     "PartialRun":  "FALSE",
+                     "Tests":  24,
+                     "Failed":  0,
+                     "ReportSHA256":  "B32016E3DE4F7E3B776F51F544DEFAD3641CDAFAD6FC96882667BDFAF2BD482F",
+                     "TestResults":  [
+                                         {
+                                             "Name":  "Instale drivers assinados e arquivos executáveis",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Nível de execução de controle de conta de usuário",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Conta do aplicativo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Manifesto do aplicativo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Verbos da associação de arquivo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Verificações do Registro",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Recursos Empresariais",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Pacotes de Recursos",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Analisador de arquivos banidos",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Assinatura de código privado",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Recursos do aplicativo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Identidade visual",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Configuração de depuração",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Recursos de uso especial",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Atributo ExclusiveTo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Localização de tipo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Diferenciação de maiúsculas e minúsculas de nome de tipo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Correção de nome de tipo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Correção de metadados gerais",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Propriedades",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Uso de arquivo morto",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Executáveis bloqueados",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Arquivos adequados da plataforma",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "DPIAwarenessValidation",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         }
+                                     ]
+                 },
+                 {
+                     "Package":  "LiteSic-1.0.0.0-x86.msix",
+                     "PackageSHA256":  "C741A810089ACB673BD7FA9546FDCB47DBFEEF822FBAA9708F0AC0502B033A37",
+                     "ProcessExitCode":  0,
+                     "ReportedOverall":  "PASS",
+                     "PartialRun":  "FALSE",
+                     "Tests":  24,
+                     "Failed":  0,
+                     "ReportSHA256":  "AA23D1890655E9454B5EC0F373BE610078941BEE87AA5B5F6BD2C574AF77C06F",
+                     "TestResults":  [
+                                         {
+                                             "Name":  "Instale drivers assinados e arquivos executáveis",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Nível de execução de controle de conta de usuário",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Conta do aplicativo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Manifesto do aplicativo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Verbos da associação de arquivo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Verificações do Registro",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Recursos Empresariais",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Pacotes de Recursos",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Analisador de arquivos banidos",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Assinatura de código privado",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Recursos do aplicativo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Identidade visual",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Configuração de depuração",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Recursos de uso especial",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Atributo ExclusiveTo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Localização de tipo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Diferenciação de maiúsculas e minúsculas de nome de tipo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Correção de nome de tipo",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Correção de metadados gerais",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Propriedades",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Uso de arquivo morto",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Executáveis bloqueados",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "Arquivos adequados da plataforma",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         },
+                                         {
+                                             "Name":  "DPIAwarenessValidation",
+                                             "Result":  "PASS",
+                                             "Messages":  ""
+                                         }
+                                     ]
+                 }
+             ],
+    "X86Install":  {
+                       "Package":  "LiteSic-1.0.0.0-x86.msix",
+                       "PackageSHA256":  "F4CF2C24884F7502188687383802F0B40F1704D3D44A086751BD78C474AC7549",
+                       "Status":  "INSTALLED_RUNTIME_TESTS_PENDING",
+                       "Message":  "",
+                       "PackageFullName":  "LiteSic.LocalValidation_1.0.0.0_x86__tk4hddz7kkqza",
+                       "PreviousPackage":  "LiteSic.LocalValidation_1.0.0.0_x64__tk4hddz7kkqza",
+                       "PreviousProfileExisted":  true,
+                       "PreviousProfileRemoved":  true
+                   },
+    "FinalUninstall":  {
+                           "Package":  "LiteSic.LocalValidation_1.0.0.0_x86__tk4hddz7kkqza",
+                           "Unregistered":  true,
+                           "ProfileExisted":  true,
+                           "ProfileRemoved":  true,
+                           "ExternalDemoPreserved":  true,
+                           "ExportedPlaylistPreserved":  true
+                       },
+    "TraditionalExeUnchanged":  {
+                                    "x86":  "9FB4AE3D947E149BE5568D3C4ACF3130829B8B5B6AF3B0DF92517BF260B5C42D",
+                                    "x64":  "A36F2E288FE2610956FC5EA3C67BABE2F0F5C2CC6D202260B6834B3FFA0B7278"
+                                },
+    "Screenshots":  [
+                        {
+                            "File":  "packaging/store/screenshots/final-en-US-osc.png",
+                            "SHA256":  "95C769FAFAFC41AAE212C9E54BC53F81D0796683B764331F4A82D0528AAB4905",
+                            "Size":  [
+                                         1920,
+                                         1080
+                                     ],
+                            "Method":  "Actual PrintWindow/GDI surfaces at native resolution and relative positions; solid background; no overlays",
+                            "UTC":  "2026-11-03T13:36:32.547429+00:00",
+                            "ExecutableSHA256":  "f6085d22d969abc4f6f54c85157d4e34c2538712d291cfc20de936deb3f919dd"
+                        },
+                        {
+                            "File":  "packaging/store/screenshots/final-en-US-spectrum.png",
+                            "SHA256":  "ACE5C8AB4DF3C120067E35F77088D957DED32821262438B6A1678F07756016E0",
+                            "Size":  [
+                                         1920,
+                                         1080
+                                     ],
+                            "Method":  "Actual PrintWindow/GDI surfaces at native resolution and relative positions; solid background; no overlays",
+                            "UTC":  "2026-11-03T13:36:54.708922+00:00",
+                            "ExecutableSHA256":  "f6085d22d969abc4f6f54c85157d4e34c2538712d291cfc20de936deb3f919dd"
+                        },
+                        {
+                            "File":  "packaging/store/screenshots/final-pt-BR-osc.png",
+                            "SHA256":  "1A50FF3D3AF29C9067E9C63C3A8FC0F61B0F9C5F6FF40299B7521714FD71E809",
+                            "Size":  [
+                                         1920,
+                                         1080
+                                     ],
+                            "Method":  "Actual PrintWindow/GDI surfaces at native resolution and relative positions; solid background; no overlays",
+                            "UTC":  "2026-11-03T13:43:46.520051+00:00",
+                            "ExecutableSHA256":  "f6085d22d969abc4f6f54c85157d4e34c2538712d291cfc20de936deb3f919dd"
+                        },
+                        {
+                            "File":  "packaging/store/screenshots/final-pt-BR-spectrum.png",
+                            "SHA256":  "A75CCC10ED228A5D712CFE5A699B12D89A2CC90BA1D203EBFE28AEE4B728C02F",
+                            "Size":  [
+                                         1920,
+                                         1080
+                                     ],
+                            "Method":  "Actual PrintWindow/GDI surfaces at native resolution and relative positions; solid background; no overlays",
+                            "UTC":  "2026-11-03T13:43:44.162350+00:00",
+                            "ExecutableSHA256":  "f6085d22d969abc4f6f54c85157d4e34c2538712d291cfc20de936deb3f919dd"
+                        }
+                    ],
+    "Privacy":  {
+                    "InitialPrivateDialogImagesDeleted":  true,
+                    "FileDialogPixelCaptureDisabled":  true,
+                    "PersonalMusicUsed":  false
+                },
+    "SubmissionStatus":  "SUBMISSION_1_DRAFT_NOT_SUBMITTED"
+}

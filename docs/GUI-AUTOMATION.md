@@ -1,3 +1,14 @@
+## Microsoft Store — privacidade (03/11/2026)
+
+Regra expressa do proprietário: **não capturar diálogos Abrir/Salvar, pastas
+pessoais ou o desktop**. Usar somente janelas do LiteSic com fixtures sintéticas
+para materiais públicos. `scripts/gui/store_gui.py` aplica bloqueio de pixels
+de `#32770` e valida a identidade do pacote instalado; registra somente
+geometria segura dos diálogos para prosseguir com a fixture permitida.
+As duas capturas iniciais de diálogos foram excluídas e nunca versionadas.
+Não usar os comandos históricos abaixo para produzir imagens de diálogos.
+[Procedimento atual e evidências](STORE-PUBLICATION.md).
+
 ## M8-T8 — hover e popup temático
 
 `-Action hover -Target main|playlist|eq|themes|info -X <px> -Y <px>` exige

@@ -57,7 +57,9 @@ int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE /*hPrevInstance*/,
     Runtime::Options options;bool parsed=argc>0&&Runtime::Parse(args,options);
     wchar_t executable[32768]{},localData[MAX_PATH]{};GetModuleFileNameW(nullptr,executable,32768);
     SHGetFolderPathW(nullptr,CSIDL_LOCAL_APPDATA,nullptr,SHGFP_TYPE_CURRENT,localData);
-    auto directory=Runtime::ProfileDirectory(executable,localData,options);
+    std::wstring packageFamily;
+    if(!Runtime::CurrentPackageFamily(packageFamily))parsed=false;
+    auto directory=Runtime::ProfileDirectory(executable,localData,options,packageFamily);
     Runtime::Instance instance;
     int election=parsed?instance.Enter(directory,options.files):-1;
     if(election==0){if(SUCCEEDED(com))CoUninitialize();return 0;}

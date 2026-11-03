@@ -12,6 +12,24 @@ static void command_line_and_profile_contract(){
     CHECK(!Runtime::Parse({L"--unknown"},o));CHECK(!Runtime::Parse({L"--portable",L"--profile=x"},o));CHECK(!Runtime::Parse({L"--profile="},o));
     CHECK(Runtime::Identity(L"C:\\User\\LiteSic")==Runtime::Identity(L"c:/user/litesic"));CHECK(Runtime::Identity(L"c:/a")!=Runtime::Identity(L"c:/b"));
 }
+static void packaged_profile_is_separate_from_desktop_and_portable(){
+    Runtime::Options options;
+    const std::wstring local=L"C:\\User\\Local",exe=L"C:\\Program Files\\WindowsApps\\LiteSic\\LiteSic.exe";
+    const std::wstring family=L"Brasiliense.LiteSic_testpublisher";
+    auto packaged=Runtime::ProfileDirectory(exe,local,options,family);
+    CHECK(packaged==local+L"\\Packages\\"+family+L"\\LocalState\\LiteSic");
+    auto desktop=Runtime::ProfileDirectory(exe,local,options);
+    CHECK(desktop==local+L"\\LiteSic");
+    CHECK(Runtime::Identity(packaged)!=Runtime::Identity(desktop));
+    CHECK(Runtime::Identity(packaged)!=Runtime::Identity(Runtime::ProfileDirectory(exe,local,options,L"LiteSic.LocalValidation_otherpublisher")));
+    options.portable=true;CHECK(Runtime::ProfileDirectory(exe,local,options,family)==packaged);
+    CHECK(Runtime::ProfileDirectory(L"D:\\USB\\LiteSic.exe",local,options)==L"D:\\USB\\data");
+    CHECK(Runtime::ProfileDirectory(exe,L"",options,family).empty());
+    options.portable=false;options.profile=L"build\\explicit-msix-test-profile";
+    CHECK(Runtime::ProfileDirectory(exe,local,options,family)==FullPath(options.profile));
+    std::wstring detected=L"must be cleared";CHECK(Runtime::CurrentPackageFamily(detected));
+    CHECK(detected.empty()); // This unit-test executable is not packaged.
+}
 static void bounded_unicode_ipc(){
     std::vector<std::wstring> paths={L"C:\\音乐\\á.wav",L"D:\\a b\\x.flac"},decoded;
     auto packet=Runtime::Encode(paths);COPYDATASTRUCT data{Runtime::Packet,DWORD(packet.size()*2),packet.data()};
@@ -40,4 +58,4 @@ static void explicit_profile_writability_and_readonly(){
     auto file=directory+L"\\settings.ini";HANDLE handle=CreateFileW(file.c_str(),GENERIC_WRITE,0,nullptr,CREATE_ALWAYS,FILE_ATTRIBUTE_NORMAL,nullptr);CHECK(handle!=INVALID_HANDLE_VALUE);CloseHandle(handle);
     CHECK(SetFileAttributesW(file.c_str(),FILE_ATTRIBUTE_READONLY));CHECK(!Runtime::PrepareProfile(directory));CHECK(SetFileAttributesW(file.c_str(),FILE_ATTRIBUTE_NORMAL));CHECK(DeleteFileW(file.c_str()));CHECK(RemoveDirectoryW(directory.c_str()));
 }
-int main(){ini=FullPath(L"build\\m8-config-"+std::to_wstring(sizeof(void*)*8)+L".ini");int cases=0;CASE(command_line_and_profile_contract);CASE(bounded_unicode_ipc);CASE(remaining_configuration_roundtrip);CASE(compact_display_preserves_geometry);CASE(explicit_profile_writability_and_readonly);Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());printf("%d remaining configuration cases\n",cases);}
+int main(){ini=FullPath(L"build\\m8-config-"+std::to_wstring(sizeof(void*)*8)+L".ini");int cases=0;CASE(command_line_and_profile_contract);CASE(packaged_profile_is_separate_from_desktop_and_portable);CASE(bounded_unicode_ipc);CASE(remaining_configuration_roundtrip);CASE(compact_display_preserves_geometry);CASE(explicit_profile_writability_and_readonly);Ui::ThemeConfigure(nullptr);DeleteFileW(ini.c_str());printf("%d remaining configuration cases\n",cases);}

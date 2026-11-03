@@ -1,0 +1,24 @@
+{
+  "Name": "LiteSic",
+  "Publisher": "Brasiliense",
+  "ShortDescription": "Your local music, playlists and a 10-band equalizer in a native Windows player.",
+  "Description": "Listen to your local music collection with LiteSic, a native Windows player with direct controls and three panels: playback, equalizer and playlist.\n\nOpen MP3, WAV, FLAC and OGG Vorbis files, add folders and organize your tracks with search, sorting and favorites. Import and export M3U/M3U8 playlists and restore your list when you reopen the app.\n\nAdjust your sound with a 10-band equalizer, preamplification and presets. Control volume and balance, choose shuffle or repeat, and follow the music through an audio spectrum or oscilloscope.\n\nCustomize the appearance with themes, interface scaling and panels that snap together. The interface is available in Brazilian Portuguese, English and other languages.\n\nLiteSic is free, with no ads, in-app purchases or subscriptions. No account is required. It plays local files without a streaming service. No music is included with the app.",
+  "Features": [
+    "Local MP3, WAV, FLAC and OGG Vorbis playback",
+    "File and folder playlists with search, sorting and favorites",
+    "M3U/M3U8 import and export and session restoration",
+    "10-band equalizer with preamplification and presets",
+    "Volume, balance, shuffle and repeat controls",
+    "Spectrum and oscilloscope visualization",
+    "Themes, adjustable interface scale and snapping panels",
+    "Brazilian Portuguese, English and other interface languages"
+  ],
+  "Keywords": ["music player", "local audio", "MP3", "FLAC", "equalizer", "playlist", "OGG"],
+  "ReleaseNotes": "First version prepared for the Microsoft Store. Local playback, playlists, favorites, equalizer, visualizer and interface customization.",
+  "Requirements": "Windows 10 version 1809 (build 17763) or later; x86 or x64 processor; an audio output device and supported local audio files. This preparation was tested on Windows 11. The traditional distribution has its own requirements and validation scope.",
+  "SupportUrl": "https://github.com/Karkoff/litesic/issues",
+  "WebsiteUrl": "https://github.com/Karkoff/litesic",
+  "PrivacyPolicyUrl": "https://github.com/Karkoff/litesic/blob/master/docs/PRIVACY.md",
+  "ScreenshotsStatus": "CAPTURED_AND_VISUALLY_REVIEWED_1920x1080",
+  "Screenshots": ["screenshots/final-en-US-spectrum.png", "screenshots/final-en-US-osc.png"]
+}

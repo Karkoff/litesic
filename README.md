@@ -1,5 +1,9 @@
 # LiteSic
 
+**Microsoft Store (03/11/2026):** MSIX 1.0.0.0 x86/x64 preparado e validado;
+Submission 1 criada em rascunho, **ainda não enviada nem publicada**.
+[Procedimento, testes e pendências](docs/STORE-PUBLICATION.md).
+
 <div align="center">
 
 **Player de áudio estilo Winamp em C++ nativo com Win32 + Direct2D/DirectWrite**
@@ -21,7 +25,7 @@ LiteSic é um player de áudio para Windows que recria a experiência clássica 
 atalhos, topo, instância única, persistência, DPI, MSAA e GUI verificados.
 Revisão linguística humana integral dos 18 idiomas e validações físicas/assistivas
 não realizadas são observações futuras não bloqueantes. Próxima atividade:
-**M10 — Distribuição**, não iniciada. Auditoria Geral de Desempenho:
+**M10 — Distribuição**, em andamento com a preparação da Microsoft Store. Auditoria Geral de Desempenho:
 **COMPLETE_WITH_CAVEATS** em 12/10/2026 ([relatório](docs/PERFORMANCE-AUDIT.md)).
 A playlist está implementada e integrada,
 com testes, validação gráfica e PASS manual do usuário para o visual,

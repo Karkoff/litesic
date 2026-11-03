@@ -1,0 +1,26 @@
+﻿{
+    "AsOf":  "2026-11-03",
+    "ProductName":  "LiteSic",
+    "StoreId":  "9NJ52QFN0LMX",
+    "PackageVersion":  "1.0.0.0",
+    "Architectures":  [
+                          "x64",
+                          "x86"
+                      ],
+    "LocalPreparation":  "VALIDATED",
+    "PartnerCenter":  "SUBMISSION_1_DRAFT",
+    "UploadedPackages":  false,
+    "Certification":  "NOT_SUBMITTED",
+    "Publication":  "NOT_PUBLISHED",
+    "OfficialStoreLink":  null,
+    "Remaining":  [
+                      "Confirm Free/public distribution and markets",
+                      "Complete properties and age ratings",
+                      "Upload official bundle and PT-BR/EN-US listings/images",
+                      "Verify public support/privacy URLs",
+                      "Submit for certification; monitor Microsoft result"
+                  ],
+    "CliFinding":  "Official msstore CLI requires first publication through Partner Center and Entra ID authentication",
+    "Evidence":  "evidence/store-2026-11-03/summary.json",
+    "Procedure":  "STORE-PUBLICATION.md"
+}

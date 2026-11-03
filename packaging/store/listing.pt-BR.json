@@ -1,0 +1,24 @@
+{
+  "Name": "LiteSic",
+  "Publisher": "Brasiliense",
+  "ShortDescription": "Suas músicas locais, playlists e equalizador de 10 bandas em um player nativo para Windows.",
+  "Description": "Ouça sua coleção de músicas locais com o LiteSic, um player nativo para Windows com controles diretos e três painéis: reprodução, equalizador e lista de reprodução.\n\nAbra arquivos MP3, WAV, FLAC e OGG Vorbis, adicione pastas e organize suas faixas com pesquisa, ordenação e favoritos. Importe e exporte listas M3U/M3U8 e retome sua lista ao abrir o aplicativo novamente.\n\nAjuste o som com equalizador de 10 bandas, pré-amplificação e presets. Controle volume e balanço, escolha reprodução aleatória ou repetição e acompanhe a música no espectro de áudio ou no osciloscópio.\n\nPersonalize a aparência com temas, escala da interface e painéis que se encaixam entre si. A interface está disponível em português brasileiro, inglês e outros idiomas.\n\nO LiteSic é gratuito, sem anúncios, compras internas ou assinaturas. Não exige conta e funciona com arquivos locais, sem serviço de streaming. Nenhuma música é fornecida com o aplicativo.",
+  "Features": [
+    "Reprodução local de MP3, WAV, FLAC e OGG Vorbis",
+    "Playlists com arquivos e pastas, pesquisa, ordenação e favoritos",
+    "Importação e exportação de M3U/M3U8 e restauração da sessão",
+    "Equalizador de 10 bandas com pré-amplificação e presets",
+    "Volume, balanço, reprodução aleatória e repetição",
+    "Visualizador de espectro e osciloscópio",
+    "Temas, escala ajustável e encaixe entre painéis",
+    "Interface em português brasileiro, inglês e outros idiomas"
+  ],
+  "Keywords": ["player de música", "áudio local", "MP3", "FLAC", "equalizador", "playlist", "OGG"],
+  "ReleaseNotes": "Primeira versão preparada para a Microsoft Store. Reprodução de arquivos locais, playlists, favoritos, equalizador, visualizador e personalização da interface.",
+  "Requirements": "Windows 10 versão 1809 (build 17763) ou posterior; processador x86 ou x64; dispositivo de saída de áudio e arquivos locais em formato compatível. Validação prática desta preparação: Windows 11. A distribuição tradicional tem requisitos e validações próprios.",
+  "SupportUrl": "https://github.com/Karkoff/litesic/issues",
+  "WebsiteUrl": "https://github.com/Karkoff/litesic",
+  "PrivacyPolicyUrl": "https://github.com/Karkoff/litesic/blob/master/docs/PRIVACY.md",
+  "ScreenshotsStatus": "CAPTURED_AND_VISUALLY_REVIEWED_1920x1080",
+  "Screenshots": ["screenshots/final-pt-BR-spectrum.png", "screenshots/final-pt-BR-osc.png"]
+}

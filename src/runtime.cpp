@@ -1,6 +1,7 @@
 #include "runtime.h"
 #include <algorithm>
 #include <cwctype>
+#include <cstring>
 #include <shlobj.h>
 namespace Runtime {
 bool Parse(const std::vector<std::wstring>& args,Options& out){
@@ -18,11 +19,30 @@ bool Parse(const std::vector<std::wstring>& args,Options& out){
     }
     return !(out.portable&&!out.profile.empty());
 }
-std::wstring ProfileDirectory(const std::wstring& executable,const std::wstring& localData,const Options& options){
+bool CurrentPackageFamily(std::wstring& family){
+    family.clear();
+    using QueryFamily=LONG(WINAPI*)(UINT32*,PWSTR);
+    auto kernel=GetModuleHandleW(L"kernel32.dll");
+    FARPROC procedure=kernel?GetProcAddress(kernel,"GetCurrentPackageFamilyName"):nullptr;
+    QueryFamily query=nullptr;
+    static_assert(sizeof(query)==sizeof(procedure),"Windows function pointer size");
+    std::memcpy(&query,&procedure,sizeof(query));
+    if(!query)return true; // Windows 7 has no package identity API.
+    UINT32 length=0;LONG result=query(&length,nullptr);
+    if(result==APPMODEL_ERROR_NO_PACKAGE)return true;
+    if(result!=ERROR_INSUFFICIENT_BUFFER||length<2||length>128)return false;
+    std::wstring value(length,L'\0');
+    if(query(&length,&value[0])!=ERROR_SUCCESS||length<2||length>value.size()||value[length-1]!=L'\0')return false;
+    value.resize(length-1);family=std::move(value);return true;
+}
+std::wstring ProfileDirectory(const std::wstring& executable,const std::wstring& localData,const Options& options,const std::wstring& packageFamily){
     if(!options.profile.empty()){
         DWORD n=GetFullPathNameW(options.profile.c_str(),0,nullptr,nullptr);if(!n)return {};
         std::wstring p(n,L'\0');GetFullPathNameW(options.profile.c_str(),n,&p[0],nullptr);p.resize(wcslen(p.c_str()));return p;
     }
+    // Explicit profile is a developer override. Normal MSIX launches never use
+    // the existing desktop profile or attempt portable writes in WindowsApps.
+    if(!packageFamily.empty())return localData.empty()?std::wstring{}:localData+L"\\Packages\\"+packageFamily+L"\\LocalState\\LiteSic";
     auto parent=executable.substr(0,executable.find_last_of(L"\\/"));
     if(options.validation){for(int i=0;i<3;++i)parent=parent.substr(0,parent.find_last_of(L"\\/"));return parent+L"\\build\\gui\\m6-session";}
     return options.portable?parent+L"\\data":localData.empty()?std::wstring{}:localData+L"\\LiteSic";

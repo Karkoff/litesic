@@ -1,5 +1,10 @@
 # ROADMAP — LiteSic
 
+**Atualização 03/11/2026:** M10 em andamento; pacote Microsoft Store validado
+localmente e Submission 1 em rascunho, sem envio ou publicação.
+[Estado e procedimento](STORE-PUBLICATION.md). Os registros abaixo preservam
+os encerramentos e planejamentos anteriores.
+
 Índice das milestones. Cada uma tem um arquivo próprio em
 `docs/milestones/` com a lista detalhada de tarefas (cada tarefa é um
 checkbox `- [ ]`, marcado `- [x]` quando concluída).

@@ -1,5 +1,18 @@
 # PROJECT_STATE — LiteSic
 
+**Microsoft Store — IN_PROGRESS (03/11/2026).** Identidade oficial
+`Brasiliense.LiteSic`, publicador Brasiliense, Store ID `9NJ52QFN0LMX`.
+MSIX candidato 1.0.0.0 x86/x64 gerado; MakeAppx e integridade PASS;
+WACK 24/24 por arquitetura PASS; suítes Release PASS; instalação real,
+reprodução dos quatro codecs, persistência e remoção do pacote de teste
+validadas no Windows 11. Quatro capturas reais 1920×1080 PT-BR/EN-US,
+com áudio original e proteção de diálogos privados. Releases tradicionais
+homologadas preservadas. **Submission 1 está em rascunho no Partner Center;
+pacotes não carregados, certificação não solicitada, publicação não confirmada.**
+CLI oficial exige primeira publicação via portal; API exige Entra e preparação
+inicial/classificação etária no portal. [Procedimento](docs/STORE-PUBLICATION.md)
+e [status](docs/STORE-STATUS.json). Registros anteriores abaixo são históricos.
+
 **Reprodução inoperante após inatividade — PASS por decisão expressa do usuário
 (15/10/2026); resultado técnico COMPLETE_WITH_CAVEATS.**
 Causa: perda do endpoint de áudio (fone Bluetooth desconectado) encerrava o

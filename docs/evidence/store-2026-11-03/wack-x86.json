@@ -1,0 +1,132 @@
+﻿{
+    "Package":  "LiteSic-1.0.0.0-x86.msix",
+    "PackageSHA256":  "C741A810089ACB673BD7FA9546FDCB47DBFEEF822FBAA9708F0AC0502B033A37",
+    "ProcessExitCode":  0,
+    "ReportedOverall":  "PASS",
+    "PartialRun":  "FALSE",
+    "Tests":  24,
+    "Failed":  0,
+    "ReportSHA256":  "AA23D1890655E9454B5EC0F373BE610078941BEE87AA5B5F6BD2C574AF77C06F",
+    "TestResults":  [
+                        {
+                            "Name":  "Instale drivers assinados e arquivos executáveis",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Nível de execução de controle de conta de usuário",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Conta do aplicativo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Manifesto do aplicativo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Verbos da associação de arquivo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Verificações do Registro",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Recursos Empresariais",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Pacotes de Recursos",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Analisador de arquivos banidos",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Assinatura de código privado",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Recursos do aplicativo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Identidade visual",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Configuração de depuração",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Recursos de uso especial",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Atributo ExclusiveTo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Localização de tipo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Diferenciação de maiúsculas e minúsculas de nome de tipo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Correção de nome de tipo",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Correção de metadados gerais",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Propriedades",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Uso de arquivo morto",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Executáveis bloqueados",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "Arquivos adequados da plataforma",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        },
+                        {
+                            "Name":  "DPIAwarenessValidation",
+                            "Result":  "PASS",
+                            "Messages":  ""
+                        }
+                    ]
+}

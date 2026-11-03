@@ -1,0 +1,34 @@
+{
+  "Status": "PARTNER_CENTER_SUBMISSION_1_DRAFT_NOT_SUBMITTED",
+  "ProductName": "LiteSic",
+  "StoreId": "9NJ52QFN0LMX",
+  "CandidatePackageVersion": "1.0.0.0",
+  "Price": "Free",
+  "Ads": false,
+  "InAppPurchases": false,
+  "Subscriptions": false,
+  "Audience": "Public",
+  "Discoverability": "Available and discoverable in Microsoft Store",
+  "Markets": "All markets permitted by Partner Center and applicable distribution restrictions",
+  "Publish": "As soon as Microsoft certification passes",
+  "Category": "Music",
+  "DeviceFamily": "Windows.Desktop",
+  "NativeArchitectures": ["x86", "x64"],
+  "ListingLanguages": ["pt-BR", "en-US"],
+  "RunFullTrustJustification": "LiteSic is a native C++ Win32 desktop music player. It needs its existing desktop process to display Win32/Direct2D windows, read audio files selected by the user, decode and play audio through Windows audio APIs, and save per-user preferences and playlists. It does not require elevation, install services or drivers, collect telemetry, show ads or provide purchases. No account or network connection is required for local playback.",
+  "CertificationNotes": "No sign-in is required. No music is bundled. To test, add your own MP3/WAV/FLAC/OGG files using the playlist Add > Files or Folder command, select a track and press Play. Verify pause, seek, volume, next/previous, shuffle/repeat, favorites and the equalizer. Close and reopen to test settings and playlist persistence. The Store profile uses the package LocalState directory. The Windows 7 compatibility goal applies to the separate traditional distribution, not this MSIX package.",
+  "AgeRatingFactsForQuestionnaire": {
+    "BundledMusicOrVideos": false,
+    "ViolenceSexGamblingDrugsOrOffensiveBundledContent": false,
+    "UserToUserCommunicationOrSharing": false,
+    "PurchasesOrAdvertising": false,
+    "LocationCollection": false,
+    "UserProvidedLocalAudio": true,
+    "Notes": "Answer the current IARC wording from these facts. The app plays arbitrary user-selected local files and has no content catalog. Do not invent an assigned age rating. The owner must personally accept any required binding IARC agreement."
+  },
+  "RequiredBeforeSubmission": [
+    "Confirm candidate version exceeds any previously submitted package version",
+    "Verify support and privacy URLs are publicly reachable after push",
+    "Complete all mandatory Partner Center fields and review the submission"
+  ]
+}
